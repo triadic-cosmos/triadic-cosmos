@@ -127,5 +127,5 @@ All data artifacts are provided for reproducibility and educational use.
 
 **Joachim De Witte**  
 Senior software engineer and architect of the Triadic Cosmos ecosystem.  
-Creator of the books, papers, toys canon defining a unified framework for AGI and physics.
+Creator of the books, papers, toys canon defining a unified framework for intelligence and physics.
 
