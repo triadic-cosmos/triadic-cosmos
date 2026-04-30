@@ -27,7 +27,7 @@ authorship, integrity, and non‑commercial use.
 
 ## 📚 Books
 
-### **1. Dynamic Modular Language Models
+### **1. Dynamic Modular Language Models**
 A complete architectural and empirical foundation for modular, interpretable language models built from many small interacting components.
 This book introduces paging, transition maps, evaluators, attention, multi‑agent writer systems, and the PRE loop as a unified framework for stable long‑form generation.
 It shows how grammar, semantics, roles, worlds, and narrative structure emerge from small micro‑LMs trained on compact curricula — without transformers, massive datasets, or monolithic models.
