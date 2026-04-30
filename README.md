@@ -27,27 +27,33 @@ authorship, integrity, and non‑commercial use.
 
 ## 📚 Books
 
-### **1. Architecting Safe and Modular AGI**  
+### **1. Dynamic Modular Language Models**
+A complete architectural and empirical foundation for modular, interpretable language models built from many small interacting components.
+This book introduces paging, transition maps, evaluators, attention, multi‑agent writer systems, and the PRE loop as a unified framework for stable long‑form generation.
+It shows how grammar, semantics, roles, worlds, and narrative structure emerge from small micro‑LMs trained on compact curricula — without transformers, massive datasets, or monolithic models.
+A core volume in the Triadic Cosmos ecosystem, demonstrating how the architectural principles of modular AGI translate directly into a practical, dynamic language‑modeling system.
+
+### **2. Architecting Safe and Modular AGI**  
 A structural blueprint for building AGI systems that are modular,  
 interpretable, and safe by design.
 
-### **2. The Triadic Cosmos: Safe and Modular AGI**  
+### **3. The Triadic Cosmos: Safe and Modular AGI**  
 A conceptual and architectural overview of the Triadic AGI framework,  
 introducing the triadic cycle, composite minds, and structural safety.
 
-### **3. The Triadic Cosmos: The Triadic Cycle**  
+### **4. The Triadic Cosmos: The Triadic Cycle**  
 A deep exploration of the triadic cycle as a unifying principle for  
 intelligence, structure, and recursive transformation.
 
-### **4. The Triadic Cosmos: The Architecture of Reality**  
+### **5. The Triadic Cosmos: The Architecture of Reality**  
 A narrative and conceptual exposition of the structural principles  
 underlying physical unification.
 
-### **5. The Triadic Cosmos: Toy Worlds**  
+### **6. The Triadic Cosmos: Toy Worlds**  
 A companion volume describing the nine computational toy universes  
 that illustrate the architectural ideas in runnable form.
 
-### **6. The Triadic Cosmos: Unification by Architecture**  
+### **7. The Triadic Cosmos: Unification by Architecture**  
 A popular‑science synthesis connecting intelligence and physics through  
 shared structural principles.
 
