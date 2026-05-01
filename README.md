@@ -61,23 +61,28 @@ shared structural principles.
 
 ## 📄 Scientific Papers
 
-### **1. A Safe and Modular AGI Architecture**  
+### **1. Dynamic Modular Language Models (DMLMs)**  
+Introduces a new class of language models built from many small, domain‑bound micro‑models governed by paging, evaluators, and a deterministic PRE loop.  
+Shows how grammar, semantics, world models, and long‑range coherence can emerge **without transformers, scale, or monolithic training**.  
+Forms the language‑level instantiation of the Paged‑PRE‑CAS AGI architecture.
+
+### **2. A Safe and Modular AGI Architecture**  
 Formalizes the AGI architecture introduced in the books, focusing on  
 safety, modularity, and structural constraints.
 
-### **2. Structural Principles for Physical Unification**  
+### **3. Structural Principles for Physical Unification**  
 Presents the architectural rules and invariants that unify physical  
 phenomena within the Triadic Cosmos framework.
 
-### **3. The Triadic Cosmos: Emergence of Intelligence**  
+### **4. The Triadic Cosmos: Emergence of Intelligence**  
 Explores how intelligence arises from structural recursion, composite  
 minds, and triadic dynamics.
 
-### **4. The Triadic Cosmos: Unified Framework**  
+### **5. The Triadic Cosmos: Unified Framework**  
 A compact synthesis of the AGI and physics architectures into a single  
 structural framework.
 
-### **5. The Triadic Cycle as Unified Framework**  
+### **6. The Triadic Cycle as Unified Framework**  
 Shows how the triadic cycle acts as a bridging mechanism between  
 intelligence, physics, and cosmological structure.
 
