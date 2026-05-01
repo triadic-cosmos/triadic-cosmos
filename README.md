@@ -10,12 +10,30 @@ Licensed under CC BY‑NC‑ND 4.0
 **The Triadic Cosmos** is a unified intellectual ecosystem that develops  
 a safe, modular, and architecturally grounded framework for:
 
-- Artificial General Intelligence (AGI)  
-- Physical unification  
-- Structural cosmology  
-- Composite minds and recursive architectures  
-- Educational toy universes and computational demonstrations  
+- **Artificial General Intelligence (AGI)**  
+  A fully modular, evaluator‑governed architecture based on paging, PRE loops,  
+  multi‑agent reasoning, and explicit cognitive structure.
 
+- **Dynamic Modular Language Models (DMLMs)**  
+  A new class of language models built from micro‑models, paging, evaluators,  
+  and deterministic generation—offering an alternative to monolithic transformers.
+
+- **Physical Unification**  
+  A structural ontology where information, energy, and geometry act as  
+  architectural primitives that generate physical phenomena.
+
+- **Structural Cosmology**  
+  A compositional view of the universe as a layered, recursive architecture  
+  governed by triadic cycles and emergent geometric constraints.
+
+- **Composite Minds and Recursive Architectures**  
+  A unified theory of cognition where minds, agents, and reasoning processes  
+  emerge from modular interactions and structural recursion.
+
+- **Educational Toy Universes & Computational Demonstrations**  
+  A suite of runnable, interpretable toy worlds and Java micro‑universes  
+  that make reasoning, emergence, and world‑building observable and teachable.
+  
 This repository contains the **canonical books and scientific papers**  
 that define the theoretical foundations of the Triadic Cosmos.
 
@@ -61,23 +79,28 @@ shared structural principles.
 
 ## 📄 Scientific Papers
 
-### **1. A Safe and Modular AGI Architecture**  
+### **1. Dynamic Modular Language Models (DMLMs)**  
+Introduces a new class of language models built from many small, domain‑bound micro‑models governed by paging, evaluators, and a deterministic PRE loop.  
+Shows how grammar, semantics, world models, and long‑range coherence can emerge **without transformers, scale, or monolithic training**.  
+Forms the language‑level instantiation of the Paged‑PRE‑CAS AGI architecture.
+
+### **2. A Safe and Modular AGI Architecture**  
 Formalizes the AGI architecture introduced in the books, focusing on  
 safety, modularity, and structural constraints.
 
-### **2. Structural Principles for Physical Unification**  
+### **3. Structural Principles for Physical Unification**  
 Presents the architectural rules and invariants that unify physical  
 phenomena within the Triadic Cosmos framework.
 
-### **3. The Triadic Cosmos: Emergence of Intelligence**  
+### **4. The Triadic Cosmos: Emergence of Intelligence**  
 Explores how intelligence arises from structural recursion, composite  
 minds, and triadic dynamics.
 
-### **4. The Triadic Cosmos: Unified Framework**  
+### **5. The Triadic Cosmos: Unified Framework**  
 A compact synthesis of the AGI and physics architectures into a single  
 structural framework.
 
-### **5. The Triadic Cycle as Unified Framework**  
+### **6. The Triadic Cycle as Unified Framework**  
 Shows how the triadic cycle acts as a bridging mechanism between  
 intelligence, physics, and cosmological structure.
 
