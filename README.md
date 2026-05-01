@@ -51,29 +51,40 @@ This book introduces paging, transition maps, evaluators, attention, multi‑age
 It shows how grammar, semantics, roles, worlds, and narrative structure emerge from small micro‑LMs trained on compact curricula — without transformers, massive datasets, or monolithic models.
 A core volume in the Triadic Cosmos ecosystem, demonstrating how the architectural principles of modular AGI translate directly into a practical, dynamic language‑modeling system.
 
-### **2. Architecting Safe and Modular AGI**  
-A structural blueprint for building AGI systems that are modular,  
-interpretable, and safe by design.
+### **2. Architecting Safe and Modular AGI**
 
-### **3. The Triadic Cosmos: Safe and Modular AGI**  
-A conceptual and architectural overview of the Triadic AGI framework,  
-introducing the triadic cycle, composite minds, and structural safety.
+A structural blueprint for building AGI systems that are modular, interpretable, and safe by design. This book dismantles the monolithic paradigm and replaces it with a principled architecture grounded in multiplicity, recursion, representational richness, and computational energy — the Quad. It develops a full reasoning substrate through PRE, CAS, paging, evaluators, ensembles, and hybrid intelligence, showing how small, explicit mechanisms scale into coherent cognitive systems. Through toy universes, domain‑bound AGI, structured memory, and compositional control flows, it demonstrates how intelligence emerges from societies of specialized minds rather than single opaque models. A foundational volume in the Triadic Cosmos ecosystem, establishing the architectural, epistemic, and safety principles required for building real, governable AGI.
 
-### **4. The Triadic Cosmos: The Triadic Cycle**  
-A deep exploration of the triadic cycle as a unifying principle for  
-intelligence, structure, and recursive transformation.
+### **3. The Triadic Cosmos: Safe and Modular AGI**
 
-### **5. The Triadic Cosmos: The Architecture of Reality**  
-A narrative and conceptual exposition of the structural principles  
-underlying physical unification.
+A conceptual and architectural overview of the Triadic AGI framework, introducing the triadic cycle, composite minds, and structural safety. This book develops the Ladder of Ontologies as a unifying scaffold for intelligence, showing how worlds, systems, and minds emerge from recursive triadic structure. Through toy universes, developmental physics, hybrid intelligence, and compute‑driven emergence, it reveals how intelligence grows from interaction, composition, and explicit architectural constraints. It positions modular AGI not as a monolithic model but as a society of interoperating cognitive systems, each grounded in the Quad and governed by structural safety principles. A central volume in the Triadic Cosmos ecosystem, providing the philosophical, ontological, and architectural foundations for safe, scalable, and comprehensible AGI.
 
-### **6. The Triadic Cosmos: Toy Worlds**  
-A companion volume describing the nine computational toy universes  
-that illustrate the architectural ideas in runnable form.
+### **4. The Triadic Cosmos: The Triadic Cycle**
 
-### **7. The Triadic Cosmos: Unification by Architecture**  
-A popular‑science synthesis connecting intelligence and physics through  
-shared structural principles.
+A deep exploration of the triadic cycle as a unifying principle for intelligence, structure, and recursive transformation. This book distills the three fundamental roles—information, energy, and geometry—into a minimal architecture that reappears across physics, computation, life, and cognition. It shows how the continuous cycle of distinction, transformation, and relation organizes reality at every scale, from vacuum dynamics and black holes to meaning, time, and emergent structure. Through clear conceptual mappings and physical analogies, it reveals why the triad is minimal, complete, and universal. A compact but foundational volume in the Triadic Cosmos ecosystem, offering the clearest entry point into the structural logic behind all other books.
+
+### **5. The Triadic Cosmos: The Architecture of Reality**
+
+A narrative and conceptual exposition of the structural principles underlying physical unification. This book traces the origin of the Triadic Cosmos from its first architectural intuitions to a full cosmological framework, showing how information, energy, and geometry form the minimal generative structure of reality. Through analogies with computation, quantum mechanics, relativity, black holes, and cosmic evolution, it reveals the universe as a recursive, self‑extracting algorithm shaped by the triad. It connects physics, cognition, and emergence into one architectural lens, demonstrating how hybrid intelligence, developmental systems, and structural recursion naturally arise from the same principles. A sweeping foundational volume in the Triadic Cosmos ecosystem, offering the broadest and most integrative view of how reality — and intelligence — organize themselves.
+
+### **6. The Triadic Cosmos: Toy Worlds**
+
+A companion volume describing the nine computational toy universes that illustrate the architectural ideas in runnable form. This book turns abstract principles into concrete, testable worlds—each a minimal micro‑cosmos demonstrating curvature, motion, cooperation, ecology, strategy, learning, reasoning, and modular cognition. From ToyCosmos and MazeRunner to Pentadia, Octadia, ToyAcademy, ToyArchitect, ToySolver, ToyStory, and ToyBoard, it shows how intelligence emerges from simple rules, local interactions, and recursive structure. These worlds serve as pedagogical tools, experimental sandboxes, and architectural microscopes, revealing how the Triadic Cosmos framework manifests in practice. A hands‑on foundation for researchers and builders, grounding the entire AGI ecosystem in reproducible, extensible computational universes.
+
+### **7. The Triadic Cosmos: Unification by Architecture**
+
+A concise, popular‑science synthesis showing how the same structural
+principles shape both the physical universe and the architecture of
+intelligence. This volume presents the Triadic Cosmos not as a theory
+layered onto physics, but as an architectural pattern discovered *within*
+physics, computation, cognition, and complex systems.
+
+A bridge between cosmology and AGI architecture, it shows how the same
+recursive, modular, constraint‑driven dynamics govern physical law,
+biological intelligence, artificial systems, and future distributed
+minds. A readable, integrative entry point into the Triadic Cosmos
+ecosystem — explaining how reality organizes itself, and why intelligence
+is one of its natural architectural phases.
 
 ---
 
