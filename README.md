@@ -4,6 +4,8 @@ Foundational Books and Papers by Joachim De Witte
 Licensed under CC BY‑NC‑ND 4.0
 
 ---
+This repository represents the stable, canonical 2026 edition of the Triadic Cosmos ecosystem.
+---
 
 ## Overview
 
