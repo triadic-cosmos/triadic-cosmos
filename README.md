@@ -219,5 +219,7 @@ Senior software engineer and architect of the Triadic Cosmos ecosystem.
 Creator of the books, papers, toys canon defining a unified framework for intelligence and physics.
 
 <p align="center">
-  <img src="triad.jpg" width="256">
+  <img src="triad.jpg" width="256" alt="The triadic roles: information, energy, and geometry">
+  <br>
+  <em>The triadic roles — information, energy, and geometry — forming the minimal generative structure of the Triadic Cosmos.</em>
 </p>
