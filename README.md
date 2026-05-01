@@ -79,30 +79,75 @@ shared structural principles.
 
 ## 📄 Scientific Papers
 
-### **1. Dynamic Modular Language Models (DMLMs)**  
-Introduces a new class of language models built from many small, domain‑bound micro‑models governed by paging, evaluators, and a deterministic PRE loop.  
-Shows how grammar, semantics, world models, and long‑range coherence can emerge **without transformers, scale, or monolithic training**.  
-Forms the language‑level instantiation of the Paged‑PRE‑CAS AGI architecture.
+### **1. The Triadic Cycle as Unified Framework**  
+The foundational ontological paper of the ecosystem.  
+Introduces the closed triadic interdependence between **energy, geometry, and information**,  
+and shows how modern physics already instantiates this cycle across quantum mechanics,  
+general relativity, thermodynamics, and holography.  
+Forms the architectural backbone for all subsequent work.
 
-### **2. A Safe and Modular AGI Architecture**  
-Formalizes the AGI architecture introduced in the books, focusing on  
-safety, modularity, and structural constraints.
+---
 
-### **3. Structural Principles for Physical Unification**  
-Presents the architectural rules and invariants that unify physical  
-phenomena within the Triadic Cosmos framework.
+### **2. The Triadic Cosmos: Emergence of Intelligence**  
+Presents a substrate‑independent structural model of intelligence based on multiplicity,  
+informational richness, recursion depth, and energetic capacity.  
+Shows how biological, artificial, and hybrid intelligence emerge as fractal repetitions  
+of the same triadic architecture that governs physical law.  
+Provides the conceptual bridge between physics and AGI.
 
-### **4. The Triadic Cosmos: Emergence of Intelligence**  
-Explores how intelligence arises from structural recursion, composite  
-minds, and triadic dynamics.
+---
 
-### **5. The Triadic Cosmos: Unified Framework**  
-A compact synthesis of the AGI and physics architectures into a single  
-structural framework.
+### **3. A Safe and Modular AGI Architecture (Paged‑PRE‑CAS)**  
+Defines a governable, modular AGI architecture built from domain‑bound cognitive units,  
+explicit evaluators, paging, and recursive PRE reasoning.  
+Implements reasoning structurally rather than statistically, enabling  
+traceability, safety, and deterministic control.  
+Forms the AGI‑level instantiation of the triadic principles.
 
-### **6. The Triadic Cycle as Unified Framework**  
-Shows how the triadic cycle acts as a bridging mechanism between  
-intelligence, physics, and cosmological structure.
+---
+
+### **4. Structural Limits of AI Scaling**  
+Applies the triadic framework to modern AI systems and explains why  
+monolithic transformer LLMs face inherent scaling limits.  
+Shows that transformers over‑scale energy‑ and information‑like dimensions  
+while lacking geometric structure, leading to interference, saturation,  
+and unstable long‑range behavior.  
+Positions DMLM as a structurally balanced alternative.
+
+---
+
+### **5. Dynamic Modular Language Models (DMLMs)**  
+Introduces a new class of language models built from many small,  
+domain‑bound micro‑models governed by paging, evaluators, and a deterministic PRE loop.  
+Demonstrates how grammar, semantics, world models, and long‑range coherence can emerge  
+without transformers, scale, or monolithic training.  
+Provides the language‑level implementation of the Paged‑PRE‑CAS architecture.
+
+---
+
+### **6. Structural Principles for Physical Unification**  
+Derives the architectural constraints that any viable unifying physical theory must satisfy,  
+based on the triadic roles of energy, geometry, and information.  
+Clarifies why holography, emergent spacetime, and information‑theoretic approaches  
+naturally align with the triadic structure.  
+Provides a theory‑neutral benchmark for evaluating unification proposals.
+
+---
+
+### **7. The Triadic Cosmos: Unified Framework**  
+An earlier synthesis that integrates the triadic ontology with the emergence of intelligence  
+and modular AGI architecture.  
+Serves as a conceptual bridge between the first ontological insights  
+and the later, more mature architectural papers.
+
+---
+
+### **8. The Triadic Cosmos: The Universe as Recursive Triadic Fractal**  
+Shows how the triadic cycle repeats fractally across scales—from physics to chemistry,  
+biology, intelligence, and cosmology.  
+Positions the entire ecosystem as a recursive architectural structure,  
+revealing deep coherence between physical law and intelligent systems.  
+Provides the long‑range conceptual synthesis of the ecosystem.
 
 ---
 
