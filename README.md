@@ -10,12 +10,30 @@ Licensed under CC BY‑NC‑ND 4.0
 **The Triadic Cosmos** is a unified intellectual ecosystem that develops  
 a safe, modular, and architecturally grounded framework for:
 
-- Artificial General Intelligence (AGI)  
-- Physical unification  
-- Structural cosmology  
-- Composite minds and recursive architectures  
-- Educational toy universes and computational demonstrations  
+- **Artificial General Intelligence (AGI)**  
+  A fully modular, evaluator‑governed architecture based on paging, PRE loops,  
+  multi‑agent reasoning, and explicit cognitive structure.
 
+- **Dynamic Modular Language Models (DMLMs)**  
+  A new class of language models built from micro‑models, paging, evaluators,  
+  and deterministic generation—offering an alternative to monolithic transformers.
+
+- **Physical Unification**  
+  A structural ontology where information, energy, and geometry act as  
+  architectural primitives that generate physical phenomena.
+
+- **Structural Cosmology**  
+  A compositional view of the universe as a layered, recursive architecture  
+  governed by triadic cycles and emergent geometric constraints.
+
+- **Composite Minds and Recursive Architectures**  
+  A unified theory of cognition where minds, agents, and reasoning processes  
+  emerge from modular interactions and structural recursion.
+
+- **Educational Toy Universes & Computational Demonstrations**  
+  A suite of runnable, interpretable toy worlds and Java micro‑universes  
+  that make reasoning, emergence, and world‑building observable and teachable.
+  
 This repository contains the **canonical books and scientific papers**  
 that define the theoretical foundations of the Triadic Cosmos.
 
