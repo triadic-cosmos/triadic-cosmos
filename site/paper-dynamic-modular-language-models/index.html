@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>A Dynamic and Modular Architecture for Language
+Modeling</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#motivation" id="toc-motivation">Motivation</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#architecture"
+    id="toc-architecture">Architecture</a></li>
+    <li><a href="#relation-to-the-paged-pre-cas-agi-architecture"
+    id="toc-relation-to-the-paged-pre-cas-agi-architecture">Relation to
+    the Paged-PRE-CAS AGI Architecture</a></li>
+    <li><a href="#example-output" id="toc-example-output">Example
+    Output</a></li>
+    <li><a href="#limitations-and-open-questions"
+    id="toc-limitations-and-open-questions">Limitations and Open
+    Questions</a></li>
+    <li><a href="#testable-predictions"
+    id="toc-testable-predictions">Testable Predictions</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Language models have advanced rapidly in recent years, driven
+    primarily by the scaling of transformer architectures. These models
+    demonstrate impressive fluency and broad task coverage, yet their
+    underlying structure remains monolithic: a single global parameter
+    space, a fixed context window, and no explicit cognitive
+    organization. Their reasoning is implicit, their memory is
+    transient, and their behavior is governed by statistical
+    correlations rather than modular computation.</p>
+    <p>This paper presents a different approach. Dynamic Modular
+    Language Models (DMLMs) introduce an architectural alternative to
+    monolithic transformers by decomposing language generation into
+    interacting micro-models governed by explicit evaluators, paging
+    structures, and a deterministic PRE loop. Instead of relying on
+    scale, DMLMs rely on structure: domain- bound modules, local memory,
+    explicit interfaces, and epistemic governance.</p>
+    <p>The full theoretical and conceptual foundations of this
+    architecture are developed in the <em>Triadic Cosmos</em> ecosystem,
+    which provides a broader ontological and computational framework for
+    modular intelligence. The present paper does not attempt to
+    reproduce that material. Instead, it offers a concise architectural
+    overview of DMLMs, focusing on the core mechanisms required to
+    understand, implement, and evaluate the model. Readers interested in
+    the deeper theoretical context, extended examples, and the full
+    architectural philosophy are encouraged to consult the accompanying
+    book and ecosystem documentation.</p>
+    <h2 id="contributions-of-this-paper">Contributions of This
+    Paper</h2>
+    <p>This paper makes the following contributions:</p>
+    <ul>
+    <li><p><strong>Architectural formulation.</strong> We present a
+    compact, self-contained description of Dynamic Modular Language
+    Models, including paging, evaluators, Writer Agents, and the PRE
+    loop.</p></li>
+    <li><p><strong>Structural motivation.</strong> We identify the
+    architectural limitations of monolithic transformer-based LLMs and
+    explain why modularity, explicit evaluators, and local memory are
+    necessary for stable long-form generation.</p></li>
+    <li><p><strong>Operational clarity.</strong> We provide a clear
+    account of how DMLMs function in practice: how micro-models
+    interact, how evaluators govern reasoning, and how paging structures
+    maintain coherence.</p></li>
+    <li><p><strong>Empirical illustration.</strong> We summarize key
+    empirical observations from the broader ecosystem—emergent narrative
+    structure, stable recursion, and domain-bound world models—without
+    reproducing the full experimental corpus.</p></li>
+    <li><p><strong>Pointer to the ecosystem.</strong> We situate this
+    paper within the larger <em>Triadic Cosmos</em> framework and direct
+    readers to the book and repositories for the complete theoretical,
+    architectural, and empirical development.</p></li>
+    </ul>
+    <p>In short, this paper serves as a concise architectural entry
+    point into Dynamic Modular Language Models: a modular,
+    evaluator-governed alternative to monolithic language models,
+    designed to make the core ideas accessible while inviting readers to
+    explore the full ecosystem.</p>
+    <h1 id="motivation">Motivation</h1>
+    <p>Modern language models have achieved remarkable fluency,
+    coherence, and task performance, but their underlying architecture
+    has remained fundamentally unchanged since the introduction of the
+    transformer. These models are monolithic, scale-driven systems: a
+    single global parameter space, a fixed context window, and no
+    explicit cognitive structure. Their reasoning is implicit, their
+    memory is transient, and their behavior is governed by statistical
+    correlations rather than modular computation.</p>
+    <p>As a result, current LLMs face structural limitations that cannot
+    be resolved by further scaling alone. They lack domain boundaries,
+    epistemic evaluators, and deterministic control flow. They cannot
+    maintain stable long-range world models, cannot reason with explicit
+    internal state, and cannot decompose tasks into interacting
+    cognitive units. Their architecture provides no mechanism for
+    modular extension, interpretability, or principled governance.</p>
+    <p>DMLMs are motivated by the need for an alternative: a language
+    model architecture that is not monolithic but modular, not
+    scale-driven but structure-driven, not implicitly cognitive but
+    explicitly organized. Instead of relying on a single transformer, a
+    DMLM consists of many small, domain-bound micro-models that interact
+    through paging, evaluators, and a PRE loop that governs recursion
+    and stabilization.</p>
+    <h2 id="why-this-paper-exists">Why This Paper Exists</h2>
+    <p>This paper exists to articulate and formalize a fundamentally
+    different approach to language modeling. While prior work has
+    explored modularity within neural networks, multi-agent LLM systems,
+    and cognitive architectures, none provide a unified, operational
+    framework for structured, evaluator-governed, modular language
+    generation.</p>
+    <p>The goal of this paper is to:</p>
+    <ul>
+    <li><p>identify the structural limitations of monolithic
+    transformer-based LLMs,</p></li>
+    <li><p>introduce a modular architecture that provides explicit
+    cognitive structure,</p></li>
+    <li><p>demonstrate how paging, evaluators, and micro-models enable
+    stable long-form generation,</p></li>
+    <li><p>show that emergent linguistic and narrative structure can
+    arise without large-scale training,</p></li>
+    <li><p>and position DMLMs as a distinct class of language models
+    with architectural, not statistical, foundations.</p></li>
+    </ul>
+    <p>In short, this paper exists because the field needs an
+    alternative to monolithic LLMs—an architecture that is modular,
+    interpretable, extensible, and epistemically governed. DMLMs offer
+    such an alternative, providing a path toward structured, stable, and
+    transparent language generation without reliance on massive datasets
+    or transformer-scale computation.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Research on cognitive architectures, modular AI systems, and
+    language models spans several decades. Dynamic Modular Language
+    Models (DMLMs) draw from multiple traditions—symbolic architectures,
+    agent-based cognition, modular neural systems, and multi-agent LLM
+    frameworks—while differing fundamentally from all of them in
+    structure, execution model, and epistemic governance.</p>
+    <h2 id="society-of-mind-and-agentic-cognition">Society of Mind and
+    Agentic Cognition</h2>
+    <p>Minsky’s <em>Society of Mind</em> <span class="citation"
+    data-cites="minsky_society"></span> proposed that intelligence
+    emerges from the interaction of many small, specialized agents
+    rather than from a single monolithic process. This perspective
+    anticipated modern views of distributed cognition, modular
+    intelligence, and multi-agent reasoning.</p>
+    <p>However, the agents in Society of Mind lack explicit interfaces,
+    epistemic evaluators, domain boundaries, and deterministic control
+    flow. The framework does not specify how agents should coordinate,
+    how conflicts should be resolved, or how reasoning should be
+    governed at scale. It provides a conceptual metaphor rather than an
+    operational architecture.</p>
+    <p>DMLMs can be viewed as a structural and computational realization
+    of the Society of Mind intuition: they implement explicit agent
+    roles (Writer Agents), deterministic evaluators, domain-bound paging
+    structures, and a PRE loop that governs interaction and recursion.
+    Where Society of Mind offers a philosophical lens, DMLMs provide a
+    concrete, reproducible, and empirically testable architecture.</p>
+    <h2 id="cognitive-architectures">Cognitive Architectures</h2>
+    <p>Classical cognitive architectures such as Soar <span
+    class="citation" data-cites="laird_soar"></span>, ACT-R <span
+    class="citation" data-cites="anderson_actr"></span>, CLARION <span
+    class="citation" data-cites="sun_clarion"></span>, and Global
+    Workspace Theory <span class="citation"
+    data-cites="baars_gwt dehaene_gwt"></span> model cognition as
+    structured interactions between symbolic components, memory systems,
+    and control processes. These frameworks emphasize modularity,
+    explicit reasoning, and interpretable internal state.</p>
+    <p>However, they rely on hand-crafted rules, lack scalable learning
+    mechanisms, and do not provide a path toward domain expansion or
+    cloud-native execution. Their modularity is symbolic rather than
+    computational, and their learning mechanisms do not generalize to
+    open-ended domains.</p>
+    <p>DMLMs inherit their emphasis on structure and transparency while
+    introducing scalable recursion, plural evaluators, distributed
+    paging, and domain-bound micro-models that learn from compact
+    curricula. Unlike classical architectures, DMLMs are fully
+    data-driven, dynamically extensible, and capable of emergent
+    behavior without hand-coded rules.</p>
+    <h2 id="multi-agent-and-tool-augmented-llm-systems">Multi-Agent and
+    Tool-Augmented LLM Systems</h2>
+    <p>Recent frameworks such as AutoGen <span class="citation"
+    data-cites="autogen"></span>, LangChain <span class="citation"
+    data-cites="langchain"></span>, and Microsoft’s Semantic Kernel
+    <span class="citation" data-cites="semantic_kernel"></span>
+    orchestrate large language models with external tools, memory
+    stores, and multi-agent workflows. These systems demonstrate
+    practical utility and highlight the benefits of decomposing tasks
+    across multiple interacting components.</p>
+    <p>However, their reasoning is emergent rather than explicit, their
+    state is stored in unstructured transcripts, and their planning
+    relies on prompting rather than algorithmic control. They lack
+    domain isolation, deterministic execution, and epistemic governance.
+    Their agents do not possess internal structure, memory, or
+    evaluators; instead, they rely on the underlying LLM to simulate
+    these capabilities.</p>
+    <p>In contrast, DMLMs implement reasoning as a first-class
+    computational process, independent of language models. Writer Agents
+    have explicit paging structures, local memory, and deterministic
+    evaluators. The PRE loop governs interaction, recursion, and
+    stabilization, providing a principled alternative to prompt-driven
+    multi-agent LLM systems.</p>
+    <h2 id="modular-and-mixture-of-experts-models">Modular and
+    Mixture-of-Experts Models</h2>
+    <p>Mixture-of-experts architectures <span class="citation"
+    data-cites="shazeer_moe lepikhin_gshard fedus_switch"></span>
+    introduce modularity at the level of neural computation, enabling
+    specialization and improved efficiency. While these models
+    demonstrate the benefits of distributed computation, they remain
+    monolithic in their parameterization and do not provide explicit
+    cognitive roles, domain boundaries, or traceable reasoning
+    steps.</p>
+    <p>Their modularity is statistical rather than structural: experts
+    are selected by learned routing mechanisms, but the model remains a
+    single global function with shared training dynamics. There is no
+    notion of local memory, domain-specific evaluators, or multi-agent
+    negotiation.</p>
+    <p>DMLMs extend modularity to the cognitive level. Each micro-model
+    operates within a local paging structure, interacts through explicit
+    interfaces, and is governed by deterministic evaluators. Modularity
+    is architectural rather than statistical, enabling interpretability,
+    traceability, and emergent structure without monolithic
+    parameterization.</p>
+    <h2 id="modular-and-configurable-language-models">Modular and
+    Configurable Language Models</h2>
+    <p>Recent work has begun to explore modularity <em>within</em> large
+    language models themselves. Configurable and modular LMs decompose a
+    pretrained transformer into functional components or “bricks”,
+    enabling partial activation, specialization, or reconfiguration at
+    inference time <span class="citation"
+    data-cites="xiao_configurable_llms qiu_emergent_modularity shen_moduleformer"></span>.
+    These approaches highlight that modular structure can emerge inside
+    otherwise monolithic architectures and can be exploited for
+    efficiency, continual learning, or interpretability.</p>
+    <p>However, these models remain fundamentally tied to a single
+    global transformer backbone. Their modules are internal partitions
+    of a shared parameter space rather than independent, domain-bound
+    cognitive units with explicit interfaces, local memory, and
+    evaluators. In contrast, DMLMs treat modules as separate
+    micro-models embedded in a paging and evaluation architecture,
+    decoupling cognitive structure from any particular neural
+    substrate.</p>
+    <h2 id="composable-expert-based-inference-frameworks">Composable
+    Expert-Based Inference Frameworks</h2>
+    <p>Composable inference frameworks decompose queries into
+    subproblems and route them to specialized experts or models, often
+    organized as graphs or pipelines. These systems improve efficiency
+    and task coverage by composing multiple experts at inference time,
+    but they typically operate over otherwise monolithic LLMs and lack
+    persistent cognitive structure, local world models, or epistemic
+    evaluators.</p>
+    <p>DMLMs share the intuition of expert composition but differ in
+    that the composition is not an external orchestration layer: it is
+    built into the architecture itself via paging, evaluators, and the
+    PRE loop, yielding a stable, recurrent cognitive substrate rather
+    than an ad-hoc routing mechanism.</p>
+    <h2 id="large-language-models-and-transformer-architectures">Large
+    Language Models and Transformer Architectures</h2>
+    <p>Transformer-based language models <span class="citation"
+    data-cites="vaswani_attention"></span> established the dominant
+    architecture for modern language modeling. GPT-2 <span
+    class="citation" data-cites="radford_gpt2"></span> demonstrated that
+    scaling transformer decoders leads to coherent long-form text
+    generation, contextual continuity, and emergent linguistic
+    structure. Its release marked a turning point in the field: a single
+    monolithic model trained on a large corpus could generate
+    surprisingly fluent text without task-specific supervision.</p>
+    <p>However, GPT-2 also revealed the structural limitations of
+    monolithic transformer models. Its context window is fixed, its
+    memory is transient, and its reasoning is implicit rather than
+    explicit. The model lacks domain boundaries, epistemic evaluators,
+    and deterministic control flow. Scaling improves fluency but does
+    not introduce cognitive structure.</p>
+    <p>These limitations motivated the development of GPT-3 <span
+    class="citation" data-cites="brown_gpt3"></span>, which showed that
+    few-shot learning and broader generalization emerge at larger
+    scales. Neural scaling laws <span class="citation"
+    data-cites="kaplan_scaling"></span> further formalized the
+    relationship between model size, dataset size, and performance.</p>
+    <p>DMLMs address the structural limitations of both GPT-2 and GPT-3
+    by introducing modularity at the architectural level rather than the
+    statistical level. Paging, evaluators, and domain-bound micro-models
+    provide explicit structure, local memory, and epistemic governance,
+    enabling coherent long-form generation without reliance on massive
+    datasets or monolithic transformers.</p>
+    <h2 id="how-a-dmlm-differs-fundamentally">How a DMLM Differs
+    Fundamentally</h2>
+    <p>DMLMs differ from prior work in four fundamental ways:</p>
+    <ol>
+    <li><p><strong>Architectural Modularity.</strong> DMLMs consist of
+    many small, domain-bound micro-models rather than a single global
+    network. Their interactions are governed by explicit interfaces and
+    evaluators.</p></li>
+    <li><p><strong>Deterministic Epistemic Governance.</strong>
+    Evaluators enforce grammar, semantics, coherence, and world physics,
+    providing stability and preventing drift—capabilities absent in both
+    classical architectures and modern LLM systems.</p></li>
+    <li><p><strong>Paging as Cognitive Structure.</strong> Paging
+    creates local memory, local attractors, and local world models,
+    enabling scalable long-form generation without global context
+    windows.</p></li>
+    <li><p><strong>Emergence Without Scale.</strong> DMLMs produce
+    grammar, roles, worlds, and narrative structure from compact
+    curricula, without transformers, massive datasets, or monolithic
+    training.</p></li>
+    </ol>
+    <p>Together, these properties position DMLMs as a distinct class of
+    language models: neither symbolic nor neural, neither monolithic nor
+    prompt-driven, but a dynamic, modular, and interpretable
+    architecture for language generation.</p>
+    <h1 id="architecture">Architecture</h1>
+    <p>Dynamic Modular Language Models (DMLMs) decompose language
+    generation into many small, interacting components—Writer Agents,
+    Token Pages, transition maps, evaluators, and a deterministic PRE
+    loop. Unlike monolithic transformer architectures, which are static
+    snapshots of a single training run, DMLMs are dynamic systems: they
+    grow, reorganize, and refine their internal structure throughout
+    their lifetime. This section provides a high-level overview of the
+    architecture; full technical details appear in the companion Triadic
+    Cosmos volume.</p>
+    <h2 id="micro-models-and-writer-agents">Micro-Models and Writer
+    Agents</h2>
+    <p>A DMLM consists of multiple <em>Writer Agents</em>, each a small,
+    self-contained micro-LM with:</p>
+    <ul>
+    <li><p>its own Token Pages and transition maps,</p></li>
+    <li><p>its own miniature prediction networks,</p></li>
+    <li><p>its own curriculum and training trajectory,</p></li>
+    <li><p>its own lemma clusters, attention patterns, and emergent
+    world.</p></li>
+    </ul>
+    <p>Agents do not share parameters. They diverge naturally due to
+    differences in paging structure, transition growth, and interaction
+    history. A central <em>Writer Engine</em> orchestrates these agents,
+    selecting which one proposes the next sentence and switching agents
+    when retries fail. This multi-agent orchestration provides
+    stability, diversity, and long-range narrative richness.</p>
+    <h2 id="paging-as-emergent-micro-memory">Paging as Emergent
+    Micro-Memory</h2>
+    <p>Paging is the cognitive backbone of the architecture. Each agent
+    maintains many <em>Token Pages</em>: small, local models that
+    specialize in narrow transition contexts. A Token Page contains:</p>
+    <ul>
+    <li><p>a small set of input tokens,</p></li>
+    <li><p>a small set of output tokens,</p></li>
+    <li><p>a deterministic mapping for trivial transitions,</p></li>
+    <li><p>or a tiny prediction network for multi-option
+    transitions.</p></li>
+    </ul>
+    <p>Token Pages are not designed; they <em>emerge</em> during
+    training. New pages appear when new transition patterns arise;
+    existing pages may split or refine as the curriculum expands. Paging
+    therefore grows dynamically and reflects the statistical and
+    structural regularities of the learned world rather than predefined
+    semantic categories.</p>
+    <p>Pages often correlate with intuitive notions such as fissures,
+    groves, or caverns, but this is not enforced. Interaction learning
+    can blend or reshape pages, and each agent develops a unique paging
+    topology—its cognitive fingerprint.</p>
+    <h2 id="dynamic-and-incremental-learning">Dynamic and Incremental
+    Learning</h2>
+    <p>A DMLM begins as an empty system: no pages, no transitions, no
+    canonical structures. All architecture emerges through learning.
+    Because learning is local and modular:</p>
+    <ul>
+    <li><p>the model can generate coherent output at any stage of
+    training,</p></li>
+    <li><p>new examples can be introduced at any time,</p></li>
+    <li><p>pages and transitions grow without global
+    retraining,</p></li>
+    <li><p>and the system supports lifelong, open-ended
+    learning.</p></li>
+    </ul>
+    <p>This dynamic property distinguishes DMLMs from transformers. A
+    DMLM is not a frozen parameter block but a persistent, evolving
+    architecture.</p>
+    <h2 id="transition-maps-as-learned-continuity">Transition Maps as
+    Learned Continuity</h2>
+    <p>Each agent maintains a sparse <em>transition map</em> that
+    records which token-to-token transitions it has observed. Transition
+    maps serve three roles:</p>
+    <ul>
+    <li><p><strong>Deterministic mappings</strong> for highly stable
+    transitions,</p></li>
+    <li><p><strong>Bias-based N-mapping</strong> during training to
+    stabilize learning,</p></li>
+    <li><p><strong>Logit filtering</strong> during inference to softly
+    suppress implausible transitions.</p></li>
+    </ul>
+    <p>Transition maps complement paging by providing continuity between
+    Token Pages. They encode the agent’s narrative highways—its
+    preferred lemma clusters, verbs, and world physics—and become a core
+    part of its personality.</p>
+    <h2 id="evaluators-and-epistemic-governance">Evaluators and
+    Epistemic Governance</h2>
+    <p>Neural components generate proposals; deterministic evaluators
+    decide which proposals survive. DMLMs use several evaluators:</p>
+    <ul>
+    <li><p><strong>Grammar Engine</strong>: deterministic rendering and
+    syntactic validation,</p></li>
+    <li><p><strong>Semantic Engine</strong>: actor consistency, world
+    physics, and semantic plausibility,</p></li>
+    <li><p><strong>Coherence mechanisms</strong>: rule-based and
+    model-based checks for long-range stability,</p></li>
+    <li><p><strong>Booster Engine</strong>: controlled lexical,
+    structural, and semantic variation.</p></li>
+    </ul>
+    <p>Evaluators provide <em>epistemic governance</em>: they define the
+    boundaries within which learning and generation remain stable.
+    Strong evaluators produce strong emergent behavior.</p>
+    <h2 id="the-pre-loop-proposalretryevaluate">The PRE Loop:
+    Proposal–Retry–Evaluate</h2>
+    <p>The PRE loop is the cognitive core of the architecture:</p>
+    <ol>
+    <li><p><strong>Proposal</strong>: an agent proposes a candidate
+    sentence using its Token Pages, transition maps, and
+    attention-compressed context.</p></li>
+    <li><p><strong>Retry</strong>: if evaluation fails, the agent
+    refines or regenerates the proposal.</p></li>
+    <li><p><strong>Evaluate</strong>: deterministic evaluators accept or
+    reject the sentence.</p></li>
+    </ol>
+    <p>PRE transforms generation from single-shot sampling into
+    iterative refinement. Transformers generate tokens without revision;
+    Writer Agents generate sentences with revision cycles.</p>
+    <h2 id="canonical-form-internal-vs.-external-language">Canonical
+    Form: Internal vs. External Language</h2>
+    <p>DMLMs think in a canonical internal language and speak in natural
+    language. Canonical form provides:</p>
+    <ul>
+    <li><p>lemma-level tokens,</p></li>
+    <li><p>morphological operators,</p></li>
+    <li><p>narrative-phase markers,</p></li>
+    <li><p>and explicit control tokens.</p></li>
+    </ul>
+    <p>The Grammar Engine deterministically renders canonical form into
+    natural language. This strict separation ensures stability,
+    interpretability, and perfect grammar even in tiny models.</p>
+    <h2 id="curriculum-as-language-definition">Curriculum as Language
+    Definition</h2>
+    <p>The curriculum is not a dataset but a formal specification of the
+    micro-language. It defines:</p>
+    <ul>
+    <li><p>grammar skeleton and structure tokens,</p></li>
+    <li><p>semantic primitives and lemma clusters,</p></li>
+    <li><p>narrative phases,</p></li>
+    <li><p>attention patterns,</p></li>
+    <li><p>and transition topology.</p></li>
+    </ul>
+    <p>From a few dozen canonical sentences, agents develop grammar,
+    semantics, roles, and world physics through interaction and
+    evolution.</p>
+    <h2 id="learned-attention-and-context-compression">Learned Attention
+    and Context Compression</h2>
+    <p>Attention in DMLMs is learned relevance: a scalar importance
+    score for each token in the context window. Attention is shaped by
+    curriculum signals and social learning between agents.</p>
+    <p>Context compression filters out irrelevant tokens, increasing
+    effective context size and simplifying prediction. This provides a
+    lightweight, interpretable alternative to transformer attention.</p>
+    <p>Together, these components form a modular, dynamic, and
+    extensible architecture for language generation. DMLMs replace
+    monolithic parameterization with explicit cognitive structure,
+    enabling stable long-form behavior, emergent worlds, and lifelong
+    learning without transformers or large-scale training.</p>
+    <h1 id="relation-to-the-paged-pre-cas-agi-architecture">Relation to
+    the Paged-PRE-CAS AGI Architecture</h1>
+    <p>Dynamic Modular Language Models can be viewed as a concrete
+    instantiation of the broader Paged-PRE-CAS architecture introduced
+    in the Triadic Cosmos AGI framework. Although DMLMs operate at the
+    level of sentence generation rather than token-level reasoning, the
+    underlying structural principles are the same: paging for domain
+    decomposition, PRE for iterative reasoning, and optional CAS vectors
+    for epistemic guidance.</p>
+    <h2 id="paged-reasoning-at-the-level-of-writer-agents">Paged
+    Reasoning at the Level of Writer Agents</h2>
+    <p>In the AGI architecture, Paging isolates reasoning into
+    domain-specific pages that constrain the action space and activate
+    domain-appropriate evaluators. In DMLMs, each Writer Agent
+    implements the same principle through its Token Pages:</p>
+    <ul>
+    <li><p>each Token Page is a local reasoning context,</p></li>
+    <li><p>deterministic or predictive transitions restrict the action
+    space,</p></li>
+    <li><p>cross-domain interference is structurally
+    impossible,</p></li>
+    <li><p>and each agent develops its own paging topology.</p></li>
+    </ul>
+    <p>Thus, every Writer Agent is a <em>paged reasoning system</em>: a
+    Paged-PRE unit specialized for narrative generation.</p>
+    <h2
+    id="pre-from-proposalevaluaterefine-to-proposalevaluateretry">PRE:
+    From Proposal–Evaluate–Refine to Proposal–Evaluate–Retry</h2>
+    <p>In the AGI architecture, PRE is defined as:</p>
+    <div class="center">
+    <p><strong>Proposal → Evaluate → Refine</strong></p>
+    </div>
+    <p>where the refinement step explicitly incorporates the previous
+    proposal to produce an improved candidate. This yields a true
+    recursive reasoning loop.</p>
+    <p>In DMLMs, PRE is implemented as:</p>
+    <div class="center">
+    <p><strong>Proposal → Evaluate → Retry</strong></p>
+    </div>
+    <p>Retries do not yet reuse the previous proposal explicitly, but
+    they operate within the same structural regime:</p>
+    <ul>
+    <li><p>retries select alternative transitions, lemma clusters, or
+    Token Pages,</p></li>
+    <li><p>evaluators provide deterministic feedback,</p></li>
+    <li><p>the loop continues until a valid sentence is found.</p></li>
+    </ul>
+    <p>This makes DMLM-PRE a <em>functional subset</em> of AGI-PRE:
+    refinement is implicit rather than explicit. The architecture
+    remains fully compatible with a future refine-based variant in which
+    Writer Agents incorporate their own failed proposals as input for
+    improved regeneration.</p>
+    <h2 id="optional-token-level-pre-for-efficiency">Optional
+    Token-Level PRE for Efficiency</h2>
+    <p>The AGI architecture applies PRE at the token level. DMLMs apply
+    PRE at the sentence level, but token-level PRE remains an optional
+    extension:</p>
+    <ul>
+    <li><p>token-level PRE can refine transitions inside a Token
+    Page,</p></li>
+    <li><p>it can reduce retries at the sentence level,</p></li>
+    <li><p>and it can increase generation efficiency by filtering weak
+    transitions earlier.</p></li>
+    </ul>
+    <p>Token-level PRE is therefore not required for correctness, but it
+    is a natural efficiency layer that can be added without altering the
+    architecture.</p>
+    <h2 id="optional-cas-vectors-for-epistemic-guidance">Optional CAS
+    Vectors for Epistemic Guidance</h2>
+    <p>The AGI architecture introduces CAS (Content–Accuracy–Safety)
+    vectors as orthogonal epistemic evaluators. DMLMs do not require CAS
+    for stable narrative generation, but CAS vectors can be integrated
+    seamlessly:</p>
+    <ul>
+    <li><p>CAS dimensions can act as additional evaluators,</p></li>
+    <li><p>CAS-N ensembles can provide pluralistic scoring,</p></li>
+    <li><p>CAS vectors can guide refinement or retries during
+    PRE,</p></li>
+    <li><p>and CAS can serve as a governance layer for safety-critical
+    applications.</p></li>
+    </ul>
+    <p>Thus, DMLMs are CAS-compatible without depending on CAS for core
+    functionality.</p>
+    <h2 id="m-paged-pre-a-multi-agent-reasoning-ensemble">M-Paged-PRE: A
+    Multi-Agent Reasoning Ensemble</h2>
+    <p>The AGI architecture allows multiple Paged-PRE-CAS systems to
+    operate in parallel for robustness and plural reasoning. DMLMs
+    instantiate this principle directly: the system is an ensemble of
+    <span class="math inline"><em>M</em></span> Writer Agents, each a
+    paged reasoning core with its own Token Pages, transition maps, and
+    micro-networks.</p>
+    <p>The Writer Engine acts as an arbiter:</p>
+    <ul>
+    <li><p>rotating agents,</p></li>
+    <li><p>switching after repeated failure,</p></li>
+    <li><p>balancing stylistic and semantic diversity,</p></li>
+    <li><p>and ensuring stable long-form generation.</p></li>
+    </ul>
+    <p>This makes a DMLM an <em>M-Paged-PRE system</em>: a plural,
+    structurally diverse ensemble of paged reasoning units.</p>
+    <h2 id="conceptual-alignment">Conceptual Alignment</h2>
+    <p>The correspondence between the two architectures is direct:</p>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>AGI Architecture</strong></th>
+    <th style="text-align: left;"><strong>DMLM
+    Architecture</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">Paging</td>
+    <td style="text-align: left;">Token Pages per Writer Agent</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">PRE (Refine-based)</td>
+    <td style="text-align: left;">PRE (Retry-based,
+    refine-compatible)</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Token-level PRE</td>
+    <td style="text-align: left;">Optional efficiency layer</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">CAS vectors</td>
+    <td style="text-align: left;">Optional evaluator extension</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Domain experts</td>
+    <td style="text-align: left;">Token Pages + transition maps</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Arbiter</td>
+    <td style="text-align: left;">Writer Engine (agent selection)</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Ensembles</td>
+    <td style="text-align: left;">Multiple Writer Agents</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>DMLMs therefore instantiate the same structural principles as the
+    Paged-PRE-CAS AGI architecture, but specialized for narrative
+    generation and optimized for small, modular micro-models.</p>
+    <h1 id="example-output">Example Output</h1>
+    <p>To illustrate how a Dynamic Modular Language Model behaves in
+    practice, we present a short story generated by a prototype DMLM
+    trained on a compact curriculum. The model consisted of domain-bound
+    micro-models (fissure, ember, forest), each with its own paging
+    structure and local attractors. Grammar, semantic, and coherence
+    evaluators governed sentence acceptance through the PRE loop, and
+    canonical form ensured consistent role and world-state
+    representation.</p>
+    <p>The following fragment is reproduced verbatim from the companion
+    Triadic Cosmos volume:</p>
+    <blockquote>
+    <p>Pulse bursts past dripping lava surges along hollow ridge. The
+    rabbit staggers within shifting fissure. Deep rumble shakes along
+    stone spine. Branches loosen within shifting ember mist. The rabbit
+    staggers along lashing mound. The rabbit breathes beside quivering
+    ember mist. The rabbit breathes amid dim fissure. The rabbit
+    breathes along dim molten shapes. Deep rumble vibrates along dim
+    ember mist. The rabbit slips beside rippling ember mist. The raccoon
+    crawls between lashing ember ledge. The rabbit slips along shifting
+    soil. The rabbit staggers toward ridge. The fox halts past grasping
+    branches. The fox stalks against silent fissure. The fox halts
+    against faint ridge. The fox chases against silent tendril fissure.
+    Within shifting dark the fox stalks fast along lessons learned
+    tonight. The rabbit stumbles forward blocking grove. Forest surges
+    closer with hungry intent.</p>
+    </blockquote>
+    <p>This example illustrates how DMLMs generate structured, coherent
+    text through modularity, paging, evaluators, and the PRE
+    loop—without transformers, large datasets, or monolithic
+    training.</p>
+    <h1 id="limitations-and-open-questions">Limitations and Open
+    Questions</h1>
+    <p>Dynamic Modular Language Models (DMLMs) introduce a new
+    architectural paradigm, but the framework also raises several
+    limitations and open questions that require further
+    investigation.</p>
+    <h2 id="limitations">Limitations</h2>
+    <ul>
+    <li><p><strong>Prototype-scale implementation.</strong> Current DMLM
+    implementations operate at small scale using compact curricula and
+    lightweight micro-models. While this demonstrates architectural
+    viability, it remains unclear how the framework behaves under
+    substantially larger domain sets or more complex reasoning
+    tasks.</p></li>
+    <li><p><strong>Absence of large-scale empirical benchmarks.</strong>
+    DMLMs have not yet been evaluated on standard NLP benchmarks or
+    compared directly to transformer-based LLMs. The architecture is
+    designed for modularity and structure rather than raw performance,
+    but systematic evaluation remains an open task.</p></li>
+    <li><p><strong>Manual curriculum design.</strong> Micro-models
+    currently rely on hand-crafted or semi-structured curricula.
+    Automated curriculum generation, domain discovery, and
+    self-expansion mechanisms are not yet implemented.</p></li>
+    <li><p><strong>Evaluator design and tuning.</strong> Evaluators play
+    a central role in governing grammar, semantics, coherence, and world
+    logic. Their design is currently heuristic and domain-specific. A
+    more principled theory of evaluator construction and interaction is
+    needed.</p></li>
+    <li><p><strong>Lack of formal guarantees.</strong> While DMLMs
+    exhibit stable long-form behavior in practice, there are no formal
+    proofs regarding convergence, stability, or bounded recursion under
+    the PRE loop.</p></li>
+    </ul>
+    <h2 id="open-questions">Open Questions</h2>
+    <ul>
+    <li><p><strong>Scaling behavior.</strong> How do DMLMs behave when
+    the number of micro-models grows by orders of magnitude? Does
+    modularity preserve coherence, or do new forms of interference
+    emerge?</p></li>
+    <li><p><strong>Automated domain formation.</strong> Can a DMLM
+    autonomously discover new domains, generate its own curricula, or
+    split existing domains when complexity increases?</p></li>
+    <li><p><strong>Learning dynamics.</strong> What are the optimal
+    training strategies for micro-models? Can evaluators themselves be
+    learned or co-evolve with the system?</p></li>
+    <li><p><strong>Hybrid architectures.</strong> How might DMLMs
+    integrate with or complement transformer-based models? Are hybrid
+    systems—combining modular structure with neural
+    embeddings—advantageous?</p></li>
+    <li><p><strong>Theoretical characterization.</strong> Can DMLMs be
+    described in terms of computational graphs, dynamical systems, or
+    formal grammars? What is the expressive power of a DMLM relative to
+    classical LMs?</p></li>
+    </ul>
+    <p>In summary, DMLMs provide a promising architectural alternative
+    to monolithic language models, but their full capabilities,
+    limitations, and theoretical properties remain open areas for future
+    research.</p>
+    <h1 id="testable-predictions">Testable Predictions</h1>
+    <p>Dynamic Modular Language Models (DMLMs) make several structural
+    predictions that follow directly from their architecture. These
+    predictions are falsifiable and can be evaluated using small-scale
+    implementations, without requiring large datasets or
+    transformer-based models. They concern stability, modularity,
+    evaluator behavior, and the dynamics of the PRE loop.</p>
+    <h2
+    id="prediction-1-stable-long-range-coherence-through-paging">Prediction
+    1: Stable Long-Range Coherence Through Paging</h2>
+    <p>Because paging creates local memory and local attractors, a DMLM
+    should maintain coherent long-range structure even when individual
+    micro-models have no global context window. Narrative arcs, roles,
+    and world-state variables should remain stable across hundreds of
+    generation steps.</p>
+    <p><strong>Falsification:</strong> If long-range coherence collapses
+    or drifts uncontrollably despite correct paging, the architectural
+    claim fails.</p>
+    <h2 id="prediction-2-evaluator-governed-convergence">Prediction 2:
+    Evaluator-Governed Convergence</h2>
+    <p>Plural evaluators (grammar, semantics, coherence, world logic)
+    should cause the PRE loop to converge toward stable outputs.
+    Repeated Proposal–Retry–Evaluate cycles should reduce variance and
+    increase structural consistency.</p>
+    <p><strong>Falsification:</strong> If evaluators fail to reduce
+    variance or if PRE cycles diverge, the evaluator governance
+    hypothesis is incorrect.</p>
+    <h2
+    id="prediction-3-domain-bound-behavior-of-micro-models">Prediction
+    3: Domain-Bound Behavior of Micro-Models</h2>
+    <p>Each micro-model is trained on a compact curriculum and bound to
+    a specific domain. The prediction is that micro-models should remain
+    within their domain even under pressure: they should not
+    spontaneously drift into unrelated genres, topics, or styles.</p>
+    <p><strong>Falsification:</strong> If micro-models consistently leak
+    into other domains despite correct paging and evaluators, the
+    domain-bound modularity claim is weakened.</p>
+    <h2 id="prediction-4-emergent-structure-without-scale">Prediction 4:
+    Emergent Structure Without Scale</h2>
+    <p>DMLMs predict that grammatical structure, narrative roles, and
+    world models can emerge from compact curricula without large-scale
+    training. Small micro-models should exhibit structured behavior
+    disproportionate to their size.</p>
+    <p><strong>Falsification:</strong> If emergent structure only
+    appears at large scale or with massive datasets, the architecture
+    does not provide the claimed structural advantages.</p>
+    <h2
+    id="prediction-5-reproducible-behavior-under-fixed-configuration">Prediction
+    5: Reproducible Behavior Under Fixed Configuration</h2>
+    <p>Given identical paging, evaluators, and micro-model parameters, a
+    DMLM should produce highly reproducible outputs. Variation should be
+    bounded and predictable, not chaotic.</p>
+    <p><strong>Falsification:</strong> If repeated runs with identical
+    settings produce inconsistent or unstable outputs, the deterministic
+    control-flow hypothesis is challenged.</p>
+    <h2
+    id="prediction-6-modular-extensibility-without-retraining">Prediction
+    6: Modular Extensibility Without Retraining</h2>
+    <p>Adding a new domain-specific micro-model should extend the
+    system’s capabilities without retraining existing modules. Existing
+    domains should remain stable and unaffected.</p>
+    <p><strong>Falsification:</strong> If adding a new module
+    destabilizes existing domains or requires global retraining, the
+    modular extensibility claim is invalid.</p>
+    <h2 id="prediction-7-pre-loop-produces-distinct-regimes">Prediction
+    7: PRE Loop Produces Distinct Regimes</h2>
+    <p>The PRE loop should exhibit identifiable behavioral regimes:
+    rapid convergence, slow convergence, oscillation, or
+    evaluator-driven rejection. These regimes should be measurable and
+    predictable across runs.</p>
+    <p><strong>Falsification:</strong> If PRE behavior is random or
+    unstructured, the loop does not function as a deterministic
+    reasoning mechanism.</p>
+    <h2 id="prediction-8-local-world-models-are-persistent">Prediction
+    8: Local World Models Are Persistent</h2>
+    <p>Paging should allow micro-models to maintain local world-state
+    variables (locations, roles, objects, intentions) across long
+    sequences. These world models should persist even when other modules
+    activate.</p>
+    <p><strong>Falsification:</strong> If world-state variables collapse
+    or reset unpredictably, the paging mechanism does not provide the
+    claimed cognitive structure.</p>
+    <p>Together, these predictions provide a falsifiable empirical
+    program for evaluating DMLMs. They do not depend on scale, data
+    volume, or transformer architectures, but follow directly from the
+    modular, evaluator-governed, paging-based design of the system.</p>
+    <h2
+    id="prediction-9-generation-efficiency-improves-with-better-evaluators-and-curricula">Prediction
+    9: Generation Efficiency Improves with Better Evaluators and
+    Curricula</h2>
+    <p>Across multiple prototype implementations, DMLMs exhibit
+    consistent structural behavior even when trained with different
+    curricula, context lengths, or micro-model sizes. The primary
+    quantity that varies is generation efficiency: the proportion of
+    generated sentences that pass the grammar engine, semantic engine,
+    and structural evaluators without requiring retries.</p>
+    <p>The architecture predicts that generation efficiency is not
+    random but systematically improvable. Enhancing evaluator quality
+    (e.g., more precise grammar rules, richer semantic constraints),
+    refining curricula, or improving micro-model training should lead to
+    higher generation efficiency without altering the underlying
+    architecture. Because the PRE loop filters low-quality proposals,
+    better evaluators should reduce the number of retries and increase
+    the acceptance rate.</p>
+    <p>Generation efficiency varies widely depending on evaluator
+    strictness, but the qualitative behavior of the system remains
+    stable across models. This suggests that efficiency is a tunable
+    performance metric rather than a structural limitation of the
+    architecture.</p>
+    <p>Because the architecture is fully modular, DMLMs allow PRE
+    mechanisms to operate at multiple levels of granularity. Earlier
+    prototypes used token-level PRE loops, and combining these with
+    sentence-level PRE may further increase generation efficiency. This
+    kind of mechanical extensibility is not available in monolithic
+    transformer architectures, where the generation mechanism is
+    fixed.</p>
+    <p><strong>Falsification:</strong> If evaluator improvements or
+    curriculum refinements do not increase generation efficiency, or if
+    efficiency remains unstable across models with similar settings, the
+    hypothesis that efficiency reflects structural alignment between
+    micro-models and evaluators would be weakened.</p>
+    <h2 class="unnumbered" id="what-has-already-been-observed">What Has
+    Already Been Observed</h2>
+    <p>Several of the predictions above are partially confirmed by
+    existing prototype implementations. Small-scale DMLMs already
+    exhibit stable long-range coherence through paging,
+    evaluator-governed convergence under the PRE loop, and reproducible
+    behavior under fixed configurations. These observations support the
+    architectural claims that local memory, plural evaluators, and
+    deterministic control flow can produce structured behavior without
+    large-scale training.</p>
+    <p>Other predictions remain open but are strongly suggested by the
+    compositional nature of the architecture. In particular,
+    domain-bound modularity and modular extensibility have not yet been
+    tested at scale, but the ability to train clusters of micro-models
+    on separate domains and later compose them into a larger system
+    follows directly from the agent-based design. The PRE loop provides
+    a natural mechanism for selecting or coordinating agents based on
+    evaluated performance, suggesting that larger DMLMs may
+    self-organize through evaluator- driven composition.</p>
+    <p>These observations indicate that while DMLMs are at an early
+    stage, the prototype already demonstrates several of the
+    architectural behaviors predicted by the framework.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper introduced Dynamic Modular Language Models (DMLMs), a
+    new architectural approach to language generation based on modular
+    micro-models, explicit evaluators, paging structures, and a
+    deterministic PRE loop. Unlike monolithic transformer-based LLMs,
+    DMLMs provide cognitive structure, local memory, and epistemic
+    governance at the architectural level rather than relying on scale
+    or implicit statistical correlations.</p>
+    <p>The prototypes developed so far demonstrate that small DMLMs can
+    produce coherent long-form text, maintain stable world models, and
+    exhibit reproducible behavior across runs. These observations
+    suggest that modularity, evaluator-governed reasoning, and local
+    paging offer a viable alternative to the monolithic design of
+    current language models. At the same time, the architecture remains
+    at an early stage: large-scale evaluation, automated curriculum
+    generation, and principled evaluator design are open areas for
+    future research.</p>
+    <p>The goal of this paper was not to present a mature production
+    system, but to articulate the core mechanisms of a new model class
+    and to provide a foundation for further exploration. The broader
+    theoretical and conceptual context of DMLMs is developed in the
+    <em>Triadic Cosmos</em> ecosystem, which offers a more complete
+    account of the ontology, design principles, and empirical
+    demonstrations underlying this work.</p>
+    <p>DMLMs open a path toward structured, interpretable, and
+    extensible language models that do not depend on massive datasets or
+    monolithic architectures. We hope this seed architecture encourages
+    further experimentation, theoretical development, and integration
+    with the wider research community.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>.</p>
+  </main>
+
+</div>
+
+</body>
+</html>

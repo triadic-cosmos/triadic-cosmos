@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Structural Principles for Physical Unification<br />
+Foundational Architectural Constraints Derived from the Triadic
+Cycle</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#the-triadic-cycle-as-ontological-basis"
+    id="toc-the-triadic-cycle-as-ontological-basis">The Triadic Cycle as
+    Ontological Basis</a></li>
+    <li><a href="#from-ontology-to-architecture-methodological-approach"
+    id="toc-from-ontology-to-architecture-methodological-approach">From
+    Ontology to Architecture: Methodological Approach</a></li>
+    <li><a
+    href="#architectural-constraints-derived-from-the-triadic-cycle"
+    id="toc-architectural-constraints-derived-from-the-triadic-cycle">Architectural
+    Constraints Derived from the Triadic Cycle</a></li>
+    <li><a href="#implications-for-existing-approaches-to-unification"
+    id="toc-implications-for-existing-approaches-to-unification">Implications
+    for Existing Approaches to Unification</a></li>
+    <li><a href="#testable-predictions"
+    id="toc-testable-predictions">Testable Predictions</a></li>
+    <li><a href="#novelties-and-contributions"
+    id="toc-novelties-and-contributions">Novelties and
+    Contributions</a></li>
+    <li><a href="#implications"
+    id="toc-implications">Implications</a></li>
+    <li><a href="#open-questions" id="toc-open-questions">Open
+    Questions</a></li>
+    <li><a href="#limitations" id="toc-limitations">Limitations</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a
+    href="#architectural-lemmas-and-their-mapping-to-the-principles"
+    id="toc-architectural-lemmas-and-their-mapping-to-the-principles">Architectural
+    Lemmas and Their Mapping to the Principles</a></li>
+    <li><a href="#glossary-of-key-terms"
+    id="toc-glossary-of-key-terms">Glossary of Key Terms</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>The search for a unified description of fundamental physics has
+    traditionally proceeded through increasingly sophisticated
+    mathematical frameworks, ranging from quantum field theory and
+    general relativity to string theory, loop-based approaches, and
+    information-theoretic reformulations. Despite their differences,
+    these programs share a common challenge: they typically begin by
+    proposing a specific formalism and only afterwards examine whether
+    the resulting structure is compatible with the known architectural
+    features of physical law. As a result, unification efforts often
+    diverge not because of empirical conflict, but because they embed
+    incompatible assumptions about the roles of energy, geometry, and
+    information.</p>
+    <p>This paper takes the opposite approach. Rather than advancing a
+    new dynamical model, it identifies the structural principles that
+    any viable unifying theory must satisfy, independent of its
+    mathematical realization. These principles are derived from the
+    foundational ontology introduced in the companion manuscript <em>The
+    Triadic Cycle as Unified Framework</em>, which characterizes energy,
+    geometry, and information as mutually constraining roles connected
+    through a cyclic interdependence. From this ontological structure
+    follow a set of architectural constraints that are already implicit
+    in modern physics, including holographic information bounds, the
+    thermodynamic character of gravitational systems, relativistic
+    causal structure, and quantum-information-theoretic limits on
+    physical evolution.</p>
+    <p>The goal of the present work is to make these constraints
+    explicit and to articulate them as structural principles for
+    physical unification. Doing so provides a theory-independent
+    benchmark against which existing and future unification proposals
+    can be evaluated. It clarifies why certain approaches—such as
+    holographic dualities, emergent spacetime programs, and
+    information-theoretic formulations—align more naturally with the
+    structural demands of fundamental physics, while others face
+    inherent architectural tensions.</p>
+    <p>By shifting the focus from mathematical proposals to
+    architectural necessity, this paper aims to complement ongoing
+    unification efforts with a conceptual framework that precedes
+    formalization. The resulting structural principles do not constitute
+    a theory of their own; rather, they delineate the architectural
+    space within which any successful unifying theory must reside.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Efforts toward physical unification span a wide range of
+    approaches, each emphasizing different structural features of
+    fundamental physics. Holographic dualities <span class="citation"
+    data-cites="tHooft93 Susskind95 Maldacena1999"></span> have played a
+    central role in revealing the deep connections between information,
+    geometry, and gravitational dynamics. These works demonstrate that
+    spacetime geometry can be encoded in lower-dimensional quantum
+    degrees of freedom, motivating the view that geometry is not
+    fundamental but emergent from information-theoretic structure.</p>
+    <p>Closely related are programs that explicitly treat spacetime as
+    emergent from entanglement patterns or tensor-network constructions
+    <span class="citation"
+    data-cites="Swingle2012 VanRaamsdonk2010"></span>. These approaches
+    highlight the role of quantum correlations in generating geometric
+    connectivity and have strengthened the conceptual link between
+    information and geometry suggested by black-hole thermodynamics
+    <span class="citation"
+    data-cites="Bekenstein1973 Hawking1975"></span>.
+    Quantum-information-theoretic limits on physical evolution, such as
+    quantum speed limits and bounds on computational capacity, further
+    support the idea that information plays a structural role in
+    constraining physical law <span class="citation"
+    data-cites="MargolusLevitin1998 Lloyd2000"></span>.</p>
+    <p>Other unification programs focus on discrete or combinatorial
+    structures, including causal set theory <span class="citation"
+    data-cites="Bombelli1987"></span>, loop-based approaches <span
+    class="citation" data-cites="Rovelli2004"></span>, and spin-foam
+    models <span class="citation" data-cites="Perez2013"></span>. These
+    frameworks aim to reconcile quantum mechanics with gravitational
+    dynamics by replacing continuum geometry with more primitive
+    building blocks. While differing in methodology, they share the
+    motivation to derive spacetime structure from deeper principles
+    rather than assume it as fundamental.</p>
+    <p>Philosophical perspectives such as structural realism and
+    relational approaches to physics <span class="citation"
+    data-cites="Ladyman2007 Rovelli1996"></span> also emphasize the
+    primacy of structural relations over substantive entities. These
+    views resonate with the idea that unification may require
+    identifying the invariant structural roles that physical theories
+    must instantiate rather than specifying particular ontological
+    commitments.</p>
+    <p>The present work differs from these approaches by not proposing a
+    new dynamical model or specific microscopic structure. Instead, it
+    synthesizes insights from holography, thermodynamics, quantum
+    information, and relational perspectives into a set of architectural
+    constraints that any viable unifying theory must satisfy. In this
+    sense, the paper is complementary to existing unification programs:
+    it provides a structural lens through which their assumptions and
+    compatibility with fundamental physical principles can be
+    evaluated.</p>
+    <h1 id="the-triadic-cycle-as-ontological-basis">The Triadic Cycle as
+    Ontological Basis</h1>
+    <p>The architectural principles developed in this manuscript are
+    derived from the ontological framework introduced in the companion
+    paper <em>The Triadic Cycle as Unified Framework</em>. For
+    completeness, this section summarizes the elements of that framework
+    that are required for the present work, without reproducing its full
+    conceptual development.</p>
+    <p>The Triadic Cycle identifies three foundational roles that recur
+    across modern physics: <em>energy</em>, <em>geometry</em>, and
+    <em>information</em>. These roles are not treated as independent
+    entities but as mutually constraining aspects of physical law. Their
+    interdependence is expressed through a cyclic structure in which
+    each role both enables and limits the others. Energy determines and
+    is constrained by geometric structure; geometry shapes and is shaped
+    by informational capacity; and information governs and is governed
+    by energetic and geometric constraints. This cyclic interrelation is
+    visible in a wide range of physical contexts, including black-hole
+    thermodynamics, relativistic causal structure,
+    quantum-information-theoretic bounds, and holographic dualities.</p>
+    <p>The purpose of the Triadic Cycle is not to introduce new physical
+    postulates but to make explicit a structural pattern already
+    implicit in established theory. By treating energy, geometry, and
+    information as roles rather than substances, the framework provides
+    a minimal ontological basis that avoids committing to specific
+    microscopic models. This role-based ontology is sufficiently
+    abstract to encompass continuum and discrete approaches, quantum and
+    classical limits, and both geometric and information-theoretic
+    formulations of physical law.</p>
+    <p>The present paper builds on this ontological foundation by
+    deriving the architectural constraints that follow from the cyclic
+    interdependence of the three roles. These constraints are structural
+    rather than dynamical: they specify the conditions that any unifying
+    physical theory must satisfy in order to instantiate the Triadic
+    Cycle. In this sense, the Triadic Cycle provides the conceptual
+    substrate, while the architectural principles developed here
+    articulate the structural space within which a viable unified theory
+    must reside.</p>
+    <h1 id="from-ontology-to-architecture-methodological-approach">From
+    Ontology to Architecture: Methodological Approach</h1>
+    <p>The transition from the role-based ontology of the Triadic Cycle
+    to the architectural principles developed in this manuscript
+    requires a methodological step. The Triadic Cycle identifies energy,
+    geometry, and information as mutually constraining roles, but it
+    does not by itself specify the structural conditions that a unifying
+    physical theory must satisfy in order to instantiate these roles
+    consistently. The present work addresses this gap by extracting the
+    architectural implications of the cyclic interdependence introduced
+    in the companion paper.</p>
+    <p>The approach taken here is deliberately structural rather than
+    dynamical. Instead of proposing specific equations, microscopic
+    mechanisms, or quantization procedures, the goal is to identify the
+    constraints that arise purely from the relational organization of
+    the three roles. This involves examining how the interdependence of
+    energy, geometry, and information manifests in well-established
+    features of modern physics, including holographic entropy bounds,
+    black-hole thermodynamics, relativistic causal structure, and
+    quantum-information-theoretic limits on physical evolution. These
+    features are treated not as contingent properties of particular
+    models, but as indicators of deeper architectural necessities.</p>
+    <p>The resulting constraints are formulated as structural
+    principles: conditions that any unifying physical theory must
+    satisfy regardless of its mathematical formulation. They do not
+    prescribe a specific ontology beyond the Triadic Cycle, nor do they
+    commit to a particular microscopic picture of spacetime or matter.
+    Instead, they delineate the architectural space within which a
+    consistent unifying theory must reside. In this sense, the
+    methodology mirrors the role of symmetry principles in
+    twentieth-century physics: providing structural guidance without
+    dictating specific dynamics.</p>
+    <p>The next section presents these architectural constraints in a
+    systematic form. Each constraint is motivated by the Triadic Cycle,
+    grounded in established physical results, and formulated to be
+    independent of any particular theoretical program. Together, they
+    constitute the structural principles for physical unification
+    developed in this work.</p>
+    <h1
+    id="architectural-constraints-derived-from-the-triadic-cycle">Architectural
+    Constraints Derived from the Triadic Cycle</h1>
+    <p>The Triadic Cycle identifies energy, geometry, and information as
+    mutually constraining roles connected through a cyclic
+    interdependence. This section derives the architectural constraints
+    that follow from that structure. Each constraint is formulated as a
+    structural principle that any viable unifying physical theory must
+    satisfy, independent of its mathematical realization. The principles
+    are grounded in well-established features of modern physics and are
+    presented in a theory-neutral manner.</p>
+    <h2 id="principle-1-energeticgeometric-consistency">Principle 1:
+    Energetic–Geometric Consistency</h2>
+    <p>Energy and geometry must mutually constrain one another in a
+    manner consistent with relativistic causal structure and
+    gravitational thermodynamics. In particular, energetic content must
+    determine geometric curvature, while geometric structure must bound
+    the energetic and dynamical possibilities of physical systems. This
+    principle reflects the interdependence expressed in general
+    relativity and in the thermodynamic behavior of gravitational
+    systems, where geometry encodes energetic constraints and energy
+    shapes geometric evolution.</p>
+    <h2 id="principle-2-geometricinformational-capacity">Principle 2:
+    Geometric–Informational Capacity</h2>
+    <p>Geometric structure must determine the informational capacity of
+    any bounded region, and informational content must be compatible
+    with the geometric constraints of that region. This principle is
+    motivated by holographic entropy bounds, black-hole thermodynamics,
+    and the observation that geometric area, rather than volume, limits
+    the information that can be physically encoded. Any unifying theory
+    must therefore reproduce the dependence of informational capacity on
+    geometric structure.</p>
+    <h2 id="principle-3-informationalenergetic-feasibility">Principle 3:
+    Informational–Energetic Feasibility</h2>
+    <p>Information-bearing degrees of freedom must be compatible with
+    energetic constraints on physical evolution.
+    Quantum-information-theoretic limits, such as quantum speed limits
+    and bounds on computational capacity, indicate that information
+    processing is fundamentally energetic. Conversely, energetic
+    processes must be representable in informational terms. This
+    principle requires that any unifying theory integrate information
+    dynamics with energetic feasibility.</p>
+    <h2 id="principle-4-cyclic-interdependence-preservation">Principle
+    4: Cyclic Interdependence Preservation</h2>
+    <p>The cyclic interdependence of energy, geometry, and information
+    must be preserved across scales and formulations. No role may be
+    treated as fundamental in isolation, nor may any unifying theory
+    break the cyclic structure by elevating one role to a privileged
+    status. This principle rules out formulations that treat geometry as
+    fixed, information as epiphenomenal, or energy as independent of
+    informational or geometric constraints. The Triadic Cycle requires
+    that all three roles remain structurally entangled.</p>
+    <h2 id="principle-5-holographic-structural-compatibility">Principle
+    5: Holographic Structural Compatibility</h2>
+    <p>Any viable unifying theory must be compatible with holographic
+    scaling relations. This does not require adherence to a specific
+    holographic duality, but it does require that the theory reproduce
+    the architectural insight that the degrees of freedom of a region
+    scale with its boundary. This principle follows from the
+    geometric–informational link and is supported by black-hole entropy,
+    AdS/CFT dualities, and tensor-network models of emergent
+    geometry.</p>
+    <h2 id="principle-6-causalinformational-coherence">Principle 6:
+    Causal–Informational Coherence</h2>
+    <p>Causal structure must be compatible with informational flow.
+    Relativistic causality and quantum nonlocality jointly imply that
+    information cannot propagate outside causal structure, even though
+    correlations may extend beyond classical locality. Any unifying
+    theory must therefore reconcile causal geometry with informational
+    constraints, ensuring that informational propagation respects causal
+    order while allowing nonlocal correlations consistent with quantum
+    theory.</p>
+    <h2 id="principle-7-emergent-structural-sufficiency">Principle 7:
+    Emergent Structural Sufficiency</h2>
+    <p>If geometry or time is emergent, the emergent structure must be
+    sufficient to instantiate the energetic, geometric, and
+    informational roles of the Triadic Cycle. This principle does not
+    assume emergence but constrains emergent models: they must reproduce
+    the cyclic interdependence at the emergent level. Conversely, if
+    geometry is taken as fundamental, the theory must still account for
+    informational and energetic constraints that appear geometric in
+    origin.</p>
+    <h2
+    id="principle-8-observer-independent-structural-invariance">Principle
+    8: Observer-Independent Structural Invariance</h2>
+    <p>The architectural relations among energy, geometry, and
+    information must be invariant under changes of observer or
+    representation. This principle reflects the structural invariance of
+    physical law under coordinate transformations, basis changes, and
+    representation shifts. Any unifying theory must preserve the
+    structural roles of the Triadic Cycle independently of descriptive
+    choices.</p>
+    <h2 id="principle-9-minimal-structural-sufficiency">Principle 9:
+    Minimal Structural Sufficiency</h2>
+    <p>The architectural constraints derived from the Triadic Cycle must
+    be satisfied without introducing unnecessary ontological
+    commitments. This principle ensures that the structural principles
+    remain compatible with multiple theoretical programs, including
+    continuum and discrete approaches, and that they function as
+    constraints rather than as a specific model.</p>
+    <p>Together, these principles constitute the architectural rule set
+    derived from the Triadic Cycle. They do not prescribe a particular
+    unifying theory but delineate the structural space within which any
+    such theory must reside. The following sections examine the
+    implications of these principles for existing unification programs
+    and for the broader landscape of fundamental physics.</p>
+    <h1
+    id="implications-for-existing-approaches-to-unification">Implications
+    for Existing Approaches to Unification</h1>
+    <p>The architectural principles derived from the Triadic Cycle
+    provide a structural lens through which existing unification
+    programs can be examined. Because the principles are
+    theory-independent, they do not privilege any particular
+    mathematical framework. Instead, they clarify which structural
+    features of modern physics any viable unifying theory must
+    accommodate. This section discusses how several major approaches
+    align with, or are constrained by, the architectural principles
+    introduced in Section 5.</p>
+    <h2 id="holographic-and-duality-based-approaches">Holographic and
+    Duality-Based Approaches</h2>
+    <p>Holographic dualities, including AdS/CFT and related
+    correspondence frameworks, naturally satisfy several of the
+    architectural principles. The dependence of informational capacity
+    on geometric boundary area aligns with the
+    <em>Geometric–Informational Capacity</em> and <em>Holographic
+    Structural Compatibility</em> principles. Moreover, the duality
+    between geometric dynamics and quantum-information-theoretic
+    structure reflects the cyclic interdependence of energy, geometry,
+    and information. While holographic models are not themselves
+    complete unifying theories, their structural features are consistent
+    with the architectural constraints derived from the Triadic
+    Cycle.</p>
+    <h2 id="emergent-spacetime-and-entanglement-based-models">Emergent
+    Spacetime and Entanglement-Based Models</h2>
+    <p>Approaches that treat spacetime geometry as emergent from
+    entanglement patterns or tensor networks exhibit strong
+    compatibility with the architectural principles. The idea that
+    geometric connectivity arises from informational structure directly
+    reflects the <em>Geometric–Informational Capacity</em> and
+    <em>Causal–Informational Coherence</em> principles. These models
+    also align with the <em>Emergent Structural Sufficiency</em>
+    principle, as they aim to reproduce geometric and causal structure
+    from more primitive informational degrees of freedom. Their emphasis
+    on entanglement as a generator of geometry resonates with the cyclic
+    interdependence central to the Triadic Cycle.</p>
+    <h2 id="quantum-gravity-programs-with-discrete-structure">Quantum
+    Gravity Programs with Discrete Structure</h2>
+    <p>Discrete approaches such as loop quantum gravity, spin-foam
+    models, and causal set theory address aspects of the architectural
+    constraints while facing challenges in others. Their replacement of
+    continuum geometry with discrete combinatorial structures aligns
+    with the <em>Geometric–Informational Capacity</em> principle,
+    particularly the idea that finite informational capacity implies
+    minimal geometric resolution. However, ensuring compatibility with
+    holographic scaling and with the full cyclic interdependence of the
+    Triadic Cycle remains an open challenge. These approaches may
+    satisfy the architectural constraints, but doing so requires
+    demonstrating that their discrete structures can instantiate the
+    required energetic, geometric, and informational roles.</p>
+    <h2
+    id="quantum-information-theoretic-reformulations">Quantum-Information-Theoretic
+    Reformulations</h2>
+    <p>Reformulations of physics that treat information as primary—such
+    as operational, computational, or category-theoretic
+    approaches—naturally satisfy the <em>Informational–Energetic
+    Feasibility</em> and <em>Causal–Informational Coherence</em>
+    principles. Their emphasis on information processing, quantum speed
+    limits, and operational constraints aligns with the architectural
+    role of information in the Triadic Cycle. However, these approaches
+    must still account for geometric structure in a manner consistent
+    with holographic bounds and relativistic causality. The
+    architectural principles therefore provide a guide for integrating
+    geometric and energetic roles into information-first frameworks.</p>
+    <h2
+    id="geometric-and-field-theoretic-unification-programs">Geometric
+    and Field-Theoretic Unification Programs</h2>
+    <p>Traditional geometric unification programs, including
+    higher-dimensional field theories and extensions of general
+    relativity, naturally satisfy aspects of the <em>Energetic–Geometric
+    Consistency</em> principle. However, they often treat geometry as
+    fundamental and information as secondary, which can conflict with
+    the <em>Cyclic Interdependence Preservation</em> principle. To
+    remain compatible with the architectural constraints, such
+    approaches must incorporate informational bounds and holographic
+    scaling into their geometric formulations. This does not preclude
+    geometric unification, but it requires that geometry be integrated
+    into the full energetic–informational cycle.</p>
+    <h2 id="summary">Summary</h2>
+    <p>The architectural principles derived from the Triadic Cycle do
+    not select a single unification program, nor do they exclude any
+    approach outright. Instead, they identify the structural
+    requirements that any successful unifying theory must satisfy.
+    Approaches that integrate energy, geometry, and information in a
+    mutually constraining manner—particularly those that incorporate
+    holographic scaling, emergent geometry, and quantum-information
+    constraints—tend to align more naturally with the architectural
+    principles. Conversely, approaches that elevate one role to a
+    privileged status or neglect the cyclic interdependence face
+    structural challenges. The principles therefore serve as a
+    theory-neutral benchmark for evaluating the conceptual coherence of
+    unification efforts.</p>
+    <h1 id="testable-predictions">Testable Predictions</h1>
+    <p>Although the architectural principles developed in this work are
+    theory-independent and do not constitute a dynamical model, they
+    nevertheless imply a set of structural predictions. These
+    predictions arise from the requirement that any viable unifying
+    theory must instantiate the cyclic interdependence of energy,
+    geometry, and information. The predictions are therefore
+    architectural rather than quantitative: they identify features that
+    must appear in any successful unification framework, regardless of
+    its mathematical formulation.</p>
+    <h2 id="prediction-1-holographic-scaling-is-universal">Prediction 1:
+    Holographic Scaling is Universal</h2>
+    <p>Any unifying theory must reproduce the dependence of
+    informational capacity on geometric boundary area. This implies that
+    holographic entropy bounds are not contingent features of specific
+    models (such as AdS/CFT) but universal constraints on physical law.
+    The prediction is that future formulations of quantum
+    gravity—including those not based on string theory or dualities—will
+    necessarily exhibit area-scaling of degrees of freedom.</p>
+    <h2
+    id="prediction-2-time-is-emergent-from-informational-and-energetic-structure">Prediction
+    2: Time is Emergent from Informational and Energetic Structure</h2>
+    <p>The architectural principles imply that temporal ordering arises
+    from the interplay of informational updates, energetic constraints,
+    and causal geometry. The prediction is that any successful unifying
+    theory will treat time as emergent or relational rather than
+    fundamental. This includes the expectation that different observers
+    will experience locally defined temporal rates determined by
+    informational and energetic structure, in agreement with
+    relativistic time dilation.</p>
+    <h2
+    id="prediction-3-minimal-geometric-resolution-is-information-bounded">Prediction
+    3: Minimal Geometric Resolution is Information-Bounded</h2>
+    <p>Finite informational capacity implies minimal distinguishable
+    geometric units. The prediction is that any complete theory of
+    quantum gravity will yield a minimal area or length scale as a
+    derived consequence of informational and energetic bounds, rather
+    than as an imposed quantization rule. This scale should coincide
+    with, or reduce to, the Planck scale in appropriate limits.</p>
+    <h2
+    id="prediction-4-locality-emerges-from-causalinformational-coherence">Prediction
+    4: Locality Emerges from Causal–Informational Coherence</h2>
+    <p>The architectural principles require that causal structure and
+    informational flow remain consistent. The prediction is that
+    locality will emerge as a structural feature of the underlying
+    theory, even if the microscopic formulation is nonlocal or
+    combinatorial. This includes the expectation that no unifying theory
+    will permit superluminal signalling, though nonlocal correlations
+    (e.g., entanglement) will remain compatible with the
+    architecture.</p>
+    <h2
+    id="prediction-5-observers-are-embedded-and-cannot-be-externalized">Prediction
+    5: Observers are Embedded and Cannot be Externalized</h2>
+    <p>Because informational and energetic roles are mutually
+    constraining, observers must be treated as embedded subsystems
+    rather than external measurement agents. The prediction is that any
+    complete unifying theory will eliminate the need for external
+    observers or classical measurement postulates. Measurement will
+    appear as an interaction within the architecture, consistent with
+    informational and energetic constraints.</p>
+    <h2
+    id="prediction-6-computational-limits-are-physical-limits">Prediction
+    6: Computational Limits are Physical Limits</h2>
+    <p>The architectural principles imply that physical evolution is
+    constrained by quantum-information-theoretic bounds, such as quantum
+    speed limits and maximal computational rates. The prediction is that
+    future unifying theories will incorporate these bounds as structural
+    features, and that systems saturating these limits (e.g.,
+    near-extremal black holes) will continue to play a central role in
+    probing fundamental physics.</p>
+    <h2
+    id="prediction-7-the-triadic-interdependence-must-appear-in-any-toe">Prediction
+    7: The Triadic Interdependence Must Appear in Any TOE</h2>
+    <p>Any successful unifying theory must reproduce the cyclic
+    interdependence of energy, geometry, and information. The prediction
+    is that no theory of everything will be able to treat any of the
+    three roles as fundamental in isolation. Instead, the theory must
+    encode their mutual constraints in a structurally closed manner,
+    consistent with the Triadic Cycle.</p>
+    <p>These predictions are intentionally structural: they identify
+    features that must appear in any viable unifying theory, independent
+    of its mathematical formulation. They therefore serve as a guide for
+    evaluating future developments in quantum gravity, emergent
+    spacetime programs, and information-theoretic approaches to
+    fundamental physics.</p>
+    <h1 id="novelties-and-contributions">Novelties and
+    Contributions</h1>
+    <p>The architectural principles developed in this manuscript provide
+    several contributions to the conceptual foundations of physical
+    unification. These contributions are structural rather than
+    dynamical and complement existing approaches by clarifying the
+    constraints that any viable unifying theory must satisfy. The
+    novelties of this work can be summarized as follows.</p>
+    <h2 id="a-theory-independent-architectural-framework">A
+    Theory-Independent Architectural Framework</h2>
+    <p>The paper introduces a set of architectural principles derived
+    from the cyclic interdependence of energy, geometry, and
+    information. Unlike traditional unification efforts, which begin
+    with a specific mathematical formalism, the present work formulates
+    constraints that apply to <em>all</em> candidate theories. This
+    theory-neutral perspective provides a structural benchmark for
+    evaluating conceptual coherence across diverse approaches.</p>
+    <h2
+    id="formalization-of-the-triadic-cycle-into-structural-constraints">Formalization
+    of the Triadic Cycle into Structural Constraints</h2>
+    <p>Building on the ontological roles introduced in the companion
+    manuscript <em>The Triadic Cycle as Unified Framework</em>, this
+    paper translates the Triadic Cycle into explicit architectural
+    constraints. This formalization clarifies how the cyclic
+    interdependence of energy, geometry, and information manifests in
+    established physical principles such as holographic bounds,
+    relativistic causality, and quantum-information-theoretic
+    limits.</p>
+    <h2 id="unification-without-model-commitment">Unification Without
+    Model Commitment</h2>
+    <p>The architectural principles delineate the structural space
+    within which any successful unifying theory must reside, without
+    committing to a specific microscopic model, spacetime ontology, or
+    quantization scheme. This distinguishes the present work from
+    model-driven approaches and positions it as a conceptual foundation
+    that can accommodate continuum, discrete, geometric, algebraic, and
+    information-theoretic formulations.</p>
+    <h2
+    id="integration-of-holographic-relational-and-informational-insights">Integration
+    of Holographic, Relational, and Informational Insights</h2>
+    <p>The framework synthesizes insights from holography, emergent
+    spacetime programs, relational approaches, and
+    quantum-information-theoretic constraints into a unified structural
+    perspective. This integration highlights the common architectural
+    features shared across otherwise disparate research programs and
+    clarifies why certain approaches align more naturally with
+    fundamental physical constraints.</p>
+    <h2
+    id="clarification-of-necessary-features-of-any-future-unifying-theory">Clarification
+    of Necessary Features of Any Future Unifying Theory</h2>
+    <p>By identifying structural requirements such as holographic
+    scaling, causal–informational coherence, and the preservation of
+    cyclic interdependence, the paper provides a set of criteria that
+    any future theory of unification must satisfy. These criteria
+    function as a conceptual filter, helping to distinguish viable
+    theoretical directions from those that conflict with established
+    architectural constraints.</p>
+    <h2
+    id="a-complementary-perspective-to-existing-quantum-gravity-programs">A
+    Complementary Perspective to Existing Quantum Gravity Programs</h2>
+    <p>Rather than competing with existing unification efforts, the
+    architectural principles offer a complementary perspective that can
+    guide their development. The framework highlights structural
+    tensions that certain approaches must resolve and identifies areas
+    where different programs converge at the architectural level, even
+    when their mathematical formulations differ.</p>
+    <p>Taken together, these contributions position the architectural
+    principles derived from the Triadic Cycle as a foundational tool for
+    evaluating and guiding unification efforts. They provide a
+    structural understanding of the constraints imposed by modern
+    physics and offer a coherent conceptual basis for future theoretical
+    developments.</p>
+    <h1 id="implications">Implications</h1>
+    <p>The architectural principles derived from the Triadic Cycle have
+    several implications for the conceptual landscape of fundamental
+    physics. These implications do not favor any specific unification
+    program but clarify the structural requirements that future theories
+    must satisfy. They also illuminate why certain research directions
+    have converged on similar themes despite originating from different
+    methodological traditions.</p>
+    <h2 id="implications-for-the-nature-of-spacetime">Implications for
+    the Nature of Spacetime</h2>
+    <p>The architectural principles suggest that spacetime cannot be
+    treated as a fixed or independent background. Whether geometry is
+    fundamental or emergent, it must be compatible with informational
+    capacity, energetic constraints, and holographic scaling. This
+    implies that geometric structure is deeply intertwined with
+    informational and energetic roles, supporting the view that
+    spacetime is relational or emergent in a broad structural sense.</p>
+    <h2 id="implications-for-quantum-gravity">Implications for Quantum
+    Gravity</h2>
+    <p>Any successful theory of quantum gravity must reproduce the
+    cyclic interdependence of energy, geometry, and information. This
+    requirement places constraints on discrete, continuum, and algebraic
+    approaches alike. In particular, quantum gravity models must account
+    for holographic entropy bounds, causal–informational coherence, and
+    the energetic feasibility of information processing. These
+    constraints provide a unifying perspective on why diverse quantum
+    gravity programs often converge on similar structural features.</p>
+    <h2
+    id="implications-for-the-role-of-information-in-physics">Implications
+    for the Role of Information in Physics</h2>
+    <p>The architectural principles elevate information from a
+    descriptive tool to a structural role in physical law. Informational
+    capacity, entanglement structure, and quantum computational limits
+    are not optional additions but necessary components of any unifying
+    framework. This reinforces the growing recognition that
+    information-theoretic concepts are central to understanding both
+    quantum mechanics and gravitational phenomena.</p>
+    <h2
+    id="implications-for-the-interpretation-of-quantum-theory">Implications
+    for the Interpretation of Quantum Theory</h2>
+    <p>The requirement that observers be embedded and that informational
+    flow respect causal structure has implications for interpretations
+    of quantum mechanics. The architectural principles favor
+    formulations in which measurement is treated as an interaction
+    within the physical system rather than as an external intervention.
+    While not endorsing any specific interpretation, the principles
+    support approaches that emphasize relational, operational, or
+    informational perspectives.</p>
+    <h2 id="implications-for-unification-methodology">Implications for
+    Unification Methodology</h2>
+    <p>The architectural framework shifts the methodological focus of
+    unification from proposing new mathematical structures to
+    identifying structural necessities. This perspective suggests that
+    progress in unification may depend less on inventing new formalisms
+    and more on ensuring that proposed theories satisfy the
+    architectural constraints imposed by the Triadic Cycle. The
+    principles therefore provide a conceptual filter that can guide the
+    development and evaluation of future unification proposals.</p>
+    <h2
+    id="implications-for-future-theoretical-developments">Implications
+    for Future Theoretical Developments</h2>
+    <p>The architectural principles imply that future advances in
+    fundamental physics will likely involve deeper integration of
+    geometric, energetic, and informational concepts. This may include
+    new formulations of holography, refined understandings of emergent
+    spacetime, novel approaches to quantum gravity, or reconstructions
+    of physical law from information-theoretic constraints. The
+    principles provide a structural foundation for such developments,
+    offering a coherent framework within which new ideas can be
+    situated.</p>
+    <p>Overall, the architectural principles derived from the Triadic
+    Cycle illuminate the structural features that unify diverse areas of
+    modern physics. They clarify the constraints that any future theory
+    must satisfy and provide a conceptual basis for understanding the
+    deep connections between energy, geometry, and information.</p>
+    <h1 id="open-questions">Open Questions</h1>
+    <p>The architectural principles derived from the Triadic Cycle
+    clarify the structural constraints that any unifying physical theory
+    must satisfy, but they also raise several open questions. These
+    questions highlight areas where further conceptual, mathematical, or
+    physical development is required. They do not undermine the
+    architectural framework; rather, they identify directions in which
+    the framework can be refined, extended, or tested.</p>
+    <h2 id="how-does-the-triadic-cycle-constrain-dynamical-laws">How
+    Does the Triadic Cycle Constrain Dynamical Laws?</h2>
+    <p>The architectural principles specify structural requirements but
+    do not determine the form of dynamical equations. An open question
+    is how the cyclic interdependence of energy, geometry, and
+    information restricts the space of possible dynamical laws. It
+    remains to be understood whether the architectural constraints
+    uniquely favor certain classes of dynamics or whether multiple
+    dynamical formulations can instantiate the same structural
+    roles.</p>
+    <h2
+    id="what-mathematical-structures-best-realize-the-architectural-principles">What
+    Mathematical Structures Best Realize the Architectural
+    Principles?</h2>
+    <p>The principles are compatible with a wide range of mathematical
+    frameworks, including continuum geometry, discrete combinatorial
+    structures, algebraic formulations, and tensor-network models. A key
+    open question is which mathematical structures most naturally encode
+    the cyclic interdependence of the Triadic Cycle. Identifying such
+    structures may provide a pathway toward a concrete unifying
+    theory.</p>
+    <h2
+    id="how-does-emergent-geometry-arise-from-informational-structure">How
+    Does Emergent Geometry Arise from Informational Structure?</h2>
+    <p>While the architectural principles require compatibility between
+    geometry and information, they do not specify the mechanism by which
+    geometric structure emerges from informational degrees of freedom.
+    Understanding how entanglement, correlation structure, or other
+    informational features give rise to geometric connectivity remains
+    an open challenge, particularly outside the context of specific
+    dualities or tensor-network models.</p>
+    <h2
+    id="what-is-the-precise-relationship-between-holography-and-the-triadic-cycle">What
+    is the Precise Relationship Between Holography and the Triadic
+    Cycle?</h2>
+    <p>The architectural principles imply that holographic scaling is
+    universal, but the exact relationship between holography and the
+    cyclic interdependence of the Triad is not yet fully understood. An
+    open question is whether holography is a consequence of the Triadic
+    Cycle, a manifestation of deeper structural constraints, or a more
+    fundamental principle from which aspects of the Triad itself may
+    emerge.</p>
+    <h2
+    id="how-should-observers-be-represented-in-a-fully-embedded-framework">How
+    Should Observers Be Represented in a Fully Embedded Framework?</h2>
+    <p>The architectural principles require that observers be treated as
+    embedded subsystems, but the formal representation of such observers
+    remains an open problem. Questions include how to model
+    informational exchange between observers and systems, how to
+    represent perspective-dependent descriptions, and how to reconcile
+    embeddedness with global architectural invariance.</p>
+    <h2
+    id="can-the-architectural-principles-be-derived-from-a-more-fundamental-axiom-set">Can
+    the Architectural Principles Be Derived from a More Fundamental
+    Axiom Set?</h2>
+    <p>The principles are motivated by the Triadic Cycle and grounded in
+    established physics, but it remains open whether they can be derived
+    from a smaller or more fundamental set of axioms. Such a derivation
+    could clarify the logical structure of the framework and reveal
+    deeper connections between the roles of energy, geometry, and
+    information.</p>
+    <h2
+    id="what-empirical-signatures-distinguish-architectural-necessity-from-model-specific-features">What
+    Empirical Signatures Distinguish Architectural Necessity from
+    Model-Specific Features?</h2>
+    <p>While the predictions in Section 7 identify structural features
+    that must appear in any unifying theory, it remains an open question
+    how to distinguish architectural necessities from model-dependent
+    artifacts in empirical or observational data. Identifying such
+    signatures may guide the search for experimental or observational
+    tests of the architectural framework.</p>
+    <p>These open questions highlight the conceptual and mathematical
+    challenges that remain in developing a complete unifying theory
+    consistent with the architectural principles. They also indicate
+    promising directions for future research, both within the Triadic
+    Cosmos ecosystem and in the broader landscape of fundamental
+    physics.</p>
+    <h1 id="limitations">Limitations</h1>
+    <p>The architectural principles developed in this work provide a
+    structural framework for physical unification, but several
+    limitations must be acknowledged. These limitations do not undermine
+    the value of the framework; rather, they clarify its scope and
+    identify areas where further development is required.</p>
+    <h2 id="architectural-not-dynamical">Architectural, Not
+    Dynamical</h2>
+    <p>The principles derived from the Triadic Cycle specify structural
+    constraints but do not determine the dynamical laws governing
+    physical evolution. As a result, the framework does not yield
+    equations of motion, interaction terms, or specific predictions for
+    particle spectra or cosmological parameters. Any complete unifying
+    theory must supplement the architectural principles with a concrete
+    dynamical formulation.</p>
+    <h2 id="conceptual-rather-than-mathematical">Conceptual Rather Than
+    Mathematical</h2>
+    <p>The architectural principles are expressed conceptually and
+    structurally, without a committed mathematical formalism. While this
+    generality is a strength, it also limits the precision with which
+    the principles can be applied to specific models. A future challenge
+    is to identify mathematical structures that naturally instantiate
+    the cyclic interdependence of energy, geometry, and information.</p>
+    <h2 id="compatibility-does-not-imply-uniqueness">Compatibility Does
+    Not Imply Uniqueness</h2>
+    <p>The principles constrain the space of viable unifying theories
+    but do not guarantee the uniqueness of any particular formulation.
+    Multiple theoretical frameworks may satisfy the architectural
+    constraints while differing in their microscopic assumptions or
+    mathematical representations. The principles therefore function as
+    necessary conditions, not sufficient ones.</p>
+    <h2 id="dependence-on-established-physical-insights">Dependence on
+    Established Physical Insights</h2>
+    <p>The architectural principles rely on features of modern physics
+    such as holographic entropy bounds, relativistic causal structure,
+    and quantum-information-theoretic limits. If future empirical
+    discoveries were to revise these foundational insights, the
+    architectural framework would require corresponding adjustments. The
+    principles are thus contingent on the continued validity of
+    well-established physical results.</p>
+    <h2 id="lack-of-direct-empirical-tests">Lack of Direct Empirical
+    Tests</h2>
+    <p>Because the principles are structural rather than dynamical, they
+    do not yield direct empirical predictions in the form of measurable
+    quantities or experimental signatures. Instead, they provide
+    constraints on the conceptual coherence of theoretical frameworks.
+    While this is appropriate for an architectural analysis, it limits
+    the immediate testability of the framework.</p>
+    <h2 id="abstract-treatment-of-observers-and-information">Abstract
+    Treatment of Observers and Information</h2>
+    <p>The principles treat observers and informational processes in an
+    abstract manner, without specifying detailed models of measurement,
+    decoherence, or subsystem decomposition. A more complete treatment
+    of embedded observers may require additional structure beyond the
+    architectural level, particularly in contexts involving quantum
+    measurement or cosmology.</p>
+    <p>These limitations reflect the intended scope of the architectural
+    framework: to identify the structural constraints that any unifying
+    theory must satisfy, without prescribing a specific mathematical or
+    dynamical model. Recognizing these boundaries clarifies the role of
+    the architectural principles and highlights the need for
+    complementary work that develops concrete formulations consistent
+    with the structural constraints.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This work has developed a set of architectural principles derived
+    from the cyclic interdependence of energy, geometry, and information
+    introduced in the companion manuscript <em>The Triadic Cycle as
+    Unified Framework</em>. These principles articulate the structural
+    constraints that any viable unifying theory of fundamental physics
+    must satisfy, independent of its mathematical formulation or
+    ontological commitments. By shifting the focus from specific
+    dynamical proposals to the structural necessities of physical law,
+    the framework provides a theory-neutral foundation for evaluating
+    and guiding unification efforts.</p>
+    <p>The architectural principles clarify why diverse research
+    programs—ranging from holographic dualities and emergent spacetime
+    models to quantum-information-theoretic approaches and discrete
+    quantum gravity frameworks—converge on similar structural themes.
+    They also identify the conditions under which these approaches can
+    be mutually compatible and highlight the structural tensions that
+    must be resolved for any of them to constitute a complete unifying
+    theory. In this sense, the principles serve as a conceptual filter,
+    distinguishing viable theoretical directions from those that
+    conflict with established architectural constraints.</p>
+    <p>While the framework is intentionally structural and does not
+    prescribe specific dynamical laws, it yields a set of testable
+    architectural predictions and identifies open questions that point
+    toward future research. These include the search for mathematical
+    structures that naturally instantiate the Triadic Cycle, the
+    development of dynamical formulations consistent with the
+    architectural constraints, and the identification of empirical
+    signatures that distinguish architectural necessities from
+    model-dependent features.</p>
+    <p>The architectural principles presented here are not a final
+    theory but a foundation. They provide a coherent conceptual basis
+    for unification, grounded in the deep interdependence of energy,
+    geometry, and information that permeates modern physics. By making
+    these structural constraints explicit, the framework aims to support
+    the development of future theories that respect the architectural
+    demands of the physical world and to contribute to a more unified
+    understanding of fundamental physics.</p>
+    <h1
+    id="architectural-lemmas-and-their-mapping-to-the-principles">Architectural
+    Lemmas and Their Mapping to the Principles</h1>
+    <p>This appendix summarizes the architectural lemmas introduced in
+    the broader Triadic Cosmos ecosystem and clarifies how they relate
+    to the architectural principles formulated in this paper. The lemmas
+    provide intuitive, narrative expressions of the structural roles of
+    energy, geometry, and information, while the principles offer a
+    formal, theory-neutral translation suitable for a physics context.
+    The mapping is therefore conceptual rather than one-to-one: each
+    lemma corresponds to one or more principles, and each principle
+    often synthesizes insights from multiple lemmas.</p>
+    <h2 id="overview-of-the-architectural-lemmas">Overview of the
+    Architectural Lemmas</h2>
+    <ol>
+    <li><p><strong>Lemma of Emergent Time</strong><br />
+    Time arises from the interplay of informational updates, energetic
+    constraints, and geometric ordering. Clocks disagree because time is
+    a local architectural phenomenon.</p></li>
+    <li><p><strong>Lemma of Discrete Resolution</strong><br />
+    Finite informational capacity implies minimal distinguishable units
+    of area and duration. Continuity emerges from coarse-graining; the
+    Planck scale is an architectural consequence.</p></li>
+    <li><p><strong>Lemma of Locality and Influence</strong><br />
+    Interactions are local in the emergent geometry, even when
+    correlations are not. Signalling respects causal structure;
+    entanglement does not violate locality.</p></li>
+    <li><p><strong>Lemma of Entangled Realities</strong><br />
+    Observers share a world only when they share entanglement.
+    Decoherence partitions informational sectors; reality is a cluster
+    of mutually consistent informational states.</p></li>
+    <li><p><strong>Lemma of Embedded Observation</strong><br />
+    Observers are informational–energetic subsystems within the
+    architecture. Measurement is an interaction, not an external act;
+    collapse is a perspective update.</p></li>
+    <li><p><strong>Lemma of Holographic Capacity</strong><br />
+    Information is stored on boundaries, not volumes. Geometry acts as a
+    bookkeeping surface; black holes saturate informational
+    capacity.</p></li>
+    <li><p><strong>Lemma of Computational Evolution</strong><br />
+    The universe behaves like a computation without being a computer.
+    Energy drives transformation; information is the evolving state;
+    geometry constrains the update structure.</p></li>
+    <li><p><strong>Lemma of Architectural Universality</strong><br />
+    Any future unifying theory must reproduce the Triad. No theory can
+    eliminate energy, geometry, or information; all known physics
+    already fits the cycle.</p></li>
+    </ol>
+    <h2 id="mapping-lemmas-to-architectural-principles">Mapping Lemmas
+    to Architectural Principles</h2>
+    <p>Table <a href="#tab:mapping" data-reference-type="ref"
+    data-reference="tab:mapping">1</a> summarizes the conceptual
+    correspondence between the lemmas and the architectural principles
+    introduced in Section 5. The mapping is many-to-many: each lemma
+    expresses an intuitive insight that is formalized across several
+    principles, and each principle synthesizes structural content from
+    multiple lemmas.</p>
+    <div id="tab:mapping">
+    <table>
+    <caption>Conceptual mapping between the architectural lemmas of the
+    Triadic Cosmos and the architectural principles formulated in this
+    paper.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Architectural
+    Lemma</strong></th>
+    <th style="text-align: left;"><strong>Corresponding Architectural
+    Principles</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">1. Emergent Time</td>
+    <td style="text-align: left;">Principle 1 (Energetic–Geometric
+    Consistency);</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 3 (Informational–Energetic
+    Feasibility);</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 6 (Causal–Informational
+    Coherence);</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 7 (Emergent Structural
+    Sufficiency).</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">2. Discrete Resolution</td>
+    <td style="text-align: left;">Principle 2 (Geometric–Informational
+    Capacity);</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 3 (Informational–Energetic
+    Feasibility);</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 7 (Emergent Structural
+    Sufficiency).</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">3. Locality and Influence</td>
+    <td style="text-align: left;">Principle 1 (Energetic–Geometric
+    Consistency);</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 6 (Causal–Informational
+    Coherence).</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">4. Entangled Realities</td>
+    <td style="text-align: left;">Principle 6 (Causal–Informational
+    Coherence);</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 8 (Observer-Independent
+    Struct. Invariance).</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">5. Embedded Observation</td>
+    <td style="text-align: left;">Principle 3 (Informational–Energetic
+    Feasibility);</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 8 (Observer-Independent
+    Struct. Invariance).</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">6. Holographic Capacity</td>
+    <td style="text-align: left;">Principle 2 (Geometric–Informational
+    Capacity);</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 5 (Holographic Structural
+    Compatibility).</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">7. Computational Evolution</td>
+    <td style="text-align: left;">Principle 3 (Informational–Energetic
+    Feasibility);</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 7 (Emergent Structural
+    Sufficiency).</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">8. Architectural Universality</td>
+    <td style="text-align: left;">Principle 4 (Cyclic Interdependence
+    Preservation);</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Principle 9 (Minimal Structural
+    Sufficiency).</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="interpretation">Interpretation</h2>
+    <p>The lemmas provide intuitive, pedagogical expressions of the
+    structural roles of energy, geometry, and information. The
+    architectural principles formalize these insights into constraints
+    that any unifying physical theory must satisfy. The mapping
+    illustrates how the narrative structure of the lemmas translates
+    into the theory-neutral, structural language required for
+    foundational physics.</p>
+    <h1 id="glossary-of-key-terms">Glossary of Key Terms</h1>
+    <p>This glossary provides concise definitions of the central
+    concepts used throughout the manuscript. The terms are defined in a
+    theory-neutral manner and reflect their roles within the
+    architectural framework developed in this work.</p>
+    <h2 class="unnumbered" id="architecture">Architecture</h2>
+    <p>A structural description of the constraints that physical law
+    must satisfy, independent of any specific dynamical equations or
+    mathematical formalism. Architectural analysis identifies necessary
+    features of unifying theories.</p>
+    <h2 class="unnumbered" id="architectural-principle">Architectural
+    Principle</h2>
+    <p>A theory-independent structural requirement derived from the
+    cyclic interdependence of energy, geometry, and information.
+    Principles function as constraints on any viable unifying
+    theory.</p>
+    <h2 class="unnumbered" id="architectural-lemma">Architectural
+    Lemma</h2>
+    <p>An intuitive, narrative expression of a structural insight about
+    the roles of energy, geometry, and information. Lemmas provide
+    conceptual motivation for the more formal architectural
+    principles.</p>
+    <h2 class="unnumbered" id="causal-structure">Causal Structure</h2>
+    <p>The pattern of allowed influence between events, determined by
+    geometric and energetic constraints. Causal structure governs which
+    informational exchanges are physically possible.</p>
+    <h2 class="unnumbered" id="cyclic-interdependence">Cyclic
+    Interdependence</h2>
+    <p>The mutual constraint relation among energy, geometry, and
+    information. Each role both enables and limits the others, forming a
+    closed structural cycle.</p>
+    <h2 class="unnumbered" id="emergence">Emergence</h2>
+    <p>A phenomenon in which macroscopic structure arises from more
+    primitive degrees of freedom. In this framework, geometry or time
+    may be emergent if they arise from informational or energetic
+    structure.</p>
+    <h2 class="unnumbered" id="energy-role">Energy (Role)</h2>
+    <p>The capacity for physical change and transformation. In the
+    Triadic Cycle, energy constrains the rate of informational updates
+    and shapes geometric structure.</p>
+    <h2 class="unnumbered" id="geometry-role">Geometry (Role)</h2>
+    <p>The structural organization of distances, causal relations, and
+    spatial connectivity. Geometry constrains informational capacity and
+    is shaped by energetic content.</p>
+    <h2 class="unnumbered" id="holographic-scaling">Holographic
+    Scaling</h2>
+    <p>The dependence of informational capacity on the boundary area of
+    a region rather than its volume. A universal architectural
+    constraint supported by black-hole thermodynamics and holographic
+    dualities.</p>
+    <h2 class="unnumbered" id="information-role">Information (Role)</h2>
+    <p>The distinguishable states of a physical system and the structure
+    of correlations among them. Information constrains geometric and
+    energetic possibilities and is bounded by holographic limits.</p>
+    <h2 class="unnumbered" id="informational-capacity">Informational
+    Capacity</h2>
+    <p>The maximum amount of information that can be physically encoded
+    within a region. Governed by geometric area and energetic
+    constraints.</p>
+    <h2 class="unnumbered" id="observer">Observer</h2>
+    <p>An informational–energetic subsystem embedded within the physical
+    architecture. Observers are not external agents but participate in
+    the informational and energetic structure of the universe.</p>
+    <h2 class="unnumbered"
+    id="perspective-or-observer-relative-description">Perspective (or
+    Observer-Relative Description)</h2>
+    <p>A representation of physical structure relative to an embedded
+    observer. Perspectives may differ without contradiction if they
+    correspond to distinct informational states.</p>
+    <h2 class="unnumbered" id="role-based-ontology">Role-Based
+    Ontology</h2>
+    <p>An ontological framework in which energy, geometry, and
+    information are treated as roles rather than substances. The roles
+    are defined by their structural relations within the Triadic
+    Cycle.</p>
+    <h2 class="unnumbered" id="structural-constraint">Structural
+    Constraint</h2>
+    <p>A requirement that follows from the interdependence of energy,
+    geometry, and information. Structural constraints must be satisfied
+    by any unifying theory, regardless of its mathematical
+    formulation.</p>
+    <h2 class="unnumbered" id="triadic-cycle">Triadic Cycle</h2>
+    <p>The cyclic interdependence of energy, geometry, and information
+    that forms the ontological basis of the architectural framework.
+    Each role constrains and is constrained by the others.</p>
+    <h2 class="unnumbered" id="unification">Unification</h2>
+    <p>The development of a theoretical framework that consistently
+    integrates the roles of energy, geometry, and information. In this
+    work, unification is approached through structural constraints
+    rather than specific dynamical models.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>.</p>
+  </main>
+
+</div>
+
+</body>
+</html>

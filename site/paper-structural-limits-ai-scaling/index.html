@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Structural Limits for AI Scaling<br />
+Applying Insights of Recursive Triadic Fractal Universe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#sec:limits" id="toc-sec:limits">Structural Limits of
+    Monolithic LLM Scaling</a></li>
+    <li><a href="#sec:dmlm" id="toc-sec:dmlm">DMLM as a Triadic, Modular
+    Alternative</a></li>
+    <li><a href="#testable-predictions-for-ai-architectures"
+    id="toc-testable-predictions-for-ai-architectures">Testable
+    Predictions for AI Architectures</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>The rapid progress of large language models (LLMs) over the past
+    five years has been driven primarily by the empirical regularities
+    known as <em>scaling laws</em>. As model size, dataset size, and
+    compute increase, performance improves in a predictable manner,
+    enabling the construction of increasingly capable systems. However,
+    recent frontier-scale experiments reveal that this trend is not
+    indefinite: transformer-based LLMs exhibit clear signs of
+    saturation, including diminishing returns in loss reduction,
+    interference between representations, instability at long context
+    lengths, and a breakdown of compute–data optimality. These
+    observations raise a fundamental question: <em>why</em> do
+    monolithic transformer architectures encounter such limits?</p>
+    <p>Existing analyses provide valuable empirical characterizations
+    but do not offer a theory-neutral architectural explanation. Most
+    accounts attribute the observed limitations to engineering
+    constraints, optimization difficulties, or insufficient data. Yet
+    the consistency of the phenomena across model families suggests that
+    deeper structural factors are at play. Understanding these factors
+    is essential not only for interpreting current scaling behaviour,
+    but also for identifying viable directions for next-generation
+    architectures.</p>
+    <p>This paper approaches the problem from a structural perspective.
+    It applies the framework introduced in <em>The Triadic Cosmos: The
+    Universe as Recursive Triadic Fractal</em>, which proposes that
+    physical, informational, and computational systems share a common
+    organization based on three interacting structural roles:
+    energy-like, geometry-like, and information-like components.
+    Although originally developed in the context of physical ontology,
+    the framework is theory-neutral and applies equally to artificial
+    systems. When viewed through this lens, transformer-based LLMs can
+    be understood as architectures that scale energy-like and
+    information-like dimensions aggressively while lacking the geometric
+    structure required for stable, coherent, and interference-resistant
+    computation.</p>
+    <p>The central claim of this paper is that the empirical limits of
+    LLM scaling arise from this structural imbalance. We show that
+    monolithic transformers violate triadic balance conditions, leading
+    to representational saturation, unstable long-range interactions,
+    and inefficient generalization dynamics. These limitations are not
+    incidental but follow from the architectural form itself.</p>
+    <p>To illustrate the implications of this perspective, we contrast
+    transformer scaling with the <em>Dynamic Modular Language Model</em>
+    (DMLM) architecture, which enforces triadic balance through
+    modularity, paging, evaluator plurality, and canonical forms. DMLM
+    thereby avoids several structural bottlenecks inherent to monolithic
+    models and offers a pathway toward architectures that scale more
+    robustly in depth, coherence, and reasoning ability.</p>
+    <p>The goal of this paper is not to introduce a new empirical
+    scaling law, but to provide a structural account of why existing
+    laws break down and why certain architectural directions remain
+    viable. By grounding AI scaling behaviour in a general triadic
+    framework, we aim to clarify the conceptual landscape and support
+    the development of next-generation systems that scale beyond the
+    limits of current transformer-based approaches.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Research on the limits of large-scale machine learning has
+    expanded rapidly in recent years, driven by the empirical
+    observation that transformer-based language models exhibit
+    predictable scaling behaviour but also clear diminishing returns at
+    frontier scales. This section reviews the most relevant strands of
+    work and situates the present paper within that landscape.</p>
+    <h2 id="scaling-laws-for-large-language-models">Scaling Laws for
+    Large Language Models</h2>
+    <p>The modern study of AI scaling began with the empirical laws
+    introduced by Kaplan et al. <span class="citation"
+    data-cites="kaplan2020scaling"></span>, who demonstrated that loss
+    decreases as a smooth power law in model size, dataset size, and
+    compute. Subsequent work refined these results, most notably the
+    Chinchilla scaling laws of Hoffmann et al. <span class="citation"
+    data-cites="hoffmann2022chinchilla"></span>, which showed that
+    optimal performance requires balancing model parameters and dataset
+    size. These findings motivated the current generation of frontier
+    LLMs.</p>
+    <p>More recent analyses have revealed structural limitations of
+    transformer scaling. DeepMind’s investigations into phase
+    transitions and generalization dynamics <span class="citation"
+    data-cites="deepmind2024phasetransitions"></span> suggest that
+    improvements slow dramatically once models enter a high-capacity
+    regime. Anthropic’s studies on context length, interference, and
+    representation saturation <span class="citation"
+    data-cites="anthropic2024context anthropic2025interference"></span>
+    further indicate that transformers face intrinsic geometric and
+    informational bottlenecks that are not resolved by brute-force
+    scaling.</p>
+    <p>Together, these works provide strong empirical evidence that
+    monolithic transformer architectures encounter fundamental
+    constraints, but they do not offer a theory-neutral architectural
+    explanation for why these limits arise.</p>
+    <h2
+    id="architectural-alternatives-and-modular-approaches">Architectural
+    Alternatives and Modular Approaches</h2>
+    <p>A parallel line of research explores modular or hierarchical
+    architectures as alternatives to monolithic transformers.
+    Mixture-of-experts models <span class="citation"
+    data-cites="shazeer2017moe lepikhin2021gshard"></span> improve
+    parameter efficiency but do not address deeper structural issues
+    such as representational interference or the absence of stable
+    geometric organization. Neurosymbolic and hybrid reasoning systems
+    <span class="citation" data-cites="li2023neurosymbolic"></span>
+    attempt to extend LLM capabilities but remain ad hoc and lack a
+    unifying architectural principle.</p>
+    <p>The <em>Dynamic Modular Language Model</em> (DMLM) architecture
+    proposed by <span class="citation"
+    data-cites="dewitte2026dmlm"></span> introduces a principled modular
+    framework based on paging, evaluator plurality, and canonical forms.
+    DMLM provides a contrasting example of a system that maintains
+    stability and scalability by enforcing structural separation between
+    energy-like, geometry-like, and information-like roles. This paper
+    builds on that contrast to show why monolithic transformers violate
+    structural balance conditions and therefore face inherent scaling
+    limits.</p>
+    <h2 id="foundational-structural-frameworks">Foundational Structural
+    Frameworks</h2>
+    <p>The present work is grounded in the structural ontology
+    introduced in <em>The Triadic Cosmos: The Universe as a Recursive
+    Triadic Fractal</em> <span class="citation"
+    data-cites="dewitte2026triadiccosmos"></span>. That foundational
+    paper develops a theory-neutral architectural framework in which
+    physical, informational, and computational systems share a common
+    triadic structure (Energy–Geometry–Information) and evolve through
+    recursive fractal organization. While the foundational paper focuses
+    on physical unification, its structural principles apply equally to
+    artificial systems.</p>
+    <p>The current paper extends those principles to the domain of AI
+    scaling, showing that the empirical limitations observed in
+    transformer-based LLMs correspond directly to violations of triadic
+    balance and geometric coherence. In this sense, the present work is
+    an application of the broader Triadic Cosmos framework to a concrete
+    and technologically relevant domain.</p>
+    <h1 id="sec:limits">Structural Limits of Monolithic LLM Scaling</h1>
+    <p>Transformer-based language models have achieved unprecedented
+    performance across a wide range of tasks, yet their behaviour at
+    frontier scales reveals a consistent pattern of structural
+    limitations. This section analyses these limitations through the
+    lens of the triadic framework, showing that they arise not from
+    optimization difficulties or insufficient data, but from
+    architectural imbalances inherent to monolithic transformer
+    design.</p>
+    <h2
+    id="energy-like-scaling-compute-without-structural-constraint">Energy-like
+    Scaling: Compute Without Structural Constraint</h2>
+    <p>Transformers scale primarily along an energy-like dimension:
+    increasing parameter count, depth, width, and training compute. This
+    produces predictable improvements at moderate scales, but at larger
+    scales the absence of geometric constraint leads to unstable
+    long-range interactions and inefficient generalization dynamics.</p>
+    <p>Attention layers aggregate information globally without an
+    intrinsic notion of structure, locality, or hierarchical
+    organization. As model size grows, this global coupling amplifies
+    noise, increases sensitivity to spurious correlations, and produces
+    interference between unrelated representations. The result is a
+    regime in which additional compute yields diminishing returns,
+    consistent with the observed flattening of empirical scaling
+    curves.</p>
+    <h2
+    id="information-like-scaling-saturation-and-interference">Information-like
+    Scaling: Saturation and Interference</h2>
+    <p>The second axis along which transformers scale is
+    information-like: expanding embedding dimensions, vocabulary size,
+    and context length. However, these expansions encounter intrinsic
+    limits. Empirical studies show that representation quality saturates
+    as embedding spaces become crowded, leading to interference, loss of
+    distinguishability, and context-length instability.</p>
+    <p>Because transformers lack mechanisms for structural separation or
+    canonical organization of representations, new information is
+    superimposed on existing representations in a high-dimensional but
+    unstructured space. This produces characteristic failure modes:</p>
+    <ul>
+    <li><p><strong>representation interference</strong>, where
+    semantically unrelated tokens compete for overlapping
+    subspaces;</p></li>
+    <li><p><strong>context degradation</strong>, where long sequences
+    accumulate noise faster than signal;</p></li>
+    <li><p><strong>instability under scaling</strong>, where increasing
+    context length or embedding size yields sublinear or negative
+    returns.</p></li>
+    </ul>
+    <p>These effects are not artifacts of training but consequences of
+    the architectural absence of geometry-like structure.</p>
+    <h2 id="geometric-deficiency-the-missing-structural-role">Geometric
+    Deficiency: The Missing Structural Role</h2>
+    <p>The triadic framework identifies a third structural role:
+    geometry-like components that enforce organization, separation, and
+    stability. In physical systems, geometric structure constrains
+    interactions, preserves distinguishability, and prevents
+    uncontrolled coupling. In computational systems, analogous
+    mechanisms include modularity, hierarchical organization, and
+    explicit structural separation.</p>
+    <p>Monolithic transformers lack such geometric structure. Attention
+    provides a uniform, undifferentiated interaction mechanism, and the
+    model state evolves in a single, globally coupled representational
+    space. Without geometric constraints, the system cannot maintain
+    stable attractors, canonical forms, or long-range coherence. This
+    deficiency explains several well-documented phenomena:</p>
+    <ul>
+    <li><p><strong>loss of coherence</strong> in long reasoning
+    chains;</p></li>
+    <li><p><strong>instability</strong> when scaling depth or context
+    length;</p></li>
+    <li><p><strong>failure to maintain modular or compositional
+    structure</strong>;</p></li>
+    <li><p><strong>difficulty with planning, recursion, and multi-step
+    reasoning</strong>.</p></li>
+    </ul>
+    <p>These limitations arise not from insufficient scale but from the
+    absence of the geometric role required for stable computation.</p>
+    <h2 id="triadic-imbalance-as-the-source-of-scaling-limits">Triadic
+    Imbalance as the Source of Scaling Limits</h2>
+    <p>Taken together, these observations reveal a structural imbalance:
+    transformers scale energy-like and information-like dimensions
+    aggressively while leaving the geometry-like dimension effectively
+    absent. This imbalance leads to:</p>
+    <ul>
+    <li><p><strong>representational saturation</strong>
+    (information-like overload),</p></li>
+    <li><p><strong>global coupling and noise amplification</strong>
+    (energy-like excess),</p></li>
+    <li><p><strong>lack of structural coherence</strong> (geometry-like
+    deficiency).</p></li>
+    </ul>
+    <p>The empirical limits of transformer scaling—diminishing returns,
+    interference, context instability, and reasoning failures—follow
+    directly from this imbalance. They are not incidental engineering
+    challenges but structural consequences of the monolithic
+    architecture itself.</p>
+    <p>This analysis motivates the search for architectures that restore
+    triadic balance. In Section <a href="#sec:dmlm"
+    data-reference-type="ref" data-reference="sec:dmlm">4</a>, we
+    examine the Dynamic Modular Language Model (DMLM) as an example of
+    such an architecture, demonstrating how modularity, paging,
+    evaluator plurality, and canonical forms provide the geometric
+    structure missing in transformers and thereby avoid the scaling
+    limits identified here.</p>
+    <h1 id="sec:dmlm">DMLM as a Triadic, Modular Alternative</h1>
+    <p>The structural limitations identified in monolithic transformer
+    scaling motivate the search for architectures that maintain
+    stability and coherence as they grow. The <em>Dynamic Modular
+    Language Model</em> (DMLM) architecture provides an example of such
+    a system. Rather than scaling a single globally coupled model, DMLM
+    organizes computation through modularity, paging, evaluator
+    plurality, and canonical forms. These mechanisms collectively
+    instantiate the geometry-like structural role that transformers
+    lack, restoring triadic balance and enabling more robust scaling
+    behaviour.</p>
+    <h2 id="modularity-and-structural-separation">Modularity and
+    Structural Separation</h2>
+    <p>DMLM decomposes computation into a collection of specialized
+    micro-models, each responsible for a distinct representational or
+    functional domain. This modularity prevents the uncontrolled
+    superposition of representations that characterizes monolithic
+    transformers. By separating representational subspaces, DMLM reduces
+    interference, preserves distinguishability, and enables stable
+    long-range interactions.</p>
+    <p>Modularity also introduces a form of structural locality:
+    interactions occur within and between modules according to explicit
+    organizational constraints rather than global attention. This
+    provides the geometric structure required for stable computation at
+    scale.</p>
+    <h2 id="paging-as-a-geometric-mechanism">Paging as a Geometric
+    Mechanism</h2>
+    <p>A central component of DMLM is its paging mechanism, which
+    governs how information is routed, stored, and retrieved across
+    modules. Paging imposes a geometric organization on the model’s
+    internal state: information is not globally accessible but is
+    structured into discrete, addressable regions. This prevents global
+    coupling, reduces noise amplification, and ensures that long-range
+    dependencies are mediated through controlled pathways.</p>
+    <p>Paging thereby plays the role of a geometry-like constraint,
+    analogous to spatial organization in physical systems. It limits the
+    effective interaction radius, stabilizes representational dynamics,
+    and supports coherent multi-step computation.</p>
+    <h2
+    id="evaluator-plurality-and-information-like-structure">Evaluator
+    Plurality and Information-like Structure</h2>
+    <p>DMLM employs multiple evaluators—distinct mechanisms that assess,
+    refine, or select representations produced by micro-models. This
+    evaluator plurality introduces an information-like dimension that is
+    structurally separated from both the energy-like micro-models and
+    the geometry-like paging system.</p>
+    <p>By distributing evaluative functions across multiple specialized
+    components, DMLM avoids the bottlenecks and saturation effects that
+    arise when a single monolithic model must simultaneously represent,
+    evaluate, and integrate all information. Evaluator plurality
+    enhances robustness, reduces interference, and supports
+    compositional reasoning.</p>
+    <h2 id="canonical-forms-and-stable-attractors">Canonical Forms and
+    Stable Attractors</h2>
+    <p>A key feature of DMLM is the use of canonical forms—standardized,
+    stable representational structures that serve as attractors for the
+    system’s dynamics. Canonical forms provide a consistent interface
+    between modules, enabling compositionality and preventing drift in
+    representational space.</p>
+    <p>In contrast to transformers, where representations evolve in a
+    single high-dimensional space without stable anchors, DMLM’s
+    canonical forms enforce structural coherence. They ensure that
+    information remains interpretable across modules and across multiple
+    computational steps, supporting depth, stability, and reuse.</p>
+    <h2 id="restoring-triadic-balance">Restoring Triadic Balance</h2>
+    <p>Taken together, modularity, paging, evaluator plurality, and
+    canonical forms restore the triadic balance absent in monolithic
+    transformers:</p>
+    <ul>
+    <li><p><strong>energy-like role:</strong> micro-models provide
+    localized computational power;</p></li>
+    <li><p><strong>geometry-like role:</strong> paging and modular
+    structure constrain and organize interactions;</p></li>
+    <li><p><strong>information-like role:</strong> evaluators and
+    canonical forms maintain coherence and distinguishability.</p></li>
+    </ul>
+    <p>This balanced organization avoids the structural bottlenecks
+    identified in Section <a href="#sec:limits"
+    data-reference-type="ref" data-reference="sec:limits">3</a>. DMLM
+    does not rely on global coupling, does not accumulate interference
+    in a single representational space, and does not require
+    ever-increasing compute to compensate for geometric deficiency.
+    Instead, it scales by recursive expansion of modular structure,
+    enabling growth in capacity without loss of stability or
+    coherence.</p>
+    <p>The purpose of this section is not to advocate for a specific
+    implementation, but to illustrate how architectures that respect
+    triadic balance can avoid the structural limits inherent to
+    monolithic transformer scaling. DMLM serves as one concrete example
+    of such an approach.</p>
+    <h1 id="testable-predictions-for-ai-architectures">Testable
+    Predictions for AI Architectures</h1>
+    <p>The foundational paper <em>The Triadic Cosmos: The Universe as
+    Recursive Triadic Fractal</em> formulates several structural
+    predictions that follow from the cyclic interdependence of energy,
+    geometry, and information. This section reformulates the predictions
+    most relevant to computational systems by introducing an
+    intermediate <em>AI Prediction</em> that translates each structural
+    principle into a falsifiable consequence for artificial
+    architectures. For each prediction, we contrast the expected
+    behaviour of monolithic transformer LLMs with that of modular
+    architectures such as the Dynamic Modular Language Model (DMLM).</p>
+    <h2 id="prediction-1-universal-arealaw-scaling">Prediction 1:
+    Universal Area–Law Scaling</h2>
+    <h4 id="triadic-prediction.">Triadic Prediction.</h4>
+    <p>Informational capacity is bounded by geometric structure;
+    effective capacity scales with boundary structure rather than
+    volume.</p>
+    <h4 id="ai-prediction.">AI Prediction.</h4>
+    <p>Architectures without geometric separation will experience
+    representational saturation as dimensionality increases, while
+    modular architectures will scale capacity through boundary
+    expansion.</p>
+    <h4 id="llm-implication-testable.">LLM Implication (Testable).</h4>
+    <ul>
+    <li><p>sublinear returns from increasing embedding size,</p></li>
+    <li><p>interference growth in dense representational
+    regions,</p></li>
+    <li><p>diminishing returns in loss reduction at frontier
+    scales.</p></li>
+    </ul>
+    <h4 id="dmlm-implication-testable.">DMLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>capacity increases by adding modules (boundary
+    expansion),</p></li>
+    <li><p>reduced interference through structural separation,</p></li>
+    <li><p>fractal-like scaling of informational capacity.</p></li>
+    </ul>
+    <h2
+    id="prediction-2-emergent-time-from-triadic-interdependence">Prediction
+    2: Emergent Time from Triadic Interdependence</h2>
+    <h4 id="triadic-prediction.-1">Triadic Prediction.</h4>
+    <p>Temporal evolution arises from the interplay of energetic,
+    geometric, and informational roles; time cannot be an independent
+    primitive.</p>
+    <h4 id="ai-prediction.-1">AI Prediction.</h4>
+    <p>Architectures lacking recursive structure will fail to maintain
+    coherent multi-step computation, while architectures with explicit
+    recursion will support stable temporal evolution.</p>
+    <h4 id="llm-implication-testable.-1">LLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>chain-of-thought instability,</p></li>
+    <li><p>absence of stable intermediate states,</p></li>
+    <li><p>degradation in multi-step reasoning as sequence length
+    grows.</p></li>
+    </ul>
+    <h4 id="dmlm-implication-testable.-1">DMLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>stable intermediate representations via PRE
+    recursion,</p></li>
+    <li><p>coherent multi-step reasoning,</p></li>
+    <li><p>improved temporal structure as modules scale.</p></li>
+    </ul>
+    <h2 id="prediction-3-minimal-geometric-resolution">Prediction 3:
+    Minimal Geometric Resolution</h2>
+    <h4 id="triadic-prediction.-2">Triadic Prediction.</h4>
+    <p>Geometric structure cannot be arbitrarily fine; systems require
+    minimal resolvable units to maintain distinguishability.</p>
+    <h4 id="ai-prediction.-2">AI Prediction.</h4>
+    <p>Architectures that attempt to scale context or embedding
+    resolution without structural units will encounter collapse, while
+    modular architectures will maintain resolution through discrete
+    representational units.</p>
+    <h4 id="llm-implication-testable.-2">LLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>instability at ultra-long context lengths,</p></li>
+    <li><p>representational collapse in dense embeddings,</p></li>
+    <li><p>diminishing returns from context-length scaling.</p></li>
+    </ul>
+    <h4 id="dmlm-implication-testable.-2">DMLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>stable resolution via module-level units,</p></li>
+    <li><p>context scaling through paging rather than embedding
+    expansion,</p></li>
+    <li><p>avoidance of collapse through discrete representational
+    boundaries.</p></li>
+    </ul>
+    <h2 id="prediction-4-causalinformational-coherence">Prediction 4:
+    Causal–Informational Coherence</h2>
+    <h4 id="triadic-prediction.-3">Triadic Prediction.</h4>
+    <p>Informational influence must respect geometric causal structure;
+    systems without locality exhibit uncontrolled coupling.</p>
+    <h4 id="ai-prediction.-3">AI Prediction.</h4>
+    <p>Architectures with global coupling will amplify noise and lose
+    compositionality, while architectures with structural locality will
+    maintain coherent interactions.</p>
+    <h4 id="llm-implication-testable.-3">LLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>global noise propagation via attention,</p></li>
+    <li><p>loss of compositional structure,</p></li>
+    <li><p>degradation of long-range dependencies.</p></li>
+    </ul>
+    <h4 id="dmlm-implication-testable.-3">DMLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>localized interactions within modules,</p></li>
+    <li><p>preserved compositionality across modules,</p></li>
+    <li><p>stable long-range dependencies through controlled
+    pathways.</p></li>
+    </ul>
+    <h2
+    id="prediction-5-embedded-observers-and-informational-boundaries">Prediction
+    5: Embedded Observers and Informational Boundaries</h2>
+    <h4 id="triadic-prediction.-4">Triadic Prediction.</h4>
+    <p>Observers must be embedded informational–energetic subsystems;
+    evaluation cannot be external to the architecture.</p>
+    <h4 id="ai-prediction.-4">AI Prediction.</h4>
+    <p>Architectures that conflate representation and evaluation will
+    struggle with self-monitoring, while architectures with internal
+    evaluators will support self-correction.</p>
+    <h4 id="llm-implication-testable.-4">LLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>no internal evaluative subsystems,</p></li>
+    <li><p>conflation of representation and evaluation,</p></li>
+    <li><p>difficulty with self-monitoring or iterative
+    refinement.</p></li>
+    </ul>
+    <h4 id="dmlm-implication-testable.-4">DMLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>evaluator plurality as embedded subsystems,</p></li>
+    <li><p>separation of representation and evaluation,</p></li>
+    <li><p>support for self-monitoring and refinement loops.</p></li>
+    </ul>
+    <h2 id="prediction-6-energetic-limits-on-computation">Prediction 6:
+    Energetic Limits on Computation</h2>
+    <h4 id="triadic-prediction.-5">Triadic Prediction.</h4>
+    <p>Computation must obey energetic constraints; systems that
+    compensate for geometric deficiency with energy alone become
+    inefficient.</p>
+    <h4 id="ai-prediction.-5">AI Prediction.</h4>
+    <p>Architectures that scale compute without structural change will
+    show diminishing returns, while architectures that balance triadic
+    roles will maintain efficiency.</p>
+    <h4 id="llm-implication-testable.-5">LLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>disproportionate compute requirements for marginal
+    gains,</p></li>
+    <li><p>inefficient scaling at frontier sizes,</p></li>
+    <li><p>diminishing returns from depth or width increases.</p></li>
+    </ul>
+    <h4 id="dmlm-implication-testable.-5">DMLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>compute scales with modular expansion,</p></li>
+    <li><p>efficiency preserved through structural balance,</p></li>
+    <li><p>avoidance of diminishing returns.</p></li>
+    </ul>
+    <h2
+    id="prediction-7-preservation-of-cyclic-interdependence">Prediction
+    7: Preservation of Cyclic Interdependence</h2>
+    <h4 id="triadic-prediction.-6">Triadic Prediction.</h4>
+    <p>Any viable system must preserve the closed interdependence</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em>.</span></p>
+    <h4 id="ai-prediction.-6">AI Prediction.</h4>
+    <p>Architectures that break the cycle (e.g., by lacking geometry)
+    will exhibit structural failure modes, while architectures that
+    preserve the cycle will scale coherently.</p>
+    <h4 id="llm-implication-testable.-6">LLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>geometric deficiency breaks the cycle,</p></li>
+    <li><p>compensation through energy-like scaling,</p></li>
+    <li><p>structural failure modes at large scale.</p></li>
+    </ul>
+    <h4 id="dmlm-implication-testable.-6">DMLM Implication
+    (Testable).</h4>
+    <ul>
+    <li><p>balanced triadic roles across modules,</p></li>
+    <li><p>recursive fractal scaling,</p></li>
+    <li><p>coherent behaviour at increasing scale.</p></li>
+    </ul>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper has examined the empirical limits of monolithic
+    transformer scaling through the structural lens provided by the
+    triadic framework. While large language models have benefited
+    enormously from predictable scaling laws, their behaviour at
+    frontier scales reveals consistent patterns of saturation,
+    interference, and instability. These phenomena are often treated as
+    engineering challenges, yet their persistence across architectures
+    and training regimes suggests deeper structural causes.</p>
+    <p>By interpreting transformers in terms of energy-like,
+    geometry-like, and information-like roles, we have shown that their
+    limitations arise from a systematic imbalance: energy and
+    information dimensions scale aggressively, while the geometric
+    dimension remains effectively absent. This absence leads to global
+    coupling, representational crowding, and the lack of stable
+    organizational structure—factors that collectively constrain the
+    ability of monolithic models to scale coherently.</p>
+    <p>In contrast, the Dynamic Modular Language Model (DMLM)
+    architecture illustrates how triadic balance can be restored.
+    Through modularity, paging, evaluator plurality, and canonical
+    forms, DMLM introduces the geometric structure required for stable
+    long-range computation and avoids the structural bottlenecks
+    inherent to transformers. The purpose of this comparison is not to
+    prescribe a specific design, but to demonstrate that architectures
+    respecting triadic balance offer a principled path beyond the limits
+    of monolithic scaling.</p>
+    <p>The broader implication is that scaling behaviour cannot be
+    understood solely through empirical laws or resource curves. It must
+    be grounded in the structural organization of the underlying
+    architecture. By applying a general triadic framework to the domain
+    of AI scaling, this paper provides a conceptual basis for
+    interpreting current limitations and for guiding the development of
+    next-generation systems that scale more robustly in depth,
+    coherence, and stability.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>.</p>
+  </main>
+
+</div>
+
+</body>
+</html>

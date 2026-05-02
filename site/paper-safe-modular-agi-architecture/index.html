@@ -1,0 +1,2533 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>A Safe and Modular AGI Architecture</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#motivation" id="toc-motivation">Motivation</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#architectural-requirements-for-safe-agi"
+    id="toc-architectural-requirements-for-safe-agi">Architectural
+    Requirements for Safe AGI</a></li>
+    <li><a href="#pre-the-minimal-recursive-reasoning-kernel"
+    id="toc-pre-the-minimal-recursive-reasoning-kernel">PRE: The Minimal
+    Recursive Reasoning Kernel</a></li>
+    <li><a href="#cas-the-cognitive-vector-layer"
+    id="toc-cas-the-cognitive-vector-layer">CAS: The Cognitive Vector
+    Layer</a></li>
+    <li><a href="#paging-domain-decomposition-of-the-action-space"
+    id="toc-paging-domain-decomposition-of-the-action-space">Paging:
+    Domain Decomposition of the Action Space</a></li>
+    <li><a href="#paged-pre-cas-the-full-reasoning-architecture"
+    id="toc-paged-pre-cas-the-full-reasoning-architecture">Paged-PRE-CAS:
+    The Full Reasoning Architecture</a></li>
+    <li><a href="#domain-bound-agi-atomic-cognitive-units"
+    id="toc-domain-bound-agi-atomic-cognitive-units">Domain-Bound AGI:
+    Atomic Cognitive Units</a></li>
+    <li><a href="#mediator-llm-coordination-across-domains"
+    id="toc-mediator-llm-coordination-across-domains">Mediator-LLM:
+    Coordination Across Domains</a></li>
+    <li><a href="#cloud-native-agi"
+    id="toc-cloud-native-agi">Cloud-Native AGI</a></li>
+    <li><a href="#comparison-with-agent-architectures"
+    id="toc-comparison-with-agent-architectures">Comparison with Agent
+    Architectures</a></li>
+    <li><a href="#real-world-example-discrete-state-transition-domains"
+    id="toc-real-world-example-discrete-state-transition-domains">Real-World
+    Example: Discrete State-Transition Domains</a></li>
+    <li><a href="#paged-pre-cas-as-a-generative-reasoning-model"
+    id="toc-paged-pre-cas-as-a-generative-reasoning-model">Paged-PRE-CAS
+    as a Generative Reasoning Model</a></li>
+    <li><a href="#safety-analysis" id="toc-safety-analysis">Safety
+    Analysis</a></li>
+    <li><a href="#discussion" id="toc-discussion">Discussion</a></li>
+    <li><a href="#limitations-and-open-questions"
+    id="toc-limitations-and-open-questions">Limitations and Open
+    Questions</a></li>
+    <li><a href="#testable-predictions"
+    id="toc-testable-predictions">Testable Predictions</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#precas-overview-table"
+    id="toc-precas-overview-table">PRE–CAS Overview Table</a></li>
+    <li><a href="#appendix:generative"
+    id="toc-appendix:generative">Empirical Demonstration of
+    Paged-PRE-CAS as a Generative Reasoning Model</a></li>
+    <li><a href="#ablation-studies" id="toc-ablation-studies">Ablation
+    Studies</a></li>
+    <li><a href="#summary-of-findings"
+    id="toc-summary-of-findings">Summary of Findings</a></li>
+    <li><a href="#implications-for-the-main-architecture"
+    id="toc-implications-for-the-main-architecture">Implications for the
+    Main Architecture</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Artificial intelligence has advanced rapidly through the scaling
+    of large neural models, yet these systems remain structurally
+    limited. Monolithic architectures entangle all cognitive functions
+    within a single parameter space, making them opaque, difficult to
+    govern, and inherently unsafe for general-purpose reasoning. Their
+    behaviour is shaped by statistical correlations rather than explicit
+    cognitive structure, and their internal processes cannot be
+    decomposed, inspected, or constrained. As a result, scaling alone
+    cannot yield a safe or general intelligence.</p>
+    <p>This paper proposes a fundamentally different approach: a
+    modular, transparent, and governable architecture in which general
+    intelligence emerges from the interaction of many small,
+    domain-bound cognitive units. Rather than relying on a single model
+    to internalize all knowledge and reasoning strategies, the
+    architecture decomposes cognition into explicit roles, explicit
+    interfaces, and explicit control flows. Reasoning is implemented
+    structurally through recursive refinement, epistemic evaluation, and
+    domain isolation, not through emergent behaviour in a monolithic
+    network.</p>
+    <p>The design draws inspiration from Minsky’s <em>Society of
+    Mind</em>, which argued that intelligence arises from the
+    coordinated activity of many simple processes. Modern developments
+    in Hybrid Intelligence—systems in which humans and machines jointly
+    participate in recursive reasoning loops—further demonstrate that
+    cognition is most stable and most general when distributed across
+    heterogeneous components. Building on these insights, the
+    architecture introduced here formalizes a compositional model of
+    intelligence suitable for real-world deployment.</p>
+    <p>At the core of the system lies <em>Paged-PRE-CAS</em>, a
+    generative reasoning engine that performs explicit
+    propose–refine–evaluate cycles under the guidance of cognitive
+    vector layers (CAS) and domain-specific paging. This engine does not
+    rely on language models for reasoning; instead, it synthesizes
+    cognitive programs that are executed deterministically by a script
+    engine. Domain logic is encapsulated in modular, replaceable
+    components called <em>domain-bound AGI modules</em>, each
+    implementing a stable interface for states, actions, and heuristics.
+    Search is externalized and pluggable, enabling deep reasoning
+    without parametric learning.</p>
+    <p>Language models, when present, serve only as semantic mediators:
+    translating natural language into structured representations,
+    generating optional domain interfaces, or providing heuristic
+    suggestions. They are not cognitive cores, and the architecture
+    remains fully operational without them. This separation ensures that
+    reasoning, planning, arbitration, and memory remain transparent,
+    auditable, and structurally constrained.</p>
+    <p>The resulting system is inherently safe. Domain isolation
+    prevents cross-domain errors, bounded recursion ensures stability,
+    plural evaluators provide epistemic diversity, and deterministic
+    execution enables full traceability. The architecture is
+    cloud-native by design, decomposing reasoning, memory, search,
+    evaluators, and experts into microservices that can be governed,
+    monitored, and replaced independently.</p>
+    <h2 class="unnumbered"
+    id="contributions-of-this-paper">Contributions of This Paper</h2>
+    <p>This paper makes four primary contributions:</p>
+    <ol>
+    <li><p>It introduces a modular and governable AGI architecture based
+    on explicit cognitive structure rather than monolithic statistical
+    models.</p></li>
+    <li><p>It formalizes <em>Paged-PRE-CAS</em> as a generative
+    reasoning engine capable of controlled recursion, epistemic
+    evaluation, and domain isolation.</p></li>
+    <li><p>It defines <em>domain-bound AGI modules</em> as atomic
+    cognitive units that encapsulate domain logic behind stable
+    interfaces and operate using externalized search.</p></li>
+    <li><p>It presents a cloud-native execution model in which
+    reasoning, memory, search, and evaluation are implemented as
+    distributed microservices.</p></li>
+    </ol>
+    <p>Together, these contributions outline a practical and
+    implementable path toward safe AGI: modular, transparent,
+    pluralistic, and grounded in explicit structure rather than emergent
+    behaviour.</p>
+    <h1 id="motivation">Motivation</h1>
+    <p>The rapid progress of large neural models has created the
+    impression that general intelligence may emerge from continued
+    scaling of monolithic architectures. However, these systems exhibit
+    structural limitations that make them unsuitable as foundations for
+    safe and governable AGI. Their internal representations are deeply
+    entangled, their reasoning processes are opaque, and their behaviour
+    cannot be decomposed into stable cognitive roles. As a result, they
+    lack the modularity, traceability, and controllability required for
+    long-horizon reasoning or high-stakes decision-making.</p>
+    <p>This paper is motivated by the need for an alternative path: an
+    AGI architecture grounded in explicit structure rather than emergent
+    statistical behaviour. The goal is not to produce a larger or more
+    capable model, but to design a system whose cognitive organization
+    is transparent, decomposable, and inherently safe. The architecture
+    presented here is built on three principles: modularity, explicit
+    reasoning, and domain isolation. These principles ensure that
+    cognitive processes remain inspectable, replaceable, and bounded,
+    even as the system grows in capability.</p>
+    <h2 id="why-this-paper-exists">Why This Paper Exists</h2>
+    <p>This work is part of the broader Triadic Cosmos ecosystem, which
+    aims to articulate minimal structural principles underlying both
+    physical systems and intelligent behaviour. While the companion work
+    <em>The Triadic Cycle as Unified Framework</em> develops a physical
+    ontology, the present paper focuses on the computational
+    organization of intelligence. Its purpose is to provide a practical,
+    implementable architecture that embodies the structural principles
+    identified in the ecosystem: multiplicity, recursion,
+    representational richness, and energetic grounding.</p>
+    <p>The architecture is not intended as a theoretical abstraction but
+    as a blueprint for real systems. It is designed to be implementable
+    with current technology, compatible with cloud-native
+    infrastructure, and suitable for open-source development. The
+    motivation is therefore both conceptual and practical: to provide a
+    coherent alternative to monolithic AI and to demonstrate how safe
+    AGI can be constructed from modular components.</p>
+    <h2 id="the-need-for-a-governable-agi-architecture">The Need for a
+    Governable AGI Architecture</h2>
+    <p>Safety in AGI cannot be achieved through alignment patches or
+    post-hoc interpretability tools. It must be embedded in the
+    architecture itself. A safe system must satisfy several structural
+    requirements:</p>
+    <ul>
+    <li><p><strong>Traceability</strong>: every cognitive step must be
+    inspectable and reproducible.</p></li>
+    <li><p><strong>Domain isolation</strong>: errors must remain local
+    and must not propagate across domains.</p></li>
+    <li><p><strong>Plurality</strong>: multiple evaluators must provide
+    epistemic diversity and prevent collapse.</p></li>
+    <li><p><strong>Bounded recursion</strong>: reasoning depth must be
+    controlled and auditable.</p></li>
+    <li><p><strong>Replaceability</strong>: components must be modular
+    and independently upgradable.</p></li>
+    </ul>
+    <p>Monolithic models satisfy none of these requirements. Their
+    internal dynamics are inaccessible, their reasoning is implicit, and
+    their behaviour cannot be decomposed into stable subsystems. A
+    governable AGI must therefore be modular by design.</p>
+    <h2 id="failure-modes-of-monolithic-llm-scaling">Failure Modes of
+    Monolithic LLM Scaling</h2>
+    <p>Large language models have demonstrated impressive capabilities,
+    but they suffer from structural failure modes that make them
+    unsuitable as AGI cores:</p>
+    <ul>
+    <li><p><strong>Entanglement</strong>: all knowledge and reasoning
+    strategies are fused into a single parameter space.</p></li>
+    <li><p><strong>Opacity</strong>: internal representations cannot be
+    inspected or constrained.</p></li>
+    <li><p><strong>Unbounded action spaces</strong>: models can generate
+    arbitrary outputs without structural safeguards.</p></li>
+    <li><p><strong>Lack of domain boundaries</strong>: errors in one
+    domain can influence behaviour in unrelated domains.</p></li>
+    <li><p><strong>Transcript-based state</strong>: agents built on LLMs
+    accumulate state in prompts rather than structured memory.</p></li>
+    </ul>
+    <p>Scaling improves correctness but worsens entanglement, reducing
+    epistemic diversity and increasing the risk of attractor collapse.
+    These limitations are architectural, not quantitative, and cannot be
+    resolved by further scaling.</p>
+    <h2 id="the-gap-between-agent-frameworks-and-true-reasoning">The Gap
+    Between Agent Frameworks and True Reasoning</h2>
+    <p>Agent frameworks attempt to simulate reasoning by orchestrating
+    LLM calls, tool invocations, and memory stores. While useful for
+    practical automation, they do not implement genuine cognitive
+    structure. Their reasoning is emergent rather than explicit, their
+    state is stored in unstructured transcripts, and their planning
+    relies on prompting rather than algorithmic search. As a result,
+    they remain fragile, unpredictable, and unsuitable as foundations
+    for AGI.</p>
+    <p>A true reasoning architecture must implement explicit control
+    flow, explicit memory, explicit evaluation, and explicit recursion.
+    It must be able to decompose tasks, refine hypotheses, and integrate
+    results in a structured manner. This paper introduces such an
+    architecture.</p>
+    <h2 id="why-agi-must-be-modular-and-domain-bound">Why AGI Must Be
+    Modular and Domain-Bound</h2>
+    <p>General intelligence does not require a single model that
+    internalizes all domains. Instead, it can emerge from the
+    interaction of many small, domain-bound intelligences, each with its
+    own representational geometry, heuristics, and constraints.
+    Domain-bound AGI modules provide:</p>
+    <ul>
+    <li><p><strong>Local coherence</strong>: each module is internally
+    consistent and domain-specific.</p></li>
+    <li><p><strong>Replaceability</strong>: modules can be upgraded or
+    swapped without destabilizing the system.</p></li>
+    <li><p><strong>Safety</strong>: domain boundaries prevent
+    cross-domain errors.</p></li>
+    <li><p><strong>Scalability</strong>: new domains can be added
+    without retraining the entire system.</p></li>
+    </ul>
+    <p>Self-expansion through code generation is optional and
+    governance-sensitive. A system may operate safely with a fixed
+    library of domains, avoiding the risks associated with uncontrolled
+    growth.</p>
+    <h2 id="llms-as-optional-semantic-engines">LLMs as Optional Semantic
+    Engines</h2>
+    <p>In this architecture, language models are not cognitive cores.
+    They serve only as semantic interfaces:</p>
+    <ul>
+    <li><p>translating natural language into structured
+    representations,</p></li>
+    <li><p>generating optional domain interfaces from formal
+    descriptions,</p></li>
+    <li><p>providing heuristics or summaries when appropriate.</p></li>
+    </ul>
+    <p>Reasoning, planning, arbitration, and memory are implemented
+    structurally, not statistically. The architecture remains fully
+    operational without LLMs, ensuring that its core cognitive processes
+    remain transparent, deterministic, and governable.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Research on cognitive architectures, modular AI systems, and
+    distributed reasoning spans several decades. While these lines of
+    work provide valuable insights, none of them achieve the structural
+    properties required for safe and governable AGI. This section
+    situates the proposed architecture within the broader landscape of
+    cognitive science, artificial intelligence, and systems engineering,
+    highlighting both conceptual connections and fundamental
+    differences.</p>
+    <h2 id="society-of-mind-and-agentic-cognition">Society of Mind and
+    Agentic Cognition</h2>
+    <p>Minsky’s <em>Society of Mind</em> <span class="citation"
+    data-cites="minsky_society"></span> proposed that intelligence
+    emerges from the interaction of many small, specialized agents
+    rather than from a single monolithic process. This perspective
+    anticipated modern views of distributed cognition and modular
+    intelligence.</p>
+    <p>However, the agents in Society of Mind lack explicit interfaces,
+    epistemic evaluators, domain boundaries, and deterministic control
+    flow. The framework does not specify how agents should coordinate,
+    how conflicts should be resolved, or how reasoning should be
+    governed at scale.</p>
+    <p>The architecture presented in this paper can be seen as a
+    structural and computational realization of the Society of Mind
+    intuition: domain-bound AGIs, evaluators, search engines, and
+    reasoning cores act as explicit, inspectable components whose
+    interactions are governed by PRE recursion, CAS evaluation, and
+    deterministic arbitration. Rather than emergent coordination, the
+    system provides formal protocols for cognitive interaction.</p>
+    <h2 id="cognitive-architectures">Cognitive Architectures</h2>
+    <p>Classical cognitive architectures such as Soar <span
+    class="citation" data-cites="laird_soar"></span>, ACT-R <span
+    class="citation" data-cites="anderson_actr"></span>, CLARION <span
+    class="citation" data-cites="sun_clarion"></span>, and Global
+    Workspace Theory <span class="citation"
+    data-cites="baars_gwt dehaene_gwt"></span> model cognition as
+    structured interactions between symbolic components, memory systems,
+    and control processes. These frameworks emphasize modularity,
+    explicit reasoning, and interpretable internal state.</p>
+    <p>However, they rely on hand-crafted rules, lack scalable learning
+    mechanisms, and do not provide a path toward domain expansion or
+    cloud-native execution. The architecture presented in this paper
+    inherits their emphasis on structure and transparency while
+    introducing scalable recursion, plural evaluators, and domain-bound
+    modularity.</p>
+    <h2 id="multi-agent-and-tool-augmented-llm-systems">Multi-Agent and
+    Tool-Augmented LLM Systems</h2>
+    <p>Recent frameworks such as AutoGen <span class="citation"
+    data-cites="autogen"></span>, LangChain <span class="citation"
+    data-cites="langchain"></span>, and Microsoft’s Semantic Kernel
+    <span class="citation" data-cites="semantic_kernel"></span>
+    orchestrate large language models with external tools, memory
+    stores, and multi-agent workflows. These systems demonstrate
+    practical utility but do not implement genuine cognitive
+    structure.</p>
+    <p>Their reasoning is emergent rather than explicit, their state is
+    stored in unstructured transcripts, and their planning relies on
+    prompting rather than algorithmic control. They lack domain
+    isolation, deterministic execution, and epistemic governance. In
+    contrast, the architecture proposed here implements reasoning as a
+    first-class computational process, independent of language
+    models.</p>
+    <h2 id="modular-and-mixture-of-experts-models">Modular and
+    Mixture-of-Experts Models</h2>
+    <p>Mixture-of-experts architectures <span class="citation"
+    data-cites="shazeer_moe lepikhin_gshard fedus_switch"></span>
+    introduce modularity at the level of neural computation, enabling
+    specialization and improved efficiency. While these models
+    demonstrate the benefits of distributed computation, they remain
+    monolithic in their parameterization and do not provide explicit
+    cognitive roles, domain boundaries, or traceable reasoning
+    steps.</p>
+    <p>Their modularity is statistical rather than structural. The
+    present architecture extends modularity to the cognitive level,
+    defining explicit interfaces for domain logic, reasoning,
+    evaluation, and memory.</p>
+    <h2 id="ai-safety-frameworks">AI Safety Frameworks</h2>
+    <p>Work on interpretability <span class="citation"
+    data-cites="olah_circuits nanda_mechinterp"></span>, alignment <span
+    class="citation"
+    data-cites="christiano_rlhf ouyang_instructgpt"></span>, and
+    governance <span class="citation"
+    data-cites="amodei_concrete hendrycks_xrisk"></span> highlights the
+    need for transparency, controllability, and bounded behaviour in
+    advanced AI systems. However, most safety frameworks assume
+    monolithic models and attempt to impose safety constraints post
+    hoc.</p>
+    <p>The architecture introduced here embeds safety into the structure
+    itself: domain isolation, bounded recursion, plural evaluators, and
+    deterministic execution provide inherent safeguards that do not
+    depend on behavioural heuristics or alignment patches.</p>
+    <h2 id="cloud-native-ai-and-distributed-cognition">Cloud-Native AI
+    and Distributed Cognition</h2>
+    <p>Distributed AI systems <span class="citation"
+    data-cites="dean_mapreduce verma_ray"></span>, microservice
+    architectures <span class="citation"
+    data-cites="newman_microservices"></span>, and cloud-native
+    orchestration frameworks <span class="citation"
+    data-cites="kubernetes"></span> demonstrate how large-scale
+    computation can be decomposed into independent, replaceable
+    components. Similarly, research on collective intelligence and
+    distributed cognition <span class="citation"
+    data-cites="hutchins_cognition woolley_collective"></span> shows
+    that reasoning can emerge from the interaction of multiple
+    agents.</p>
+    <p>The proposed architecture synthesizes these ideas into a unified
+    cognitive fabric: reasoning, memory, search, evaluators, and experts
+    operate as microservices coordinated through explicit protocols.</p>
+    <h2 id="how-paged-pre-cas-differs-fundamentally">How Paged-PRE-CAS
+    Differs Fundamentally</h2>
+    <p>While related work provides important conceptual foundations, the
+    architecture presented in this paper differs in three fundamental
+    ways:</p>
+    <ol>
+    <li><p><strong>Reasoning is explicit</strong>: Paged-PRE-CAS
+    synthesizes cognitive programs rather than relying on emergent
+    behaviour.</p></li>
+    <li><p><strong>Modularity is structural</strong>: domain-bound AGI
+    modules encapsulate domain logic behind stable interfaces.</p></li>
+    <li><p><strong>Safety is architectural</strong>: domain isolation,
+    plural evaluators, and deterministic execution are built into the
+    system.</p></li>
+    </ol>
+    <p>These differences position the architecture as a structural
+    alternative to both monolithic scaling and agent-based
+    orchestration.</p>
+    <h1 id="architectural-requirements-for-safe-agi">Architectural
+    Requirements for Safe AGI</h1>
+    <p>A safe AGI system cannot rely on behavioural heuristics,
+    alignment patches, or post-hoc interpretability tools. Safety must
+    be embedded in the architecture itself. This section identifies the
+    structural requirements that any AGI system must satisfy in order to
+    remain governable, transparent, and stable under recursive
+    reasoning. These requirements motivate the design choices underlying
+    the Paged-PRE-CAS architecture and the domain-bound AGI model.</p>
+    <h2 id="traceability-and-inspectability">Traceability and
+    Inspectability</h2>
+    <p>Every cognitive step must be observable, reproducible, and
+    auditable. A safe AGI architecture must expose:</p>
+    <ul>
+    <li><p>intermediate reasoning states,</p></li>
+    <li><p>evaluator scores and epistemic vectors,</p></li>
+    <li><p>search decisions and branching factors,</p></li>
+    <li><p>memory reads and writes,</p></li>
+    <li><p>arbitration outcomes.</p></li>
+    </ul>
+    <p>Monolithic models do not satisfy this requirement: their internal
+    activations are opaque, their reasoning is implicit, and their
+    outputs cannot be decomposed into meaningful steps. A safe
+    architecture must therefore implement explicit reasoning and
+    deterministic execution.</p>
+    <h2 id="domain-isolation-and-bounded-action-spaces">Domain Isolation
+    and Bounded Action Spaces</h2>
+    <p>General-purpose models operate over unbounded action spaces,
+    allowing arbitrary outputs that may violate domain constraints. A
+    safe AGI must enforce:</p>
+    <ul>
+    <li><p>strict domain boundaries,</p></li>
+    <li><p>domain-specific action vocabularies,</p></li>
+    <li><p>deterministic routing to domain experts,</p></li>
+    <li><p>structural prevention of cross-domain errors.</p></li>
+    </ul>
+    <p>Domain isolation ensures that errors remain local and that
+    reasoning remains coherent within each domain. It also enables
+    fine-grained governance and replaceability of domain modules.</p>
+    <h2 id="plurality-and-epistemic-diversity">Plurality and Epistemic
+    Diversity</h2>
+    <p>A single evaluator or reasoning pathway is insufficient for
+    robust cognition. Safe AGI requires epistemic plurality:</p>
+    <ul>
+    <li><p>multiple evaluators with independent error
+    geometries,</p></li>
+    <li><p>consensus mechanisms for stability,</p></li>
+    <li><p>disagreement-triggered aborts for safety,</p></li>
+    <li><p>orthogonal evaluation dimensions (safety, accuracy,
+    relevance, domain coherence).</p></li>
+    </ul>
+    <p>Plurality prevents attractor collapse and provides natural
+    uncertainty detection. It also ensures that no single subsystem
+    becomes a single point of failure.</p>
+    <h2 id="controlled-recursion">Controlled Recursion</h2>
+    <p>Recursive reasoning is essential for planning, abstraction, and
+    self-correction, but unbounded recursion is unsafe. A safe
+    architecture must enforce:</p>
+    <ul>
+    <li><p>bounded recursion depth,</p></li>
+    <li><p>explicit recursion steps,</p></li>
+    <li><p>evaluator-guided refinement,</p></li>
+    <li><p>deterministic termination conditions.</p></li>
+    </ul>
+    <p>These constraints ensure that reasoning remains stable and
+    predictable, even in long-horizon tasks.</p>
+    <h2 id="replaceability-and-modular-growth">Replaceability and
+    Modular Growth</h2>
+    <p>A safe AGI must be able to evolve without destabilizing its
+    existing capabilities. This requires:</p>
+    <ul>
+    <li><p>modular components with stable interfaces,</p></li>
+    <li><p>domain-bound AGI modules that can be added or replaced
+    independently,</p></li>
+    <li><p>externalized search engines that can be swapped without
+    retraining,</p></li>
+    <li><p>a reasoning core that contains no domain-specific
+    knowledge.</p></li>
+    </ul>
+    <p>Replaceability ensures that the system can grow structurally
+    rather than parametrically, avoiding the risks associated with
+    weight updates in monolithic models.</p>
+    <h2 id="governance-as-an-architectural-property">Governance as an
+    Architectural Property</h2>
+    <p>Governance must be embedded into the architecture, not added
+    externally. This includes:</p>
+    <ul>
+    <li><p>audit logs for all cognitive operations,</p></li>
+    <li><p>deterministic execution paths,</p></li>
+    <li><p>explicit control flow,</p></li>
+    <li><p>policy layers that constrain domain access and recursion
+    depth,</p></li>
+    <li><p>cloud-native observability (metrics, traces, structured
+    logs).</p></li>
+    </ul>
+    <p>A governable AGI is one whose behaviour can be monitored,
+    constrained, and verified at every step.</p>
+    <h2 id="why-self-expansion-must-be-optional-and-controlled">Why
+    Self-Expansion Must Be Optional and Controlled</h2>
+    <p>While the architecture supports the automatic creation of new
+    domain modules through non-parametric code generation, this
+    capability is optional and governance-sensitive. A safe AGI may
+    operate with a fixed library of domains, avoiding the risks
+    associated with uncontrolled growth. When self-expansion is enabled,
+    it must be:</p>
+    <ul>
+    <li><p>explicitly authorized,</p></li>
+    <li><p>fully traceable,</p></li>
+    <li><p>sandboxed,</p></li>
+    <li><p>subject to evaluator scrutiny,</p></li>
+    <li><p>reversible and replaceable.</p></li>
+    </ul>
+    <p>This ensures that the system remains stable and predictable even
+    as it acquires new capabilities.</p>
+    <h1 id="pre-the-minimal-recursive-reasoning-kernel">PRE: The Minimal
+    Recursive Reasoning Kernel</h1>
+    <p>At the foundation of the architecture lies a minimal but fully
+    expressive reasoning mechanism: the <em>Propose–Refine–Evaluate</em>
+    (PRE) kernel. PRE provides the smallest structural unit in which
+    reasoning becomes explicit, traceable, and recursively improvable.
+    Unlike monolithic models, which internalize reasoning implicitly
+    within a single parameter space, PRE decomposes reasoning into three
+    explicit cognitive roles with transparent communication
+    channels.</p>
+    <h2 id="the-proposerefineevaluate-cycle">The Propose–Refine–Evaluate
+    Cycle</h2>
+    <p>The PRE kernel operates through a controlled recursive loop:</p>
+    <ol>
+    <li><p><strong>Propose</strong>: generate an initial hypothesis or
+    candidate solution.</p></li>
+    <li><p><strong>Evaluate</strong>: assess the candidate using
+    explicit evaluators.</p></li>
+    <li><p><strong>Refine</strong>: improve the candidate based on
+    evaluator feedback.</p></li>
+    </ol>
+    <p>This cycle may repeat for a bounded number of iterations,
+    producing increasingly coherent and domain-aligned outputs. Each
+    step is explicit, inspectable, and recorded in the system’s
+    structured memory, enabling full traceability of the reasoning
+    process.</p>
+    <h2 id="explicit-internal-communication">Explicit Internal
+    Communication</h2>
+    <p>A defining feature of PRE is its use of explicit messages between
+    roles. The proposer does not implicitly “learn” evaluator
+    preferences; instead, evaluators communicate structured feedback
+    that guides refinement. This separation ensures:</p>
+    <ul>
+    <li><p>transparency of intermediate reasoning states,</p></li>
+    <li><p>modularity of evaluators,</p></li>
+    <li><p>replaceability of refinement strategies,</p></li>
+    <li><p>clear cognitive boundaries between roles.</p></li>
+    </ul>
+    <p>Explicit communication prevents entanglement and enables
+    fine-grained governance over the reasoning process.</p>
+    <h2 id="bounded-recursion">Bounded Recursion</h2>
+    <p>Recursive reasoning is powerful but potentially unstable. PRE
+    enforces bounded recursion through:</p>
+    <ul>
+    <li><p>fixed recursion depth limits,</p></li>
+    <li><p>evaluator-driven termination conditions,</p></li>
+    <li><p>structural aborts triggered by evaluator
+    disagreement,</p></li>
+    <li><p>deterministic control flow.</p></li>
+    </ul>
+    <p>These constraints ensure that reasoning remains predictable and
+    auditable, even in complex multi-step tasks.</p>
+    <h2 id="transparency-of-intermediate-states">Transparency of
+    Intermediate States</h2>
+    <p>Every PRE iteration produces:</p>
+    <ul>
+    <li><p>a candidate hypothesis,</p></li>
+    <li><p>evaluator scores across orthogonal dimensions,</p></li>
+    <li><p>refinement instructions,</p></li>
+    <li><p>a traceable record of changes.</p></li>
+    </ul>
+    <p>This transparency enables debugging, governance, and
+    reproducibility. It also allows external systems—human or machine—to
+    inspect and intervene in the reasoning process when necessary.</p>
+    <h2 id="pre-as-atomic-reasoning-unit">PRE as Atomic Reasoning
+    Unit</h2>
+    <p>PRE is intentionally minimal. It does not assume:</p>
+    <ul>
+    <li><p>any specific model architecture,</p></li>
+    <li><p>any particular search algorithm,</p></li>
+    <li><p>any domain-specific knowledge,</p></li>
+    <li><p>any reliance on language models.</p></li>
+    </ul>
+    <p>Instead, PRE provides a substrate-independent reasoning primitive
+    that can be composed, parallelized, or embedded within larger
+    cognitive structures. In the full architecture, PRE serves as the
+    atomic reasoning unit inside each page of the Paged-PRE-CAS system,
+    enabling controlled recursion, epistemic evaluation, and modular
+    refinement.</p>
+    <h1 id="cas-the-cognitive-vector-layer">CAS: The Cognitive Vector
+    Layer</h1>
+    <p>While PRE provides the minimal recursive mechanism for generating
+    and refining hypotheses, it does not specify <em>how</em> candidates
+    should be evaluated or <em>which</em> cognitive dimensions matter
+    for a given task. The <em>Cognitive Vector Layer</em> (CAS) fills
+    this gap by attaching an epistemic profile to every intermediate and
+    final output. CAS transforms reasoning from an unstructured
+    refinement loop into a guided, multi-dimensional cognitive
+    process.</p>
+    <h2 id="epistemic-vectors">Epistemic Vectors</h2>
+    <p>A CAS vector is a structured representation of the epistemic
+    properties of a candidate. It encodes orthogonal evaluation
+    dimensions such as:</p>
+    <ul>
+    <li><p><strong>safety</strong>: adherence to domain constraints and
+    system policies,</p></li>
+    <li><p><strong>accuracy</strong>: correctness relative to domain
+    heuristics or ground truth,</p></li>
+    <li><p><strong>relevance</strong>: alignment with the task or
+    query,</p></li>
+    <li><p><strong>style</strong>: formatting, tone, or structural
+    coherence,</p></li>
+    <li><p><strong>domain</strong>: compatibility with the active domain
+    or page.</p></li>
+    </ul>
+    <p>These dimensions are not tied to any specific model or evaluator.
+    Instead, they form a general epistemic geometry that can be
+    implemented by heterogeneous evaluators, including symbolic
+    checkers, search heuristics, or neural scoring modules.</p>
+    <h2 id="orthogonal-evaluation-dimensions">Orthogonal Evaluation
+    Dimensions</h2>
+    <p>A key design principle of CAS is the separation of evaluation
+    dimensions. Safety, accuracy, relevance, and domain coherence are
+    evaluated independently, preventing entanglement and enabling
+    fine-grained control. This orthogonality provides several
+    benefits:</p>
+    <ul>
+    <li><p><strong>transparent evaluation</strong>: each dimension can
+    be inspected separately,</p></li>
+    <li><p><strong>modular governance</strong>: policy layers can target
+    specific dimensions,</p></li>
+    <li><p><strong>robustness</strong>: failure in one dimension does
+    not corrupt others,</p></li>
+    <li><p><strong>composability</strong>: evaluators can be added or
+    replaced independently.</p></li>
+    </ul>
+    <p>Orthogonality ensures that reasoning remains interpretable and
+    that evaluators do not interfere with one another.</p>
+    <h2 id="cas-guided-generation-and-refinement">CAS-Guided Generation
+    and Refinement</h2>
+    <p>During the PRE cycle, CAS vectors guide both refinement and
+    arbitration:</p>
+    <ul>
+    <li><p>the <strong>proposer</strong> generates candidates
+    conditioned on a target CAS vector,</p></li>
+    <li><p>the <strong>evaluators</strong> compute CAS scores for each
+    candidate,</p></li>
+    <li><p>the <strong>refiner</strong> adjusts the candidate to better
+    match the target vector.</p></li>
+    </ul>
+    <p>This creates a closed-loop control system in which reasoning is
+    steered by explicit epistemic goals. CAS therefore acts as a
+    cognitive control layer, shaping the trajectory of recursive
+    reasoning.</p>
+    <h2 id="cas-n-plural-evaluators-and-consensus">CAS-N: Plural
+    Evaluators and Consensus</h2>
+    <p>To ensure epistemic diversity and robustness, CAS can be extended
+    to <em>CAS-N</em>, a plural evaluation system in which multiple
+    independent evaluators compute CAS vectors using different internal
+    error geometries. CAS-N provides:</p>
+    <ul>
+    <li><p><strong>epistemic diversity</strong>: evaluators trained or
+    designed with different biases,</p></li>
+    <li><p><strong>consensus</strong>: stable agreement across
+    evaluators,</p></li>
+    <li><p><strong>disagreement-based aborts</strong>: structural safety
+    mechanism,</p></li>
+    <li><p><strong>uncertainty detection</strong>: natural signal for
+    ambiguous or unsafe states.</p></li>
+    </ul>
+    <p>Plurality prevents attractor collapse and ensures that no single
+    evaluator dominates the reasoning process.</p>
+    <h2 id="emergent-abort-through-disagreement">Emergent Abort Through
+    Disagreement</h2>
+    <p>A distinctive property of CAS-N is that disagreement between
+    evaluators triggers an automatic abort. This mechanism is not
+    heuristic but structural: if evaluators with independent error
+    geometries diverge significantly, the system halts the reasoning
+    process and returns an uncertainty state. This provides:</p>
+    <ul>
+    <li><p><strong>built-in safety</strong>: unsafe or incoherent
+    candidates are rejected,</p></li>
+    <li><p><strong>robustness</strong>: errors do not propagate through
+    recursion,</p></li>
+    <li><p><strong>interpretability</strong>: disagreement signals
+    epistemic instability.</p></li>
+    </ul>
+    <p>This emergent abort mechanism is a core safety feature of the
+    architecture.</p>
+    <h1 id="paging-domain-decomposition-of-the-action-space">Paging:
+    Domain Decomposition of the Action Space</h1>
+    <p>Reasoning systems that operate over a global, undifferentiated
+    action space are inherently unsafe. Without structural boundaries, a
+    system may generate actions that violate domain constraints, mix
+    incompatible representations, or apply inappropriate heuristics.
+    Paging addresses this problem by decomposing the global action space
+    into coherent, domain-specific regions called <em>pages</em>. Each
+    page contains its own experts, action vocabularies, evaluators, and
+    constraints, ensuring that reasoning remains structurally aligned
+    with the active domain.</p>
+    <h2 id="why-global-action-spaces-are-unsafe">Why Global Action
+    Spaces Are Unsafe</h2>
+    <p>Monolithic models and agent-based systems typically operate over
+    a single, universal action space. This design introduces several
+    risks:</p>
+    <ul>
+    <li><p><strong>cross-domain interference</strong>: reasoning
+    strategies from one domain may corrupt another,</p></li>
+    <li><p><strong>invalid actions</strong>: the system may generate
+    actions that are syntactically valid but semantically
+    impossible,</p></li>
+    <li><p><strong>unbounded behaviour</strong>: the system may explore
+    irrelevant or unsafe regions of the action space,</p></li>
+    <li><p><strong>lack of governance</strong>: domain-specific policies
+    cannot be enforced reliably.</p></li>
+    </ul>
+    <p>Paging eliminates these risks by enforcing strict domain
+    boundaries and deterministic routing.</p>
+    <h2 id="pages-as-domain-coherent-cognitive-regions">Pages as
+    Domain-Coherent Cognitive Regions</h2>
+    <p>A page is a self-contained cognitive region associated with a
+    specific domain. Each page contains:</p>
+    <ul>
+    <li><p>domain-specific experts,</p></li>
+    <li><p>a restricted action vocabulary,</p></li>
+    <li><p>domain-aware evaluators,</p></li>
+    <li><p>heuristics and constraints,</p></li>
+    <li><p>a local PRE-CAS reasoning loop.</p></li>
+    </ul>
+    <p>Pages ensure that reasoning remains coherent within the domain
+    and that all actions are valid by construction.</p>
+    <h2 id="deterministic-routing">Deterministic Routing</h2>
+    <p>Paging introduces a deterministic routing mechanism that maps the
+    current context to the correct domain page. Routing may be based
+    on:</p>
+    <ul>
+    <li><p>the structure of the input state,</p></li>
+    <li><p>domain metadata,</p></li>
+    <li><p>explicit domain identifiers,</p></li>
+    <li><p>mediator-LLM interpretation (when present).</p></li>
+    </ul>
+    <p>Once a page is selected, all subsequent reasoning steps occur
+    strictly within that page until the task is complete or the system
+    transitions to another domain under controlled conditions.</p>
+    <h2 id="domain-specific-experts">Domain-Specific Experts</h2>
+    <p>Each page contains a set of experts responsible for generating,
+    refining, or evaluating actions within the domain. Experts may
+    be:</p>
+    <ul>
+    <li><p>symbolic algorithms,</p></li>
+    <li><p>neural modules,</p></li>
+    <li><p>search heuristics,</p></li>
+    <li><p>simulators,</p></li>
+    <li><p>parsers or validators.</p></li>
+    </ul>
+    <p>Experts communicate with the reasoning core through explicit
+    callbacks, ensuring that domain logic remains externalized and
+    modular.</p>
+    <h2 id="structural-prevention-of-domain-errors">Structural
+    Prevention of Domain Errors</h2>
+    <p>Paging provides a structural guarantee that domain errors cannot
+    occur. This is achieved through:</p>
+    <ul>
+    <li><p><strong>restricted action vocabularies</strong>: only
+    domain-valid actions can be generated,</p></li>
+    <li><p><strong>domain-specific evaluators</strong>: invalid states
+    are rejected immediately,</p></li>
+    <li><p><strong>page-local reasoning</strong>: PRE-CAS operates only
+    within the active domain,</p></li>
+    <li><p><strong>explicit transitions</strong>: domain switches
+    require explicit authorization.</p></li>
+    </ul>
+    <p>These mechanisms ensure that reasoning remains safe, coherent,
+    and aligned with domain constraints.</p>
+    <h1
+    id="paged-pre-cas-the-full-reasoning-architecture">Paged-PRE-CAS:
+    The Full Reasoning Architecture</h1>
+    <p>The Paged-PRE-CAS architecture integrates the three core
+    components introduced in the previous sections—Paging, PRE, and
+    CAS—into a unified reasoning system. Paging provides domain
+    decomposition and structural safety; PRE implements explicit
+    recursive reasoning; and CAS supplies epistemic guidance and
+    evaluator plurality. Together, they form a modular, transparent, and
+    governable reasoning engine suitable for domain-bound AGI.</p>
+    <h2 id="step-1-paging">Step 1 — Paging</h2>
+    <p>Reasoning begins with the selection of the appropriate domain
+    page. Paging ensures that:</p>
+    <ul>
+    <li><p>the action space is restricted to domain-valid
+    operations,</p></li>
+    <li><p>domain-specific experts and evaluators are
+    activated,</p></li>
+    <li><p>cross-domain interference is structurally
+    impossible,</p></li>
+    <li><p>all reasoning occurs within a coherent representational
+    geometry.</p></li>
+    </ul>
+    <p>Routing may be performed by structural rules, domain metadata, or
+    a mediator-LLM when present. Once a page is selected, the reasoning
+    core operates strictly within that domain.</p>
+    <h2 id="step-2-pre-cas-within-a-page">Step 2 — PRE-CAS Within a
+    Page</h2>
+    <p>Within the selected page, reasoning proceeds through a PRE-CAS
+    loop:</p>
+    <ol>
+    <li><p><strong>Propose</strong>: domain experts or neural modules
+    generate candidate actions or states.</p></li>
+    <li><p><strong>Evaluate</strong>: CAS evaluators compute epistemic
+    vectors across orthogonal dimensions.</p></li>
+    <li><p><strong>Refine</strong>: candidates are improved based on
+    evaluator feedback.</p></li>
+    <li><p><strong>Re-evaluate</strong>: updated candidates are scored
+    again.</p></li>
+    </ol>
+    <p>This loop continues for a bounded number of iterations, producing
+    increasingly coherent and domain-aligned candidates. PRE ensures
+    explicit recursion; CAS ensures epistemic guidance; Paging ensures
+    domain isolation.</p>
+    <h2 id="step-3-filtering">Step 3 — Filtering</h2>
+    <p>After the PRE-CAS loop, the system applies filtering
+    mechanisms:</p>
+    <ul>
+    <li><p><strong>hard constraints</strong>: candidates violating
+    domain rules are discarded,</p></li>
+    <li><p><strong>soft thresholds</strong>: candidates must meet
+    minimum epistemic quality,</p></li>
+    <li><p><strong>policy filters</strong>: governance layers may impose
+    additional restrictions.</p></li>
+    </ul>
+    <p>Filtering ensures that only safe, valid, and domain-coherent
+    candidates proceed to arbitration.</p>
+    <h2 id="step-4-arbiter">Step 4 — Arbiter</h2>
+    <p>The arbiter combines evaluator scores and selects the best
+    candidate. Arbitration may involve:</p>
+    <ul>
+    <li><p>weighted aggregation of CAS dimensions,</p></li>
+    <li><p>consensus across CAS-N evaluators,</p></li>
+    <li><p>rejection if evaluators disagree significantly,</p></li>
+    <li><p>optional diversity mechanisms to avoid local minima.</p></li>
+    </ul>
+    <p>The arbiter provides a deterministic and transparent
+    decision-making step, ensuring that the system’s output is grounded
+    in explicit epistemic criteria.</p>
+    <h2 id="step-5-ensembles-and-plural-systems">Step 5 — Ensembles and
+    Plural Systems</h2>
+    <p>For additional robustness, multiple Paged-PRE-CAS systems may
+    operate in parallel:</p>
+    <ul>
+    <li><p><strong>ensemble reasoning</strong>: multiple reasoning cores
+    explore different trajectories,</p></li>
+    <li><p><strong>plural arbitration</strong>: results are compared or
+    merged,</p></li>
+    <li><p><strong>population analysis</strong>: diversity across
+    systems signals uncertainty,</p></li>
+    <li><p><strong>redundancy</strong>: failures in one system do not
+    compromise the whole.</p></li>
+    </ul>
+    <p>Ensembles provide structural pluralism, improving stability and
+    safety.</p>
+    <h2 id="what-the-full-architecture-provides">What the Full
+    Architecture Provides</h2>
+    <p>Paged-PRE-CAS delivers several key properties required for safe
+    AGI:</p>
+    <ul>
+    <li><p><strong>Modularity</strong>: domain logic, evaluators, and
+    experts are independent components.</p></li>
+    <li><p><strong>Traceability</strong>: every reasoning step is
+    explicit and inspectable.</p></li>
+    <li><p><strong>Orthogonal constraints</strong>: safety, accuracy,
+    relevance, and domain coherence are separated.</p></li>
+    <li><p><strong>Plurality</strong>: multiple evaluators and optional
+    ensembles prevent collapse.</p></li>
+    <li><p><strong>Bounded recursion</strong>: reasoning depth is
+    controlled and auditable.</p></li>
+    <li><p><strong>Scalability</strong>: new domains can be added
+    without retraining the system.</p></li>
+    <li><p><strong>Governability</strong>: deterministic execution and
+    domain isolation enable fine-grained control.</p></li>
+    </ul>
+    <p>Paged-PRE-CAS therefore constitutes the structural core of a
+    safe, modular, and extensible AGI architecture.</p>
+    <h1 id="domain-bound-agi-atomic-cognitive-units">Domain-Bound AGI:
+    Atomic Cognitive Units</h1>
+    <p>General intelligence does not require a single system that
+    internalizes all domains. Instead, it can emerge from the
+    interaction of many small, coherent, and independently governed
+    cognitive modules. A <em>domain-bound AGI</em> is such a module: a
+    fully functional cognitive subsystem that implements reasoning,
+    evaluation, planning, and action within a single domain. Each
+    domain-bound AGI is internally coherent, externally modular, and
+    structurally isolated from other domains, making it the atomic
+    cognitive unit of the proposed architecture.</p>
+    <h2 id="why-agi-must-be-composed-of-domain-intelligences">Why AGI
+    Must Be Composed of Domain Intelligences</h2>
+    <p>Different domains require different representational geometries,
+    heuristics, and constraints. Attempting to unify all domains within
+    a single model leads to entanglement, loss of traceability, and
+    unsafe generalization. Domain-bound AGIs avoid these problems by
+    providing:</p>
+    <ul>
+    <li><p><strong>local coherence</strong>: each module maintains its
+    own internal logic and constraints,</p></li>
+    <li><p><strong>replaceability</strong>: modules can be upgraded or
+    swapped independently,</p></li>
+    <li><p><strong>safety</strong>: domain boundaries prevent
+    cross-domain interference,</p></li>
+    <li><p><strong>scalability</strong>: new domains can be added
+    without retraining the system.</p></li>
+    </ul>
+    <p>General intelligence emerges not from a monolithic model but from
+    the structured interaction of many domain intelligences coordinated
+    by a mediator.</p>
+    <h2 id="the-three-core-interfaces">The Three Core Interfaces</h2>
+    <p>Each domain-bound AGI implements three stable interfaces that
+    define its cognitive boundary:</p>
+    <h4 id="domain-interface">Domain Interface</h4>
+    <ul>
+    <li><p>semantic description of the domain,</p></li>
+    <li><p>detection of whether a state belongs to the domain,</p></li>
+    <li><p>generation of initial or random states,</p></li>
+    <li><p>bidirectional translation between text and internal
+    representations,</p></li>
+    <li><p>selection of the appropriate search engine (Monte Carlo,
+    Beam, A*, heuristics).</p></li>
+    </ul>
+    <h4 id="state-interface">State Interface</h4>
+    <ul>
+    <li><p>access to the linked domain,</p></li>
+    <li><p>identification of the current actor,</p></li>
+    <li><p>goal detection,</p></li>
+    <li><p>enumeration of valid actions,</p></li>
+    <li><p>state transition under a given action,</p></li>
+    <li><p>heuristic evaluation of the state,</p></li>
+    <li><p>optional visualization or description.</p></li>
+    </ul>
+    <h4 id="action-interface">Action Interface</h4>
+    <ul>
+    <li><p>structured representation of an action,</p></li>
+    <li><p>domain-specific parameters,</p></li>
+    <li><p>optional visualization or description.</p></li>
+    </ul>
+    <p>These interfaces form the cognitive API between the reasoning
+    core and domain logic.</p>
+    <h2 id="experts-as-autonomous-cognitive-subsystems">Experts as
+    Autonomous Cognitive Subsystems</h2>
+    <p>Within each domain, experts implement the computational logic
+    required for reasoning. Experts may be:</p>
+    <ul>
+    <li><p>symbolic algorithms,</p></li>
+    <li><p>neural modules,</p></li>
+    <li><p>simulators,</p></li>
+    <li><p>parsers or validators,</p></li>
+    <li><p>heuristic evaluators,</p></li>
+    <li><p>search engines.</p></li>
+    </ul>
+    <p>Experts communicate with the reasoning core through explicit
+    callbacks, ensuring that domain logic remains externalized and
+    modular.</p>
+    <h2 id="externalized-search">Externalized Search</h2>
+    <p>Domain-bound AGIs do not rely on parametric learning for deep
+    reasoning. Instead, they use externalized search engines such
+    as:</p>
+    <ul>
+    <li><p>Monte Carlo search for stochastic or strategic
+    domains,</p></li>
+    <li><p>Beam Search for deterministic planning,</p></li>
+    <li><p>A* or constraint solvers for structured
+    optimization,</p></li>
+    <li><p>domain-specific heuristics for rapid evaluation.</p></li>
+    </ul>
+    <p>Search is pluggable and domain-specific, enabling deep reasoning
+    without modifying the reasoning core.</p>
+    <h2 id="procedural-memory-vs.-parametric-memory">Procedural Memory
+    vs. Parametric Memory</h2>
+    <p>Domain-bound AGIs rely on <em>procedural memory</em>—explicit
+    algorithms, heuristics, and interfaces—rather than parametric memory
+    encoded in neural weights. This provides:</p>
+    <ul>
+    <li><p><strong>stability</strong>: no catastrophic
+    forgetting,</p></li>
+    <li><p><strong>governance</strong>: algorithms can be inspected and
+    audited,</p></li>
+    <li><p><strong>replaceability</strong>: components can be updated
+    without retraining,</p></li>
+    <li><p><strong>predictability</strong>: behaviour is determined by
+    explicit procedures.</p></li>
+    </ul>
+    <p>This stands in contrast to monolithic models, where knowledge and
+    reasoning are entangled in weights.</p>
+    <h2 id="fixed-domain-libraries-vs.-optional-self-expansion">Fixed
+    Domain Libraries vs. Optional Self-Expansion</h2>
+    <p>A domain-bound AGI system may operate with a fixed library of
+    domains—e.g., one hundred well-defined planning or optimization
+    domains. This configuration is safe, predictable, and fully
+    governable.</p>
+    <p>The architecture also supports optional self-expansion through
+    non-parametric code generation, where a mediator-LLM synthesizes new
+    domain interfaces from formal descriptions. However, this capability
+    is:</p>
+    <ul>
+    <li><p>optional,</p></li>
+    <li><p>governance-sensitive,</p></li>
+    <li><p>fully traceable,</p></li>
+    <li><p>sandboxed,</p></li>
+    <li><p>reversible.</p></li>
+    </ul>
+    <p>Self-expansion is therefore a controlled extension mechanism, not
+    a requirement for AGI.</p>
+    <h2 id="why-llms-are-optional-and-replaceable">Why LLMs Are Optional
+    and Replaceable</h2>
+    <p>Language models are not cognitive cores in this architecture.
+    They serve only as:</p>
+    <ul>
+    <li><p>semantic translators between natural language and structured
+    states,</p></li>
+    <li><p>optional generators of domain interfaces,</p></li>
+    <li><p>heuristic providers when appropriate.</p></li>
+    </ul>
+    <p>Reasoning, planning, arbitration, and memory are implemented
+    structurally through Paged-PRE-CAS and domain-bound AGIs. The system
+    remains fully operational without LLMs, ensuring that its core
+    cognitive processes remain transparent, deterministic, and
+    governable.</p>
+    <h1 id="mediator-llm-coordination-across-domains">Mediator-LLM:
+    Coordination Across Domains</h1>
+    <p>While domain-bound AGI modules implement reasoning, planning, and
+    search within their own domains, a system capable of interacting
+    with the external world must also interpret natural language,
+    translate user queries into structured representations, and
+    coordinate reasoning across multiple domains. These tasks are
+    performed by the <em>mediator-LLM</em>. Importantly, the
+    mediator-LLM is not a cognitive core: it does not perform reasoning,
+    planning, or arbitration. Instead, it serves as a semantic interface
+    and coordination layer.</p>
+    <h2 id="interpretation-and-translation">Interpretation and
+    Translation</h2>
+    <p>The mediator-LLM receives natural language input from the user
+    and performs three functions:</p>
+    <ol>
+    <li><p><strong>Interpretation</strong>: identify the domain or
+    domains relevant to the query.</p></li>
+    <li><p><strong>Translation</strong>: convert natural language into
+    structured internal representations (states, goals,
+    constraints).</p></li>
+    <li><p><strong>Normalization</strong>: ensure that the resulting
+    representation conforms to the domain’s interface
+    specifications.</p></li>
+    </ol>
+    <p>This translation step allows the reasoning core to operate
+    entirely on structured data, avoiding the ambiguity and variability
+    inherent in natural language.</p>
+    <h2 id="routing-to-domain-bound-agis">Routing to Domain-Bound
+    AGIs</h2>
+    <p>Once the input has been translated, the mediator-LLM routes the
+    structured representation to the appropriate domain-bound AGI.
+    Routing may involve:</p>
+    <ul>
+    <li><p>domain classification,</p></li>
+    <li><p>disambiguation across multiple candidate domains,</p></li>
+    <li><p>decomposition of multi-domain tasks,</p></li>
+    <li><p>sequential or parallel invocation of domain modules.</p></li>
+    </ul>
+    <p>Routing is deterministic and auditable: the mediator-LLM produces
+    explicit routing metadata that can be inspected and verified.</p>
+    <h2 id="integration-of-partial-results">Integration of Partial
+    Results</h2>
+    <p>Complex tasks may require contributions from multiple
+    domain-bound AGIs. The mediator-LLM integrates partial results
+    by:</p>
+    <ul>
+    <li><p>merging structured outputs,</p></li>
+    <li><p>translating intermediate states between domains,</p></li>
+    <li><p>coordinating multi-step workflows,</p></li>
+    <li><p>generating natural language summaries for the user.</p></li>
+    </ul>
+    <p>Integration is semantic rather than cognitive: the mediator-LLM
+    does not reason about the content but merely transforms and composes
+    representations.</p>
+    <h2 id="maintaining-continuity-across-tasks">Maintaining Continuity
+    Across Tasks</h2>
+    <p>The mediator-LLM maintains continuity across user interactions
+    by:</p>
+    <ul>
+    <li><p>tracking conversational context,</p></li>
+    <li><p>preserving task metadata,</p></li>
+    <li><p>reusing structured states across turns,</p></li>
+    <li><p>ensuring consistent domain routing.</p></li>
+    </ul>
+    <p>This continuity layer allows the system to support multi-step
+    tasks without embedding state inside the reasoning core.</p>
+    <h2 id="llm-as-semantic-engine-not-cognitive-core">LLM as Semantic
+    Engine, Not Cognitive Core</h2>
+    <p>The mediator-LLM is intentionally limited to semantic tasks. It
+    does not:</p>
+    <ul>
+    <li><p>perform reasoning or planning,</p></li>
+    <li><p>evaluate candidates,</p></li>
+    <li><p>execute search,</p></li>
+    <li><p>maintain internal cognitive state,</p></li>
+    <li><p>modify domain logic.</p></li>
+    </ul>
+    <p>This separation ensures that the reasoning core remains
+    transparent, deterministic, and governable. The mediator-LLM can be
+    replaced, upgraded, or removed entirely without affecting the
+    system’s cognitive integrity.</p>
+    <h2 id="why-the-architecture-remains-llm-agnostic">Why the
+    Architecture Remains LLM-Agnostic</h2>
+    <p>Because the mediator-LLM is not a cognitive core, the
+    architecture is fully LLM-agnostic:</p>
+    <ul>
+    <li><p>any model capable of semantic translation can serve as
+    mediator,</p></li>
+    <li><p>multiple mediators may be used for different languages or
+    modalities,</p></li>
+    <li><p>the system remains operational without an LLM,</p></li>
+    <li><p>reasoning quality does not depend on LLM scale.</p></li>
+    </ul>
+    <p>This design avoids the safety and governance risks associated
+    with monolithic LLM-based AGI and ensures that the architecture
+    remains modular, replaceable, and future-proof.</p>
+    <h1 id="cloud-native-agi">Cloud-Native AGI</h1>
+    <p>The architecture presented in this paper is designed from the
+    ground up as a distributed, cloud-native cognitive system. Rather
+    than embedding all reasoning, memory, and evaluation within a single
+    model or process, the system decomposes cognition into independent,
+    communicating microservices. This design enables scalability,
+    observability, fault isolation, and fine-grained
+    governance—properties that are essential for safe AGI deployment in
+    real-world environments.</p>
+    <h2 id="agi-as-a-distributed-cognitive-fabric">AGI as a Distributed
+    Cognitive Fabric</h2>
+    <p>In a cloud-native setting, AGI is not a monolithic program but a
+    <em>cognitive fabric</em> composed of interacting services. Each
+    service implements a specific cognitive role:</p>
+    <ul>
+    <li><p>reasoning cores (Paged-PRE-CAS),</p></li>
+    <li><p>domain-bound AGI modules,</p></li>
+    <li><p>search engines,</p></li>
+    <li><p>evaluators and CAS-N components,</p></li>
+    <li><p>memory services,</p></li>
+    <li><p>mediator-LLM interfaces (optional).</p></li>
+    </ul>
+    <p>These services communicate through explicit protocols, enabling
+    transparency and modularity. The system can scale horizontally by
+    spawning additional reasoning cores or domain modules as needed.</p>
+    <h2 id="stateless-reasoning-core">Stateless Reasoning Core</h2>
+    <p>The reasoning core is intentionally stateless. It receives:</p>
+    <ul>
+    <li><p>a structured state,</p></li>
+    <li><p>a domain identifier,</p></li>
+    <li><p>evaluator configurations,</p></li>
+    <li><p>recursion limits,</p></li>
+    <li><p>policy constraints.</p></li>
+    </ul>
+    <p>It produces:</p>
+    <ul>
+    <li><p>candidate actions,</p></li>
+    <li><p>CAS vectors,</p></li>
+    <li><p>reasoning traces,</p></li>
+    <li><p>arbitration results.</p></li>
+    </ul>
+    <p>All persistent information is stored externally in dedicated
+    memory services. Statelessness ensures reproducibility, fault
+    tolerance, and the ability to scale reasoning cores elastically.</p>
+    <h2 id="persistent-object-memory">Persistent Object Memory</h2>
+    <p>Long-term memory is implemented as a persistent object store that
+    maintains:</p>
+    <ul>
+    <li><p>structured states,</p></li>
+    <li><p>domain objects,</p></li>
+    <li><p>task metadata,</p></li>
+    <li><p>evaluator configurations,</p></li>
+    <li><p>reasoning traces,</p></li>
+    <li><p>user context.</p></li>
+    </ul>
+    <p>Memory is versioned, auditable, and queryable. This allows the
+    system to support multi-step tasks, maintain continuity across
+    interactions, and provide full traceability for governance and
+    debugging.</p>
+    <h2 id="asynchronous-orchestration">Asynchronous Orchestration</h2>
+    <p>Cloud-native AGI relies on asynchronous orchestration to
+    coordinate reasoning, memory, and domain modules. Orchestration
+    frameworks handle:</p>
+    <ul>
+    <li><p>task scheduling,</p></li>
+    <li><p>parallel execution of reasoning cores,</p></li>
+    <li><p>retries and fault recovery,</p></li>
+    <li><p>timeouts and recursion limits,</p></li>
+    <li><p>routing between services.</p></li>
+    </ul>
+    <p>This enables the system to handle complex workflows, long-horizon
+    tasks, and large-scale reasoning without blocking or resource
+    contention.</p>
+    <h2
+    id="microservices-for-reasoning-memory-search-evaluators-and-experts">Microservices
+    for Reasoning, Memory, Search, Evaluators, and Experts</h2>
+    <p>Each cognitive function is implemented as a microservice:</p>
+    <ul>
+    <li><p><strong>Reasoning service</strong>: executes Paged-PRE-CAS
+    loops.</p></li>
+    <li><p><strong>Memory service</strong>: stores structured states and
+    task metadata.</p></li>
+    <li><p><strong>Search service</strong>: provides domain-specific
+    search algorithms.</p></li>
+    <li><p><strong>Evaluator service</strong>: computes CAS vectors and
+    performs plural evaluation.</p></li>
+    <li><p><strong>Expert services</strong>: implement domain logic,
+    heuristics, and simulators.</p></li>
+    </ul>
+    <p>This decomposition provides fault isolation: failures in one
+    component do not compromise the entire system. It also enables
+    independent deployment, testing, and upgrading of components.</p>
+    <h2 id="governance-through-observability">Governance Through
+    Observability</h2>
+    <p>Cloud-native infrastructure provides built-in observability
+    mechanisms that are essential for AGI governance:</p>
+    <ul>
+    <li><p><strong>structured logs</strong>: record every reasoning step
+    and evaluator score,</p></li>
+    <li><p><strong>metrics</strong>: track recursion depth, evaluator
+    disagreement, and domain transitions,</p></li>
+    <li><p><strong>traces</strong>: capture end-to-end reasoning
+    workflows,</p></li>
+    <li><p><strong>policy layers</strong>: enforce domain access rules
+    and recursion limits.</p></li>
+    </ul>
+    <p>Observability transforms AGI from an opaque system into an
+    auditable computational process. Governance becomes a first-class
+    architectural property rather than an afterthought.</p>
+    <h1 id="comparison-with-agent-architectures">Comparison with Agent
+    Architectures</h1>
+    <p>Agent-based systems have become a dominant paradigm for
+    orchestrating large language models with tools, memory stores, and
+    external APIs. Frameworks such as AutoGen, LangChain, and Swarm
+    demonstrate practical utility for automation and workflow
+    coordination. However, these systems do not constitute cognitive
+    architectures. Their behaviour emerges from prompting patterns, tool
+    invocation heuristics, and transcript accumulation rather than
+    explicit reasoning structures. This section contrasts agent
+    architectures with the Paged-PRE-CAS framework and highlights the
+    fundamental differences in design, safety, and cognitive
+    organization.</p>
+    <h2 id="why-agents-simulate-reasoning">Why Agents Simulate
+    Reasoning</h2>
+    <p>Agents typically rely on a single large language model to perform
+    all cognitive functions: planning, decomposition, evaluation, memory
+    retrieval, and tool selection. Reasoning is simulated through:</p>
+    <ul>
+    <li><p>prompt engineering,</p></li>
+    <li><p>chain-of-thought generation,</p></li>
+    <li><p>self-reflection loops,</p></li>
+    <li><p>tool-calling heuristics,</p></li>
+    <li><p>multi-agent dialogues.</p></li>
+    </ul>
+    <p>These mechanisms create the appearance of structured reasoning
+    but lack explicit control flow, bounded recursion, or epistemic
+    governance. The reasoning process remains implicit in the model’s
+    internal activations and cannot be decomposed into stable cognitive
+    roles.</p>
+    <h2 id="why-paged-pre-cas-implements-reasoning">Why Paged-PRE-CAS
+    Implements Reasoning</h2>
+    <p>In contrast, Paged-PRE-CAS implements reasoning as a first-class
+    computational process:</p>
+    <ul>
+    <li><p>PRE provides explicit recursive refinement,</p></li>
+    <li><p>CAS provides orthogonal epistemic evaluation,</p></li>
+    <li><p>CAS-N provides plural evaluators and disagreement-based
+    aborts,</p></li>
+    <li><p>Paging enforces domain isolation and action-space
+    constraints,</p></li>
+    <li><p>arbitration is deterministic and transparent.</p></li>
+    </ul>
+    <p>Reasoning is not emergent but algorithmic. Every step is
+    inspectable, reproducible, and governable. This structural clarity
+    is essential for safety and long-horizon planning.</p>
+    <h2 id="structured-state-vs.-transcript-accumulation">Structured
+    State vs. Transcript Accumulation</h2>
+    <p>Agent systems typically store state in unstructured transcripts.
+    This leads to:</p>
+    <ul>
+    <li><p>uncontrolled context growth,</p></li>
+    <li><p>implicit memory,</p></li>
+    <li><p>susceptibility to prompt drift,</p></li>
+    <li><p>difficulty in debugging or auditing,</p></li>
+    <li><p>lack of stable intermediate representations.</p></li>
+    </ul>
+    <p>Paged-PRE-CAS uses structured state representations defined by
+    domain-bound AGIs. State is explicit, typed, and validated by domain
+    interfaces. This enables:</p>
+    <ul>
+    <li><p>deterministic state transitions,</p></li>
+    <li><p>domain-specific constraints,</p></li>
+    <li><p>reproducible reasoning traces,</p></li>
+    <li><p>clear separation between memory and reasoning.</p></li>
+    </ul>
+    <h2 id="real-search-vs.-hallucinated-search">Real Search vs.
+    Hallucinated Search</h2>
+    <p>Agents often rely on LLM-generated search trajectories that are
+    not grounded in actual simulation or algorithmic evaluation. This
+    results in:</p>
+    <ul>
+    <li><p>hallucinated search trees,</p></li>
+    <li><p>inconsistent heuristics,</p></li>
+    <li><p>unreliable planning,</p></li>
+    <li><p>lack of guarantees about optimality or safety.</p></li>
+    </ul>
+    <p>Domain-bound AGIs use externalized search engines—Monte Carlo,
+    Beam, A*, constraint solvers— ensuring that search is:</p>
+    <ul>
+    <li><p>algorithmic,</p></li>
+    <li><p>deterministic,</p></li>
+    <li><p>domain-valid,</p></li>
+    <li><p>inspectable,</p></li>
+    <li><p>reproducible.</p></li>
+    </ul>
+    <p>Reasoning is grounded in actual computation rather than
+    linguistic simulation.</p>
+    <h2 id="governance-and-safety-differences">Governance and Safety
+    Differences</h2>
+    <p>Agent architectures provide limited safety guarantees:</p>
+    <ul>
+    <li><p>no domain isolation,</p></li>
+    <li><p>no bounded recursion,</p></li>
+    <li><p>no evaluator plurality,</p></li>
+    <li><p>no deterministic arbitration,</p></li>
+    <li><p>no structural abort mechanisms.</p></li>
+    </ul>
+    <p>Paged-PRE-CAS embeds safety into the architecture:</p>
+    <ul>
+    <li><p>domain boundaries prevent cross-domain errors,</p></li>
+    <li><p>recursion depth is explicitly bounded,</p></li>
+    <li><p>CAS-N provides epistemic diversity,</p></li>
+    <li><p>arbitration is deterministic,</p></li>
+    <li><p>evaluator disagreement triggers automatic aborts.</p></li>
+    </ul>
+    <p>Safety is structural, not behavioural.</p>
+    <h2 id="complementarity-not-equivalence">Complementarity, Not
+    Equivalence</h2>
+    <p>Agent systems and Paged-PRE-CAS are not competing paradigms but
+    complementary layers:</p>
+    <ul>
+    <li><p>agent frameworks excel at workflow orchestration and tool
+    integration,</p></li>
+    <li><p>Paged-PRE-CAS provides a principled reasoning
+    substrate,</p></li>
+    <li><p>domain-bound AGIs provide structured domain
+    intelligence,</p></li>
+    <li><p>mediator-LLMs provide semantic translation.</p></li>
+    </ul>
+    <p>Agents can orchestrate Paged-PRE-CAS modules, but they cannot
+    replace them. The architecture presented here provides the cognitive
+    foundation that agent systems lack.</p>
+    <h1
+    id="real-world-example-discrete-state-transition-domains">Real-World
+    Example: Discrete State-Transition Domains</h1>
+    <p>To illustrate the practical applicability of the architecture,
+    this section presents a concrete example based on discrete
+    state-transition domains. These domains are common in planning,
+    optimization, simulation, and game-like environments. They provide a
+    clean setting in which the interaction between domain-bound AGIs,
+    search engines, and the Paged-PRE-CAS reasoning core can be
+    demonstrated with full transparency.</p>
+    <h2 id="problem-class-definition">Problem Class Definition</h2>
+    <p>A discrete state-transition domain is defined by:</p>
+    <ul>
+    <li><p>a finite or countably infinite set of states <span
+    class="math inline"><em>S</em></span>,</p></li>
+    <li><p>a set of actions <span
+    class="math inline"><em>A</em>(<em>s</em>)</span> available in each
+    state <span
+    class="math inline"><em>s</em> ∈ <em>S</em></span>,</p></li>
+    <li><p>a deterministic or stochastic transition function <span
+    class="math inline"><em>T</em>(<em>s</em>,<em>a</em>)</span>,</p></li>
+    <li><p>a goal condition <span
+    class="math inline"><em>G</em>(<em>s</em>)</span>,</p></li>
+    <li><p>optional heuristics <span
+    class="math inline"><em>h</em>(<em>s</em>)</span> for
+    search.</p></li>
+    </ul>
+    <p>This class includes puzzles, board games, logistics problems,
+    scheduling tasks, and many real-world planning scenarios. The
+    structure aligns naturally with the Domain/State/Action interfaces
+    defined earlier.</p>
+    <h2 id="domain-state-and-action-interfaces">Domain, State, and
+    Action Interfaces</h2>
+    <p>A domain-bound AGI for a discrete state-transition domain
+    implements:</p>
+    <h4 id="domain-interface-1">Domain Interface</h4>
+    <ul>
+    <li><p>detection of whether a state belongs to the domain,</p></li>
+    <li><p>generation of initial or random states,</p></li>
+    <li><p>translation between text and structured states,</p></li>
+    <li><p>selection of the appropriate search engine.</p></li>
+    </ul>
+    <h4 id="state-interface-1">State Interface</h4>
+    <ul>
+    <li><p>enumeration of valid actions,</p></li>
+    <li><p>transition under a given action,</p></li>
+    <li><p>goal detection,</p></li>
+    <li><p>heuristic evaluation,</p></li>
+    <li><p>visualization or textual description.</p></li>
+    </ul>
+    <h4 id="action-interface-1">Action Interface</h4>
+    <ul>
+    <li><p>structured representation of an action,</p></li>
+    <li><p>domain-specific parameters,</p></li>
+    <li><p>optional visualization.</p></li>
+    </ul>
+    <p>These interfaces allow the reasoning core to operate
+    independently of domain-specific logic.</p>
+    <h2 id="reasoning-flow-via-mediator-llm">Reasoning Flow via
+    Mediator-LLM</h2>
+    <p>When a user provides a natural language query (e.g., “Solve this
+    puzzle” or “Plan the next move”), the mediator-LLM performs:</p>
+    <ol>
+    <li><p><strong>Interpretation</strong>: identify the relevant domain
+    (e.g., a puzzle domain).</p></li>
+    <li><p><strong>Translation</strong>: convert the input into a
+    structured state.</p></li>
+    <li><p><strong>Routing</strong>: send the state to the appropriate
+    domain-bound AGI.</p></li>
+    </ol>
+    <p>The mediator-LLM does not perform reasoning; it only prepares the
+    structured input required by the reasoning core.</p>
+    <h2 id="simulation-and-next-move-prediction">Simulation and
+    Next-Move Prediction</h2>
+    <p>Within the domain, the reasoning core executes a Paged-PRE-CAS
+    loop:</p>
+    <ol>
+    <li><p><strong>Propose</strong>: generate candidate next actions
+    using domain experts or search.</p></li>
+    <li><p><strong>Evaluate</strong>: compute CAS vectors for each
+    candidate.</p></li>
+    <li><p><strong>Refine</strong>: improve candidates based on
+    evaluator feedback.</p></li>
+    <li><p><strong>Arbitrate</strong>: select the best
+    candidate.</p></li>
+    </ol>
+    <p>If search is required, the domain-bound AGI invokes:</p>
+    <ul>
+    <li><p>Monte Carlo search for stochastic domains,</p></li>
+    <li><p>Beam Search for deterministic planning,</p></li>
+    <li><p>A* for structured optimization,</p></li>
+    <li><p>domain-specific heuristics for rapid evaluation.</p></li>
+    </ul>
+    <p>The result is a next-move prediction or a full plan, depending on
+    the task.</p>
+    <h2
+    id="automatic-domain-creation-from-natural-language-optional">Automatic
+    Domain Creation from Natural Language (Optional)</h2>
+    <p>When governance allows, the mediator-LLM can generate new domain
+    modules from natural language descriptions. For example:</p>
+    <blockquote>
+    <p>“Create a domain for a 4×4 sliding puzzle with numbered
+    tiles.”</p>
+    </blockquote>
+    <p>The mediator-LLM produces:</p>
+    <ul>
+    <li><p>a Domain interface,</p></li>
+    <li><p>a State representation,</p></li>
+    <li><p>an Action vocabulary,</p></li>
+    <li><p>transition logic,</p></li>
+    <li><p>heuristics.</p></li>
+    </ul>
+    <p>This capability is optional and fully traceable. It allows rapid
+    prototyping of new domains without modifying the reasoning core.</p>
+    <h2 id="deterministic-execution-via-script-engine">Deterministic
+    Execution via Script Engine</h2>
+    <p>Once a cognitive program is synthesized by the reasoning core, it
+    is executed by a deterministic script engine. This ensures:</p>
+    <ul>
+    <li><p>reproducibility,</p></li>
+    <li><p>auditability,</p></li>
+    <li><p>safety,</p></li>
+    <li><p>independence from neural model variability.</p></li>
+    </ul>
+    <p>The script engine executes only domain-valid actions, providing a
+    final layer of structural safeguards.</p>
+    <h2 id="empirical-demonstration-github-reference">Empirical
+    Demonstration (GitHub Reference)</h2>
+    <p>A full implementation of this architecture for discrete
+    state-transition domains is available in the accompanying
+    open-source repository. It includes:</p>
+    <ul>
+    <li><p>multiple domain-bound AGIs (puzzles, planning tasks,
+    simulations),</p></li>
+    <li><p>a complete Paged-PRE-CAS reasoning core,</p></li>
+    <li><p>search engines (Monte Carlo, Beam, A*),</p></li>
+    <li><p>a deterministic script engine,</p></li>
+    <li><p>examples of mediator-LLM domain synthesis.</p></li>
+    </ul>
+    <p>This implementation demonstrates that the architecture is not
+    theoretical but practical, deployable, and compatible with
+    real-world systems.</p>
+    <h1 id="paged-pre-cas-as-a-generative-reasoning-model">Paged-PRE-CAS
+    as a Generative Reasoning Model</h1>
+    <p>Although the architecture is not based on monolithic neural
+    models, it is nonetheless a <em>generative</em> system. Instead of
+    generating text or tokens, Paged-PRE-CAS generates <em>cognitive
+    programs</em>: structured sequences of actions, refinements,
+    evaluations, and state transitions that solve a task. These programs
+    are explicit, inspectable, and executable by a deterministic script
+    engine. This section formalizes Paged-PRE-CAS as a generative
+    reasoning model and contrasts it with token-based generative
+    models.</p>
+    <h2 id="generative-output-cognitive-programs">Generative Output:
+    Cognitive Programs</h2>
+    <p>A cognitive program is a structured object composed of:</p>
+    <ul>
+    <li><p>a sequence of domain-valid actions,</p></li>
+    <li><p>intermediate states,</p></li>
+    <li><p>evaluator feedback,</p></li>
+    <li><p>refinement steps,</p></li>
+    <li><p>arbitration decisions,</p></li>
+    <li><p>termination conditions.</p></li>
+    </ul>
+    <p>Unlike token sequences, cognitive programs are:</p>
+    <ul>
+    <li><p><strong>typed</strong>: each element has a domain-specific
+    type,</p></li>
+    <li><p><strong>validated</strong>: every action is checked by domain
+    interfaces,</p></li>
+    <li><p><strong>executable</strong>: programs can be run
+    deterministically,</p></li>
+    <li><p><strong>inspectable</strong>: every step is recorded and
+    auditable.</p></li>
+    </ul>
+    <p>This makes Paged-PRE-CAS a generative model in the computational
+    sense, not the linguistic one.</p>
+    <h2 id="generative-process-pre-cas-recursion">Generative Process:
+    PRE-CAS Recursion</h2>
+    <p>The generative process unfolds through recursive PRE-CAS
+    cycles:</p>
+    <ol>
+    <li><p><strong>Propose</strong>: generate candidate cognitive steps
+    or partial programs.</p></li>
+    <li><p><strong>Evaluate</strong>: compute CAS vectors for each
+    candidate.</p></li>
+    <li><p><strong>Refine</strong>: improve candidates based on
+    evaluator feedback.</p></li>
+    <li><p><strong>Arbitrate</strong>: select the best
+    candidate.</p></li>
+    </ol>
+    <p>Each iteration extends or modifies the cognitive program. The
+    recursion continues until:</p>
+    <ul>
+    <li><p>a goal state is reached,</p></li>
+    <li><p>evaluators converge,</p></li>
+    <li><p>recursion limits are reached,</p></li>
+    <li><p>disagreement triggers an abort.</p></li>
+    </ul>
+    <p>The result is a complete, domain-valid cognitive program.</p>
+    <h2 id="generative-model-without-parametric-learning">Generative
+    Model Without Parametric Learning</h2>
+    <p>Paged-PRE-CAS is generative but not parametric. It does not rely
+    on:</p>
+    <ul>
+    <li><p>neural weights,</p></li>
+    <li><p>gradient descent,</p></li>
+    <li><p>token prediction,</p></li>
+    <li><p>statistical correlations.</p></li>
+    </ul>
+    <p>Instead, generation emerges from:</p>
+    <ul>
+    <li><p>explicit search,</p></li>
+    <li><p>domain heuristics,</p></li>
+    <li><p>evaluator feedback,</p></li>
+    <li><p>structural recursion,</p></li>
+    <li><p>deterministic arbitration.</p></li>
+    </ul>
+    <p>This makes the system fully transparent and governable.</p>
+    <h2 id="comparison-with-token-based-generative-models">Comparison
+    with Token-Based Generative Models</h2>
+    <p>Token-based generative models (LLMs) generate sequences of tokens
+    based on statistical patterns. Their generative process is:</p>
+    <ul>
+    <li><p>implicit,</p></li>
+    <li><p>entangled,</p></li>
+    <li><p>opaque,</p></li>
+    <li><p>non-deterministic,</p></li>
+    <li><p>difficult to govern.</p></li>
+    </ul>
+    <p>Paged-PRE-CAS differs fundamentally:</p>
+    <ul>
+    <li><p>it generates structured cognitive programs, not
+    text,</p></li>
+    <li><p>its generative process is explicit and algorithmic,</p></li>
+    <li><p>every step is traceable and auditable,</p></li>
+    <li><p>domain boundaries constrain generation,</p></li>
+    <li><p>evaluators provide orthogonal epistemic guidance.</p></li>
+    </ul>
+    <p>This distinction is central to the architecture’s safety and
+    modularity.</p>
+    <h2 id="generative-diversity-through-plural-evaluators">Generative
+    Diversity Through Plural Evaluators</h2>
+    <p>Plural evaluators (CAS-N) introduce diversity into the generative
+    process:</p>
+    <ul>
+    <li><p>different evaluators explore different cognitive
+    trajectories,</p></li>
+    <li><p>disagreement signals uncertainty or unsafe states,</p></li>
+    <li><p>consensus ensures stability,</p></li>
+    <li><p>ensembles of reasoning cores provide additional
+    diversity.</p></li>
+    </ul>
+    <p>Generative diversity is therefore structural rather than
+    stochastic.</p>
+    <h2 id="execution-of-generated-programs">Execution of Generated
+    Programs</h2>
+    <p>Once a cognitive program is generated, it is executed by a
+    deterministic script engine. This ensures:</p>
+    <ul>
+    <li><p>reproducibility across runs,</p></li>
+    <li><p>independence from neural variability,</p></li>
+    <li><p>strict adherence to domain constraints,</p></li>
+    <li><p>full traceability for governance.</p></li>
+    </ul>
+    <p>Execution is separate from generation, providing an additional
+    layer of safety.</p>
+    <h2 id="why-this-constitutes-a-generative-reasoning-model">Why This
+    Constitutes a Generative Reasoning Model</h2>
+    <p>Paged-PRE-CAS satisfies the criteria for a generative model:</p>
+    <ul>
+    <li><p>it produces structured outputs,</p></li>
+    <li><p>its outputs are novel but domain-valid,</p></li>
+    <li><p>its generative process is recursive and
+    constructive,</p></li>
+    <li><p>it can generate arbitrarily long cognitive programs,</p></li>
+    <li><p>it can generalize across tasks within a domain.</p></li>
+    </ul>
+    <p>However, it does so through explicit reasoning rather than
+    statistical prediction. This makes it a generative reasoning model:
+    a system that generates solutions through structured cognitive
+    processes rather than token-level correlations.</p>
+    <h1 id="safety-analysis">Safety Analysis</h1>
+    <p>Safety in AGI cannot be achieved through behavioural heuristics,
+    alignment patches, or post-hoc interpretability tools. It must be
+    embedded directly into the architecture. This section analyzes how
+    the structural components of the Paged-PRE-CAS framework—Paging,
+    PRE, CAS, CAS-N, and domain-bound AGIs—collectively enforce safety
+    guarantees that are unachievable in monolithic or agent-based
+    systems.</p>
+    <h2 id="structural-vs.-behavioural-safety">Structural vs.
+    Behavioural Safety</h2>
+    <p>Most contemporary AI safety approaches rely on behavioural
+    methods:</p>
+    <ul>
+    <li><p>reinforcement learning from human feedback,</p></li>
+    <li><p>prompt-based guardrails,</p></li>
+    <li><p>post-hoc filtering,</p></li>
+    <li><p>adversarial training,</p></li>
+    <li><p>interpretability tools applied after training.</p></li>
+    </ul>
+    <p>These methods attempt to constrain the behaviour of opaque models
+    whose internal representations remain inaccessible. They cannot
+    guarantee safety under distribution shift, recursive reasoning, or
+    long-horizon planning.</p>
+    <p>In contrast, Paged-PRE-CAS provides <em>structural safety</em>:
+    safety emerges from the architecture itself, not from behavioural
+    tuning.</p>
+    <h2 id="domain-isolation-as-a-primary-safety-mechanism">Domain
+    Isolation as a Primary Safety Mechanism</h2>
+    <p>Paging enforces strict domain boundaries. This prevents:</p>
+    <ul>
+    <li><p>cross-domain interference,</p></li>
+    <li><p>invalid action generation,</p></li>
+    <li><p>representational drift,</p></li>
+    <li><p>unsafe generalization,</p></li>
+    <li><p>domain mixing during recursive reasoning.</p></li>
+    </ul>
+    <p>Because each domain-bound AGI defines its own action vocabulary,
+    constraints, and evaluators, the system cannot generate actions
+    outside the domain’s permitted space. This eliminates entire classes
+    of unsafe behaviour.</p>
+    <h2 id="bounded-recursion-and-controlled-reasoning-depth">Bounded
+    Recursion and Controlled Reasoning Depth</h2>
+    <p>Recursive reasoning is essential for AGI but dangerous when
+    unbounded. PRE enforces:</p>
+    <ul>
+    <li><p>fixed recursion depth limits,</p></li>
+    <li><p>evaluator-driven termination,</p></li>
+    <li><p>disagreement-triggered aborts,</p></li>
+    <li><p>deterministic control flow.</p></li>
+    </ul>
+    <p>These constraints ensure that reasoning cannot spiral into unsafe
+    or unbounded trajectories. Every recursive step is explicit, logged,
+    and auditable.</p>
+    <h2 id="plural-evaluators-and-epistemic-diversity">Plural Evaluators
+    and Epistemic Diversity</h2>
+    <p>CAS-N introduces multiple evaluators with independent error
+    geometries. This provides:</p>
+    <ul>
+    <li><p><strong>epistemic redundancy</strong>: no single evaluator
+    can dominate,</p></li>
+    <li><p><strong>uncertainty detection</strong>: disagreement signals
+    instability,</p></li>
+    <li><p><strong>automatic aborts</strong>: unsafe states halt the
+    reasoning process,</p></li>
+    <li><p><strong>robustness</strong>: evaluators catch each other’s
+    blind spots.</p></li>
+    </ul>
+    <p>Plurality is a structural safety mechanism: it prevents attractor
+    collapse and ensures that unsafe or incoherent candidates are
+    rejected early.</p>
+    <h2 id="deterministic-arbitration">Deterministic Arbitration</h2>
+    <p>Arbitration is deterministic and transparent. It does not rely
+    on:</p>
+    <ul>
+    <li><p>stochastic sampling,</p></li>
+    <li><p>neural variability,</p></li>
+    <li><p>implicit preferences encoded in weights.</p></li>
+    </ul>
+    <p>Instead, arbitration uses:</p>
+    <ul>
+    <li><p>explicit CAS vectors,</p></li>
+    <li><p>weighted aggregation,</p></li>
+    <li><p>consensus rules,</p></li>
+    <li><p>policy constraints.</p></li>
+    </ul>
+    <p>This ensures that decision-making is reproducible and
+    auditable.</p>
+    <h2 id="script-engine-execution-guarantees">Script Engine Execution
+    Guarantees</h2>
+    <p>Generated cognitive programs are executed by a deterministic
+    script engine. This provides:</p>
+    <ul>
+    <li><p><strong>reproducibility</strong>: identical inputs yield
+    identical outputs,</p></li>
+    <li><p><strong>auditability</strong>: every step is logged,</p></li>
+    <li><p><strong>constraint enforcement</strong>: only domain-valid
+    actions can be executed,</p></li>
+    <li><p><strong>sandboxing</strong>: execution cannot escape domain
+    boundaries.</p></li>
+    </ul>
+    <p>The script engine acts as a final safety layer, ensuring that
+    even if reasoning produces an unsafe candidate, it cannot be
+    executed.</p>
+    <h2 id="governance-through-observability-1">Governance Through
+    Observability</h2>
+    <p>Cloud-native deployment provides built-in observability:</p>
+    <ul>
+    <li><p>structured logs for every reasoning step,</p></li>
+    <li><p>metrics for recursion depth and evaluator
+    disagreement,</p></li>
+    <li><p>traces for end-to-end workflows,</p></li>
+    <li><p>policy layers for domain access and recursion
+    limits.</p></li>
+    </ul>
+    <p>Governance is therefore not an external process but an
+    architectural property.</p>
+    <h2 id="comparison-with-monolithic-llm-safety">Comparison with
+    Monolithic LLM Safety</h2>
+    <p>Monolithic LLMs cannot provide structural safety because:</p>
+    <ul>
+    <li><p>their internal representations are opaque,</p></li>
+    <li><p>their action space is unbounded,</p></li>
+    <li><p>their reasoning is implicit,</p></li>
+    <li><p>their behaviour is non-deterministic,</p></li>
+    <li><p>their safety depends on behavioural heuristics.</p></li>
+    </ul>
+    <p>Paged-PRE-CAS avoids these limitations entirely by:</p>
+    <ul>
+    <li><p>externalizing domain logic,</p></li>
+    <li><p>enforcing domain boundaries,</p></li>
+    <li><p>using explicit reasoning loops,</p></li>
+    <li><p>separating evaluation dimensions,</p></li>
+    <li><p>ensuring deterministic execution.</p></li>
+    </ul>
+    <h2 id="failure-modes-and-mitigations">Failure Modes and
+    Mitigations</h2>
+    <p>The architecture mitigates common AGI failure modes:</p>
+    <h4 id="hallucination">Hallucination</h4>
+    <p>Prevented by domain constraints and evaluator checks.</p>
+    <h4 id="runaway-recursion">Runaway recursion</h4>
+    <p>Prevented by bounded recursion and evaluator-driven
+    termination.</p>
+    <h4 id="unsafe-generalization">Unsafe generalization</h4>
+    <p>Prevented by domain isolation and explicit action
+    vocabularies.</p>
+    <h4 id="mode-collapse">Mode collapse</h4>
+    <p>Prevented by evaluator plurality and ensemble reasoning.</p>
+    <h4 id="opaque-decision-making">Opaque decision-making</h4>
+    <p>Prevented by explicit reasoning traces and deterministic
+    arbitration.</p>
+    <h2 id="summary-of-safety-guarantees">Summary of Safety
+    Guarantees</h2>
+    <p>Paged-PRE-CAS provides the following structural guarantees:</p>
+    <ul>
+    <li><p>domain isolation,</p></li>
+    <li><p>bounded recursion,</p></li>
+    <li><p>evaluator plurality,</p></li>
+    <li><p>deterministic arbitration,</p></li>
+    <li><p>explicit reasoning,</p></li>
+    <li><p>transparent state transitions,</p></li>
+    <li><p>deterministic execution,</p></li>
+    <li><p>full observability and governance.</p></li>
+    </ul>
+    <p>These guarantees make the architecture inherently safe,
+    transparent, and governable—properties that cannot be achieved
+    through monolithic scaling or agent-based orchestration.</p>
+    <h1 id="discussion">Discussion</h1>
+    <p>The architecture presented in this paper proposes a structural
+    alternative to monolithic language-model-based AI systems. Rather
+    than relying on emergent reasoning within a single parameter space,
+    it decomposes cognition into explicit, modular, and governable
+    components. This section reflects on the broader implications of the
+    Paged-PRE-CAS framework, its relationship to existing paradigms, and
+    its potential impact on the development of safe and scalable
+    AGI.</p>
+    <h2 id="a-shift-from-parametric-to-structural-intelligence">A Shift
+    from Parametric to Structural Intelligence</h2>
+    <p>Most contemporary AI systems derive their capabilities from
+    parametric learning: knowledge and reasoning strategies are encoded
+    implicitly in neural weights. This approach has produced remarkable
+    results but suffers from fundamental limitations, including opacity,
+    entanglement, and lack of governance.</p>
+    <p>Paged-PRE-CAS represents a shift toward <em>structural
+    intelligence</em>, where:</p>
+    <ul>
+    <li><p>reasoning is explicit rather than emergent,</p></li>
+    <li><p>evaluation is orthogonal and plural rather than
+    entangled,</p></li>
+    <li><p>domain logic is externalized rather than embedded in
+    weights,</p></li>
+    <li><p>safety is architectural rather than behavioural.</p></li>
+    </ul>
+    <p>This shift parallels the evolution of software engineering from
+    monolithic programs to microservice architectures: modularity,
+    observability, and replaceability become first-class properties.</p>
+    <h2 id="implications-for-agi-safety">Implications for AGI
+    Safety</h2>
+    <p>The architecture demonstrates that AGI safety does not require
+    solving alignment in the traditional sense. Instead, safety can
+    emerge from:</p>
+    <ul>
+    <li><p>domain isolation,</p></li>
+    <li><p>bounded recursion,</p></li>
+    <li><p>evaluator plurality,</p></li>
+    <li><p>deterministic arbitration,</p></li>
+    <li><p>explicit reasoning traces,</p></li>
+    <li><p>cloud-native observability.</p></li>
+    </ul>
+    <p>These mechanisms provide structural guarantees that are
+    impossible to achieve in monolithic LLMs or agent-based systems. The
+    architecture therefore reframes AGI safety as a problem of
+    <em>system design</em> rather than <em>behavioural
+    alignment</em>.</p>
+    <h2 id="implications-for-agi-capability">Implications for AGI
+    Capability</h2>
+    <p>Although the architecture is safety-first, it also provides a
+    path toward scalable capability:</p>
+    <ul>
+    <li><p>domain-bound AGIs can be added incrementally,</p></li>
+    <li><p>search engines provide deep reasoning without parametric
+    scaling,</p></li>
+    <li><p>ensembles of reasoning cores provide robustness and
+    diversity,</p></li>
+    <li><p>mediator-LLMs enable natural language interaction without
+    entangling cognition.</p></li>
+    </ul>
+    <p>Capability emerges from the composition of many small
+    intelligences rather than from scaling a single model. This approach
+    is inherently extensible and avoids the diminishing returns of
+    monolithic scaling.</p>
+    <h2 id="novelty-of-the-architecture">Novelty of the
+    Architecture</h2>
+    <p>The architecture introduces several novel concepts:</p>
+    <ul>
+    <li><p><strong>Paged cognition</strong>: domain decomposition of the
+    action space.</p></li>
+    <li><p><strong>PRE</strong>: a minimal, explicit recursive reasoning
+    kernel.</p></li>
+    <li><p><strong>CAS</strong>: orthogonal epistemic evaluation
+    vectors.</p></li>
+    <li><p><strong>CAS-N</strong>: plural evaluators with
+    disagreement-based aborts.</p></li>
+    <li><p><strong>Domain-bound AGIs</strong>: atomic cognitive units
+    with explicit interfaces.</p></li>
+    <li><p><strong>Generative reasoning</strong>: generation of
+    cognitive programs rather than tokens.</p></li>
+    <li><p><strong>Cloud-native cognition</strong>: AGI as a distributed
+    microservice fabric.</p></li>
+    </ul>
+    <p>These components combine into a coherent architecture that
+    differs fundamentally from both LLM-based systems and classical
+    cognitive architectures.</p>
+    <h2 id="relationship-to-existing-paradigms">Relationship to Existing
+    Paradigms</h2>
+    <p>The architecture bridges several traditions:</p>
+    <ul>
+    <li><p>from cognitive architectures: explicit structure and
+    modularity,</p></li>
+    <li><p>from symbolic AI: deterministic reasoning and
+    search,</p></li>
+    <li><p>from modern AI: neural semantic interfaces,</p></li>
+    <li><p>from distributed systems: microservices and
+    observability,</p></li>
+    <li><p>from safety engineering: structural constraints and
+    governance.</p></li>
+    </ul>
+    <p>However, it is not reducible to any of these paradigms. Its
+    novelty lies in the integration of these ideas into a unified,
+    safety-first AGI architecture.</p>
+    <h2 id="broader-implications">Broader Implications</h2>
+    <p>If adopted, this architecture could reshape how AGI systems are
+    built:</p>
+    <ul>
+    <li><p>AGI development becomes an engineering discipline rather than
+    a scaling race.</p></li>
+    <li><p>Safety becomes a property of system design rather than
+    behavioural tuning.</p></li>
+    <li><p>Reasoning becomes explicit, inspectable, and
+    auditable.</p></li>
+    <li><p>Domain expertise becomes modular and replaceable.</p></li>
+    <li><p>LLMs become optional semantic engines rather than cognitive
+    cores.</p></li>
+    </ul>
+    <p>This reframing has implications for research, industry,
+    governance, and public understanding of AGI.</p>
+    <h1 id="limitations-and-open-questions">Limitations and Open
+    Questions</h1>
+    <p>Although the Paged-PRE-CAS architecture provides a structurally
+    safe and modular foundation for AGI, several limitations and open
+    questions remain. These limitations are not flaws of the
+    architecture but areas where further engineering, empirical
+    validation, or theoretical refinement is required. This section
+    outlines the most important challenges and opportunities for future
+    research.</p>
+    <h2 id="engineering-complexity-and-system-integration">Engineering
+    Complexity and System Integration</h2>
+    <p>The architecture decomposes cognition into many interacting
+    components: reasoning cores, domain-bound AGIs, evaluators, search
+    engines, memory services, and mediator-LLMs. While this modularity
+    is essential for safety and governance, it introduces engineering
+    complexity.</p>
+    <p>Open questions include:</p>
+    <ul>
+    <li><p>How should large-scale deployments orchestrate thousands of
+    reasoning cores?</p></li>
+    <li><p>What are the optimal communication protocols between
+    cognitive microservices?</p></li>
+    <li><p>How can latency be minimized without compromising
+    observability?</p></li>
+    </ul>
+    <p>These questions are primarily engineering challenges rather than
+    conceptual limitations.</p>
+    <h2 id="scaling-domain-libraries">Scaling Domain Libraries</h2>
+    <p>The architecture assumes a library of domain-bound AGIs. While
+    each domain module is small and replaceable, building and
+    maintaining a large library raises practical questions:</p>
+    <ul>
+    <li><p>How many domains are required for broad real-world
+    capability?</p></li>
+    <li><p>What is the optimal granularity of domain
+    decomposition?</p></li>
+    <li><p>How should domain modules be versioned, validated, and
+    governed?</p></li>
+    </ul>
+    <p>The architecture supports optional self-expansion, but governance
+    and validation remain open research areas.</p>
+    <h2 id="evaluator-design-and-epistemic-geometry">Evaluator Design
+    and Epistemic Geometry</h2>
+    <p>CAS and CAS-N rely on evaluators with orthogonal error
+    geometries. Designing such evaluators is non-trivial:</p>
+    <ul>
+    <li><p>How should epistemic dimensions be selected for new
+    domains?</p></li>
+    <li><p>How can evaluator independence be measured or
+    guaranteed?</p></li>
+    <li><p>What disagreement thresholds should trigger aborts?</p></li>
+    </ul>
+    <p>These questions require empirical study across diverse
+    domains.</p>
+    <h2 id="search-engine-selection-and-optimization">Search Engine
+    Selection and Optimization</h2>
+    <p>Domain-bound AGIs rely on externalized search engines. While this
+    provides transparency and determinism, it raises questions
+    about:</p>
+    <ul>
+    <li><p>search engine selection for complex or hybrid
+    domains,</p></li>
+    <li><p>heuristic design and optimization,</p></li>
+    <li><p>balancing search depth with computational cost.</p></li>
+    </ul>
+    <p>Search is a powerful tool, but its performance depends on
+    domain-specific heuristics that may require expert tuning.</p>
+    <h2 id="mediator-llm-reliability">Mediator-LLM Reliability</h2>
+    <p>Although the mediator-LLM is not a cognitive core, it remains a
+    potential source of error:</p>
+    <ul>
+    <li><p>misclassification of domains,</p></li>
+    <li><p>incorrect translation of natural language into structured
+    states,</p></li>
+    <li><p>ambiguity in multi-domain tasks.</p></li>
+    </ul>
+    <p>These issues can be mitigated through validation layers, but they
+    remain open engineering questions.</p>
+    <h2 id="emergent-behaviour-in-large-scale-systems">Emergent
+    Behaviour in Large-Scale Systems</h2>
+    <p>Even though the architecture is designed to minimize emergent
+    behaviour, large-scale compositions of domain-bound AGIs may exhibit
+    unexpected interactions:</p>
+    <ul>
+    <li><p>How do many domain modules interact in long-horizon
+    tasks?</p></li>
+    <li><p>Can emergent meta-strategies arise across domains?</p></li>
+    <li><p>How should cross-domain workflows be governed at
+    scale?</p></li>
+    </ul>
+    <p>These questions require empirical study in real-world
+    deployments.</p>
+    <h2 id="humanai-interaction-and-usability">Human–AI Interaction and
+    Usability</h2>
+    <p>The architecture provides structural safety, but usability and
+    human–AI interaction remain open questions:</p>
+    <ul>
+    <li><p>How should cognitive programs be visualized for human
+    oversight?</p></li>
+    <li><p>What interfaces best support debugging and
+    governance?</p></li>
+    <li><p>How can users understand and trust explicit reasoning
+    traces?</p></li>
+    </ul>
+    <p>These questions lie at the intersection of AI, HCI, and cognitive
+    ergonomics.</p>
+    <h2 id="theoretical-foundations">Theoretical Foundations</h2>
+    <p>Finally, several theoretical questions remain open:</p>
+    <ul>
+    <li><p>What is the minimal set of epistemic dimensions required for
+    general reasoning?</p></li>
+    <li><p>How does PRE recursion relate to classical models of
+    deliberation and planning?</p></li>
+    <li><p>Can domain-bound AGIs be formally composed into a unified
+    cognitive theory?</p></li>
+    </ul>
+    <p>These questions invite further research into the theoretical
+    underpinnings of structural intelligence.</p>
+    <h1 id="testable-predictions">Testable Predictions</h1>
+    <p>A scientific architecture must make claims that can be
+    empirically tested and potentially falsified. Although Paged-PRE-CAS
+    is primarily a structural and engineering framework, it nonetheless
+    yields a number of concrete predictions about system behaviour,
+    performance, safety, and epistemic dynamics. These predictions can
+    be evaluated through controlled experiments across diverse domains
+    and implementations.</p>
+    <h2
+    id="prediction-1-cas-n-disagreement-correlates-with-epistemic-uncertainty">Prediction
+    1: CAS-N Disagreement Correlates with Epistemic Uncertainty</h2>
+    <p>The architecture predicts that evaluator disagreement is a
+    reliable indicator of uncertainty:</p>
+    <ul>
+    <li><p>high disagreement should correlate with ambiguous or unsafe
+    states,</p></li>
+    <li><p>low disagreement should correlate with stable,
+    high-confidence reasoning,</p></li>
+    <li><p>disagreement spikes should precede reasoning failures or
+    invalid candidates.</p></li>
+    </ul>
+    <p>This prediction can be tested by measuring evaluator variance
+    across tasks with known difficulty or ambiguity.</p>
+    <h2
+    id="prediction-2-domain-isolation-eliminates-cross-domain-error-propagation">Prediction
+    2: Domain Isolation Eliminates Cross-Domain Error Propagation</h2>
+    <p>Paging predicts that strict domain boundaries prevent
+    cross-domain interference:</p>
+    <ul>
+    <li><p>errors in one domain should not affect reasoning in
+    another,</p></li>
+    <li><p>invalid cross-domain actions should never be
+    generated,</p></li>
+    <li><p>domain-specific evaluators should reject mixed-domain states
+    with near-perfect accuracy.</p></li>
+    </ul>
+    <p>This can be tested by intentionally injecting cross-domain
+    perturbations and measuring system resilience.</p>
+    <h2
+    id="prediction-3-pre-recursion-depth-exhibits-diminishing-returns">Prediction
+    3: PRE Recursion Depth Exhibits Diminishing Returns</h2>
+    <p>The architecture predicts that increasing PRE recursion depth
+    improves solution quality only up to a shallow threshold. Empirical
+    observations in both discrete domains and token-generation models
+    suggest:</p>
+    <ul>
+    <li><p><span class="math inline"><em>k</em> = 1</span> or <span
+    class="math inline"><em>k</em> = 2</span> is sufficient for most
+    tasks,</p></li>
+    <li><p><span class="math inline"><em>k</em> = 4</span> can provide
+    additional refinement in more complex cases,</p></li>
+    <li><p>deeper recursion yields rapidly diminishing returns,</p></li>
+    <li><p>excessive depth increases computational cost without
+    improving quality.</p></li>
+    </ul>
+    <p>This prediction can be tested by varying recursion depth across
+    planning, optimization, and generation tasks and measuring
+    improvements in evaluator scores, solution optimality, and
+    consistency.</p>
+    <h2
+    id="prediction-4-externalized-search-outperforms-llm-simulated-search">Prediction
+    4: Externalized Search Outperforms LLM-Simulated Search</h2>
+    <p>Because domain-bound AGIs use algorithmic search rather than
+    linguistic simulation, the architecture predicts:</p>
+    <ul>
+    <li><p>search-based reasoning should outperform LLM-generated
+    trajectories,</p></li>
+    <li><p>search should produce consistent and reproducible
+    results,</p></li>
+    <li><p>LLM-based search should show higher variance and more
+    hallucinated states.</p></li>
+    </ul>
+    <p>This can be tested by comparing search engines with LLM-generated
+    plans in identical domains.</p>
+    <h2
+    id="prediction-5-arbitration-controls-rather-than-eliminates-variance">Prediction
+    5: Arbitration Controls, Rather Than Eliminates, Variance</h2>
+    <p>The architecture predicts that arbitration provides explicit
+    control over output variance. In its default deterministic mode,
+    arbitration:</p>
+    <ul>
+    <li><p>reduces variance across repeated runs,</p></li>
+    <li><p>improves reproducibility,</p></li>
+    <li><p>eliminates stochastic drift in long-horizon tasks.</p></li>
+    </ul>
+    <p>However, when a near-optimal threshold is enabled (e.g.,
+    selecting any candidate within 98% of the top candidate score), the
+    arbiter introduces <em>controlled variation</em>. This yields:</p>
+    <ul>
+    <li><p>increased diversity of cognitive programs,</p></li>
+    <li><p>bounded and predictable variance,</p></li>
+    <li><p>no hallucinated or unsafe deviations, since all candidates
+    remain domain-valid.</p></li>
+    </ul>
+    <p>This prediction can be tested by comparing deterministic
+    arbitration with threshold-based arbitration and measuring variance,
+    diversity, and safety across repeated runs.</p>
+    <h2
+    id="prediction-6-ensembles-of-reasoning-cores-improve-robustness">Prediction
+    6: Ensembles of Reasoning Cores Improve Robustness</h2>
+    <p>Plural reasoning predicts that ensembles:</p>
+    <ul>
+    <li><p>reduce failure rates,</p></li>
+    <li><p>improve solution quality,</p></li>
+    <li><p>provide early warning signals through divergence across
+    cores.</p></li>
+    </ul>
+    <p>This can be tested by comparing single-core and multi-core
+    configurations.</p>
+    <h2
+    id="prediction-7-script-engine-execution-eliminates-hallucination">Prediction
+    7: Script Engine Execution Eliminates Hallucination</h2>
+    <p>Because cognitive programs are executed by a deterministic script
+    engine, the architecture predicts:</p>
+    <ul>
+    <li><p>hallucinated actions should be structurally
+    impossible,</p></li>
+    <li><p>invalid actions should be rejected before execution,</p></li>
+    <li><p>execution traces should be fully reproducible.</p></li>
+    </ul>
+    <p>This can be tested by attempting to induce hallucinated or
+    invalid actions during execution.</p>
+    <h2
+    id="prediction-8-mediator-llm-errors-are-contained-and-non-catastrophic">Prediction
+    8: Mediator-LLM Errors Are Contained and Non-Catastrophic</h2>
+    <p>Because the mediator-LLM is not a cognitive core, the
+    architecture predicts:</p>
+    <ul>
+    <li><p>mediator errors should not propagate into reasoning,</p></li>
+    <li><p>domain misclassification should be detectable by domain
+    validators,</p></li>
+    <li><p>incorrect translations should be caught by evaluators or
+    domain constraints.</p></li>
+    </ul>
+    <p>This can be tested by injecting controlled translation
+    errors.</p>
+    <h2
+    id="prediction-9-domain-bound-agis-scale-linearly-with-domain-count">Prediction
+    9: Domain-Bound AGIs Scale Linearly with Domain Count</h2>
+    <p>The architecture predicts that capability scales with the number
+    of domain modules:</p>
+    <ul>
+    <li><p>adding new domains should increase capability without
+    retraining,</p></li>
+    <li><p>performance should degrade gracefully when domains are
+    removed,</p></li>
+    <li><p>scaling should be linear rather than exponential.</p></li>
+    </ul>
+    <p>This can be tested by incrementally expanding or contracting
+    domain libraries.</p>
+    <h2
+    id="prediction-10-observability-enables-predictable-failure-modes">Prediction
+    10: Observability Enables Predictable Failure Modes</h2>
+    <p>Because all reasoning steps are logged and observable, the
+    architecture predicts:</p>
+    <ul>
+    <li><p>failure modes should be predictable and diagnosable,</p></li>
+    <li><p>evaluator disagreement should precede failure,</p></li>
+    <li><p>recursion-depth saturation should correlate with task
+    difficulty.</p></li>
+    </ul>
+    <p>This can be tested by analyzing logs across large-scale
+    deployments.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper introduced Paged-PRE-CAS, a modular and structurally
+    safe architecture for domain-bound AGI. Unlike monolithic language
+    models or agent-based systems, the architecture does not rely on
+    emergent reasoning, implicit representations, or unbounded action
+    spaces. Instead, it decomposes cognition into explicit, inspectable,
+    and governable components: domain-bound AGIs, PRE-based recursive
+    reasoning, CAS-based epistemic evaluation, plural evaluators,
+    deterministic arbitration, and cloud-native orchestration.</p>
+    <p>The central contribution of the architecture is the shift from
+    <em>parametric intelligence</em> to <em>structural
+    intelligence</em>. Reasoning is implemented as an explicit
+    computational process, evaluation is orthogonal and plural, and
+    domain logic is externalized into modular interfaces. Safety emerges
+    from architectural constraints—domain isolation, bounded recursion,
+    evaluator plurality, deterministic execution—rather than behavioural
+    heuristics or alignment patches.</p>
+    <p>The architecture also demonstrates that AGI capability can scale
+    without monolithic models. Domain-bound AGIs provide atomic
+    cognitive units that can be added, replaced, or upgraded
+    independently. Search engines provide deep reasoning without
+    parametric scaling. Mediator-LLMs enable natural language
+    interaction without entangling cognition. Cloud-native deployment
+    provides observability, reproducibility, and governance.</p>
+    <p>Several limitations and open questions remain, particularly in
+    evaluator design, domain library scaling, and large-scale
+    orchestration. However, these challenges are engineering problems
+    rather than conceptual obstacles. The architecture is implementable
+    today, as demonstrated by the accompanying discrete state-transition
+    domains and reasoning engines.</p>
+    <p>Ultimately, Paged-PRE-CAS reframes AGI development as a systems
+    engineering discipline. Cognition becomes modular, explicit, and
+    inspectable. Safety becomes structural. Capability becomes
+    compositional. And general intelligence emerges not from scaling a
+    single model but from the coordinated interaction of many small,
+    coherent intelligences.</p>
+    <p>The architecture therefore offers a practical, extensible, and
+    governable path toward safe AGI— one that is compatible with current
+    technology, grounded in explicit computation, and aligned with the
+    principles of transparency, modularity, and structural safety.</p>
+    <h1 id="precas-overview-table">PRE–CAS Overview Table</h1>
+    <table>
+    <caption>Concise overview of the PRE–CAS modular reasoning
+    architecture.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Component</strong></th>
+    <th style="text-align: left;"><strong>Input</strong></th>
+    <th style="text-align: left;"><strong>Output</strong></th>
+    <th style="text-align: left;"><strong>Role</strong></th>
+    <th style="text-align: left;"><strong>Guarantees</strong></th>
+    <th style="text-align: left;"><strong>Variations</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Paging</strong></td>
+    <td style="text-align: left;">Context <span
+    class="math inline"><em>c</em></span></td>
+    <td style="text-align: left;">Page index <span
+    class="math inline"><em>p</em></span></td>
+    <td style="text-align: left;">Selects domain for next action</td>
+    <td style="text-align: left;">Deterministic routing; domain
+    coherence</td>
+    <td style="text-align: left;">Rule-based, learned, hybrid</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Expert</strong></td>
+    <td style="text-align: left;"><span
+    class="math inline"><em>c</em></span>, <span
+    class="math inline"><em>a</em><sub>prev</sub></span></td>
+    <td style="text-align: left;">Proposal logits / action</td>
+    <td style="text-align: left;">Generates actions within one
+    domain</td>
+    <td style="text-align: left;">No cross-domain errors</td>
+    <td style="text-align: left;">Single or multiple experts per
+    page</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>PRE–Propose</strong></td>
+    <td style="text-align: left;"><span
+    class="math inline">(<em>c</em>,<em>a</em><sub>prev</sub>,⌀,⌀)</span></td>
+    <td style="text-align: left;">Initial proposal <span
+    class="math inline"><em>a</em><sub>0</sub></span></td>
+    <td style="text-align: left;">Starts refinement loop</td>
+    <td style="text-align: left;">Traceable, domain-bounded
+    proposal</td>
+    <td style="text-align: left;">Neural, symbolic, heuristic</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>PRE–Refine</strong></td>
+    <td style="text-align: left;"><span
+    class="math inline">(<em>c</em>,<em>a</em><sub>prev</sub>,<em>a</em><sub><em>j</em></sub>,<em>e</em><sub><em>j</em></sub>)</span></td>
+    <td style="text-align: left;">Refined <span
+    class="math inline"><em>a</em><sub><em>j</em> + 1</sub></span></td>
+    <td style="text-align: left;">Improves proposal using evaluator
+    feedback</td>
+    <td style="text-align: left;">Corrects weak proposals</td>
+    <td style="text-align: left;">Any refinement depth <span
+    class="math inline"><em>k</em></span></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Evaluators</strong></td>
+    <td style="text-align: left;">Action <span
+    class="math inline"><em>a</em></span>, context <span
+    class="math inline"><em>c</em></span></td>
+    <td style="text-align: left;">Score vector <span
+    class="math inline"><em>e</em></span></td>
+    <td style="text-align: left;">Assess orthogonal constraints</td>
+    <td style="text-align: left;">Independent signals; full
+    traceability</td>
+    <td style="text-align: left;">Heuristic, learned, hybrid</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Filtering</strong></td>
+    <td style="text-align: left;">Candidates <span
+    class="math inline">(<em>a</em><sub><em>j</em></sub>,<em>e</em><sub><em>j</em></sub>)</span></td>
+    <td style="text-align: left;">Filtered set <span
+    class="math inline"><em>F</em></span></td>
+    <td style="text-align: left;">Removes invalid / low-quality
+    actions</td>
+    <td style="text-align: left;">Hard constraints enforced</td>
+    <td style="text-align: left;">Threshold tuning; fallback rules</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Arbiter</strong></td>
+    <td style="text-align: left;">Filtered set <span
+    class="math inline"><em>F</em></span></td>
+    <td style="text-align: left;">Final action <span
+    class="math inline"><em>a</em><sub>final</sub></span></td>
+    <td style="text-align: left;">Selects best action with variation
+    control</td>
+    <td style="text-align: left;">Transparent scoring; bounded
+    diversity</td>
+    <td style="text-align: left;">Score clusters; sampling rules</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Ensemble</strong></td>
+    <td style="text-align: left;">Context <span
+    class="math inline"><em>c</em></span></td>
+    <td style="text-align: left;"><span
+    class="math inline">{<em>a</em><sub>1</sub>, …, <em>a</em><sub><em>M</em></sub>}</span></td>
+    <td style="text-align: left;">Parallel independent reasoning</td>
+    <td style="text-align: left;">Plurality; robustness; ecology</td>
+    <td style="text-align: left;">With/without global arbiter</td>
+    </tr>
+    </tbody>
+    </table>
+    <div class="tcolorbox">
+    <p>PRE–CAS is not a monolithic intelligence. It is a composition of
+    minds: independent experts, evaluators, and arbiters whose
+    coordinated interaction produces coherent reasoning.</p>
+    </div>
+    <h1 id="appendix:generative">Empirical Demonstration of
+    Paged-PRE-CAS as a Generative Reasoning Model</h1>
+    <p>This appendix presents a minimal generative micro-domain used to
+    empirically validate the Paged-PRE-CAS architecture. The purpose is
+    not to introduce a new model or dataset, but to demonstrate—under
+    fully transparent and controlled conditions—that:</p>
+    <ol>
+    <li><p>Paged-PRE-CAS functions as a generative reasoning
+    model,</p></li>
+    <li><p>each architectural component contributes measurably to
+    correctness and stability,</p></li>
+    <li><p>coherent, domain-valid sequences emerge from explicit
+    reasoning rather than statistical sampling.</p></li>
+    </ol>
+    <p>The micro-domain is intentionally small, interpretable, and
+    structurally constrained. It provides a clean environment in which
+    the behaviour of paging, PRE recursion, evaluator guidance,
+    filtering, and arbitration can be observed in isolation.</p>
+    <h2 id="micro-domain-setup">Micro-Domain Setup</h2>
+    <p>The generative domain consists of:</p>
+    <ul>
+    <li><p>a finite vocabulary partitioned into non-overlapping
+    <em>pages</em>,</p></li>
+    <li><p>a fixed-position context window,</p></li>
+    <li><p>lightweight input and output embeddings,</p></li>
+    <li><p>a set of orthogonal evaluators,</p></li>
+    <li><p>a deterministic script engine that executes generated
+    sequences.</p></li>
+    </ul>
+    <p>Each token belongs to exactly one page. Paging ensures that only
+    domain-valid tokens can be proposed at each step, enforcing
+    structural safety by design.</p>
+    <h2 id="generative-reasoning-loop">Generative Reasoning Loop</h2>
+    <p>Generation proceeds through the full Paged-PRE-CAS loop:</p>
+    <ol>
+    <li><p><strong>Paging</strong> selects the active domain
+    page.</p></li>
+    <li><p><strong>Propose</strong>: the page-expert produces an initial
+    candidate token.</p></li>
+    <li><p><strong>Evaluate</strong>: all evaluators score the candidate
+    along orthogonal dimensions.</p></li>
+    <li><p><strong>Refine</strong>: the expert receives evaluator
+    feedback and proposes improved alternatives.</p></li>
+    <li><p><strong>Filter</strong>: invalid candidates are removed
+    before selection.</p></li>
+    <li><p><strong>Arbitrate</strong>: the arbiter selects the final
+    token from the filtered candidate set.</p></li>
+    <li><p><strong>Execute</strong>: the token is appended to the
+    sequence by the script engine.</p></li>
+    </ol>
+    <p>A typical generation trace contains multiple refinement steps,
+    several candidate proposals per step, evaluator scores, filtering
+    decisions, and a final arbitration decision. All intermediate states
+    are logged and fully inspectable.</p>
+    <h1 id="ablation-studies">Ablation Studies</h1>
+    <p>To validate the contribution of each architectural component, we
+    perform controlled ablations within the micro-domain. All
+    experiments use the same vocabulary, paging structure, evaluators,
+    and training procedure unless otherwise noted.</p>
+    <h2 id="effect-of-refinement">Effect of Refinement</h2>
+    <p>We compare refinement depths <span
+    class="math inline"><em>k</em> = 0, 1, 2</span>.</p>
+    <ul>
+    <li><p><strong><span
+    class="math inline"><em>k</em> = 0</span></strong>: highly unstable
+    behaviour; very low diversity; the arbiter has too few
+    alternatives.</p></li>
+    <li><p><strong><span
+    class="math inline"><em>k</em> = 1</span></strong>: correctness and
+    diversity increase substantially; refinement corrects weak
+    proposals.</p></li>
+    <li><p><strong><span
+    class="math inline"><em>k</em> = 2</span></strong>: further
+    improvement with diminishing returns; refinement stabilizes
+    reasoning.</p></li>
+    </ul>
+    <p><strong>Conclusion:</strong> refinement is essential for
+    stability and correctness.</p>
+    <h2 id="effect-of-evaluators">Effect of Evaluators</h2>
+    <p>Evaluators are disabled individually to measure their
+    contribution.</p>
+    <h3 id="coherence-evaluator-disabled">Coherence Evaluator
+    Disabled</h3>
+    <p>Correctness decreases, diversity increases sharply, and semantic
+    drift appears. The coherence evaluator provides local semantic
+    continuity.</p>
+    <h3 id="style-evaluator-disabled">Style Evaluator Disabled</h3>
+    <p>Correctness remains high, but stylistic consistency disappears
+    and diversity increases. The style evaluator enforces CAS-guided
+    stylistic alignment.</p>
+    <h3 id="heuristic-structural-evaluators-disabled">Heuristic
+    Structural Evaluators Disabled</h3>
+    <p>Disabling actor, timing, or line-structure evaluators causes
+    correctness to collapse. Many sequences become structurally invalid
+    and are filtered out.</p>
+    <p><strong>Conclusion:</strong> evaluators are orthogonal and
+    essential; each governs a distinct dimension of correctness.</p>
+    <h2 id="effect-of-arbiter-threshold">Effect of Arbiter
+    Threshold</h2>
+    <p>The arbiter selects among high-scoring candidates using a score
+    threshold.</p>
+    <ul>
+    <li><p><strong>High threshold (e.g., 0.98)</strong>: correctness
+    high, diversity low, narrow attractors.</p></li>
+    <li><p><strong>Lower threshold (e.g., 0.60)</strong>: correctness
+    decreases, diversity increases, broader manifold.</p></li>
+    </ul>
+    <p><strong>Conclusion:</strong> the threshold provides a governable
+    diversity dial; variation is controlled, bounded, and structurally
+    safe.</p>
+    <h1 id="summary-of-findings">Summary of Findings</h1>
+    <p>Across all experiments, the micro-domain demonstrates that:</p>
+    <ul>
+    <li><p>Paged-PRE-CAS generates coherent sequences through explicit
+    reasoning,</p></li>
+    <li><p>paging enforces domain isolation and prevents structural
+    errors,</p></li>
+    <li><p>refinement stabilizes generation and improves
+    correctness,</p></li>
+    <li><p>evaluators provide orthogonal epistemic signals,</p></li>
+    <li><p>filtering before selection ensures safety,</p></li>
+    <li><p>arbitration balances correctness with controlled
+    diversity,</p></li>
+    <li><p>ensembles provide robustness and plural reasoning
+    trajectories.</p></li>
+    </ul>
+    <p>The system produces valid sequences with fully traceable
+    reasoning steps, confirming that generative behaviour emerges from
+    structured recursion, evaluator guidance, and domain isolation.</p>
+    <h1 id="implications-for-the-main-architecture">Implications for the
+    Main Architecture</h1>
+    <p>The micro-domain experiments validate the core claims of the
+    Paged-PRE-CAS architecture:</p>
+    <ol>
+    <li><p>generative reasoning is feasible without monolithic models or
+    token sampling,</p></li>
+    <li><p>explicit structure—paging, PRE recursion, CAS
+    evaluation—produces stable, coherent generative behaviour,</p></li>
+    <li><p>safety mechanisms (domain isolation, filtering, evaluator
+    plurality) operate as intended,</p></li>
+    <li><p>the architecture is modular, inspectable, and fully
+    traceable.</p></li>
+    </ol>
+    <p>These results support the use of Paged-PRE-CAS as a safe,
+    modular, and transparent generative reasoning engine within the
+    broader AGI architecture.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>.</p>
+  </main>
+
+</div>
+
+</body>
+</html>
