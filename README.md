@@ -164,6 +164,13 @@ Positions the entire ecosystem as a recursive architectural structure,
 revealing deep coherence between physical law and intelligent systems.  
 Provides the long‑range conceptual synthesis of the ecosystem.
 
+### **9. Adaptive Neural Networks — Neurons as Trainable Neural Networks**  
+Introduces a new class of artificial neurons whose activation function is itself a small trainable neural network, paired with a learned derivative network.  
+Replaces fixed nonlinearities with **layer‑specific activation geometry**, enabling neurons to learn their own internal structure, sensitivity, and computational shape.  
+Formalizes a **three‑stage training protocol** (pre‑training, joint training, freezing) that stabilizes optimization and allows activation functions to become **data‑dependent** rather than hand‑crafted.  
+Provides the theoretical foundation for recursive “network‑within‑a‑neuron” computation and expands the expressive power of multilayer perceptrons without architectural expansion.  
+Forms the neuron‑level instantiation of triadic principles (energy, information, geometry, recursion) within the Triadic Cosmos ecosystem.
+
 ---
 
 ## 🔍 Purpose of This Repository
