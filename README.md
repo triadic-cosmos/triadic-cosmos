@@ -164,6 +164,8 @@ Positions the entire ecosystem as a recursive architectural structure,
 revealing deep coherence between physical law and intelligent systems.  
 Provides the long‑range conceptual synthesis of the ecosystem.
 
+---
+
 ### **9. Adaptive Neural Networks — Neurons as Trainable Neural Networks**  
 Introduces a new class of artificial neurons whose activation function is itself a small trainable neural network, paired with a learned derivative network.  
 Replaces fixed nonlinearities with **layer‑specific activation geometry**, enabling neurons to learn their own internal structure, sensitivity, and computational shape.  
