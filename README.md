@@ -172,6 +172,7 @@ Replaces fixed nonlinearities with **layer‑specific activation geometry**, ena
 Formalizes a **three‑stage training protocol** (pre‑training, joint training, freezing) that stabilizes optimization and allows activation functions to become **data‑dependent** rather than hand‑crafted.  
 Provides the theoretical foundation for recursive “network‑within‑a‑neuron” computation and expands the expressive power of multilayer perceptrons without architectural expansion.  
 Forms the neuron‑level instantiation of triadic principles (energy, information, geometry, recursion) within the Triadic Cosmos ecosystem.
+Adaptive neurons introduce data‑driven activation geometry that can produce sharper decision boundaries, enable implicit parameter compression, and yield activation functions that remain analytically approximable after training.
 
 ---
 
