@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Adaptive Neural Networks<br />
+Neurons as Trainable Neural Networks</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#adaptive-neuron-architecture"
+    id="toc-adaptive-neuron-architecture">Adaptive Neuron
+    Architecture</a></li>
+    <li><a href="#training-dynamics" id="toc-training-dynamics">Training
+    Dynamics</a></li>
+    <li><a href="#method" id="toc-method">Method</a></li>
+    <li><a href="#theoretical-properties"
+    id="toc-theoretical-properties">Theoretical Properties</a></li>
+    <li><a href="#testable-predictions"
+    id="toc-testable-predictions">Testable Predictions</a></li>
+    <li><a href="#novelties-and-implications"
+    id="toc-novelties-and-implications">Novelties and
+    Implications</a></li>
+    <li><a href="#limitations-and-open-questions"
+    id="toc-limitations-and-open-questions">Limitations and Open
+    Questions</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Artificial neural networks are built upon a remarkably simple
+    computational primitive: a neuron that computes a linear
+    transformation followed by a fixed, hand–crafted activation
+    function. This design has remained essentially unchanged since the
+    earliest multilayer perceptrons. Although modern architectures have
+    grown deeper, wider, and more structured, the internal mechanism of
+    the neuron itself has remained static. As a result, the expressive
+    power of neural networks is forced to emerge almost entirely from
+    architectural scale rather than from the computational richness of
+    individual units.</p>
+    <p>In contrast, biological neurons exhibit substantial internal
+    complexity. Dendritic subunits perform nonlinear transformations,
+    local integration, and context–dependent modulation. The neuron is
+    not a pointwise nonlinearity but a structured dynamical system with
+    internal geometry and adaptive sensitivity. This discrepancy between
+    biological and artificial neurons raises a fundamental question: can
+    artificial neurons be endowed with internal structure while
+    remaining compatible with standard differentiable learning?</p>
+    <p>This paper develops a theoretical framework for <em>adaptive
+    neurons</em>, a new class of computational units in which the
+    activation function is replaced by a small trainable neural network.
+    Each layer possesses its own activation network <span
+    class="math inline"><em>f</em>(<em>x</em>)</span> and a
+    corresponding derivative network <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span>, enabling neurons
+    to learn both their transformation and their local sensitivity.
+    These internal networks introduce persistent computational
+    structure, support recursive “network–within–a–neuron” dynamics, and
+    allow representational capacity to grow without increasing the depth
+    or width of the surrounding architecture.</p>
+    <p>The proposed construction generalizes learnable activation
+    functions, subsumes hypernetwork–based modulation, and provides a
+    differentiable analogue of dendritic computation. Unlike previous
+    approaches, adaptive neurons explicitly model both the activation
+    and its derivative, enabling stable integration into gradient–based
+    optimization. The framework also admits a natural interpretation
+    within the Triadic Cosmos paradigm: the activation network
+    represents energy (transformation), its parameters encode
+    information, its architecture defines geometry, and the recursive
+    application of internal networks expresses self–referential
+    computation.</p>
+    <p>Beyond the structure of the neuron itself, the framework
+    naturally supports staged optimization procedures. Because
+    activation networks are trainable modules, they may first be
+    pre-trained to approximate classical nonlinearities, then jointly
+    refined with network weights on the target task, and finally frozen
+    for a dedicated fine-tuning phase. This separation between learning
+    activation geometry and learning task-specific representations
+    introduces a new methodological axis not present in classical
+    architectures and suggests potential benefits for stability,
+    inductive bias, and generalization.</p>
+    <p>The goal of this paper is purely theoretical. We provide formal
+    definitions, derive the training dynamics, analyze the structural
+    properties of adaptive neurons, and articulate their conceptual
+    implications. No empirical claims are made. Instead, we establish
+    the mathematical and architectural foundations required for future
+    practical implementations and experimental exploration.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>The classical artificial neuron, defined as a linear
+    transformation followed by a fixed activation function, has remained
+    largely unchanged since the early development of multilayer
+    perceptrons. Several research directions have attempted to increase
+    the expressivity of neurons by modifying or extending the activation
+    mechanism. These approaches provide important conceptual precursors
+    to the present work. Below, we review the most relevant lines of
+    research, highlight their advantages, and identify the limitations
+    that motivate the introduction of adaptive neurons with learnable
+    internal dynamics.</p>
+    <h2 id="learnable-activation-functions">Learnable Activation
+    Functions</h2>
+    <p>A first family of approaches replaces fixed nonlinearities with
+    parameterized or learnable activation functions. Examples include
+    PReLU <span class="citation" data-cites="prelu"></span>, Adaptive
+    Piecewise Linear Units (APL) <span class="citation"
+    data-cites="apl"></span>, learnable spline activations, and rational
+    activation functions <span class="citation"
+    data-cites="rational"></span>. These methods demonstrated that even
+    small degrees of flexibility in the activation function can improve
+    optimization dynamics, representation power, and empirical
+    performance.</p>
+    <h4 id="advantages.">Advantages.</h4>
+    <p>Learnable activations showed that nonlinearities need not be
+    static, that data–dependent shaping of activation curves can be
+    beneficial, and that expressivity can be increased without adding
+    layers or widening networks.</p>
+    <h4 id="limitations.">Limitations.</h4>
+    <p>Despite their benefits, these activations remain low–dimensional
+    objects: they modify a curve, not a computational mechanism. They
+    lack internal structure, cannot represent complex transformations,
+    and do not provide an explicit model of the derivative <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span>. As a result,
+    they cannot capture the kind of internal dynamics characteristic of
+    biological neurons.</p>
+    <h2
+    id="hypernetworks-and-contextdependent-activations">Hypernetworks
+    and Context–Dependent Activations</h2>
+    <p>A second line of work uses hypernetworks to generate activation
+    parameters dynamically <span class="citation"
+    data-cites="hypernet"></span>. In these models, a small auxiliary
+    network outputs the parameters of an activation function conditioned
+    on the input, layer, or task context. This introduces a form of
+    meta–adaptation and demonstrates that activations can themselves be
+    outputs of learned computation.</p>
+    <h4 id="advantages.-1">Advantages.</h4>
+    <p>Hypernetwork–based activations show that nonlinearities can be
+    context–sensitive and that small networks can modulate the behavior
+    of larger ones. They provide a conceptual bridge between fixed
+    activations and fully learned internal mechanisms.</p>
+    <h4 id="limitations.-1">Limitations.</h4>
+    <p>The activation is generated externally rather than implemented
+    internally. The neuron itself remains structurally simple. Moreover,
+    these methods do not model the derivative explicitly, and the
+    generated activations often lack stability or interpretability. They
+    do not provide a persistent internal computational structure within
+    each neuron.</p>
+    <h2 id="dendritic-models-in-computational-neuroscience">Dendritic
+    Models in Computational Neuroscience</h2>
+    <p>Biological neurons exhibit rich internal computation: dendritic
+    subunits perform nonlinear transformations, integrate signals
+    locally, and contribute to the overall firing behavior.
+    Multi–compartment neuron models and dendritic processing frameworks
+    <span class="citation" data-cites="dendritic"></span> capture
+    aspects of this complexity.</p>
+    <h4 id="advantages.-2">Advantages.</h4>
+    <p>These models provide strong evidence that internal structure
+    within a neuron increases computational capacity. They motivate the
+    idea that neurons are not point–like units but systems with internal
+    geometry and dynamics.</p>
+    <h4 id="limitations.-2">Limitations.</h4>
+    <p>Biophysical models are difficult to integrate into differentiable
+    machine learning frameworks. They typically rely on continuous–time
+    dynamics, ion–channel models, or non–differentiable mechanisms. As
+    such, they offer conceptual inspiration but not a practical
+    computational analogue for deep learning.</p>
+    <h2 id="implicit-layers-and-deep-equilibrium-models">Implicit Layers
+    and Deep Equilibrium Models</h2>
+    <p>Implicit layers and deep equilibrium models <span
+    class="citation" data-cites="equilibrium"></span> introduce internal
+    iterative dynamics within a layer, showing that fixed–point
+    computation can replace explicit depth. These models demonstrate
+    that internal computation can increase expressivity without adding
+    parameters linearly with depth.</p>
+    <h4 id="advantages.-3">Advantages.</h4>
+    <p>They highlight the value of internal computation and recursive
+    structure within a layer.</p>
+    <h4 id="limitations.-3">Limitations.</h4>
+    <p>These models operate at the layer level, not the neuron level,
+    and do not provide internal structure for individual neurons. They
+    also lack explicit modeling of activation derivatives and are often
+    challenging to train.</p>
+    <h2 id="staged-optimization-and-activation-pre-training">Staged
+    Optimization and Activation Pre-Training</h2>
+    <p>A smaller body of work has explored staged or progressive
+    training procedures, such as layerwise pre-training <span
+    class="citation" data-cites="hinton2006fast"></span>, curriculum
+    learning, or the warm-starting of activation parameters. Some
+    meta-learning approaches also adapt activation functions across
+    tasks, and a few recent studies investigate pre-training of
+    activation parameters to improve stability. These methods suggest
+    that separating different phases of learning can improve
+    optimization or generalization.</p>
+    <h4 id="advantages.-4">Advantages.</h4>
+    <p>Staged optimization demonstrates that neural networks may benefit
+    from learning different components at different times. Pre-training
+    activations can stabilize early training, while freezing certain
+    parameters can reduce overfitting in later stages.</p>
+    <h4 id="limitations.-4">Limitations.</h4>
+    <p>Existing staged methods operate at the level of layers,
+    architectures, or scalar activation parameters. None provide a
+    principled framework for pre-training, jointly training, and
+    freezing <em>internal activation networks</em> with their own
+    derivative models. Moreover, prior work does not treat the
+    activation mechanism as a computational module with persistent
+    internal structure. As a result, existing staged approaches cannot
+    capture the recursive “network-within-a-neuron” dynamics introduced
+    in this paper.</p>
+    <h2 id="positioning-of-the-present-work">Positioning of the Present
+    Work</h2>
+    <p>The approaches above collectively demonstrate three key insights:
+    (i) nonlinearities benefit from being learnable, (ii) internal
+    computation increases representational capacity, and (iii)
+    biological neurons motivate richer internal structure. However, none
+    of the existing methods provide a neuron whose activation function
+    is itself a neural network, an explicit learnable model of the
+    derivative <span class="math inline"><em>f</em>′(<em>x</em>)</span>,
+    persistent internal structure shared across neurons within a layer,
+    or a recursive “network–within–a–neuron” architecture.</p>
+    <p>The adaptive neuron model proposed in this paper integrates these
+    elements into a single construct. It generalizes learnable
+    activations into full internal networks, introduces a learnable
+    derivative network, and provides a triadic interpretation linking
+    energy (transformation), information (parameters), geometry
+    (internal structure), and recursion (self–application). This
+    positions adaptive neurons as a new class of computational units
+    that extend the expressive power of multilayer perceptrons without
+    requiring architectural expansion.</p>
+    <h1 id="adaptive-neuron-architecture">Adaptive Neuron
+    Architecture</h1>
+    <p>Adaptive neurons replace the classical activation function with a
+    pair of trainable neural networks: an activation network <span
+    class="math inline"><em>f</em>(<em>x</em>)</span> and a derivative
+    network <span class="math inline"><em>f</em>′(<em>x</em>)</span>.
+    This section formalizes their structure, forward computation, and
+    internal geometry. The goal is to define a computational unit whose
+    nonlinearity is no longer fixed but learned, while remaining fully
+    compatible with gradient-based optimization.</p>
+    <h2 id="classical-neuron-structure">Classical Neuron Structure</h2>
+    <p>A standard artificial neuron computes</p>
+    <p><span
+    class="math display"><em>y</em> = <em>ϕ</em>(<em>W</em><em>x</em>+<em>b</em>),</span></p>
+    <p>where <span class="math inline"><em>W</em></span> and <span
+    class="math inline"><em>b</em></span> are trainable parameters and
+    <span class="math inline"><em>ϕ</em></span> is a fixed activation
+    function such as <span class="math inline">tanh </span>, ReLU, or
+    GELU. The activation is pointwise, memoryless, and identical across
+    all neurons in a layer. As a result, the expressive power of the
+    network arises almost entirely from the arrangement of linear
+    transformations.</p>
+    <h2 id="activation-networks">Activation Networks</h2>
+    <p>In an adaptive neuron, the activation function is replaced by a
+    small multilayer perceptron:</p>
+    <p><span class="math display"><em>f</em> : ℝ → ℝ,</span></p>
+    <p>shared across all neurons in a layer. The forward computation
+    becomes</p>
+    <p><span
+    class="math display"><em>y</em> = <em>f</em>(<em>W</em><em>x</em>+<em>b</em>).</span></p>
+    <p>The activation network introduces internal structure, depth, and
+    learnable geometry. Its parameters are persistent across training
+    and define the nonlinear transformation performed by the layer.</p>
+    <p>A typical activation network may be defined as</p>
+    <p><span
+    class="math display"><em>f</em>(<em>x</em>) = <em>A</em><sub>2</sub> <em>σ</em>(<em>A</em><sub>1</sub><em>x</em>+<em>c</em><sub>1</sub>) + <em>c</em><sub>2</sub>,</span></p>
+    <p>where <span class="math inline"><em>σ</em></span> is a classical
+    nonlinearity (e.g., <span class="math inline">tanh </span>), and
+    <span
+    class="math inline"><em>A</em><sub>1</sub>, <em>A</em><sub>2</sub>, <em>c</em><sub>1</sub>, <em>c</em><sub>2</sub></span>
+    are trainable parameters. The architecture may vary across layers,
+    enabling heterogeneous activation geometries.</p>
+    <h2 id="derivative-networks">Derivative Networks</h2>
+    <p>Backpropagation requires the derivative <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span>. Instead of
+    computing it analytically, adaptive neurons introduce a second
+    neural network</p>
+    <p><span class="math display"><em>f</em>′ : ℝ → ℝ,</span></p>
+    <p>trained to approximate the derivative of <span
+    class="math inline"><em>f</em></span>. During training, the gradient
+    of the loss with respect to the pre-activation <span
+    class="math inline"><em>z</em> = <em>W</em><em>x</em> + <em>b</em></span>
+    is computed as</p>
+    <p><span class="math display">$$\frac{\partial L}{\partial z} =
+    f'(z) \odot \frac{\partial L}{\partial y}.$$</span></p>
+    <p>The derivative network decouples the forward and backward
+    computational pathways, allowing the backward sensitivity to be
+    learned rather than imposed. This provides additional flexibility
+    and may stabilize gradient flow.</p>
+    <h2 id="schematic-overview">Schematic Overview</h2>
+    <figure>
+
+    <figcaption>Schematic view of an adaptive neuron layer. The
+    classical pre-activation <span
+    class="math inline"><em>z</em> = <em>W</em><em>x</em> + <em>b</em></span>
+    is passed through a trainable activation network <span
+    class="math inline"><em>f</em></span>, while a separate derivative
+    network <span class="math inline"><em>f</em>′</span> provides the
+    backward sensitivity during training. Both <span
+    class="math inline"><em>f</em></span> and <span
+    class="math inline"><em>f</em>′</span> are shared across neurons in
+    the layer and can be trained in a three-stage protocol
+    (pre-training, joint training, freezing).</figcaption>
+    </figure>
+    <h2 id="consistency-constraint">Consistency Constraint</h2>
+    <p>To ensure that <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span> remains a valid
+    approximation of the derivative of <span
+    class="math inline"><em>f</em>(<em>x</em>)</span>, we introduce a
+    consistency loss:</p>
+    <p><span class="math display">$$\mathcal{L}_{\text{consistency}} =
+    \mathbb{E}_{x \sim \mathcal{D}} \left[ \left\| f'(x) - \frac{d}{dx}
+    f(x) \right\|^2 \right].$$</span></p>
+    <p>This term encourages coherence between the forward and backward
+    pathways without requiring exact equality. The strength of this
+    constraint can be tuned to balance flexibility and stability.</p>
+    <h2 id="internal-geometry-and-recursive-structure">Internal Geometry
+    and Recursive Structure</h2>
+    <p>Because both <span class="math inline"><em>f</em></span> and
+    <span class="math inline"><em>f</em>′</span> are neural networks,
+    each adaptive neuron contains a recursive computational structure: a
+    network inside a neuron inside a network. This recursion is shallow
+    but persistent, giving each layer its own internal geometry. The
+    architecture of the activation network—its depth, width, and
+    nonlinearities—defines the shape of the transformation performed by
+    the layer.</p>
+    <h2 id="compatibility-with-standard-architectures">Compatibility
+    with Standard Architectures</h2>
+    <p>Adaptive neurons can replace classical neurons in any multilayer
+    perceptron without modifying the surrounding architecture. The only
+    change is the substitution of the fixed activation function with the
+    learned activation network. The derivative network is used only
+    during training and may be discarded or simplified during
+    inference.</p>
+    <p>This modularity ensures that adaptive neurons remain compatible
+    with standard optimization methods, initialization schemes, and
+    architectural patterns.</p>
+    <h1 id="training-dynamics">Training Dynamics</h1>
+    <p>Adaptive neurons introduce trainable internal structure into the
+    activation mechanism, which requires a careful formulation of the
+    forward pass, backward pass, and optimization procedure. This
+    section formalizes the training dynamics of adaptive neurons and
+    introduces a staged optimization protocol that separates the
+    learning of activation geometry from the learning of task-specific
+    representations.</p>
+    <h2 id="forward-computation">Forward Computation</h2>
+    <p>For an input vector <span
+    class="math inline"><em>x</em> ∈ ℝ<sup><em>d</em></sup></span>, a
+    layer computes the pre-activation</p>
+    <p><span
+    class="math display"><em>z</em> = <em>W</em><em>x</em> + <em>b</em>,</span></p>
+    <p>where <span class="math inline"><em>W</em></span> and <span
+    class="math inline"><em>b</em></span> are the trainable parameters
+    of the layer. The activation network <span
+    class="math inline"><em>f</em></span> then produces the output</p>
+    <p><span
+    class="math display"><em>y</em> = <em>f</em>(<em>z</em>).</span></p>
+    <p>Because <span class="math inline"><em>f</em></span> is itself a
+    neural network, the forward computation of the layer includes both
+    the linear transformation and the internal nonlinear structure of
+    the activation network. This introduces persistent computational
+    depth inside each neuron.</p>
+    <h2 id="backward-computation">Backward Computation</h2>
+    <p>Backpropagation requires the derivative of the activation with
+    respect to its input. Instead of computing this derivative
+    analytically, adaptive neurons use a learned derivative network
+    <span class="math inline"><em>f</em>′(<em>x</em>)</span>. Given the
+    gradient of the loss with respect to the layer output,</p>
+    <p><span class="math display">$$\frac{\partial L}{\partial
+    y},$$</span></p>
+    <p>the gradient with respect to the pre-activation is</p>
+    <p><span class="math display">$$\frac{\partial L}{\partial z}
+    = f'(z) \odot \frac{\partial L}{\partial y}.$$</span></p>
+    <p>The gradients with respect to the layer parameters follow the
+    classical form:</p>
+    <p><span class="math display">$$\frac{\partial L}{\partial W} =
+    \left( \frac{\partial L}{\partial z} \right) x^\top,
+    \qquad
+    \frac{\partial L}{\partial b} = \frac{\partial L}{\partial
+    z}.$$</span></p>
+    <p>The activation network <span
+    class="math inline"><em>f</em></span> and derivative network <span
+    class="math inline"><em>f</em>′</span> are trained by
+    backpropagating through their internal layers in the usual way.</p>
+    <h2 id="consistency-loss">Consistency Loss</h2>
+    <p>To ensure that the derivative network remains aligned with the
+    activation network, we introduce a consistency term:</p>
+    <p><span class="math display">$$\mathcal{L}_{\text{consistency}}
+    = \mathbb{E}_{z \sim \mathcal{D}}
+    \left[ \left\| f'(z) - \frac{d}{dz} f(z) \right\|^2
+    \right].$$</span></p>
+    <p>This term does not enforce exact equality—adaptive neurons are
+    not required to satisfy analytic differentiability—but it encourages
+    coherence between the forward and backward pathways. The strength of
+    this constraint can be tuned to balance flexibility and
+    stability.</p>
+    <h2 id="total-training-objective">Total Training Objective</h2>
+    <p>For a supervised learning task with loss <span
+    class="math inline">ℒ<sub>task</sub></span>, the full objective
+    becomes</p>
+    <p><span
+    class="math display">ℒ = ℒ<sub>task</sub> + <em>λ</em><sub>cons</sub> ℒ<sub>consistency</sub>,</span></p>
+    <p>where <span class="math inline"><em>λ</em><sub>cons</sub></span>
+    controls the influence of the consistency constraint.</p>
+    <p>Additional regularization terms may be applied to the activation
+    networks, such as weight decay, Lipschitz penalties, or smoothness
+    constraints, depending on the desired activation geometry.</p>
+    <h2 id="staged-optimization-protocol">Staged Optimization
+    Protocol</h2>
+    <p>Because activation networks are trainable modules, adaptive
+    neurons naturally support a staged training procedure. We propose a
+    three-stage protocol:</p>
+    <h4 id="stage-1-pre-training-of-activation-networks.">Stage 1:
+    Pre-Training of Activation Networks.</h4>
+    <p>Activation networks <span class="math inline"><em>f</em></span>
+    and <span class="math inline"><em>f</em>′</span> are trained to
+    approximate a classical activation function (e.g., <span
+    class="math inline">tanh </span>) and its derivative. This produces
+    a stable initialization and avoids chaotic early dynamics.</p>
+    <h4 id="stage-2-joint-training.">Stage 2: Joint Training.</h4>
+    <p>The full network is trained end-to-end on the target task. Both
+    the layer parameters <span
+    class="math inline">(<em>W</em>,<em>b</em>)</span> and the
+    activation networks <span
+    class="math inline">(<em>f</em>,<em>f</em>′)</span> are updated.
+    During this phase, the activation geometry adapts to the structure
+    of the data.</p>
+    <h4 id="stage-3-freezing-and-fine-tuning.">Stage 3: Freezing and
+    Fine-Tuning.</h4>
+    <p>The activation networks are frozen, and only the layer parameters
+    are further optimized. This reduces the degrees of freedom in late
+    training, stabilizes optimization, and may improve
+    generalization.</p>
+    <p>This staged protocol separates the learning of activation
+    geometry from the learning of task-specific representations,
+    providing a structured optimization pathway not available in
+    classical architectures.</p>
+    <h2 id="computational-considerations">Computational
+    Considerations</h2>
+    <p>The presence of activation networks increases the computational
+    cost of both forward and backward passes. However, because the
+    activation networks are shared across all neurons in a layer, the
+    overhead grows with the number of layers rather than the number of
+    units. Furthermore, the derivative network is only required during
+    training and may be discarded or simplified during inference.</p>
+    <h2 id="compatibility-with-standard-optimization">Compatibility with
+    Standard Optimization</h2>
+    <p>Despite their internal complexity, adaptive neurons remain fully
+    compatible with standard optimization methods such as SGD, Adam,
+    RMSProp, and second-order approximations. No modifications to the
+    surrounding architecture are required. The only difference is the
+    replacement of the fixed activation function with a learned
+    activation network and its derivative.</p>
+    <h1 id="method">Method</h1>
+    <p>This section formalizes the computational structure of adaptive
+    neurons, derives their forward and backward dynamics, and introduces
+    a staged optimization protocol that separates the learning of
+    activation geometry from the learning of task-specific
+    representations. The goal is to provide a complete and
+    self-contained mathematical description of the model.</p>
+    <h2 id="pre-activation-and-layer-structure">Pre-Activation and Layer
+    Structure</h2>
+    <p>Consider a layer with input <span
+    class="math inline"><em>x</em> ∈ ℝ<sup><em>d</em></sup></span>. The
+    classical pre-activation is preserved:</p>
+    <p><span
+    class="math display"><em>z</em> = <em>W</em><em>x</em> + <em>b</em>,</span></p>
+    <p>where <span
+    class="math inline"><em>W</em> ∈ ℝ<sup><em>m</em> × <em>d</em></sup></span>
+    and <span
+    class="math inline"><em>b</em> ∈ ℝ<sup><em>m</em></sup></span> are
+    trainable parameters. The novelty lies entirely in the activation
+    mechanism applied to <span
+    class="math inline"><em>z</em></span>.</p>
+    <h2 id="activation-network">Activation Network</h2>
+    <p>Each layer possesses a trainable activation network</p>
+    <p><span class="math display"><em>f</em> : ℝ → ℝ,</span></p>
+    <p>shared across all neurons in the layer. A typical architecture is
+    a small multilayer perceptron:</p>
+    <p><span
+    class="math display"><em>f</em>(<em>x</em>) = <em>A</em><sub>2</sub> <em>σ</em>(<em>A</em><sub>1</sub><em>x</em>+<em>c</em><sub>1</sub>) + <em>c</em><sub>2</sub>,</span></p>
+    <p>where <span class="math inline"><em>σ</em></span> is a classical
+    nonlinearity (e.g., <span class="math inline">tanh </span>), and
+    <span
+    class="math inline">(<em>A</em><sub>1</sub>,<em>A</em><sub>2</sub>,<em>c</em><sub>1</sub>,<em>c</em><sub>2</sub>)</span>
+    are trainable parameters.</p>
+    <p>The layer output is</p>
+    <p><span
+    class="math display"><em>y</em> = <em>f</em>(<em>z</em>).</span></p>
+    <p>This introduces persistent internal structure and recursive
+    computation inside each neuron.</p>
+    <h2 id="derivative-network">Derivative Network</h2>
+    <p>Backpropagation requires the derivative of the activation.
+    Instead of computing it analytically, adaptive neurons introduce a
+    second network:</p>
+    <p><span class="math display"><em>f</em>′ : ℝ → ℝ.</span></p>
+    <p>During training, the gradient with respect to the pre-activation
+    is computed as</p>
+    <p><span class="math display">$$\frac{\partial L}{\partial z}
+    = f'(z) \odot \frac{\partial L}{\partial y}.$$</span></p>
+    <p>The derivative network is trained jointly with the activation
+    network and the layer parameters.</p>
+    <h2 id="consistency-constraint-1">Consistency Constraint</h2>
+    <p>To ensure coherence between the forward and backward pathways, we
+    introduce a consistency loss:</p>
+    <p><span class="math display">$$\mathcal{L}_{\text{consistency}}
+    = \mathbb{E}_{z \sim \mathcal{D}}
+    \left[ \left\| f'(z) - \frac{d}{dz} f(z) \right\|^2
+    \right].$$</span></p>
+    <p>This term does not enforce exact equality—adaptive neurons are
+    not required to be analytically differentiable—but it encourages the
+    derivative network to approximate the true derivative of the
+    activation network.</p>
+    <h2 id="total-loss-function">Total Loss Function</h2>
+    <p>For a supervised learning task with loss <span
+    class="math inline">ℒ<sub>task</sub></span>, the full objective
+    is</p>
+    <p><span
+    class="math display">ℒ = ℒ<sub>task</sub> + <em>λ</em><sub>cons</sub> ℒ<sub>consistency</sub>,</span></p>
+    <p>where <span class="math inline"><em>λ</em><sub>cons</sub></span>
+    controls the strength of the consistency constraint.</p>
+    <p>Additional regularization terms may be applied to the activation
+    networks, such as smoothness penalties or Lipschitz constraints.</p>
+    <h2 id="backpropagation-through-adaptive-neurons">Backpropagation
+    Through Adaptive Neurons</h2>
+    <p>The backward pass proceeds as follows:</p>
+    <p><span class="math display">$$\frac{\partial L}{\partial y} \quad
+    \text{(from next layer)},$$</span></p>
+    <p><span class="math display">$$\frac{\partial L}{\partial z}
+    = f'(z) \odot \frac{\partial L}{\partial y},$$</span></p>
+    <p><span class="math display">$$\frac{\partial L}{\partial W}
+    = \left( \frac{\partial L}{\partial z} \right) x^\top,
+    \qquad
+    \frac{\partial L}{\partial b}
+    = \frac{\partial L}{\partial z}.$$</span></p>
+    <p>Gradients propagate through the internal layers of <span
+    class="math inline"><em>f</em></span> and <span
+    class="math inline"><em>f</em>′</span> using standard automatic
+    differentiation.</p>
+    <h2 id="staged-optimization-protocol-1">Staged Optimization
+    Protocol</h2>
+    <p>Adaptive neurons naturally support a three-stage training
+    procedure:</p>
+    <h4 id="stage-1-pre-training-of-activation-networks.-1">Stage 1:
+    Pre-Training of Activation Networks.</h4>
+    <p>Activation networks <span class="math inline"><em>f</em></span>
+    and <span class="math inline"><em>f</em>′</span> are trained to
+    approximate a classical activation function (e.g., <span
+    class="math inline">tanh </span>) and its derivative. This produces
+    a stable initialization and avoids chaotic early dynamics.</p>
+    <h4 id="stage-2-joint-training.-1">Stage 2: Joint Training.</h4>
+    <p>The full network is trained end-to-end on the target task. Both
+    the layer parameters <span
+    class="math inline">(<em>W</em>,<em>b</em>)</span> and the
+    activation networks <span
+    class="math inline">(<em>f</em>,<em>f</em>′)</span> are updated.
+    During this phase, the activation geometry adapts to the structure
+    of the data.</p>
+    <h4 id="stage-3-freezing-and-fine-tuning.-1">Stage 3: Freezing and
+    Fine-Tuning.</h4>
+    <p>The activation networks are frozen, and only the layer parameters
+    are further optimized. This reduces the degrees of freedom in late
+    training, stabilizes optimization, and may improve
+    generalization.</p>
+    <p>This staged protocol separates the learning of activation
+    geometry from the learning of task-specific representations.</p>
+    <h2 id="computational-considerations-1">Computational
+    Considerations</h2>
+    <p>The activation and derivative networks introduce additional
+    computation during training. However:</p>
+    <ul>
+    <li><p>the overhead is per-layer, not per-neuron,</p></li>
+    <li><p>the derivative network is only required during
+    training,</p></li>
+    <li><p>activation networks can be cached or compiled for efficient
+    inference.</p></li>
+    </ul>
+    <p>Thus, the computational cost remains manageable, especially for
+    small activation networks.</p>
+    <h2 id="compatibility-with-standard-architectures-1">Compatibility
+    with Standard Architectures</h2>
+    <p>Adaptive neurons can replace classical neurons in any multilayer
+    perceptron without modifying the surrounding architecture. They
+    remain compatible with:</p>
+    <ul>
+    <li><p>SGD, Adam, RMSProp, and second-order optimizers,</p></li>
+    <li><p>standard initialization schemes,</p></li>
+    <li><p>batching, normalization, and regularization
+    techniques.</p></li>
+    </ul>
+    <p>The only change is the substitution of the fixed activation
+    function with a learned activation network and its derivative.</p>
+    <h1 id="theoretical-properties">Theoretical Properties</h1>
+    <p>Adaptive neurons introduce internal computational structure into
+    the activation mechanism, fundamentally altering the expressive and
+    geometric properties of multilayer perceptrons. This section
+    analyzes the theoretical implications of this design, focusing on
+    expressivity, approximation power, parameter scaling, internal
+    geometry, and stability.</p>
+    <h2 id="expressive-power">Expressive Power</h2>
+    <p>Classical multilayer perceptrons rely on depth and width to
+    increase expressive capacity. In contrast, adaptive neurons
+    introduce additional depth inside each activation function. For a
+    layer with activation network <span
+    class="math inline"><em>f</em></span>, the effective computation
+    becomes</p>
+    <p><span
+    class="math display"><em>x</em> ↦ <em>f</em>(<em>W</em><em>x</em>+<em>b</em>),</span></p>
+    <p>where <span class="math inline"><em>f</em></span> itself may
+    contain multiple nonlinear transformations. This yields a composite
+    mapping with strictly greater expressive power than a classical
+    layer of the same width.</p>
+    <p>Formally, if <span class="math inline"><em>f</em></span> is a
+    universal approximator on compact subsets of <span
+    class="math inline">ℝ</span>, then the adaptive neuron layer is a
+    universal approximator on compact subsets of <span
+    class="math inline">ℝ<sup><em>d</em></sup></span> even when the
+    surrounding architecture is shallow. This suggests that adaptive
+    neurons can approximate functions that would otherwise require
+    significantly deeper or wider networks.</p>
+    <h2 id="approximation-power-and-functional-complexity">Approximation
+    Power and Functional Complexity</h2>
+    <p>The activation network <span
+    class="math inline"><em>f</em></span> allows each layer to implement
+    a nonlinear transformation whose complexity is independent of the
+    number of neurons in the layer. This decouples functional complexity
+    from architectural scale. In particular:</p>
+    <ul>
+    <li><p>A single adaptive layer can approximate multi-regime
+    nonlinearities that classical activations cannot represent.</p></li>
+    <li><p>The derivative network <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span> enables the
+    backward sensitivity to adapt to the structure of the task,
+    potentially improving optimization.</p></li>
+    <li><p>The internal geometry of <span
+    class="math inline"><em>f</em></span> allows the layer to implement
+    transformations that resemble multi-branch or piecewise-smooth
+    functions.</p></li>
+    </ul>
+    <p>These properties suggest that adaptive neurons may reduce the
+    need for architectural depth in certain regimes.</p>
+    <h2 id="parameter-scaling">Parameter Scaling</h2>
+    <p>Let <span class="math inline"><em>P</em></span> denote the number
+    of parameters in the linear transformation of a layer and <span
+    class="math inline"><em>Q</em></span> the number of parameters in
+    the activation network. The total parameter count becomes</p>
+    <p><span
+    class="math display"><em>P</em><sub>total</sub> = <em>P</em> + <em>Q</em>.</span></p>
+    <p>Because <span class="math inline"><em>Q</em></span> is shared
+    across all neurons in the layer, the relative overhead decreases as
+    the width increases. This yields a favorable scaling regime:</p>
+    <p><span class="math display">$$\frac{Q}{P} \to 0 \quad \text{as
+    width} \to \infty.$$</span></p>
+    <p>Thus, adaptive neurons introduce a fixed per-layer cost while
+    potentially replacing the need for additional layers or wider
+    architectures. This trade-off between internal complexity and
+    architectural scale is a central theoretical implication of the
+    model.</p>
+    <h2 id="internal-geometry-and-recursive-structure-1">Internal
+    Geometry and Recursive Structure</h2>
+    <p>The activation network introduces a recursive computational
+    structure: a network inside a neuron inside a network. This
+    recursion is shallow but persistent, giving each layer its own
+    internal geometry. The architecture of the activation network—its
+    depth, width, and nonlinearities—defines the shape of the
+    transformation performed by the layer.</p>
+    <p>This internal geometry enables:</p>
+    <ul>
+    <li><p>hierarchical nonlinear transformations within a single
+    layer,</p></li>
+    <li><p>context-dependent sensitivity through the learned derivative
+    network,</p></li>
+    <li><p>layer-specific activation regimes that differ across the
+    network.</p></li>
+    </ul>
+    <p>These properties mirror the diversity of nonlinear processing
+    observed in biological neurons.</p>
+    <h2 id="stability-and-gradient-flow">Stability and Gradient
+    Flow</h2>
+    <p>The derivative network <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span> introduces a
+    learned backward pathway. This may improve gradient flow by adapting
+    the sensitivity of the layer to the structure of the task. However,
+    it also introduces potential instability:</p>
+    <ul>
+    <li><p>If <span class="math inline"><em>f</em>′(<em>x</em>)</span>
+    becomes too large, gradients may explode.</p></li>
+    <li><p>If <span class="math inline"><em>f</em>′(<em>x</em>)</span>
+    becomes too small, gradients may vanish.</p></li>
+    <li><p>If <span class="math inline"><em>f</em></span> and <span
+    class="math inline"><em>f</em>′</span> diverge, optimization may
+    become inconsistent.</p></li>
+    </ul>
+    <p>The consistency constraint mitigates these issues by encouraging
+    coherence between the forward and backward pathways. The staged
+    training protocol further stabilizes optimization by freezing
+    activation networks in late training.</p>
+    <h2 id="inductive-bias-and-functional-specialization">Inductive Bias
+    and Functional Specialization</h2>
+    <p>Because each layer possesses its own activation network, adaptive
+    neurons introduce a new axis of inductive bias: the geometry of the
+    activation itself. This enables:</p>
+    <ul>
+    <li><p>early layers to learn smooth, compressive
+    nonlinearities,</p></li>
+    <li><p>deeper layers to learn sharper or more selective
+    transformations,</p></li>
+    <li><p>task-specific specialization of activation geometry.</p></li>
+    </ul>
+    <p>This specialization resembles the hierarchical organization of
+    biological cortical layers and may improve representation
+    learning.</p>
+    <h2 id="compatibility-with-classical-theory">Compatibility with
+    Classical Theory</h2>
+    <p>Despite their internal complexity, adaptive neurons remain
+    compatible with classical results on:</p>
+    <ul>
+    <li><p>universal approximation,</p></li>
+    <li><p>differentiability and gradient-based optimization,</p></li>
+    <li><p>Lipschitz continuity (with appropriate
+    regularization),</p></li>
+    <li><p>compositional function approximation.</p></li>
+    </ul>
+    <p>The framework extends classical theory without violating its
+    assumptions, providing a principled generalization of the standard
+    neuron model.</p>
+    <h1 id="testable-predictions">Testable Predictions</h1>
+    <p>Although this paper is purely theoretical, the adaptive neuron
+    framework yields several concrete predictions that can be
+    empirically evaluated in future work. These predictions concern
+    expressivity, optimization behavior, data efficiency, architectural
+    scaling, and the functional role of the learned derivative network.
+    Each prediction is stated in a falsifiable form, enabling direct
+    experimental verification.</p>
+    <h2
+    id="prediction-1-increased-expressive-power-per-parameter">Prediction
+    1: Increased Expressive Power per Parameter</h2>
+    <p>Adaptive neurons introduce internal activation networks that are
+    shared across all units in a layer. This suggests that a network
+    with significantly fewer global parameters may approximate functions
+    typically requiring much larger architectures. Formally, we predict
+    that for a fixed parameter budget, models with adaptive neurons will
+    approximate a broader class of nonlinear functions than classical
+    multilayer perceptrons. This prediction can be tested by comparing
+    approximation error on synthetic regression tasks under matched
+    parameter counts.</p>
+    <h2
+    id="prediction-2-faster-or-more-stable-learning-dynamics">Prediction
+    2: Faster or More Stable Learning Dynamics</h2>
+    <p>Because the derivative network <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span> is learned rather
+    than analytically derived, it may adapt to improve gradient flow or
+    reduce pathological curvature in the loss landscape. We predict
+    that, under identical initialization and optimization settings,
+    adaptive neurons will exhibit either faster convergence or reduced
+    variance in training dynamics compared to classical activations.
+    This can be evaluated by measuring convergence rates and gradient
+    statistics across multiple random seeds.</p>
+    <h2 id="prediction-3-improved-data-efficiency">Prediction 3:
+    Improved Data Efficiency</h2>
+    <p>If the internal activation networks capture task-specific
+    nonlinear structure, the model may require fewer training samples to
+    achieve comparable performance. We predict that adaptive neurons
+    will outperform classical networks in low-data regimes, particularly
+    on tasks with complex or highly non-monotonic nonlinearities. This
+    can be tested by training both models on progressively smaller
+    subsets of a dataset.</p>
+    <h2
+    id="prediction-4-layer-specific-activation-geometry-yields-functional-specialization">Prediction
+    4: Layer-Specific Activation Geometry Yields Functional
+    Specialization</h2>
+    <p>Since each layer possesses its own activation network, we predict
+    that the learned activation functions will diverge across layers and
+    acquire distinct computational roles. Early layers may learn
+    smoother or more compressive nonlinearities, while deeper layers may
+    learn sharper or more selective transformations. This can be tested
+    by visualizing the learned activation functions and their
+    derivatives after training.</p>
+    <h2
+    id="prediction-5-pre-training-on-classical-activations-improves-stability">Prediction
+    5: Pre-Training on Classical Activations Improves Stability</h2>
+    <p>The framework predicts that initializing <span
+    class="math inline"><em>f</em></span> and <span
+    class="math inline"><em>f</em>′</span> to approximate a classical
+    activation (e.g., <span class="math inline">tanh </span>) will yield
+    more stable early training dynamics than random initialization. This
+    can be tested by comparing training curves, gradient norms, and
+    activation statistics under both initialization schemes.</p>
+    <h2
+    id="prediction-6-the-derivative-network-is-primarily-useful-during-training">Prediction
+    6: The Derivative Network Is Primarily Useful During Training</h2>
+    <p>Because <span class="math inline"><em>f</em>′(<em>x</em>)</span>
+    is only required for backpropagation, we predict that the derivative
+    network may be discarded or simplified after training with minimal
+    impact on inference performance. This can be tested by replacing
+    <span class="math inline"><em>f</em>′(<em>x</em>)</span> with an
+    analytic derivative of <span
+    class="math inline"><em>f</em>(<em>x</em>)</span>, a numerical
+    approximation, or a frozen version of the learned derivative network
+    during inference.</p>
+    <h2
+    id="prediction-7-transformer-like-inductive-biases-emerge-at-the-neuron-level">Prediction
+    7: Transformer-Like Inductive Biases Emerge at the Neuron Level</h2>
+    <p>The internal multi-layer structure of the activation networks
+    resembles the feedforward blocks of transformer architectures. We
+    predict that adaptive neurons will exhibit transformer-like
+    behaviors, such as hierarchical feature formation or improved
+    modularity, even in simple multilayer perceptrons. This can be
+    tested by analyzing representation similarity, feature clustering,
+    or layer-wise abstraction patterns.</p>
+    <h2
+    id="prediction-8-consistency-constraints-improve-generalization">Prediction
+    8: Consistency Constraints Improve Generalization</h2>
+    <p>The requirement that <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span> approximate the
+    derivative of <span
+    class="math inline"><em>f</em>(<em>x</em>)</span> acts as a
+    structural regularizer. We predict that models trained with this
+    consistency constraint will generalize better than those trained
+    without it, even when the forward performance during training is
+    similar. This can be tested by comparing validation performance and
+    robustness to distribution shifts.</p>
+    <h2
+    id="prediction-9-three-stage-training-improves-final-performance">Prediction
+    9: Three-Stage Training Improves Final Performance</h2>
+    <p>The proposed three-stage training protocol—(i) pre-training
+    activation networks on a fixed nonlinearity, (ii) joint training of
+    network weights and neuron networks, and (iii) freezing neuron
+    networks for a final fine-tuning phase—introduces a structured
+    learning schedule. We predict that this staged approach will yield
+    better final performance than purely joint training, due to improved
+    stability in early training and reduced overfitting in late
+    training. This can be tested by comparing final loss and
+    generalization error across training regimes.</p>
+    <h2
+    id="prediction-10-three-stage-training-reduces-sensitivity-to-initialization">Prediction
+    10: Three-Stage Training Reduces Sensitivity to Initialization</h2>
+    <p>Because the first stage produces a canonical activation geometry
+    and the third stage removes degrees of freedom by freezing neuron
+    networks, we predict that the three-stage protocol will reduce
+    sensitivity to random initialization. Models trained with this
+    protocol should exhibit lower variance in performance across random
+    seeds compared to models trained jointly from scratch. This can be
+    evaluated by measuring performance dispersion across multiple
+    independent training runs.</p>
+    <p>In summary, the adaptive neuron framework yields a set of clear,
+    falsifiable predictions that can be evaluated using controlled toy
+    experiments. These predictions provide a roadmap for future
+    empirical work and offer a means of assessing the practical
+    relevance of the theoretical contributions presented in this
+    paper.</p>
+    <h1 id="novelties-and-implications">Novelties and Implications</h1>
+    <p>The adaptive neuron framework introduces several conceptual and
+    structural innovations that distinguish it from classical neural
+    network design. These novelties have direct implications for
+    expressivity, training dynamics, architectural modularity, and the
+    theoretical understanding of neural computation.</p>
+    <h2 id="neural-networks-as-activation-functions">Neural Networks as
+    Activation Functions</h2>
+    <p>The central novelty of this work is the replacement of fixed
+    activation functions with trainable neural networks. Each layer is
+    equipped with its own activation network <span
+    class="math inline"><em>f</em>(<em>x</em>)</span>, enabling the
+    nonlinearity itself to acquire internal structure, depth, and
+    learnable geometry. This transforms the activation from a static
+    mathematical function into a computational module with
+    representational capacity. As a result, expressivity no longer
+    depends solely on the depth or width of the surrounding architecture
+    but also on the internal dynamics of the activation networks.</p>
+    <h2 id="a-separate-network-for-the-derivative">A Separate Network
+    for the Derivative</h2>
+    <p>A second innovation is the introduction of a dedicated derivative
+    network <span class="math inline"><em>f</em>′(<em>x</em>)</span>.
+    Instead of relying on analytic differentiation of <span
+    class="math inline"><em>f</em></span>, the model learns an explicit
+    approximation of the derivative. This design decouples the forward
+    and backward computational pathways, allowing the derivative to be
+    optimized for stability, smoothness, or task–specific sensitivity.
+    Although <span class="math inline"><em>f</em>′(<em>x</em>)</span> is
+    essential during training, it may be discarded or simplified after
+    optimization, raising the possibility of reduced inference cost.</p>
+    <h2 id="layer-specific-activation-geometry">Layer-Specific
+    Activation Geometry</h2>
+    <p>Unlike classical networks, where the same activation function is
+    applied uniformly across layers, adaptive neurons allow each layer
+    to possess its own activation geometry. The internal architecture of
+    the activation network—its depth, width, and nonlinearities—can
+    differ across layers, enabling heterogeneous computational roles.
+    This mirrors the diversity of nonlinear processing observed in
+    biological cortical layers and introduces a new dimension of
+    architectural design: the geometry of the activation itself.</p>
+    <h2
+    id="initialization-and-pre-training-of-activation-networks">Initialization
+    and Pre-Training of Activation Networks</h2>
+    <p>Because activation networks are themselves trainable modules,
+    their initialization is nontrivial. A key implication of this
+    framework is the need for principled pre-training. Initializing
+    <span class="math inline"><em>f</em></span> and <span
+    class="math inline"><em>f</em>′</span> to approximate a classical
+    activation function (e.g., <span class="math inline">tanh </span>)
+    provides a stable starting point and avoids chaotic early dynamics.
+    This pre-training step introduces a new methodological axis: the
+    choice of initial activation geometry and its influence on
+    subsequent learning.</p>
+    <h2 id="a-three-stage-training-protocol">A Three-Stage Training
+    Protocol</h2>
+    <p>A further novelty arises from the staged training dynamics
+    enabled by adaptive neurons. The framework naturally supports a
+    three-stage protocol: (i) pre-training activation networks to
+    approximate a fixed nonlinearity, (ii) joint training of network
+    weights and neuron networks on the target task, and (iii) freezing
+    the neuron networks for a final fine-tuning phase. This staged
+    approach separates the learning of activation geometry from the
+    learning of task-specific representations, providing a structured
+    optimization pathway not available in classical architectures. It
+    also introduces the possibility of reusing pre-trained neuron
+    networks across tasks, analogous to transfer learning at the
+    activation level.</p>
+    <h2 id="parameter-scaling-and-effective-capacity">Parameter Scaling
+    and Effective Capacity</h2>
+    <p>Adaptive neurons alter the relationship between parameter count
+    and expressive power. For a layer with <span
+    class="math inline"><em>P</em></span> parameters in its weight
+    matrix and <span class="math inline"><em>Q</em></span> parameters in
+    its activation network, the effective parameterization becomes
+    approximately <span
+    class="math inline"><em>P</em> + <em>Q</em></span>. However, because
+    the activation network is shared across all neurons in the layer,
+    the increase in parameters is modest relative to the potential gain
+    in expressivity. This raises the possibility that a network with
+    significantly fewer global parameters may approximate functions
+    typically requiring much larger architectures. Understanding this
+    trade-off is an important theoretical implication of the model.</p>
+    <h2 id="potential-for-improved-learning-dynamics">Potential for
+    Improved Learning Dynamics</h2>
+    <p>The presence of a learnable derivative network introduces the
+    possibility of improved gradient flow, smoother optimization
+    landscapes, and task-adaptive sensitivity. The three-stage training
+    protocol further suggests that freezing activation networks in the
+    final phase may reduce overfitting and stabilize late-stage
+    optimization. Although this paper does not make empirical claims,
+    the theoretical structure indicates that adaptive neurons may learn
+    more efficiently or require fewer data points in certain
+    regimes.</p>
+    <h2 id="connections-to-transformer-like-computation">Connections to
+    Transformer-Like Computation</h2>
+    <p>The internal multi-layer structure of activation networks
+    resembles, in miniature, the feedforward blocks of transformer
+    architectures. This structural similarity raises the possibility
+    that adaptive neurons inherit some of the inductive biases that make
+    transformers effective, such as hierarchical representation learning
+    or modular nonlinear processing. If so, adaptive neurons may serve
+    as a bridge between classical multilayer perceptrons and
+    transformer-style computation, offering a compact and theoretically
+    grounded alternative.</p>
+    <p>In summary, the adaptive neuron framework introduces a new
+    computational primitive that expands the design space of neural
+    architectures. By endowing neurons with internal networks for both
+    activation and derivative computation, and by enabling staged
+    optimization protocols, it opens new avenues for expressivity,
+    modularity, and theoretical analysis, while remaining fully
+    compatible with standard gradient-based optimization.</p>
+    <h1 id="limitations-and-open-questions">Limitations and Open
+    Questions</h1>
+    <p>The adaptive neuron framework proposed in this paper introduces
+    internal computational structure into individual neurons, but
+    several limitations and open questions remain. These issues are not
+    flaws of the model but natural consequences of extending the
+    classical neuron design. They identify the boundaries of the present
+    theory and outline directions for future investigation.</p>
+    <h2 id="computational-overhead">Computational Overhead</h2>
+    <p>The most immediate limitation concerns computational cost. Each
+    adaptive neuron relies on two internal networks, <span
+    class="math inline"><em>f</em>(<em>x</em>)</span> and <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span>, which must be
+    evaluated during forward and backward passes. Although these
+    internal networks are intentionally small, their presence introduces
+    nontrivial overhead compared to fixed activations. An open question
+    is whether the increased expressivity compensates for the additional
+    computation in practical settings, and whether optimized
+    implementations or architectural constraints can reduce this
+    cost.</p>
+    <h2 id="parameter-efficiency">Parameter Efficiency</h2>
+    <p>A central motivation for adaptive neurons is the possibility of
+    achieving richer functional expressivity with fewer global
+    parameters. However, it remains theoretically unresolved whether the
+    internal networks of adaptive neurons can consistently replace depth
+    or width in large architectures. Formal bounds on expressivity,
+    sample complexity, or approximation power would clarify whether
+    adaptive neurons can serve as a principled alternative to scaling
+    network size.</p>
+    <h2 id="learning-dynamics-and-data-efficiency">Learning Dynamics and
+    Data Efficiency</h2>
+    <p>The introduction of internal networks raises questions about
+    optimization behavior. It is unclear whether adaptive neurons enable
+    faster convergence, improved conditioning of the loss landscape, or
+    reduced data requirements. The presence of a learnable derivative
+    network <span class="math inline"><em>f</em>′(<em>x</em>)</span> may
+    stabilize gradient flow, but this remains a hypothesis.
+    Understanding how adaptive neurons interact with gradient descent,
+    initialization schemes, and regularization is an open theoretical
+    challenge.</p>
+    <h2 id="interaction-with-transformer-like-structure">Interaction
+    with Transformer-Like Structure</h2>
+    <p>Adaptive neurons share structural features with transformer
+    feedforward blocks: internal multi-layer computation, learnable
+    nonlinear transformations, and recursive composition. Whether these
+    shared properties yield transformer-like benefits—such as improved
+    representation learning, modularity, or hierarchical
+    abstraction—remains unknown. A deeper theoretical analysis is
+    required to determine whether adaptive neurons inherit any of the
+    inductive biases that make transformers effective.</p>
+    <h2 id="stability-and-regularization">Stability and
+    Regularization</h2>
+    <p>The flexibility of internal activation networks introduces
+    potential instability. Without appropriate constraints, <span
+    class="math inline"><em>f</em>(<em>x</em>)</span> or <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span> may become
+    excessively sharp, oscillatory, or poorly conditioned. The
+    consistency requirement between <span
+    class="math inline"><em>f</em></span> and <span
+    class="math inline"><em>f</em>′</span> provides partial control, but
+    the optimal form and strength of such constraints remain open
+    questions. Identifying principled regularization strategies is
+    essential for ensuring stable training and well-behaved internal
+    dynamics.</p>
+    <h2 id="scope-of-applicability">Scope of Applicability</h2>
+    <p>It is not yet clear which classes of problems benefit most from
+    adaptive neurons. Their internal structure may be advantageous for
+    tasks requiring fine-grained nonlinear transformations, but
+    unnecessary for simpler domains. Determining the regimes in which
+    adaptive neurons provide meaningful advantages is an important
+    direction for future theoretical and empirical work.</p>
+    <h2 id="complexity-of-staged-training-protocols">Complexity of
+    Staged Training Protocols</h2>
+    <p>The introduction of staged training protocols—such as
+    pre-training activation networks, joint training, and final
+    fine-tuning with frozen neurons—adds methodological complexity. It
+    remains unclear whether the benefits of staged training outweigh the
+    additional hyperparameters, training phases, and implementation
+    overhead. Understanding when staged training is beneficial, and
+    whether simpler alternatives exist, is an open question.</p>
+    <h2 id="optimal-pre-training-targets">Optimal Pre-Training
+    Targets</h2>
+    <p>The three-stage protocol relies on pre-training activation
+    networks to approximate a fixed nonlinearity (e.g., <span
+    class="math inline">tanh </span>). However, it is unknown which
+    pre-training targets yield the best downstream performance.
+    Alternatives such as GELU, rational functions, mixtures of
+    nonlinearities, or task-specific synthetic objectives may produce
+    more effective activation geometries. Identifying optimal
+    pre-training strategies is an open research direction.</p>
+    <h2 id="freezing-strategies-and-timing">Freezing Strategies and
+    Timing</h2>
+    <p>In the final stage of the three-stage protocol, neuron networks
+    are frozen to stabilize optimization. However, the optimal timing of
+    freezing, the degree of allowed fine-tuning, and the interaction
+    between freezing and generalization remain unexplored. It is
+    possible that premature freezing limits expressivity, while late
+    freezing reduces stability. Systematic investigation is required to
+    understand these trade-offs.</p>
+    <h2
+    id="reusability-and-transferability-of-pre-trained-neurons">Reusability
+    and Transferability of Pre-Trained Neurons</h2>
+    <p>If activation networks can be pre-trained independently of
+    downstream tasks, an open question is whether such neurons can be
+    reused across architectures or domains. This raises the possibility
+    of a library of pre-trained neuron types, analogous to transfer
+    learning at the activation level. Whether such transfer is feasible,
+    beneficial, or stable remains unknown.</p>
+    <p>In summary, adaptive neurons offer a promising new computational
+    primitive, but their practical and theoretical properties are not
+    yet fully understood. Addressing these limitations and open
+    questions—including those introduced by staged training
+    protocols—will be essential for assessing the broader impact of this
+    framework on neural network design.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper introduced a theoretical framework for <em>adaptive
+    neurons</em>: computational units whose activation functions are
+    themselves trainable neural networks. By equipping each layer with
+    an internal activation network <span
+    class="math inline"><em>f</em>(<em>x</em>)</span> and a
+    corresponding derivative network <span
+    class="math inline"><em>f</em>′(<em>x</em>)</span>, adaptive neurons
+    acquire persistent internal structure, learnable sensitivity, and
+    recursive computational depth. This design generalizes classical
+    activation functions, extends the expressive capacity of multilayer
+    perceptrons without architectural expansion, and provides a
+    differentiable analogue of dendritic processing in biological
+    neurons.</p>
+    <p>The framework developed here is intentionally and entirely
+    theoretical. We formalized the structure of adaptive neurons,
+    derived their training dynamics, and articulated the consistency
+    constraints that couple <span class="math inline"><em>f</em></span>
+    and <span class="math inline"><em>f</em>′</span>. We also positioned
+    the model within existing research on learnable activations,
+    hypernetwork modulation, dendritic computation, and implicit layers,
+    showing that adaptive neurons unify and extend these ideas while
+    avoiding their limitations. Within the Triadic Cosmos paradigm,
+    adaptive neurons naturally decompose into energy (transformation),
+    information (parameters), geometry (internal architecture), and
+    recursion (self–application), offering a principled conceptual
+    grounding for their design.</p>
+    <p>Beyond the structure of individual neurons, the framework also
+    enables new training methodologies. In particular, the proposed
+    three-stage protocol—pre-training activation networks on a fixed
+    nonlinearity, jointly training neurons and network weights on the
+    target task, and finally freezing the neuron networks for a
+    dedicated fine-tuning phase—introduces a staged optimization pathway
+    not available in classical architectures. This separation between
+    learning activation geometry and learning task-specific
+    representations suggests new forms of inductive bias, stability
+    control, and potential reuse of pre-trained neuron networks across
+    tasks.</p>
+    <p>No empirical claims were made, and no implementation details were
+    required. Instead, the goal of this work was to establish a complete
+    theoretical foundation that is sufficiently precise to enable
+    practical realization without further conceptual development. The
+    resulting framework opens several avenues for future research,
+    including the study of neurons with temporal dynamics, internal
+    memory, stochastic substructures, or deeper recursive organization,
+    as well as the systematic evaluation of staged training protocols.
+    Adaptive neurons thus represent a new direction in the design of
+    computational primitives for neural networks, one in which
+    expressivity arises not only from network architecture but from the
+    internal dynamics and learnable geometry of the neurons
+    themselves.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>.</p>
+  </main>
+
+</div>
+
+</body>
+</html>
