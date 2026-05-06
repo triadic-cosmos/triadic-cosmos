@@ -144,6 +144,29 @@
     id="toc-notes-and-further-reading">Notes and Further
     Reading</a></li>
     </ul></li>
+    <li><a href="#what-are-neural-networks"
+    id="toc-what-are-neural-networks">What Are Neural Networks?</a>
+    <ul>
+    <li><a href="#neurons-and-layers"
+    id="toc-neurons-and-layers">Neurons and Layers</a></li>
+    <li><a href="#the-role-of-activation-functions"
+    id="toc-the-role-of-activation-functions">The Role of Activation
+    Functions</a></li>
+    <li><a href="#common-activation-functions"
+    id="toc-common-activation-functions">Common Activation Functions</a>
+    <ul>
+    <li><a href="#relu" id="toc-relu">ReLU</a></li>
+    <li><a href="#leaky-relu" id="toc-leaky-relu">Leaky ReLU</a></li>
+    <li><a href="#sigmoid" id="toc-sigmoid">Sigmoid</a></li>
+    <li><a href="#tanh" id="toc-tanh">Tanh</a></li>
+    <li><a href="#gelu" id="toc-gelu">GELU</a></li>
+    <li><a href="#silu-swish" id="toc-silu-swish">SiLU / Swish</a></li>
+    </ul></li>
+    <li><a href="#why-activation-functions-matter-in-agi-toys"
+    id="toc-why-activation-functions-matter-in-agi-toys">Why Activation
+    Functions Matter in AGI Toys</a></li>
+    <li><a href="#summary-3" id="toc-summary-3">Summary</a></li>
+    </ul></li>
     <li><a href="#toy-architect-reasoning-using-pre"
     id="toc-toy-architect-reasoning-using-pre">Toy Architect: Reasoning
     using PRE</a>
@@ -549,7 +572,7 @@
     id="toc-benefits-of-ensembles">Benefits of Ensembles</a></li>
     <li><a href="#architectural-neutrality"
     id="toc-architectural-neutrality">Architectural Neutrality</a></li>
-    <li><a href="#summary-3" id="toc-summary-3">Summary</a></li>
+    <li><a href="#summary-4" id="toc-summary-4">Summary</a></li>
     </ul></li>
     <li><a href="#summary-and-architectural-outlook"
     id="toc-summary-and-architectural-outlook">Summary and Architectural
@@ -938,7 +961,7 @@
     <li><a href="#a-bidirectional-benefit-for-transformers"
     id="toc-a-bidirectional-benefit-for-transformers">A Bidirectional
     Benefit for Transformers</a></li>
-    <li><a href="#summary-4" id="toc-summary-4">Summary</a></li>
+    <li><a href="#summary-5" id="toc-summary-5">Summary</a></li>
     </ul></li>
     <li><a
     href="#monte-carlo-and-domain-specific-search-as-depth-reasoning-mechanisms"
@@ -1124,7 +1147,7 @@
     <li><a href="#autonomous-workflow-execution"
     id="toc-autonomous-workflow-execution">Autonomous Workflow
     Execution</a></li>
-    <li><a href="#summary-5" id="toc-summary-5">Summary</a></li>
+    <li><a href="#summary-6" id="toc-summary-6">Summary</a></li>
     </ul></li>
     <li><a href="#what-ai-agents-do-more-and-why-it-matters"
     id="toc-what-ai-agents-do-more-and-why-it-matters">What AI Agents Do
@@ -1142,7 +1165,7 @@
     <li><a href="#rapid-deployment-and-practical-utility"
     id="toc-rapid-deployment-and-practical-utility">Rapid Deployment and
     Practical Utility</a></li>
-    <li><a href="#summary-6" id="toc-summary-6">Summary</a></li>
+    <li><a href="#summary-7" id="toc-summary-7">Summary</a></li>
     </ul></li>
     <li><a href="#what-ai-agents-do-less-and-why-it-matters"
     id="toc-what-ai-agents-do-less-and-why-it-matters">What AI Agents Do
@@ -1165,7 +1188,7 @@
     <li><a href="#no-mechanism-for-self-expansion"
     id="toc-no-mechanism-for-self-expansion">No Mechanism for
     Self-Expansion</a></li>
-    <li><a href="#summary-7" id="toc-summary-7">Summary</a></li>
+    <li><a href="#summary-8" id="toc-summary-8">Summary</a></li>
     </ul></li>
     <li><a href="#why-the-internal-approach-is-stronger"
     id="toc-why-the-internal-approach-is-stronger">Why the Internal
@@ -1193,7 +1216,7 @@
     <li><a href="#bidirectional-enhancement-of-transformer-models"
     id="toc-bidirectional-enhancement-of-transformer-models">Bidirectional
     Enhancement of Transformer Models</a></li>
-    <li><a href="#summary-8" id="toc-summary-8">Summary</a></li>
+    <li><a href="#summary-9" id="toc-summary-9">Summary</a></li>
     </ul></li>
     <li><a
     href="#synthesis-two-divergent-paths-toward-intelligent-systems"
@@ -1221,7 +1244,7 @@
     <li><a href="#two-complementary-but-unequal-paradigms"
     id="toc-two-complementary-but-unequal-paradigms">Two Complementary
     but Unequal Paradigms</a></li>
-    <li><a href="#summary-9" id="toc-summary-9">Summary</a></li>
+    <li><a href="#summary-10" id="toc-summary-10">Summary</a></li>
     </ul></li>
     <li><a
     href="#integrating-large-language-models-inside-domain-bound-agi"
@@ -1240,7 +1263,7 @@
     <li><a href="#a-new-purpose-for-large-language-models"
     id="toc-a-new-purpose-for-large-language-models">A New Purpose for
     Large Language Models</a></li>
-    <li><a href="#summary-10" id="toc-summary-10">Summary</a></li>
+    <li><a href="#summary-11" id="toc-summary-11">Summary</a></li>
     </ul></li>
     <li><a href="#conclusion-1"
     id="toc-conclusion-1">Conclusion</a></li>
@@ -2198,10 +2221,10 @@
     structure. Not from a single mapping, but from recursive interaction
     between specialized roles.</em></p>
     </blockquote>
-    <p>Part II of this book develops a computational path grounded in
-    this shared lineage. The goal is not to recreate Minsky’s theory,
-    nor to idealize human–machine hybrids, but to operationalize their
-    core principles in modern, reproducible systems—ranging from
+    <p>This book develops a computational path grounded in this shared
+    lineage. The goal is not to recreate Minsky’s theory, nor to
+    idealize human–machine hybrids, but to operationalize their core
+    principles in modern, reproducible systems—ranging from
     architectural roles and evaluators to the PRE–CAS–CE engine and the
     Toy Story implementation. This part of the book translates a
     historic vision into a concrete, architectural path toward AGI.</p>
@@ -2216,13 +2239,152 @@
     perspective anticipates modern evaluator–refiner architectures,
     hybrid intelligence systems, and the modular decomposition used
     throughout this book.</p>
+    <h1 id="what-are-neural-networks">What Are Neural Networks?</h1>
+    <p>Neural networks form the computational substrate of modern
+    machine learning, and within this book they serve as the primary
+    <em>intelligence layer</em> underlying many of the toy universes and
+    experimental systems that illustrate the Triadic Cosmos. Whenever a
+    toy world learns, adapts, classifies, predicts, or transforms
+    information, it does so through the dynamics of a neural network.
+    Understanding these networks is therefore essential for
+    understanding how the AGI prototypes in this book operate
+    internally.</p>
+    <p>From the perspective of the Triad–Quad–Septad ontology, neural
+    networks occupy a precise conceptual role. They instantiate the
+    <em>computational substrate</em> (Triad:
+    <strong>Substrate</strong>), they implement the <em>transformational
+    dynamics</em> that define cognitive processes (Quad:
+    <strong>Dynamics</strong>), and they support the emergence of
+    structured behaviour across multiple scales (Septad:
+    <strong>Emergence</strong>). Neural networks are thus not merely
+    engineering tools; they are concrete realisations of the ontological
+    principles developed earlier.</p>
+    <p>Despite their widespread use, the internal mechanisms of neural
+    networks are often treated as opaque or mysterious. In this chapter,
+    we take a clear and structured view of what neural networks are, how
+    they operate, and why <em>activation functions</em> play a central
+    role in shaping their behaviour. This is particularly important in
+    the context of the AGI book, because many of the toy universes rely
+    on different activation regimes to produce distinct forms of
+    behaviour.</p>
+    <h2 id="neurons-and-layers">Neurons and Layers</h2>
+    <p>A neural network is composed of simple computational units called
+    <em>neurons</em>. Each neuron receives an input vector <span
+    class="math inline"><em>x</em> ∈ ℝ<sup><em>n</em></sup></span>,
+    computes a weighted sum, adds a bias, and applies a nonlinear
+    transformation:</p>
+    <p><span
+    class="math display"><em>y</em> = <em>ϕ</em>(<em>W</em><em>x</em>+<em>b</em>),</span></p>
+    <p>where <span class="math inline"><em>W</em></span> is a weight
+    matrix, <span class="math inline"><em>b</em></span> is a bias
+    vector, and <span class="math inline"><em>ϕ</em></span> is an
+    activation function.</p>
+    <p>A single neuron is limited in expressive power, but when many
+    neurons are arranged into layers, and layers are stacked into deeper
+    architectures, the resulting network can approximate highly complex
+    functions. This is the essence of the <em>universal approximation
+    theorem</em>: a sufficiently large neural network can approximate
+    any continuous function on a compact domain.</p>
+    <p>In the Triadic Cosmos, this layered structure corresponds to the
+    <em>hierarchical organisation of transformations</em> (Quad:
+    <strong>Composition</strong>) and the emergence of higher-level
+    behaviour from simple local rules (Septad:
+    <strong>Emergence</strong>).</p>
+    <h2 id="the-role-of-activation-functions">The Role of Activation
+    Functions</h2>
+    <p>The activation function <span
+    class="math inline"><em>ϕ</em></span> is the only source of
+    nonlinearity in a neural network. Without it, the entire network
+    collapses into a single linear transformation, regardless of
+    depth:</p>
+    <p><span
+    class="math display"><em>ϕ</em>(<em>x</em>) = <em>x</em>  ⇒  <em>ϕ</em>(<em>W</em><sub>2</sub><em>ϕ</em>(<em>W</em><sub>1</sub><em>x</em>)) = <em>W</em><sub>2</sub><em>W</em><sub>1</sub><em>x</em>.</span></p>
+    <p>Thus, activation functions are not a minor detail—they are the
+    <em>structural backbone</em> that enables neural networks to model
+    nonlinear relationships.</p>
+    <p>Activation functions determine:</p>
+    <ul>
+    <li><p>the geometry of the network’s internal
+    representations,</p></li>
+    <li><p>the flow of gradients during training,</p></li>
+    <li><p>the stability of optimisation,</p></li>
+    <li><p>the expressiveness of each layer,</p></li>
+    <li><p>and the inductive biases of the entire architecture.</p></li>
+    </ul>
+    <p>In the AGI book, these properties are essential because the toy
+    universes introduced throughout the chapters rely on different
+    activation regimes. Some toys require sharp, piecewise-linear
+    transitions; others require smooth, expressive nonlinearities; still
+    others benefit from saturating or periodic behaviours. The diversity
+    of activation functions mirrors the diversity of cognitive dynamics
+    across the Triad, Quad, and Septad.</p>
+    <h2 id="common-activation-functions">Common Activation
+    Functions</h2>
+    <p>Several activation functions have become standard in deep
+    learning. Each has distinct properties and inductive biases, and
+    many of them appear throughout the toy systems in this book.</p>
+    <h3 id="relu">ReLU</h3>
+    <p><span
+    class="math display">ReLU(<em>x</em>) = max (0,<em>x</em>).</span></p>
+    <p>Simple, efficient, and widely used, but prone to “dying” neurons
+    when gradients vanish.</p>
+    <h3 id="leaky-relu">Leaky ReLU</h3>
+    <p><span class="math display">$$\mathrm{LeakyReLU}(x) =
+    \begin{cases}
+    	x, &amp; x \ge 0, \\
+    	\alpha x, &amp; x &lt; 0,
+    \end{cases}$$</span></p>
+    <p>with a small negative slope to avoid inactive units.</p>
+    <h3 id="sigmoid">Sigmoid</h3>
+    <p><span class="math display">$$\sigma(x) = \frac{1}{1 +
+    e^{-x}}.$$</span></p>
+    <p>Historically important, but prone to saturation and vanishing
+    gradients.</p>
+    <h3 id="tanh">Tanh</h3>
+    <p><span class="math display">$$\tanh(x) = \frac{e^x - e^{-x}}{e^x +
+    e^{-x}}.$$</span></p>
+    <p>Zero-centered and smoother than sigmoid.</p>
+    <h3 id="gelu">GELU</h3>
+    <p><span
+    class="math display">GELU(<em>x</em>) = <em>x</em><em>Φ</em>(<em>x</em>),</span></p>
+    <p>where <span class="math inline"><em>Φ</em></span> is the standard
+    normal CDF. Widely used in transformer architectures.</p>
+    <h3 id="silu-swish">SiLU / Swish</h3>
+    <p><span
+    class="math display">SiLU(<em>x</em>) = <em>x</em> ⋅ <em>σ</em>(<em>x</em>).</span></p>
+    <p>Smooth, expressive, and effective across many tasks.</p>
+    <h2 id="why-activation-functions-matter-in-agi-toys">Why Activation
+    Functions Matter in AGI Toys</h2>
+    <p>Throughout the AGI book, neural networks appear in many forms: as
+    classifiers, as dynamical systems, as agents, as world models, and
+    as components of miniature universes. In each case, the choice of
+    activation function shapes the behaviour of the system.</p>
+    <p>For example:</p>
+    <ul>
+    <li><p>toy reasoning systems often rely on piecewise-linear
+    activations to create sharp decision boundaries,</p></li>
+    <li><p>toy physics worlds benefit from smooth activations that
+    support continuous dynamics,</p></li>
+    <li><p>symbolic–numeric hybrids may require saturating functions to
+    stabilise discrete transitions.</p></li>
+    </ul>
+    <p>Activation functions thus play a central role in determining how
+    a toy universe behaves, learns, and generalises.</p>
+    <h2 class="unnumbered" id="summary-3">Summary</h2>
+    <p>Neural networks are powerful function approximators, but their
+    behaviour is fundamentally shaped by their activation functions.
+    Fixed activations impose specific inductive biases that influence
+    expressiveness, stability, and learning dynamics. Because many toy
+    universes in this book rely on neural networks, understanding these
+    activation functions is essential for understanding the behaviour of
+    the AGI prototypes built on top of them.</p>
+    <p>The next toy chapters explores how these networks are trained and
+    how their internal representations evolve during learning.</p>
     <h1 id="toy-architect-reasoning-using-pre">Toy Architect: Reasoning
     using PRE</h1>
     <h2 id="introduction-a-tiny-universe-of-thought">Introduction — A
     Tiny Universe of Thought</h2>
-    <p>The Toy Architect is the fourth universe in the world‑learning
-    quartet. Where MazeRunner explores movement, Pentadia explores
-    ecology, and Octadia explores strategy, the Toy Architect explores
+    <p>Toy Architect is the first toy universe in the book and explores
     reasoning.</p>
     <p>It is a symbolic world with:</p>
     <ul>
@@ -4413,7 +4575,7 @@
     <p>This neutrality allows PRE–CAS to support a wide range of
     multi-agent configurations, from loosely coupled populations to
     tightly integrated collective systems.</p>
-    <h3 id="summary-3">Summary</h3>
+    <h3 id="summary-4">Summary</h3>
     <p>The ensemble layer extends PRE–CAS from a single reasoning
     pipeline to a pluralistic architecture. By running multiple PRE–CAS
     instances in parallel, the system gains robustness, diversity, and
@@ -7328,7 +7490,7 @@
     structured cognitive environment in which transformer models can
     operate more effectively, while simultaneously enabling forms of
     reasoning that cannot emerge from next-token prediction alone.</p>
-    <h3 id="summary-4">Summary</h3>
+    <h3 id="summary-5">Summary</h3>
     <p>Hierarchical contexts, parallel reasoning, and asynchronous
     processing transform the architecture from a linear prompt-driven
     system into a distributed, event-driven cognitive environment. By
@@ -8224,7 +8386,7 @@
     the reasoning core coordinate progress without external
     intervention. The resulting behaviour—a system that continues
     reasoning on its own—is similar in appearance.</p>
-    <h3 id="summary-5">Summary</h3>
+    <h3 id="summary-6">Summary</h3>
     <p>These behavioural overlaps explain why AI agents are often
     perceived as a practical route toward AGI. They demonstrate
     planning, tool use, multi-step reasoning, and autonomous
@@ -8312,7 +8474,7 @@
     components, which introduces an initial engineering cost. However,
     once implemented, it offers capabilities that agents cannot
     match.</p>
-    <h3 id="summary-6">Summary</h3>
+    <h3 id="summary-7">Summary</h3>
     <p>AI agents excel in integration, tooling, and practical
     deployment. They provide a convenient interface between monolithic
     language models and real-world environments, supported by a rich
@@ -8418,7 +8580,7 @@
     both of which modify behaviour without expanding the underlying
     architecture. Domain-bound AGI, by contrast, supports procedural
     learning through expert acquisition and modular integration.</p>
-    <h3 id="summary-7">Summary</h3>
+    <h3 id="summary-8">Summary</h3>
     <p>AI agents do less not because they are poorly engineered, but
     because their architecture fundamentally limits what they can do.
     They lack structured state, internal control flow, explicit search,
@@ -8512,7 +8674,7 @@
     procedural scaffolding that the model lacks. The result is a
     bidirectional relationship: the architecture enhances the
     transformer, and the transformer empowers the architecture.</p>
-    <h3 id="summary-8">Summary</h3>
+    <h3 id="summary-9">Summary</h3>
     <p>The internal approach of domain-bound AGI is stronger because it
     provides the structural foundations that AI agents attempt to
     approximate externally. It offers stability through structured
@@ -8608,7 +8770,7 @@
     unequal in principle. AI agents offer immediate utility;
     domain-bound AGI offers a path toward governed, compositional
     intelligence.</p>
-    <h3 id="summary-9">Summary</h3>
+    <h3 id="summary-10">Summary</h3>
     <p>AI agents and domain-bound AGI represent two divergent paths
     toward intelligent systems. Agents wrap external scaffolding around
     monolithic models to simulate reasoning, while domain-bound AGI
@@ -8740,7 +8902,7 @@
     the deeper cognitive mechanisms required for scalable, transparent,
     and extensible reasoning.</p>
     </div>
-    <h3 id="summary-10">Summary</h3>
+    <h3 id="summary-11">Summary</h3>
     <p>Domain-bound AGI provides a principled way to integrate large
     language models as internal cognitive enhancers. This role is
     distinct from the monolithic LLM at the center of agent systems and
