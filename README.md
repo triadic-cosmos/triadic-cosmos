@@ -49,6 +49,25 @@ authorship, integrity, and non‑commercial use.
 
 ## 📚 Books
 
+The Triadic Cosmos Library is a collection of architectural volumes that explore how  
+structure, modularity, and explicit mechanisms can replace monolithic black‑box models  
+across language, cognition, physics, and artificial intelligence.  
+Each book develops one layer of the same overarching framework:  
+systems built from small interacting components, governed by deterministic structure,  
+recursive processes, and transparent mechanisms rather than scale or statistical opacity.
+
+Together, these books form a coherent ecosystem:  
+a unified architectural lens spanning AGI, language generation, cosmology, toy universes,  
+and modular reasoning systems.
+
+**All volumes in this library are living documents.**  
+They are published as early drafts to make the architecture transparent, reproducible,  
+and open to iteration. Each book evolves alongside the research: chapters may expand,  
+structures may refine, and new mechanisms may be introduced as the broader Triadic Cosmos  
+framework continues to develop.  
+These drafts are intentionally released early so the ecosystem can grow in the open —  
+mechanism by mechanism, world by world, book by book.
+
 ### **1. Dynamic Modular Language Graphs (DMLG)**  
 A complete architectural and empirical foundation for a new class of language generators built from deterministic graphs, modular micro‑models, canonical grammar, and explicit context structure.  
 This book introduces the Dynamic Modular Language Graph as a fully interpretable alternative to transformer‑based language modelling: a system where language emerges from structure rather than scale.  
