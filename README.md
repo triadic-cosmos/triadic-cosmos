@@ -165,17 +165,19 @@ Provides the language‑level implementation of the Paged‑PRE‑CAS architectu
 
 ---
 
-### **6. Language as Graph Traversal: The DMLG Architecture**  
-Presents the Dynamic Modular Language Graph (DMLG), a structural alternative to  
-transformer‑based language modelling. Shows how language generation emerges from  
-probabilistic traversal over a deterministic canonical token‑graph, guided by paging,  
-micro‑MLPs, grammar‑driven context compression, and the PRE reasoning loop.  
-Demonstrates that coherent, stylistically stable language can be produced by small,  
-transparent models trained on tiny datasets — without embeddings, attention,  
-transformers, or large‑scale statistical training.  
-Establishes DMLG as the language‑generation implementation of the Paged‑PRE‑CAS  
-architecture and as a modular, interpretable, cognitively plausible foundation for  
-future AGI systems.
+### **6. Language as Graph Traversal: The DMLG Architecture**
+The Dynamic Modular Language Graph (DMLG) is introduced as a deterministic, structural representation of language, where canonical tokens and their transitions form an explicit, navigable graph.
+Rather than modelling language as a statistical distribution, DMLG treats it as graph geometry: a canonical structure encoding domain boundaries, stylistic rules, semantic constraints, and allowable transitions.
+
+DMLG positions graph traversal as the unifying mechanism for multiple applications.
+It can govern, filter, constrain, audit, or guide any generative system by enforcing canonical structure and domain fidelity.
+Language generation becomes a special case of traversal rather than the primary purpose of the architecture.
+
+The architecture enables **hybrid intelligence** systems, where a large language model acts as a generative engine and DMLG provides a transparent, traceable, modular, dynamically learnable governance layer.
+This layer is dataset‑driven, customizable, lightweight, cloud‑deployable, ensemble‑friendly, and compatible with any LLM — allowing enterprises to build proprietary canon layers, domain‑locked filters, explainable safety modules, and on‑demand governance systems without retraining or fine‑tuning.
+
+DMLG is established as a **general‑purpose** language‑graph architecture within the Paged‑PRE‑CAS paradigm:
+a modular, interpretable, cognitively plausible foundation for future cloud‑native AGI systems, where governance and structure — not generation — form the core of intelligence.
 
 ---
 
