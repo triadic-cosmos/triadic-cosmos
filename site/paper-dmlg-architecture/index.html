@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Language as Graph Traversal: The DMLG Architecture<br />
+A dynamic, modular, explainable graph-based governance architecture for
+language</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#motivation" id="toc-motivation">Motivation</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#definition" id="toc-definition">Definition</a></li>
+    <li><a href="#architecture"
+    id="toc-architecture">Architecture</a></li>
+    <li><a href="#experimental-setup"
+    id="toc-experimental-setup">Experimental Setup</a></li>
+    <li><a href="#structural-evaluation-mode"
+    id="toc-structural-evaluation-mode">Structural Evaluation
+    Mode</a></li>
+    <li><a href="#limitations-and-open-questions"
+    id="toc-limitations-and-open-questions">Limitations and Open
+    Questions</a></li>
+    <li><a href="#testable-predictions"
+    id="toc-testable-predictions">Testable Predictions</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Contemporary language models are built on large-scale statistical
+    learning, high-dimensional embeddings, and transformer-based
+    attention mechanisms. These systems have achieved remarkable
+    generative capabilities, yet they lack explicit structure,
+    deterministic control, and transparent internal representations. As
+    a result, they remain difficult to govern, hard to interpret, and
+    fundamentally limited in their ability to provide guarantees about
+    domain fidelity, safety, or stylistic consistency. Parameter scaling
+    has improved performance but has not resolved these structural
+    limitations.</p>
+    <p>This paper introduces the Dynamic Modular Language Graph (DMLG),
+    a general-purpose architecture that models language as a
+    deterministic, canonical graph rather than a probability
+    distribution. In DMLG, tokens and their allowable transitions form
+    an explicit structural substrate, and language use is expressed as
+    traversal through this graph. This shift from statistical modelling
+    to structural representation enables transparency, modularity, and
+    fine-grained control that are difficult to obtain from purely neural
+    approaches.</p>
+    <p>The primary contribution of DMLG is not a new generative model,
+    but a new <em>governance architecture</em>. By providing an explicit
+    graph of canonical transitions, DMLG can constrain, filter, audit,
+    or guide any generative system—independent of its internal
+    mechanisms. This enables domain-locked behaviour, explainable
+    transitions, deterministic safety constraints, and canonical style
+    enforcement. Generation is treated only as a special case of graph
+    traversal, rather than the central purpose of the architecture.</p>
+    <p>DMLG is lightweight, modular, trainable on small datasets, and
+    compatible with existing large language models. It integrates
+    naturally with hybrid intelligence systems, where a generative model
+    provides expressive power and DMLG provides structure, control, and
+    interpretability. By introducing an explicit structural layer, DMLG
+    addresses fundamental limitations of parameter scaling and offers a
+    path toward safer, more transparent, and more modular AI
+    systems.</p>
+    <p>The remainder of this paper develops the motivation, related
+    work, architectural details, and implications of modelling language
+    as graph traversal, and positions DMLG as a structural foundation
+    for future governance layers in intelligent systems.</p>
+    <h1 id="motivation">Motivation</h1>
+    <p>Large language models have demonstrated impressive generative
+    capabilities, yet they remain fundamentally limited in their ability
+    to provide guarantees about correctness, safety, domain fidelity, or
+    stylistic consistency. Their internal representations are opaque,
+    high-dimensional, and statistically entangled, making it difficult
+    to audit behaviour, enforce constraints, or ensure predictable
+    operation in sensitive or domain-specific settings. As these models
+    are increasingly deployed in real-world applications, the need for
+    governance, transparency, and controllability has become
+    critical.</p>
+    <p>DMLG is motivated by the observation that many of the structural
+    limitations of LLMs arise not from insufficient scale, but from the
+    lack of an explicit, deterministic representation of linguistic
+    structure. Rather than attempting to solve governance and safety
+    through additional parameter scaling, DMLG introduces a
+    complementary structural layer that can constrain, filter, or guide
+    any generative model. This hybrid intelligence approach allows a
+    statistical model to provide expressive power while a deterministic
+    graph provides structure, control, and explainability.</p>
+    <p>Although this paper focuses on language, the underlying
+    architectural principles are general. A deterministic, modular,
+    dynamically learnable graph can serve as a governance substrate for
+    any domain that can be expressed in terms of states and transitions.
+    The resulting architecture is traceable, transparent,
+    dataset-driven, canon-faithful, customizable, lightweight,
+    computationally inexpensive, cloud-deployable, and usable on demand.
+    These properties make DMLG suitable not only for language governance
+    but for a broad class of structured reasoning and control tasks
+    across domains.</p>
+    <p>Moreover, the architecture is practically realizable. Because
+    DMLG relies on explicit structure and small, interpretable
+    components rather than large-scale statistical training, it can be
+    developed and deployed by a focused team of AI, language, and domain
+    experts. With appropriate engineering effort, such a system could be
+    brought into production within a relatively short time frame,
+    providing a viable path toward safer, more transparent, and more
+    controllable intelligent systems.</p>
+    <h1 id="related-work">Related Work</h1>
+    <h2 id="language-models-and-structural-alternatives">Language Models
+    and Structural Alternatives</h2>
+    <p>Transformer-based language models <span class="citation"
+    data-cites="vaswani2017attention brown2020gpt3 touvron2023llama"></span>
+    form the dominant paradigm in contemporary NLP. These systems rely
+    on high-dimensional embeddings, attention mechanisms, and
+    large-scale statistical training. While highly capable, they provide
+    limited transparency, weak controllability, and no explicit
+    structural representation of language.</p>
+    <p>Several strands of research explore alternatives to purely
+    statistical sequence modelling. Graph-based or symbolic approaches
+    to linguistic structure <span class="citation"
+    data-cites="gildea2002synchronous jurafsky2023speech"></span> aim to
+    make syntax or semantics explicit, while neuro-symbolic hybrids
+    <span class="citation" data-cites="besold2017neurosymbolic"></span>
+    and modular neural architectures <span class="citation"
+    data-cites="andreas2016neuralmodules"></span> attempt to combine
+    learned components with structured reasoning. However, these systems
+    typically do not provide a deterministic, canonical token-level
+    graph of language.</p>
+    <h2 id="governance-safety-and-explainability">Governance, Safety,
+    and Explainability</h2>
+    <p>The need for controllable, auditable, and safe language systems
+    has led to work on constrained decoding <span class="citation"
+    data-cites="hokamp2017lexical"></span>, rule-based filters, and
+    post-hoc safety layers <span class="citation"
+    data-cites="ganguli2022redteaming"></span>. Explainable AI
+    frameworks <span class="citation"
+    data-cites="arrieta2020explainable"></span> and formal verification
+    techniques <span class="citation"
+    data-cites="huang2017safetynet"></span> offer partial solutions but
+    do not yield a unified structural model that can act as a governance
+    layer for generative systems. Existing approaches operate
+    <em>outside</em> the model’s internal structure and therefore cannot
+    provide deterministic guarantees about allowed transitions or domain
+    boundaries.</p>
+    <h2 id="graph-based-reasoning-and-traversal-models">Graph-Based
+    Reasoning and Traversal Models</h2>
+    <p>Graph traversal is widely used in semantic parsing, knowledge
+    graph reasoning, and planning <span class="citation"
+    data-cites="hamilton2017inductive kipf2016gcn"></span>, but these
+    methods operate on external knowledge structures rather than
+    modelling language itself as a canonical graph. Prior work on
+    dynamic or modular graph architectures remains limited and is
+    generally not applied to token-level linguistic structure or
+    governance.</p>
+    <h2 id="relation-to-earlier-works-by-the-author">Relation to Earlier
+    Works by the Author</h2>
+    <p>This paper builds on several earlier works by the author.</p>
+    <p>First, <em>A Safe and Modular AGI Architecture</em> introduces
+    the Paged–PRE–CAS framework for modular reasoning, paging-based
+    context management, and evaluator-governed execution. The present
+    work adopts the same design philosophy of explicit modular structure
+    and deterministic control, but applies it specifically to language
+    as a canonical graph.</p>
+    <p>Second, <em>A Dynamic and Modular Architecture for Language
+    Modeling</em> presents DMLM, a generative architecture demonstrating
+    that coherent language can emerge from modular, non-transformer
+    components. In contrast, the current paper does not focus on
+    generation: the Dynamic Modular Language Graph (DMLG) is introduced
+    as a structural, deterministic representation of language, with
+    generation treated only as a special case of graph traversal.</p>
+    <p>Third, <em>Adaptive Neural Networks</em> highlights the
+    importance of custom activation functions and page-specific dynamics
+    in modular systems. These ideas inform the design of DMLG’s local
+    transition evaluators, which rely on small, interpretable components
+    rather than large monolithic networks.</p>
+    <p>Finally, <em>Structural Limits for AI Scaling</em> argues that
+    parameter scaling alone cannot yield systems with the structural
+    guarantees, controllability, or explainability required for
+    AGI-aligned behaviour.</p>
+    <p>The present work addresses this gap by proposing a graph-based
+    governance architecture that provides explicit structure,
+    deterministic transitions, and domain-level control, independent of
+    the underlying generative model.</p>
+    <h1 id="definition">Definition</h1>
+    <p>A Dynamic Modular Language Graph (DMLG) is a structural,
+    deterministic, and context-sensitive language generator built on top
+    of a canonical language graph. It extends the formal graph-theoretic
+    foundations of language with dynamic traversal mechanisms, a
+    non-statistical generative process, an explicit linguistic ontology,
+    and cognitively plausible functional organisation. This section
+    provides a high-level definition of the DMLG concept.</p>
+    <h2 id="language-graph-the-structural-substrate">Language Graph: The
+    Structural Substrate</h2>
+    <p>A DMLG is grounded in a canonical language graph <span
+    class="math inline"><em>G</em> = (<em>V</em>,<em>E</em>)</span>,
+    where:</p>
+    <ul>
+    <li><p><span class="math inline"><em>V</em></span> is the set of
+    canonical tokens (lemmas, grammar markers, structural
+    symbols),</p></li>
+    <li><p><span
+    class="math inline"><em>E</em> ⊆ <em>V</em> × <em>V</em></span> is
+    the set of admissible transitions.</p></li>
+    </ul>
+    <p>Edges are either deterministic (structural invariants) or
+    functional (context-sensitive transitions scored by local
+    evaluators). The graph is canon-closed: it cannot generate unseen
+    tokens or transitions. This provides strong structural guarantees
+    and forms the static backbone of the system.</p>
+    <h2 id="dynamic-layer-context-sensitive-navigation">Dynamic Layer:
+    Context-Sensitive Navigation</h2>
+    <p>A DMLG becomes dynamic by equipping the graph with:</p>
+    <ul>
+    <li><p><strong>local micro-models</strong> (deterministic functions
+    or small MLPs) that score transitions,</p></li>
+    <li><p><strong>grammar-driven context compression</strong> that
+    activates relevant regions of the graph,</p></li>
+    <li><p><strong>probabilistic traversal</strong> that selects among
+    admissible transitions.</p></li>
+    </ul>
+    <p>Generation is not next-token prediction but navigation: a
+    probabilistic walk through a deterministic structure guided by
+    compressed context.</p>
+    <h2 id="paging-modular-biomes">Paging: Modular Biomes</h2>
+    <p>The node set is partitioned into pages—modular subgraphs
+    representing semantic or structural biomes. Paging restricts
+    traversal, reduces search complexity, and enables modular
+    specialisation. Pages are activated or deactivated based on context,
+    providing a structured mechanism for domain control and stylistic
+    fidelity.</p>
+    <h2 id="not-a-language-model">Not a Language Model</h2>
+    <p>A DMLG is not a language model in the classical sense. It
+    has:</p>
+    <ul>
+    <li><p>no embeddings,</p></li>
+    <li><p>no attention,</p></li>
+    <li><p>no autoregressive hidden state,</p></li>
+    <li><p>no probabilistic next-token prediction.</p></li>
+    </ul>
+    <p>It generates sentences through structural composition, modular
+    micro-models, and context-sensitive traversal. It is therefore a
+    <em>language generator</em>, not a language model, and occupies an
+    architectural category orthogonal to transformers and recurrent
+    networks.</p>
+    <h2 id="a-linguistic-ontology">A Linguistic Ontology</h2>
+    <p>By making tokens, edges, and pages explicit, a DMLG exposes the
+    ontological structure presupposed by language:</p>
+    <ul>
+    <li><p>tokens as ontological units,</p></li>
+    <li><p>edges as grammatical or semantic relations,</p></li>
+    <li><p>pages as modular regions,</p></li>
+    <li><p>traversal as dynamic instantiation of meaning.</p></li>
+    </ul>
+    <p>This yields a mechanistic ontology of language that is explicit,
+    interpretable, and corpus-grounded.</p>
+    <h2 id="cognitive-plausibility">Cognitive Plausibility</h2>
+    <p>Although not designed as a cognitive model, the DMLG aligns with
+    key principles of human language cognition:</p>
+    <ul>
+    <li><p>discrete lemmas and grammatical markers,</p></li>
+    <li><p>modular semantic regions,</p></li>
+    <li><p>local decision-making,</p></li>
+    <li><p>constraint-based incremental processing,</p></li>
+    <li><p>structural self-monitoring via PRE.</p></li>
+    </ul>
+    <p>These parallels arise naturally from the architecture’s
+    structural commitments.</p>
+    <h2 id="sentence-level-pre">Sentence-Level PRE</h2>
+    <p>The Propose–Retry–Evaluate (PRE) mechanism provides
+    sentence-level governance. PRE validates complete sentences using
+    minimal deterministic checks (grammar validity, structural closure,
+    biome consistency) and triggers retries when necessary. PRE
+    complements token-level coherence rules and ensures global
+    structural integrity.</p>
+    <h2 id="summary">Summary</h2>
+    <p>A DMLG is defined by:</p>
+    <ul>
+    <li><p>a deterministic canonical graph,</p></li>
+    <li><p>modular paging biomes,</p></li>
+    <li><p>grammar-driven context compression,</p></li>
+    <li><p>local micro-models for functional variation,</p></li>
+    <li><p>probabilistic traversal through admissible
+    transitions,</p></li>
+    <li><p>and PRE-based structural governance.</p></li>
+    </ul>
+    <p>It is a structural, interpretable, and cognitively plausible
+    language generator whose power derives from explicit structure
+    rather than statistical scale.</p>
+    <h1 id="architecture">Architecture</h1>
+    <p>The Dynamic Modular Language Graph (DMLG) refines earlier modular
+    language architectures by making the structural representation of
+    language fully explicit and deterministic. Rather than modelling
+    language as a latent distribution over embeddings, DMLG represents
+    it as a graph of canonical tokens and transitions, equipped with
+    local evaluators that govern traversal. This section provides a
+    high-level architectural overview, focusing on the aspects most
+    relevant for governance and hybrid integration with large language
+    models.</p>
+    <h2 id="canonical-graph-and-deterministic-tokens">Canonical Graph
+    and Deterministic Tokens</h2>
+    <p>At the core of DMLG is a canonical graph whose nodes represent
+    tokens in a normalized form (e.g., lemmas, grammar markers, or
+    domain-specific symbols). Edges encode allowable transitions between
+    these tokens, forming a deterministic structural substrate. Tokens
+    are not tied to any particular surface form or language; the only
+    requirement is that a canonical representation can be defined. This
+    makes DMLG inherently language-agnostic and suitable for domains
+    beyond natural language.</p>
+    <p>Deterministic tokens ensure that each graph state has a
+    well-defined interpretation. This contrasts with embedding-based
+    models, where meaning is distributed and context-dependent. In DMLG,
+    the meaning of a state is given by its position in the graph and the
+    transitions that lead to and from it.</p>
+    <h2 id="context-compression-via-grammar">Context Compression via
+    Grammar</h2>
+    <p>DMLG uses grammar as a deterministic mechanism for context
+    compression. Instead of storing long surface sequences, the graph
+    encodes structural patterns (e.g., phrase types, clause boundaries,
+    discourse roles) as grammar tokens and transitions. Traversal
+    through these grammar structures provides a compressed
+    representation of context that plays a role analogous to attention,
+    but in a fully explicit and deterministic form.</p>
+    <p>This grammar-based context acts as the primary signal for
+    determining which transitions are permissible or preferred at each
+    step. It allows DMLG to maintain long-range structural coherence
+    without relying on high-dimensional continuous states.</p>
+    <h2 id="pagination-and-state-management">Pagination and State
+    Management</h2>
+    <p>The graph is organized into pages or regions that group related
+    tokens and transitions. Pagination provides a structured way to
+    manage the in–out space of the graph: entering a page corresponds to
+    focusing on a particular subdomain, style, or structural regime,
+    while exiting a page corresponds to shifting context. Although the
+    detailed paging mechanisms are left to future work, the architecture
+    assumes that:</p>
+    <ul>
+    <li><p>pages can be activated or deactivated based on
+    context,</p></li>
+    <li><p>transitions across pages are explicitly controlled,</p></li>
+    <li><p>evaluators can be specialized per page.</p></li>
+    </ul>
+    <p>This organization supports modularity, interpretability, and
+    efficient computation.</p>
+    <h2 id="transition-evaluators-and-custom-activations">Transition
+    Evaluators and Custom Activations</h2>
+    <p>Transitions in DMLG are governed by local evaluators. These can
+    be:</p>
+    <ul>
+    <li><p>purely deterministic (rule-based) functions,</p></li>
+    <li><p>small MLPs with custom activation functions,</p></li>
+    <li><p>page-specific evaluators specialized for a subset of the
+    graph,</p></li>
+    <li><p>global evaluators with dataset-specific activation
+    laws.</p></li>
+    </ul>
+    <p>Deterministic transitions define the structural backbone; learned
+    evaluators modulate preference, not validity.</p>
+    <p>Custom activation functions allow the evaluators to reflect
+    dataset-level properties, such as a “temperature law” or “scaling
+    law” for a given book or corpus. In this view, the graph structure
+    depends on both vocabulary size (tokens as nodes) and transition
+    complexity (grammar + lemma combinations), while the evaluators
+    encode how likely or preferred certain transitions are within that
+    structure.</p>
+    <h2 id="dynamic-vocabulary-and-scaling-behaviour">Dynamic Vocabulary
+    and Scaling Behaviour</h2>
+    <p>DMLG supports a dynamic vocabulary: tokens can be added, refined,
+    or reorganized as the canonical graph evolves. This enables:</p>
+    <ul>
+    <li><p>adaptation to new domains or styles,</p></li>
+    <li><p>incremental refinement of canonical forms,</p></li>
+    <li><p>scaling from small, tightly curated graphs to larger, more
+    expressive ones.</p></li>
+    </ul>
+    <p>The architecture predicts that governance performance depends
+    more on graph quality (coverage, structure, transition design) than
+    on parameter count. This suggests a form of structural scaling law:
+    improvements in canonical graph design yield larger gains than
+    additional parameters in the evaluators.</p>
+    <h2 id="keywords-beam-search-and-additional-steering">Keywords, Beam
+    Search, and Additional Steering</h2>
+    <p>In addition to context and grammar-based transitions, DMLG can
+    use keywords or other high-level signals as auxiliary steering
+    inputs. During traversal, a bounded-depth, wide-beam search can
+    explore multiple grammar–lemma transition sequences that correspond
+    to candidate tokens or phrases. Evaluators then score these paths
+    based on:</p>
+    <ul>
+    <li><p>compatibility with the current context,</p></li>
+    <li><p>alignment with keywords or goals,</p></li>
+    <li><p>canonical and grammatical validity.</p></li>
+    </ul>
+    <p>This mechanism supports flexible yet controlled exploration of
+    the graph, and integrates naturally with hybrid setups where DMLG
+    filters or evaluates LLM outputs. Context remains the primary driver
+    of transitions via the mini-MLP evaluators, while beam search and
+    keywords provide additional, interpretable steering.</p>
+    <p>Overall, DMLG combines canonical graph structure, grammar-based
+    context compression, dynamic vocabulary, and modular evaluators into
+    a lightweight, deterministic architecture. This makes it suitable as
+    a general-purpose governance layer that can be trained on specific
+    datasets and applied across domains, while remaining compatible with
+    existing generative models.</p>
+    <h2 id="sentence-level-pre-proposeretryevaluate">Sentence-Level PRE:
+    Propose–Retry–Evaluate</h2>
+    <p>Beyond token-level evaluators, DMLG incorporates a sentence-level
+    validation layer based on the PRE (Propose–Retry–Evaluate)
+    mechanism. This layer operates after a full sentence candidate has
+    been generated (either by the LLM, by DMLG traversal, or by a hybrid
+    sampler) and determines whether the sentence satisfies a minimal set
+    of structural and semantic constraints. PRE provides a deterministic
+    acceptance filter that complements token-level coherence checks.</p>
+    <h4 id="propose.">Propose.</h4>
+    <p>A sentence candidate is proposed by the generative component. The
+    sentence is represented in canonical form, consisting of grammar
+    tokens, lemma tokens, and structural markers. No assumptions are
+    made about the origin of the proposal: it may come from an LLM, from
+    DMLG traversal, or from a hybrid system.</p>
+    <h4 id="evaluate.">Evaluate.</h4>
+    <p>The proposed sentence is evaluated using a minimal set of
+    deterministic checks, like grammar validity rules or trivial
+    semantical checks such as repeated lemmas or degenerate loops.</p>
+    <p>These checks are intentionally minimal: they ensure structural
+    validity without imposing stylistic or domain-specific constraints,
+    which are handled by the graph and evaluators.</p>
+    <h4 id="retry.">Retry.</h4>
+    <p>If the sentence fails evaluation, the system triggers a retry. A
+    new proposal is generated, optionally using:</p>
+    <ul>
+    <li><p>a different sampling path,</p></li>
+    <li><p>a fallback agent or page,</p></li>
+    <li><p>a modified context state,</p></li>
+    <li><p>or a constrained transition subset.</p></li>
+    </ul>
+    <p>Retry is always sentence-based, never token-based. This ensures
+    that token-level coherence and sentence-level validity remain
+    conceptually separate.</p>
+    <h2 id="token-level-rule-based-coherence">Token-Level Rule-Based
+    Coherence</h2>
+    <p>PRE operates alongside a token-level coherence mechanism derived
+    from the canonical grammar. This mechanism enforces local structural
+    constraints during generation:</p>
+    <ul>
+    <li><p>punctuation may only follow specific grammar tokens,</p></li>
+    <li><p>repeated tokens or near-repetitions are suppressed,</p></li>
+    <li><p>conjugations must follow valid grammatical openings,</p></li>
+    <li><p>transitions that violate canonical adjacency rules are
+    rejected.</p></li>
+    </ul>
+    <p>These rule-based checks act as a lightweight, deterministic
+    coherence filter that prevents invalid transitions before they
+    accumulate into sentence-level errors.</p>
+    <h2 id="multi-stage-governance-pipeline">Multi-Stage Governance
+    Pipeline</h2>
+    <p>Together, token-level coherence and sentence-level PRE form a
+    multi-stage governance pipeline:</p>
+    <ol>
+    <li><p><strong>Token stage:</strong> rule-based grammar coherence
+    filters invalid transitions.</p></li>
+    <li><p><strong>Sentence stage:</strong> PRE validates full sentences
+    and triggers retries when necessary.</p></li>
+    <li><p><strong>Graph stage:</strong> evaluators score transitions
+    and maintain canonical consistency.</p></li>
+    </ol>
+    <p>This layered design ensures that DMLG maintains structural
+    integrity at both local and global levels, providing deterministic
+    governance that remains lightweight, interpretable, and compatible
+    with hybrid LLM+DMLG systems.</p>
+    <h1 id="experimental-setup">Experimental Setup</h1>
+    <p>To evaluate the Dynamic Modular Language Graph (DMLG) as a
+    governance layer for generative models, we propose an experimental
+    setup in which a large language model (LLM) is guided or constrained
+    by a DMLG trained on a specific dataset. The goal is to assess
+    whether hybrid systems (LLM + DMLG) exhibit improved safety,
+    consistency, and canonical faithfulness without degrading the
+    underlying model’s generative capabilities.</p>
+    <h2 id="base-model">Base Model</h2>
+    <p>Any open-weights LLM with a standard token-level sampling
+    interface may be used; for concreteness, a model such as
+    <em>gpt-oss-120b</em> serves as a representative example. The LLM is
+    left unmodified: no fine-tuning, no architectural changes, and no
+    additional training. The only intervention occurs at sampling time,
+    where DMLG influences token selection.</p>
+    <h2 id="dmlg-training">DMLG Training</h2>
+    <p>A DMLG is trained on a curated dataset representing a specific
+    domain, style, or canonical form. The graph encodes:</p>
+    <ul>
+    <li><p>a canonical vocabulary (tokens or lemmas),</p></li>
+    <li><p>allowable transitions between tokens,</p></li>
+    <li><p>local evaluators that score or filter transitions,</p></li>
+    <li><p>optional domain-specific constraints.</p></li>
+    </ul>
+    <p>Although DMLG typically uses lemma-based canonical forms, the
+    architecture is language-agnostic. The only requirement is that a
+    canonical representation can be constructed; tokens need not be
+    English lemmas. For ease of integration, the DMLG may dynamically
+    align its canonical vocabulary with the LLM’s tokenization, enabling
+    seamless hybrid sampling.</p>
+    <h2 id="hybrid-sampling-procedure">Hybrid Sampling Procedure</h2>
+    <p>During generation, the LLM produces a probability distribution
+    over its vocabulary at each step. Instead of sampling directly from
+    this distribution, the DMLG:</p>
+    <ol>
+    <li><p>receives the current graph state and the LLM’s
+    logits,</p></li>
+    <li><p>filters or reweights tokens based on canonical
+    transitions,</p></li>
+    <li><p>selects the next token consistent with the DMLG
+    structure,</p></li>
+    <li><p>updates its internal state and continues traversal.</p></li>
+    </ol>
+    <p>This setup allows the DMLG to enforce domain fidelity, stylistic
+    consistency, and safety constraints while preserving the expressive
+    power of the LLM.</p>
+    <h2 id="evaluation-tasks">Evaluation Tasks</h2>
+    <p>To test governance performance, the hybrid system is evaluated on
+    tasks related to the dataset used to train the DMLG. Representative
+    tasks include:</p>
+    <ul>
+    <li><p><strong>Canonical style reproduction:</strong> generating
+    text in the style of a book or corpus without copying or
+    memorization.</p></li>
+    <li><p><strong>Domain-locked reasoning:</strong> answering questions
+    or producing explanations constrained to the domain.</p></li>
+    <li><p><strong>Safety and consistency tests:</strong> adversarial
+    prompting to assess whether the DMLG prevents off-domain or unsafe
+    outputs.</p></li>
+    <li><p><strong>Stability under sampling variation:</strong>
+    measuring robustness across temperatures and decoding
+    strategies.</p></li>
+    </ul>
+    <p>A particularly informative experiment is to train a DMLG on a
+    single book with a distinctive style and evaluate whether the hybrid
+    system can produce canon-faithful text that respects the book’s
+    structure and tone without reproducing copyrighted content. This
+    tests whether DMLG can guide an LLM toward structured,
+    style-consistent behaviour while avoiding memorization.</p>
+    <h2 id="context-requirements">Context Requirements</h2>
+    <p>The DMLG maintains its own compact context state, which is
+    typically far smaller than the LLM’s context window. This enables
+    efficient traversal and governance even for long sequences. The
+    LLM’s context is used normally; the DMLG’s context acts as an
+    additional structural signal rather than a replacement.</p>
+    <h2 id="beam-search-based-transition-expansion">Beam-Search-Based
+    Transition Expansion</h2>
+    <p>In many cases, a single LLM token does not correspond to a single
+    canonical transition in the DMLG. Instead, producing a token
+    typically requires a short sequence of transitions, such as a
+    grammar token followed by a lemma token. Thus, for each candidate
+    LLM token, the DMLG must consider multiple possible transition paths
+    rather than a single edge.</p>
+    <p>To handle this, we introduce a beam-search expansion mechanism.
+    For each LLM token under consideration, the DMLG performs:</p>
+    <ol>
+    <li><p>a bounded-depth beam search over all valid grammar–lemma
+    transition sequences,</p></li>
+    <li><p>with a wide beam to capture all structurally permissible
+    paths,</p></li>
+    <li><p>producing a set of candidate transitions corresponding to the
+    same LLM token.</p></li>
+    </ol>
+    <p>The resulting set of valid paths is then used to filter or
+    reweight the LLM’s logits. Tokens for which no valid DMLG path
+    exists are suppressed; tokens with multiple valid paths are scored
+    according to evaluator weights and transition likelihoods within the
+    graph.</p>
+    <p>This mechanism allows the DMLG to operate over the full
+    vocabulary of the LLM, even when the canonical representation
+    differs from the LLM’s tokenization. Although DMLG typically uses
+    lemma-based canonical forms, the architecture is language-agnostic:
+    any token can be represented as a sequence of grammar and
+    non-grammar transitions, provided that a canonical form is
+    available.</p>
+    <h2 id="success-criteria">Success Criteria</h2>
+    <p>The hybrid system is considered successful if:</p>
+    <ul>
+    <li><p>governance improves without collapsing the LLM’s generative
+    diversity,</p></li>
+    <li><p>outputs remain coherent and fluent,</p></li>
+    <li><p>domain fidelity and canonical consistency increase,</p></li>
+    <li><p>safety violations decrease under adversarial
+    prompting,</p></li>
+    <li><p>the system remains stable across long sequences.</p></li>
+    </ul>
+    <p>This experimental setup provides a concrete, reproducible
+    framework for evaluating DMLG as a structural governance layer and
+    for assessing its ability to complement or correct the behaviour of
+    large language models.</p>
+    <h1 id="structural-evaluation-mode">Structural Evaluation Mode</h1>
+    <p>In addition to guiding or constraining token selection during
+    sampling, the DMLG can operate in a non-intrusive evaluation mode.
+    In this mode, the LLM generates text freely, and the DMLG assigns a
+    confidence score to each token or sequence based on its canonical
+    transition structure. This enables governance without modifying the
+    sampling process.</p>
+    <h2 id="confidence-scoring">Confidence Scoring</h2>
+    <p>For each generated token, the DMLG evaluates whether the
+    transition from the current graph state to the next is:</p>
+    <ul>
+    <li><p>structurally valid,</p></li>
+    <li><p>canon-consistent,</p></li>
+    <li><p>stylistically aligned with the training corpus,</p></li>
+    <li><p>compliant with domain-specific constraints.</p></li>
+    </ul>
+    <p>The DMLG produces a confidence score reflecting the degree to
+    which the LLM output adheres to the canonical graph. A threshold
+    mechanism can then determine whether the LLM remains within
+    acceptable bounds.</p>
+    <h2 id="threshold-based-governance">Threshold-Based Governance</h2>
+    <p>A simple threshold-based controller can be used to detect
+    deviations:</p>
+    <ul>
+    <li><p>If the confidence score remains above the threshold, the LLM
+    is considered to operate within canonical constraints.</p></li>
+    <li><p>If the score falls below the threshold, the system may
+    trigger a warning, request regeneration, or switch to a safer
+    fallback mode.</p></li>
+    </ul>
+    <p>This approach provides governance without interfering with the
+    LLM’s sampling dynamics, making it robust and easy to integrate.</p>
+    <h2 id="advantages">Advantages</h2>
+    <p>Structural evaluation mode offers several benefits:</p>
+    <ul>
+    <li><p><strong>Non-intrusive:</strong> the LLM remains unchanged and
+    unmodified.</p></li>
+    <li><p><strong>Model-agnostic:</strong> works with any LLM that
+    exposes token-level outputs.</p></li>
+    <li><p><strong>Lightweight:</strong> requires only graph traversal
+    and evaluator scoring.</p></li>
+    <li><p><strong>Explainable:</strong> deviations can be traced to
+    specific transitions.</p></li>
+    <li><p><strong>Practical:</strong> suitable for real-time monitoring
+    and safety auditing.</p></li>
+    </ul>
+    <h2 id="use-case-canonical-style-monitoring">Use Case: Canonical
+    Style Monitoring</h2>
+    <p>A practical experiment is to train a DMLG on a book or corpus
+    with a distinctive style and use structural evaluation mode to
+    assess whether an LLM’s generated text remains canon-faithful.
+    Because the DMLG does not influence sampling, this setup isolates
+    the evaluation capability and provides a clean test of structural
+    consistency.</p>
+    <p>This mode demonstrates that DMLG can function not only as a
+    governance layer during generation but also as an independent
+    structural evaluator, broadening its applicability across domains
+    and architectures.</p>
+    <h1 id="limitations-and-open-questions">Limitations and Open
+    Questions</h1>
+    <p>While the Dynamic Modular Language Graph (DMLG) provides a
+    structural and deterministic foundation for governance, several
+    limitations and open questions remain. These concern the
+    construction of canonical graphs, the integration with generative
+    models, the scalability of evaluator design, and the broader
+    applicability of the architecture beyond language.</p>
+    <h2 id="limitations">Limitations</h2>
+    <h4 id="graph-construction-and-coverage.">Graph construction and
+    coverage.</h4>
+    <p>DMLG relies on the availability of a high-quality canonical graph
+    of tokens and transitions. Constructing such graphs requires domain
+    expertise, careful curation, and iterative refinement. Incomplete or
+    biased graphs may lead to overly restrictive behaviour or gaps in
+    coverage, limiting the system’s expressiveness.</p>
+    <h4 id="evaluator-design-and-training.">Evaluator design and
+    training.</h4>
+    <p>Although DMLG uses small, interpretable evaluators, their design
+    still requires empirical tuning and domain knowledge. The optimal
+    balance between rule-based structure and learned evaluators remains
+    an open engineering challenge, particularly for highly specialized
+    domains.</p>
+    <h4 id="integration-overhead-with-llms.">Integration overhead with
+    LLMs.</h4>
+    <p>Hybrid systems combining DMLG with large language models
+    introduce additional orchestration complexity. Ensuring low-latency
+    interaction, maintaining coherence across model boundaries, and
+    preventing conflicts between statistical and structural components
+    require careful system design.</p>
+    <h4 id="dependence-on-canonicalization-quality.">Dependence on
+    canonicalization quality.</h4>
+    <p>DMLG assumes that language can be represented through a canonical
+    set of tokens and transitions. While effective for many domains,
+    this assumption may be challenged by highly creative, ambiguous, or
+    non-standard linguistic phenomena.</p>
+    <h4 id="limited-empirical-validation.">Limited empirical
+    validation.</h4>
+    <p>Although the architecture is conceptually motivated and
+    practically realizable, large-scale empirical validation remains
+    future work. Systematic benchmarks comparing pure LLMs, hybrid
+    systems, and structure-first approaches are needed to quantify the
+    benefits and trade-offs.</p>
+    <h2 id="open-questions">Open Questions</h2>
+    <h4 id="how-large-should-canonical-graphs-be">How large should
+    canonical graphs be?</h4>
+    <p>It remains unclear how graph size, granularity, and transition
+    density affect governance performance. Determining optimal graph
+    complexity for different domains is an open research direction.</p>
+    <h4
+    id="what-is-the-ideal-division-of-labour-between-structure-and-scale">What
+    is the ideal division of labour between structure and scale?</h4>
+    <p>Hybrid systems raise fundamental questions about how much
+    responsibility should lie with deterministic structure versus
+    statistical models. The boundary between the two is not yet
+    theoretically characterized.</p>
+    <h4 id="can-canonical-graphs-be-learned-automatically">Can canonical
+    graphs be learned automatically?</h4>
+    <p>While DMLG currently assumes curated graphs, it is an open
+    question whether high-quality canonical structures can be learned
+    from data, constructed through self-supervision, or induced from
+    model behaviour.</p>
+    <h4 id="how-far-does-general-purpose-applicability-extend">How far
+    does general-purpose applicability extend?</h4>
+    <p>DMLG predicts that deterministic, modular graphs can govern any
+    domain expressible as states and transitions. Testing this
+    prediction across robotics, workflow control, simulation, and
+    planning remains an important direction for future work.</p>
+    <h4 id="what-are-the-limits-of-interpretability">What are the limits
+    of interpretability?</h4>
+    <p>Although DMLG improves transparency, the interaction between
+    evaluators, graph structure, and generative models may still produce
+    emergent behaviour. Understanding the interpretability limits of
+    hybrid systems is an open challenge.</p>
+    <p>Together, these limitations and open questions outline a research
+    agenda for evaluating and extending DMLG as a structural,
+    general-purpose governance architecture for intelligent systems.</p>
+    <h1 id="testable-predictions">Testable Predictions</h1>
+    <p>The Dynamic Modular Language Graph (DMLG) makes several concrete
+    and falsifiable predictions about the behaviour of hybrid
+    intelligence systems, the structure of linguistic space, and the
+    limits of statistical language models. These predictions can be
+    evaluated through empirical experiments, ablation studies, and
+    controlled integration with existing LLMs.</p>
+    <h2
+    id="prediction-1-deterministic-structure-improves-governance">Prediction
+    1: Deterministic Structure Improves Governance</h2>
+    <p>DMLG predicts that introducing an explicit, deterministic graph
+    of canonical transitions will measurably improve governance
+    performance in hybrid systems. When an LLM is constrained or guided
+    by DMLG, we expect:</p>
+    <ul>
+    <li><p>a reduction in off-domain or stylistically inconsistent
+    outputs,</p></li>
+    <li><p>improved adherence to domain-specific rules and canonical
+    forms,</p></li>
+    <li><p>fewer safety violations under adversarial prompting,</p></li>
+    <li><p>more stable behaviour across temperature and sampling
+    settings.</p></li>
+    </ul>
+    <p>These effects should be observable even when the underlying LLM
+    remains unchanged, demonstrating that governance can be improved
+    structurally rather than statistically.</p>
+    <h2
+    id="prediction-2-small-interpretable-evaluators-are-sufficient">Prediction
+    2: Small, Interpretable Evaluators Are Sufficient</h2>
+    <p>DMLG predicts that local transition evaluators—implemented as
+    small, interpretable components—are sufficient to maintain
+    coherence, structure, and domain fidelity. In particular:</p>
+    <ul>
+    <li><p>evaluator modules with orders of magnitude fewer parameters
+    than an LLM can reliably enforce canonical transitions,</p></li>
+    <li><p>evaluator performance scales with graph quality rather than
+    parameter count,</p></li>
+    <li><p>replacing evaluators with larger neural components yields
+    diminishing returns.</p></li>
+    </ul>
+    <p>This prediction can be tested by varying evaluator size while
+    holding the graph structure constant.</p>
+    <h2
+    id="prediction-3-graph-quality-outperforms-parameter-scaling">Prediction
+    3: Graph Quality Outperforms Parameter Scaling</h2>
+    <p>DMLG predicts that improvements in the canonical graph—its
+    coverage, structure, and transition quality—yield larger gains in
+    governance accuracy than additional LLM parameter scaling.
+    Formally:</p>
+    <ul>
+    <li><p>upgrading the graph while keeping the LLM fixed should
+    improve constraint satisfaction and domain fidelity,</p></li>
+    <li><p>scaling the LLM while keeping the graph fixed should yield
+    smaller improvements,</p></li>
+    <li><p>the two effects are not additive: structure dominates
+    scale.</p></li>
+    </ul>
+    <p>This prediction challenges the assumption that scaling alone is
+    the primary path to improved reliability.</p>
+    <h2 id="prediction-4-hybrid-systems-outperform-pure-llms">Prediction
+    4: Hybrid Systems Outperform Pure LLMs</h2>
+    <p>DMLG predicts that hybrid systems—LLM + DMLG—will outperform pure
+    LLMs on tasks requiring structure, consistency, or rule adherence.
+    This includes:</p>
+    <ul>
+    <li><p>multi-step reasoning with explicit constraints,</p></li>
+    <li><p>domain-locked generation (legal, medical,
+    technical),</p></li>
+    <li><p>style-preserving rewriting,</p></li>
+    <li><p>safety-critical or compliance-sensitive tasks.</p></li>
+    </ul>
+    <p>Performance should improve even when the LLM is weaker than
+    state-of-the-art, demonstrating that structure can compensate for
+    scale.</p>
+    <h2
+    id="prediction-5-general-purpose-applicability-beyond-language">Prediction
+    5: General-Purpose Applicability Beyond Language</h2>
+    <p>Although DMLG is instantiated here for language, the architecture
+    predicts that deterministic, modular, dynamically learnable graphs
+    can serve as governance substrates for any domain expressible as
+    states and transitions. We expect:</p>
+    <ul>
+    <li><p>successful application to non-linguistic domains such as
+    workflow control, robotics, planning, or simulation,</p></li>
+    <li><p>similar gains in safety, consistency, and
+    controllability,</p></li>
+    <li><p>comparable performance using domain-specific graphs of
+    similar size and complexity.</p></li>
+    </ul>
+    <p>This prediction is falsifiable by implementing DMLG-style graphs
+    in non-linguistic settings and measuring governance performance.</p>
+    <h2
+    id="prediction-6-practical-feasibility-with-small-teams">Prediction
+    6: Practical Feasibility With Small Teams</h2>
+    <p>Finally, DMLG predicts that such systems are practically
+    realizable. Because the architecture relies on explicit structure
+    and small components rather than large-scale training, a focused
+    team of AI, language, and domain experts should be able to construct
+    a production system within a short development cycle. This can be
+    tested by incremental prototypes and real-world deployments.</p>
+    <p>Together, these predictions provide a concrete empirical basis
+    for evaluating DMLG as a structural, general-purpose governance
+    architecture and for assessing its potential to complement or
+    correct the behaviour of large language models.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper introduced the Dynamic Modular Language Graph (DMLG),
+    a structural and deterministic architecture for representing
+    language as a graph of canonical transitions rather than a
+    statistical distribution. By shifting from implicit embeddings to
+    explicit structure, DMLG provides a transparent, modular, and
+    controllable substrate that can govern, constrain, or guide any
+    generative model. Generation becomes a special case of graph
+    traversal, while governance emerges as the primary function of the
+    architecture.</p>
+    <p>DMLG addresses several fundamental limitations of contemporary
+    language models. It offers deterministic control where statistical
+    models provide only probabilistic tendencies, explicit structure
+    where embeddings provide only latent geometry, and transparent
+    transitions where attention mechanisms provide only distributed
+    influence. As a result, hybrid systems combining DMLG with existing
+    LLMs can achieve improved safety, consistency, domain fidelity, and
+    explainability without requiring additional parameter scaling.</p>
+    <p>Although instantiated here for language, the architectural
+    principles underlying DMLG are general. Any domain expressible as
+    states and transitions can, in principle, be governed by a
+    deterministic, dynamically learnable graph. This positions DMLG as a
+    candidate general-purpose governance layer for intelligent systems,
+    extending beyond language to structured reasoning, workflow control,
+    planning, and other domains where transparency and control are
+    essential.</p>
+    <p>The work presented here outlines a structural foundation rather
+    than a finished system. Future research must refine graph
+    construction methods, evaluate hybrid performance at scale, and
+    explore applications beyond language. Nonetheless, the architecture
+    is practically realizable and offers a concrete path toward safer,
+    more transparent, and more modular AI systems. By introducing
+    explicit structure where current models rely on statistical
+    inference alone, DMLG provides a new direction for the development
+    of controllable and trustworthy intelligent systems.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>. A complete reference
+    Python implementation is included in the ecosystem under the
+    AGPL-3.0 license, together with example datasets and models provided
+    in a separate data repository. These resources make the architecture
+    fully inspectable, reproducible, and practically deployable.</p>
+  </main>
+
+</div>
+
+</body>
+</html>
