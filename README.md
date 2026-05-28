@@ -47,30 +47,6 @@ authorship, integrity, and non‑commercial use.
 
 ---
 
-## Work in Progress — Building Modular AI Systems
-
-A practical implementation volume that translates the architectural principles of  
-*A Safe and Modular AGI Architecture*, *Dynamic Modular Language Models*, and *Adaptive Neural Networks*  
-into a unified, runnable Python system.
-
-### Adaptive Neural Networks
-Experiments with learned activation functions for language models, modular neuron design,  
-and compositional micro‑architectures implemented in PyTorch.
-
-### Improved Grammar and Canonical Form
-A bidirectional grammar engine using spaCy and inflect to convert natural language into a  
-deterministic canonical form and back, combined with canonical‑form validation using Lark.
-
-### Domain‑Bound AI Engine
-A modular reasoning engine that integrates a DMLM implementation as prompt engine together  
-with other AGI‑enabling mechanisms such as prompt memory and structured variables.
-
-### Unified Implementation
-A single Python project that brings together the architectural ideas from the Triadic Cosmos  
-ecosystem into a runnable, extensible system.
-
----
-
 ## 📚 Books
 
 ### **1. Dynamic Modular Language Models**
