@@ -18,7 +18,7 @@ a safe, modular, and architecturally grounded framework for:
   A fully modular, evaluator‑governed architecture based on paging, PRE loops,  
   multi‑agent reasoning, and explicit cognitive structure.
 
-- **Dynamic Modular Language Models (DMLMs)**  
+- **Dynamic Modular Language Graphs (DMLGs)**  
   A new class of language models built from micro‑models, paging, evaluators,  
   and deterministic generation—offering an alternative to monolithic transformers.
 
