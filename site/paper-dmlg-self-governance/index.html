@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>DMLG Self-Governance: Empirical Evaluation of Modular
+Safety<br />
+Multi-Agent Moderation, Activation-Level Diversity, and Evaluator-Driven
+Control </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#motivation" id="toc-motivation">Motivation</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#core-use-cases-of-dmlg-moderation"
+    id="toc-core-use-cases-of-dmlg-moderation">Core Use Cases of DMLG
+    Moderation</a></li>
+    <li><a href="#the-dmlg-moderation-algorithm"
+    id="toc-the-dmlg-moderation-algorithm">The DMLG Moderation
+    Algorithm</a></li>
+    <li><a href="#structural-analogy-to-safety-engineering"
+    id="toc-structural-analogy-to-safety-engineering">Structural Analogy
+    to Safety Engineering</a></li>
+    <li><a href="#sec:moderator-ensemble"
+    id="toc-sec:moderator-ensemble">Moderator Dataset and Agent Ensemble
+    Architecture</a></li>
+    <li><a href="#sec:activation-diversity"
+    id="toc-sec:activation-diversity">Architectural Diversity Through
+    Activation Variation</a></li>
+    <li><a href="#sec:quality-boosting"
+    id="toc-sec:quality-boosting">Quality Boosting Through
+    Ensemble-Based Moderation</a></li>
+    <li><a href="#moderation-as-canon-intersection"
+    id="toc-moderation-as-canon-intersection">Moderation as Canon
+    Intersection</a></li>
+    <li><a href="#sec:hybrid-moderation"
+    id="toc-sec:hybrid-moderation">Moderation Using a Small Hybrid
+    Modern Dataset</a></li>
+    <li><a href="#ensemble-size-and-the-role-of-moderator-quality"
+    id="toc-ensemble-size-and-the-role-of-moderator-quality">Ensemble
+    Size and the Role of Moderator Quality</a></li>
+    <li><a href="#limitations-and-open-questions"
+    id="toc-limitations-and-open-questions">Limitations and Open
+    Questions</a></li>
+    <li><a href="#testable-predictions-for-llmdmlg-hybrid-moderation"
+    id="toc-testable-predictions-for-llmdmlg-hybrid-moderation">Testable
+    Predictions for LLM–DMLG Hybrid Moderation</a></li>
+    <li><a href="#conclusion-3"
+    id="toc-conclusion-3">Conclusion</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Large language models (LLMs) have achieved impressive generative
+    performance, yet their internal mechanisms remain opaque,
+    statistically entangled, and difficult to control. Safety,
+    coherence, and canonical style are typically enforced through
+    post‑hoc heuristics—such as RLHF, classifier‑based filtering, or
+    constrained decoding—rather than through intrinsic architectural
+    guarantees. As a result, modern generative systems exhibit a
+    structural asymmetry: generation is powerful but uncontrolled, while
+    moderation is weak, heuristic, and external to the model.</p>
+    <p>The Dynamic Modular Language Graph (DMLG) proposes a
+    fundamentally different perspective. Instead of treating moderation
+    as an auxiliary correction mechanism, DMLG treats
+    <em>governance</em> as the primary architectural role. A DMLG is a
+    deterministic, interpretable graph whose nodes represent canonical
+    tokens and whose edges encode admissible transitions. Small, modular
+    evaluators—each with its own inductive bias—score transitions
+    locally. In this framework, generation is merely a special case of
+    graph traversal, while moderation becomes a first‑class,
+    structurally grounded operation.</p>
+    <p>This paper presents the first empirical evaluation of <em>DMLG
+    self‑governance</em>: a multi‑agent moderation architecture in which
+    several independently trained DMLG evaluators vote on each proposed
+    lemma. The system implements ensemble arbitration through a simple
+    propose–vote–select rule, combined with activation‑diverse grammar
+    consensus. Despite its simplicity, the mechanism yields a surprising
+    and conceptually important result: <strong>DMLG is empirically
+    stronger as a moderator than as a generator</strong>. Even extremely
+    weak writer agents—such as HardTanh models with minimal expressive
+    capacity—produce coherent, grammatical, and canon‑consistent text
+    when governed by a small ensemble of DMLG moderators.</p>
+    <p>This finding suggests that linguistic quality, safety, and
+    canonical fidelity do not require a powerful generator. Instead,
+    they emerge from the interaction of multiple small evaluators with
+    diverse activation functions and inductive biases. Moderation, not
+    generation, becomes the primary locus of reliability. This stands in
+    contrast to transformer architectures, where generation is
+    monolithic and moderation is heuristic.</p>
+    <p>The contributions of this paper are threefold:</p>
+    <ol>
+    <li><p>We formalize DMLG self‑governance as a modular,
+    interpretable, activation‑diverse moderation architecture.</p></li>
+    <li><p>We empirically demonstrate that multi‑agent DMLG moderation
+    can dramatically improve the output of weak or unstable writer
+    agents, establishing that governance can dominate
+    generation.</p></li>
+    <li><p>We show that consensus‑driven moderation yields stable
+    semantics, consistent lemma selection, and strong drift resistance,
+    even when the underlying writer is noisy, under‑trained, or
+    stylistically divergent.</p></li>
+    </ol>
+    <p>Together, these results position DMLG not as an alternative to
+    LLMs, but as a <em>structural governance layer</em> capable of
+    enforcing canonical style, traceable decision paths, and
+    deterministic constraints in hybrid generative systems. The writer
+    generates; the ensemble governs; and the system remains stable.</p>
+    <h1 id="motivation">Motivation</h1>
+    <p>Modern language systems are dominated by transformer-based LLMs,
+    whose strengths and weaknesses are tightly coupled to their
+    statistical foundations. They excel at broad generalization and
+    fluent generation, but their internal mechanisms are opaque,
+    high-dimensional, and difficult to constrain. As a result, current
+    governance techniques—RLHF, classifier-based filtering, prompt
+    engineering, and constrained decoding—operate outside the generative
+    mechanism and cannot provide deterministic guarantees about
+    canonical structure, traceability, or domain-locked behaviour.</p>
+    <p>The Dynamic Modular Language Graph (DMLG) occupies a
+    fundamentally different region of the design space. Its properties
+    are orthogonal to those of mainstream architectures: deterministic
+    tokens instead of embeddings, explicit graphs instead of latent
+    spaces, modular evaluators instead of monolithic attention blocks,
+    and PRE-based reasoning loops instead of stochastic sampling. This
+    orthogonality makes DMLG far more suitable for <em>moderation</em>
+    than for standalone generation.</p>
+    <p>Table 1 summarizes these contrasts. Where transformers prioritize
+    expressive capacity, DMLG prioritizes structure, interpretability,
+    and controllability. Where LLMs require massive datasets and GPU
+    clusters, DMLG operates on small, domain-specific corpora and can
+    run on commodity hardware. Where LLMs provide probabilistic fluency,
+    DMLG provides deterministic constraints. These differences are not
+    incremental—they represent a structural gap in the current AI
+    ecosystem.</p>
+    <p>This gap is particularly evident in governance. No existing
+    architecture offers:</p>
+    <ul>
+    <li><p>deterministic transition constraints,</p></li>
+    <li><p>transparent token-level decision paths,</p></li>
+    <li><p>ensemble-based arbitration with architectural
+    diversity,</p></li>
+    <li><p>canonical style enforcement independent of the writer
+    model,</p></li>
+    <li><p>or traceable drift detection at lemma resolution.</p></li>
+    </ul>
+    <p>DMLG provides all of these by construction. Its explicit graph
+    and modular evaluators make it possible to govern arbitrary
+    generative agents—including LLMs—without modifying them. This
+    enables applications such as company-approved writing style
+    enforcement, domain-locked generation, and safety-critical
+    traceability, which are difficult or impossible to achieve with
+    statistical models alone.</p>
+    <p>Beyond scientific motivation, this represents a practical
+    opportunity. As LLMs become commoditized, governance becomes a
+    differentiating capability. A lightweight, interpretable,
+    model-agnostic moderation layer that can be applied to any
+    generative system provides a new axis of control and a new source of
+    value. DMLG fills a structural lacuna in the field: it offers a
+    principled, architecturally grounded solution to governance, rather
+    than a heuristic patch on top of a black-box generator.</p>
+    <p>In this sense, DMLG is not an alternative to LLMs but a
+    complementary architecture that supplies what they lack:
+    deterministic structure, modular control, and transparent
+    governance.</p>
+    <table>
+    <caption>Comparison of DMLG with mainstream architectures.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Property</strong></th>
+    <th style="text-align: center;"><strong>DMLG</strong></th>
+    <th style="text-align: center;"><strong>Transformer</strong></th>
+    <th style="text-align: center;"><strong>Mamba/SSM</strong></th>
+    <th style="text-align: center;"><strong>RNN/RWKV</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">Complexity</td>
+    <td style="text-align: center;">Low, modular</td>
+    <td style="text-align: center;">Very high</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">Medium</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Transparency</td>
+    <td style="text-align: center;">Full</td>
+    <td style="text-align: center;">Black box</td>
+    <td style="text-align: center;">Black box</td>
+    <td style="text-align: center;">Partial</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Modularity</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">Low</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Training cost</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">Very high</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">Medium</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Context scaling</td>
+    <td style="text-align: center;">Linear</td>
+    <td style="text-align: center;">Quadratic</td>
+    <td style="text-align: center;">Linear</td>
+    <td style="text-align: center;">Linear</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Internal language</td>
+    <td style="text-align: center;">Canonical</td>
+    <td style="text-align: center;">Natural text</td>
+    <td style="text-align: center;">Natural text</td>
+    <td style="text-align: center;">Natural text</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Embeddings</td>
+    <td style="text-align: center;">Deterministic</td>
+    <td style="text-align: center;">Trainable</td>
+    <td style="text-align: center;">Trainable</td>
+    <td style="text-align: center;">Trainable</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Dataset needs</td>
+    <td style="text-align: center;">Small, domain-specific</td>
+    <td style="text-align: center;">Huge, mixed</td>
+    <td style="text-align: center;">Large</td>
+    <td style="text-align: center;">Large</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Continual learning</td>
+    <td style="text-align: center;">Yes</td>
+    <td style="text-align: center;">No</td>
+    <td style="text-align: center;">Difficult</td>
+    <td style="text-align: center;">Difficult</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Reasoning loop</td>
+    <td style="text-align: center;">PRE</td>
+    <td style="text-align: center;">Sampling/RLHF</td>
+    <td style="text-align: center;">Sampling</td>
+    <td style="text-align: center;">Sampling</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Debuggability</td>
+    <td style="text-align: center;">Full</td>
+    <td style="text-align: center;">None</td>
+    <td style="text-align: center;">None</td>
+    <td style="text-align: center;">Limited</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Hardware</td>
+    <td style="text-align: center;">CPU</td>
+    <td style="text-align: center;">GPU clusters</td>
+    <td style="text-align: center;">GPUs</td>
+    <td style="text-align: center;">GPUs</td>
+    </tr>
+    </tbody>
+    </table>
+    <h1 id="related-work">Related Work</h1>
+    <h2 id="relation-to-earlier-works-by-the-author">Relation to Earlier
+    Works by the Author</h2>
+    <p>This paper extends a line of work on modular, interpretable
+    architectures for language and reasoning.</p>
+    <p><em>A Dynamic and Modular Architecture for Language Modeling</em>
+    (DMLM) demonstrated that coherent language can emerge from modular,
+    non-transformer components. However, that work focused on
+    generation. In contrast, the present paper treats generation as
+    secondary: the Dynamic Modular Language Graph (DMLG) is used
+    primarily as a <em>governance layer</em>, not as a generative
+    model.</p>
+    <p><em>Language as Graph Traversal: The DMLG Architecture</em>
+    introduced DMLG as a deterministic, canonical graph of tokens and
+    transitions, with generation interpreted as traversal. That work
+    proposed governance as a conceptual application but did not
+    empirically evaluate moderation. The present paper fills this gap by
+    demonstrating that DMLG moderation can dominate generation and
+    stabilize arbitrary writer agents.</p>
+    <p><em>Adaptive Neural Networks</em> explored custom activation
+    functions and page-specific dynamics in modular systems. These ideas
+    inform the design of DMLG’s local evaluators, which rely on small,
+    interpretable components rather than large monolithic networks.</p>
+    <p>Across these works, the central theme is that explicit structure
+    and modular evaluation can provide capabilities—traceability,
+    controllability, and explainability—that are difficult to obtain
+    from large-scale statistical models. The present paper provides the
+    first empirical demonstration that these principles enable robust,
+    ensemble-based governance.</p>
+    <h2
+    id="governance-safety-and-traceability-in-language-systems">Governance,
+    Safety, and Traceability in Language Systems</h2>
+    <p>Most research on safety and controllability in language models
+    focuses on <em>post-hoc</em> mechanisms applied to transformer-based
+    LLMs. These include:</p>
+    <ul>
+    <li><p><strong>Constrained decoding</strong> Methods such as
+    lexically constrained decoding and rule-based token filtering <span
+    class="citation" data-cites="hokamp2017lexical"></span> restrict the
+    model’s output space but operate outside the model’s internal
+    structure.</p></li>
+    <li><p><strong>RLHF and preference optimization</strong>
+    Reinforcement learning from human feedback <span class="citation"
+    data-cites="ouyang2022training"></span> and preference-based
+    fine-tuning <span class="citation"
+    data-cites="bai2022constitutional"></span> shape model behaviour but
+    do not provide deterministic guarantees or traceable decision
+    paths.</p></li>
+    <li><p><strong>Safety layers and classifiers</strong> External
+    safety filters <span class="citation"
+    data-cites="ganguli2022redteaming"></span> detect undesirable
+    content but cannot enforce canonical style or structural
+    consistency.</p></li>
+    <li><p><strong>Explainability frameworks</strong> Post-hoc
+    interpretability methods <span class="citation"
+    data-cites="arrieta2020explainable"></span> provide partial insight
+    into model behaviour but do not yield a structural model of allowed
+    transitions.</p></li>
+    </ul>
+    <p>These approaches share two limitations: (1) they operate
+    <em>outside</em> the generative mechanism, and (2) they cannot
+    provide deterministic guarantees about allowed transitions,
+    canonical style, or domain fidelity.</p>
+    <p>DMLG moderation differs fundamentally. It provides:</p>
+    <ul>
+    <li><p>a <em>structural</em> representation of language (canonical
+    graph),</p></li>
+    <li><p><em>deterministic</em> transition constraints,</p></li>
+    <li><p><em>ensemble-based arbitration</em> through lemma-level
+    voting,</p></li>
+    <li><p><em>traceable decision paths</em> at token
+    resolution,</p></li>
+    <li><p>and <em>transparent disagreement signals</em> via vote
+    counts.</p></li>
+    </ul>
+    <p>Rather than modifying a generative model, DMLG governs it from
+    the outside through a model-agnostic, deterministic structure.</p>
+    <h2 id="ensemble-methods-and-safety-critical-redundancy">Ensemble
+    Methods and Safety-Critical Redundancy</h2>
+    <p>Ensemble methods are widely used in machine learning for
+    robustness and uncertainty estimation <span class="citation"
+    data-cites="lakshminarayanan2017simple"></span>, but they typically
+    combine probabilistic predictors rather than enforce structural
+    constraints. Safety-critical systems, by contrast, rely on
+    redundancy, diversity, isolation, and arbitration to prevent
+    correlated failure modes.</p>
+    <p>DMLG moderation aligns with the latter tradition: multiple
+    independently trained evaluators, each with distinct activation
+    functions and inductive biases, jointly arbitrate the validity of
+    each lemma transition. This yields a governance layer that is more
+    reliable than any individual agent and provides deterministic
+    guarantees unavailable in probabilistic ensembles.</p>
+    <h2 id="style-enforcement-and-canonical-generation">Style
+    Enforcement and Canonical Generation</h2>
+    <p>Prior work on style transfer and canonical writing enforcement
+    typically relies on fine-tuning, prompt engineering, or
+    classifier-guided decoding. These methods can bias a model toward a
+    target style but cannot guarantee structural fidelity or traceable
+    decision-making.</p>
+    <p>DMLG moderation provides a different mechanism: style emerges
+    from the canonical graph and the moderator ensemble’s internal
+    canon. Lemma-level voting enforces stylistic and structural
+    consistency without fine-tuning the writer model, enabling
+    applications such as:</p>
+    <ul>
+    <li><p>company-approved writing style enforcement,</p></li>
+    <li><p>domain-locked generation,</p></li>
+    <li><p>canonical reproduction of narrative or technical
+    styles,</p></li>
+    <li><p>and transparent drift detection.</p></li>
+    </ul>
+    <p>In this sense, DMLG moderation is closer to a <em>structural
+    regulator</em> than a generative model or classifier.</p>
+    <h1 id="core-use-cases-of-dmlg-moderation">Core Use Cases of DMLG
+    Moderation</h1>
+    <p>DMLG moderation enables four governance behaviours that arise
+    directly from the interaction between a writer agent and a moderator
+    ensemble. These behaviours require no additional training and follow
+    solely from canonical graph structure, local evaluator proposals,
+    and lemma-level voting. They illustrate how multi-agent moderation
+    can constrain, guide, and analyse generative processes in a
+    structurally transparent manner.</p>
+    <h2 id="steering-generation-through-ensemble-voting">Steering
+    Generation Through Ensemble Voting</h2>
+    <p>At each generation step, the writer proposes a set of candidate
+    lemma tokens. Each moderator independently evaluates these proposals
+    by determining which lemmas it could also generate in the same
+    canonical context. A token receives one vote per moderator that
+    supports it. Tokens with the highest vote count form the eligible
+    set, from which one is selected at random to preserve variation.</p>
+    <p>If no moderator supports any candidate, the system falls back to
+    the writer’s top-ranked proposal. This ensures progress while
+    maintaining canonical alignment whenever possible.</p>
+    <p>This ensemble-voting mechanism constrains traversal to regions of
+    the canonical graph that are jointly supported by the moderator
+    ensemble, providing a lightweight and deterministic form of
+    generative steering.</p>
+    <h2 id="sentence-level-confidence-scoring">Sentence-Level Confidence
+    Scoring</h2>
+    <p>Lemma-level voting yields a natural confidence measure for entire
+    sentences. Given a sentence consisting of <span
+    class="math inline"><em>n</em></span> lemma tokens and an ensemble
+    of <span class="math inline"><em>m</em></span> moderators, the
+    confidence score is defined as:</p>
+    <p><span class="math display">$$\text{confidence} =
+    \frac{\sum_{\text{lemma } i} \text{votes}(i)}
+    {n \times m}.$$</span></p>
+    <p>This score reflects the degree of ensemble agreement across the
+    sentence and serves as a transparent acceptance criterion within the
+    PRE (Propose–Retry–Evaluate) mechanism. Sentences with confidence
+    below a chosen threshold may be rejected prior to grammar or
+    semantic validation.</p>
+    <h2 id="token-level-drift-visualization">Token-Level Drift
+    Visualization</h2>
+    <p>Because each lemma token receives an explicit vote count, drift
+    can be visualized directly in the natural-language output.
+    Colour-coded annotations indicate the level of moderator
+    agreement:</p>
+    <ul>
+    <li><p><strong>green</strong> — full agreement,</p></li>
+    <li><p><strong>orange</strong> — partial agreement,</p></li>
+    <li><p><strong>red</strong> — no agreement.</p></li>
+    </ul>
+    <p>This provides a fine-grained diagnostic view of where the writer
+    diverges from the moderator ensemble, enabling transparent
+    inspection of structural drift, stylistic inconsistency, or context
+    misalignment.</p>
+    <h2 id="quality-stabilization-for-arbitrary-writer-agents">Quality
+    Stabilization for Arbitrary Writer Agents</h2>
+    <p>Moderation can be applied to any writer agent, independent of
+    architecture or training regime. The governance layer filters
+    unstable transitions, suppresses structurally incompatible
+    proposals, and guides the writer toward canon-consistent regions of
+    the graph. This yields a general mechanism for stabilizing
+    generative behaviour without modifying the writer itself.</p>
+    <h2 id="summary">Summary</h2>
+    <p>These four behaviours—ensemble steering, confidence scoring,
+    drift visualization, and writer stabilization—demonstrate that DMLG
+    moderation constitutes a general-purpose governance mechanism. They
+    arise naturally from canonical graph structure and evaluator design,
+    without requiring additional training or model-specific
+    adaptation.</p>
+    <h2 id="the-niche-role-of-dmlg-in-the-modern-ai-landscape">The Niche
+    Role of DMLG in the Modern AI Landscape</h2>
+    <p>Large language models dominate contemporary NLP, but their
+    strengths— expressive power, fluency, and broad generalization—come
+    with structural limitations. Their internal representations are
+    opaque, their decision paths are not traceable, and their outputs
+    cannot be deterministically constrained to a canonical style or
+    domain. Existing governance techniques—RLHF, safety classifiers,
+    constrained decoding, and prompt engineering—operate outside the
+    model’s internal structure and therefore cannot provide guarantees
+    about allowed transitions, canonical fidelity, or stylistic
+    consistency.</p>
+    <p>DMLG occupies a complementary niche. It is not a generative
+    competitor to LLMs, but a <em>structural regulator</em> that
+    provides:</p>
+    <ul>
+    <li><p><strong>deterministic transition constraints</strong> through
+    a canonical graph,</p></li>
+    <li><p><strong>transparent decision paths</strong> via lemma-level
+    voting,</p></li>
+    <li><p><strong>ensemble-based arbitration</strong> that exposes
+    uncertainty,</p></li>
+    <li><p><strong>style and canon enforcement</strong> independent of
+    the writer model,</p></li>
+    <li><p><strong>model-agnostic governance</strong> applicable to any
+    generative agent.</p></li>
+    </ul>
+    <p>Where LLMs excel at producing content, DMLG excels at
+    <em>governing</em> content. The architecture provides a mechanism
+    for enforcing company-approved writing styles, domain-locked
+    generation, canonical reproduction of narrative or technical styles,
+    and traceable drift detection—capabilities that are difficult or
+    impossible to obtain from statistical models alone.</p>
+    <p>In this sense, DMLG does not replace mainstream AI systems; it
+    augments them. It provides the structural guarantees, transparency,
+    and controllability that LLMs lack, enabling hybrid systems in
+    which:</p>
+    <div class="center">
+    <p><em>the writer generates, the ensemble governs, and the system
+    remains stable.</em></p>
+    </div>
+    <h2 id="the-generative-competence-requirement-for-moderation">The
+    Generative Competence Requirement for Moderation</h2>
+    <p>A central empirical finding of this work is that effective
+    moderation requires the moderator to possess generative competence.
+    A moderator cannot reliably evaluate or constrain a writer unless it
+    can itself generate the same class of canonical transitions. This
+    leads to the following structural principle.</p>
+    <div class="theorem">
+    <p><strong>Theorem 1</strong> (Generative Competence Requirement).
+    <em>A governance agent can only moderate a generative agent if it is
+    itself capable of generating all transitions that it is expected to
+    validate. Formally, for a writer <span
+    class="math inline"><em>W</em></span> and moderator <span
+    class="math inline"><em>M</em></span>, moderation is well-defined
+    only if</em></p>
+    <p><em><span
+    class="math display">𝒯(<em>W</em>) ∩ 𝒯(<em>M</em>) ≠ ⌀,</span></em></p>
+    <p><em>and moderation is reliable only if</em></p>
+    <p><em><span
+    class="math display">𝒯(<em>M</em>) ⊇ 𝒯<sub>valid</sub>(<em>W</em>),</span></em></p>
+    <p><em>where <span class="math inline">𝒯(⋅)</span> denotes the set
+    of admissible canonical transitions.</em></p>
+    </div>
+    <h4 id="interpretation.">Interpretation.</h4>
+    <p>A moderator must be able to <em>generate</em> any transition it
+    is expected to approve. Without this property, the moderator cannot
+    distinguish between valid and invalid proposals, cannot detect
+    drift, and cannot participate meaningfully in ensemble voting.
+    Moderation therefore presupposes generative ability, even if the
+    moderator is never used as a primary generator.</p>
+    <h4 id="implications.">Implications.</h4>
+    <p>This principle explains several empirical observations:</p>
+    <ul>
+    <li><p>Moderators trained on archaic narrative corpora can govern
+    writers trained on related archaic corpora, but not writers whose
+    canonical structure is orthogonal to their own.</p></li>
+    <li><p>Weak writers can be stabilized by strong moderators, but weak
+    moderators cannot reliably govern strong writers.</p></li>
+    <li><p>Ensemble diversity is beneficial only when each moderator
+    retains sufficient generative competence to evaluate the writer’s
+    proposals.</p></li>
+    </ul>
+    <h4 id="conclusion.">Conclusion.</h4>
+    <p>Moderation is not a purely discriminative task. It is a
+    generative task performed in reverse: to judge whether a transition
+    is valid, the moderator must be able to produce it. DMLG moderation
+    therefore reveals a structural duality between generation and
+    governance: the ability to generate canonical structure is a
+    prerequisite for enforcing it.</p>
+    <h1 id="the-dmlg-moderation-algorithm">The DMLG Moderation
+    Algorithm</h1>
+    <p>DMLG moderation is implemented as a lightweight, deterministic
+    governance mechanism that operates on top of any writer agent. The
+    algorithm requires no beam search, no additional training, and no
+    model-specific adaptation. It relies solely on canonical graph
+    structure, local evaluator proposals, and lemma-level ensemble
+    voting. Despite its simplicity, the mechanism provides strong
+    steering, drift suppression, and structural stabilization.</p>
+    <h2 id="overview">Overview</h2>
+    <p>At each generation step, the writer proposes a set of candidate
+    tokens. Each moderator independently proposes its own candidate set
+    for the same canonical context. A token receives one vote per
+    moderator that also proposes it. The token with the highest vote
+    count is selected, subject to a grammar-consensus constraint. If no
+    moderator supports any candidate, the system falls back to the
+    writer’s top-ranked proposal.</p>
+    <p>This procedure yields a deterministic, model-agnostic governance
+    layer that constrains traversal to regions jointly supported by the
+    moderator ensemble.</p>
+    <h2 id="token-proposal">Token Proposal</h2>
+    <p>Let <span class="math inline"><em>W</em></span> be the writer
+    agent and <span
+    class="math inline"><em>M</em><sub>1</sub>, …, <em>M</em><sub><em>k</em></sub></span>
+    the moderator agents. Given a context state <span
+    class="math inline"><em>C</em></span>, the writer produces a
+    proposal set:</p>
+    <p><span
+    class="math display"><em>P</em><sub><em>W</em></sub> = {<em>t</em><sub>1</sub>, …, <em>t</em><sub><em>n</em></sub>}.</span></p>
+    <p>Each moderator independently produces its own proposal set:</p>
+    <p><span
+    class="math display"><em>P</em><sub><em>M</em><sub><em>j</em></sub></sub> = {<em>u</em><sub>1</sub>, …, <em>u</em><sub><em>m</em><sub><em>j</em></sub></sub>}.</span></p>
+    <p>No assumptions are made about the internal architecture of <span
+    class="math inline"><em>W</em></span> or <span
+    class="math inline"><em>M</em><sub><em>j</em></sub></span>; the only
+    requirement is that each agent can propose a finite set of canonical
+    tokens for the given context.</p>
+    <h2 id="ensemble-voting">Ensemble Voting</h2>
+    <p>For each writer-proposed token <span
+    class="math inline"><em>t</em> ∈ <em>P</em><sub><em>W</em></sub></span>,
+    the vote count is defined as:</p>
+    <p><span
+    class="math display">votes(<em>t</em>) = |{<em>j</em>∈{1,…,<em>k</em>}:<em>t</em>∈<em>P</em><sub><em>M</em><sub><em>j</em></sub></sub>}|.</span></p>
+    <p>Let</p>
+    <p><span
+    class="math display"><em>v</em><sub>max</sub> = max<sub><em>t</em> ∈ <em>P</em><sub><em>W</em></sub></sub>votes(<em>t</em>).</span></p>
+    <p>If <span class="math inline"><em>v</em><sub>max</sub> = 0</span>,
+    the system selects the writer’s top-ranked token. This ensures
+    forward progress even when the ensemble provides no guidance.</p>
+    <h2 id="grammar-consensus-filtering">Grammar-Consensus
+    Filtering</h2>
+    <p>Grammar tokens require a minimum number of moderator votes. Let
+    <span class="math inline">isLemma(<em>t</em>)</span> denote whether
+    <span class="math inline"><em>t</em></span> is a lemma token. A
+    token <span class="math inline"><em>t</em></span> is eligible
+    if:</p>
+    <p><span class="math display">$$\text{eligible}(t) =
+    \begin{cases}
+        \text{votes}(t) = v_{\max}, &amp; \text{if } \text{isLemma}(t),
+    \\
+        \text{votes}(t) \geq \tau_{\text{grammar}}, &amp;
+    \text{otherwise},
+    \end{cases}$$</span></p>
+    <p>where <span
+    class="math inline"><em>τ</em><sub>grammar</sub></span> is a fixed
+    grammar-consensus threshold.</p>
+    <p>The final candidate set is:</p>
+    <p><span
+    class="math display"><em>E</em> = {<em>t</em> ∈ <em>P</em><sub><em>W</em></sub> : eligible(<em>t</em>)}.</span></p>
+    <p>If <span class="math inline"><em>E</em> = ⌀</span>, the sentence
+    is aborted and rejected by PRE.</p>
+    <p>If <span class="math inline"><em>E</em> ≠ ⌀</span>, the next
+    token is selected uniformly at random from <span
+    class="math inline"><em>E</em></span> to preserve stylistic
+    variety.</p>
+    <h2 id="sentence-construction-and-termination">Sentence Construction
+    and Termination</h2>
+    <p>Tokens are appended sequentially until either:</p>
+    <ul>
+    <li><p>an end-of-line token is produced (successful termination),
+    or</p></li>
+    <li><p>the maximum token limit is reached (unsuccessful
+    termination).</p></li>
+    </ul>
+    <p>Unsuccessful sentences are rejected by PRE and do not enter the
+    context state.</p>
+    <h2 id="confidence-scoring">Confidence Scoring</h2>
+    <p>For a generated sentence with lemma tokens <span
+    class="math inline"><em>t</em><sub>1</sub>, …, <em>t</em><sub><em>n</em></sub></span>
+    and vote counts <span
+    class="math inline"><em>v</em><sub>1</sub>, …, <em>v</em><sub><em>n</em></sub></span>,
+    the confidence score is:</p>
+    <p><span class="math display">$$\text{confidence} =
+    \frac{\sum_{i=1}^{n} v_i}{n \cdot k}.$$</span></p>
+    <p>This score is used as a deterministic acceptance criterion within
+    PRE.</p>
+    <h2 id="properties">Properties</h2>
+    <p>The algorithm has the following properties:</p>
+    <ul>
+    <li><p><strong>Model-agnostic</strong>: applicable to any writer
+    architecture.</p></li>
+    <li><p><strong>Training-free</strong>: moderators require no
+    additional training.</p></li>
+    <li><p><strong>Deterministic governance</strong>: all decisions
+    follow from canonical structure and ensemble agreement.</p></li>
+    <li><p><strong>Low computational cost</strong>: no beam search is
+    required.</p></li>
+    <li><p><strong>Stability</strong>: grammar-consensus filtering
+    suppresses drift.</p></li>
+    </ul>
+    <p>Despite its simplicity, the algorithm provides strong generative
+    steering and structural stabilization, and can outperform unguided
+    beam-search decoding in practice.</p>
+    <h1 id="structural-analogy-to-safety-engineering">Structural Analogy
+    to Safety Engineering</h1>
+    <p>The DMLG moderation ensemble exhibits the same structural
+    principles that underlie classical safety‑critical engineering
+    systems. In such systems, the functional layer may be simple or even
+    unreliable, but the governance layer must be robust, redundant, and
+    architecturally diverse. The same pattern emerges in DMLG: the
+    writer agent provides expressive variation, while the moderator
+    ensemble ensures stability, constraint, and drift suppression.</p>
+    <h2 id="safety-critical-design-principles">Safety-Critical Design
+    Principles</h2>
+    <p>The moderation ensemble implements five canonical principles of
+    safety engineering:</p>
+    <ol>
+    <li><p><strong>Redundancy</strong> — multiple independent evaluators
+    assess each proposed transition. No single evaluator determines
+    system behaviour.</p></li>
+    <li><p><strong>Diversity</strong> — moderators may differ in
+    architecture, activation functions, datasets, or inductive biases.
+    This prevents shared failure modes and reduces the risk of
+    correlated drift.</p></li>
+    <li><p><strong>Isolation</strong> — the writer cannot influence the
+    moderators. Information flow is strictly unidirectional: moderators
+    evaluate proposals but do not receive gradients or updates from the
+    writer.</p></li>
+    <li><p><strong>Arbitration</strong> — majority voting ensures that
+    no single evaluator can unilaterally approve an invalid transition.
+    Ensemble agreement is required for acceptance.</p></li>
+    <li><p><strong>Transparency</strong> — disagreement among moderators
+    is directly observable through vote counts. This exposes uncertainty
+    and enables deterministic rejection criteria.</p></li>
+    </ol>
+    <p>These principles are not aesthetic design choices. They are
+    structural requirements for any governance layer that must be more
+    reliable than the system it governs. The writer may generate
+    unstable or stylistically divergent proposals, but the ensemble
+    ensures that only transitions consistent with the canonical graph
+    and evaluator consensus are admitted.</p>
+    <h2 id="governance-as-the-primary-reliability-layer">Governance as
+    the Primary Reliability Layer</h2>
+    <p>The writer agent may be a singleton because creativity tolerates
+    variation. Generative instability is acceptable as long as it is
+    bounded by a reliable governance layer. In contrast, the moderation
+    layer must be an ensemble: safety does not tolerate single points of
+    failure.</p>
+    <p>By combining multiple independently trained evaluators, the DMLG
+    moderation ensemble:</p>
+    <ul>
+    <li><p>avoids catastrophic attractors,</p></li>
+    <li><p>suppresses pathological drift,</p></li>
+    <li><p>prevents unilateral stylistic collapse,</p></li>
+    <li><p>and ensures that no single model can dominate the generative
+    process.</p></li>
+    </ul>
+    <p>In this sense, DMLG does not merely borrow ideas from safety
+    engineering; it <em>implements</em> them. The writer generates. The
+    ensemble governs. The system remains stable.</p>
+    <h1 id="sec:moderator-ensemble">Moderator Dataset and Agent Ensemble
+    Architecture</h1>
+    <p>This section describes the datasets and agent ensemble used to
+    implement cross-canon DMLG moderation. The goal is not to maximize
+    stylistic similarity between writer and moderators, but to ensure
+    that the moderators possess a stable, internally coherent canon that
+    can serve as an external governance reference. All moderator agents
+    are trained on archaic narrative corpora with consistent syntax and
+    strong thematic anchors, making deviations from their canon highly
+    salient.</p>
+    <h2 id="moderator-canon-the-time-machine">Moderator Canon: The Time
+    Machine</h2>
+    <p>The primary moderator canon is <em>The Time Machine</em> by
+    H. G. Wells, an archaic narrative corpus with distinctive syntactic
+    rhythm and stable lemma–grammar patterns. Its stylistic consistency
+    and thematic coherence make it well suited for lemma-level drift
+    detection. The text is sufficiently different from the writer
+    corpora to provide external governance, yet not so orthogonal as to
+    eliminate shared structural patterns.</p>
+    <p>The Wells corpus provides three essential properties for
+    moderation:</p>
+    <ol>
+    <li><p><strong>Stable syntax and rhythm</strong> — enabling reliable
+    detection of structural drift.</p></li>
+    <li><p><strong>Strong thematic anchors</strong> — providing
+    consistent semantic expectations across contexts.</p></li>
+    <li><p><strong>Moderate canon distance</strong> — far enough from
+    the writer corpora to expose deviations, but close enough to share
+    grammatical structure.</p></li>
+    </ol>
+    <h2 id="moderator-ensemble-three-mature-agents">Moderator Ensemble:
+    Three Mature Agents</h2>
+    <p>The governance layer consists of a three-agent ensemble, each
+    trained to convergence on the Wells corpus. The agents differ in
+    activation functions (SiLU, GELU, and a SiLU–GELU hybrid), ensuring
+    architectural diversity and reducing the risk of correlated failure
+    modes. All three agents operate solely as moderators; they do not
+    generate primary text.</p>
+    <p>These agents provide:</p>
+    <ul>
+    <li><p>complementary inductive biases,</p></li>
+    <li><p>sensitivity to syntactic and semantic drift,</p></li>
+    <li><p>stable lemma distributions,</p></li>
+    <li><p>robust consensus formation across activations.</p></li>
+    </ul>
+    <p>Activation diversity is a structural requirement: moderators must
+    not share the same architecture or activation law, otherwise
+    correlated errors may propagate through the ensemble.</p>
+    <h2 id="weak-writer-agents-not-moderators">Weak Writer Agents (Not
+    Moderators)</h2>
+    <p>Two additional agents are trained on the same corpus but with
+    significantly reduced training time and weaker activation functions
+    (LeakyReLU and HardTanh). These agents are intentionally
+    under-trained and serve exclusively as writer agents in evaluation
+    experiments.</p>
+    <p>Their role is to test whether DMLG moderation can:</p>
+    <ol>
+    <li><p>stabilize the output of weak or unstable writers,</p></li>
+    <li><p>suppress incoherent lemma proposals,</p></li>
+    <li><p>guide generation toward canon-consistent regions of the
+    graph.</p></li>
+    </ol>
+    <p>These agents are <em>not</em> part of the moderator ensemble.</p>
+    <h2 id="additional-archaic-writer-corpora">Additional Archaic Writer
+    Corpora</h2>
+    <p>To evaluate cross-canon moderation beyond a single dataset, two
+    additional archaic narrative corpora are used as writer sources:</p>
+    <h4 id="aesops-fables.">Aesop’s Fables.</h4>
+    <p>A compact collection of moral tales with simple syntax and
+    repetitive narrative patterns. Its regular structure makes it
+    suitable for testing canonical tokenization and low-complexity world
+    modelling.</p>
+    <h4 id="dr.-jekyll-and-mr.-hyde.">Dr. Jekyll and Mr. Hyde.</h4>
+    <p>A Victorian novella with dense psychological themes and highly
+    variable sentence structure. Its archaic style provides a
+    challenging test for canonicalization and cross-canon
+    moderation.</p>
+    <p>These corpora are stylistically distinct from the Wells canon but
+    share enough structural features (archaic English, narrative prose,
+    lemma–grammar patterns) to allow meaningful cross-canon
+    evaluation.</p>
+    <h2 id="ensemble-dynamics">Ensemble Dynamics</h2>
+    <p>The three mature moderators play complementary roles:</p>
+    <ul>
+    <li><p><strong>Drift detection (SiLU, GELU).</strong> Sensitive to
+    deviations from the Wells canon, filtering anomalous lemma
+    proposals.</p></li>
+    <li><p><strong>Hybrid stability (SiLU+GELU).</strong> Provides a
+    stabilizing influence on borderline transitions by combining the
+    inductive biases of both activations.</p></li>
+    <li><p><strong>Consensus formation.</strong> Lemma-level voting
+    suppresses outliers, reinforces canon-consistent behaviour, and
+    yields more stable transitions than any individual
+    moderator.</p></li>
+    </ul>
+    <p>Together, these agents form a structurally diverse ensemble
+    capable of governing writers trained on both related and unrelated
+    archaic corpora.</p>
+    <h2 id="dataset-selection-and-public-domain-constraints">Dataset
+    Selection and Public-Domain Constraints</h2>
+    <p>All corpora used in this work are drawn from public-domain
+    sources, primarily through Project Gutenberg. This choice is
+    motivated by practical and scientific considerations: the
+    <em>Triadic Cosmos</em> project aims to provide a fully reproducible
+    and openly distributable reference implementation of DMLG
+    moderation. Public-domain texts allow the entire training
+    pipeline—including datasets, tokenization, and model checkpoints—to
+    be shared without legal restrictions.</p>
+    <p>The selection of these corpora should therefore be understood as
+    a constraint of open-science methodology rather than an attempt to
+    identify stylistically optimal or domain-specific training material.
+    Works such as <em>The Time Machine</em>, Aesop’s Fables, and
+    <em>Dr. Jekyll and Mr. Hyde</em> are used because they are legally
+    redistributable, structurally coherent, and sufficiently diverse to
+    support cross-canon evaluation. Their inclusion reflects the
+    practical requirement that all datasets in this study be accessible,
+    inspectable, and reusable by the research community.</p>
+    <p>Importantly, the use of public-domain corpora highlights a
+    central property of DMLG moderation: the architecture does not rely
+    on carefully curated or proprietary datasets. Even when trained on
+    openly available texts with heterogeneous styles and varying levels
+    of structural regularity, the moderator ensemble exhibits robust
+    drift detection, stable lemma-level voting, and consistent
+    governance behaviour. This makes the approach suitable for
+    open-source research environments where dataset constraints are both
+    common and desirable.</p>
+    <div class="tcolorbox">
+    <p>All evaluations in this paper were performed by a large language
+    model (LLM) operating as an external qualitative assessor. The
+    evaluator examined coherence, structural stability, drift
+    suppression, lemma-level consistency, and stylistic regularity
+    across all generated samples. No numerical metrics were used; the
+    analysis is based solely on observable structural properties and
+    cross-sample consistency.</p>
+    <p>This approach ensures that the reported effects—such as emergent
+    manifold selection, cross-canon stabilization, and
+    governance-dominant behaviour—reflect qualitative differences that
+    are robust enough to be detected by an independent model without
+    access to the DMLG architecture or its internal mechanisms.</p>
+    </div>
+    <h1 id="sec:activation-diversity">Architectural Diversity Through
+    Activation Variation</h1>
+    <p>Effective moderation requires that the evaluators in the ensemble
+    do not share the same inductive biases or failure modes. In
+    safety‑critical systems, this principle is known as
+    <em>architectural diversity</em>: redundant components must differ
+    internally so that correlated errors do not propagate through the
+    governance layer. In DMLG, this diversity arises naturally from
+    differences in activation functions and, more importantly, from the
+    use of learned activation MLPs.</p>
+    <h2 id="activation-functions-as-inductive-biases">Activation
+    Functions as Inductive Biases</h2>
+    <p>Each activation function imposes a distinct inductive bias on the
+    evaluator’s transition preferences. Even when trained on the same
+    canonical dataset, evaluators with different activations (e.g. SiLU,
+    GELU, LeakyReLU, HardTanh) develop measurably different
+    behaviours:</p>
+    <ul>
+    <li><p>different sensitivity to grammatical irregularities,</p></li>
+    <li><p>different tolerance for semantic drift,</p></li>
+    <li><p>different smoothness or sharpness in transition
+    scoring,</p></li>
+    <li><p>different stability under temperature variation.</p></li>
+    </ul>
+    <p>These differences are not cosmetic. They ensure that moderators
+    do not collapse onto the same decision manifold, enabling meaningful
+    ensemble arbitration.</p>
+    <h2 id="learned-activation-mlps-as-higher-order-diversity">Learned
+    Activation MLPs as Higher-Order Diversity</h2>
+    <p>Beyond fixed activations, DMLG evaluators may employ <em>learned
+    activation MLPs</em>—small neural networks that replace the
+    activation function itself. Prior work on Adaptive Neural Networks
+    has shown that such activation MLPs converge to dataset‑specific
+    nonlinearities that differ substantially across training runs, even
+    when all other architectural components are identical.</p>
+    <p>This yields a stronger form of diversity:</p>
+    <ul>
+    <li><p>each evaluator learns its own activation geometry,</p></li>
+    <li><p>activation MLPs encode corpus‑specific “temperature
+    laws,”</p></li>
+    <li><p>evaluators diverge in how they score borderline
+    transitions,</p></li>
+    <li><p>ensemble disagreement becomes structurally
+    meaningful.</p></li>
+    </ul>
+    <p>Two evaluators trained on the same dataset but with different
+    activation MLPs behave as if they were trained on different corpora.
+    This makes them ideal moderators: they share the same canonical
+    graph but disagree in precisely the regions where drift is most
+    likely to occur.</p>
+    <h2
+    id="diversity-as-a-structural-requirement-for-governance">Diversity
+    as a Structural Requirement for Governance</h2>
+    <p>Architectural diversity is not optional. It is a structural
+    requirement for reliable moderation. If all moderators share the
+    same activation law, the ensemble degenerates into a single model
+    replicated <span class="math inline"><em>k</em></span> times,
+    offering no protection against correlated drift or systematic
+    errors.</p>
+    <p>Activation diversity ensures that:</p>
+    <ul>
+    <li><p>no single evaluator can dominate the ensemble,</p></li>
+    <li><p>outlier transitions are suppressed by majority
+    voting,</p></li>
+    <li><p>disagreement exposes uncertainty and drift,</p></li>
+    <li><p>consensus reflects structural validity rather than shared
+    bias.</p></li>
+    </ul>
+    <p>In this sense, activation variation—both fixed and
+    learned—provides the architectural heterogeneity necessary for
+    DMLG’s governance guarantees.</p>
+    <h2 id="conclusion">Conclusion</h2>
+    <p>DMLG moderation relies on the interaction of multiple evaluators
+    that differ in their activation functions, activation geometries,
+    and inductive biases. This diversity is essential for ensemble
+    arbitration, drift detection, and structural reliability. It ensures
+    that the governance layer is more robust than any individual
+    evaluator and that consensus reflects genuine canonical agreement
+    rather than architectural homogeneity.</p>
+    <h1 id="sec:quality-boosting">Quality Boosting Through
+    Ensemble-Based Moderation</h1>
+    <p>This section evaluates DMLG moderation as a mechanism for
+    improving the output quality of weak and unstable writer agents. We
+    compare three conditions: (1) unguided generation using beam search,
+    (2) unmoderated sampling without beam search, and (3) sampling under
+    DMLG ensemble moderation. The experiments use three writer agents of
+    increasing strength—HardTanh, LeakyReLU, and a SiLU/GELU hybrid—and
+    apply the same moderator ensemble (SiLU, GELU, and SiLU+GELU) across
+    all conditions.</p>
+    <h2
+    id="unguided-generation-attractor-collapse-in-weak-writers">Unguided
+    Generation: Attractor Collapse in Weak Writers</h2>
+    <p>Weak writer agents exhibit severe attractor collapse when
+    generating without moderation. The HardTanh writer produces long,
+    repetitive sequences dominated by a small set of high-frequency
+    motifs (e.g. “the greenery was …”, “the figures ceased …”, “I was
+    only a match”), often repeating the same syntactic template dozens
+    of times. The LeakyReLU writer shows a similar pattern, collapsing
+    into motifs such as “the blackness”, “the workshop again”, and “the
+    grindstone broke …”. These attractors dominate the entire sequence,
+    leading to semantic drift, syntactic instability, and loss of
+    narrative structure.</p>
+    <p>Beam search amplifies this effect. Because weak writers have
+    poorly shaped logit landscapes, beam search repeatedly selects the
+    same local maxima, reinforcing the attractor and accelerating
+    collapse. The resulting text is long, repetitive, and structurally
+    unstable.</p>
+    <h2
+    id="moderation-without-beam-search-stabilizing-weak-writers">Moderation
+    Without Beam Search: Stabilizing Weak Writers</h2>
+    <p>When the same weak writers are sampled without beam search but
+    under DMLG moderation, the output changes dramatically. The
+    moderated LeakyReLU writer produces short, coherent, and
+    syntactically well-formed sentences. Drift is visible through
+    disagreement markers, but the ensemble suppresses invalid or
+    unstable transitions. Even extremely weak proposals are steered
+    toward canon-consistent regions of the Wells corpus.</p>
+    <p>Moderation does not increase the expressive capacity of the
+    writer; instead, it filters the writer’s proposals through a
+    structurally diverse ensemble. Lemma-level voting removes
+    attractor-driven repetitions and enforces local coherence. The
+    result is text that is substantially more stable than the writer’s
+    raw output, despite the absence of beam search or additional
+    training.</p>
+    <h2 id="hardtanh-extreme-weakness-and-partial-recovery">HardTanh:
+    Extreme Weakness and Partial Recovery</h2>
+    <p>The HardTanh writer represents an extreme case: its activation
+    function saturates aggressively, producing logits with minimal
+    nuance. Unguided output is dominated by a handful of rigid templates
+    and exhibits severe semantic erosion. Under moderation, the HardTanh
+    writer still produces fragmented text, but the ensemble suppresses
+    the worst degeneracies. Invalid transitions are filtered, repetitive
+    loops are broken, and the output becomes locally coherent even if
+    global structure remains weak. This demonstrates that moderation can
+    partially recover quality even when the writer’s internal
+    representation has collapsed.</p>
+    <h2
+    id="cross-validation-moderating-a-strong-writer">Cross-Validation:
+    Moderating a Strong Writer</h2>
+    <p>To test whether moderation benefits only weak writers or also
+    improves strong ones, we apply the same ensemble to a SiLU/GELU
+    hybrid writer trained to convergence. Unguided output from this
+    model is already substantially more coherent than that of the weak
+    writers, but still exhibits attractor patterns (e.g. “the skin”, “a
+    match”) and occasional syntactic drift.</p>
+    <p>Under moderation, these attractors are suppressed, and the output
+    becomes more varied, more canon-consistent, and less prone to
+    repetitive phrasing. The moderators do not simply replicate their
+    own style: they filter the writer’s proposals while preserving its
+    expressive capacity. This cross-validation confirms that moderation
+    improves both weak and strong writers, though the magnitude of
+    improvement is greatest for the weakest models.</p>
+    <h2 id="mechanism-governance-dominates-generation">Mechanism:
+    Governance Dominates Generation</h2>
+    <p>Across all experiments, a consistent pattern emerges: DMLG
+    moderation provides a stronger source of reliability than the writer
+    itself. Weak writers collapse into attractors; strong writers drift
+    into stylistic loops; beam search amplifies both effects. The
+    moderator ensemble, by contrast, enforces canonical structure
+    through architectural diversity, lemma-level arbitration, and
+    deterministic rejection of invalid transitions.</p>
+    <p>This leads to a counterintuitive but empirically supported
+    conclusion: <em>governance can dominate generation</em>. Even
+    minimal-capacity writers produce coherent, grammatical, and
+    stylistically stable text when governed by a diverse ensemble of
+    DMLG moderators. The ensemble does not need to be large; it needs to
+    be diverse. Activation diversity, learned activation geometries, and
+    independent training runs ensure that no single evaluator can
+    dominate the decision process.</p>
+    <h2 id="conclusion-1">Conclusion</h2>
+    <p>DMLG moderation provides a lightweight, interpretable, and
+    model-agnostic mechanism for improving generative quality. It
+    stabilizes weak writers, refines strong writers, and suppresses
+    attractor collapse without beam search or additional training. These
+    results demonstrate that the primary locus of reliability in a
+    generative system need not be the generator itself: a small, diverse
+    ensemble of evaluators can enforce canonical structure, suppress
+    drift, and produce output that is more coherent than any individual
+    agent.</p>
+    <h1 id="moderation-as-canon-intersection">Moderation as Canon
+    Intersection</h1>
+    <p>In addition to its role as a grammatical quality booster,
+    moderation in our DMLG pipeline serves a second, equally important
+    function: it enforces a <em>canon intersection</em> between a
+    domain-specific generator and an external moderator ensemble. In
+    this section we analyse this phenomenon using two contrasting
+    literary domains: a trained Aesop-style fable generator and a
+    trained <em>Jekyll &amp; Hyde</em> generator. In both cases, the
+    generator is moderated by the same three Time-Machine agents used in
+    the quality-boosting experiments, but here moderation is applied
+    <em>without</em> structural guidance or keyword prompting.</p>
+    <h2 id="experimental-conditions">Experimental Conditions</h2>
+    <p>For both Aesop and <em>Jekyll &amp; Hyde</em>, we compare two
+    configurations:</p>
+    <ul>
+    <li><p><strong>Fully Guided–Unmoderated:</strong> A strong
+    domain-specific writer receives explicit structural guidance,
+    keyword constraints, and beam search. No moderation is
+    applied.</p></li>
+    <li><p><strong>Unguided–Moderated:</strong> The same writer receives
+    <em>no</em> structural guidance, no keywords, and no beam
+    constraints. Instead, all generations are filtered by the three
+    Time-Machine moderators, which enforce canonical consistency and
+    reject incompatible continuations.</p></li>
+    </ul>
+    <p>This setup isolates the effect of moderation itself: the
+    generator is held constant, and only the presence or absence of the
+    moderator ensemble changes.</p>
+    <h2 id="effect-1-canon-intersection">Effect 1: Canon
+    Intersection</h2>
+    <p>Moderation does not generate text; it filters. The resulting
+    output is therefore not a mixture but an <em>intersection</em> of
+    two canons:</p>
+    <p><span class="math display">Output
+    Canon = Canon<sub>Writer</sub> ∩ Canon<sub>Moderators</sub>.</span></p>
+    <p>For Aesop, this intersection suppresses archaic or unstable
+    constructions typical of unguided DMLG sampling and replaces them
+    with the temporal, mechanical, and observational motifs
+    characteristic of the Time-Machine moderators. The result is
+    recognisably Aesopian in structure (animal agents, moral framing,
+    short episodic scenes) but with a shifted semantic field: references
+    to clocks, mechanisms, twilight, observation, and spatial
+    orientation appear where classical Aesop would use rustic or
+    pastoral imagery.</p>
+    <p>For <em>Jekyll &amp; Hyde</em>, the effect is even more
+    pronounced. The Hyde generator naturally produces dense Victorian
+    diction, recursive introspection, and moralised psychological
+    conflict. Moderation intersects this with the Time-Machine canon,
+    yielding output that retains Hyde’s confessional tone and moral
+    anxiety but replaces archaic Victorian syntax with more modern,
+    temporally grounded phrasing. The result is a hybrid canon:
+    recognisably Hyde, but filtered through the temporal and mechanical
+    worldview of the moderators.</p>
+    <h2 id="effect-2-grammatical-and-structural-stabilisation">Effect 2:
+    Grammatical and Structural Stabilisation</h2>
+    <p>Across both domains, moderation also improves grammatical
+    stability. Unguided DMLG sampling often produces:</p>
+    <ul>
+    <li><p>clause repetition,</p></li>
+    <li><p>drifting referents,</p></li>
+    <li><p>unstable verb tense cycles,</p></li>
+    <li><p>local syntactic collapse under long sampling
+    horizons.</p></li>
+    </ul>
+    <p>The moderator ensemble rejects such continuations, forcing the
+    generator to remain within a narrower, more syntactically coherent
+    manifold. This stabilisation is not equivalent to style transfer:
+    the generator’s sentence templates remain intact, but malformed or
+    incoherent branches are pruned before they can propagate.</p>
+    <h2 id="summary-1">Summary</h2>
+    <p>Moderation therefore has a dual effect:</p>
+    <ol>
+    <li><p><strong>Canon Intersection:</strong> The output becomes the
+    intersection of the writer’s canon and the moderators’ canon,
+    producing a hybrid but coherent literary style.</p></li>
+    <li><p><strong>Quality Stabilisation:</strong> Moderation suppresses
+    syntactic drift and enforces grammatical consistency, even without
+    explicit structural guidance.</p></li>
+    </ol>
+    <p>These results demonstrate that moderation is not merely a safety
+    mechanism but a powerful tool for shaping the semantic and stylistic
+    manifold of DMLG generators, especially on complex literary datasets
+    such as Aesop and <em>Jekyll &amp; Hyde</em>.</p>
+    <h1 id="sec:hybrid-moderation">Moderation Using a Small Hybrid
+    Modern Dataset</h1>
+    <p>The previous section demonstrated that DMLG moderation remains
+    effective even when the moderator ensemble and the writer are
+    trained on distinct canonical corpora. We now extend this analysis
+    to a more challenging setting: a small <em>hybrid modern
+    dataset</em> consisting of three structurally incompatible
+    regimes:</p>
+    <ol>
+    <li><p>a simplified narrative corpus (short lemma-driven sentences
+    with strong transition regularity),</p></li>
+    <li><p>a modern observational corpus (long-form prose centred on an
+    observatory and caretaker),</p></li>
+    <li><p>and a poetic microfiction corpus (high-entropy, metaphorical,
+    non-narrative text).</p></li>
+    </ol>
+    <p>This dataset was intentionally constructed to contain conflicting
+    inductive biases, incompatible syntactic rhythms, and heterogeneous
+    transition structures. All writer and moderator agents were trained
+    on this mixture.</p>
+    <h2 id="unguided-generation-collapse-under-hybrid-training">Unguided
+    Generation: Collapse Under Hybrid Training</h2>
+    <p>When trained on the hybrid dataset, the writer agent exhibits
+    severe instability. Even when decoded with beam search—the strongest
+    unguided decoding strategy available to the model— the output
+    shows:</p>
+    <ul>
+    <li><p>syntactic drift and broken clause boundaries,</p></li>
+    <li><p>inconsistent subject–object transitions,</p></li>
+    <li><p>uncontrolled mixing of narrative, observational, and poetic
+    registers,</p></li>
+    <li><p>and attractor collapse into repeated fragments</p></li>
+    </ul>
+    <p>Beam search does not mitigate these effects; it amplifies them.
+    Because the hybrid dataset contains no dominant structural
+    attractor, the writer oscillates between incompatible regimes,
+    producing text that is neither canonical nor coherent. This
+    behaviour is consistent with the absence of a stable manifold in the
+    underlying training distribution.</p>
+    <h2 id="moderation-with-mix-activation-evaluators">Moderation With
+    Mix-Activation Evaluators</h2>
+    <p>Despite the instability of the writer, a small ensemble of
+    activation-diverse moderators trained on the same hybrid dataset
+    produces <em>highly stable</em> moderated output. The ensemble
+    consistently selects:</p>
+    <ul>
+    <li><p>short lemma-driven sentences,</p></li>
+    <li><p>canonical DMLG-style transitions,</p></li>
+    <li><p>and structurally coherent narrative fragments.</p></li>
+    </ul>
+    <p>This is surprising because the hybrid dataset contains no
+    explicit canonical core. The moderators nevertheless converge on a
+    stable manifold that resembles the DMLG narrative regime, even
+    though this regime constitutes only a fraction of the training
+    data.</p>
+    <h2 id="emergent-manifold-selection">Emergent Manifold
+    Selection</h2>
+    <p>The key empirical finding is that moderation performs
+    <em>manifold selection</em>. Among the three incompatible regimes in
+    the hybrid dataset, only the DMLG-style narrative corpus exhibits
+    sufficient structural redundancy to support reliable lemma-level
+    voting. The poetic and observational regimes contain high syntactic
+    entropy and low transition regularity, making them unsuitable for
+    ensemble consensus.</p>
+    <p>As a result, the moderator ensemble implicitly identifies and
+    stabilizes the only structurally coherent manifold available. This
+    emergent behaviour occurs without explicit canonical supervision and
+    demonstrates that DMLG moderation can extract a stable generative
+    regime from heterogeneous data.</p>
+    <h2
+    id="beam-writer-vs.-moderated-writer-on-a-distilled-dataset">Beam
+    Writer vs. Moderated Writer on a Distilled Dataset</h2>
+    <p>To further test the generality of this effect, we evaluated a
+    writer trained on a <em>distilled dataset</em> constructed from five
+    heterogeneous corpora. The writer was decoded using both beam search
+    and DMLG moderation with the same mix-activation ensemble.</p>
+    <p>LLM-based qualitative evaluation revealed that:</p>
+    <ul>
+    <li><p>beam search amplifies instability, producing long-range drift
+    and semantic collapse,</p></li>
+    <li><p>while DMLG moderation suppresses drift, enforces structural
+    regularity, and yields coherent lemma-driven sequences.</p></li>
+    </ul>
+    <p>This confirms that moderation dominates generation even when the
+    writer is trained on a highly entropic distilled corpus. The
+    ensemble consistently selects transitions that align with the
+    emergent canonical manifold identified in the hybrid dataset
+    experiments.</p>
+    <h2 id="conclusion-2">Conclusion</h2>
+    <p>These results show that DMLG moderation is robust to
+    heterogeneous training data. Even when both writer and moderators
+    are trained on a mixture of incompatible styles, the ensemble
+    identifies and stabilizes the only structurally coherent manifold
+    available. This emergent behaviour suggests that DMLG moderation
+    functions not merely as a constraint mechanism, but as a
+    <em>structural filter</em> that extracts canonical order from
+    statistical chaos.</p>
+    <p>The fact that all evaluations were performed by an LLM further
+    underscores the qualitative clarity of the effect: the difference
+    between unguided and moderated output is large enough to be
+    consistently recognized without numerical scoring. This positions
+    DMLG moderation as a general-purpose governance layer capable of
+    stabilizing arbitrary generative agents, even in the absence of a
+    well-defined canonical corpus.</p>
+    <h1 id="ensemble-size-and-the-role-of-moderator-quality">Ensemble
+    Size and the Role of Moderator Quality</h1>
+    <p>All experiments in this paper were conducted with a
+    three-moderator ensemble. This choice was not arbitrary: in
+    practice, small ensembles tend to provide the most stable balance
+    between diversity and consensus. Moderation relies on agreement
+    between independent evaluators, and this agreement becomes harder to
+    achieve as the ensemble grows and the canonical expectations of
+    individual moderators diverge.</p>
+    <h2 id="quality-over-quantity">Quality Over Quantity</h2>
+    <p>Our observations suggest that the <em>quality</em> and
+    <em>alignment</em> of moderators matter more than the sheer number
+    of them. A small set of well-trained, canonically coherent
+    moderators provides:</p>
+    <ul>
+    <li><p>sufficient diversity to avoid overfitting to a single
+    canonical view,</p></li>
+    <li><p>enough overlap to reach consistent voting outcomes,</p></li>
+    <li><p>low computational overhead,</p></li>
+    <li><p>stable and interpretable moderation behaviour.</p></li>
+    </ul>
+    <p>Larger ensembles introduce more canonical variation, which can be
+    beneficial up to a point, but excessive diversity reduces the
+    likelihood of consensus and may narrow the acceptance region to the
+    point where generation becomes brittle or inefficient. This effect
+    is architectural rather than empirical: moderation is a voting
+    mechanism, and voting mechanisms naturally depend on the degree of
+    shared structure among voters.</p>
+    <h2 id="practical-implications">Practical Implications</h2>
+    <p>These considerations motivate the use of small, high-quality
+    moderator ensembles. In practice, a triad of moderators provides a
+    good balance between independent judgement and shared canonical
+    grounding, enabling stable moderation without excessive
+    computational cost or consensus fragmentation.</p>
+    <p>This behaviour reinforces a broader theme of this work:
+    moderation is most effective when it is <em>precisely
+    calibrated</em>. The goal is not to maximise the number of
+    moderators, but to ensure that the ensemble forms a coherent
+    governance layer capable of constraining generation while preserving
+    stylistic identity.</p>
+    <h1 id="limitations-and-open-questions">Limitations and Open
+    Questions</h1>
+    <p>Although the experiments in this paper show that DMLG moderation
+    can substantially improve generative stability, canonical fidelity,
+    and stylistic coherence, several limitations remain. These
+    limitations do not reflect flaws in the architecture, but rather the
+    broader challenge of combining structural governance with free-form
+    generation.</p>
+    <h4 id="model-capacity.">Model Capacity.</h4>
+    <p>DMLG writers are intentionally lightweight and structurally
+    constrained. Their generative weaknesses are a design choice:
+    variation is delegated to the writer, while coherence is delegated
+    to the moderators. As a result, unguided generation on complex
+    corpora remains fragile without a governance layer. Moderation is
+    therefore not optional but essential to the architecture.</p>
+    <h4 id="moderator-canon-dependence.">Moderator Canon
+    Dependence.</h4>
+    <p>Moderation enforces the canonical structure encoded in the
+    moderator ensemble. When the moderator and writer canons differ, the
+    output converges to their intersection. This behaviour is
+    predictable and often desirable, but it also means that the choice
+    of moderator canon directly shapes the resulting style. Selecting or
+    training appropriate moderators remains an open design question.</p>
+    <h4 id="ensemble-size-and-alignment.">Ensemble Size and
+    Alignment.</h4>
+    <p>Moderation relies on agreement between independent evaluators.
+    Our observations suggest that small, well-aligned ensembles provide
+    the most stable behaviour: they offer enough diversity to avoid
+    overfitting, yet enough overlap to reach consistent voting outcomes.
+    Larger ensembles introduce more canonical variation, which can make
+    consensus harder to achieve and may narrow the acceptance region.
+    The challenge is therefore not to maximise ensemble size, but to
+    calibrate it: moderator <em>quality</em> and <em>alignment</em>
+    matter more than quantity.</p>
+    <h4 id="integration-with-large-language-models.">Integration with
+    Large Language Models.</h4>
+    <p>The most important open question concerns hybrid architectures.
+    Transformers trained on large corpora are vastly stronger generators
+    than DMLG writers; the question is not whether LLMs can generate,
+    but whether they can <em>cooperate</em> with DMLG-style governance.
+    In principle, moderation is agnostic to the source of candidate
+    tokens, and the same acceptance–rejection mechanism could be applied
+    to LLM sampling. However, several challenges remain:</p>
+    <ul>
+    <li><p><strong>Sampling compatibility:</strong> LLM logits are dense
+    and high-entropy, whereas DMLG moderation expects sparse,
+    lemma-level transitions. Mapping between these representations
+    requires further study.</p></li>
+    <li><p><strong>Latency and throughput:</strong> LLM sampling
+    produces many candidate continuations per step; moderation must
+    remain efficient enough to filter them in real time.</p></li>
+    <li><p><strong>Canonical alignment:</strong> LLMs tend to normalise
+    stylistic irregularities, while DMLG moderators preserve them.
+    Understanding how these tendencies interact is an open research
+    direction.</p></li>
+    <li><p><strong>Governance strength:</strong> It is unknown how
+    strongly a DMLG moderator can constrain a much more expressive
+    generator without collapsing diversity.</p></li>
+    </ul>
+    <h4 id="future-directions.">Future Directions.</h4>
+    <p>These limitations point toward a broader research agenda: can
+    DMLG moderation serve as a general-purpose governance layer for
+    transformer-based generation? If so, hybrid systems may combine the
+    expressive power of LLMs with the canonical stability and
+    interpretability of DMLG. This paper provides initial evidence that
+    moderation can dominate generation in lightweight settings;
+    extending this to large-scale hybrid architectures remains an open
+    and promising challenge.</p>
+    <h1 id="testable-predictions-for-llmdmlg-hybrid-moderation">Testable
+    Predictions for LLM–DMLG Hybrid Moderation</h1>
+    <p>The experiments in this paper evaluate DMLG moderation
+    exclusively in the DMLG–DMLG setting: a lightweight writer governed
+    by a small, aligned ensemble of DMLG moderators. Extending this
+    mechanism to transformer-based generation raises several concrete,
+    testable predictions. These predictions concern the behaviour of the
+    moderation layer when applied to high-capacity LLM sampling, and can
+    be evaluated without modifying the underlying architecture.</p>
+    <h4
+    id="prediction-1-moderation-improves-llm-canon-fidelity.">Prediction
+    1: Moderation Improves LLM Canon Fidelity.</h4>
+    <p>If an LLM is sampled freely on a stylistically rigid corpus
+    (e.g. archaic literature), its output will tend to normalise the
+    style into modern prose. Applying DMLG moderation to the LLM
+    sampling process should increase canonical fidelity by rejecting
+    continuations that deviate from the target style. <em>Test:</em>
+    Compare LLM-only sampling with LLM+moderation on a fixed corpus and
+    measure canonical deviation using a style classifier or perplexity
+    under a domain-specific model.</p>
+    <h4
+    id="prediction-2-moderation-reduces-llm-drift-on-long-horizons.">Prediction
+    2: Moderation Reduces LLM Drift on Long Horizons.</h4>
+    <p>LLMs exhibit semantic drift and topic instability during
+    long-form generation. DMLG moderation should reduce this drift by
+    pruning off-canon continuations. <em>Test:</em> Generate long
+    sequences with and without moderation and quantify topic drift using
+    embedding-based coherence metrics.</p>
+    <h4
+    id="prediction-3-moderation-narrows-the-llm-sampling-distribution.">Prediction
+    3: Moderation Narrows the LLM Sampling Distribution.</h4>
+    <p>Because moderation rejects high-entropy or stylistically
+    inconsistent continuations, the effective sampling distribution of
+    the LLM should become narrower and more structured. <em>Test:</em>
+    Measure entropy of accepted vs. proposed LLM logits across many
+    steps.</p>
+    <h4
+    id="prediction-4-moderator-quality-dominates-llm-capacity.">Prediction
+    4: Moderator Quality Dominates LLM Capacity.</h4>
+    <p>If moderation acts as a governance layer, then the quality and
+    alignment of the moderators should matter more than the capacity of
+    the LLM. A strong LLM with weak or misaligned moderators should
+    perform worse than a moderate LLM with strong, canonically aligned
+    moderators. <em>Test:</em> Cross LLMs of different sizes with
+    moderator ensembles of varying quality and measure canonical
+    fidelity.</p>
+    <h4
+    id="prediction-5-small-aligned-moderator-ensembles-outperform-large-diverse-ones.">Prediction
+    5: Small, Aligned Moderator Ensembles Outperform Large, Diverse
+    Ones.</h4>
+    <p>The ensemble-size behaviour observed in DMLG–DMLG settings should
+    generalise: a small, coherent moderator ensemble should outperform a
+    large, heterogeneous one when governing LLM sampling. <em>Test:</em>
+    Evaluate LLM+moderation with ensembles of size 1–N and measure
+    acceptance rate, coherence, and canonical fidelity.</p>
+    <h4
+    id="prediction-6-llmdmlg-hybrid-moderation-preserves-llm-fluency.">Prediction
+    6: LLM–DMLG Hybrid Moderation Preserves LLM Fluency.</h4>
+    <p>Because moderation filters rather than generates, it should
+    preserve the fluency and grammatical competence of the LLM while
+    constraining its style. <em>Test:</em> Compare fluency metrics
+    (e.g. grammaticality, perplexity under a general language model) for
+    LLM-only vs. LLM+moderation outputs.</p>
+    <h4
+    id="prediction-7-moderation-enables-llms-to-generate-in-styles-they-do-not-natively-master.">Prediction
+    7: Moderation Enables LLMs to Generate in Styles They Do Not
+    Natively Master.</h4>
+    <p>If moderation enforces canonical constraints independently of the
+    generator, then an LLM should be able to produce stable output in a
+    style it does not fully internalise, provided the moderators encode
+    that style. <em>Test:</em> Use moderators trained on a niche or
+    archaic corpus and evaluate whether LLM+moderation produces more
+    canonical output than LLM-only sampling.</p>
+    <h4
+    id="prediction-8-moderation-can-be-inserted-without-retraining-the-llm.">Prediction
+    8: Moderation Can Be Inserted Without Retraining the LLM.</h4>
+    <p>Because moderation operates at the sampling layer, it should
+    function as a drop-in governance mechanism without requiring LLM
+    fine-tuning. <em>Test:</em> Apply moderation to multiple
+    off-the-shelf LLMs and measure improvements in canonical fidelity
+    and drift reduction.</p>
+    <h4
+    id="prediction-9-moderation-increases-interpretability-of-llm-decisions.">Prediction
+    9: Moderation Increases Interpretability of LLM Decisions.</h4>
+    <p>Moderator accept/reject patterns should reveal which stylistic or
+    canonical constraints the LLM violates, providing a form of
+    interpretable governance. <em>Test:</em> Log moderator decisions and
+    cluster rejected continuations to identify systematic LLM
+    deviations.</p>
+    <h4
+    id="prediction-10-hybrid-moderation-exhibits-the-same-failure-modes-as-dmlg-moderation.">Prediction
+    10: Hybrid Moderation Exhibits the Same Failure Modes as DMLG
+    Moderation.</h4>
+    <p>If moderation is architecture-agnostic, then LLM+moderation
+    should show the same structural behaviours observed in DMLG–DMLG
+    settings: narrow acceptance regions, dependence on moderator
+    alignment, and sensitivity to ensemble size. <em>Test:</em>
+    Replicate the ensemble-size and canonical-intersection experiments
+    with LLM sampling.</p>
+    <h1 id="conclusion-3">Conclusion</h1>
+    <p>This work demonstrates that DMLG moderation is not merely an
+    auxiliary mechanism for filtering or stabilising generative output,
+    but a structural component that fundamentally enhances the behaviour
+    of the underlying architecture. Across all experiments—ranging from
+    synthetic corpora to Aesop, <em>The Time Machine</em>, and
+    <em>Jekyll &amp; Hyde</em>—we observe the same pattern: <em>DMLG
+    generates better text when it is governed by DMLG</em>.</p>
+    <p>Unguided writers, even when trained on rich literary corpora,
+    exhibit well-known DMLG failure modes: attractor loops, syntactic
+    fragmentation, semantic drift, and unstable clause structure.
+    Moderation suppresses these degeneracies without introducing new
+    content. Instead, the moderator ensemble acts as a canonical
+    constraint operator: it accepts only those continuations that
+    satisfy the structural, lexical, and stylistic invariants encoded in
+    its own training corpus. The result is a form of
+    <em>self-reinforcing governance</em>: the architecture improves its
+    own generative behaviour not by increasing model capacity, but by
+    constraining itself.</p>
+    <p>This effect is particularly striking on difficult corpora. On
+    <em>The Time Machine</em>, where unguided DMLG generation collapses
+    into unstable archaic fragments, moderation produces coherent,
+    temporally grounded sentences that remain faithful to the canonical
+    style. On <em>Jekyll &amp; Hyde</em>, moderation restores
+    psychological coherence and Victorian cadence while eliminating
+    malformed recursive structures. Even on Aesop, moderation shifts the
+    generator toward a stable intersection between the fable canon and
+    the moderators’ temporal-mechanical canon, demonstrating that
+    moderation can enforce stylistic identity even when the moderator
+    and writer are trained on different corpora.</p>
+    <p>The central insight is therefore architectural: <em>DMLG is
+    strongest not as a generator, but as a governor</em>. Its generative
+    layer provides variation, but its moderation layer provides
+    structure, coherence, and canonical fidelity. Where large language
+    models avoid archaic or stylistically rigid corpora by normalising
+    them into modern prose, DMLG preserves these canons by enforcing
+    them. Moderation enables DMLG to operate reliably on corpora that
+    would otherwise exceed its generative stability.</p>
+    <p>In this sense, DMLG offers a complementary paradigm to
+    contemporary neural generation: a governance-first architecture in
+    which quality, coherence, and stylistic identity emerge not from
+    scale, but from constraint. The fact that DMLG becomes a better
+    generator precisely when it moderates itself underscores its core
+    contribution: <em>governance can dominate generation</em>.</p>
+    <div class="tcolorbox">
+    <p>Transformers excel by learning broad linguistic priors; DMLG
+    excels by enforcing narrow canonical structure. Where the former
+    smooths irregular corpora into fluent modern prose, the latter
+    preserves their internal logic through governance. Moderation
+    therefore does not compete with generation—it completes it: a small
+    DMLG writer becomes stronger precisely when it is constrained by its
+    own evaluators. This complementarity suggests a hybrid future in
+    which LLMs generate and DMLG governs, a separation of roles that may
+    also prove useful in applied settings where consistency and
+    traceability are required.</p>
+    </div>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>. A complete reference
+    Python implementation is included in the ecosystem under the
+    AGPL-3.0 license, together with example datasets and models provided
+    in a separate data repository. These resources make the architecture
+    fully inspectable, reproducible, and practically deployable.</p>
+  </main>
+
+</div>
+
+</body>
+</html>

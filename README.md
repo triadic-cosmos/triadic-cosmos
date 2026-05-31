@@ -217,6 +217,32 @@ Adaptive neurons introduce data‑driven activation geometry that can produce sh
 
 ---
 
+### **11. DMLG Self‑Governance: Empirical Evaluation of Modular Multi‑Agent Moderation**
+This paper provides the **empirical extension** of *Language as Graph Traversal: The DMLG Architecture*.  
+Where the earlier work introduced DMLG as a deterministic, canonical graph of tokens and transitions,  
+this paper demonstrates how **multiple independently trained DMLG evaluators** can govern a writer agent  
+through lemma‑level ensemble voting.
+
+It shows that moderation is not a secondary capability but the **primary locus of reliability** in the system.  
+A simple propose‑vote‑select mechanism—operating without beam search or additional training—  
+is sufficient to:
+
+- stabilize weak or unstable writer agents,  
+- suppress drift and structural divergence,  
+- enforce canonical transitions and stylistic fidelity,  
+- and produce coherent, grammatical, canon‑consistent text even from minimal‑capacity writers.
+
+The key empirical finding is that **governance can dominate generation**:  
+structural consensus among small evaluators can outperform the raw generative capacity of the writer.  
+This reveals DMLG moderation as a lightweight, interpretable, model‑agnostic governance layer  
+capable of stabilizing arbitrary generative systems.
+
+The paper establishes DMLG self‑governance as a practical mechanism for  
+**ensemble‑based safety, canonical enforcement, drift detection, and hybrid LLM governance**,  
+positioning it as the operational realization of the structural principles introduced in the DMLG architecture.
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
