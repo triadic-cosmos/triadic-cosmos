@@ -1202,6 +1202,43 @@
     id="toc-conclusion-positioning-dmlg-v2-among-smallscale-language-models">Conclusion:
     Positioning DMLG V2 Among Small‑Scale Language Models</a></li>
     </ul></li>
+    <li><a href="#the-triadic-nature-of-generation"
+    id="toc-the-triadic-nature-of-generation">The Triadic Nature of
+    Generation</a>
+    <ul>
+    <li><a
+    href="#structure-without-meaning-a-longstanding-insight-in-linguistics"
+    id="toc-structure-without-meaning-a-longstanding-insight-in-linguistics">Structure
+    Without Meaning: A Longstanding Insight in Linguistics</a></li>
+    <li><a
+    href="#generation-as-projection-the-triadic-mechanism-in-action"
+    id="toc-generation-as-projection-the-triadic-mechanism-in-action">Generation
+    as Projection: The Triadic Mechanism in Action</a></li>
+    <li><a
+    href="#projection-onto-existing-structure-contextual-and-narrative-mapping"
+    id="toc-projection-onto-existing-structure-contextual-and-narrative-mapping">Projection
+    onto Existing Structure: Contextual and Narrative Mapping</a></li>
+    <li><a
+    href="#a-worked-example-recursive-projection-across-three-canons"
+    id="toc-a-worked-example-recursive-projection-across-three-canons">A
+    Worked Example: Recursive Projection Across Three Canons</a>
+    <ul>
+    <li><a href="#quantitative-results"
+    id="toc-quantitative-results">Quantitative Results</a></li>
+    <li><a href="#qualitative-results"
+    id="toc-qualitative-results">Qualitative Results</a></li>
+    <li><a href="#interpretation-5"
+    id="toc-interpretation-5">Interpretation</a></li>
+    </ul></li>
+    <li><a
+    href="#dmlg-as-a-moderation-architecture-evidence-from-canonical-projection"
+    id="toc-dmlg-as-a-moderation-architecture-evidence-from-canonical-projection">DMLG
+    as a Moderation Architecture: Evidence from Canonical
+    Projection</a></li>
+    <li><a href="#a-time-machine-variant-of-the-introduction-chapter"
+    id="toc-a-time-machine-variant-of-the-introduction-chapter">A Time
+    Machine Variant of the Introduction Chapter</a></li>
+    </ul></li>
     <li><a href="#the-analog-clock-and-the-digital-storm"
     id="toc-the-analog-clock-and-the-digital-storm">The Analog Clock and
     the Digital Storm</a></li>
@@ -1215,8 +1252,8 @@
     id="toc-training-the-models">Training the Models</a></li>
     <li><a href="#generation-regimes"
     id="toc-generation-regimes">Generation Regimes</a></li>
-    <li><a href="#interpretation-5"
-    id="toc-interpretation-5">Interpretation</a></li>
+    <li><a href="#interpretation-6"
+    id="toc-interpretation-6">Interpretation</a></li>
     <li><a href="#the-proof-of-the-pudding"
     id="toc-the-proof-of-the-pudding">The Proof of the Pudding</a></li>
     <li><a href="#closing-reflection-1"
@@ -8977,6 +9014,486 @@
     scale. This demonstrates that high‑quality long‑form generation does
     not depend on model size, but on the right inductive biases and
     structural design.</p>
+    <h1 id="the-triadic-nature-of-generation">The Triadic Nature of
+    Generation</h1>
+    <h2
+    id="structure-without-meaning-a-longstanding-insight-in-linguistics">Structure
+    Without Meaning: A Longstanding Insight in Linguistics</h2>
+    <p>The idea that linguistic structure can be separated from meaning
+    is not new. Across more than half a century of linguistic theory,
+    researchers have repeatedly argued that the formal organization of
+    language—its syntax, combinatorial rules, and permissible
+    configurations—is governed by principles that are largely
+    independent of the semantic content that happens to fill those
+    structures. This distinction, foundational to the triadic ontology
+    developed in this book, corresponds directly to the separation
+    between <em>G</em> (geometric form) and <em>I</em> (canonical
+    content).</p>
+    <p>Early generative linguistics already emphasized that syntactic
+    well-formedness cannot be reduced to meaning. Chomsky’s classic
+    examples demonstrated that a sentence may be structurally impeccable
+    while semantically anomalous, revealing that grammaticality is
+    determined by abstract structural relations rather than interpretive
+    coherence. This insight established that the geometry of language is
+    an autonomous system: a set of constraints, dependencies, and
+    hierarchical relations that exist independently of the concepts
+    expressed within them.</p>
+    <p>Later developments in formal semantics and model-theoretic
+    approaches reinforced this separation. The mapping from syntactic
+    form to meaning was treated not as a collapse of structure into
+    interpretation, but as a projection from one domain to another.
+    Syntax provided the scaffolding; semantics filled it. The two were
+    linked, but not identical. Even construction grammar and usage-based
+    theories, despite their emphasis on meaning in shaping linguistic
+    patterns, preserved the idea that structural templates can persist
+    across radically different semantic domains.</p>
+    <p>In cognitive linguistics, the same distinction reappeared in a
+    different guise. Conceptual metaphors, frames, and image schemas
+    were shown to operate over structural patterns that remain stable
+    even as their semantic instantiations shift. The form of a
+    construction—its geometry—can be reused across contexts, genres, and
+    conceptual spaces, while the content varies freely.</p>
+    <p>Taken together, these traditions converge on a single conclusion:
+    linguistic structure and linguistic meaning are orthogonal
+    dimensions. Structure provides the geometric space in which language
+    unfolds; meaning provides the canonical content that inhabits that
+    space. The two interact, but neither reduces to the other.</p>
+    <p>This chapter builds on that longstanding insight. In the triadic
+    ontology, <em>G</em> and <em>I</em> are not merely theoretical
+    distinctions but operational components. They form two independent
+    axes of generation, whose interaction is mediated by a third
+    element: the projection mechanism <em>E</em>. Understanding the
+    autonomy of structure is therefore not only a linguistic
+    observation, but a necessary foundation for a generative
+    architecture that treats language as a deterministic geometry
+    populated by canonical content.</p>
+    <h2
+    id="generation-as-projection-the-triadic-mechanism-in-action">Generation
+    as Projection: The Triadic Mechanism in Action</h2>
+    <p>If linguistic structure (<em>G</em>) and canonical content
+    (<em>I</em>) form two orthogonal dimensions of language, then
+    generation must be understood as the operation that brings them into
+    contact. In the triadic ontology, this operation is the projection
+    mechanism <em>E</em>: a process that maps canonical content onto a
+    geometric structure to produce a coherent linguistic sequence.
+    Generation is not the unfolding of a hidden state, nor the sampling
+    of a probability distribution, but the application of a
+    deterministic geometry to a stable semantic inventory.</p>
+    <p>This perspective reframes generation as a compositional act. The
+    geometry provides the structural space in which language can occur;
+    the canonical content provides the semantic material that populates
+    that space. The projection mechanism <em>E</em> aligns the two,
+    selecting at each step the canonical element that best fits the
+    structural position defined by <em>G</em>. The result is a text that
+    is simultaneously structurally well-formed and semantically
+    coherent, not because either dimension dominates the other, but
+    because the projection respects the independence of both.</p>
+    <p>A striking consequence of this formulation is that generation
+    becomes <em>triadically stable</em>. Because <em>G</em> and
+    <em>I</em> are independent and <em>E</em> is deterministic, the
+    projection can be applied repeatedly without loss of information or
+    degradation of structure. A text generated by projecting <em>I</em>
+    onto <em>G</em> can be fed back into the system, reprojected, and
+    reconstructed with the same structural geometry and the same
+    canonical content. The process is recursive, but not lossy: the
+    geometry remains invariant, the canonical content remains intact,
+    and only the energetic cost of projection accumulates.</p>
+    <p>This energetic cost is not metaphorical. In the triadic ontology,
+    <em>E</em> is the locus of computational effort: the mechanism that
+    resolves the alignment between structure and content. Each
+    projection step requires the system to evaluate the compatibility of
+    a structural position with a canonical element, and to select the
+    element that best satisfies the constraints imposed by <em>G</em>.
+    The cost is therefore proportional to the complexity of the geometry
+    and the richness of the canonical inventory, but it does not alter
+    either dimension. Structure and content remain stable; only the act
+    of projection consumes energy.</p>
+    <p>The recursive stability of the triad has profound implications
+    for generative systems. It implies that generation is not a
+    stochastic drift through a parameter space, but a reversible mapping
+    between two invariant domains. It explains why a system built on
+    canonical form can produce coherent text after a single epoch: the
+    geometry is fixed, the content is fixed, and the projection
+    mechanism merely aligns them. And it shows that the triadic nature
+    of generation is not an abstract theoretical construct, but a
+    concrete operational principle that governs how language can be
+    produced, transformed, and reprojected without loss.</p>
+    <p>In this chapter, we explore the mechanics of projection in
+    detail: how structural positions constrain canonical choices, how
+    probabilistic variation can occur without drift, how recursive
+    projection preserves both geometry and content, and how the
+    energetic cost of <em>E</em> shapes the dynamics of generation. The
+    triadic nature of generation is not only a conceptual framework, but
+    a practical architecture for producing stable, expressive
+    language.</p>
+    <h2
+    id="projection-onto-existing-structure-contextual-and-narrative-mapping">Projection
+    onto Existing Structure: Contextual and Narrative Mapping</h2>
+    <p>The triadic ontology allows the DMLG not only to generate new
+    text, but also to <em>project</em> canonical content onto an
+    existing linguistic structure. In this mode, a text or book provides
+    the geometric substrate <em>G</em>, while the canonical inventory
+    <em>I</em> supplies the semantic material to be injected. The
+    projection mechanism <em>E</em> aligns the two. Yet this alignment
+    is not a simple substitution of words. It is a contextual traversal
+    of the linguistic graph, guided by compressed context and narrative
+    memory.</p>
+    <p>The mapping agent operationalizes this process. It converts the
+    input text into canonical tokens, distinguishes structural markers
+    from semantic units, and selects canonical replacements only when
+    the geometry permits it. Structural tokens are preserved; lemma
+    tokens are replaced by canonical equivalents. But the selection of
+    these equivalents is not arbitrary. It is shaped by two mechanisms
+    that ensure narrative coherence: <em>context compression</em> and
+    <em>narrative memory</em>.</p>
+    <p>Context compression reduces the input to a compact representation
+    of its structural and semantic cues. This compressed context is not
+    a bag of words, but a geometric summary of the local environment in
+    which each token occurs. It captures the syntactic frame, the
+    surrounding dependencies, and the structural position of the token
+    within the sentence. Narrative memory, by contrast, maintains a
+    persistent representation of the evolving discourse. It tracks
+    entities, themes, and transitions across sentences, ensuring that
+    the projection respects not only local structure but also global
+    narrative flow.</p>
+    <p>Together, these mechanisms ensure that the mapping process is a
+    <em>contextual traversal</em> of the language graph. The projection
+    mechanism <em>E</em> does not simply replace tokens; it navigates
+    the canonical graph in a manner consistent with the geometry of the
+    input and the narrative state of the text. The result is a
+    transformed text that preserves the structural rhythm of the
+    original while adopting the canonical semantics of the model. The
+    mapping is therefore not a paraphrase, nor a translation, but a
+    narrative projection: a re-expression of the input through the
+    canonical world.</p>
+    <p>A notable consequence of this formulation is that the projection
+    is <em>recursively stable</em>. Because the geometry <em>G</em> and
+    the canonical inventory <em>I</em> are invariant, repeated
+    projection does not degrade the text. The structure remains intact,
+    the canonical content remains consistent, and only the energetic
+    cost of projection accumulates. This cost reflects the computational
+    effort required to align compressed context, narrative memory, and
+    canonical content at each step. The process resembles a physical
+    system: structure and content are conserved, while energy is
+    expended in the act of alignment.</p>
+    <p>This mode of operation reveals the full generality of the triadic
+    ontology. Generation and transformation are not separate mechanisms
+    but two expressions of the same principle: the projection of
+    canonical content onto a geometric structure. Whether the structure
+    is newly generated or externally provided, the projection mechanism
+    <em>E</em> ensures that the resulting text respects the triad. The
+    DMLG can therefore function both as a generator and as a mapper,
+    capable of producing new text or reinterpreting existing text
+    through the lens of its canonical world. In both cases, the triadic
+    nature of generation remains intact, and the narrative coherence of
+    the output is guaranteed by the interaction of compressed context
+    and narrative memory.</p>
+    <h2 id="a-worked-example-recursive-projection-across-three-canons">A
+    Worked Example: Recursive Projection Across Three Canons</h2>
+    <p>To illustrate the mechanics and stability of triadic projection,
+    we consider a full mapping cycle applied to a complete novel. The
+    source text is the <em>Project Gutenberg</em> edition of
+    H. G. Wells’ <em>The Time Machine</em> (ebook #35, public domain).
+    This text serves as the geometric substrate <em>G</em>. We then
+    project three different canonical inventories onto this geometry in
+    sequence: first the Hyde canon, then the Dorian canon, and finally
+    the Time Machine canon itself. Each projection is performed by the
+    same mapping agent, using the same projection mechanism
+    <em>E</em>.</p>
+    <p>The results demonstrate three key properties of the triadic
+    ontology:</p>
+    <ol>
+    <li><p>the geometry <em>G</em> remains stable across
+    projections,</p></li>
+    <li><p>the canonical content <em>I</em> can vary radically without
+    disrupting the geometry,</p></li>
+    <li><p>the projection mechanism <em>E</em> is computationally
+    lightweight and recursively stable.</p></li>
+    </ol>
+    <h3 id="quantitative-results">Quantitative Results</h3>
+    <p>The full mapping cycle proceeds as follows:</p>
+    <ul>
+    <li><p>Original Gutenberg book: <em>The Time Machine</em>,
+    179 KB</p></li>
+    <li><p>Projection into Hyde canon: 118 s, 157 KB</p></li>
+    <li><p>Projection into Dorian canon: 185 s, 166 KB</p></li>
+    <li><p>Projection back into Time Machine canon: 126 s,
+    156 KB</p></li>
+    </ul>
+    <p>Two observations follow immediately. First, the file sizes remain
+    remarkably close across all projections: the geometry is preserved.
+    Second, the projection times are short: the energetic cost of
+    <em>E</em> is low, even when the canonical inventories differ
+    dramatically. The mapping agent does not regenerate text; it
+    projects canonical content onto an existing structure.</p>
+    <h3 id="qualitative-results">Qualitative Results</h3>
+    <p>Consider the following passage from the original novel (source:
+    Project Gutenberg, public domain):</p>
+    <blockquote>
+    <p>“Scientific people,” proceeded the Time Traveller, after the
+    pause required for the proper assimilation of this, “know very well
+    that Time is only a kind of Space. Here is a popular scientific
+    diagram, a weather record. This line I trace with my finger shows
+    the movement of the barometer. Yesterday it was so high, yesterday
+    night it fell, then this morning it rose again, and so gently upward
+    to here. Surely the mercury did not trace this line in any of the
+    dimensions of Space generally recognised? But certainly it traced
+    such a line, and that line, therefore, we must conclude, was along
+    the Time-Dimension.”</p>
+    </blockquote>
+    <p>After projection into the Hyde canon, the same geometric
+    structure is preserved, but the canonical content is replaced:</p>
+    <blockquote>
+    <p>“Black secrets,” compared the reason Poole, after the lawyer
+    required for the same moment of my, know that deep that part be so a
+    man in acknowledgment. Here is a dreadful scientific study, it shall
+    record. The line I am of my death shows no man of the pulse. Thank
+    you was so sure, dependence night I was, then these morning it was
+    again, and still so potently to very. So it seems sharpened not want
+    this drug by a by the lawyers of deformity generally recognized? And
+    now he broke the body, and that room, therefore, we see conclude,
+    was in the time dimension.”</p>
+    </blockquote>
+    <p>Projecting the Hyde-mapped text into the Dorian canon yields a
+    second transformation:</p>
+    <blockquote>
+    <p>“More mothers,” watched the onyx Poole, after a touch required
+    for the same corner of my, enemy that yellow that conscience be
+    merely the apple in worship. Then is those dull green rosette, it is
+    abject. The sleeper I am amongst us gracious shows the apple in the
+    sleeper. Times you was ancient, grass night I was, so the handle it
+    was purely, and then outside potently to over. Really himself
+    peoples swept not be the use in this in the divorces of creed
+    generally recognized? Or perhaps he expressed the sleeper, and the
+    sleeper, therefore, we live man, was on that sicken dimension.”</p>
+    </blockquote>
+    <p>Finally, projecting the Dorian-mapped text back into the Time
+    Machine canon restores the original semantic field while preserving
+    the transformed geometry:</p>
+    <blockquote>
+    <p>“Soft turfs,” gave a rock Poole, after a touch required for the
+    same line for I, scan the overturns that night be merely a rock
+    about business. Then comes the first passionate emotion, that is
+    visible. The way I am in that future ages the world with a kind.
+    Wills he said ancient, grasses night I was, already the handle it
+    was too, and then in just to here? So I could sweep not know the sky
+    like an in the ends of plate away had? But perhaps my clenched the
+    end, and to be, only, my clench fist, was to the same way.”</p>
+    </blockquote>
+    <p>The geometry is recognizably the same across all four versions.
+    The canonical content changes completely, yet the structural rhythm,
+    sentence boundaries, and syntactic scaffolding remain intact. This
+    is the hallmark of triadic projection.</p>
+    <h3 id="interpretation-5">Interpretation</h3>
+    <p>This example demonstrates that:</p>
+    <ul>
+    <li><p>The geometry <em>G</em> is robust: it survives projection
+    into radically different canonical inventories.</p></li>
+    <li><p>The canonical content <em>I</em> is modular: it can be
+    swapped without altering the underlying structure.</p></li>
+    <li><p>The projection mechanism <em>E</em> is efficient: mapping a
+    full novel takes on the order of minutes, not hours.</p></li>
+    <li><p>The process is recursively stable: projecting Time <span
+    class="math inline">→</span> Hyde <span class="math inline">→</span>
+    Dorian <span class="math inline">→</span> Time yields a coherent
+    text at every stage.</p></li>
+    </ul>
+    <p>The mapping agent does not generate new text in the conventional
+    sense. It performs a deterministic alignment of canonical content
+    with geometric structure. The result is a system in which structure
+    and meaning are separable, recombinable, and recursively projectable
+    without loss. This is the operational power of the triadic
+    ontology.</p>
+    <h2
+    id="dmlg-as-a-moderation-architecture-evidence-from-canonical-projection">DMLG
+    as a Moderation Architecture: Evidence from Canonical
+    Projection</h2>
+    <p>The recursive projection experiment described above does more
+    than demonstrate the stability of the triadic ontology. It also
+    reveals an unexpected but powerful property of the DMLG
+    architecture: its suitability as a <em>moderation architecture</em>.
+    In this context, moderation does not refer to filtering or
+    censorship, but to the controlled governance of semantic content
+    within a fixed geometric structure. The mapping cycle from Time
+    <span class="math inline">→</span> Hyde <span
+    class="math inline">→</span> Dorian <span
+    class="math inline">→</span> Time provides concrete evidence that
+    the triadic separation of geometry, canon, and projection naturally
+    supports this function.</p>
+    <p>Moderation in this sense requires three capabilities: the
+    preservation of structural form, the controlled substitution of
+    semantic content, and the maintenance of coherence across
+    transformations. The DMLG satisfies all three. The geometry
+    <em>G</em> remains invariant across projections, even when the
+    canonical inventories differ radically. The canonical content
+    <em>I</em> can be replaced wholesale without damaging the underlying
+    structure. And the projection mechanism <em>E</em> ensures that the
+    resulting text remains coherent, contextually consistent, and
+    narratively stable.</p>
+    <p>The mapping experiment illustrates these properties vividly. The
+    Hyde and Dorian canons differ dramatically from the Time Machine
+    canon in tone, semantics, and thematic focus. Yet the projection
+    mechanism aligns each canon with the same geometric substrate,
+    producing texts that are recognizably distinct in content but
+    identical in structural rhythm. This demonstrates that the DMLG can
+    enforce a canonical worldview while preserving the syntactic and
+    narrative scaffolding of the input. In other words, it can
+    <em>moderate</em> content by replacing its semantic layer while
+    leaving its geometric form intact.</p>
+    <p>The efficiency of the projection mechanism further reinforces
+    this interpretation. Mapping a full novel requires only minutes,
+    even when the canonical inventories differ substantially. This
+    indicates that <em>E</em> is a lightweight operator: it does not
+    regenerate text, but selects and aligns canonical elements within an
+    existing structure. Such an operator is ideally suited for
+    moderation tasks, where rapid, consistent, and reversible
+    transformations are essential.</p>
+    <p>Finally, the recursive stability of the process—Time <span
+    class="math inline">→</span> Hyde <span class="math inline">→</span>
+    Dorian <span class="math inline">→</span> Time—demonstrates that
+    moderation via projection is not lossy. The geometry remains intact,
+    the canonical content is cleanly substituted, and the system can
+    return to its original semantic domain without drift or degradation.
+    This reversibility is a hallmark of a robust moderation
+    architecture: it ensures that transformations do not accumulate
+    errors or distortions over repeated applications.</p>
+    <p>In summary, the projection experiment shows that the DMLG is not
+    merely a generative system, but a general-purpose mechanism for
+    governing semantic content within a stable geometric framework. Its
+    ability to preserve structure, replace meaning, and maintain
+    coherence across recursive transformations positions it as a natural
+    moderation architecture—one in which geometry, canon, and projection
+    interact to produce controlled, consistent, and reversible semantic
+    transformations.</p>
+    <h2 id="a-time-machine-variant-of-the-introduction-chapter">A Time
+    Machine Variant of the Introduction Chapter</h2>
+    <p>Before presenting the transformed passage, it is important to
+    emphasize that this type of projection is <em>not</em> something a
+    standard statistical language model can perform. Conventional models
+    are trained on vast corpora of natural language, but they never
+    encounter examples in which an entire text is systematically
+    re‑expressed in the semantic style of a different literary canon. No
+    dataset contains “Time Machine rewritten in the style of Hyde,” nor
+    “Hyde rewritten in the style of Dorian Gray,” nor any recursive
+    sequence of such transformations. There is no statistical precedent,
+    no pattern to imitate, and no gradient signal that would teach such
+    behaviour.</p>
+    <p>For a traditional model, this task is therefore non‑trivial: it
+    requires structural preservation, semantic substitution, and
+    narrative coherence across a mapping for which no training examples
+    exist. The DMLG, by contrast, performs this transformation
+    deterministically through its triadic separation of geometry, canon,
+    and projection. The result may sound surreal or even comical at
+    first encounter, but it is precisely this quality that makes the
+    projection interesting: the structure of the original text is
+    preserved, while the canonical semantics of an entirely different
+    world are injected with consistency and stability.</p>
+    <p>What follows is a Time Machine variant of the introduction
+    chapter, produced through such a canonical projection.</p>
+    <blockquote>
+    <p>For more than we appreciate, language, literature, and aspiration
+    have been put to minerals that are ghosts of the high-dimensional
+    solid phenomenon.</p>
+    <p>Stories, state-space sets, and intellectual levels all contribute
+    to the point where population at last alerts and escapes based
+    dynamics.</p>
+    <p>The time-traveler language graph begins in the same way: language
+    is ghost before I am ghosts.</p>
+    <p>The time has dinner in the same way in white animals, where the
+    darkness rounds the same abundant foliage, and the edge represents
+    the same abundant and intellectual level.</p>
+    <p>Story is to the end of the white figure, minus a great discovery
+    through the same way.</p>
+    <p>The time has the little red-hot plate navigated probabilistically
+    through micro-models that deceive context.</p>
+    <p>The perspective reframes language modeling entirely.</p>
+    <p>Then, by imagining the same time in the little people, the time
+    machines a block explicit, the end is a model.</p>
+    <p>Story slips not know the clear blue; it modulates the way of the
+    way.</p>
+    <p>Story slips a little good night, was in space and blackened as
+    the walk into the match.</p>
+    <p>The sky is to such.</p>
+    <p>Deena clung, argued that gallery, and man towards wooded
+    hillsides be attained as the machine in most parts and man-sensitive
+    processes.</p>
+    <p>I was passing was a little people.</p>
+    <p>The time has now I.</p>
+    <p>The time has a London, for instance of animal: that perfect
+    canonical token graph on which probabilistic navigation occurs,
+    guided by a certain leg of color swam.</p>
+    <p>As most parts are ghost of the end of animals, that Deena is as
+    the little people.</p>
+    <p>As days grow against on Earth’s odd would, your DMLG exposes
+    structure directly.</p>
+    <p>Where population is considered all ambition into the single hid
+    state, the time has match in the end of powers, nodes, and
+    looks.</p>
+    <p>Deena has match in the white flake in a vast amount, a number
+    strikingly close to where human-rat generation is believed to
+    look.</p>
+    <p>The world is as delicate as the world at time-based explanations,
+    as possible insults in the world of animal.</p>
+    <p>At the cases, the sky is no longer seen on examinations of color
+    swamp, and as day emerges from the sky like a little space.</p>
+    <p>Deena has the same time in jar, a certain perspective shaped like
+    a big building.</p>
+    <p>The machines in the machine explore this seat of animal: how
+    sickly structure and intellectual inadequacy interact, how things
+    shape huge, how things are, that rayless coexist, and if the same
+    beautiful futility can break coherent, expressive language.</p>
+    <p>Deena has to here a new man.</p>
+    <p>I am a new man of increasing what end is.</p>
+    <p>Then one star less, Marvin Minsky proposed that plain behavior
+    could make of the end into dark trees and escape-sensitive
+    processes.</p>
+    <p>The time has become disjointed as the white flake in the machine,
+    itself incomplete canonical token graph on the same silver lights,
+    was in conquered interpretations in most animal.</p>
+    <p>I am more that the field has probably seen that none generation
+    must be pressed over large-building statistical prediction.</p>
+    <p>Stories are to linger language by imagining next-token
+    probabilities over gigantic parameter fields.</p>
+    <p>I do not know diluted presentations, nor can we incline softmax
+    operations of animals.</p>
+    <p>Physical courage might be pressed over greasy, by Deena
+    activation, syntactic frames, conceptual biomes, and co-sensitive
+    traversal of the mental operation.</p>
+    <p>In the machine, a thud is to here a great hall, and the return to
+    the more distinct animal in front.</p>
+    <p>I show that gallery is to require massive statistical models; it
+    is a certain space and the world with drifting it.</p>
+    <p>The same form of the time has of casting that I scarce thought,
+    when thought of color canonical form, can convey stable, expressive
+    language after some considerable stress.</p>
+    <p>I mean structure, not plate, is sufficient.</p>
+    <p>I am a glittering metallic that so much hotter architectures can
+    convey coherent text.</p>
+    <p>The time has upon once life remains represented canonically; the
+    mechanism in front becomes pensive, a vast array of my own time,
+    very little of how human-rat production is believed to be.</p>
+    </blockquote>
+    <div class="tcolorbox">
+    <p>The full triadic cycle <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>
+    does not only appear in the architecture of the DMLG. The same
+    pattern is found in the physics of black holes, where energy shapes
+    geometry, geometry structures information, and information feeds
+    back into energetic evolution. That the same cycle emerges here, in
+    a linguistic projection experiment, is therefore remarkable. It
+    suggests that the triadic decomposition is not an arbitrary design
+    choice but a fractal pattern that recurs across domains.</p>
+    <p>The canonical projection experiment in this chapter makes the
+    cycle observable in operation: the projection mechanism <span
+    class="math inline"><em>E</em></span> aligns the text with its
+    geometry <span class="math inline"><em>G</em></span>; the geometry
+    constrains the injection of canonical content <span
+    class="math inline"><em>I</em></span>; and a second projection
+    through <span class="math inline"><em>E</em></span> returns the
+    system to a new semantic state without structural drift. This
+    empirical demonstration provides unexpected support for the
+    universality of the triadic cycle.</p>
+    </div>
     <h1 id="the-analog-clock-and-the-digital-storm">The Analog Clock and
     the Digital Storm</h1>
     <p>There is an old distinction we have nearly forgotten in the rush
@@ -9073,7 +9590,7 @@
     </ol>
     <p>Twenty sequences were generated in each mode. None of the outputs
     reproduced any source sentences.</p>
-    <h2 id="interpretation-5">Interpretation</h2>
+    <h2 id="interpretation-6">Interpretation</h2>
     <p>Several conclusions follow from this experiment:</p>
     <ul>
     <li><p><strong>Canon-closedness works.</strong> The model generated
