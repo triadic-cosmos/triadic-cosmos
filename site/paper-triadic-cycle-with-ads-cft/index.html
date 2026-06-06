@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The Triadic Cycle with AdS/CFT<br />
+Recursion, Emergent Time, and Holographic Structure</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#clarifying-scope-and-common-misinterpretations"
+    id="toc-clarifying-scope-and-common-misinterpretations">Clarifying
+    Scope and Common Misinterpretations</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a
+    href="#the-triadic-cycle-functional-and-recursive-formalization"
+    id="toc-the-triadic-cycle-functional-and-recursive-formalization">The
+    Triadic Cycle: Functional and Recursive Formalization</a></li>
+    <li><a href="#mapping-the-triadic-cycle-to-adscft"
+    id="toc-mapping-the-triadic-cycle-to-adscft">Mapping the Triadic
+    Cycle to AdS/CFT</a></li>
+    <li><a href="#emergent-time-from-triadic-recursion-and-holography"
+    id="toc-emergent-time-from-triadic-recursion-and-holography">Emergent
+    Time from Triadic Recursion and Holography</a></li>
+    <li><a href="#implications-for-black-holes"
+    id="toc-implications-for-black-holes">Implications for Black
+    Holes</a></li>
+    <li><a href="#comparison-with-existing-black-hole-interpretations"
+    id="toc-comparison-with-existing-black-hole-interpretations">Comparison
+    with Existing Black Hole Interpretations</a></li>
+    <li><a href="#testable-predictions-and-theoretical-implications"
+    id="toc-testable-predictions-and-theoretical-implications">Testable
+    Predictions and Theoretical Implications</a></li>
+    <li><a href="#limitations-and-open-questions"
+    id="toc-limitations-and-open-questions">Limitations and Open
+    Questions</a></li>
+    <li><a href="#conclusion-1"
+    id="toc-conclusion-1">Conclusion</a></li>
+    <li><a href="#summarizing-schematic-figure"
+    id="toc-summarizing-schematic-figure">Summarizing Schematic
+    Figure</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Modern physics exhibits a remarkable degree of empirical success
+    while remaining conceptually fragmented. Quantum mechanics, quantum
+    field theory, general relativity, thermodynamics, and holographic
+    dualities each illuminate essential aspects of physical law, yet
+    they do so using distinct structural assumptions and incompatible
+    ontological commitments. Attempts at unification typically introduce
+    new mathematical frameworks or microscopic models, but these efforts
+    often inherit the limitations of the theories they aim to reconcile.
+    What is missing is a structural account of the roles that physical
+    theories must instantiate in order to remain mutually
+    compatible.</p>
+    <p>The Triadic Cosmos program has proposed such an account. Earlier
+    work introduced a minimal ontology consisting of three irreducible
+    roles—energy, geometry, and information—and showed that modern
+    physics already implements a closed interdependence among them,
+    expressed as the Triadic Cycle <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>.
+    Subsequent papers developed the architectural consequences of this
+    ontology, identifying theory-independent constraints that any viable
+    unifying framework must satisfy. These works established the Triadic
+    Cycle as a structural grammar underlying quantum theory, relativity,
+    thermodynamics, and holography, but they remained architectural
+    rather than dynamical: the cycle was treated as a conceptual
+    structure rather than as an explicit process.</p>
+    <p>The present paper advances the Triadic Cosmos framework by
+    introducing a formal dynamical interpretation of the Triadic Cycle.
+    We treat the cycle as a recursive update scheme in which each
+    triadic role is iteratively reorganized by the others. This
+    recursion provides a natural generator of emergent temporal
+    structure: time is interpreted not as a fundamental parameter but as
+    the ordering induced by successive triadic transformations. In this
+    view, temporal evolution reflects the iterative reconfiguration of
+    informational, energetic, and geometric roles, and equilibrium
+    corresponds to fixed points of the recursive process.</p>
+    <p>A second and central contribution of this work is the explicit
+    embedding of the Triadic Cycle within the AdS/CFT correspondence.
+    Holographic dualities provide the most concrete realization of the
+    deep relationship between geometry and information, and the
+    recursive structure of holographic renormalization offers a natural
+    setting in which to interpret triadic recursion. We show that the
+    recursive index of the Triadic Cycle can be understood as a
+    holographic renormalization direction, that informational roles map
+    onto entanglement entropy and boundary degrees of freedom, that
+    geometric roles correspond to bulk extremal surfaces, and that
+    energetic roles align with boundary Hamiltonian evolution. This
+    mapping clarifies why holographic frameworks satisfy the
+    architectural constraints derived in earlier Triadic Cosmos papers
+    and positions AdS/CFT as a canonical realization of triadic
+    interdependence.</p>
+    <p>A third contribution of this paper is a structural interpretation
+    of black-hole interiors that emerges naturally from the triadic and
+    holographic framework. Because the interior of a black hole lacks
+    independent informational, energetic, and geometric degrees of
+    freedom, the triadic recursion terminates at the horizon. As a
+    consequence, the interior does not support emergent temporal
+    structure and is best understood as a holographic shadow of boundary
+    data rather than a dynamical region. This perspective resolves
+    classical singularities, avoids information loss, and eliminates the
+    need for firewalls or exotic microstate geometries, providing a
+    clean and architecturally coherent account of black-hole
+    physics.</p>
+    <p>By combining a formal recursive interpretation of the Triadic
+    Cycle with its holographic embedding and its implications for
+    black-hole structure, this paper provides a dynamical refinement of
+    the Triadic Cosmos framework and clarifies the structural origin of
+    emergent time. The goal is not to propose new physical laws but to
+    reveal the dynamical and holographic structure already implicit in
+    established theory. The resulting synthesis offers a unified
+    perspective on the roles of energy, geometry, and information, and
+    outlines a conceptual foundation for future mathematical development
+    of the Triadic Cosmos program.</p>
+    <h1 id="clarifying-scope-and-common-misinterpretations">Clarifying
+    Scope and Common Misinterpretations</h1>
+    <p>Because the Triadic Cycle touches on foundational questions about
+    energy, geometry, information, and the emergence of time, it is
+    important to clarify what this framework does <em>not</em> claim.
+    The Triadic Cosmos program is architectural rather than ontological
+    or microscopic, and several common misinterpretations can be
+    preemptively addressed.</p>
+    <h4 id="not-a-new-physical-theory.">Not a new physical theory.</h4>
+    <p>The Triadic Cycle does not propose new dynamical laws, new
+    fields, new particles, or new equations of motion. It identifies
+    structural roles that existing theories already instantiate and
+    extracts the minimal interdependence required for their mutual
+    consistency. The framework is therefore <em>descriptive and
+    architectural</em>, not a replacement for quantum mechanics, general
+    relativity, or quantum field theory.</p>
+    <h4 id="not-an-alternative-to-adscft.">Not an alternative to
+    AdS/CFT.</h4>
+    <p>The present work does not introduce a competing holographic
+    duality. Instead, it shows that AdS/CFT provides a canonical
+    realization of the triadic interdependence between energy, geometry,
+    and information. The Triadic Cycle is an architectural lens through
+    which the structure of AdS/CFT becomes more transparent; it does not
+    modify or extend the duality.</p>
+    <h4 id="not-an-emergent-gravity-model.">Not an emergent-gravity
+    model.</h4>
+    <p>The Triadic Cycle does not attempt to derive gravity from
+    entanglement, quantum information, or computational principles.
+    While the framework is compatible with emergent-spacetime programs,
+    it does not posit that geometry is reducible to information or that
+    gravity arises from microscopic entanglement. Instead, it identifies
+    geometry as one of three irreducible structural roles whose
+    interdependence is already present in established theory.</p>
+    <h4 id="not-a-proposal-for-new-microscopic-dynamics.">Not a proposal
+    for new microscopic dynamics.</h4>
+    <p>The recursive update operator introduced in this paper is a
+    structural mechanism for organizing triadic roles, not a microscopic
+    evolution law. It does not specify Hamiltonians, Lagrangians, or
+    state spaces. Its purpose is to formalize the architectural
+    recursion implicit in holographic renormalization and to clarify the
+    structural origin of emergent time.</p>
+    <h4 id="not-a-modification-of-black-hole-physics.">Not a
+    modification of black-hole physics.</h4>
+    <p>The interpretation of black-hole interiors developed in this
+    paper is structural rather than geometric or dynamical. It does not
+    alter the Einstein equations, semiclassical gravity, or holographic
+    reconstruction. Instead, it shows that the absence of independent
+    interior degrees of freedom implies the termination of triadic
+    recursion, yielding a clean architectural account of why black-hole
+    interiors lack emergent temporal structure.</p>
+    <h4 id="scope-of-the-framework.">Scope of the framework.</h4>
+    <p>The Triadic Cycle provides a unifying architectural perspective
+    on the roles of energy, geometry, and information across modern
+    physics. It is intended as a structural foundation for interpreting
+    existing theories, not as a replacement for them. The contributions
+    of this paper should therefore be understood as clarifying the
+    dynamical and holographic structure already implicit in established
+    frameworks.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>The present paper builds on three major lines of research: (i)
+    the Triadic Cosmos program, which develops a minimal architectural
+    ontology of information, energy, and geometry; (ii) holographic
+    dualities, especially AdS/CFT, which provide the most concrete
+    realization of geometry–information coupling; and (iii) approaches
+    to recursion, emergent time, and computational structure in
+    fundamental physics.</p>
+    <h2 id="the-triadic-cosmos-program">The Triadic Cosmos Program</h2>
+    <p>This work extends a sequence of earlier papers that introduced
+    and refined the Triadic ontology. The initial formulation in <span
+    class="citation" data-cites="DeWitteTriadicCosmos2026"></span>
+    proposed information, energy, and geometry as three irreducible
+    structural roles underlying quantum mechanics, relativity, and
+    cosmology. The closed interdependence <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>
+    was made explicit in <span class="citation"
+    data-cites="DeWitteTriadicCycle2026"></span>, which showed that
+    modern physics already instantiates each transition of the cycle
+    across quantum field theory, general relativity, thermodynamics, and
+    holography.</p>
+    <p>The architectural consequences of this ontology were developed in
+    <span class="citation"
+    data-cites="DeWitteStructuralPrinciples2026"></span>, which
+    extracted theory-independent structural constraints—such as
+    energetic–geometric consistency, geometric–informational capacity,
+    and preservation of cyclic interdependence—that any viable unifying
+    theory must satisfy. A broader recursive and fractal interpretation
+    of the Triadic architecture, extending into intelligent systems, was
+    presented in <span class="citation"
+    data-cites="DeWitteRecursiveFractal2026"></span>.</p>
+    <p>The present paper complements this body of work by introducing a
+    formal dynamical interpretation of the Triadic Cycle and embedding
+    it within the holographic structure of AdS/CFT, thereby connecting
+    the architectural ontology to a mainstream theoretical
+    framework.</p>
+    <table>
+    <caption>Overview of prior work in the Triadic Cosmos program and
+    the contributions of the present paper.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Paper</strong></th>
+    <th style="text-align: left;"><strong>Core
+    Contribution</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">Unified Framework <span
+    class="citation" data-cites="DeWitteTriadicCosmos2026"></span></td>
+    <td style="text-align: left;">Introduced the Triadic ontology of
+    <em>energy, geometry, information</em> as three irreducible
+    structural roles underlying modern physics; established the
+    conceptual basis of the Triadic Cycle.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">The Triadic Cycle <span
+    class="citation" data-cites="DeWitteTriadicCycle2026"></span></td>
+    <td style="text-align: left;">Made the closed interdependence <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>
+    explicit; demonstrated that each transition is instantiated across
+    quantum field theory, general relativity, thermodynamics, and
+    holography.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Structural Principles <span
+    class="citation"
+    data-cites="DeWitteStructuralPrinciples2026"></span></td>
+    <td style="text-align: left;">Derived theory-independent structural
+    constraints—energetic–geometric consistency, geometric–informational
+    capacity, and preservation of cyclic interdependence—that any viable
+    unifying theory must satisfy.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Recursive Fractal <span
+    class="citation"
+    data-cites="DeWitteRecursiveFractal2026"></span></td>
+    <td style="text-align: left;">Extended the Triadic architecture into
+    recursive and fractal interpretations, including applications to
+    intelligent systems and multi-level structural dynamics.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Present paper</strong></td>
+    <td style="text-align: left;">Introduces a <em>formal dynamical</em>
+    interpretation of the Triadic Cycle via a recursive update operator;
+    identifies recursion as the generator of emergent time; embeds the
+    Triad within AdS/CFT; and derives a structural interpretation of
+    black-hole interiors as regions without triadic updates or emergent
+    temporal structure.</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="holography-adscft-and-emergent-geometry">Holography,
+    AdS/CFT, and Emergent Geometry</h2>
+    <p>The AdS/CFT correspondence <span class="citation"
+    data-cites="Maldacena1998 Witten1998"></span> provides a duality
+    between a gravitational theory in asymptotically anti–de Sitter
+    spacetime and a conformal field theory on its boundary. This duality
+    offers a concrete realization of the deep relationship between
+    geometry and information. The Ryu–Takayanagi formula and its
+    covariant extensions <span class="citation"
+    data-cites="RyuTakayanagi2006 HubenyRangamaniTakayanagi2007"></span>
+    relate entanglement entropy to extremal surfaces in the bulk,
+    establishing a quantitative bridge between informational content and
+    geometric area.</p>
+    <p>Work on emergent spacetime from entanglement <span
+    class="citation" data-cites="VanRaamsdonk2010 Swingle2012"></span>
+    and holographic quantum error-correcting codes <span
+    class="citation" data-cites="Pastawski2015"></span> further supports
+    the idea that geometry is not fundamental but arises from
+    informational structure. From the perspective of the Triadic Cycle,
+    these developments instantiate the <span
+    class="math inline"><em>G</em> → <em>I</em></span> and <span
+    class="math inline"><em>I</em> → <em>G</em></span> transitions in a
+    particularly transparent way. The present paper leverages AdS/CFT as
+    the canonical setting in which to formalize the recursive triadic
+    dynamics and the emergence of time.</p>
+    <h2 id="emergent-and-relational-time">Emergent and Relational
+    Time</h2>
+    <p>Several approaches treat time as emergent rather than
+    fundamental. The Page–Wootters mechanism <span class="citation"
+    data-cites="PageWootters1983"></span> derives temporal ordering from
+    correlations between subsystems. Thermodynamic and
+    information-theoretic accounts tie the arrow of time to entropy
+    production and coarse-graining <span class="citation"
+    data-cites="Jaynes1957"></span>. Quantum speed limits <span
+    class="citation"
+    data-cites="MargolusLevitin1998 MandelstamTamm1945"></span> connect
+    the rate of state change to energetic resources, linking temporal
+    evolution directly to informational and energetic structure.</p>
+    <p>Earlier work in the Triadic Cosmos program interpreted time as a
+    triadic construct emerging from the interplay of energetic change,
+    geometric ordering, and informational distinguishability <span
+    class="citation"
+    data-cites="DeWitteTriadicCycle2026 DeWitteStructuralPrinciples2026"></span>.
+    The present paper refines this view by embedding emergent time into
+    a holographic context, where boundary time, bulk time, and recursive
+    triadic evolution can be related through AdS/CFT.</p>
+    <h2
+    id="recursion-computation-and-architectural-views-of-physics">Recursion,
+    Computation, and Architectural Views of Physics</h2>
+    <p>Computational and recursive perspectives on physics have been
+    explored in digital physics, cellular automata, and algorithmic
+    interpretations of physical law <span class="citation"
+    data-cites="Lloyd2000 Wolfram2002"></span>. These approaches
+    resonate with the recursive schema already present in the Triadic
+    Cosmos program, where system evolution is described as iterative
+    updates of geometry, energy, and information <span class="citation"
+    data-cites="DeWitteTriadicCosmos2026 DeWitteRecursiveFractal2026"></span>.</p>
+    <p>What has been missing in this line of work is a concrete physical
+    setting in which such recursion can be anchored. By interpreting the
+    triadic recursion as a form of holographic renormalization
+    flow—where the recursive index plays the role of the AdS radial
+    direction—the present paper provides a natural embedding of triadic
+    dynamics within a well-established framework of modern theoretical
+    physics.</p>
+    <h1
+    id="the-triadic-cycle-functional-and-recursive-formalization">The
+    Triadic Cycle: Functional and Recursive Formalization</h1>
+    <p>The Triadic Cycle identifies three irreducible structural
+    roles—energy (<span class="math inline"><em>E</em></span>), geometry
+    (<span class="math inline"><em>G</em></span>), and information
+    (<span class="math inline"><em>I</em></span>)—that mutually
+    constrain one another through the closed sequence</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em>.</span></p>
+    <p>Earlier work established this cycle as an architectural
+    extraction from modern physics. In this section, we refine the
+    structure by introducing a minimal functional decomposition of the
+    cycle and a recursive update operator that turns the Triad into a
+    dynamical process. This provides the foundation for the holographic
+    interpretation developed in the next section.</p>
+    <h2 id="triadic-roles-as-state-components">Triadic roles as state
+    components</h2>
+    <p>We represent the structural state of a system at recursion step
+    <span class="math inline"><em>n</em></span> by a triadic vector</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em></sub> = (<em>E</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>,<em>I</em><sub><em>n</em></sub>),</span></p>
+    <p>where <span
+    class="math inline"><em>E</em><sub><em>n</em></sub></span> encodes
+    the energetic configuration, <span
+    class="math inline"><em>G</em><sub><em>n</em></sub></span> the
+    geometric or causal structure, and <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> the
+    informational capacity or distinguishability structure. These are
+    not microscopic variables but coarse-grained structural roles that
+    constrain one another.</p>
+    <h2 id="functional-relations-between-the-triadic-roles">Functional
+    relations between the triadic roles</h2>
+    <p>The interdependence of the triadic roles can be expressed through
+    three minimal functional relations:</p>
+    <p><span class="math display">$$\begin{aligned}
+        E_{n+1} &amp;= f(I_n, G_n), \\
+        G_{n+1} &amp;= g(E_n, I_n), \\
+        I_{n+1} &amp;= h(G_n, E_n).
+    \end{aligned}$$</span></p>
+    <p>Each function captures one leg of the Triadic Cycle:</p>
+    <ul>
+    <li><p><span
+    class="math inline"><em>f</em>(<em>I</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>)</span>
+    expresses the transition <span
+    class="math inline"><em>I</em> → <em>E</em></span>: informational
+    structure and geometric constraints bound energetic evolution
+    (e.g. unitarity, entropy bounds, causal accessibility).</p></li>
+    <li><p><span
+    class="math inline"><em>g</em>(<em>E</em><sub><em>n</em></sub>,<em>I</em><sub><em>n</em></sub>)</span>
+    expresses the transition <span
+    class="math inline"><em>E</em> → <em>G</em></span>: energetic
+    content shapes geometric and causal structure, while geometry must
+    remain compatible with informational capacity.</p></li>
+    <li><p><span
+    class="math inline"><em>h</em>(<em>G</em><sub><em>n</em></sub>,<em>E</em><sub><em>n</em></sub>)</span>
+    expresses the transition <span
+    class="math inline"><em>G</em> → <em>I</em></span>: geometric
+    structure bounds informational capacity (e.g. holographic area
+    laws), while energetic processes generate or reorganize
+    information.</p></li>
+    </ul>
+    <p>Together, these relations constitute a closed functional cycle in
+    which each role is both a constraint on and a consequence of the
+    others.</p>
+    <h2 id="the-recursive-update-operator">The recursive update
+    operator</h2>
+    <p>The functional relations can be combined into a single recursive
+    update operator</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>),</span></p>
+    <p>where</p>
+    <p><span
+    class="math display"><em>R</em>(<em>X</em><sub><em>n</em></sub>) = (<em>f</em>(<em>I</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>), <em>g</em>(<em>E</em><sub><em>n</em></sub>,<em>I</em><sub><em>n</em></sub>), <em>h</em>(<em>G</em><sub><em>n</em></sub>,<em>E</em><sub><em>n</em></sub>)).</span></p>
+    <p>Equivalently, the operator can be written as a composition of the
+    three triadic transitions:</p>
+    <p><span
+    class="math display"><em>R</em> = <em>R</em><sub><em>I</em> → <em>E</em></sub> ∘ <em>R</em><sub><em>G</em> → <em>I</em></sub> ∘ <em>R</em><sub><em>E</em> → <em>G</em></sub>.</span></p>
+    <p>This recursive formulation turns the Triadic Cycle into a
+    dynamical process: each update reorganizes the triadic roles
+    according to their mutual constraints.</p>
+    <h2 id="recursion-as-the-generator-of-temporal-ordering">Recursion
+    as the generator of temporal ordering</h2>
+    <p>A key conceptual shift introduced in this paper is that
+    <em>recursion is taken as primary</em>, while <em>time is treated as
+    emergent</em>. The recursion index <span
+    class="math inline"><em>n</em></span> does not represent a
+    pre-existing temporal parameter; rather, it <em>induces</em> an
+    ordering on successive triadic states. Temporal structure arises
+    from the fact that each update produces a new configuration that is
+    distinguishable from the previous one:</p>
+    <p><span class="math display">time ≡ ordering of
+    {<em>X</em><sub>0</sub>, <em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, …}.</span></p>
+    <p>This interpretation aligns with relational and
+    information-theoretic accounts of time and preserves the minimality
+    of the Triad: no additional primitive is required.</p>
+    <h2 id="fixed-points-and-structural-equilibrium">Fixed points and
+    structural equilibrium</h2>
+    <p>The recursive formulation naturally admits fixed points <span
+    class="math inline"><em>X</em><sup>*</sup></span> satisfying</p>
+    <p><span
+    class="math display"><em>R</em>(<em>X</em><sup>*</sup>) = <em>X</em><sup>*</sup>.</span></p>
+    <p>Such points correspond to structural equilibria in which the
+    triadic roles mutually stabilize. In the holographic interpretation
+    developed later, these fixed points will be related to conformal
+    fixed points in holographic renormalization and to equilibrium
+    configurations in AdS/CFT.</p>
+    <h2 id="interpretation">Interpretation</h2>
+    <p>The functional and recursive formalization presented here
+    transforms the Triadic Cycle from a static architectural pattern
+    into a minimal dynamical mechanism. The cycle becomes an iterative
+    process through which informational, energetic, and geometric roles
+    reorganize one another. This provides the conceptual and
+    mathematical foundation for the next section, where we show how the
+    recursive triadic update maps naturally onto holographic
+    renormalization in AdS/CFT.</p>
+    <h1 id="mapping-the-triadic-cycle-to-adscft">Mapping the Triadic
+    Cycle to AdS/CFT</h1>
+    <p>The recursive formalization of the Triadic Cycle provides a
+    minimal dynamical structure in which energy, geometry, and
+    information reorganize one another. In this section, we show that
+    this structure maps naturally onto the AdS/CFT correspondence. The
+    mapping is not imposed but arises from structural parallels between
+    triadic recursion and holographic renormalization, between
+    informational and geometric roles in the Triad and in holography,
+    and between energetic roles and boundary dynamics. AdS/CFT thus
+    provides a concrete realization of the Triadic Cycle within a
+    mainstream theoretical framework.</p>
+    <h2
+    id="the-recursive-index-as-holographic-renormalization-direction">The
+    recursive index as holographic renormalization direction</h2>
+    <p>In AdS/CFT, the radial coordinate of the bulk spacetime plays the
+    role of a renormalization scale: moving inward corresponds to
+    coarse-graining the boundary theory, while moving outward
+    corresponds to refining it. This structure is inherently recursive:
+    each radial step implements a transformation of the boundary degrees
+    of freedom.</p>
+    <p>The recursion index <span class="math inline"><em>n</em></span>
+    of the Triadic Cycle can therefore be interpreted as a discrete
+    approximation to the holographic renormalization direction:</p>
+    <p><span class="math display"><em>n</em> ↔︎ RG scale (radial
+    direction in AdS).</span></p>
+    <p>Under this identification, the triadic update</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>)</span></p>
+    <p>corresponds to a single step of holographic renormalization. The
+    triadic roles evolve as the boundary theory flows under
+    coarse-graining, and fixed points of the recursion correspond to
+    conformal fixed points of the RG flow.</p>
+    <h2
+    id="geometry-bulk-extremal-surfaces-and-causal-structure">Geometry:
+    bulk extremal surfaces and causal structure</h2>
+    <p>The geometric role <span
+    class="math inline"><em>G</em><sub><em>n</em></sub></span> in the
+    Triadic Cycle corresponds naturally to bulk geometric structure in
+    AdS. In holography, geometric features such as extremal surfaces,
+    curvature, and causal wedges encode the structure of the boundary
+    theory. The Ryu–Takayanagi and Hubeny–Rangamani–Takayanagi
+    prescriptions relate entanglement entropy to the area of extremal
+    surfaces in the bulk, making geometry a direct expression of
+    informational structure.</p>
+    <p>Under the triadic mapping, the update</p>
+    <p><span
+    class="math display"><em>G</em><sub><em>n</em> + 1</sub> = <em>g</em>(<em>E</em><sub><em>n</em></sub>,<em>I</em><sub><em>n</em></sub>)</span></p>
+    <p>corresponds to the holographic statement that bulk geometry is
+    shaped by boundary energetic content (via the stress-energy tensor)
+    and by boundary entanglement structure. Geometry is therefore not
+    fundamental but emerges from the interplay of energetic and
+    informational roles, consistent with the Triadic Cycle.</p>
+    <h2
+    id="information-boundary-entanglement-and-holographic-encoding">Information:
+    boundary entanglement and holographic encoding</h2>
+    <p>The informational role <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> maps
+    directly onto boundary entanglement structure. In AdS/CFT, the
+    entanglement pattern of the boundary state determines the
+    connectivity and curvature of the bulk geometry. Tensor-network
+    models and holographic error-correcting codes make this relationship
+    explicit: information is encoded geometrically, and geometric
+    relations reflect informational structure.</p>
+    <p>The triadic update</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em> + 1</sub> = <em>h</em>(<em>G</em><sub><em>n</em></sub>,<em>E</em><sub><em>n</em></sub>)</span></p>
+    <p>corresponds to the holographic principle that informational
+    capacity is bounded by geometric structure (e.g. area laws) and
+    shaped by energetic processes (e.g. entanglement growth under
+    Hamiltonian evolution). This realizes the <span
+    class="math inline"><em>G</em> → <em>I</em></span> transition of the
+    Triadic Cycle.</p>
+    <h2 id="energy-boundary-hamiltonian-evolution">Energy: boundary
+    Hamiltonian evolution</h2>
+    <p>The energetic role <span
+    class="math inline"><em>E</em><sub><em>n</em></sub></span>
+    corresponds to boundary Hamiltonian dynamics. In AdS/CFT, the
+    boundary theory is a conformal field theory whose Hamiltonian
+    generates time evolution and determines the energetic content that
+    sources bulk geometry. Energetic structure on the boundary therefore
+    constrains both geometric and informational structure.</p>
+    <p>The triadic update</p>
+    <p><span
+    class="math display"><em>E</em><sub><em>n</em> + 1</sub> = <em>f</em>(<em>I</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>)</span></p>
+    <p>corresponds to the fact that boundary energy is constrained by
+    entanglement structure (unitarity, entropy bounds, quantum speed
+    limits) and by geometric structure (causal accessibility,
+    curvature). This realizes the <span
+    class="math inline"><em>I</em> → <em>E</em></span> transition of the
+    Triadic Cycle.</p>
+    <h2 id="the-full-mapping">The full mapping</h2>
+    <p>The three triadic transitions map onto holographic structure as
+    follows:</p>
+    <p><span class="math display">$$\begin{aligned}
+        E \rightarrow G &amp;\quad\longleftrightarrow\quad
+    \text{Boundary energy sources bulk geometry}, \\
+        G \rightarrow I &amp;\quad\longleftrightarrow\quad \text{Bulk
+    geometry encodes boundary entanglement}, \\
+        I \rightarrow E &amp;\quad\longleftrightarrow\quad
+    \text{Entanglement structure constrains boundary dynamics}.
+    \end{aligned}$$</span></p>
+    <p>Together with the identification of the recursion index with the
+    holographic RG direction, this yields a complete structural mapping
+    between the Triadic Cycle and AdS/CFT:</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>)  ↔︎  One
+    step of holographic renormalization.</span></p>
+    <h2 id="interpretation-1">Interpretation</h2>
+    <p>The mapping developed in this section shows that AdS/CFT is not
+    merely compatible with the Triadic Cycle but instantiates it. The
+    recursive triadic update corresponds to holographic renormalization;
+    geometric roles correspond to bulk extremal surfaces; informational
+    roles to boundary entanglement; and energetic roles to boundary
+    Hamiltonian evolution. The Triadic Cycle thus provides an
+    architectural interpretation of holography, while AdS/CFT provides a
+    concrete realization of triadic interdependence. This correspondence
+    forms the basis for the next section, where we show how emergent
+    time arises from the recursive triadic structure in the holographic
+    setting.</p>
+    <h1
+    id="emergent-time-from-triadic-recursion-and-holography">Emergent
+    Time from Triadic Recursion and Holography</h1>
+    <p>The recursive formalization of the Triadic Cycle provides a
+    natural mechanism for the emergence of temporal structure. In this
+    section, we show how time arises from the ordering induced by
+    triadic recursion and how this interpretation aligns with the
+    holographic structure of AdS/CFT. The resulting picture treats time
+    not as a fundamental parameter but as a structural consequence of
+    iterative triadic reorganization.</p>
+    <h2 id="time-as-ordering-of-recursive-triadic-states">Time as
+    ordering of recursive triadic states</h2>
+    <p>In the recursive formulation, the evolution of the triadic state
+    is given by</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>),</span></p>
+    <p>where <span class="math inline"><em>R</em></span> implements the
+    closed sequence of triadic transitions. The recursion index <span
+    class="math inline"><em>n</em></span> does not represent an external
+    temporal parameter; instead, it <em>induces</em> an ordering on the
+    sequence of triadic states</p>
+    <p><span
+    class="math display"><em>X</em><sub>0</sub>, <em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, ….</span></p>
+    <p>Temporal structure emerges from the fact that each update
+    produces a new configuration that is distinguishable from the
+    previous one. In this sense,</p>
+    <p><span class="math display">time ≡ the ordering of recursive
+    triadic states.</span></p>
+    <p>This interpretation is consistent with relational and
+    information-theoretic accounts of time, where temporal progression
+    reflects changes in distinguishability, causal accessibility, or
+    energetic feasibility.</p>
+    <h2
+    id="compatibility-with-relativistic-and-quantum-notions-of-time">Compatibility
+    with relativistic and quantum notions of time</h2>
+    <p>The emergent-time interpretation aligns with the treatment of
+    time in both relativity and quantum theory. In general relativity,
+    proper time depends on geometric structure, and different observers
+    experience different temporal rates. In quantum theory, time appears
+    as an external parameter, yet the Page–Wootters mechanism and
+    related approaches show that temporal ordering can arise from
+    correlations between subsystems.</p>
+    <p>The triadic recursion unifies these perspectives: geometric
+    structure (<span
+    class="math inline"><em>G</em><sub><em>n</em></sub></span>)
+    constrains causal ordering, informational structure (<span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span>)
+    determines distinguishability, and energetic structure (<span
+    class="math inline"><em>E</em><sub><em>n</em></sub></span>) governs
+    the rate of change. Time emerges from the interplay of these roles
+    rather than from any one of them individually.</p>
+    <h2
+    id="holographic-interpretation-boundary-time-and-rg-flow">Holographic
+    interpretation: boundary time and RG flow</h2>
+    <p>In AdS/CFT, two notions of time appear: boundary time, generated
+    by the Hamiltonian of the boundary theory, and bulk time, encoded in
+    the causal structure of the AdS spacetime. The recursive triadic
+    update provides a structural bridge between these notions.</p>
+    <p>The identification</p>
+    <p><span class="math display"><em>n</em> ↔︎ RG scale (radial
+    direction in AdS)</span></p>
+    <p>implies that the ordering of triadic states corresponds to the
+    ordering of holographic renormalization steps. Boundary time
+    evolution is generated by the boundary Hamiltonian, which
+    corresponds to the energetic role <span
+    class="math inline"><em>E</em><sub><em>n</em></sub></span>, while
+    bulk causal structure corresponds to the geometric role <span
+    class="math inline"><em>G</em><sub><em>n</em></sub></span>. The
+    informational role <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> encodes
+    the entanglement structure that links boundary dynamics to bulk
+    geometry.</p>
+    <p>Thus, emergent time arises from the combined evolution of
+    energetic, geometric, and informational roles under holographic
+    renormalization. The triadic recursion provides the structural
+    mechanism that unifies boundary time, bulk time, and RG flow.</p>
+    <h2 id="irreversibility-and-the-arrow-of-time">Irreversibility and
+    the arrow of time</h2>
+    <p>The recursive triadic update is not necessarily reversible. Even
+    if the underlying microscopic dynamics are reversible,
+    coarse-graining under holographic renormalization introduces an
+    effective irreversibility. This aligns with the thermodynamic arrow
+    of time, which arises from coarse-graining and entropy increase.</p>
+    <p>In the triadic framework, irreversibility appears when the update
+    operator <span class="math inline"><em>R</em></span> is not
+    invertible or when informational coarse-graining reduces
+    distinguishability. The arrow of time is therefore a structural
+    feature of the recursive process:</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>)  ⇒  <em>X</em><sub><em>n</em> + 1</sub>
+    contains less recoverable detail than
+    <em>X</em><sub><em>n</em></sub>.</span></p>
+    <p>This provides a unified account of temporal asymmetry across
+    quantum, thermodynamic, and holographic contexts.</p>
+    <h2 id="fixed-points-and-temporal-equilibrium">Fixed points and
+    temporal equilibrium</h2>
+    <p>Fixed points of the recursion satisfy</p>
+    <p><span
+    class="math display"><em>R</em>(<em>X</em><sup>*</sup>) = <em>X</em><sup>*</sup>.</span></p>
+    <p>At such points, the triadic roles mutually stabilize, and no
+    further structural reorganization occurs. In the holographic
+    interpretation, these fixed points correspond to conformal fixed
+    points of the RG flow, where the theory becomes scale-invariant and
+    temporal evolution simplifies.</p>
+    <p>Temporal equilibrium therefore corresponds to structural
+    equilibrium: time ceases to emerge when the triadic roles cease to
+    reorganize.</p>
+    <h2
+    id="planck-time-minimal-update-scales-and-holographic-consistency">Planck
+    Time, Minimal Update Scales, and Holographic Consistency</h2>
+    <p>If temporal structure emerges from the ordering of recursive
+    triadic updates, an immediate question arises: is there a lower
+    bound on how rapidly such updates can occur? In conventional
+    physics, the Planck time</p>
+    <p><span class="math display">$$t_{\mathrm{P}} = \sqrt{\frac{\hbar
+    G}{c^5}}$$</span></p>
+    <p>is often interpreted as the smallest meaningful temporal
+    interval, below which the combined effects of quantum mechanics and
+    gravity render the notion of time operationally undefined. In the
+    triadic framework, this suggests that the recursive update mechanism
+    may possess a minimal step size: the triadic state cannot reorganize
+    arbitrarily quickly, because doing so would require informational,
+    energetic, and geometric changes that exceed the bounds set by
+    quantum gravity.</p>
+    <p>This interpretation is consistent with the functional relations
+    introduced earlier. Each update</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>)</span></p>
+    <p>involves changes in energetic structure (bounded by quantum speed
+    limits), geometric structure (bounded by curvature and causal
+    accessibility), and informational structure (bounded by holographic
+    area laws). These constraints jointly imply that there exists a
+    minimal interval between successive distinguishable triadic states.
+    The Planck time therefore appears not as a fundamental temporal atom
+    but as the minimal interval required for a nontrivial triadic
+    update.</p>
+    <h3 id="relation-to-adscft">Relation to AdS/CFT</h3>
+    <p>In the holographic setting, this interpretation aligns with the
+    structure of AdS/CFT. The radial direction in AdS corresponds to a
+    renormalization scale, and coarse-graining steps in the boundary
+    theory cannot be made arbitrarily fine: each RG step must integrate
+    out a finite amount of information. This imposes a lower bound on
+    the “resolution” of the RG flow, which in turn bounds the minimal
+    change in the triadic state.</p>
+    <p>Boundary time evolution is generated by the Hamiltonian of the
+    conformal field theory, and quantum speed limits constrain how
+    rapidly distinguishable boundary states can evolve. Bulk causal
+    structure imposes additional geometric constraints on how quickly
+    changes in the boundary theory can be reflected in the bulk.
+    Together, these constraints imply that the recursive triadic update
+    cannot proceed faster than the rate allowed by holographic
+    consistency.</p>
+    <p>Thus, the Planck time emerges as the minimal interval required
+    for a meaningful step in the triadic recursion, and this minimality
+    is mirrored in the holographic structure of AdS/CFT. Rather than
+    being a fundamental temporal constant, <span
+    class="math inline"><em>t</em><sub>P</sub></span> reflects the
+    smallest structurally coherent reorganization of the triadic roles
+    that remains compatible with quantum gravity and holography.</p>
+    <h2 id="interpretation-2">Interpretation</h2>
+    <p>The relationship between triadic recursion, Planck-scale bounds,
+    and holographic structure suggests a unified picture of temporal
+    emergence. In the triadic framework, time is not a primitive
+    parameter but the ordering of recursive triadic states. Each
+    update</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>)</span></p>
+    <p>produces a new configuration that is distinguishable from the
+    previous one, and this distinguishability induces temporal
+    structure. The rate at which such updates can occur is limited by
+    the structural constraints governing informational, energetic, and
+    geometric change.</p>
+    <p>Quantum speed limits bound how rapidly energetic and
+    informational states can evolve; holographic area laws bound the
+    informational capacity associated with geometric structure; and
+    causal constraints bound how quickly geometric relations can
+    reorganize. Together, these constraints imply that there exists a
+    minimal interval between successive nontrivial triadic updates. The
+    Planck time</p>
+    <p><span class="math display">$$t_{\mathrm{P}} = \sqrt{\frac{\hbar
+    G}{c^5}}$$</span></p>
+    <p>therefore appears not as a fundamental temporal atom but as the
+    smallest interval over which a coherent triadic reorganization can
+    occur without violating quantum-gravitational or holographic
+    consistency.</p>
+    <p>This interpretation aligns naturally with AdS/CFT. The recursion
+    index <span class="math inline"><em>n</em></span> corresponds to a
+    step in holographic renormalization, and RG flow cannot proceed in
+    arbitrarily fine increments: each step must coarse-grain a finite
+    amount of information. Boundary Hamiltonian evolution is constrained
+    by quantum speed limits, while bulk causal structure constrains how
+    rapidly boundary changes can be reflected in the bulk. These
+    holographic constraints mirror the triadic limits on informational,
+    energetic, and geometric reorganization.</p>
+    <p>Taken together, these observations yield a unified architectural
+    account of time. Temporal structure emerges from the iterative
+    reorganization of the triadic roles; temporal rates are determined
+    by the structural limits on how quickly these roles can change; and
+    the Planck time marks the minimal interval required for a nontrivial
+    update. The Triadic Cycle thus provides a coherent, holographically
+    consistent explanation of emergent time that is compatible with
+    quantum theory, relativity, thermodynamics, and AdS/CFT.</p>
+    <h1 id="implications-for-black-holes">Implications for Black
+    Holes</h1>
+    <p>The triadic interpretation of emergent time provides a structural
+    perspective on black holes that differs from traditional geometric
+    or singularity-based accounts. In the triadic framework, temporal
+    structure arises from the iterative reorganization of energetic,
+    geometric, and informational roles. This raises a natural question:
+    what happens to the triadic recursion inside a black hole, where
+    holographic principles imply that all physically relevant
+    information resides on the horizon? In this section, we show that
+    the triadic recursion effectively terminates in the interior,
+    leading to a structural interpretation of black-hole interiors as
+    regions without independent temporal evolution.</p>
+    <h2
+    id="holographic-saturation-and-the-termination-of-recursion">Holographic
+    saturation and the termination of recursion</h2>
+    <p>In holographic theories, including AdS/CFT, the degrees of
+    freedom of a black hole are encoded on its horizon. The interior
+    does not possess independent informational degrees of freedom; it is
+    reconstructed from boundary data rather than dynamically generated.
+    In triadic terms, this means that the informational role <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span>
+    associated with the interior is trivial:</p>
+    <p><span
+    class="math display"><em>I</em><sub>interior</sub> = 0.</span></p>
+    <p>Without informational distinguishability, the update</p>
+    <p><span
+    class="math display"><em>E</em><sub><em>n</em> + 1</sub> = <em>f</em>(<em>I</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>)</span></p>
+    <p>cannot generate new energetic structure. Without energetic
+    reorganization, the geometric update</p>
+    <p><span
+    class="math display"><em>G</em><sub><em>n</em> + 1</sub> = <em>g</em>(<em>E</em><sub><em>n</em></sub>,<em>I</em><sub><em>n</em></sub>)</span></p>
+    <p>cannot proceed. And without geometric change, the informational
+    update</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em> + 1</sub> = <em>h</em>(<em>G</em><sub><em>n</em></sub>,<em>E</em><sub><em>n</em></sub>)</span></p>
+    <p>cannot produce new information. The triadic cycle therefore
+    collapses:</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em>  terminates.</span></p>
+    <p>The interior becomes a region in which no triadic update is
+    possible.</p>
+    <h2 id="absence-of-triadic-updates-implies-absence-of-time">Absence
+    of triadic updates implies absence of time</h2>
+    <p>Since temporal structure is defined as the ordering of recursive
+    triadic states, the termination of the triadic recursion implies the
+    absence of emergent time. The interior of a black hole is therefore
+    not a region in which time “flows differently” or “slows down,” but
+    a region in which time, in the triadic sense, does not exist at all.
+    The interior is structurally timeless:</p>
+    <p><span class="math display">No recursion ⇒ no temporal
+    ordering.</span></p>
+    <p>This interpretation aligns with the classical observation that
+    infalling observers encounter a finite proper time to the
+    singularity, while external observers see infalling matter
+    asymptotically approach the horizon. In the triadic picture, both
+    perspectives reflect the same structural fact: the interior does not
+    support independent temporal evolution.</p>
+    <h2 id="the-interior-as-a-holographic-shadow">The interior as a
+    holographic shadow</h2>
+    <p>From the holographic viewpoint, the interior of a black hole is
+    not a region with independent degrees of freedom but a
+    reconstruction from horizon data. The triadic interpretation makes
+    this explicit: the interior is a <em>shadow</em> of the boundary
+    triadic state, not an autonomous triadic system. Its apparent
+    geometry and causal structure are emergent reconstructions rather
+    than dynamically updated entities.</p>
+    <p>This explains why the interior can appear smooth and classical in
+    semiclassical treatments while lacking independent informational or
+    energetic content. The triadic recursion operates on the horizon,
+    not in the interior, and the interior inherits its structure from
+    the boundary without participating in the recursive process.</p>
+    <h2
+    id="singularities-and-the-absence-of-structural-roles">Singularities
+    and the absence of structural roles</h2>
+    <p>In classical general relativity, the interior terminates in a
+    curvature singularity. In the triadic framework, the singularity
+    corresponds to the complete breakdown of the triadic roles:</p>
+    <p><span
+    class="math display"><em>E</em> = 0,  <em>G</em> = 0,  <em>I</em> = 0.</span></p>
+    <p>This is not a physical “point” but the structural limit at which
+    no triadic update is possible and no triadic role remains
+    meaningful. The singularity is therefore not a region of extreme
+    physics but the absence of physics: a point where the triadic
+    architecture ceases to apply.</p>
+    <h2 id="interpretation-3">Interpretation</h2>
+    <p>The triadic interpretation of black holes yields a coherent and
+    holographically consistent picture of their interiors. The horizon
+    is the locus of triadic activity; the interior is a region without
+    informational, energetic, or geometric reorganization; and time,
+    being emergent from triadic recursion, is absent in the interior.
+    This perspective replaces traditional geometric narratives of
+    singularities and spaghettification with an architectural account
+    grounded in the Triadic Cycle and holographic principles. It
+    suggests that black-hole interiors are not dynamical regions but
+    structural shadows of boundary data, and that the true physics of
+    black holes resides on their horizons.</p>
+    <h1
+    id="comparison-with-existing-black-hole-interpretations">Comparison
+    with Existing Black Hole Interpretations</h1>
+    <p>The triadic interpretation of black holes developed in this paper
+    yields a structural picture that differs significantly from
+    classical, semiclassical, and string-theoretic accounts. In this
+    section, we compare the triadic perspective with major existing
+    interpretations, highlighting how the Triadic Cycle resolves
+    long-standing conceptual tensions while remaining consistent with
+    holographic principles and emergent-time dynamics.</p>
+    <h2
+    id="classical-general-relativity-singularities-and-geometric-divergence">Classical
+    general relativity: singularities and geometric divergence</h2>
+    <p>In classical general relativity, black-hole interiors contain
+    curvature singularities where geometric invariants diverge and the
+    theory ceases to be predictive. Spaghettification and geodesic
+    incompleteness arise from the unbounded growth of tidal forces.
+    These features reflect the breakdown of the geometric role <span
+    class="math inline"><em>G</em></span> but do not provide an
+    informational or energetic interpretation.</p>
+    <p>In the triadic framework, the singularity corresponds to the
+    structural limit at which all triadic roles vanish:</p>
+    <p><span
+    class="math display"><em>E</em> = 0,  <em>G</em> = 0,  <em>I</em> = 0.</span></p>
+    <p>Rather than representing a physical point of infinite curvature,
+    the singularity marks the termination of the triadic recursion. The
+    interior is not a region of extreme physics but a region in which no
+    triadic update is possible. This replaces geometric divergence with
+    structural minimality and avoids the infinities inherent in
+    classical GR.</p>
+    <h2 id="hawkings-information-loss-proposal">Hawking’s
+    information-loss proposal</h2>
+    <p>Hawking’s original proposal suggested that black holes destroy
+    information, leading to non-unitary evolution. This conflicts with
+    quantum mechanics and with holographic principles, which require
+    that information be preserved.</p>
+    <p>In the triadic interpretation, information is encoded on the
+    horizon, not in the interior:</p>
+    <p><span
+    class="math display"><em>I</em><sub>interior</sub> = 0.</span></p>
+    <p>Since the interior has no informational degrees of freedom, no
+    information can be lost there. The triadic recursion operates on the
+    horizon, ensuring that unitarity is preserved without requiring
+    additional assumptions. The information-loss paradox does not
+    arise.</p>
+    <h2 id="firewall-and-amps-paradox">Firewall and AMPS paradox</h2>
+    <p>The AMPS paradox argues that the combination of unitarity,
+    semiclassical smoothness, and monogamy of entanglement leads to a
+    contradiction, implying that the horizon must be a high-energy
+    “firewall.” This violates the equivalence principle and introduces
+    severe conceptual difficulties.</p>
+    <p>In the triadic framework, the paradox does not arise because the
+    interior does not support independent informational or energetic
+    structure. All triadic activity occurs on the horizon, and there is
+    no interior entanglement that must be preserved or broken. The
+    horizon remains smooth, and no firewall is required. The triadic
+    interpretation resolves the AMPS paradox by eliminating the
+    assumption that the interior contains independent degrees of
+    freedom.</p>
+    <h2 id="fuzzball-models-in-string-theory">Fuzzball models in string
+    theory</h2>
+    <p>Fuzzball models replace the black-hole interior with a complex
+    ensemble of microstate geometries. While these models preserve
+    unitarity, they require highly nonclassical geometries and introduce
+    significant conceptual and mathematical complexity.</p>
+    <p>The triadic interpretation achieves the same goal—preservation of
+    unitarity—without invoking exotic microstate geometries. The
+    interior is a holographic shadow of the horizon, not a region with
+    its own microstructure. This yields a simpler and more universal
+    account that does not depend on specific string-theoretic
+    constructions.</p>
+    <h2 id="erepr-and-entanglement-based-interiors">ER=EPR and
+    entanglement-based interiors</h2>
+    <p>The ER=EPR proposal interprets wormholes as geometric
+    manifestations of entanglement. While conceptually elegant, the
+    proposal does not specify a dynamical mechanism for the emergence of
+    interior geometry or the role of time.</p>
+    <p>The triadic framework provides such a mechanism: the interior
+    geometry is a reconstruction from boundary entanglement, and
+    temporal structure arises from triadic recursion. The interior is
+    emergent but not dynamical; it inherits its structure from the
+    horizon without participating in the recursive process. This
+    complements and strengthens the ER=EPR picture.</p>
+    <h2 id="adscft-and-holographic-reconstructions">AdS/CFT and
+    holographic reconstructions</h2>
+    <p>In AdS/CFT, the interior of a black hole is reconstructed from
+    boundary data, but the reason why the interior lacks independent
+    dynamics is not fully explained. The triadic interpretation makes
+    this explicit: the interior does not support triadic updates because
+    it lacks informational distinguishability. The horizon is the locus
+    of triadic activity, and the interior is a structural shadow of
+    boundary data.</p>
+    <p>This yields a coherent interpretation of holographic black holes
+    in which the termination of the triadic recursion corresponds to the
+    end of the holographic RG flow.</p>
+    <h2 id="conclusion">Conclusion</h2>
+    <p>Across classical, semiclassical, and holographic interpretations,
+    the triadic perspective offers a minimal, coherent, and structurally
+    unified account of black-hole interiors. It avoids singularities,
+    preserves unitarity, resolves the AMPS paradox, eliminates the need
+    for exotic microstate geometries, and provides a dynamical mechanism
+    for the emergence of time. The triadic interpretation thus
+    represents a conceptually clean and holographically consistent
+    framework for understanding black holes, grounded in the recursive
+    interplay of energy, geometry, and information.</p>
+    <h1 id="testable-predictions-and-theoretical-implications">Testable
+    Predictions and Theoretical Implications</h1>
+    <p>The triadic framework developed in this paper yields several
+    structural predictions that can be evaluated within existing
+    theoretical and holographic models. These predictions arise from the
+    functional and recursive formulation of the Triadic Cycle, the
+    identification of emergent time with triadic ordering, and the
+    mapping of triadic roles onto holographic structures in AdS/CFT.
+    Because AdS/CFT is the only known framework that fully instantiates
+    the triadic relations between energy, geometry, and information, it
+    emerges as a strong candidate for a unifying theory consistent with
+    the triadic architecture.</p>
+    <h2
+    id="prediction-1-holographic-rg-flow-as-the-unique-realization-of-triadic-recursion">Prediction
+    1: Holographic RG flow as the unique realization of triadic
+    recursion</h2>
+    <p>The triadic recursion</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>)</span></p>
+    <p>predicts that any consistent theory of quantum gravity must
+    contain a renormalization-like direction that reorganizes energetic,
+    geometric, and informational roles in a closed cycle. In known
+    physics, only holographic RG flow in AdS/CFT satisfies this
+    requirement. The prediction is therefore that:</p>
+    <blockquote>
+    <p><em>Any viable unification framework must contain a holographic
+    renormalization structure isomorphic to the triadic
+    recursion.</em></p>
+    </blockquote>
+    <p>This can be tested by examining whether alternative
+    quantum-gravity proposals (e.g. loop quantum gravity, causal sets,
+    tensor networks) admit a closed triadic update structure. Current
+    evidence suggests that AdS/CFT is uniquely compatible with this
+    requirement.</p>
+    <h2
+    id="prediction-2-fixed-points-of-triadic-recursion-correspond-to-conformal-fixed-points">Prediction
+    2: Fixed points of triadic recursion correspond to conformal fixed
+    points</h2>
+    <p>The triadic recursion admits fixed points <span
+    class="math inline"><em>X</em><sup>*</sup></span> satisfying</p>
+    <p><span
+    class="math display"><em>R</em>(<em>X</em><sup>*</sup>) = <em>X</em><sup>*</sup>.</span></p>
+    <p>The prediction is that such fixed points correspond to conformal
+    fixed points of holographic RG flow. This implies:</p>
+    <blockquote>
+    <p><em>Scale-invariant phases of quantum field theories correspond
+    to structural equilibria of the triadic roles.</em></p>
+    </blockquote>
+    <p>This prediction can be tested by analyzing the behavior of
+    entanglement entropy, stress-energy expectation values, and bulk
+    extremal surfaces near conformal fixed points.</p>
+    <h2
+    id="prediction-3-minimal-update-interval-corresponds-to-the-planck-time">Prediction
+    3: Minimal update interval corresponds to the Planck time</h2>
+    <p>The triadic framework predicts that the Planck time</p>
+    <p><span class="math display">$$t_{\mathrm{P}} = \sqrt{\frac{\hbar
+    G}{c^5}}$$</span></p>
+    <p>is not a fundamental temporal atom but the minimal interval
+    required for a nontrivial triadic update. This yields the
+    prediction:</p>
+    <blockquote>
+    <p><em>No physical process can reorganize energetic, geometric, or
+    informational structure on timescales shorter than the minimal
+    triadic update interval, which is of order <span
+    class="math inline"><em>t</em><sub>P</sub></span>.</em></p>
+    </blockquote>
+    <p>This is consistent with quantum speed limits, holographic bounds,
+    and bulk causal constraints. The prediction can be tested indirectly
+    through bounds on scrambling time, entanglement growth, and quantum
+    computational complexity.</p>
+    <h2
+    id="prediction-4-black-hole-interiors-lack-independent-temporal-evolution">Prediction
+    4: Black-hole interiors lack independent temporal evolution</h2>
+    <p>The triadic interpretation predicts that black-hole interiors do
+    not support triadic updates:</p>
+    <p><span
+    class="math display"><em>I</em><sub>interior</sub> = 0  ⇒  no
+    recursion  ⇒  no time.</span></p>
+    <p>This yields the prediction:</p>
+    <blockquote>
+    <p><em>Black-hole interiors are structurally timeless regions whose
+    apparent geometry is a reconstruction from horizon data.</em></p>
+    </blockquote>
+    <p>This prediction is testable through holographic reconstruction
+    techniques, entanglement wedge duality, and the behavior of
+    complexity growth in black-hole spacetimes.</p>
+    <h2
+    id="prediction-5-horizon-dynamics-encode-all-physical-evolution">Prediction
+    5: Horizon dynamics encode all physical evolution</h2>
+    <p>Because triadic recursion operates only where informational,
+    energetic, and geometric roles are nontrivial, the prediction
+    is:</p>
+    <blockquote>
+    <p><em>All physically meaningful evolution in black-hole spacetimes
+    occurs on or near the horizon, not in the interior.</em></p>
+    </blockquote>
+    <p>This aligns with membrane-paradigm results, holographic
+    entanglement dynamics, and the fast-scrambling behavior of black
+    holes.</p>
+    <h2 id="prediction-6-adscft-as-a-unification-candidate">Prediction
+    6: AdS/CFT as a unification candidate</h2>
+    <p>The structural overlap between the Triadic Cycle and AdS/CFT
+    leads to a final prediction:</p>
+    <blockquote>
+    <p><em>Any successful unification of quantum mechanics and gravity
+    must reproduce the triadic relations between energy, geometry, and
+    information. AdS/CFT is currently the only framework known to
+    satisfy all triadic constraints, making it a strong unification
+    candidate.</em></p>
+    </blockquote>
+    <p>This prediction can be evaluated by examining whether alternative
+    unification proposals can replicate the triadic mapping between
+    boundary Hamiltonian evolution, bulk geometry, and entanglement
+    structure.</p>
+    <h2 id="interpretation-4">Interpretation</h2>
+    <p>The predictions above illustrate that the triadic framework is
+    not merely a conceptual reorganization of known physics but a source
+    of concrete, testable constraints on any future theory of quantum
+    gravity. The deep structural alignment between triadic recursion and
+    holographic renormalization suggests that AdS/CFT is not an
+    accidental correspondence but a canonical realization of the triadic
+    architecture. The Triadic Cycle thus provides a unifying perspective
+    on energy, geometry, and information that yields falsifiable
+    predictions and clarifies the structural foundations of
+    holography.</p>
+    <h1 id="limitations-and-open-questions">Limitations and Open
+    Questions</h1>
+    <p>The triadic framework developed in this paper provides a
+    structural account of energy, geometry, and information, together
+    with a recursive mechanism for the emergence of time and a
+    holographically consistent interpretation of black-hole interiors.
+    While the framework is architecturally coherent and aligns with
+    known features of AdS/CFT, several limitations and open questions
+    remain. These highlight directions for future work and clarify the
+    scope of the present results.</p>
+    <h2 id="limitations-of-the-current-formalization">Limitations of the
+    current formalization</h2>
+    <h4 id="absence-of-explicit-dynamical-equations.">Absence of
+    explicit dynamical equations.</h4>
+    <p>The triadic recursion is defined at the level of structural roles
+    rather than explicit dynamical equations. The functions <span
+    class="math inline"><em>f</em></span>, <span
+    class="math inline"><em>g</em></span>, and <span
+    class="math inline"><em>h</em></span> encode the interdependence of
+    energetic, geometric, and informational structure, but their
+    detailed form is left unspecified. This is intentional: the triadic
+    framework aims to identify architectural constraints rather than
+    propose new microscopic laws. Nevertheless, a more explicit
+    dynamical realization would be required to connect the framework to
+    concrete physical models beyond AdS/CFT.</p>
+    <h4 id="dependence-on-holographic-structure.">Dependence on
+    holographic structure.</h4>
+    <p>The mapping between triadic recursion and holographic
+    renormalization relies on the existence of a holographic duality.
+    While AdS/CFT is the only known framework that fully instantiates
+    the triadic relations, it remains an open question whether
+    holography is a universal feature of quantum gravity or a special
+    property of theories with conformal boundaries. The triadic
+    interpretation may therefore be limited to holographic settings
+    unless a more general triadic–gravitational correspondence can be
+    established.</p>
+    <h4 id="coarse-grained-nature-of-triadic-roles.">Coarse-grained
+    nature of triadic roles.</h4>
+    <p>The triadic roles <span
+    class="math inline">(<em>E</em>,<em>G</em>,<em>I</em>)</span>
+    represent coarse-grained structural quantities rather than
+    microscopic degrees of freedom. This limits the resolution at which
+    the framework can make predictions. While this is consistent with
+    the architectural goals of the Triadic Cosmos program, it raises
+    questions about how the triadic roles emerge from or constrain
+    microscopic theories.</p>
+    <h2 id="open-questions">Open questions</h2>
+    <h4
+    id="can-the-triadic-recursion-be-derived-from-a-microscopic-theory">1.
+    Can the triadic recursion be derived from a microscopic theory?</h4>
+    <p>A major open question is whether the triadic update operator
+    <span class="math inline"><em>R</em></span> can be derived from a
+    microscopic quantum-gravity model. In AdS/CFT, the recursion
+    corresponds to holographic RG flow, but it remains unclear whether a
+    similar structure exists in non-holographic or non-conformal
+    settings. A derivation of <span
+    class="math inline"><em>R</em></span> from first principles would
+    significantly strengthen the framework.</p>
+    <h4
+    id="what-is-the-precise-relationship-between-triadic-fixed-points-and-conformal-fixed-points">2.
+    What is the precise relationship between triadic fixed points and
+    conformal fixed points?</h4>
+    <p>While the correspondence between triadic fixed points and
+    conformal fixed points is structurally compelling, a more detailed
+    analysis is needed to determine whether all conformal fixed points
+    correspond to triadic equilibria and whether the converse holds.
+    This question is closely related to the classification of
+    scale-invariant phases in quantum field theory.</p>
+    <h4
+    id="how-universal-is-the-termination-of-recursion-in-black-hole-interiors">3.
+    How universal is the termination of recursion in black-hole
+    interiors?</h4>
+    <p>The triadic interpretation predicts that black-hole interiors
+    lack independent temporal evolution. It remains an open question
+    whether this prediction holds in non-AdS black holes, in
+    cosmological horizons, or in dynamical spacetimes. Understanding the
+    universality of recursion termination may shed light on the nature
+    of horizons and singularities in more general settings.</p>
+    <h4 id="can-triadic-recursion-be-extended-to-cosmology">4. Can
+    triadic recursion be extended to cosmology?</h4>
+    <p>The triadic framework suggests that time emerges from recursive
+    structural reorganization. Whether this mechanism can be applied to
+    cosmological settings—such as inflation, cosmic horizons, or the
+    early universe—remains an open question. A triadic interpretation of
+    cosmological time could provide new insights into the arrow of time
+    and the initial conditions of the universe.</p>
+    <h4
+    id="is-adscft-the-unique-realization-of-the-triadic-architecture">5.
+    Is AdS/CFT the unique realization of the triadic architecture?</h4>
+    <p>The strong structural alignment between triadic recursion and
+    holographic renormalization suggests that AdS/CFT may be uniquely
+    compatible with the triadic framework. However, it remains an open
+    question whether other unification proposals—such as tensor-network
+    approaches, asymptotic safety, or loop quantum gravity—can reproduce
+    the triadic relations between energy, geometry, and information.
+    Establishing the uniqueness or non-uniqueness of AdS/CFT as a
+    triadic realization is an important direction for future work.</p>
+    <h2 id="interpretation-5">Interpretation</h2>
+    <p>The limitations and open questions identified above do not
+    undermine the core contributions of the triadic framework. Instead,
+    they highlight the scope of the present work and point toward a
+    broader research program aimed at deriving, extending, and testing
+    the triadic architecture across different physical contexts. The
+    structural alignment between triadic recursion and holographic
+    renormalization suggests that the Triadic Cycle captures essential
+    features of quantum gravity, but further work is needed to determine
+    the full extent and universality of this correspondence.</p>
+    <h1 id="conclusion-1">Conclusion</h1>
+    <p>This paper developed a structural framework in which energy,
+    geometry, and information form a closed triadic architecture whose
+    recursive reorganization gives rise to temporal structure. By
+    expressing the Triadic Cycle through functional relations and a
+    recursive update operator, we showed that time is not a primitive
+    parameter but an emergent ordering of successive triadic states.
+    This interpretation aligns with relational and information-theoretic
+    accounts of time while providing a minimal and coherent
+    architectural foundation.</p>
+    <p>The mapping between triadic recursion and holographic
+    renormalization in AdS/CFT reveals a deep structural correspondence:
+    boundary Hamiltonian evolution realizes the energetic role, bulk
+    extremal surfaces realize the geometric role, and boundary
+    entanglement realizes the informational role. The recursion index
+    corresponds to the holographic RG direction, and triadic fixed
+    points correspond to conformal fixed points. Among known frameworks,
+    AdS/CFT is uniquely compatible with the triadic architecture,
+    suggesting that holography is not an incidental duality but a
+    canonical realization of the structural relations between energy,
+    geometry, and information.</p>
+    <p>The triadic interpretation yields concrete physical implications.
+    Most notably, it provides a clean and holographically consistent
+    account of black-hole interiors: the interior does not support
+    independent informational, energetic, or geometric updates, and
+    therefore lacks emergent temporal structure. The horizon is the
+    locus of triadic activity, while the interior is a structural shadow
+    of boundary data rather than a dynamical region. This resolves
+    classical singularities, avoids information loss, and eliminates the
+    need for firewalls or exotic microstate geometries.</p>
+    <p>The framework also generates testable predictions, including the
+    identification of the Planck time as the minimal interval required
+    for a nontrivial triadic update, the correspondence between triadic
+    and conformal fixed points, and the prediction that any viable
+    unification of quantum mechanics and gravity must reproduce the
+    triadic relations instantiated in AdS/CFT. These predictions outline
+    a broader research program aimed at deriving the triadic update
+    operator from microscopic principles, extending the framework beyond
+    holographic settings, and exploring its implications for cosmology
+    and quantum gravity.</p>
+    <p>Taken together, the results of this paper suggest that the
+    Triadic Cycle captures essential structural features of physical
+    law. By unifying energy, geometry, and information within a single
+    recursive architecture, the triadic framework offers a coherent
+    foundation for emergent time, holography, and black-hole physics,
+    and points toward a deeper understanding of the architectural
+    principles underlying quantum gravity.</p>
+    <h1 id="summarizing-schematic-figure">Summarizing Schematic
+    Figure</h1>
+    <p>This appendix provides a schematic overview of the full structure
+    developed in the paper: the Triadic Cycle, its recursive
+    interpretation, the mapping to AdS/CFT, and the termination of
+    recursion at black-hole horizons. The figure is conceptual rather
+    than geometric and is intended to summarize the architectural
+    relations at a glance.</p>
+    <figure>
+
+    <figcaption>Schematic summary of the Triadic Cycle, its recursive
+    dynamics, its mapping to AdS/CFT, and the termination of recursion
+    at black-hole horizons.</figcaption>
+    </figure>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>.</p>
+  </main>
+
+</div>
+
+</body>
+</html>
