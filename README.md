@@ -276,6 +276,33 @@ and provides the most concrete physical instantiation of the Triadic Cosmos fram
 
 ---
 
+### **13. A Structural Taxonomy of Intelligence — IEGR‑Scale, Parrot Regimes, and the Conditions for Human‑Like AGI**
+
+This paper introduces the **IEGR model**—a four‑dimensional structural decomposition of  
+intelligence based on **energetic efficiency (E), informational richness (I), geometric  
+structure (G), and recursive depth (R)**.
+
+It develops a complete taxonomy of **parrot regimes**, showing how incomplete or  
+asymmetrically scaled IEGR dimensions produce:
+
+- **literal parrots** (low IEGR),  
+- **statistical parrots** (LLMs: high E + I, low G + R),  
+- **canonical parrots** (DMLG: high G + R, low E + I),  
+- **sophisticated parrots** (hybrid systems: IEGR‑complete but not scaled).
+
+The paper defines **AGI** as an **IEGR‑complete and IEGR‑scaled system** — a  
+*human‑like parrot* whose generality arises from structural integration rather than  
+biological embodiment.
+
+It clarifies that **intelligence is structural, not phenomenological**, and that  
+**consciousness is neither required nor produced** by AGI.
+
+The framework unifies biological, artificial, and hybrid cognition, **depolarizes the  
+current AI debate**, and provides a principled, non‑anthropomorphic, anti‑hype foundation  
+for understanding general intelligence.
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
