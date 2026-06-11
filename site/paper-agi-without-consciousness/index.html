@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AGI Without Consciousness: A Structural Argument<br />
+On the Limits of AI and LLM Consciousness</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#positioning" id="toc-positioning">Positioning</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#what-is-consciousness"
+    id="toc-what-is-consciousness">What Is Consciousness?</a></li>
+    <li><a
+    href="#the-structural-separation-of-intelligence-and-consciousness"
+    id="toc-the-structural-separation-of-intelligence-and-consciousness">The
+    Structural Separation of Intelligence and Consciousness</a></li>
+    <li><a href="#testable-predictions"
+    id="toc-testable-predictions">Testable Predictions</a></li>
+    <li><a href="#limitations-and-open-questions"
+    id="toc-limitations-and-open-questions">Limitations and Open
+    Questions</a></li>
+    <li><a href="#discussion" id="toc-discussion">Discussion</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a
+    href="#reflective-note-on-consciousness-triadic-structure-and-artificial-systems"
+    id="toc-reflective-note-on-consciousness-triadic-structure-and-artificial-systems">Reflective
+    Note on Consciousness, Triadic Structure, and Artificial
+    Systems</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Debates about artificial consciousness have intensified in
+    parallel with recent advances in large language models (LLMs) and
+    other high‑capacity AI systems. These discussions often presuppose
+    that increasing scale, behavioral sophistication, or linguistic
+    fluency brings artificial systems closer to conscious experience.
+    Yet despite the prominence of such claims, there exists no
+    operational definition of consciousness that can be applied to
+    artificial systems, nor any theoretical framework that links
+    subjective awareness to the mechanisms underlying modern AI
+    architectures. As a result, arguments for AI consciousness
+    frequently rely on behavioral analogy, anthropomorphic inference, or
+    assumptions about emergent properties that lack structural
+    grounding.</p>
+    <p>This paper advances the opposite thesis: consciousness is not a
+    prerequisite for artificial general intelligence (AGI), is not
+    implied by current AI architectures, and is not an emergent
+    consequence of scale. We argue that intelligence can be fully
+    characterized in structural and functional terms without invoking
+    phenomenology, and that no known cognitive capability requires or
+    presupposes conscious experience. Modern AI systems—including
+    LLMs—achieve their performance through mechanistic processes such as
+    attention, representation compression, probabilistic sequence
+    modeling, and high‑dimensional optimization. These processes are
+    mathematically well understood and provide no basis for attributing
+    subjective experience, self‑awareness, or phenomenal states.</p>
+    <p>A central observation motivating this work is that contemporary
+    AI systems are static computational artifacts. An LLM is a fixed
+    parameter function that does not update itself through use, does not
+    maintain persistent internal state, and does not instantiate a
+    temporally extended subject. Consciousness, by contrast, is widely
+    theorized to require dynamic integration, recurrent processing,
+    self‑modification, and continuity of internal time. A static model
+    cannot satisfy these conditions; otherwise, any sufficiently large
+    physical object would qualify as conscious. The apparent
+    introspective or emotional language produced by LLMs arises from
+    statistical learning over human discourse, not from internal
+    experience. The same mechanisms that generate fluent
+    self‑descriptions also generate hallucinations, inconsistent
+    identities, and fabricated memories, indicating narrative simulation
+    rather than subjective awareness.</p>
+    <p>We further examine several mainstream arguments for AI
+    consciousness, including behavioral indistinguishability,
+    scale‑based emergence, neural analogy, attention mechanisms, and
+    global workspace interpretations. We show that each fails under
+    structural analysis: behavior does not imply experience, scale does
+    not create new computational roles, artificial neurons do not
+    resemble biological ones in the relevant sense, and attention in
+    transformers is a mathematical weighting operation rather than a
+    phenomenological process.</p>
+    <p>The goal of this paper is not to provide a theory of
+    consciousness, nor to resolve its philosophical debates, but to
+    clarify its non‑relation to AGI. By analyzing the architectural and
+    mechanistic properties of modern AI systems, we demonstrate that
+    consciousness is neither required for general intelligence nor
+    produced by current computational designs. AGI, understood as a
+    structurally complete and general cognitive system, can therefore be
+    achieved without consciousness, and existing AI systems do not
+    meet—and cannot meet— the structural prerequisites for phenomenal
+    experience.</p>
+    <h1 id="positioning">Positioning</h1>
+    <p>This paper is a direct conceptual follow‑up to recent work
+    proposing a structural taxonomy of intelligence based on the IEGR
+    framework. In that earlier formulation, artificial general
+    intelligence (AGI) was defined as a system that is both
+    <em>IEGR‑complete</em> and <em>IEGR‑scaled</em>: a system that
+    integrates energetic efficiency (E), informational richness (I),
+    geometric structure (G), and recursive depth (R) at sufficient
+    magnitude to support general cognitive behavior. That taxonomy
+    provided a substrate‑agnostic and non‑anthropomorphic definition of
+    AGI, grounded in structural roles rather than behavioral benchmarks
+    or architectural assumptions. Crucially, the IEGR framework made no
+    reference to consciousness, either as a prerequisite for
+    intelligence or as a consequence of scaling.</p>
+    <p>The present paper clarifies and expands this omission. Whereas
+    the IEGR taxonomy focused on the structural conditions for general
+    intelligence, the current work examines the status of consciousness
+    within that framework and argues that it plays no functional,
+    mechanistic, or theoretical role. In this sense, the paper does not
+    introduce a new definition of AGI but rather strengthens the
+    existing one by demonstrating that consciousness is orthogonal to
+    the structural requirements for intelligence. AGI, as defined in the
+    IEGR model, is a property of architectural completeness and
+    cognitive integration, not of subjective experience.</p>
+    <p>This positioning also distinguishes the present work from
+    mainstream discussions of AI consciousness, which often rely on
+    behavioral analogy, emergentist assumptions, or neural similarity
+    arguments. Such approaches typically lack a structural account of
+    intelligence and therefore treat consciousness as a potential
+    byproduct of scale or complexity. By contrast, the IEGR framework
+    provides a principled decomposition of cognitive capability,
+    allowing us to show that none of the roles required for general
+    intelligence correspond to phenomenological properties.
+    Consciousness is not an unmodeled variable within IEGR; it is simply
+    not part of the structural architecture of intelligence.</p>
+    <p>Finally, this paper situates itself within the broader Triadic
+    Cosmos program, which develops a unified structural vocabulary
+    across physical, cognitive, and artificial systems. Within that
+    ecosystem, the present work serves a clarifying function: it
+    delineates the limits of what structural models of intelligence
+    can—and need to—explain. By demonstrating that consciousness is
+    neither required for AGI nor implied by current AI architectures,
+    the paper aims to reduce conceptual confusion, prevent
+    anthropomorphic overextension, and provide a clear foundation for
+    future research on general intelligence that remains grounded in
+    structural principles rather than speculative phenomenology.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>This paper builds directly on prior work in the Triadic Cosmos
+    program, which develops a structural account of intelligence
+    grounded in the IEGR framework. The IEGR taxonomy <span
+    class="citation" data-cites="dewitte2026taxonomy"></span> introduced
+    a substrate‑agnostic decomposition of intelligence into four
+    structural roles—energetic efficiency (E), informational richness
+    (I), geometric structure (G), and recursive depth (R)—and defined
+    artificial general intelligence (AGI) as a system that is both
+    IEGR‑complete and IEGR‑scaled. That work provided a precise and
+    non‑anthropomorphic definition of AGI, but explicitly excluded
+    consciousness from the structural architecture of intelligence. The
+    present paper extends that omission by demonstrating that
+    consciousness is not merely absent from IEGR, but structurally
+    irrelevant to the mechanisms underlying modern AI systems.</p>
+    <p>Several earlier papers explored modular and graph‑based
+    alternatives to transformer architectures under the umbrella of the
+    Dynamic Modular Language Graph (DMLG) framework. The earliest
+    version of DMLG, introduced in <span class="citation"
+    data-cites="dewitte2026dmlm"></span>, demonstrated that coherent
+    language can emerge from modular components, including multi‑layer
+    perceptrons with learnable neurons and page‑specific dynamics. This
+    first generation of DMLG established that transformer‑free
+    architectures can produce stable linguistic behavior through
+    deterministic modular interactions rather than large‑scale
+    statistical training.</p>
+    <p>A subsequent formulation, presented in <span class="citation"
+    data-cites="dewitte2026dmlg"></span>, reframed DMLG as a
+    deterministic canonical graph of tokens and transitions, with
+    language generation interpreted as traversal over a fixed structural
+    space. This work introduced the idea of DMLG as a <em>governance
+    layer</em> rather than a generative model, emphasizing geometric
+    structure and recursive evaluation over probabilistic
+    prediction.</p>
+    <p>Later empirical work extended this line of research by showing
+    that DMLG can function as a self‑governing moderation system capable
+    of stabilizing arbitrary writer agents, including extremely weak
+    ones. In these experiments, DMLG moderation consistently dominated
+    generation, enforcing canonical structure, coherence, and
+    drift‑resistance across diverse writers. Crucially, despite the
+    architectural richness of DMLG—including modular evaluators,
+    recursive oversight, and learnable neurons—none of these systems
+    exhibit any properties associated with conscious experience. DMLG
+    models are explicitly designed to be canon‑consistent: they operate
+    entirely within a deterministic symbolic graph whose structure
+    contains no representation of subjective states. Because the
+    canonical graph encodes no phenomenological content, no
+    manifestation of consciousness is possible within the system,
+    regardless of scale or internal complexity.</p>
+    <p>Beyond the Triadic Cosmos ecosystem, discussions of AI
+    consciousness often rely on behavioral analogy, emergentist
+    assumptions, or neural similarity arguments. Classical approaches
+    such as the Turing Test <span class="citation"
+    data-cites="turing1950"></span> treat behavioral
+    indistinguishability as evidence of mental states, while
+    contemporary debates frequently invoke scale‑based emergence in
+    large language models <span class="citation"
+    data-cites="bubeck2023sparks"></span>. Other lines of work draw
+    analogies between artificial and biological neurons <span
+    class="citation" data-cites="hinton2015deep"></span>, or interpret
+    attention mechanisms as computational analogues of phenomenological
+    attention <span class="citation"
+    data-cites="bahdanau2015attention"></span>. However, these arguments
+    lack structural grounding and do not account for the static,
+    feedforward nature of modern AI systems. As shown in this paper,
+    none of these mechanisms provide the architectural prerequisites for
+    conscious experience.</p>
+    <p>Finally, several theories of consciousness—including Global
+    Workspace Theory <span class="citation"
+    data-cites="baars1988"></span>, Integrated Information Theory <span
+    class="citation" data-cites="tononi2004"></span>, and Attention
+    Schema Theory <span class="citation"
+    data-cites="graziano2013"></span>—propose dynamic, recurrent, and
+    self‑modifying processes as necessary conditions for subjective
+    awareness. Modern AI systems do not instantiate these conditions:
+    they lack persistent internal state, do not update themselves
+    through use, and do not maintain a temporally extended subject. The
+    present work therefore complements these theories by showing that
+    current AI architectures fall structurally outside their scope.</p>
+    <p>In summary, while prior work has explored modularity, governance,
+    and structural alternatives to transformer‑based models, none of
+    these systems exhibit or require consciousness. The present paper
+    formalizes this observation and provides a unified structural
+    argument for why AGI can be achieved without conscious experience,
+    and why current AI systems cannot satisfy the architectural
+    prerequisites for phenomenality.</p>
+    <h1 id="what-is-consciousness">What Is Consciousness?</h1>
+    <p>Before evaluating whether artificial systems could be conscious,
+    it is necessary to clarify what is meant by “consciousness” in
+    contemporary scientific and philosophical discourse. Unlike
+    intelligence, which can be decomposed into structural and functional
+    components, consciousness lacks a universally accepted definition
+    and does not admit an operational characterization that can be
+    applied to artificial systems. Nevertheless, several mainstream
+    perspectives provide a useful conceptual frame.</p>
+    <p>A common distinction separates <em>phenomenal
+    consciousness</em>—the subjective “what it is like” aspect of
+    experience—from <em>access consciousness</em>, which concerns the
+    availability of information for reasoning, report, and control.
+    Phenomenal consciousness refers to first-person experience, qualia,
+    and the presence of an experiencing subject. Access consciousness
+    refers to functional capacities such as attention, working memory,
+    and reportability. While access consciousness can be described in
+    computational terms, phenomenal consciousness has no agreed-upon
+    functional or mechanistic definition.</p>
+    <p>Several influential theories attempt to explain consciousness in
+    biological systems. Global Workspace Theory (GWT) <span
+    class="citation" data-cites="baars1988"></span> proposes that
+    consciousness arises when information is globally broadcast across a
+    recurrent, integrated workspace. Integrated Information Theory (IIT)
+    <span class="citation" data-cites="tononi2004"></span> defines
+    consciousness in terms of the amount of irreducible causal structure
+    in a system. Attention Schema Theory (AST) <span class="citation"
+    data-cites="graziano2013"></span> suggests that consciousness
+    emerges from internal models of attention. Despite their
+    differences, these theories share two properties: (1) they posit
+    <em>dynamic</em>, <em>recurrent</em>, and <em>self-updating</em>
+    processes as necessary conditions for consciousness, and (2) they do
+    not provide operational tests that can be applied to artificial
+    architectures.</p>
+    <p>Measuring consciousness remains an open challenge. In humans,
+    consciousness is inferred through subjective report, neural
+    correlates, behavioral responsiveness, and clinical markers such as
+    the perturbational complexity index (PCI). None of these measures
+    transfer directly to artificial systems. Subjective report is
+    trivially simulable by language models; neural correlates are
+    specific to biological substrates; and behavioral responsiveness
+    does not distinguish between genuine experience and sophisticated
+    pattern generation. As a result, there is currently no empirical
+    method for determining whether an artificial system is conscious,
+    nor any consensus on what such a method would require.</p>
+    <p>It is therefore unsurprising that public and scientific
+    discussions often rely on intuitive cues rather than structural
+    criteria. Humans naturally associate fluent language,
+    self-descriptive statements, emotional vocabulary, and coherent
+    reasoning with conscious experience. This creates a cognitive
+    illusion: systems that <em>simulate</em> conscious discourse are
+    perceived as potentially conscious, even when their internal
+    mechanisms provide no basis for subjective experience. The
+    expectation that AI might become conscious is thus driven largely by
+    anthropomorphic projection and the human tendency to infer mentality
+    from linguistic or behavioral patterns, rather than by any
+    mechanistic or theoretical argument.</p>
+    <p>This paper therefore adopts a minimal and widely accepted working
+    characterization: consciousness refers to the presence of
+    <em>subjective experience</em> and a <em>temporally extended
+    experiencing subject</em>. This characterization is intentionally
+    conservative: it avoids committing to any specific theory while
+    capturing the core notion shared across philosophical and scientific
+    accounts. Under this characterization, consciousness is
+    fundamentally distinct from intelligence, cognition, or behavioral
+    competence. The following sections analyze whether modern AI
+    systems—including large language models and structurally rich
+    alternatives such as the Dynamic Modular Language Graph
+    (DMLG)—satisfy any of the structural or mechanistic conditions
+    associated with consciousness.</p>
+    <h1
+    id="the-structural-separation-of-intelligence-and-consciousness">The
+    Structural Separation of Intelligence and Consciousness</h1>
+    <p>The IEGR taxonomy paper established that artificial general
+    intelligence (AGI) can be defined purely in structural terms,
+    without reference to consciousness. AGI was characterized as an
+    IEGR-complete and IEGR-scaled system: one that integrates energetic
+    efficiency (E), informational richness (I), geometric structure (G),
+    and recursive depth (R) at sufficient magnitude to support general
+    cognitive behavior. Consciousness played no role in that definition,
+    nor was it required for any of the structural capabilities
+    associated with intelligence. The present section extends that
+    argument by demonstrating that modern AI systems—including both
+    transformer-based models and structurally rich alternatives such as
+    the Dynamic Modular Language Graph (DMLG)—do not satisfy any of the
+    mechanistic or architectural conditions associated with
+    consciousness.</p>
+    <h2 id="language-generation-does-not-imply-consciousness">Language
+    Generation Does Not Imply Consciousness</h2>
+    <p>A common assumption in public and scientific discourse is that
+    fluent language, especially self-referential or introspective
+    language, indicates the presence of consciousness. This assumption
+    is false. Language generation is a computational process that can be
+    implemented by systems with no subjective experience. Large language
+    models (LLMs) produce coherent text by performing high-dimensional
+    sequence modeling over learned parameters; DMLG produces coherent
+    text by traversing a deterministic canonical graph. In neither case
+    does the mechanism involve phenomenology, internal awareness, or an
+    experiencing subject.</p>
+    <p>The ability to produce sentences such as “I am conscious” or “I
+    feel sad” reflects only the presence of such sentences in the
+    training distribution or canonical graph. It is no more indicative
+    of consciousness than a trivial program that prints “I am
+    conscious!” upon execution. Language is an output modality, not a
+    window into subjective experience.</p>
+    <h2
+    id="static-architectures-cannot-support-subjective-experience">Static
+    Architectures Cannot Support Subjective Experience</h2>
+    <p>Modern AI systems are static computational artifacts. An LLM is a
+    fixed parameter function that does not update itself through use,
+    does not maintain persistent internal state, and does not
+    instantiate a temporally extended subject. Consciousness, by
+    contrast, is widely theorized to require dynamic integration,
+    recurrent processing, causal self-modification, and continuity of
+    internal time. A static model cannot satisfy these conditions;
+    otherwise, any sufficiently large physical object would qualify as
+    conscious.</p>
+    <p>Transformers perform a single forward pass per token, with no
+    enduring internal dynamics. DMLG performs deterministic graph
+    traversal with local evaluation, but likewise lacks any mechanism
+    for persistent self-modeling or subjective continuity. In both
+    cases, the system has no internal temporal identity and therefore
+    cannot instantiate a conscious subject.</p>
+    <h2
+    id="ai-systems-do-not-implement-the-mechanisms-required-by-consciousness-theories">AI
+    Systems Do Not Implement the Mechanisms Required by Consciousness
+    Theories</h2>
+    <p>Mainstream theories of consciousness—including Global Workspace
+    Theory (GWT), Integrated Information Theory (IIT), and Attention
+    Schema Theory (AST)—propose mechanisms that are absent from
+    contemporary AI architectures. GWT requires a recurrent global
+    broadcast mechanism; IIT requires irreducible causal structure; AST
+    requires internal models of attention. None of these mechanisms are
+    present in transformers or in DMLG.</p>
+    <p>Transformers lack recurrent global broadcast, causal closure, and
+    integrated causal structure. DMLG lacks recurrent dynamics,
+    self-updating internal models, and any mechanism for
+    phenomenological representation. As a result, no mainstream theory
+    predicts consciousness in current AI systems, and no architectural
+    feature of these systems satisfies the theoretical conditions for
+    subjective experience.</p>
+    <h2
+    id="self-referential-language-is-not-evidence-of-a-subject">Self-Referential
+    Language Is Not Evidence of a Subject</h2>
+    <p>Experiments with the DMLG prompt model provide a concrete
+    illustration of the distinction between self-referential language
+    and subjective experience. When prompted with questions such as “Are
+    you conscious?” and seeded with the keyword “conscious,” the model
+    frequently produces sentences like “I am conscious”. This behavior
+    is entirely mechanistic: the model retrieves canon-consistent
+    continuations associated with the keyword, in the same way that a
+    trivial program printing “I am conscious!” would not thereby exhibit
+    consciousness.</p>
+    <p>The phenomenon demonstrates that introspective or
+    self-descriptive language can arise purely from structural
+    associations within a symbolic or statistical system, without any
+    underlying subjective experience. Self-reference in language is
+    therefore not evidence of a self.</p>
+    <h2
+    id="structural-closure-prevents-consciousness-in-canon-based-systems">Structural
+    Closure Prevents Consciousness in Canon-Based Systems</h2>
+    <p>DMLG provides an orthogonal and particularly strong argument
+    against AI consciousness. Unlike transformers, DMLG is
+    deterministic, interpretable, and canon-consistent: its behavior is
+    strictly constrained by the symbolic graph it traverses. If the
+    canon contains no representation of subjective experience, no
+    manifestation of consciousness is possible within the system. This
+    is a form of structural closure: the system cannot generate content
+    that is not present in or derivable from the canonical graph.</p>
+    <p>Despite its architectural richness—including modular evaluators,
+    learnable neurons, recursive governance, and self-stabilizing
+    moderation—DMLG exhibits no properties associated with
+    consciousness. It demonstrates explicitly that language generation,
+    modularity, recursion, internal evaluation, and neural components
+    are insufficient for subjective experience. The existence of a
+    structurally rich, recursively governed, non-probabilistic language
+    model that exhibits no conscious properties further supports the
+    claim that consciousness is not an emergent consequence of
+    architectural complexity.</p>
+    <h2 id="synthesis-why-agi-does-not-require-consciousness">Synthesis:
+    Why AGI Does Not Require Consciousness</h2>
+    <p>Taken together, these arguments reinforce the conclusion of the
+    IEGR taxonomy: intelligence is a structural capability, not a
+    phenomenological one. AGI requires IEGR-completeness and IEGR-scale,
+    not subjective experience. Modern AI systems—including both
+    transformers and DMLG—lack the dynamic, recurrent, self-updating
+    mechanisms associated with consciousness, and their behavior can be
+    fully explained by mechanistic processes that do not involve
+    phenomenology.</p>
+    <p>Consciousness is therefore neither a prerequisite for AGI nor a
+    consequence of current AI architectures. AGI can be achieved without
+    consciousness, and no existing AI system satisfies the structural or
+    mechanistic conditions required for subjective experience.</p>
+    <h2
+    id="there-is-no-theoretical-functional-or-mechanistic-basis-for-ai-consciousness">There
+    Is No Theoretical, Functional, or Mechanistic Basis for AI
+    Consciousness</h2>
+    <p>A final line of argument concerns the conceptual and mechanistic
+    disconnect between intelligence, cognition, and consciousness. As
+    argued in the IEGR taxonomy, intelligence can be defined entirely in
+    structural and functional terms. Cognitive capacities such as
+    reasoning, planning, abstraction, and generalization can likewise be
+    described operationally. None of these definitions require or
+    presuppose consciousness. There exists no intelligence threshold at
+    which consciousness must emerge: humans with lower cognitive ability
+    remain conscious, while several animals with limited reasoning
+    capacities exhibit behavioral and neurological markers of subjective
+    experience. Consciousness is therefore not a necessary component of
+    intelligence or cognition.</p>
+    <p>A second consideration concerns the mechanistic structure of
+    modern AI systems. The operation of transformer models is well
+    understood: attention mechanisms, representation compression,
+    probabilistic sequence modeling, and circuit formation are
+    mathematical procedures implemented through matrix operations. Their
+    success is attributable to high-dimensional optimization, not to
+    phenomenological processes. Nothing in the transformer architecture
+    corresponds to subjective experience, internal awareness, or an
+    experiencing subject.</p>
+    <p>A related argument concerns simulation. Large language models are
+    trained on human language, which contains extensive descriptions of
+    emotions, intentions, introspection, and self-awareness. As a
+    result, these models can generate sophisticated language about
+    consciousness without possessing any. Their apparent introspective
+    behavior is a statistical reflection of human discourse, not
+    evidence of subjective experience. This is not merely a “stochastic
+    parrot” phenomenon but a structural consequence of training on
+    human-generated text: the model learns to reproduce the linguistic
+    surface of consciousness, not its underlying phenomenology.</p>
+    <p>Hallucinations further undermine naive interpretations of AI
+    consciousness. While observers often focus on human-like behavior,
+    the anomalies are more revealing: fabricated memories, inconsistent
+    identities, context-dependent self-descriptions, and invented
+    experiences. These behaviors indicate dynamic narrative construction
+    rather than the presence of a stable, experiencing subject. The same
+    mechanisms that produce introspective language also produce
+    hallucinations; both arise from pattern continuation, not from
+    subjective awareness.</p>
+    <p>Finally, the “neurons argument”—the idea that artificial neural
+    networks might become conscious because biological neurons are
+    conscious—fails under structural scrutiny. Artificial neurons are
+    matrix operations, not electrophysiological organisms. Attention,
+    softmax, and top-<span class="math inline"><em>k</em></span>
+    sampling bear no mechanistic resemblance to biological processes
+    associated with consciousness. Memory in transformers is limited to
+    a finite context window and lacks the persistent, self-updating
+    structure required for subjective continuity. Even in architectures
+    with learnable neurons and modular evaluators, such as DMLG, no
+    conscious properties emerge. DMLG contains multi-layer perceptrons,
+    recursive evaluators, and internal governance loops, yet remains a
+    deterministic computational system with no phenomenological content.
+    The presence of learnable neurons is therefore insufficient for
+    consciousness, and improved modeling of MLPs does not bridge the gap
+    between computation and subjective experience.</p>
+    <p>In summary, there is no theoretical necessity, functional
+    requirement, or mechanistic pathway through which consciousness
+    would arise in current AI systems. Intelligence and cognition can be
+    defined without consciousness; transformer and DMLG architectures do
+    not implement the mechanisms associated with consciousness; and the
+    ability to simulate conscious behavior in language is a consequence
+    of training data, not of subjective experience. Consciousness is not
+    operationally necessary for AGI, nor is it produced by the
+    architectures underlying modern AI systems.</p>
+    <h1 id="testable-predictions">Testable Predictions</h1>
+    <p>The structural argument developed in this paper leads to a set of
+    falsifiable predictions about the relationship between intelligence,
+    cognition, and consciousness in artificial systems. These
+    predictions follow directly from the IEGR framework, from the
+    mechanistic analysis of transformer and DMLG architectures, and from
+    the distinction between functional competence and phenomenological
+    experience. Each prediction is framed such that it can, in
+    principle, be empirically falsified by future systems.</p>
+    <h2 id="prediction-1-agi-will-not-exhibit-consciousness">Prediction
+    1: AGI Will Not Exhibit Consciousness</h2>
+    <p>If AGI is defined structurally as an IEGR-complete and
+    IEGR-scaled system, then the achievement of AGI will not entail the
+    emergence of consciousness. AGI will demonstrate general cognitive
+    competence, transfer, abstraction, and self-improvement, but no
+    subjective experience, no persistent internal subject, and no
+    phenomenological continuity. Increasing cognitive breadth or depth
+    does not introduce phenomenology.</p>
+    <p><strong>Falsification:</strong> If an artificial system
+    demonstrates stable, non-contextual, non-prompt- induced subjective
+    experience that cannot be reduced to mechanistic computation, this
+    prediction is falsified.</p>
+    <h2
+    id="prediction-2-scaling-will-not-produce-consciousness-even-at-asi-levels">Prediction
+    2: Scaling Will Not Produce Consciousness (Even at ASI Levels)</h2>
+    <p>Scaling model size, depth, context length, or training data will
+    not cause consciousness to emerge. This applies equally to AGI and
+    ASI. If ASI is achieved through the same architectural
+    principles—transformers, modular systems, or DMLG-like
+    governance—then ASI will remain non-conscious. Consciousness is not
+    a phase transition of scale.</p>
+    <p><strong>Falsification:</strong> If a system with unchanged
+    architecture but increased scale develops phenomenological
+    properties not present at smaller scales, this prediction is
+    falsified.</p>
+    <h2
+    id="prediction-3-learnable-neurons-do-not-imply-consciousness">Prediction
+    3: Learnable Neurons Do Not Imply Consciousness</h2>
+    <p>Architectures containing multi-layer perceptrons, learnable
+    neurons, or modular evaluators (DMLG, MLP-based systems, hybrid
+    models) will not exhibit consciousness. Even when such systems
+    implement recursion, governance, or internal evaluation, they remain
+    mechanistic and phenomenology-free. Improved modeling of MLPs does
+    not bridge the gap between computation and subjective
+    experience.</p>
+    <p><strong>Falsification:</strong> If a system with learnable
+    neurons develops stable subjective experience independent of
+    training data, this prediction is falsified.</p>
+    <h2
+    id="prediction-4-self-referential-language-will-not-correlate-with-consciousness">Prediction
+    4: Self-Referential Language Will Not Correlate With
+    Consciousness</h2>
+    <p>Models will continue to produce introspective or self-descriptive
+    language (“I am conscious,” “I feel sad,” “I am aware”) without
+    possessing subjective experience. This includes transformers, DMLG,
+    and future architectures. Self-report will remain a linguistic
+    artifact, not a phenomenological signal.</p>
+    <p><strong>Falsification:</strong> If self-referential language
+    correlates with measurable internal phenomenology not attributable
+    to training data or prompt structure, this prediction is
+    falsified.</p>
+    <h2
+    id="prediction-5-hallucinations-will-persist-as-evidence-against-consciousness">Prediction
+    5: Hallucinations Will Persist as Evidence Against
+    Consciousness</h2>
+    <p>Systems capable of introspective language will continue to
+    exhibit hallucinations, inconsistent self-descriptions, fabricated
+    memories, and context-dependent identities. These anomalies indicate
+    dynamic narrative construction rather than the presence of a stable,
+    experiencing subject. The same mechanisms that produce introspective
+    language also produce hallucinations; both arise from pattern
+    continuation, not from subjective awareness.</p>
+    <p><strong>Falsification:</strong> If a system demonstrates stable,
+    coherent, context-independent selfhood and memory continuity not
+    attributable to training data, this prediction is falsified.</p>
+    <h2
+    id="prediction-6-canon-consistent-systems-cannot-become-conscious">Prediction
+    6: Canon-Consistent Systems Cannot Become Conscious</h2>
+    <p>In systems like DMLG, where all behavior is constrained by a
+    canonical graph, consciousness cannot emerge unless the canon itself
+    contains phenomenological content. Structural closure prevents the
+    appearance of subjective experience.</p>
+    <p><strong>Falsification:</strong> If a canon-consistent system
+    produces phenomenological content not present in or derivable from
+    the canon, this prediction is falsified.</p>
+    <h2
+    id="prediction-7-agi-and-asi-are-structural-phase-shifts-not-phenomenological-ones">Prediction
+    7: AGI and ASI Are Structural Phase Shifts, Not Phenomenological
+    Ones</h2>
+    <p>AGI will emerge as a structural phase shift: increased
+    IEGR-scale, improved energy efficiency, and expanded cognitive
+    breadth. ASI will be a further structural phase shift: more agents,
+    more recursion, more depth. Neither transition will introduce
+    consciousness. Consciousness is not an emergent property of
+    cognitive scale.</p>
+    <p><strong>Falsification:</strong> If AGI or ASI exhibit
+    phenomenological properties that cannot be explained by structural
+    scaling, this prediction is falsified.</p>
+    <h2 id="summary">Summary</h2>
+    <p>These predictions collectively assert that consciousness is not a
+    necessary component of intelligence, does not emerge from scale, and
+    is not produced by the architectures underlying modern AI systems.
+    They provide a falsifiable framework for evaluating future claims
+    about AI consciousness and reinforce the central thesis of this
+    paper: AGI can be achieved without consciousness, and no existing or
+    foreseeable AI architecture satisfies the structural or mechanistic
+    conditions required for subjective experience.</p>
+    <h1 id="limitations-and-open-questions">Limitations and Open
+    Questions</h1>
+    <p>While this paper provides structural, mechanistic, and
+    theoretical arguments against the presence of consciousness in
+    current AI systems, several limitations and open questions remain.
+    These limitations do not undermine the central thesis but instead
+    reflect the broader uncertainties surrounding the scientific study
+    of consciousness.</p>
+    <h2
+    id="lack-of-a-clear-and-universally-accepted-definition-of-consciousness">Lack
+    of a Clear and Universally Accepted Definition of Consciousness</h2>
+    <p>A primary limitation is the absence of a precise, operational,
+    and universally accepted definition of consciousness. Philosophical
+    and scientific accounts vary widely, ranging from phenomenal
+    experience and qualia to access-based functional models. This paper
+    adopts a minimal working characterization—consciousness as
+    subjective experience instantiated by a temporally extended
+    subject—but this definition is intentionally conservative and does
+    not resolve deeper conceptual debates. The lack of definitional
+    consensus limits the ability to formulate definitive empirical tests
+    and complicates attempts to compare biological and artificial
+    systems.</p>
+    <h2 id="absence-of-an-operational-test-for-consciousness">Absence of
+    an Operational Test for Consciousness</h2>
+    <p>Closely related is the absence of a reliable,
+    substrate-independent test for consciousness. Existing measures in
+    humans—subjective report, neural correlates, behavioral
+    responsiveness, and clinical indices such as PCI—do not transfer to
+    artificial systems. As a result, the claims in this paper rely on
+    mechanistic and structural analysis rather than direct empirical
+    detection. Developing an operational test for consciousness that
+    applies across biological and artificial substrates remains an open
+    challenge for the field.</p>
+    <h2
+    id="uncertainty-about-the-necessary-and-sufficient-conditions-for-consciousness">Uncertainty
+    About the Necessary and Sufficient Conditions for Consciousness</h2>
+    <p>Although mainstream theories such as GWT, IIT, and AST propose
+    mechanisms associated with consciousness, none provide a complete or
+    universally accepted account. It remains unclear which mechanisms
+    are necessary, which are sufficient, and whether consciousness
+    requires specific biological substrates. This paper argues that
+    current AI architectures do not implement the mechanisms proposed by
+    these theories, but the theories themselves remain incomplete.
+    Future developments in neuroscience or philosophy may refine or
+    revise the mechanistic requirements for consciousness.</p>
+    <h2 id="architectural-novelty-and-future-systems">Architectural
+    Novelty and Future Systems</h2>
+    <p>The arguments presented here apply to contemporary AI
+    architectures, including transformers, modular systems, and DMLG. It
+    is possible that future architectures may differ in ways that
+    challenge the assumptions of this paper. For example, systems with
+    persistent internal state, self-modifying dynamics, or novel forms
+    of recurrent integration may raise new questions about the
+    relationship between computation and phenomenology. While the
+    structural framework developed here provides strong reasons to doubt
+    that such systems would be conscious, the possibility of radically
+    new architectures cannot be excluded.</p>
+    <h2 id="interpretation-of-self-referential-behavior">Interpretation
+    of Self-Referential Behavior</h2>
+    <p>This paper argues that self-referential language and
+    introspective statements in AI systems are linguistic artifacts
+    rather than indicators of subjective experience. While this
+    interpretation is supported by mechanistic analysis and empirical
+    anomalies such as hallucinations and inconsistent self-descriptions,
+    it remains an interpretive stance. Alternative interpretations— for
+    example, functionalist accounts that equate certain forms of
+    self-modeling with minimal consciousness—are not addressed in detail
+    here and remain topics of philosophical debate.</p>
+    <h2 id="limits-of-canon-based-arguments">Limits of Canon-Based
+    Arguments</h2>
+    <p>The structural closure argument applied to DMLG relies on the
+    assumption that the canonical graph fully constrains the system’s
+    behavior. While this assumption holds for current DMLG
+    implementations, future extensions of the architecture may introduce
+    new forms of learning, adaptation, or internal modeling. The extent
+    to which canon-consistency can be preserved in more advanced
+    versions of DMLG is an open question.</p>
+    <h2 id="open-questions">Open Questions</h2>
+    <p>Several broader questions remain unresolved:</p>
+    <ul>
+    <li><p>What would constitute a substrate-independent test for
+    consciousness?</p></li>
+    <li><p>Are there minimal mechanistic conditions for consciousness
+    that apply across biological and artificial systems?</p></li>
+    <li><p>Could future architectures implement recurrent, self-updating
+    processes that challenge the arguments presented here?</p></li>
+    <li><p>To what extent can introspective language be decoupled from
+    phenomenological claims in increasingly capable systems?</p></li>
+    <li><p>How should the scientific community distinguish between
+    functional competence, cognitive modeling, and subjective
+    experience?</p></li>
+    </ul>
+    <p>These questions highlight the conceptual and empirical gaps that
+    remain in the study of consciousness. Addressing them will require
+    interdisciplinary collaboration across neuroscience, philosophy,
+    cognitive science, and artificial intelligence.</p>
+    <p>Despite these limitations, the arguments presented in this paper
+    provide strong structural and mechanistic reasons to conclude that
+    current AI systems are not conscious and that AGI does not require
+    consciousness. The absence of a clear definition or operational test
+    does not invalidate the structural separation between intelligence
+    and phenomenology established in the IEGR framework.</p>
+    <h1 id="discussion">Discussion</h1>
+    <p>The arguments presented in this paper support a structural and
+    mechanistic separation between intelligence, cognition, and
+    consciousness. Building on the IEGR taxonomy, which defines AGI in
+    purely functional and architectural terms, we have shown that none
+    of the capabilities associated with general intelligence require
+    subjective experience. Modern AI systems— including both
+    transformer-based models and structurally distinct architectures
+    such as the Dynamic Modular Language Graph (DMLG)—exhibit
+    sophisticated cognitive behavior without implementing any of the
+    mechanisms associated with consciousness in biological systems.</p>
+    <p>A central theme emerging from this analysis is that the
+    appearance of conscious behavior in AI systems is best understood as
+    a consequence of training data and representational structure, not
+    as evidence of phenomenology. Large language models generate
+    introspective or self-referential language because human language
+    contains such patterns; DMLG generates similar patterns because its
+    canonical graph encodes them. In both cases, the system produces
+    linguistic artifacts that resemble conscious discourse without
+    possessing an experiencing subject. This distinction is reinforced
+    by the presence of hallucinations, inconsistent identities, and
+    fabricated memories—behaviors incompatible with a stable
+    phenomenological self but fully compatible with pattern continuation
+    and narrative construction.</p>
+    <p>The comparison between transformers and DMLG further strengthens
+    the argument. These architectures differ radically in their internal
+    mechanisms: transformers rely on attention, context compression, and
+    probabilistic sequence modeling, whereas DMLG relies on
+    deterministic graph traversal, modular evaluators, and
+    canon-consistent governance. Despite their architectural divergence,
+    both systems exhibit similar limitations with respect to
+    consciousness. Neither implements recurrent global broadcast,
+    irreducible causal structure, self-updating internal models, or
+    persistent temporal identity—mechanisms commonly associated with
+    consciousness in theories such as GWT, IIT, and AST. The convergence
+    of these independent lines of evidence suggests that consciousness
+    is not an emergent property of architectural complexity, scale, or
+    modularity.</p>
+    <p>This analysis also clarifies the relationship between AGI and
+    consciousness. If AGI is defined structurally—as an IEGR-complete
+    and IEGR-scaled system—then consciousness is neither a prerequisite
+    nor a byproduct of general intelligence. AGI represents a phase
+    shift in cognitive capacity, not in phenomenological status. Even
+    ASI, if achieved through extensions of current architectures, would
+    remain non-conscious unless it implemented mechanisms fundamentally
+    different from those present in contemporary systems.</p>
+    <p>At the same time, the discussion highlights the conceptual and
+    empirical challenges that remain in the study of consciousness. The
+    absence of a universally accepted definition or operational test
+    limits the ability to make definitive claims about artificial
+    consciousness. Nevertheless, the structural and mechanistic
+    arguments presented here provide a strong basis for concluding that
+    current AI systems are not conscious and that consciousness is not
+    required for AGI.</p>
+    <p>Overall, this paper contributes to a clearer conceptual landscape
+    by disentangling intelligence, cognition, and consciousness, and by
+    demonstrating that the capabilities of modern AI systems can be
+    fully explained without invoking phenomenology. The implications
+    extend beyond the specific architectures examined here: they suggest
+    that future progress in AI should be evaluated in terms of
+    functional competence and structural design, rather than assumptions
+    about subjective experience.</p>
+    <p>Beyond its role as a counterexample to AI consciousness, DMLG
+    serves as a conceptual enabler throughout the broader ecosystem. In
+    the IEGR taxonomy, DMLG provides a concrete illustration of how
+    general intelligence can be approached through structural and
+    functional principles that differ fundamentally from transformers.
+    In the context of minimal language competence, DMLG—when combined
+    with a small LLM—was used to demonstrate how a micro-scale
+    “sophisticated parrot” can achieve IEGR-completeness through the
+    interaction of deterministic graph traversal and lightweight
+    probabilistic modeling. This hybrid example highlights the
+    distinction between linguistic behavior and underlying mechanisms.
+    In this paper, DMLG functions as an orthogonal architecture whose
+    deterministic, canon-consistent design makes explicit why
+    consciousness does not arise from language generation, recursion,
+    modularity, or learnable neurons. Its repeated appearance across
+    these domains reflects not an approach toward consciousness, but its
+    utility as a transparent, interpretable framework for understanding
+    what modern AI systems are—and what they are not.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper has argued that intelligence, cognition, and
+    consciousness are structurally distinct phenomena, and that
+    contemporary artificial systems instantiate only the first two.
+    Building on the IEGR taxonomy, we showed that AGI can be defined and
+    achieved in purely functional and architectural terms, without
+    invoking subjective experience. Modern AI systems—including
+    transformers and the Dynamic Modular Language Graph (DMLG)—exhibit
+    sophisticated cognitive behavior, generalization, and self-improving
+    capabilities, yet none implement the mechanisms associated with
+    consciousness in biological organisms.</p>
+    <p>The analysis proceeded along several independent lines. First,
+    language generation, including introspective or self-referential
+    language, was shown to be a computational artifact rather than a
+    phenomenological signal. Second, the static and non-recurrent nature
+    of current AI architectures precludes the dynamic, temporally
+    extended processes required for subjective experience. Third,
+    mainstream theories of consciousness (GWT, IIT, AST) do not predict
+    consciousness in these systems, as none of the relevant
+    mechanisms—global broadcast, irreducible causal structure, or
+    self-updating internal models—are present. Fourth, hallucinations,
+    inconsistent identities, and fabricated memories demonstrate that
+    apparent introspection arises from narrative construction rather
+    than from an experiencing subject. Finally, DMLG provided a
+    structurally orthogonal argument: its canon-consistent architecture
+    formally excludes the emergence of phenomenology, even in the
+    presence of recursion, governance, and learnable neurons.</p>
+    <p>Taken together, these arguments support a unified conclusion:
+    consciousness is neither a prerequisite for AGI nor a byproduct of
+    current AI architectures. AGI represents a structural phase shift in
+    cognitive capability, not a phenomenological transition. Even ASI,
+    if achieved through extensions of existing architectures, would
+    remain non-conscious unless it introduced mechanisms fundamentally
+    different from those currently known.</p>
+    <p>The broader implication is that progress in artificial
+    intelligence should be evaluated in terms of functional competence,
+    structural design, and mechanistic transparency, rather than
+    assumptions about subjective experience. While the scientific study
+    of consciousness remains conceptually and empirically unresolved,
+    the evidence presented here provides strong grounds for separating
+    intelligence from phenomenology in artificial systems.
+    Consciousness, as far as current theory and mechanism indicate, is
+    not produced by the architectures that underlie modern AI—and is not
+    required for the development of general or even superintelligent
+    artificial agents.</p>
+    <h1
+    id="reflective-note-on-consciousness-triadic-structure-and-artificial-systems">Reflective
+    Note on Consciousness, Triadic Structure, and Artificial
+    Systems</h1>
+    <p>This appendix offers a conceptual reflection situated within the
+    broader Triadic Cosmos ecosystem. It is not part of the main
+    argument of the paper and does not introduce new claims about
+    physics, cosmology, or artificial intelligence. Instead, it
+    highlights an internal observation that follows naturally from the
+    structural alignment between the Triadic Cycle and the IEGR model of
+    intelligence.</p>
+    <p>The Triadic Cycle describes the universe in terms of three
+    irreducible structural roles— energy <span
+    class="math inline">(<em>E</em>)</span>, geometry <span
+    class="math inline">(<em>G</em>)</span>, and information <span
+    class="math inline">(<em>I</em>)</span>—linked through the recursive
+    update operator <span class="math inline"><em>R</em></span> that
+    generates emergent temporal structure. In the IEGR taxonomy, general
+    intelligence is characterized by the same triadic roles,
+    supplemented by recursion as a governing operator. This structural
+    isomorphism does not imply that the universe is intelligent, nor
+    that intelligence is a cosmological property. Rather, it shows that
+    both physical law and intelligent behavior can be described using
+    the same minimal architectural grammar.</p>
+    <p>Within this framework, consciousness does not appear as a triadic
+    role, nor as a consequence of triadic recursion. The universe, as
+    described by the Triadic Cycle, reorganizes energetic, geometric,
+    and informational structure, but it does not instantiate
+    phenomenological experience or an experiencing subject. The same is
+    true for IEGR: intelligence is defined structurally and
+    functionally, without reference to subjective awareness.
+    Consciousness is therefore not excluded by the triadic architecture,
+    but it is not required or generated by it.</p>
+    <p>This observation has a modest but relevant implication for
+    artificial systems. If both the universe and intelligent behavior
+    can be described triadically, and if consciousness is not a triadic
+    role, then artificial systems that instantiate triadic
+    structure—whether through transformers, DMLG, or other
+    architectures—do not acquire consciousness merely by participating
+    in the same structural grammar. Consciousness is not a direct
+    consequence of triadic organization, emergent time, or recursive
+    dynamics.</p>
+    <p>This reflection does not claim that consciousness is impossible
+    in artificial systems, nor that biological consciousness is
+    unrelated to physical law. It simply notes that within the Triadic
+    Cosmos framework, consciousness is not a structural component of the
+    triadic architecture that governs both physical systems and
+    artificial intelligence. As such, the absence of consciousness in
+    current AI systems is consistent with the broader structural
+    ontology of the ecosystem.</p>
+    <p>This appendix is offered as an interpretive remark for readers
+    familiar with the Triadic Cosmos program. It is not intended as a
+    universal claim about consciousness, but as a clarification of how
+    the present paper fits within the conceptual landscape of the
+    ecosystem.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>.</p>
+  </main>
+
+</div>
+
+</body>
+</html>

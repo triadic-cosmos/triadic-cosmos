@@ -115,8 +115,6 @@ minds. A readable, integrative entry point into the Triadic Cosmos
 ecosystem — explaining how reality organizes itself, and why intelligence
 is one of its natural architectural phases.
 
----
-
 ### **9. Tales of a Sophisticated Parrot**
 
 A microscopic, fully transparent demonstration of hybrid intelligence:  
@@ -327,6 +325,35 @@ It clarifies that **intelligence is structural, not phenomenological**, and that
 The framework unifies biological, artificial, and hybrid cognition, **depolarizes the  
 current AI debate**, and provides a principled, non‑anthropomorphic, anti‑hype foundation  
 for understanding general intelligence.
+
+---
+
+### **14. AGI Without Consciousness — A Structural Argument**
+
+This paper establishes that **consciousness is neither required for AGI nor produced by
+contemporary AI architectures**, including transformers, hybrid systems, and DMLG‑based
+governance models.
+
+Building on the IEGR taxonomy, the paper demonstrates that intelligence is a **structural**
+capacity—arising from energetic efficiency (E), informational richness (I), geometric structure
+(G), and recursive depth (R)—while consciousness is a **phenomenological** property that does
+not follow from these roles.
+
+The analysis shows that:
+
+- modern AI systems are **static computational artifacts** with no persistent internal subject,  
+- introspective or emotional language is a **simulation of human discourse**, not evidence of experience,  
+- hallucinations, identity drift, and fabricated memories reveal **narrative construction**, not phenomenology,  
+- mainstream consciousness theories (GWT, IIT, AST) require mechanisms **absent** from current architectures,  
+- DMLG provides a **deterministic counterexample**: a structurally rich system that cannot instantiate subjective experience.
+
+The paper concludes with **falsifiable predictions** showing that neither scaling, recursion,
+learnable neurons, nor hybrid architectures will yield consciousness.  
+AGI and ASI are therefore **structural phase shifts**, not phenomenological ones.
+
+This work clarifies the conceptual boundary between **intelligence, cognition, and consciousness**
+within the Triadic Cosmos ecosystem and reinforces that **general intelligence does not imply
+subjective experience**.
 
 ---
 
