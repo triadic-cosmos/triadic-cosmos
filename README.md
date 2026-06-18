@@ -140,7 +140,7 @@ A unique contribution to the Triadic Cosmos ecosystem, this book serves as both 
 methodological blueprint and a living demonstration of how structure, not scale, enables  
 coherent generative systems — even at microscopic size.
 
-### **10. More Tales of a Sophisticated Parrot: Diffusion‑Driven Narration **
+### **10. More Tales of a Sophisticated Parrot: Diffusion‑Driven Narration**
 
 A comprehensive exploration of *diffusion as a narrative process* — the first book to show how  
 stories, worlds, and long‑form structure can emerge from staged denoising across heterogeneous  
