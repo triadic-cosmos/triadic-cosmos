@@ -140,6 +140,36 @@ A unique contribution to the Triadic Cosmos ecosystem, this book serves as both 
 methodological blueprint and a living demonstration of how structure, not scale, enables  
 coherent generative systems — even at microscopic size.
 
+### **10. More Tales of a Sophisticated Parrot: Diffusion‑Driven Narration **
+
+A comprehensive exploration of *diffusion as a narrative process* — the first book to show how  
+stories, worlds, and long‑form structure can emerge from staged denoising across heterogeneous  
+cognitive modules.
+
+This volume introduces **Diffusion‑Driven Narration**, a generative methodology in which  
+narrative structure is not produced in a single pass but *diffuses* through a multi‑agent  
+architecture: DMLG micro‑models (geometry + recursion), mid‑scale transformers (local  
+semantics), and large LLMs (global informational expansion). Each stage performs a distinct  
+IEGR transformation, gradually collapsing narrative noise into stable attractors.
+
+The book demonstrates six generative modalities — Sampling, Remaster, Blending, Blending +  
+Remaster, Narration, and Narration + Director’s Cut — and shows how each corresponds to a  
+different denoising phase in the diffusion trajectory. Across these stages, entire narrative  
+worlds crystallize from latent structure: mechanical (Time Machine), cosmic‑emotional  
+(Honeymoon in Space), cognitive‑topological (Architectural Shift), and surreal blended  
+universes.
+
+Beyond the demonstrations, the book provides the first full theoretical synthesis of  
+diffusion‑driven narrative generation, situating it within the IEGR taxonomy and showing how  
+hybrid modular systems can exhibit pre‑AGI behavior: world absorption, recursive planning,  
+long‑horizon coherence, and autonomous continuation.
+
+A successor to *Tales of a Sophisticated Parrot*, this volume expands the methodology into a  
+general framework for **synthetic narratology** — a discipline where worlds are not written but  
+*grown* through structured transformations of latent narrative geometry.  
+A foundational contribution to the Triadic Cosmos ecosystem, revealing how structure, not  
+scale, enables coherent generative systems.
+
 ---
 
 ## 📄 Scientific Papers
