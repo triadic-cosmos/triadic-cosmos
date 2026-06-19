@@ -387,6 +387,36 @@ subjective experience**.
 
 ---
 
+### **15. Diffusion‑Driven Narration — Tales of a Sophisticated Parrot**  
+This paper introduces **Diffusion‑Driven Narration**, a hybrid generative methodology in which  
+narrative worlds emerge through *staged denoising across heterogeneous cognitive modules*.  
+It presents the first fully operational instantiation of the IEGR taxonomy within the Triadic  
+Cosmos ecosystem.
+
+The system combines:
+
+- a **structural generator** (DMLG) providing canonical geometry, paging, and recursive scaffolding,  
+- a **lightweight LLM layer** supplying semantic refinement, evaluative judgment, and informational expansion,  
+- a **narrator pipeline** orchestrating multi‑stage diffusion, recursive refinement, world absorption,  
+  and long‑horizon narrative planning.
+
+The resulting architecture behaves as a **domain‑bound AGI module**:  
+IEGR‑complete but not yet IEGR‑scaled, capable of autonomous long‑form generation,  
+recursive self‑correction, and stable world modelling.
+
+Beyond its generative contribution, the paper provides a structural insight into AGI:  
+LLMs already supply the **informational (I)** and **energetic (E)** roles of cognition,  
+while the **geometric (G)** and **recursive (R)** substrate must be engineered explicitly.  
+Diffusion‑Driven Narration therefore demonstrates how hybrid IEGR systems can exhibit  
+pre‑AGI behaviour using only existing models, and identifies the **geometric‑recursive frontier**  
+as the key remaining challenge for general intelligence.
+
+This work completes the conceptual arc from theory → architecture → implementation,  
+and serves as a concrete example of **modular AGI**, **hybrid intelligence**,  
+and the **sophisticated parrot regime** in practice.
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
