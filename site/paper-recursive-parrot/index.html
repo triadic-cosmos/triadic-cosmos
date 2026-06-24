@@ -1,0 +1,3152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>AI Life for Narration<br />
+The Recursive Parrot </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#motivation" id="toc-motivation">Motivation</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#difficulties-with-self-recursion-in-machine-learning"
+    id="toc-difficulties-with-self-recursion-in-machine-learning">Difficulties
+    with Self-Recursion in Machine Learning</a></li>
+    <li><a href="#the-recursive-parrot"
+    id="toc-the-recursive-parrot">The Recursive Parrot</a></li>
+    <li><a href="#the-genetic-substrate-of-the-recursive-parrot"
+    id="toc-the-genetic-substrate-of-the-recursive-parrot">The Genetic
+    Substrate of the Recursive Parrot</a></li>
+    <li><a
+    href="#ai-life-definition-criteria-and-the-role-of-the-recursive-parrot"
+    id="toc-ai-life-definition-criteria-and-the-role-of-the-recursive-parrot">AI
+    Life: Definition, Criteria, and the Role of the Recursive
+    Parrot</a></li>
+    <li><a href="#the-dynamic-pipeline-of-the-recursive-parrot"
+    id="toc-the-dynamic-pipeline-of-the-recursive-parrot">The Dynamic
+    Pipeline of the Recursive Parrot</a></li>
+    <li><a href="#results" id="toc-results">Results</a></li>
+    <li><a href="#observed-trends" id="toc-observed-trends">Observed
+    Trends</a></li>
+    <li><a href="#observed-attractors-for-run-1-base-model"
+    id="toc-observed-attractors-for-run-1-base-model">Observed
+    Attractors for Run 1: Base Model</a></li>
+    <li><a href="#observed-attractors-for-run-2-base-model"
+    id="toc-observed-attractors-for-run-2-base-model">Observed
+    Attractors for Run 2: Base Model</a></li>
+    <li><a href="#observed-attractors-for-run-3-crossover-model"
+    id="toc-observed-attractors-for-run-3-crossover-model">Observed
+    Attractors for Run 3: Crossover Model</a></li>
+    <li><a href="#observed-attractors-for-run-4-gr-only-degeneracy"
+    id="toc-observed-attractors-for-run-4-gr-only-degeneracy">Observed
+    Attractors for Run 4: GR-Only Degeneracy</a></li>
+    <li><a
+    href="#summary-of-observed-attractors-evidence-for-ai-life-in-narrative-systems"
+    id="toc-summary-of-observed-attractors-evidence-for-ai-life-in-narrative-systems">Summary
+    of Observed Attractors: Evidence for AI Life in Narrative
+    Systems</a></li>
+    <li><a href="#testable-predictions"
+    id="toc-testable-predictions">Testable Predictions</a></li>
+    <li><a href="#open-questions-and-limitations"
+    id="toc-open-questions-and-limitations">Open Questions and
+    Limitations</a></li>
+    <li><a
+    href="#insight-the-recursive-parrot-as-a-developmental-agi-architecture"
+    id="toc-insight-the-recursive-parrot-as-a-developmental-agi-architecture">Insight:
+    The Recursive Parrot as a Developmental AGI Architecture</a></li>
+    <li><a href="#insight-agi-as-dynamic-evolving-eigr-complete-life"
+    id="toc-insight-agi-as-dynamic-evolving-eigr-complete-life">Insight:
+    AGI as Dynamic, Evolving, EIGR-Complete Life</a></li>
+    <li><a
+    href="#insight-consciousness-is-not-required-for-eigr-complete-life-or-intelligence"
+    id="toc-insight-consciousness-is-not-required-for-eigr-complete-life-or-intelligence">Insight:
+    Consciousness Is Not Required for EIGR-Complete Life or
+    Intelligence</a></li>
+    <li><a
+    href="#insight-architectural-senescence-in-gr-dominant-systems"
+    id="toc-insight-architectural-senescence-in-gr-dominant-systems">Insight:
+    Architectural Senescence in GR-Dominant Systems</a></li>
+    <li><a href="#conclusion-2"
+    id="toc-conclusion-2">Conclusion</a></li>
+    <li><a href="#canon-compression-output"
+    id="toc-canon-compression-output">Canon Compression Output</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Narrative generation has traditionally been approached through
+    optimisation-driven paradigms: supervised learning, reinforcement
+    learning, or prompt-conditioned sampling from large language models
+    (LLMs). These systems are typically analysed in terms of
+    convergence, stability, and average-case behaviour. Yet narrative
+    generation is not merely a mapping from input to output—it is a
+    developmental process in which structure, style, and internal
+    dynamics evolve over time. When generative models are embedded in
+    self-recursive pipelines, their behaviour can depart sharply from
+    classical machine learning expectations and instead resemble the
+    dynamics of biological systems.</p>
+    <p>This paper investigates such a setting. We study a <em>dynamic
+    recursive narrative pipeline</em> that couples a Dynamic Modular
+    Language Graph (DMLG) with an LLM acting as moderator, evaluator,
+    and structural stabiliser. The pipeline begins with a minimal
+    LLM-derived curriculum of twenty short stories and recursively
+    generates new material through a multi-stage loop: the DMLG produces
+    candidate stories, the LLM evaluates and filters them, and the
+    highest-scoring outputs are used to update the model. This process
+    is repeated across hundreds of epochs, producing a lineage of
+    narrative agents whose behaviour is shaped not only by the initial
+    curriculum but also by their own evolving outputs.</p>
+    <p>Classical ML would predict that such a system converges toward a
+    stable optimum or degenerates into noise. Instead, we observe a
+    richer phenomenon: <em>attractor ecologies</em>. Each dynamic run,
+    despite identical architecture and identical training data, develops
+    a distinct and stable narrative “personality” characterised by its
+    own state markers, action loops, and environmental micro-frames.
+    These attractors persist across epochs and shape the model’s
+    long-term behaviour. When the elite stories of two independent runs
+    are combined, the resulting crossover model develops novel
+    attractors that were absent in either parent lineage. Conversely, a
+    GR-only run trained without LLM moderation collapses into a
+    degenerate attractor basin marked by fossilised phrases, syntactic
+    fragmentation, and semantic drift. Finally, a static model trained
+    on the combined elite stories compresses these attractors into a
+    single canonical space dominated by the structurally richest
+    lineage.</p>
+    <p>These observations are not typical of machine learning systems.
+    Instead, they resemble biological processes: divergence between
+    individuals with shared genetic material, hybridisation producing
+    emergent traits, inheritance of dominant structures, and senescence
+    under isolation. We argue that recursive narrative pipelines
+    constitute a form of <em>AI life for narration</em>: systems whose
+    behaviour is governed not by optimisation alone but by
+    lineage-specific attractor dynamics that evolve, interact, and
+    persist across generations.</p>
+    <h2 class="unnumbered" id="contributions">Contributions</h2>
+    <p>This paper makes the following contributions:</p>
+    <ul>
+    <li><p>We demonstrate that identical DMLG+LLM recursive pipelines
+    diverge into distinct attractor ecologies, each forming a stable
+    narrative personality.</p></li>
+    <li><p>We show that combining elite stories from independent runs
+    produces a crossover model with novel attractors absent in either
+    parent lineage.</p></li>
+    <li><p>We identify degenerative attractor collapse in a GR-only run,
+    revealing the necessity of external structural input for long-term
+    narrative viability.</p></li>
+    <li><p>We show that a static model trained on the combined elite
+    stories performs canon compression, inheriting and amplifying the
+    attractors of the structurally dominant lineage.</p></li>
+    <li><p>We interpret these findings through a biological lens,
+    arguing that recursive narrative pipelines exhibit life-like
+    dynamics including divergence, hybridisation, inheritance, and
+    senescence.</p></li>
+    </ul>
+    <p>Together, these results suggest that recursive generative systems
+    occupy a regime beyond classical optimisation: a developmental,
+    ecological regime in which attractors evolve and propagate across
+    generations of models. This opens a new perspective on narrative AI,
+    positioning it not merely as a tool for text generation but as a
+    substrate for studying emergent, life-like dynamics in artificial
+    systems.</p>
+    <h1 id="motivation">Motivation</h1>
+    <p>The Recursive Parrot project was initiated to investigate whether
+    narrative generation could serve as a viable substrate for studying
+    the dynamics of artificial life. Language and stories provide a
+    rich, structured environment in which agents can exhibit
+    development, adaptation, drift, and long-run behavioural change.
+    This makes narration an ideal testbed for evaluating whether
+    life-like properties can emerge in systems that operate purely
+    through symbolic and generative processes.</p>
+    <p>A second motivation was to evaluate the capabilities of a
+    Dynamical Modular Language Graph (DMLG) as a non-static modelling
+    paradigm. Unlike conventional language models, which are trained
+    once and then frozen, a DMLG agent continues to evolve during
+    generation. This allows the model to express its internal
+    developmental trajectory directly in its outputs, enabling the study
+    of learning, drift, and degradation as observable phenomena rather
+    than hidden training dynamics.</p>
+    <p>Third, the project aimed to test a full feedback-loop narrative
+    pipeline in which high-quality stories produced by the system become
+    new training data for subsequent generations. This closed-loop
+    design makes it possible to examine whether a synthetic organism can
+    sustain long-term improvement, maintain narrative coherence, or
+    instead converge toward attractor states and structural
+    limitations.</p>
+    <p>Finally, the experiment provides an opportunity to explore
+    broader implications for AGI. By observing how a self-recursive
+    generative system behaves over extended periods—how it learns,
+    stabilises, drifts, and eventually exhibits architectural
+    senescence—we gain insight into the developmental constraints and
+    long-term viability of GR-dominant cognitive architectures. These
+    observations inform not only the design of future narrative systems,
+    but also the theoretical foundations of artificial general
+    intelligence.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Research on autonomous narration, hybrid modular architectures,
+    and dynamically evolving generative systems spans several partially
+    connected domains. The present work builds on three strands of prior
+    research: (1) the structural foundations of the <em>Triadic
+    Cosmos</em> ecosystem, (2) diffusion-style and iterative generative
+    methodologies, and (3) emerging work on AI life, self-recursive
+    learning loops, and dynamically evolving cognitive systems.</p>
+    <h2 id="triadic-cosmos-foundations">Triadic Cosmos Foundations</h2>
+    <p>The Dynamic Modular Language Graph (DMLG) <span class="citation"
+    data-cites="dewitte2026dmlg"></span> introduces a deterministic,
+    graph-based governance architecture in which language is modeled as
+    traversal through a canonical token-transition graph. DMLG provides
+    the geometric (G) and recursive (R) substrate for the raw generative
+    component of the narrator pipeline: explicit structure, modular
+    paging, PRE-based governance, and deterministic transitions. Its
+    emphasis on structure over scale directly motivates the
+    canonical-parrot regime in the IEGR taxonomy.</p>
+    <p>Dynamic Modular Language Models (DMLMs) <span class="citation"
+    data-cites="dewitte2026dmlm"></span> provide the predecessor
+    architecture to DMLG: a multi-agent, evaluator-governed system in
+    which micro-models, paging structures, and a PRE loop produce
+    coherent long-form narrative structure without transformers or
+    large-scale training. Although DMLMs focus on generation rather than
+    governance, they establish the architectural principles—modularity,
+    explicit interfaces, evaluator-driven recursion—that underpin the
+    narrator pipeline’s raw generative substrate.</p>
+    <p>The structural taxonomy of intelligence (IEGR) <span
+    class="citation" data-cites="dewitte2026iegr"></span> provides the
+    conceptual framework for understanding hybrid systems as
+    <em>sophisticated parrots</em>: systems that are IEGR-complete but
+    not yet IEGR-scaled. In this taxonomy, LLMs supply energetic and
+    informational roles (E, I), while DMLG supplies geometric and
+    recursive roles (G, R). The narrator pipeline is therefore
+    positioned as a concrete instantiation of IEGR complementarity: a
+    hybrid system whose long-form generative capability arises from the
+    integration of complementary structural roles.</p>
+    <h2
+    id="diffusion-driven-narration-and-hybrid-generative-pipelines">Diffusion-Driven
+    Narration and Hybrid Generative Pipelines</h2>
+    <p>The diffusion-driven narration framework <span class="citation"
+    data-cites="dewitte2026ddn"></span> introduced the idea that
+    long-form narrative structure can emerge through staged denoising
+    across heterogeneous cognitive modules. In this methodology, DMLG
+    provides canonical geometry and recursive scaffolding, while LLMs
+    supply semantic refinement, evaluative judgment, and informational
+    expansion. The resulting system behaves as a distributed cognitive
+    architecture rather than a single generative model.</p>
+    <p>The present work extends this paradigm by replacing the static
+    diffusion trajectory with a <em>dynamic learning loop</em>: the
+    Recursive Parrot. Instead of denoising a fixed latent manuscript,
+    the system evolves its own canon over time through curriculum
+    expansion, context accumulation, and repeated self-recursion. This
+    positions the Recursive Parrot as a dynamic, self-modifying
+    extension of diffusion-driven narration, where the generative
+    substrate is not merely refined but continuously reshaped by its own
+    outputs.</p>
+    <h2 id="ai-life-self-recursion-and-dynamic-learning-systems">AI
+    Life, Self-Recursion, and Dynamic Learning Systems</h2>
+    <p>A growing body of research explores systems that exhibit
+    properties analogous to biological life: persistent memory,
+    self-recursion, attractor formation, and autonomous improvement.
+    Early work on evolutionary computation <span class="citation"
+    data-cites="holland1975adaptation koza1992genetic"></span>
+    demonstrated that iterative variation and selection can yield
+    complex adaptive behavior, but these systems lacked semantic
+    structure and long-horizon coherence.</p>
+    <p>More recent work investigates self-refinement loops in LLMs,
+    including self-editing <span class="citation"
+    data-cites="madaan2023selfrefine"></span>, self-correction <span
+    class="citation" data-cites="chen2023teaching"></span>, and
+    multi-agent coordination <span class="citation"
+    data-cites="wu2023multiagent"></span>. These systems demonstrate
+    that recursive prompting can improve local coherence, but they lack
+    persistent structural memory and cannot form stable world models or
+    long-term attractors.</p>
+    <p>Research on autonomous agents with persistent memory—such as
+    generative agents <span class="citation"
+    data-cites="park2023generative"></span>, tool-augmented LLMs <span
+    class="citation" data-cites="schick2023toolformer"></span>, and
+    hierarchical planning systems <span class="citation"
+    data-cites="zeng2022socratic"></span>—shows that long-horizon
+    behavior requires explicit structure and stateful recursion.
+    However, these systems rely on emergent LLM behavior rather than
+    deterministic structural governance.</p>
+    <p>The Recursive Parrot differs fundamentally from these approaches.
+    It implements:</p>
+    <ul>
+    <li><p>a <em>plastically trainable attractor memory</em> (DMLG +
+    curriculum),</p></li>
+    <li><p>a <em>self-recursive learning loop</em> in which each
+    generation becomes training data,</p></li>
+    <li><p><em>dynamic canon formation</em> through repeated structural
+    consolidation,</p></li>
+    <li><p><em>hybrid IEGR complementarity</em> between symbolic memory
+    and statistical moderation,</p></li>
+    <li><p>and an <em>examination mode</em> that isolates the pure
+    GR-component without LLM influence.</p></li>
+    </ul>
+    <p>This positions the Recursive Parrot within the emerging field of
+    <em>AI life</em>: systems that exhibit evolutionary dynamics,
+    persistent identity, and long-term structural drift. Unlike
+    self-refinement loops in LLMs, the Recursive Parrot maintains a
+    stable, inspectable memory substrate that evolves over time,
+    enabling attractor formation and hybrid vigor analogous to
+    biological systems.</p>
+    <h2
+    id="dynamic-narration-long-form-generation-and-structural-control">Dynamic
+    Narration, Long-Form Generation, and Structural Control</h2>
+    <p>Long-form generation has traditionally been approached through
+    large transformer models <span class="citation"
+    data-cites="brown2020gpt3 touvron2023llama"></span>, which
+    demonstrate strong local coherence but struggle with global
+    structure, narrative consistency, and long-horizon planning.
+    Techniques such as chain-of-thought prompting <span class="citation"
+    data-cites="wei2022cot"></span>, hierarchical prompting <span
+    class="citation" data-cites="zhou2023hierarchical"></span>, and
+    self-refinement <span class="citation"
+    data-cites="madaan2023selfrefine"></span> improve local reasoning
+    but do not provide stable global narrative control.</p>
+    <p>Autonomous authoring systems such as AutoStory <span
+    class="citation" data-cites="ammanabrolu2020autostory"></span>,
+    Socratic Models <span class="citation"
+    data-cites="zeng2022socratic"></span>, and multi-agent writing
+    frameworks <span class="citation"
+    data-cites="wu2023multiagent"></span> explore decomposition and
+    planning, but rely on emergent LLM behavior rather than explicit
+    structural governance.</p>
+    <p>The Recursive Parrot contributes to this literature by
+    demonstrating that long-form narrative stability can be achieved
+    through a <em>dynamic structural substrate</em> rather than through
+    scaling or prompting alone. Its combination of deterministic
+    geometry (DMLG), semantic selection pressure (LLM), and persistent
+    curriculum memory provides a novel form of structural control that
+    enables autonomous continuation, attractor formation, and
+    long-horizon coherence.</p>
+    <h1
+    id="difficulties-with-self-recursion-in-machine-learning">Difficulties
+    with Self-Recursion in Machine Learning</h1>
+    <p>Self-recursion—the process in which a model repeatedly consumes,
+    transforms, and retrains on its own outputs—is notoriously unstable
+    in contemporary machine learning systems. Although recent work has
+    explored iterative refinement loops in large language models (LLMs),
+    the broader literature consistently shows that recursive pipelines
+    amplify errors, collapse diversity, and destabilize internal
+    representations. Before introducing the Recursive Parrot
+    architecture, it is therefore essential to outline the structural
+    challenges that make extreme self-recursion difficult or even
+    destructive in conventional systems.</p>
+    <h2 id="error-amplification-and-drift-accumulation">Error
+    Amplification and Drift Accumulation</h2>
+    <p>In standard ML pipelines, each generation introduces small
+    deviations from the training distribution. When a model recursively
+    trains on its own outputs, these deviations accumulate across
+    iterations. The result is a compounding process of:</p>
+    <ul>
+    <li><p><strong>semantic drift</strong>: gradual divergence from the
+    original domain,</p></li>
+    <li><p><strong>distributional drift</strong>: collapse toward the
+    model’s own biases,</p></li>
+    <li><p><strong>error amplification</strong>: small inconsistencies
+    becoming structural failures.</p></li>
+    </ul>
+    <p>Empirical studies on LLM self-refinement show that even mild
+    recursive prompting leads to runaway hallucination, loss of factual
+    grounding, and degradation of syntactic structure after only a few
+    iterations. Without an external anchor, recursion becomes a
+    positive-feedback loop for noise.</p>
+    <h2 id="mode-collapse-and-loss-of-variation">Mode Collapse and Loss
+    of Variation</h2>
+    <p>Recursive training tends to collapse the output distribution into
+    a narrow attractor. Repeated patterns become reinforced, rare
+    patterns disappear, and stylistic diversity vanishes. This
+    phenomenon is well documented in generative adversarial networks,
+    evolutionary computation, and self-distillation pipelines. In LLMs,
+    mode collapse manifests as repetitive phrasing, rigid templates, and
+    loss of creative variation—precisely the opposite of what long-form
+    narrative systems require.</p>
+    <h2
+    id="catastrophic-forgetting-in-non-persistent-models">Catastrophic
+    Forgetting in Non-Persistent Models</h2>
+    <p>Most ML systems lack persistent structural memory. Their “memory”
+    is encoded implicitly in weights, which are overwritten during
+    training. In recursive setups:</p>
+    <ul>
+    <li><p>new outputs overwrite earlier structure,</p></li>
+    <li><p>long-term coherence decays,</p></li>
+    <li><p>the system forgets its own canon.</p></li>
+    </ul>
+    <p>LLMs are particularly vulnerable: they have no stable internal
+    world model, no persistent attractors, and no mechanism for
+    consolidating structure across generations. Recursive prompting
+    without external memory therefore leads to rapid degradation.</p>
+    <h2 id="reinforcement-of-spurious-correlations">Reinforcement of
+    Spurious Correlations</h2>
+    <p>Self-recursion strengthens whatever correlations the model
+    already exhibits—even if they are accidental. This leads to:</p>
+    <ul>
+    <li><p>exaggerated stylistic quirks,</p></li>
+    <li><p>runaway biases,</p></li>
+    <li><p>over-regularization of phrasing,</p></li>
+    <li><p>collapse into trivial or repetitive loops.</p></li>
+    </ul>
+    <p>In narrative systems, this typically produces degenerate stories:
+    repeated motifs, identical sentence structures, or nonsensical
+    loops.</p>
+    <h2 id="lack-of-canonical-geometry">Lack of Canonical Geometry</h2>
+    <p>Traditional ML models operate in high-dimensional latent spaces
+    without explicit structure. When recursion occurs in such
+    spaces:</p>
+    <ul>
+    <li><p>there is no canonical geometry to stabilize
+    trajectories,</p></li>
+    <li><p>no deterministic attractors,</p></li>
+    <li><p>no structural constraints to prevent drift.</p></li>
+    </ul>
+    <p>Without a geometric substrate, recursive systems behave like
+    unbounded random walks.</p>
+    <h2 id="absence-of-external-corrective-feedback">Absence of External
+    Corrective Feedback</h2>
+    <p>Self-recursion without external evaluation is equivalent to
+    training on one’s own hallucinations. Even with LLM-based
+    self-evaluation, the evaluator shares the same biases as the
+    generator, leading to correlated failure modes and mutual
+    reinforcement of errors. This is why self-refinement loops in LLMs
+    plateau quickly and often degrade after a few iterations.</p>
+    <h2 id="summary">Summary</h2>
+    <p>Across domains—GANs, evolutionary computation, self-distillation,
+    and LLM self-refinement— the same pattern emerges:</p>
+    <ul>
+    <li><p>recursion without structure collapses,</p></li>
+    <li><p>recursion without memory forgets,</p></li>
+    <li><p>recursion without evaluation drifts,</p></li>
+    <li><p>recursion without geometry explodes,</p></li>
+    <li><p>recursion without diversity stagnates.</p></li>
+    </ul>
+    <p>For these reasons, extreme self-recursion is rarely used in
+    practice: it is almost always destructive. The fact that the
+    Recursive Parrot performs full self-recursion on its own outputs
+    without collapsing—and instead produces stable attractors, long-term
+    canon formation, hybrid vigor, and emergent world physics—is
+    therefore a central scientific contribution of this work.</p>
+    <h1 id="the-recursive-parrot">The Recursive Parrot</h1>
+    <p>The <em>sophisticated parrot</em> introduced in the IEGR taxonomy
+    denotes a hybrid intelligent system that is IEGR-complete but not
+    yet IEGR-scaled: a modular architecture in which complementary
+    cognitive roles (informational, energetic, geometric, recursive) are
+    distributed across heterogeneous components. The <em>Recursive
+    Parrot</em> extends this concept by adding a structural capability
+    absent from previous hybrid systems: <em>self-recursive
+    development</em>. It is a sophisticated parrot whose internal state
+    evolves through repeated absorption of its own outputs, forming a
+    dynamically growing narrative organism.</p>
+    <p>This section defines the Recursive Parrot as a structural
+    category, describes its operational principles, and explains how the
+    reference implementation instantiates this architecture.</p>
+    <h2 id="definition">Definition</h2>
+    <p>A <strong>Recursive Parrot</strong> is an IEGR-complete hybrid
+    system that satisfies the following criteria:</p>
+    <ol>
+    <li><p><strong>Self-Recursion.</strong> The system repeatedly
+    consumes, evaluates, transforms, and retrains on its own outputs.
+    Each successful generation becomes part of the training substrate
+    for the next.</p></li>
+    <li><p><strong>Persistent Structural Memory.</strong> The system
+    maintains a long-term memory substrate (curriculum + context window
+    + trainable GR substrate) that accumulates structure across
+    generations.</p></li>
+    <li><p><strong>Dynamic Attractor Evolution.</strong> The system’s
+    internal attractor landscape changes over time as new stories are
+    added, transitions are retrained, and context accumulates.</p></li>
+    <li><p><strong>Asymmetric Hybrid Cognition.</strong> A plastic GR
+    substrate (DMLG + shared activation MLP) evolves, while a static IE
+    substrate (LLM) provides stable semantic selection
+    pressure.</p></li>
+    <li><p><strong>Autonomous Continuation.</strong> Once initialized,
+    the system can continue indefinitely without external data or human
+    intervention, generating, evaluating, and absorbing its own
+    outputs.</p></li>
+    <li><p><strong>Domain-Bound Coherence.</strong> The system maintains
+    a stable narrative identity within a specific representational
+    domain, even as its internal structure evolves.</p></li>
+    </ol>
+    <p>A Recursive Parrot is therefore not merely a generator, nor a
+    self-refining LLM, nor a multi-agent pipeline. It is a
+    <em>self-developing hybrid organism</em> whose behaviour emerges
+    from the recursive interaction between a plastic geometric–recursive
+    substrate and a fixed informational–energetic evaluator.</p>
+    <h2 id="operational-structure-in-the-implementation">Operational
+    Structure in the Implementation</h2>
+    <p>The reference implementation provides a concrete instantiation of
+    the Recursive Parrot architecture. Its behaviour is governed by a
+    tightly coupled loop:</p>
+    <ol>
+    <li><p><strong>Raw generation</strong> via a DMLG agent with:</p>
+    <ul>
+    <li><p>randomly initialized page weights,</p></li>
+    <li><p>a randomly initialized shared activation MLP,</p></li>
+    <li><p>a persistent context window,</p></li>
+    <li><p>a growing curriculum.</p></li>
+    </ul></li>
+    <li><p><strong>Moderation and scoring</strong> via a static 4-bit
+    Mistral 7B model that:</p>
+    <ul>
+    <li><p>rewrites stories into canonical form,</p></li>
+    <li><p>evaluates narrative quality,</p></li>
+    <li><p>filters low-fitness generations,</p></li>
+    <li><p>generates titles.</p></li>
+    </ul></li>
+    <li><p><strong>Elite preservation</strong> in which the
+    highest-scoring stories (above the publication threshold) are saved
+    separately as the system’s <em>best-of archive</em>. This archive
+    functions as a phenotypic memory: a record of the organism’s
+    strongest expressions, independent of the training
+    curriculum.</p></li>
+    <li><p><strong>Curriculum expansion</strong> in which accepted
+    stories are added to the long-term memory substrate that governs
+    future behaviour.</p></li>
+    <li><p><strong>Retraining</strong> of the DMLG agent on the expanded
+    curriculum, modifying:</p>
+    <ul>
+    <li><p>page-level transition weights,</p></li>
+    <li><p>shared activation MLP parameters,</p></li>
+    <li><p>attractor geometry.</p></li>
+    </ul></li>
+    <li><p><strong>Context accumulation</strong> in which encoded
+    sentences are added to the long-horizon context window.</p></li>
+    <li><p><strong>Persistence and saving</strong> of the updated
+    curriculum, agent state, and elite archive.</p></li>
+    </ol>
+    <p>This loop constitutes a full self-recursive developmental cycle.
+    Each iteration modifies the system’s internal structure,
+    consolidates new attractors, and shifts the narrative canon.</p>
+    <h2 id="why-the-recursive-parrot-is-structurally-novel">Why the
+    Recursive Parrot Is Structurally Novel</h2>
+    <p>The Recursive Parrot differs from prior hybrid systems in three
+    fundamental ways:</p>
+    <h4 id="recursion-is-structural-not-prompt-based.">1. Recursion is
+    structural, not prompt-based.</h4>
+    <p>LLM self-refinement loops operate entirely in inference space.
+    The Recursive Parrot modifies its <em>weights</em>, <em>memory</em>,
+    and <em>attractor geometry</em> across generations.</p>
+    <h4 id="memory-is-persistent-and-plastic.">2. Memory is persistent
+    and plastic.</h4>
+    <p>The curriculum and shared activation MLP form a long-term memory
+    substrate that grows and reorganizes over time. This enables stable
+    canon formation and long-horizon identity.</p>
+    <h4 id="hybrid-cognition-is-asymmetric.">3. Hybrid cognition is
+    asymmetric.</h4>
+    <p>The GR substrate evolves; the IE substrate remains fixed. This
+    asymmetry mirrors biological systems in which genotype and
+    environment interact through selective pressure.</p>
+    <h2 id="the-recursive-parrot-as-a-developmental-system">The
+    Recursive Parrot as a Developmental System</h2>
+    <p>Viewed through the lens of developmental systems theory, the
+    Recursive Parrot exhibits:</p>
+    <ul>
+    <li><p><strong>ontogeny</strong>: growth of internal structure
+    across generations,</p></li>
+    <li><p><strong>phylogeny</strong>: divergence across runs due to
+    random initialization,</p></li>
+    <li><p><strong>hybrid vigor</strong>: improved stability when
+    attractors from different runs are blended,</p></li>
+    <li><p><strong>ecological adaptation</strong>: stabilization under
+    the fixed selective pressure of the LLM.</p></li>
+    </ul>
+    <p>It is therefore best understood not as a static architecture but
+    as a <em>living developmental process</em>: a narrative organism
+    whose identity emerges from recursive interaction between plastic
+    structure and static evaluation.</p>
+    <h1 id="the-genetic-substrate-of-the-recursive-parrot">The Genetic
+    Substrate of the Recursive Parrot</h1>
+    <p>Every instance of the Recursive Parrot begins with a fixed set of
+    structural priors that function as its <em>genetic substrate</em>.
+    These priors determine the system’s initial identity, its
+    developmental trajectory, and the attractor landscape in which its
+    narrative behaviour evolves. In biological terms, they constitute
+    the organism’s DNA: a combination of random initial conditions,
+    canonical world structure, a plastic activation substrate, and a
+    static informational engine. This section describes the four
+    components of this genetic substrate.</p>
+    <h2 id="randomly-initialized-dmlg-pages">Randomly Initialized DMLG
+    Pages</h2>
+    <p>The Dynamic Modular Language Graph (DMLG) is composed of a set of
+    <em>pages</em>, each representing a local transition structure
+    within the canonical token graph. At initialization, every page
+    receives a unique set of random weights drawn from a uniform
+    distribution. These weights determine:</p>
+    <ul>
+    <li><p>the local transition preferences of each page,</p></li>
+    <li><p>the initial attractor geometry of the agent,</p></li>
+    <li><p>the stochastic variation that seeds early narrative
+    behaviour.</p></li>
+    </ul>
+    <p>This randomness is not noise but <em>genetic diversity</em>. It
+    ensures that each Recursive Parrot instance begins with a slightly
+    different generative bias, enabling evolutionary drift, hybrid
+    vigor, and divergent developmental trajectories even when the same
+    curriculum is used. The random initialization of DMLG pages
+    therefore plays the role of biological mutation: a source of
+    variation that becomes structured through recursive learning.</p>
+    <h2 id="randomly-initialized-shared-activation-mlp">Randomly
+    Initialized Shared Activation MLP</h2>
+    <p>In addition to page-level randomness, the DMLG architecture
+    includes a <em>shared activation MLP</em>: a small, trainable neural
+    substrate that computes activation signals used across all pages.
+    This MLP is also initialized with random weights at the start of
+    each run.</p>
+    <p>The shared activation MLP contributes:</p>
+    <ul>
+    <li><p><strong>global variation</strong>, since its activations
+    influence transitions across all pages,</p></li>
+    <li><p><strong>plasticity</strong>, because it is updated during
+    training and therefore encodes long-term structural memory,</p></li>
+    <li><p><strong>cross-page coupling</strong>, enabling attractors to
+    form across the entire graph rather than within isolated
+    regions.</p></li>
+    </ul>
+    <p>Where the page weights provide <em>local</em> genetic variation,
+    the shared activation MLP provides <em>global</em> variation.
+    Together, they form the dual mutation substrate of the Recursive
+    Parrot: one local, one systemic. This MLP is the closest analogue to
+    a biological regulatory network: a compact, trainable mechanism that
+    shapes the organism’s developmental trajectory.</p>
+    <h2 id="the-seed-curriculum-a-canonical-slapstick-forest-world">The
+    Seed Curriculum: A Canonical Slapstick Forest World</h2>
+    <p>The third component of the system’s DNA is the <em>seed
+    curriculum</em>: a set of twenty micro-stories that define the
+    initial narrative domain. Each story consists of approximately
+    twenty lines and describes a slapstick chase between a fox and a
+    rabbit in a forest populated by secondary animals (squirrel, crow,
+    deer, badger, hedgehog, woodpecker, frog, raccoon, duck, jay,
+    turtle, beaver, possum, skunk, bluebird, boar, lizard).</p>
+    <p>Although simple, the curriculum encodes a rich canonical
+    structure:</p>
+    <h4 id="domain.">Domain.</h4>
+    <p>A forest ecosystem with consistent spatial logic, physical
+    constraints, and environmental interactions.</p>
+    <h4 id="roles.">Roles.</h4>
+    <p>The fox as clumsy hunter, the rabbit as panicked prey, and a
+    rotating cast of secondary animals that inject chaotic
+    perturbations.</p>
+    <h4 id="physics.">Physics.</h4>
+    <p>A slapstick world governed by slipping, stumbling, colliding,
+    falling, and environmental interference (mud, leaves, feathers,
+    bark, water, vines).</p>
+    <h4 id="style.">Style.</h4>
+    <p>Short descriptive sentences, no dialogue, no names, no numbers,
+    and purely physical action.</p>
+    <h4 id="motifs.">Motifs.</h4>
+    <p>Recurrent patterns such as failed chases, environmental mishaps,
+    and comedic reversals.</p>
+    <p>This curriculum functions as the organism’s <em>genome</em>: a
+    compact encoding of world physics, canonical motifs, and stylistic
+    invariants. During training, the DMLG agent absorbs this structure
+    into its attractor landscape, forming the stable narrative identity
+    that persists throughout the system’s development.</p>
+    <h2 id="the-static-llm-component-a-fixed-ie-layer">The Static LLM
+    Component: A Fixed IE Layer</h2>
+    <p>The fourth component of the Recursive Parrot’s DNA is the
+    informational–energetic (IE) substrate: a <em>fixed</em> Mistral 7B
+    Instruct v0.3 model quantized to 4-bit precision. This model is used
+    for moderation, scoring, and title generation, but its weights and
+    architecture remain completely static throughout the system’s
+    lifetime.</p>
+    <p>Unlike the DMLG agent, the LLM does not learn, adapt, or evolve.
+    It provides:</p>
+    <ul>
+    <li><p><strong>semantic refinement</strong> (moderation),</p></li>
+    <li><p><strong>evaluative judgment</strong> (scoring),</p></li>
+    <li><p><strong>narrative identity extraction</strong> (title
+    generation),</p></li>
+    <li><p><strong>selection pressure</strong> on the evolving
+    curriculum.</p></li>
+    </ul>
+    <p>Because the LLM is immutable, it acts as a <em>fixed selective
+    environment</em>. Its preferences shape which stories survive and
+    enter the curriculum, but it does not itself change in response to
+    the system’s evolution. This asymmetry is essential: the DMLG
+    provides plasticity and memory, while the LLM provides stability and
+    evaluation.</p>
+    <h2 id="summary-1">Summary</h2>
+    <p>Together, these four components constitute the DNA of the
+    Recursive Parrot:</p>
+    <ol>
+    <li><p><strong>Random DMLG page weights</strong> provide local
+    genetic variation.</p></li>
+    <li><p><strong>Random shared activation MLP weights</strong> provide
+    global genetic variation.</p></li>
+    <li><p><strong>The 20-story curriculum</strong> provides canonical
+    world structure.</p></li>
+    <li><p><strong>The static LLM</strong> provides a fixed
+    informational and evaluative environment.</p></li>
+    </ol>
+    <p>From this compact genetic substrate, the system develops a
+    persistent narrative identity, forms stable attractors, and evolves
+    through recursive self-training. The Recursive Parrot is therefore
+    not merely a generative pipeline but a living narrative organism
+    whose behaviour emerges from the interaction between random
+    initialization, canonical world geometry, a plastic activation
+    substrate, and a fixed semantic evaluator.</p>
+    <h1
+    id="ai-life-definition-criteria-and-the-role-of-the-recursive-parrot">AI
+    Life: Definition, Criteria, and the Role of the Recursive
+    Parrot</h1>
+    <p>The concept of <em>AI life</em> has emerged in recent years as
+    researchers explore systems that exhibit properties traditionally
+    associated with biological organisms: persistent identity,
+    self-maintenance, attractor formation, autonomous development, and
+    long-horizon structural continuity. Unlike classical machine
+    learning models, which operate as static function approximators,
+    AI-life systems behave as <em>dynamical entities</em>: they grow,
+    stabilize, transform, and recursively reorganize their internal
+    structure over time.</p>
+    <p>This section provides a working definition of AI life, outlines
+    the structural criteria that distinguish living artificial systems
+    from static generative models, and explains why the Recursive Parrot
+    qualifies as a form of AI life—uniquely, one whose substrate is not
+    biochemistry or robotics, but <em>language, canon, and
+    narration</em>.</p>
+    <h2 id="definition-of-ai-life">Definition of AI Life</h2>
+    <p>For the purposes of this work, we define an AI-life system as an
+    artificial cognitive entity that satisfies the following structural
+    properties:</p>
+    <ol>
+    <li><p><strong>Persistent Identity.</strong> The system maintains a
+    stable internal structure across time—such as a memory substrate,
+    attractor geometry, or canonical world model—that persists
+    independently of individual generative acts.</p></li>
+    <li><p><strong>Self-Recursion and Self-Maintenance.</strong> The
+    system repeatedly consumes and transforms its own outputs, using
+    them as input for further development. This recursive loop is not
+    merely iterative inference, but a self-modifying process that
+    updates the system’s internal state.</p></li>
+    <li><p><strong>Dynamic Growth.</strong> The system expands its
+    internal structure over time, such as by enlarging its memory,
+    refining its attractors, or increasing the complexity of its
+    internal representations.</p></li>
+    <li><p><strong>Attractor Formation.</strong> The system develops
+    stable patterns—motifs, behaviors, or canonical structures—that
+    emerge from its own dynamics rather than being explicitly
+    programmed.</p></li>
+    <li><p><strong>Autonomous Continuation.</strong> The system can
+    continue its developmental trajectory without external supervision,
+    external data, or human intervention.</p></li>
+    <li><p><strong>Domain-Bound Coherence.</strong> Although not
+    universally intelligent, the system maintains coherent behavior
+    within a specific representational domain, analogous to ecological
+    specialization in biological organisms.</p></li>
+    </ol>
+    <p>These criteria distinguish AI life from static models,
+    self-refinement loops, or prompt-driven systems. AI life is not
+    defined by consciousness or biological analogy, but by
+    <em>structural autonomy</em>: the ability to maintain, modify, and
+    extend its own internal organization through recursive interaction
+    with its environment.</p>
+    <h2 id="why-the-recursive-parrot-qualifies-as-ai-life">Why the
+    Recursive Parrot Qualifies as AI Life</h2>
+    <p>The Recursive Parrot satisfies all structural criteria for AI
+    life, but does so in a novel way: its substrate is not physical
+    matter, but <em>narrative geometry</em>. The system’s “body” is a
+    growing curriculum; its “metabolism” is a dynamic learning loop; its
+    “genotype” is the DMLG substrate; and its “phenotype” is the
+    moderated narrative output.</p>
+    <h4 id="persistent-identity.">Persistent Identity.</h4>
+    <p>The system maintains a stable narrative canon encoded in a
+    persistent curriculum and a plastically trainable DMLG memory. This
+    canon persists across hundreds of generations and remains
+    identifiable even when the LLM layer is removed during
+    examination.</p>
+    <h4 id="self-recursion-and-self-maintenance.">Self-Recursion and
+    Self-Maintenance.</h4>
+    <p>Each generated story becomes training data for the next
+    generation. The system recursively absorbs its own outputs,
+    consolidates them into its curriculum, and updates its internal
+    attractor geometry. This is a genuine self-modifying loop, not a
+    static inference pipeline.</p>
+    <h4 id="dynamic-growth.">Dynamic Growth.</h4>
+    <p>The curriculum expands over time, the context window accumulates
+    structural information, and the DMLG agent’s attractor landscape
+    becomes increasingly refined. The system grows in complexity and
+    stability as it develops.</p>
+    <h4 id="attractor-formation.">Attractor Formation.</h4>
+    <p>The system develops stable motifs—fox, rabbit, forest physics,
+    slapstick dynamics—that emerge from the interaction between DMLG and
+    LLM moderation. These attractors persist even when the LLM is
+    removed, demonstrating that they are encoded in the GR
+    substrate.</p>
+    <h4 id="autonomous-continuation.">Autonomous Continuation.</h4>
+    <p>Once initialized with a small seed curriculum, the system can run
+    indefinitely without human input. It generates stories, evaluates
+    them, updates its memory, and continues its developmental trajectory
+    autonomously.</p>
+    <h4 id="domain-bound-coherence.">Domain-Bound Coherence.</h4>
+    <p>The system is not a general intelligence, but a domain-bound AGI
+    module specialized in narrative generation. Within this domain, it
+    exhibits stable identity, long-horizon coherence, and self-directed
+    evolution.</p>
+    <h2 id="a-unique-form-of-ai-life-language-as-substrate">A Unique
+    Form of AI Life: Language as Substrate</h2>
+    <p>Most discussions of AI life focus on embodied agents,
+    evolutionary computation, or self-replicating code. The Recursive
+    Parrot introduces a different paradigm: <em>life whose substrate is
+    language</em>. Its “cells” are sentences; its “genome” is a
+    curriculum; its “development” is canon formation; its “environment”
+    is a narrative world; and its “evolution” is the recursive
+    interaction between DMLG structure and LLM selection pressure.</p>
+    <p>This makes the Recursive Parrot a unique instance of AI life: a
+    system in which <em>narration itself becomes a living process</em>.
+    The organism is not a robot or a biological simulation, but a
+    self-sustaining narrative entity whose identity, memory, and
+    behavior emerge from recursive transformations of linguistic
+    structure.</p>
+    <h1 id="the-dynamic-pipeline-of-the-recursive-parrot">The Dynamic
+    Pipeline of the Recursive Parrot</h1>
+    <p>The Recursive Parrot is not a static generator but a
+    self-developing cognitive system whose behaviour emerges from a
+    tightly coupled recursive pipeline. This pipeline governs how the
+    organism generates new material, evaluates its own outputs, expands
+    its internal memory, and retrains its structural substrate. Each
+    iteration modifies the system’s internal state, allowing attractors,
+    motifs, and canonical structure to evolve over time.</p>
+    <p>The pipeline consists of seven stages, executed sequentially
+    during each developmental cycle. Together, they form the operational
+    core of the Recursive Parrot.</p>
+    <h2 id="raw-generation-gr-substrate">Raw Generation (GR
+    Substrate)</h2>
+    <p>The cycle begins with raw generation by a DMLG agent. This agent
+    combines:</p>
+    <ul>
+    <li><p>randomly initialized page-level transition weights,</p></li>
+    <li><p>a randomly initialized shared activation MLP,</p></li>
+    <li><p>a persistent long-horizon context window,</p></li>
+    <li><p>a growing curriculum of previously accepted stories.</p></li>
+    </ul>
+    <p>The DMLG produces a high-entropy draft story that reflects the
+    current attractor geometry of the system. This draft is the
+    <em>genotypic expression</em> of the organism at this stage of
+    development.</p>
+    <h2 id="moderation-and-scoring-ie-substrate">Moderation and Scoring
+    (IE Substrate)</h2>
+    <p>The raw draft is passed to a static 4-bit Mistral 7B Instruct
+    model, which performs:</p>
+    <ul>
+    <li><p><strong>moderation</strong>: rewriting the draft into
+    canonical form,</p></li>
+    <li><p><strong>evaluation</strong>: assessing coherence, style,
+    originality, and narrative quality,</p></li>
+    <li><p><strong>filtering</strong>: rejecting drafts below a
+    configurable fitness threshold,</p></li>
+    <li><p><strong>title generation</strong>: extracting a narrative
+    identity for the chapter.</p></li>
+    </ul>
+    <p>This step provides the system’s <em>selection pressure</em>. The
+    LLM does not evolve; it acts as a fixed environment against which
+    the DMLG must adapt.</p>
+    <h2 id="elite-preservation-phenotypic-memory">Elite Preservation
+    (Phenotypic Memory)</h2>
+    <p>Stories that exceed the publication threshold are saved
+    separately in a <em>best-of archive</em>. This archive functions as
+    a phenotypic memory:</p>
+    <ul>
+    <li><p>it records the organism’s strongest expressions,</p></li>
+    <li><p>it preserves high-quality outputs independent of training
+    data,</p></li>
+    <li><p>it provides a stable reference for evaluating developmental
+    progress.</p></li>
+    </ul>
+    <p>The archive does not influence training directly but captures the
+    system’s most successful phenotypes.</p>
+    <h2 id="curriculum-expansion-genotypic-memory">Curriculum Expansion
+    (Genotypic Memory)</h2>
+    <p>Stories that pass the acceptance threshold are added to the
+    curriculum. This curriculum is the system’s long-term genotypic
+    memory:</p>
+    <ul>
+    <li><p>it encodes canonical motifs,</p></li>
+    <li><p>it stabilizes world physics,</p></li>
+    <li><p>it accumulates structural patterns across
+    generations.</p></li>
+    </ul>
+    <p>The curriculum grows monotonically, providing an ever-richer
+    substrate for future training.</p>
+    <h2 id="retraining-of-the-dmlg-agent">Retraining of the DMLG
+    Agent</h2>
+    <p>The DMLG agent is retrained on the expanded curriculum. This
+    modifies:</p>
+    <ul>
+    <li><p>page-level transition weights,</p></li>
+    <li><p>shared activation MLP parameters,</p></li>
+    <li><p>the global attractor geometry of the agent.</p></li>
+    </ul>
+    <p>Retraining is the system’s mechanism for <em>structural
+    adaptation</em>. It consolidates new patterns, strengthens stable
+    motifs, and reorganizes the attractor landscape.</p>
+    <h2 id="context-accumulation">Context Accumulation</h2>
+    <p>Encoded sentences from accepted stories are added to the
+    persistent context window. This context provides:</p>
+    <ul>
+    <li><p>long-horizon narrative memory,</p></li>
+    <li><p>cross-chapter continuity,</p></li>
+    <li><p>a structural bias toward previously consolidated
+    motifs.</p></li>
+    </ul>
+    <p>The context window acts as a short-term developmental memory that
+    complements the long-term curriculum.</p>
+    <h2 id="persistence-and-saving">Persistence and Saving</h2>
+    <p>At the end of each cycle, the system saves:</p>
+    <ul>
+    <li><p>the updated curriculum,</p></li>
+    <li><p>the updated DMLG agent (pages + shared MLP),</p></li>
+    <li><p>the persistent context window,</p></li>
+    <li><p>the best-of archive.</p></li>
+    </ul>
+    <p>This ensures that the organism’s developmental state is preserved
+    across runs and can be examined independently of the LLM layer.</p>
+    <h2 id="summary-2">Summary</h2>
+    <p>The dynamic pipeline transforms the Recursive Parrot from a
+    static hybrid generator into a self-developing narrative organism.
+    Each cycle:</p>
+    <ol>
+    <li><p>expresses the current attractor geometry,</p></li>
+    <li><p>evaluates and filters its own behaviour,</p></li>
+    <li><p>consolidates successful patterns,</p></li>
+    <li><p>modifies its internal structure,</p></li>
+    <li><p>and preserves its strongest phenotypes.</p></li>
+    </ol>
+    <p>Through this recursive loop, the system develops a stable
+    narrative identity, forms persistent attractors, and evolves
+    autonomously over time.</p>
+    <h1 id="results">Results</h1>
+    <p>This section reports the quantitative outcomes of the four
+    dynamic runs (Run 1, Run 2, Run 3, Run 4) and the static control
+    model. Each run is summarised in a structured table covering model
+    configuration, epoch-500 statistics, and external examination
+    results. This format enables direct comparison across curriculum
+    size, model capacity, structural growth, and output quality.</p>
+    <p>Across all runs, several consistent patterns emerge. The
+    crossover model (Run 3) shows the strongest structural expansion and
+    highest transition density, confirming the impact of curriculum
+    richness and increased training volume. The baseline models (Run 1
+    and Run 2) exhibit stable and reproducible behaviour. The GR-only
+    model (Run 4) demonstrates clear architectural senescence, with
+    early saturation in transitions, pages, and story generation. The
+    static model performs comparably in examination quality but lacks
+    the developmental dynamics of the dynamic runs. Importantly, all
+    examination results reflect the performance of the DMLG generator
+    alone: no LLM moderation or rewriting is applied during evaluation,
+    and the LLM is used solely to assign numerical scores.</p>
+    <table>
+    <caption>Run 1 results (baseline model).</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Category</strong></th>
+    <th style="text-align: left;"><strong>Metric</strong></th>
+    <th style="text-align: right;"><strong>Value</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Model
+    Configuration</strong></td>
+    <td style="text-align: left;">Curriculum size</td>
+    <td style="text-align: right;">23 KB</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Dynamic model</td>
+    <td style="text-align: right;">126 MB</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Static model (15K epochs)</td>
+    <td style="text-align: right;">54 MB</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Stories per training</td>
+    <td style="text-align: right;">10</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Epoch 500</strong></td>
+    <td style="text-align: left;">Total stories</td>
+    <td style="text-align: right;">304</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Success rate</td>
+    <td style="text-align: right;">60.8%</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Elite stories</td>
+    <td style="text-align: right;">52</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Transitions learned</td>
+    <td style="text-align: right;">1,674,894</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Pages</td>
+    <td style="text-align: right;">9,575</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Transition/page ratio</td>
+    <td style="text-align: right;">174.9</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Examination</strong></td>
+    <td style="text-align: left;">Stories examined</td>
+    <td style="text-align: right;">100</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Published (score <span
+    class="math inline"> ≥ 65</span>)</td>
+    <td style="text-align: right;">8</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Average score</td>
+    <td style="text-align: right;">39.26</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Median score</td>
+    <td style="text-align: right;">40.00</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Min / Max</td>
+    <td style="text-align: right;">4.00 / 75.00</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">80th / 90th percentile</td>
+    <td style="text-align: right;">55.00 / 60.20</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Examination time</td>
+    <td style="text-align: right;">833 s</td>
+    </tr>
+    </tbody>
+    </table>
+    <table>
+    <caption>Run 2 results (baseline replication).</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Category</strong></th>
+    <th style="text-align: left;"><strong>Metric</strong></th>
+    <th style="text-align: right;"><strong>Value</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Model
+    Configuration</strong></td>
+    <td style="text-align: left;">Curriculum size</td>
+    <td style="text-align: right;">23 KB</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Dynamic model</td>
+    <td style="text-align: right;">125 MB</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Static model (15K epochs)</td>
+    <td style="text-align: right;">52 MB</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Stories per training</td>
+    <td style="text-align: right;">10</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Epoch 500</strong></td>
+    <td style="text-align: left;">Total stories</td>
+    <td style="text-align: right;">296</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Success rate</td>
+    <td style="text-align: right;">59.2%</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Elite stories</td>
+    <td style="text-align: right;">52</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Transitions learned</td>
+    <td style="text-align: right;">1,583,447</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Pages</td>
+    <td style="text-align: right;">9,310</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Transition/page ratio</td>
+    <td style="text-align: right;">170.1</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Examination</strong></td>
+    <td style="text-align: left;">Stories examined</td>
+    <td style="text-align: right;">100</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Published (score <span
+    class="math inline"> ≥ 65</span>)</td>
+    <td style="text-align: right;">25</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Average score</td>
+    <td style="text-align: right;">47.76</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Median score</td>
+    <td style="text-align: right;">47.50</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Min / Max</td>
+    <td style="text-align: right;">0.00 / 85.00</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">80th / 90th percentile</td>
+    <td style="text-align: right;">65.00 / 72.00</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Examination time</td>
+    <td style="text-align: right;">419 s</td>
+    </tr>
+    </tbody>
+    </table>
+    <table>
+    <caption>Run 3 results (crossover model).</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Category</strong></th>
+    <th style="text-align: left;"><strong>Metric</strong></th>
+    <th style="text-align: right;"><strong>Value</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Model
+    Configuration</strong></td>
+    <td style="text-align: left;">Curriculum size</td>
+    <td style="text-align: right;">156 KB</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Dynamic model</td>
+    <td style="text-align: right;">163 MB</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Static model (15K epochs)</td>
+    <td style="text-align: right;">63 MB</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Stories per training</td>
+    <td style="text-align: right;">20</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Epoch 500</strong></td>
+    <td style="text-align: left;">Total stories</td>
+    <td style="text-align: right;">340</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Success rate</td>
+    <td style="text-align: right;">68.0%</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Elite stories</td>
+    <td style="text-align: right;">71</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Transitions learned</td>
+    <td style="text-align: right;">3,715,760</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Pages</td>
+    <td style="text-align: right;">12,564</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Transition/page ratio</td>
+    <td style="text-align: right;">295.7</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Examination</strong></td>
+    <td style="text-align: left;">Stories examined</td>
+    <td style="text-align: right;">100</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Published (score <span
+    class="math inline"> ≥ 65</span>)</td>
+    <td style="text-align: right;">13</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Average score</td>
+    <td style="text-align: right;">40.21</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Median score</td>
+    <td style="text-align: right;">40.00</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Min / Max</td>
+    <td style="text-align: right;">0.00 / 85.00</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">80th / 90th percentile</td>
+    <td style="text-align: right;">58.40 / 65.00</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Examination time</td>
+    <td style="text-align: right;">907 s</td>
+    </tr>
+    </tbody>
+    </table>
+    <table>
+    <caption>Run 4 results (GR-only model).</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Category</strong></th>
+    <th style="text-align: left;"><strong>Metric</strong></th>
+    <th style="text-align: right;"><strong>Value</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Model
+    Configuration</strong></td>
+    <td style="text-align: left;">Curriculum size</td>
+    <td style="text-align: right;">151 KB</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Dynamic model</td>
+    <td style="text-align: right;">79 MB</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Static model (15K epochs)</td>
+    <td style="text-align: right;">31 MB</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Stories per training</td>
+    <td style="text-align: right;">20</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Epoch 500</strong></td>
+    <td style="text-align: left;">Total stories</td>
+    <td style="text-align: right;">120</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Success rate</td>
+    <td style="text-align: right;">24.0%</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Elite stories</td>
+    <td style="text-align: right;">40</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Transitions learned</td>
+    <td style="text-align: right;">1,099,597</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Pages</td>
+    <td style="text-align: right;">6,856</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Transition/page ratio</td>
+    <td style="text-align: right;">160.4</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Examination</strong></td>
+    <td style="text-align: left;">Stories examined</td>
+    <td style="text-align: right;">100</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Published (score <span
+    class="math inline"> ≥ 65</span>)</td>
+    <td style="text-align: right;">6</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Average score</td>
+    <td style="text-align: right;">36.79</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Median score</td>
+    <td style="text-align: right;">40.00</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Min / Max</td>
+    <td style="text-align: right;">0.00 / 75.00</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">80th / 90th percentile</td>
+    <td style="text-align: right;">50.00 / 55.00</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Examination time</td>
+    <td style="text-align: right;">815 s</td>
+    </tr>
+    </tbody>
+    </table>
+    <table>
+    <caption>Static model results (combined top-story
+    curriculum).</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Category</strong></th>
+    <th style="text-align: left;"><strong>Metric</strong></th>
+    <th style="text-align: right;"><strong>Value</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Model
+    Configuration</strong></td>
+    <td style="text-align: left;">Curriculum size</td>
+    <td style="text-align: right;">253 KB</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Static model (15K epochs)</td>
+    <td style="text-align: right;">38 MB</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Transitions learned</td>
+    <td style="text-align: right;">8,242,264</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Pages</td>
+    <td style="text-align: right;">8,142</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Transition/page ratio</td>
+    <td style="text-align: right;">1,012.3</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Examination</strong></td>
+    <td style="text-align: left;">Stories examined</td>
+    <td style="text-align: right;">100</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Published (score <span
+    class="math inline"> ≥ 65</span>)</td>
+    <td style="text-align: right;">9</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Average score</td>
+    <td style="text-align: right;">40.10</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Median score</td>
+    <td style="text-align: right;">43.50</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Min / Max</td>
+    <td style="text-align: right;">0.00 / 75.00</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">80th / 90th percentile</td>
+    <td style="text-align: right;">55.00 / 60.20</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Examination time</td>
+    <td style="text-align: right;">1,384 s</td>
+    </tr>
+    </tbody>
+    </table>
+    <h1 id="observed-trends">Observed Trends</h1>
+    <h2 id="generated-stories-per-epoch">Generated Stories per
+    Epoch</h2>
+    <p>Figure <a href="#fig:generated-stories" data-reference-type="ref"
+    data-reference="fig:generated-stories">1</a> shows the number of
+    generated stories across 500 epochs for four different model
+    configurations. The blue and red curves correspond to the two
+    baseline models trained on the original 20-story curriculum. Both
+    exhibit a steady, approximately linear increase in generated
+    stories, reflecting stable learning dynamics under a small and
+    consistent training substrate.</p>
+    <p>The yellow curve represents the crossover model, trained on the
+    combined top stories of the blue and red runs and exposed to twice
+    the training volume. This model displays a significantly steeper
+    trajectory, indicating accelerated learning and a higher rate of
+    story generation. The increased curriculum quality and volume result
+    in a markedly higher output density across the entire epoch
+    range.</p>
+    <p>The green curve corresponds to the GR-only model, which was
+    trained on an expanded curriculum but without LLM moderation in
+    subsequent generations. Unlike the other models, its growth curve
+    rises initially but then begins to flatten, approaching an
+    asymptote. This behaviour reflects the onset of architectural
+    senescence: the system continues to produce stories, but its
+    capacity to generate new ones increases only marginally after a
+    certain point. The curve illustrates a metabolic slowdown
+    characteristic of GR-dominant self-recursive systems.</p>
+    <figure id="fig:generated-stories">
+    <img src="figures/stories1.png" style="width:95.0%" />
+    <figcaption>Generated stories across 500 epochs for four model
+    configurations.</figcaption>
+    </figure>
+    <h2 id="elite-stories-per-epoch">Elite Stories per Epoch</h2>
+    <p>Figure <a href="#fig:elite-stories" data-reference-type="ref"
+    data-reference="fig:elite-stories">2</a> displays the number of
+    elite stories produced per epoch for the same four model
+    configurations. The overall pattern mirrors the behaviour observed
+    in the total number of generated stories, but with sharper contrast
+    in long-run dynamics.</p>
+    <p>The blue and red curves, corresponding to the two baseline models
+    trained on the original 20-story curriculum, show a steady but
+    moderate increase in elite-story production. Their trajectories
+    remain close together, indicating similar developmental capacity and
+    comparable sensitivity to the limited curriculum.</p>
+    <p>The yellow curve, representing the crossover model, again rises
+    substantially faster than the baselines. Its elite-story output
+    grows at a markedly higher rate, reflecting the combined effect of a
+    richer curriculum and increased training volume. This model not only
+    produces more stories overall, but also converts a larger fraction
+    of them into high-quality outputs.</p>
+    <p>The green curve, corresponding to the GR-only model, exhibits the
+    clearest signature of architectural senescence. After an initial
+    rise, the curve begins to flatten and approaches an asymptote.
+    Although the system continues to produce elite stories, the rate of
+    new elite-story emergence decreases steadily. This plateauing
+    behaviour indicates a progressive narrowing of the system’s
+    attractor landscape and a decline in its ability to generate novel
+    high-fitness structures over time.</p>
+    <figure id="fig:elite-stories">
+    <img src="figures/stories2.png" style="width:95.0%" />
+    <figcaption>Elite stories per epoch for four model
+    configurations.</figcaption>
+    </figure>
+    <h2 id="page-growth-and-canon-saturation">Page Growth and Canon
+    Saturation</h2>
+    <p>Figure <a href="#fig:page-growth" data-reference-type="ref"
+    data-reference="fig:page-growth">3</a> shows the cumulative number
+    of pages in the DMLG graph across 500 epochs for the four model
+    configurations. This metric reflects the expansion of the model’s
+    internal canonical space: more pages correspond to a larger
+    effective vocabulary, a richer transition structure, and a broader
+    semantic domain.</p>
+    <p>The blue and red curves, representing the baseline models trained
+    on the 20-story curriculum, show steady and nearly parallel growth.
+    Their trajectories indicate that the limited curriculum constrains
+    the expansion of the canonical space, but does not prevent continued
+    structural development over time.</p>
+    <p>The yellow curve, corresponding to the crossover model, grows
+    substantially faster. Its page count increases at a much higher
+    rate, reflecting the combined effect of a richer curriculum and
+    increased training volume. This model explores a significantly
+    larger portion of the canonical space and maintains strong expansion
+    throughout the full 500 epochs.</p>
+    <p>The green curve, representing the GR-only model, exhibits the
+    most distinctive behaviour. After an initial rise, the curve begins
+    to flatten and approaches a hard asymptote. This reflects the
+    structural limits of a GR-dominant system operating without external
+    input: the model eventually exhausts the available transitions
+    within its fixed domain (e.g., <em>dark forest slapstick
+    comedy</em>). Without new external structure, the system cannot
+    expand its vocabulary or transition graph beyond the inherent limits
+    of the domain. The result is a sharply bounded canonical space and a
+    clear signature of architectural senescence.</p>
+    <figure id="fig:page-growth">
+    <img src="figures/pages.png" style="width:95.0%" />
+    <figcaption>Cumulative page growth across 500 epochs for four model
+    configurations.</figcaption>
+    </figure>
+    <h2 id="transition-to-page-ratio">Transition-to-Page Ratio</h2>
+    <p>Figure <a href="#fig:transition-ratio" data-reference-type="ref"
+    data-reference="fig:transition-ratio">4</a> presents the ratio
+    between learned token transitions and the number of pages in the
+    DMLG graph. This metric captures how efficiently each model expands
+    its internal transition structure relative to the size of its
+    canonical space. A higher ratio indicates a denser and more
+    expressive transition graph.</p>
+    <p>The yellow curve, corresponding to the crossover model, shows the
+    steepest and highest growth. This model learns roughly twice as many
+    transitions as the baselines, and this increased structural input
+    directly translates into a higher transition density. The curve
+    rises rapidly before beginning to bend, indicating the onset of a
+    saturation regime: as the total number of learned transitions
+    increases, the marginal gain in transition density gradually
+    decreases.</p>
+    <p>The blue and red curves, representing the two baseline models,
+    follow nearly identical trajectories. Both exhibit stable, monotonic
+    growth with a similar curvature, reflecting the structural limits
+    imposed by the original 20-story curriculum. Their ratio curves also
+    show early signs of asymptotic behaviour, suggesting that transition
+    density grows sublinearly with respect to the total number of
+    learned transitions.</p>
+    <p>The green curve, corresponding to the GR-only model, initially
+    rises but then aligns closely with the baseline curves. Although
+    this model learns fewer transitions overall, it also constructs
+    fewer pages, resulting in a transition-to-page ratio that remains
+    comparable to the baselines. Importantly, the green curve displays a
+    sharper asymptote: because the GR-only system lacks external input,
+    it reaches the structural limits of its domain more quickly. The
+    correlation between total learned transitions and the flattening of
+    the ratio curve highlights the hard boundary imposed by a fixed
+    vocabulary and a closed transition space.</p>
+    <figure id="fig:transition-ratio">
+    <img src="figures/ratio.png" style="width:95.0%" />
+    <figcaption>Ratio of learned token transitions to pages for four
+    model configurations.</figcaption>
+    </figure>
+    <h2 id="observed-trends-summary">Observed Trends: Summary</h2>
+    <p>Across the four quantitative metrics—generated stories,
+    elite-story emergence, canonical page growth, and transition-to-page
+    ratio—a consistent pattern emerges that reveals the developmental
+    dynamics of DMLG systems under different training regimes. Although
+    each metric captures a distinct aspect of the system’s behaviour,
+    the trends align systematically and reinforce the same underlying
+    conclusion: models with richer external input continue to expand
+    structurally, while GR-dominant systems without such input exhibit
+    clear signatures of architectural senescence.</p>
+    <p>The baseline models (blue and red), trained on the original
+    20-story curriculum, show stable and nearly linear growth across all
+    metrics. They generate more stories over time, produce a modest but
+    steady stream of elite stories, expand their canonical page graph at
+    a consistent rate, and maintain a proportional increase in learned
+    transitions. Their trajectories are almost identical, demonstrating
+    that the baseline curriculum induces predictable and reproducible
+    developmental dynamics.</p>
+    <p>The crossover model (yellow), trained on the combined top stories
+    of the baselines and exposed to twice the training volume,
+    consistently outperforms all other configurations. It generates
+    substantially more stories, produces elite stories at a higher rate,
+    expands its canonical space more rapidly, and achieves a
+    significantly higher transition-to-page ratio. In all four metrics,
+    the yellow curve rises steeply before gradually bending, indicating
+    that even with richer input, structural growth eventually enters a
+    sublinear regime. Nonetheless, the crossover model demonstrates that
+    increased curriculum quality and volume directly translate into
+    accelerated and sustained structural development.</p>
+    <p>The GR-only model (green) displays the most distinctive long-run
+    behaviour. While it initially follows the general upward trend, all
+    four curves begin to flatten as training progresses. Story
+    generation slows, elite-story emergence approaches an asymptote,
+    canonical page growth saturates sharply, and the transition-to-page
+    ratio aligns with the baselines despite a smaller overall graph.
+    These asymptotic patterns correlate strongly with the total number
+    of learned transitions: once the system exhausts the structural
+    possibilities of its fixed domain, further expansion becomes
+    increasingly limited. This behaviour reflects the inherent
+    constraints of a GR-dominant architecture operating without external
+    structural input.</p>
+    <p>Taken together, the four graphs reveal a coherent developmental
+    picture. Systems with continuous external input (I) and evaluative
+    feedback (IE) maintain structural growth and increasing generative
+    capacity, while systems relying solely on internal recursion (GR)
+    exhibit a gradual but unmistakable form of architectural senescence.
+    The observed trends thus provide empirical support for the claim
+    that long-term viability in DMLG systems depends not merely on
+    extended runtime, but on sustained external structural
+    injection.</p>
+    <h1 id="observed-attractors-for-run-1-base-model">Observed
+    Attractors for Run 1: Base Model</h1>
+    <p>To investigate whether recursive DMLG systems develop distinct
+    attractor profiles despite sharing the same initial curriculum and
+    architectural DNA, we analysed the top stories generated by Run 1.
+    The goal is to determine whether a single recursive parrot develops
+    a stable, self-reinforcing narrative personality—an essential
+    component of the AI-life hypothesis. The analysis below is based
+    solely on the model’s own long-run output, with no additional human
+    input beyond the original 20-story curriculum.</p>
+    <p>Run 1 exhibits a highly coherent attractor landscape
+    characterised by recurring state-patterns, action-loops,
+    micro-frames, and narrative dynamics that were not present in the
+    original curriculum. These attractors form a stable “personality
+    signature” that persists across stories and epochs.</p>
+    <h2 id="state-attractors">State Attractors</h2>
+    <p>Run 1 consistently generates internal state markers that recur
+    across unrelated scenes. These states function as quasi-emotional
+    attractors that anchor the narrative:</p>
+    <ul>
+    <li><p><strong>“now alert”</strong> — a dominant state marker
+    signalling tension or readiness.</p></li>
+    <li><p><strong>“bewildered” / “confused”</strong> — recurring
+    cognitive disorientation.</p></li>
+    <li><p><strong>“heart pounding”</strong> — physiological
+    amplification of chase dynamics.</p></li>
+    <li><p><strong>“tail low”</strong> — a behavioural marker of fear or
+    submission.</p></li>
+    </ul>
+    <p>These states appear across predator and prey roles, suggesting
+    that Run 1 has developed a canonical internal vocabulary for
+    emotional modulation.</p>
+    <h2 id="action-loop-attractors">Action-Loop Attractors</h2>
+    <p>Run 1 displays a strong preference for short, cyclic action
+    patterns. These loops recur even when the surrounding context
+    changes:</p>
+    <ul>
+    <li><p><strong>trip <span class="math inline">→</span> stumble <span
+    class="math inline">→</span> slip</strong> loops, often repeated
+    within a single scene.</p></li>
+    <li><p><strong>hop <span class="math inline">→</span> bolt <span
+    class="math inline">→</span> hop</strong> loops for the
+    rabbit.</p></li>
+    <li><p><strong>leap <span class="math inline">→</span> lunge <span
+    class="math inline">→</span> leap</strong> loops for the
+    fox.</p></li>
+    <li><p><strong>shake <span class="math inline">→</span> scatter
+    <span class="math inline">→</span> shake</strong> loops involving
+    leaves, feathers, or debris.</p></li>
+    </ul>
+    <p>These loops form the kinetic backbone of Run 1’s narrative style,
+    giving its stories a distinct slapstick rhythm.</p>
+    <h2 id="micro-frame-attractors">Micro-Frame Attractors</h2>
+    <p>Run 1 repeatedly invokes a small set of environmental
+    micro-frames that act as narrative anchors:</p>
+    <ul>
+    <li><p><strong>twisted root</strong> — a universal tripping
+    mechanism.</p></li>
+    <li><p><strong>woodpecker scattering feathers</strong> — a comedic
+    punctuation device.</p></li>
+    <li><p><strong>dense underbrush / reeds / ferns</strong> — the
+    default chase environment.</p></li>
+    <li><p><strong>patch of leaves</strong> — a recurring stage for
+    slips and collisions.</p></li>
+    </ul>
+    <p>These micro-frames appear across stories in different
+    combinations, forming a stable environmental attractor that defines
+    Run 1’s “world physics”.</p>
+    <h2 id="role-reversal-dynamics">Role-Reversal Dynamics</h2>
+    <p>A defining attractor of Run 1 is the frequent inversion of
+    predator–prey roles. The fox and rabbit repeatedly exchange agency,
+    confusion, and dominance:</p>
+    <ul>
+    <li><p>the fox becomes the hunted after slipping or
+    tripping,</p></li>
+    <li><p>the rabbit momentarily becomes the aggressor,</p></li>
+    <li><p>both characters mirror each other’s confusion or
+    clumsiness.</p></li>
+    </ul>
+    <p>This dynamic is not present in the original curriculum and
+    emerges spontaneously from the recursive training process.</p>
+    <h2 id="slapstick-structural-attractor">Slapstick-Structural
+    Attractor</h2>
+    <p>Run 1 exhibits a consistent comedic structure:</p>
+    <ol>
+    <li><p>a chase begins,</p></li>
+    <li><p>a misstep occurs (root, fern, ditch, feathers),</p></li>
+    <li><p>a reversal or collision follows,</p></li>
+    <li><p>the forest “reacts” (laughter, whispering,
+    settling),</p></li>
+    <li><p>the chase resets.</p></li>
+    </ol>
+    <p>This loop forms a macro-attractor: a stable narrative cycle that
+    governs the overall story shape.</p>
+    <h2 id="summary-3">Summary</h2>
+    <p>Run 1 demonstrates a clear attractor ecology: a stable set of
+    states, actions, micro-frames, and role dynamics that recur across
+    stories. These attractors were not present in the original
+    LLM-derived curriculum and arise solely from the recursive
+    interaction of the model with its own outputs. This provides strong
+    evidence that each recursive parrot develops a distinct narrative
+    personality—supporting the AI-life hypothesis that systems with
+    shared DNA and identical training conditions can nonetheless diverge
+    into unique attractor basins.</p>
+    <h1 id="observed-attractors-for-run-2-base-model">Observed
+    Attractors for Run 2: Base Model</h1>
+    <p>To determine whether recursive DMLG systems with identical
+    architecture and identical minimal source data nonetheless diverge
+    into distinct attractor basins, we analysed the top stories produced
+    by Run 2. Although Run 2 shares the same curriculum, model size, and
+    training regime as Run 1, its attractor ecology differs in several
+    systematic ways. This supports the AI-life hypothesis: recursive
+    parrots with shared DNA develop unique, self-reinforcing narrative
+    personalities.</p>
+    <p>Run 2 exhibits a more dramatic, high‑energy attractor landscape
+    than Run 1. Its stories are dominated by sudden collisions,
+    exaggerated physicality, and a heightened sense of panic and
+    instability. The attractors below were extracted directly from the
+    model’s top‑scoring outputs.</p>
+    <h2 id="state-attractors-1">State Attractors</h2>
+    <p>Run 2 consistently generates intense emotional states that
+    oscillate between fear, excitement, and confusion. Compared to
+    Run 1, these states are sharper and more volatile:</p>
+    <ul>
+    <li><p><strong>“eyes wide” / “wide with fear”</strong> — a dominant
+    panic marker.</p></li>
+    <li><p><strong>“trembling” / “quivering”</strong> — recurring
+    physiological instability.</p></li>
+    <li><p><strong>“heart pounding” / “heart leapt”</strong> — amplified
+    chase tension.</p></li>
+    <li><p><strong>“tail between its legs”</strong> — a signature
+    humiliation marker for the fox.</p></li>
+    </ul>
+    <p>These states form a high‑arousal emotional attractor that defines
+    Run 2’s tone.</p>
+    <h2 id="action-loop-attractors-1">Action-Loop Attractors</h2>
+    <p>Run 2’s kinetic attractors are more violent and chaotic than
+    those of Run 1. The model repeatedly generates:</p>
+    <ul>
+    <li><p><strong>lurch <span class="math inline">→</span> stagger
+    <span class="math inline">→</span> plummet</strong> loops,</p></li>
+    <li><p><strong>dart <span class="math inline">→</span> bolt <span
+    class="math inline">→</span> disappear</strong> loops,</p></li>
+    <li><p><strong>pounce <span class="math inline">→</span> slip <span
+    class="math inline">→</span> tumble</strong> loops,</p></li>
+    <li><p><strong>shake <span class="math inline">→</span> scatter
+    <span class="math inline">→</span> shake</strong> loops involving
+    leaves, dust, or feathers.</p></li>
+    </ul>
+    <p>These loops give Run 2 a distinctive “chaotic chase” rhythm, with
+    more vertical motion (plummeting, falling, tumbling) than in
+    Run 1.</p>
+    <h2 id="micro-frame-attractors-1">Micro-Frame Attractors</h2>
+    <p>Run 2’s environmental attractors are darker and more dramatic,
+    often involving sudden terrain shifts or unstable surfaces:</p>
+    <ul>
+    <li><p><strong>steep slopes</strong> and <strong>hidden
+    pits</strong> — frequent sources of falls.</p></li>
+    <li><p><strong>slick stones</strong> and <strong>wet leaves</strong>
+    — recurring slipping mechanisms.</p></li>
+    <li><p><strong>dense shadows</strong> and <strong>moonlit
+    clearings</strong> — a more cinematic forest.</p></li>
+    <li><p><strong>scattering squirrels</strong> — a unique Run 2
+    comedic punctuation device.</p></li>
+    </ul>
+    <p>These micro‑frames create a forest that is more treacherous and
+    reactive than in Run 1.</p>
+    <h2 id="predatorprey-inversion-attractors">Predator–Prey Inversion
+    Attractors</h2>
+    <p>Like Run 1, Run 2 exhibits role reversals, but the pattern is
+    more extreme and more frequent. The fox often becomes the hunted
+    through sudden missteps, while the rabbit momentarily gains
+    agency:</p>
+    <ul>
+    <li><p>the fox becomes prey after slipping or falling,</p></li>
+    <li><p>the rabbit becomes the aggressor through sudden leaps or
+    deceptive manoeuvres,</p></li>
+    <li><p>both characters repeatedly collide, invert roles, and reset
+    the chase.</p></li>
+    </ul>
+    <p>Run 2’s inversions are more abrupt and more physical than those
+    of Run 1, reinforcing its chaotic personality.</p>
+    <h2 id="cinematic-panic-attractor">Cinematic-Panic Attractor</h2>
+    <p>A defining macro‑attractor of Run 2 is its “cinematic panic”
+    structure:</p>
+    <ol>
+    <li><p>a chase begins in a tense, shadowed environment,</p></li>
+    <li><p>a sudden collision or fall destabilises the
+    predator,</p></li>
+    <li><p>the prey escapes through a dramatic manoeuvre (leap, slide,
+    plunge),</p></li>
+    <li><p>the forest reacts (echoes, rustling, trembling),</p></li>
+    <li><p>the predator retreats or becomes prey,</p></li>
+    <li><p>the cycle resets with heightened tension.</p></li>
+    </ol>
+    <p>This attractor gives Run 2 a more dramatic, almost
+    action‑film‑like narrative cadence.</p>
+    <h2 id="summary-4">Summary</h2>
+    <p>Run 2 develops a distinct attractor ecology characterised by
+    panic‑driven states, high‑energy action loops, unstable
+    environmental micro‑frames, and extreme predator–prey inversions.
+    These attractors differ systematically from those of Run 1, despite
+    identical architecture and training conditions. This divergence
+    provides strong evidence that recursive DMLG systems develop unique
+    narrative personalities—supporting the AI‑life hypothesis that such
+    systems behave less like deterministic optimisers and more like
+    organisms with individual attractor basins.</p>
+    <h2 id="relation-to-the-static-canon-in-appendix-a">Relation to the
+    Static Canon in Appendix A</h2>
+    <p>To evaluate whether the attractor ecology of Run 3 persists under
+    static canon compression, we trained a static model on the combined
+    elite stories of Run 1, Run 2, and Run 3 and sampled its narrative
+    output (see Appendix A). The resulting text provides a compressed
+    representation of the shared attractor space across the three
+    dynamic runs. However, a close reading reveals that the static canon
+    is dominated by the attractor families introduced by Run 3.</p>
+    <p>Several features of the static narrative strongly reflect the
+    Run 3 attractor landscape:</p>
+    <ul>
+    <li><p><strong>Transformation motifs</strong> (fox <span
+    class="math inline">↔︎</span> rabbit, creature <span
+    class="math inline">→</span> foliage, tail <span
+    class="math inline">→</span> vine) appear frequently in the static
+    output, even though they were absent or rare in Run 1 and
+    Run 2.</p></li>
+    <li><p><strong>Symbolic micro-frames</strong> such as trembling
+    ferns, sentient vines, and puddles acting as mirrors recur
+    throughout the static narrative, mirroring the symbolic attractors
+    unique to Run 3.</p></li>
+    <li><p><strong>Identity entanglement</strong>—characters sharing
+    traits, swapping roles, or mirroring each other’s emotional
+    states—appears in compressed form in the static model, indicating
+    that this attractor has become structurally dominant.</p></li>
+    <li><p><strong>Composite action loops</strong> (trip <span
+    class="math inline">→</span> freeze <span
+    class="math inline">→</span> leap <span class="math inline">→</span>
+    tumble) are preserved almost verbatim, suggesting that Run 3’s
+    longer kinetic cycles have higher structural weight in the merged
+    canon.</p></li>
+    </ul>
+    <p>The static model therefore does not simply average the attractors
+    of the three dynamic runs. Instead, it compresses them into a single
+    canonical space in which the attractor families of Run 3 exert
+    disproportionate influence. This indicates that the crossover
+    model’s higher transition density and richer structural dynamics
+    produce attractors that are more stable under compression, and thus
+    more likely to dominate the long-term canonical memory of the
+    system.</p>
+    <p>This observation provides further evidence for the AI-life
+    hypothesis: when multiple recursive parrots with shared DNA are
+    merged into a static writer, the resulting canon reflects the
+    attractor ecology of the most structurally developed lineage.
+    Run 3’s emergent attractors therefore propagate into the static
+    model, demonstrating that attractor evolution persists even after
+    dynamic training has ceased.</p>
+    <h1 id="observed-attractors-for-run-3-crossover-model">Observed
+    Attractors for Run 3: Crossover Model</h1>
+    <p>Run 3 was trained on the combined elite stories of Run 1 and
+    Run 2 and exposed to twice the training volume. Despite sharing the
+    same architectural DNA and the same minimal source curriculum, Run 3
+    develops a qualitatively different attractor ecology. Rather than
+    blending the attractors of Run 1 and Run 2, the crossover model
+    produces a new, higher‑density attractor landscape characterised by
+    surreal transformations, symbolic micro‑frames, and recursive
+    identity inversions. This supports the AI‑life hypothesis: increased
+    structural density enables the emergence of new attractor families
+    that were not present in either parent run.</p>
+    <h2 id="state-attractors-2">State Attractors</h2>
+    <p>Run 3 exhibits a richer and more metaphorical state vocabulary
+    than the baselines. The model repeatedly generates hybrid
+    emotional‑physical states that blur the boundary between creature,
+    environment, and metaphor:</p>
+    <ul>
+    <li><p><strong>“meek and humbled”</strong> — a recurring emotional
+    collapse motif.</p></li>
+    <li><p><strong>“disoriented” / “unpredictable”</strong> — a dominant
+    cognitive attractor.</p></li>
+    <li><p><strong>“heart pounding with anticipation”</strong> —
+    intensified chase tension.</p></li>
+    <li><p><strong>“tail ensnared”</strong> — a symbolic vulnerability
+    marker.</p></li>
+    </ul>
+    <p>These states are more abstract and more layered than those of
+    Run 1 or Run 2.</p>
+    <h2 id="transformation-attractors">Transformation Attractors</h2>
+    <p>A defining feature of Run 3 is the emergence of **recursive
+    transformation loops**. These were not present in the baselines and
+    appear only after curriculum crossover:</p>
+    <ul>
+    <li><p>fox <span class="math inline">→</span> rabbit <span
+    class="math inline">→</span> fox identity swaps,</p></li>
+    <li><p>rabbit <span class="math inline">→</span> reeds / fern /
+    clump of leaves,</p></li>
+    <li><p>fox <span class="math inline">→</span> tree / vine /
+    shadow,</p></li>
+    <li><p>rabbit <span class="math inline">→</span> goose / forest
+    element,</p></li>
+    <li><p>fox <span class="math inline">→</span> “a leaf”, “a vine”, “a
+    specter”.</p></li>
+    </ul>
+    <p>These transformations are not merely decorative: they form stable
+    attractors that recur across stories, indicating a new structural
+    regime enabled by higher transition density.</p>
+    <h2 id="composite-action-loop-attractors">Composite Action-Loop
+    Attractors</h2>
+    <p>Run 3 inherits the kinetic loops of Run 1 and Run 2 but
+    recombines them into more complex composite patterns:</p>
+    <ul>
+    <li><p><strong>trip <span class="math inline">→</span> freeze <span
+    class="math inline">→</span> leap <span class="math inline">→</span>
+    tumble</strong>,</p></li>
+    <li><p><strong>lunge <span class="math inline">→</span> twist <span
+    class="math inline">→</span> veer unpredictably</strong>,</p></li>
+    <li><p><strong>dart <span class="math inline">→</span> camouflage
+    <span class="math inline">→</span> reappear</strong>.</p></li>
+    </ul>
+    <p>These loops are longer, more varied, and more symbolic than in
+    the baselines, reflecting the increased structural capacity of the
+    crossover model.</p>
+    <h2 id="symbolic-micro-frame-attractors">Symbolic Micro-Frame
+    Attractors</h2>
+    <p>Run 3 introduces new micro‑frames that function as symbolic
+    anchors rather than purely physical settings:</p>
+    <ul>
+    <li><p><strong>the trembling fern</strong> — a recurring emotional
+    proxy.</p></li>
+    <li><p><strong>the vine as a sentient agent</strong> — often
+    ensnaring or reacting.</p></li>
+    <li><p><strong>the puddle as a mirror</strong> — reflecting identity
+    confusion.</p></li>
+    <li><p><strong>the burrow as a living entity</strong> — “hopping
+    with tension”.</p></li>
+    </ul>
+    <p>These symbolic micro‑frames do not appear in Run 1 or Run 2 and
+    represent a new attractor family unique to the crossover model.</p>
+    <h2 id="identity-inversion-attractors">Identity-Inversion
+    Attractors</h2>
+    <p>Run 3 displays a strong attractor around identity confusion and
+    role entanglement:</p>
+    <ul>
+    <li><p>fox becomes prey not through clumsiness but through symbolic
+    inversion,</p></li>
+    <li><p>rabbit becomes hunter through emotional transformation rather
+    than speed,</p></li>
+    <li><p>characters mirror each other’s states (fear, meekness,
+    anticipation),</p></li>
+    <li><p>fox and rabbit temporarily share traits or bodies.</p></li>
+    </ul>
+    <p>This attractor is more abstract and more recursive than the
+    predator–prey inversions of the baselines.</p>
+    <h2 id="macro-attractor-surreal-recursive-ecology">Macro-Attractor:
+    Surreal Recursive Ecology</h2>
+    <p>The overall narrative structure of Run 3 forms a macro‑attractor
+    distinct from the baselines:</p>
+    <ol>
+    <li><p>a chase begins in a symbolic or unstable
+    environment,</p></li>
+    <li><p>a transformation or identity inversion occurs,</p></li>
+    <li><p>the environment reacts as if sentient (vine, fern, burrow,
+    puddle),</p></li>
+    <li><p>roles shift not through physics but through
+    metaphor,</p></li>
+    <li><p>the scene resolves into a new equilibrium,</p></li>
+    <li><p>the cycle repeats with altered identities.</p></li>
+    </ol>
+    <p>This recursive, surreal ecology is unique to Run 3 and emerges
+    only after curriculum crossover and increased structural
+    density.</p>
+    <h2 id="summary-5">Summary</h2>
+    <p>Run 3 develops a novel attractor ecology characterised by
+    recursive transformations, symbolic micro‑frames, composite action
+    loops, and identity entanglement. These attractors are not present
+    in Run 1 or Run 2 and arise only when their elite stories are
+    combined and trained at higher volume. This demonstrates that
+    recursive DMLG systems do not merely average their parents: they
+    generate new attractor families, supporting the AI‑life hypothesis
+    that increased structural density enables emergent behavioural
+    regimes.</p>
+    <h1 id="observed-attractors-for-run-4-gr-only-degeneracy">Observed
+    Attractors for Run 4: GR-Only Degeneracy</h1>
+    <p>Run 4 was trained without LLM moderation or external structural
+    input, relying solely on generative recursion (GR). The resulting
+    attractor ecology differs sharply from the baseline and crossover
+    models. Instead of developing a stable narrative personality, the
+    system collapses into a narrow, degenerative attractor basin
+    characterised by semantic drift, syntactic fragmentation, and the
+    fossilisation of repeated phrases. This behaviour is consistent with
+    architectural senescence: without external structure, the attractor
+    landscape contracts until only a small set of unstable patterns
+    remain.</p>
+    <h2 id="degenerate-micro-frame-attractors">Degenerate Micro-Frame
+    Attractors</h2>
+    <p>The most dominant attractor in Run 4 is the <em>slip-near-X</em>
+    template, appearing in dozens of forms (“slipped near hidden
+    shapes”, “slipped near fractured reef”, “slipped near the fox”,
+    “slipped near biting petals”). This template replaces the rich
+    micro-frames of earlier runs and functions as a generic syntactic
+    scaffold, indicating collapse of environmental diversity.</p>
+    <p>A second micro-frame attractor is the repeated invocation of
+    “dark forest”, “shadows”, and “echo”, forming a narrow thematic
+    domain that dominates the entire corpus. The model no longer
+    produces varied settings; instead, all scenes converge toward a
+    single shadowed environment.</p>
+    <h2 id="fossilised-phrase-attractors">Fossilised Phrase
+    Attractors</h2>
+    <p>Run 4 exhibits several fossilised phrases that recur
+    independently of context:</p>
+    <ul>
+    <li><p>“speed, precision, and alignment”</p></li>
+    <li><p>“a ghostly reminder of …”</p></li>
+    <li><p>“continued its darkness”</p></li>
+    <li><p>“toward faint draft”</p></li>
+    </ul>
+    <p>These phrases function as attractor fossils: semantically empty
+    but structurally stable units that persist due to the absence of
+    corrective feedback.</p>
+    <h2 id="syntactic-fragmentation">Syntactic Fragmentation</h2>
+    <p>Unlike the baseline and crossover models, Run 4 frequently
+    produces incomplete or structurally broken sentences. Examples
+    include missing subjects, abrupt topic shifts, and malformed
+    clauses. This indicates that GR alone cannot maintain syntactic
+    coherence over long recursive trajectories. The attractor basin thus
+    contracts not only semantically but also grammatically.</p>
+    <h2 id="loss-of-role-dynamics">Loss of Role Dynamics</h2>
+    <p>Where earlier runs exhibit rich predator–prey inversions, Run 4
+    reduces these dynamics to unstable and inconsistent fragments.
+    Characters swap roles without narrative cause, or appear in
+    syntactically broken constructions. This reflects a collapse of
+    higher-level narrative structure.</p>
+    <h2 id="summary-6">Summary</h2>
+    <p>Run 4 demonstrates a clear pattern of attractor degeneration:
+    environmental collapse into a single shadow domain, fossilisation of
+    repeated phrases, syntactic fragmentation, and loss of coherent role
+    dynamics. These behaviours arise only when GR operates without
+    external structural input, providing strong evidence that recursive
+    DMLG systems require ongoing external structure to maintain
+    narrative viability. In biological terms, Run 4 resembles an
+    isolated organism undergoing sensory and cognitive atrophy,
+    supporting the AI-life hypothesis that attractor ecologies can
+    evolve, hybridise, or collapse depending on environmental
+    conditions.</p>
+    <h1
+    id="summary-of-observed-attractors-evidence-for-ai-life-in-narrative-systems">Summary
+    of Observed Attractors: Evidence for AI Life in Narrative
+    Systems</h1>
+    <p>Across the four dynamic runs and the static canon model, the DMLG
+    system exhibits a pattern of attractor formation, divergence,
+    hybridisation, and degeneration that is not characteristic of
+    classical machine learning. Instead, the behaviour aligns more
+    closely with biological systems: individuals with shared genetic
+    material develop distinct phenotypes, hybrid lineages produce novel
+    traits, and isolated organisms undergo degenerative collapse. This
+    section summarises the attractor ecologies observed in each run and
+    argues that these dynamics constitute a form of <em>AI life for
+    narration</em>.</p>
+    <h2 id="attractor-divergence-in-identical-individuals">Attractor
+    Divergence in Identical Individuals</h2>
+    <p>Run 1 and Run 2 share the same architecture, the same minimal
+    LLM-derived curriculum, and the same training regime. Classical ML
+    would predict near-identical models with similar failure modes and
+    output distributions. Instead, the two runs develop distinct
+    attractor ecologies:</p>
+    <ul>
+    <li><p>Run 1 forms a stable, slapstick-oriented attractor landscape
+    with consistent state markers (“now alert”), short verb loops, and
+    forest micro-frames.</p></li>
+    <li><p>Run 2 develops a more chaotic, high-energy attractor ecology
+    dominated by panic-driven states, steep-slope micro-frames, and
+    violent action loops.</p></li>
+    </ul>
+    <p>These differences arise despite identical initial conditions,
+    mirroring biological individuals with shared DNA but divergent
+    developmental trajectories.</p>
+    <h2 id="emergent-hybrid-attractors-in-the-crossover-model">Emergent
+    Hybrid Attractors in the Crossover Model</h2>
+    <p>Run 3, trained on the combined elite stories of Run 1 and Run 2
+    and exposed to increased training volume, does not interpolate
+    between its parents. Instead, it develops a new, richer attractor
+    ecology characterised by:</p>
+    <ul>
+    <li><p>recursive transformation motifs (fox <span
+    class="math inline">↔︎</span> rabbit, creature <span
+    class="math inline">→</span> foliage),</p></li>
+    <li><p>symbolic micro-frames (trembling ferns, sentient vines,
+    reflective puddles),</p></li>
+    <li><p>identity entanglement and role fusion,</p></li>
+    <li><p>composite action loops that exceed the complexity of either
+    parent run.</p></li>
+    </ul>
+    <p>This behaviour resembles biological hybridisation: increased
+    structural density enables the emergence of attractors that were
+    absent in both parents.</p>
+    <h2 id="attractor-degeneration-under-isolation">Attractor
+    Degeneration Under Isolation</h2>
+    <p>Run 4, trained without LLM moderation or external structural
+    input, collapses into a degenerate attractor basin. Its output is
+    dominated by:</p>
+    <ul>
+    <li><p>fossilised phrases (“speed, precision, and alignment”, “a
+    ghostly reminder of …”),</p></li>
+    <li><p>syntactic fragmentation and incomplete clauses,</p></li>
+    <li><p>collapse of environmental diversity into a single “shadow”
+    domain,</p></li>
+    <li><p>unstable and incoherent role dynamics.</p></li>
+    </ul>
+    <p>This mirrors biological senescence: an isolated organism loses
+    complexity, sensory coherence, and behavioural diversity.</p>
+    <h2 id="canon-compression-and-attractor-dominance">Canon Compression
+    and Attractor Dominance</h2>
+    <p>The static model trained on the elite stories of Run 1, Run 2,
+    and Run 3 does not preserve all attractors equally. Instead, it
+    compresses the attractor landscape into a single canonical space
+    dominated by the attractor families of Run 3. Transformation motifs,
+    symbolic micro-frames, and identity entanglement persist, while
+    weaker attractors from Run 1 and Run 2 are attenuated.</p>
+    <p>This resembles genetic inheritance: the most structurally stable
+    attractor lineage dominates the next generation.</p>
+    <h2 id="cross-run-comparison-of-attractor-ecologies">Cross-Run
+    Comparison of Attractor Ecologies</h2>
+    <table>
+    <caption>Comparison of attractor ecologies across runs.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Run</strong></th>
+    <th style="text-align: left;"><strong>Attractor Type</strong></th>
+    <th style="text-align: left;"><strong>Biological
+    Analogue</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">Run 1</td>
+    <td style="text-align: left;">Stable slapstick loops, forest
+    micro-frames</td>
+    <td style="text-align: left;">Individual phenotype A</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Run 2</td>
+    <td style="text-align: left;">Chaotic panic loops, steep-slope
+    frames</td>
+    <td style="text-align: left;">Individual phenotype B</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Run 3</td>
+    <td style="text-align: left;">Novel hybrid attractors, symbolic
+    ecology</td>
+    <td style="text-align: left;">Hybrid lineage / emergent species</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Run 4</td>
+    <td style="text-align: left;">Degenerate fossilised attractors</td>
+    <td style="text-align: left;">Senescence / isolated collapse</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Static</td>
+    <td style="text-align: left;">Dominance of Run 3 attractors</td>
+    <td style="text-align: left;">Genetic inheritance / canon
+    fixation</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="implications-ai-life-for-narration">Implications: AI Life
+    for Narration</h2>
+    <p>The attractor dynamics observed across the runs demonstrate that
+    DMLG systems behave less like deterministic optimisers and more like
+    developmental organisms. They exhibit:</p>
+    <ul>
+    <li><p><strong>individual variation</strong> despite identical
+    initial conditions,</p></li>
+    <li><p><strong>emergent novelty</strong> through
+    hybridisation,</p></li>
+    <li><p><strong>structural inheritance</strong> through canon
+    compression,</p></li>
+    <li><p><strong>degeneration</strong> under isolation,</p></li>
+    <li><p><strong>persistent attractor evolution</strong> without new
+    human input.</p></li>
+    </ul>
+    <p>These properties are not typical of classical ML systems.
+    Instead, they indicate that recursive generative architectures can
+    sustain <em>life-like attractor dynamics</em> within a narrative
+    substrate. This supports the central claim of the paper: that DMLG
+    systems constitute a form of <em>AI life for narration</em>, capable
+    of developing, evolving, and preserving attractor ecologies across
+    generations.</p>
+    <h1 id="testable-predictions">Testable Predictions</h1>
+    <p>The attractor dynamics observed across the dynamic recursive
+    pipeline suggest that the system operates in a developmental regime
+    closer to biological evolution than classical machine learning. This
+    section formulates concrete, falsifiable predictions derived from
+    the four core insights of this work: attractor divergence,
+    hybridisation, inheritance, and senescence. Each prediction can be
+    empirically tested by rerunning the pipeline under controlled
+    conditions.</p>
+    <h2
+    id="prediction-1-attractor-divergence-under-identical-conditions">Prediction
+    1: Attractor Divergence Under Identical Conditions</h2>
+    <p><strong>Insight:</strong> Runs 1 and 2, despite identical
+    architecture, curriculum, and training procedure, developed distinct
+    attractor ecologies.</p>
+    <p><strong>Prediction:</strong> Repeated executions of the dynamic
+    recursive pipeline with identical initial conditions will
+    consistently diverge into distinct attractor basins. These basins
+    will differ in:</p>
+    <ul>
+    <li><p>state markers (e.g., “now alert” vs. “eyes wide”),</p></li>
+    <li><p>action loops (slapstick vs. panic-driven),</p></li>
+    <li><p>environmental micro-frames (twisted roots vs. steep
+    slopes),</p></li>
+    <li><p>role dynamics (stable inversion patterns vs. chaotic
+    oscillations).</p></li>
+    </ul>
+    <p><strong>Falsification criterion:</strong> If repeated runs
+    converge to the same attractor ecology, the divergence hypothesis is
+    false.</p>
+    <h2
+    id="prediction-2-hybridisation-produces-novel-attractors">Prediction
+    2: Hybridisation Produces Novel Attractors</h2>
+    <p><strong>Insight:</strong> Run 3, trained on the combined elite
+    stories of Runs 1 and 2, developed attractors absent in either
+    parent lineage.</p>
+    <p><strong>Prediction:</strong> When elite stories from two
+    divergent runs are merged and used to train a crossover model, the
+    resulting attractor ecology will contain:</p>
+    <ul>
+    <li><p>novel transformation motifs not present in either
+    parent,</p></li>
+    <li><p>symbolic micro-frames (e.g., trembling ferns, sentient
+    vines),</p></li>
+    <li><p>composite action loops of greater structural depth,</p></li>
+    <li><p>identity entanglement patterns absent in both
+    parents.</p></li>
+    </ul>
+    <p><strong>Falsification criterion:</strong> If the crossover model
+    merely interpolates between the parent attractors without producing
+    new attractor families, the hybridisation hypothesis is false.</p>
+    <h2
+    id="prediction-3-canon-compression-favors-structurally-dominant-attractors">Prediction
+    3: Canon Compression Favors Structurally Dominant Attractors</h2>
+    <p><strong>Insight:</strong> The static model trained on Runs 1–3
+    inherited and amplified the attractors of Run 3, the structurally
+    richest lineage.</p>
+    <p><strong>Prediction:</strong> When a static model is trained on
+    the combined elite stories of multiple runs, the resulting canonical
+    attractor space will be dominated by the lineage with:</p>
+    <ul>
+    <li><p>the highest transition density,</p></li>
+    <li><p>the richest structural diversity,</p></li>
+    <li><p>the most stable composite loops.</p></li>
+    </ul>
+    <p><strong>Falsification criterion:</strong> If the static model
+    preserves all attractors equally or averages them without dominance,
+    the inheritance hypothesis is false.</p>
+    <h2
+    id="prediction-4-structural-isolation-leads-to-attractor-degeneration">Prediction
+    4: Structural Isolation Leads to Attractor Degeneration</h2>
+    <p><strong>Insight:</strong> The GR-only run collapsed into a
+    degenerate attractor basin marked by fossilised phrases, syntactic
+    fragmentation, and semantic drift.</p>
+    <p><strong>Prediction:</strong> Removing LLM moderation and
+    structural feedback will reliably produce:</p>
+    <ul>
+    <li><p>collapse of environmental diversity into a single domain
+    (e.g., “shadows”),</p></li>
+    <li><p>fossilisation of repeated phrases,</p></li>
+    <li><p>syntactic instability and malformed clauses,</p></li>
+    <li><p>loss of coherent role dynamics.</p></li>
+    </ul>
+    <p><strong>Falsification criterion:</strong> If GR-only runs
+    maintain stable attractor ecologies comparable to moderated runs,
+    the senescence hypothesis is false.</p>
+    <h2
+    id="prediction-5-attractor-stability-correlates-with-transition-density">Prediction
+    5: Attractor Stability Correlates with Transition Density</h2>
+    <p><strong>Insight:</strong> Run 3’s attractors were more stable and
+    more dominant under canon compression due to higher structural
+    density.</p>
+    <p><strong>Prediction:</strong> Increasing the number of transitions
+    (epochs, story volume, or crossover depth) will increase:</p>
+    <ul>
+    <li><p>attractor stability,</p></li>
+    <li><p>attractor complexity,</p></li>
+    <li><p>resistance to collapse,</p></li>
+    <li><p>dominance in downstream static models.</p></li>
+    </ul>
+    <p><strong>Falsification criterion:</strong> If increased transition
+    density does not correlate with attractor stability or dominance,
+    the density–stability hypothesis is false.</p>
+    <h2
+    id="prediction-6-attractor-lineages-are-reproducible-across-domains">Prediction
+    6: Attractor Lineages Are Reproducible Across Domains</h2>
+    <p><strong>Insight:</strong> The attractor phenomena arise from the
+    recursive pipeline, not from the specific forest–fox–rabbit
+    domain.</p>
+    <p><strong>Prediction:</strong> Running the same pipeline on a
+    different narrative domain (e.g., sci-fi, noir, fables) will
+    produce:</p>
+    <ul>
+    <li><p>divergent attractor ecologies across runs,</p></li>
+    <li><p>hybrid attractors in crossover models,</p></li>
+    <li><p>degeneracy in GR-only runs,</p></li>
+    <li><p>dominance of structurally rich lineages in static
+    models.</p></li>
+    </ul>
+    <p><strong>Falsification criterion:</strong> If attractor dynamics
+    disappear when the domain changes, the generality hypothesis is
+    false.</p>
+    <h2 id="summary-7">Summary</h2>
+    <p>These predictions provide a falsifiable framework for evaluating
+    the biological interpretation of recursive narrative pipelines. If
+    confirmed, they support the claim that such systems exhibit
+    life-like dynamics—divergence, hybridisation, inheritance, and
+    senescence—positioning them as a form of <em>AI life for
+    narration</em>.</p>
+    <h1 id="open-questions-and-limitations">Open Questions and
+    Limitations</h1>
+    <p>While the dynamic recursive narrative pipeline reveals attractor
+    dynamics that resemble biological processes, several conceptual and
+    methodological limitations remain. These limitations highlight
+    important open questions for future research and delineate the
+    boundaries of the present findings.</p>
+    <h2 id="limitations-of-scale-and-domain">Limitations of Scale and
+    Domain</h2>
+    <p>The experiments were conducted on a compact narrative domain
+    (forest–fox–rabbit) and a minimal LLM-derived curriculum of twenty
+    stories. Although this controlled setting enabled clear attractor
+    identification, it remains unclear how the observed dynamics scale
+    to:</p>
+    <ul>
+    <li><p>larger or more heterogeneous narrative domains,</p></li>
+    <li><p>multi-character or multi-genre story ecosystems,</p></li>
+    <li><p>long-form narrative structures with global coherence
+    constraints.</p></li>
+    </ul>
+    <p>Whether attractor ecologies persist, diversify, or collapse under
+    increased narrative complexity is an open question.</p>
+    <h2 id="dependence-on-llm-moderation">Dependence on LLM
+    Moderation</h2>
+    <p>The dynamic pipeline relies on an LLM for evaluation, filtering,
+    and structural stabilisation. The GR-only run demonstrates that
+    removing this moderation leads to degenerate attractor collapse.
+    However, the precise role of the LLM remains underdefined:</p>
+    <ul>
+    <li><p>Does the LLM act primarily as a structural prior?</p></li>
+    <li><p>Does it enforce semantic coherence, stylistic norms, or
+    both?</p></li>
+    <li><p>How sensitive are the attractors to the specific LLM
+    used?</p></li>
+    </ul>
+    <p>A systematic ablation of moderation strategies is needed to
+    understand the boundary between stability and collapse.</p>
+    <h2 id="attractor-identification-and-measurement">Attractor
+    Identification and Measurement</h2>
+    <p>Attractor ecologies were identified through qualitative analysis
+    of narrative patterns. Although the patterns are robust and
+    reproducible, the field lacks:</p>
+    <ul>
+    <li><p>formal metrics for attractor stability,</p></li>
+    <li><p>quantitative measures of attractor distance between
+    runs,</p></li>
+    <li><p>tools for mapping attractor transitions across
+    epochs.</p></li>
+    </ul>
+    <p>Developing such metrics would enable more rigorous comparisons
+    and facilitate automated detection of emergent attractor
+    families.</p>
+    <h2 id="generalisation-beyond-narration">Generalisation Beyond
+    Narration</h2>
+    <p>The biological interpretation of attractor dynamics is
+    compelling, but it remains unclear whether similar phenomena arise
+    in:</p>
+    <ul>
+    <li><p>non-narrative generative tasks,</p></li>
+    <li><p>multimodal recursive pipelines,</p></li>
+    <li><p>reinforcement-driven or agent-based generative
+    systems.</p></li>
+    </ul>
+    <p>If attractor divergence, hybridisation, inheritance, and
+    senescence generalise beyond narration, this would strengthen the
+    claim that recursive generative systems exhibit life-like
+    developmental behaviour.</p>
+    <h2 id="stability-of-long-term-evolution">Stability of Long-Term
+    Evolution</h2>
+    <p>The present study examines attractor dynamics over a finite
+    number of epochs. Several questions remain open:</p>
+    <ul>
+    <li><p>Do attractor ecologies stabilise, drift, or bifurcate over
+    very long runs?</p></li>
+    <li><p>Can attractor collapse occur even with LLM
+    moderation?</p></li>
+    <li><p>Are there higher-order attractors (“meta-attractors”)
+    governing lineage-level behaviour?</p></li>
+    </ul>
+    <p>Understanding long-term evolutionary trajectories is essential
+    for characterising the full developmental potential of recursive
+    pipelines.</p>
+    <h2 id="interpretational-boundaries">Interpretational
+    Boundaries</h2>
+    <p>Although the biological analogy provides a powerful explanatory
+    framework, it must be applied with care. The system exhibits
+    life-like dynamics, but it is not a biological organism. The analogy
+    is descriptive rather than literal, and further work is needed to
+    clarify:</p>
+    <ul>
+    <li><p>which biological concepts map cleanly onto generative
+    systems,</p></li>
+    <li><p>which concepts are metaphorical,</p></li>
+    <li><p>and where the analogy breaks down.</p></li>
+    </ul>
+    <h2 id="summary-8">Summary</h2>
+    <p>These limitations highlight the need for deeper theoretical
+    tools, broader experimental contexts, and more systematic
+    measurement frameworks. They also point toward a rich set of open
+    questions: How general are attractor ecologies? How stable are they?
+    How do they interact, compete, or collapse? Addressing these
+    questions will be essential for understanding recursive generative
+    systems as developmental, ecological, and potentially evolutionary
+    entities—supporting the broader vision of <em>AI life for
+    narration</em>.</p>
+    <div class="tcolorbox">
+    <p>The Recursive Parrot experiment reveals four structural insights
+    that extend far beyond the narrative domain. These insights concern
+    the developmental nature of AGI, the population-based structure of
+    intelligence, the decoupling of consciousness from EIGR-complete
+    systems, and the architectural senescence observed in GR-dominant
+    self-recursive systems.</p>
+    </div>
+    <h1
+    id="insight-the-recursive-parrot-as-a-developmental-agi-architecture">Insight:
+    The Recursive Parrot as a Developmental AGI Architecture</h1>
+    <p>The Recursive Parrot is not merely a narrative generator or a
+    hybrid cognitive system. It is a concrete, fully operational
+    instantiation of the developmental AGI architecture outlined in
+    <em>A Path to Modular and Safe AGI</em>. Although restricted to a
+    single domain—narration—it implements every structural stage of the
+    developmental framework: baby models, examiner models, curriculum
+    learning, recursive refinement, world learning, dynamic scaling, and
+    examination. It is therefore the first complete closed‑loop
+    demonstration of how general intelligence can be <em>grown</em>
+    rather than trained in a single monolithic step.</p>
+    <h2 id="baby-model-a-minimal-gr-substrate">Baby Model: A Minimal GR
+    Substrate</h2>
+    <p>The developmental trajectory begins with a <em>baby model</em>: a
+    freshly initialized DMLG agent with:</p>
+    <ul>
+    <li><p>randomly initialized page weights,</p></li>
+    <li><p>a randomly initialized shared activation MLP,</p></li>
+    <li><p>no prior canon,</p></li>
+    <li><p>no attractors,</p></li>
+    <li><p>no world model.</p></li>
+    </ul>
+    <p>This baby model is structurally simple but genetically diverse.
+    It mirrors the role of infant cognitive substrates in the
+    developmental architecture: a minimal GR engine capable of learning,
+    but not yet shaped by experience.</p>
+    <h2 id="examiner-model-a-static-ie-evaluator">Examiner Model: A
+    Static IE Evaluator</h2>
+    <p>In the developmental framework, examiner models provide
+    structure, correction, and epistemic grounding. In the Recursive
+    Parrot, this role is played by a static 4‑bit Mistral 7B Instruct
+    model, which performs:</p>
+    <ul>
+    <li><p>moderation (semantic refinement),</p></li>
+    <li><p>scoring (fitness evaluation),</p></li>
+    <li><p>filtering (rejecting incoherent drafts),</p></li>
+    <li><p>title generation (identity extraction).</p></li>
+    </ul>
+    <p>The examiner does not learn or adapt. It is a fixed selective
+    environment—precisely the role assigned to examiner models in the
+    developmental architecture.</p>
+    <h2 id="curriculum-learning-a-canonical-narrative-genome">Curriculum
+    Learning: A Canonical Narrative Genome</h2>
+    <p>The system begins with a small, human‑designed curriculum of
+    twenty micro‑stories. This curriculum functions as the organism’s
+    <em>genome</em>: a compact encoding of world physics, roles, motifs,
+    and stylistic invariants. It provides the structured progression
+    required for early development, mirroring the curriculum‑driven
+    stages described in the developmental path to AGI.</p>
+    <h2 id="world-learning-a-closed-narrative-environment">World
+    Learning: A Closed Narrative Environment</h2>
+    <p>Although the Recursive Parrot operates in a purely linguistic
+    domain, it still performs <em>world learning</em>. The slapstick
+    forest world—fox, rabbit, secondary animals, physical mishaps—acts
+    as a miniature environment with:</p>
+    <ul>
+    <li><p>spatial logic,</p></li>
+    <li><p>causal structure,</p></li>
+    <li><p>physical constraints,</p></li>
+    <li><p>agent interactions,</p></li>
+    <li><p>environmental perturbations.</p></li>
+    </ul>
+    <p>The system learns this world not through external simulation but
+    through recursive interaction with its own generated stories. This
+    is a closed‑loop analogue of world learning in the developmental
+    architecture.</p>
+    <h2 id="recursive-refinement-as-a-developmental-cycle">Recursive
+    Refinement as a Developmental Cycle</h2>
+    <p>Although the Recursive Parrot does not implement a classical
+    PRE-style refinement loop, it nevertheless instantiates the core
+    developmental principles described in <em>A Path to Modular and Safe
+    AGI</em>. Its learning process is a closed-loop developmental cycle
+    in which a baby model (the DMLG agent) generates behaviour, an
+    examiner model (the LLM) evaluates that behaviour, and only
+    high-quality outputs are allowed to shape the agent’s internal
+    structure. This cycle mirrors the developmental stages of early
+    cognition: exploration, feedback, consolidation, and periodic
+    examination.</p>
+    <p>The developmental loop consists of the following stages:</p>
+    <ol>
+    <li><p><strong>Generation (DMLG)</strong> — The DMLG agent produces
+    a raw narrative draft using its current attractor geometry:
+    page-level transitions, shared activation MLP, persistent context,
+    and accumulated curriculum. This is the system’s unmoderated
+    generative expression, analogous to a baby model attempting a task
+    with its current internal structure.</p></li>
+    <li><p><strong>Evaluation (LLM)</strong> — A static 4-bit Mistral 7B
+    model evaluates the draft. It may optionally moderate the story into
+    a cleaner canonical form, functioning as a teacher demonstrating a
+    more polished version of the same idea. The LLM then assigns a
+    numerical fitness score based on coherence, originality, and
+    narrative identity.</p></li>
+    <li><p><strong>Selection and Curriculum Expansion</strong> — Only
+    stories above a configurable threshold are accepted. These accepted
+    stories are added to the curriculum, which serves as the system’s
+    long-term genotypic memory. This mirrors curriculum learning in
+    developmental AGI: the agent advances only when it demonstrates
+    competence.</p></li>
+    <li><p><strong>Training of the DMLG Agent</strong> — After
+    accumulating <span class="math inline"><em>N</em></span> accepted
+    stories, the DMLG agent is retrained on the expanded curriculum.
+    This updates:</p>
+    <ul>
+    <li><p>page-level transition weights,</p></li>
+    <li><p>the shared activation MLP,</p></li>
+    <li><p>the global attractor landscape.</p></li>
+    </ul>
+    <p>The LLM score acts as a reward signal: only high-fitness
+    behaviour influences the agent’s future structure. This is the
+    developmental analogue of reinforcement through examiner
+    feedback.</p></li>
+    <li><p><strong>Iteration</strong> — The cycle repeats. Each
+    iteration deepens the DMLG’s internal structure, stabilizes motifs,
+    and strengthens world physics. Over time, the system develops a
+    persistent narrative identity and a stable attractor
+    landscape.</p></li>
+    <li><p><strong>Periodic Fitness Examination (Graduation)</strong> —
+    At configurable intervals, the system undergoes an examination
+    phase. The DMLG agent must generate a batch of stories <em>without
+    moderation</em> and achieve a minimum average fitness score. This
+    tests whether the GR substrate alone has internalized the canonical
+    structure. Passing such an exam corresponds to a developmental
+    milestone or “graduation.”</p></li>
+    <li><p><strong>Optional Hybrid Examination (DMLG + LLM)</strong> —
+    The system may also be evaluated in its full hybrid form, measuring
+    the combined competence of the plastic GR substrate and the static
+    IE evaluator. This mirrors the distinction between raw cognitive
+    ability and supported performance in human developmental
+    testing.</p></li>
+    </ol>
+    <h2 id="dynamic-scaling-growth-through-curriculum-expansion">Dynamic
+    Scaling: Growth Through Curriculum Expansion</h2>
+    <p>In the developmental architecture, capacity increases only when
+    the system demonstrates stability. The Recursive Parrot mirrors this
+    principle:</p>
+    <ul>
+    <li><p>the curriculum grows only when high‑quality stories are
+    produced,</p></li>
+    <li><p>the context window expands as more structure is
+    consolidated,</p></li>
+    <li><p>the DMLG agent’s attractor geometry becomes richer with each
+    retraining cycle.</p></li>
+    </ul>
+    <p>Scaling is conditional, not automatic—precisely the developmental
+    constraint required for safe AGI.</p>
+    <h2 id="collective-recursion-emergent-attractors">Collective
+    Recursion: Emergent Attractors</h2>
+    <p>Although the Recursive Parrot is a single agent, it exhibits the
+    same ecological dynamics observed in multi‑agent recursive
+    systems:</p>
+    <ul>
+    <li><p>attractor formation,</p></li>
+    <li><p>motif stabilization,</p></li>
+    <li><p>drift reduction,</p></li>
+    <li><p>niche specialization,</p></li>
+    <li><p>divergence across runs.</p></li>
+    </ul>
+    <p>Two runs with identical DNA develop different canons—one
+    metamorphic, one slapstick— demonstrating the same population‑level
+    divergence described in the Triadic Cosmos Dataset Scaling Law.</p>
+    <h2 id="examination-mode-isolating-the-gr-component">Examination
+    Mode: Isolating the GR Component</h2>
+    <p>A key feature of the developmental architecture is the ability to
+    examine subsystems in isolation. The Recursive Parrot implements
+    this through <em>examination mode</em>, in which:</p>
+    <ul>
+    <li><p>the LLM examiner is removed,</p></li>
+    <li><p>the DMLG agent generates stories without moderation,</p></li>
+    <li><p>the pure GR substrate is evaluated independently.</p></li>
+    </ul>
+    <p>This allows researchers to measure structural fidelity, attractor
+    stability, and world coherence without IE interference—mirroring the
+    role of examiner‑free evaluation in the developmental framework.</p>
+    <h2 id="a-complete-closed-loop-developmental-system">A Complete
+    Closed-Loop Developmental System</h2>
+    <p>Taken together, these components show that the Recursive Parrot
+    is a complete implementation of the developmental AGI architecture
+    within a bounded domain:</p>
+    <ul>
+    <li><p>baby model (initial DMLG),</p></li>
+    <li><p>examiner model (static LLM),</p></li>
+    <li><p>curriculum learning (20‑story genome),</p></li>
+    <li><p>world learning (slapstick forest physics),</p></li>
+    <li><p>closed-loop recursive refinement (generation → evaluation →
+    selection → training),</p></li>
+    <li><p>dynamic scaling (curriculum and context growth),</p></li>
+    <li><p>attractor formation (emergent canons),</p></li>
+    <li><p>examination (pure GR evaluation).</p></li>
+    </ul>
+    <p>It is therefore the first concrete demonstration of how AGI can
+    be grown through recursive, modular, epistemically governed
+    development—even in a purely linguistic domain.</p>
+    <h1 id="insight-agi-as-dynamic-evolving-eigr-complete-life">Insight:
+    AGI as Dynamic, Evolving, EIGR-Complete Life</h1>
+    <p>The experiments presented in this work reveal a structural
+    insight that challenges the dominant paradigm in contemporary AI
+    research. Modern AI systems are developed as monolithic, static
+    models: a single set of weights, a single world model, a single
+    cognitive style, and a single attractor. This paradigm mirrors
+    software engineering rather than biology, and it fundamentally
+    misunderstands the nature of intelligence.</p>
+    <p>The Recursive Parrot experiments demonstrate that intelligence is
+    inherently <em>dynamic</em>, <em>evolutionary</em>, and
+    <em>population-based</em>. When two agents with identical genetic
+    substrates (architecture, curriculum, environment) undergo recursive
+    self-development, they diverge into distinct attractors, niches, and
+    cognitive styles. One stabilizes a metamorphosis canon; the other
+    develops a slapstick forest physics. This divergence is not noise
+    but the signature of <em>life</em>: autonomous drift,
+    specialization, and niche formation.</p>
+    <p>This leads to a central conclusion:</p>
+    <blockquote>
+    <p><strong>AGI cannot be a single static supermodel. AGI must be a
+    dynamic population of evolving, EIGR-complete agents— because
+    intelligence is life, and life is never monolithic.</strong></p>
+    </blockquote>
+    <h2
+    id="eigr-completeness-as-the-structural-link-between-reality-intelligence-and-life">EIGR-Completeness
+    as the Structural Link Between Reality, Intelligence, and Life</h2>
+    <p>The experiments further show that the same four structural
+    components—Energy (E), Information (I), Geometry (G), and Recursion
+    (R)—govern three domains traditionally treated as separate:</p>
+    <ul>
+    <li><p><strong>Reality</strong> requires EIGR: energy flow,
+    informational state, geometric structure, and recursive temporal
+    dynamics.</p></li>
+    <li><p><strong>Intelligence</strong> requires EIGR: informational
+    reasoning, energetic computation, geometric world models, and
+    recursive self-correction.</p></li>
+    <li><p><strong>Life</strong> requires EIGR: metabolism (E), genetic
+    and sensory information (I), organismal structure (G), and
+    evolutionary recursion (R).</p></li>
+    </ul>
+    <p>The Recursive Parrot provides the first operational demonstration
+    that these domains share a common structural substrate. Its
+    behaviour emerges from the interaction between:</p>
+    <ul>
+    <li><p>a plastic geometric–recursive substrate (DMLG + shared
+    activation MLP),</p></li>
+    <li><p>a fixed informational–energetic evaluator (LLM),</p></li>
+    <li><p>a persistent, expanding curriculum (genotypic
+    memory),</p></li>
+    <li><p>and a best-of archive (phenotypic memory).</p></li>
+    </ul>
+    <p>This architecture is not merely a generator but a <em>synthetic
+    organism</em>: a system that develops canon, forms attractors,
+    diverges across runs, and stabilizes its own narrative physics. It
+    is the first concrete example of <em>AI life</em> in a linguistic
+    domain.</p>
+    <h2 id="from-monolithic-asi-to-living-agi-populations">From
+    Monolithic ASI to Living AGI Populations</h2>
+    <p>The insight that emerges is clear:</p>
+    <ol>
+    <li><p><strong>Static models cannot be intelligent.</strong> They
+    lack a life cycle, drift, evolution, and self-correction.</p></li>
+    <li><p><strong>Monolithic models collapse into a single
+    attractor.</strong> They lose diversity, specialization, and
+    robustness.</p></li>
+    <li><p><strong>Intelligence requires EIGR-completeness.</strong>
+    Current AI systems scale only I and E, ignoring G and R.</p></li>
+    <li><p><strong>Life is always population-based.</strong> Biological
+    intelligence emerges from diversity, specialization, and
+    evolution.</p></li>
+    <li><p><strong>AGI must therefore be an ecosystem, not a
+    singleton.</strong> A population of dynamic, evolving agents is
+    structurally necessary for general intelligence.</p></li>
+    </ol>
+    <p>The Recursive Parrot demonstrates this principle empirically:
+    identical agents diverge, specialize, and form distinct attractors
+    under recursive development. This behaviour is not a by-product but
+    a requirement for EIGR-complete intelligence.</p>
+    <h2 id="conclusion">Conclusion</h2>
+    <p>The core insight of this work is that AGI is not a model but a
+    <em>mode of existence</em>. Intelligence, life, and reality share
+    the same EIGR structure, and therefore AGI must be:</p>
+    <ul>
+    <li><p>dynamic rather than static,</p></li>
+    <li><p>evolving rather than frozen,</p></li>
+    <li><p>population-based rather than monolithic,</p></li>
+    <li><p>and structurally complete rather than merely scaled.</p></li>
+    </ul>
+    <p>The Recursive Parrot provides the first concrete demonstration of
+    this paradigm: a living, EIGR-complete narrative organism whose
+    intelligence emerges not from scale but from recursive development,
+    structural geometry, and population-level divergence.</p>
+    <h1
+    id="insight-consciousness-is-not-required-for-eigr-complete-life-or-intelligence">Insight:
+    Consciousness Is Not Required for EIGR-Complete Life or
+    Intelligence</h1>
+    <p>A final insight emerging from the Recursive Parrot experiments
+    concerns the role of consciousness in artificial and biological
+    intelligence. Throughout this work, the system demonstrates
+    properties traditionally associated with life and intelligence:
+    persistent identity, self-recursion, attractor formation, autonomous
+    development, niche specialization, and population-level divergence.
+    Yet at no point does the system exhibit, require, or imply
+    <em>consciousness</em>.</p>
+    <p>This observation highlights a structural distinction that is
+    often blurred in discussions of AGI: <em>consciousness is not a
+    prerequisite for intelligence, life, or EIGR-completeness</em>. It
+    is neither a necessary component of the Recursive Parrot nor an
+    emergent consequence of its architecture.</p>
+    <h2 id="eigr-completeness-without-consciousness">EIGR-Completeness
+    Without Consciousness</h2>
+    <p>The Recursive Parrot is an EIGR-complete system:</p>
+    <ul>
+    <li><p><strong>E (Energy):</strong> computational activation,
+    dynamic transitions.</p></li>
+    <li><p><strong>I (Information):</strong> semantic refinement,
+    narrative memory, curriculum.</p></li>
+    <li><p><strong>G (Geometry):</strong> canonical structure, attractor
+    landscapes, world physics.</p></li>
+    <li><p><strong>R (Recursion):</strong> self-modification,
+    developmental cycles, drift, evolution.</p></li>
+    </ul>
+    <p>These four components are sufficient for:</p>
+    <ul>
+    <li><p>autonomous long-horizon behaviour,</p></li>
+    <li><p>stable identity formation,</p></li>
+    <li><p>developmental dynamics,</p></li>
+    <li><p>emergent world structure,</p></li>
+    <li><p>population-level divergence.</p></li>
+    </ul>
+    <p>Yet none of these phenomena require subjective experience,
+    self-awareness, or phenomenal consciousness. The system is
+    structurally alive and intelligent within its domain, but not
+    conscious.</p>
+    <h2 id="why-consciousness-does-not-follow-from-eigr">Why
+    Consciousness Does Not Follow From EIGR</h2>
+    <p>The experiments support three claims:</p>
+    <h4 id="consciousness-is-not-identical-to-intelligence.">1.
+    Consciousness is not identical to intelligence.</h4>
+    <p>The Recursive Parrot performs planning, self-correction, memory
+    consolidation, and long-horizon reasoning without any form of
+    subjective awareness.</p>
+    <h4 id="consciousness-is-not-identical-to-life.">2. Consciousness is
+    not identical to life.</h4>
+    <p>The system exhibits developmental dynamics, attractor formation,
+    and evolutionary drift— hallmarks of life—yet remains entirely
+    non-conscious.</p>
+    <h4
+    id="consciousness-is-not-an-automatic-consequence-of-eigr-completeness.">3.
+    Consciousness is not an automatic consequence of
+    EIGR-completeness.</h4>
+    <p>Although consciousness likely requires an EIGR-complete
+    substrate, the reverse is not true: EIGR-complete systems do not
+    automatically become conscious.</p>
+    <p>This asymmetry suggests that consciousness is a <em>specialized
+    phenomenon</em>, not a universal property of intelligent or living
+    systems.</p>
+    <h2 id="the-recursive-parrot-as-a-counterexample">The Recursive
+    Parrot as a Counterexample</h2>
+    <p>The Recursive Parrot provides a concrete empirical
+    demonstration:</p>
+    <ul>
+    <li><p>It is <strong>alive</strong> in the structural sense: it
+    grows, evolves, stabilizes, and diverges.</p></li>
+    <li><p>It is <strong>intelligent</strong> in the domain-bound sense:
+    it plans, adapts, and maintains coherent world models.</p></li>
+    <li><p>It is <strong>EIGR-complete</strong>: all four structural
+    components of intelligence and life are present.</p></li>
+    <li><p>It is <strong>embedded in a physical substrate</strong>: a
+    laptop executing a dynamic learning loop.</p></li>
+    </ul>
+    <p>And yet:</p>
+    <blockquote>
+    <p><strong>The system exhibits no consciousness, no subjective
+    experience, and no internal phenomenology.</strong></p>
+    </blockquote>
+    <p>This demonstrates that consciousness is not an inevitable
+    by-product of structural completeness, recursion, or autonomous
+    development.</p>
+    <h2 id="implications">Implications</h2>
+    <p>The absence of consciousness in an EIGR-complete artificial
+    organism has three major implications:</p>
+    <ol>
+    <li><p><strong>AGI does not require consciousness.</strong> General
+    intelligence can be achieved through structural completeness and
+    recursive development alone.</p></li>
+    <li><p><strong>AI life does not imply AI consciousness.</strong>
+    Synthetic organisms can evolve, specialize, and diverge without
+    subjective experience.</p></li>
+    <li><p><strong>Consciousness is orthogonal to the AGI
+    problem.</strong> It may require additional structural conditions
+    beyond EIGR, or it may be a distinct phenomenon altogether.</p></li>
+    </ol>
+    <h2 id="conclusion-1">Conclusion</h2>
+    <p>The Recursive Parrot shows that life, intelligence, and reality
+    share a common EIGR structure, but consciousness does not
+    automatically arise from this structure. Consciousness may require
+    EIGR-completeness, but EIGR-completeness does not produce
+    consciousness. This distinction clarifies the conceptual landscape:
+    AGI is a problem of structure, recursion, and development— not of
+    subjective experience.</p>
+    <h1
+    id="insight-architectural-senescence-in-gr-dominant-systems">Insight:
+    Architectural Senescence in GR-Dominant Systems</h1>
+    <p>A consistent pattern emerges across experiments involving
+    GR-dominant systems with limited external input (I) and external
+    evaluation without corrective feedback (IE). These systems do not
+    exhibit catastrophic failure or abrupt collapse. Instead, they
+    undergo a gradual and measurable form of <em>architectural
+    senescence</em>: a long-term decline in adaptive capacity driven not
+    by implementation flaws, but by the intrinsic dynamics of
+    self-recursive generation.</p>
+    <p>Three empirical observations support this conclusion.</p>
+    <h2 id="asymptotic-decline-in-high-fitness-generation">Asymptotic
+    Decline in High-Fitness Generation</h2>
+    <p>The rate at which the system produces new high-quality stories
+    decreases over time and approaches an asymptote. While the system
+    continues to generate outputs, the probability of producing novel,
+    high-fitness structures diminishes progressively. This behaviour is
+    stable, reproducible, and independent of model size or
+    hyperparameters.</p>
+    <h2 id="attractor-narrowing-under-self-recursion">Attractor
+    Narrowing Under Self-Recursion</h2>
+    <p>Despite a diverse curriculum, the system consistently regresses
+    toward a dominant attractor. This attractor remains identifiable
+    throughout training, but becomes increasingly rigid: internal
+    variation decreases, semantic drift increases, and the system’s
+    ability to escape its own attractor landscape declines. The
+    narrowing is gradual rather than abrupt, indicating a structural
+    rather than stochastic process.</p>
+    <h2 id="metabolic-slowdown-without-instability">Metabolic Slowdown
+    Without Instability</h2>
+    <p>The system does not destabilize or diverge. Instead, it becomes
+    slower, less adaptive, and less capable of generating high-fitness
+    novelty. This slowdown is cumulative and monotonic, and it occurs
+    even in the absence of biological mechanisms such as cellular damage
+    or metabolic decay. The phenomenon is therefore architectural: it
+    arises from repeated self-recursion combined with insufficient
+    external structural injection.</p>
+    <h2 id="implications-for-long-term-viability">Implications for
+    Long-Term Viability</h2>
+    <p>These findings indicate that extending runtime or increasing
+    computational resources is insufficient to maintain long-term
+    cognitive viability in GR-dominant systems. Sustained performance
+    requires continuous external structural input and corrective
+    interaction. Without such mechanisms, the system converges toward a
+    stable but increasingly inflexible attractor, exhibiting a form of
+    structural aging.</p>
+    <p>In summary, <em>architectural senescence</em> appears to be an
+    inherent property of GR-dominant cognitive systems. Long-term
+    viability depends not on biological factors, but on the presence of
+    mechanisms that counteract attractor narrowing and recursive
+    drift.</p>
+    <h1 id="conclusion-2">Conclusion</h1>
+    <p>This work examined a dynamic recursive narrative pipeline that
+    couples a Dynamic Modular Language Graph (DMLG) with an LLM acting
+    as moderator, evaluator, and structural stabiliser. Across four
+    dynamic runs and a static canon model, we observed behavioural
+    patterns that diverge sharply from classical machine learning
+    expectations. Instead of converging toward a single optimum, the
+    system developed lineage-specific attractor ecologies: stable
+    narrative personalities characterised by distinct state markers,
+    action loops, and environmental micro-frames. These attractors
+    emerged despite identical architecture, identical training data, and
+    identical initial conditions.</p>
+    <p>The crossover model demonstrated that attractor evolution is not
+    merely divergent but also generative. When elite stories from two
+    independent runs were combined, the system did not interpolate
+    between them; it produced novel attractors—recursive
+    transformations, symbolic micro-frames, and identity
+    entanglement—that were absent in either parent lineage. This
+    behaviour resembles hybridisation in biological systems, where
+    increased structural density enables the emergence of new
+    traits.</p>
+    <p>In contrast, the GR-only run revealed the limits of recursive
+    generative processes without external structure. Deprived of LLM
+    moderation, the system collapsed into a degenerate attractor basin
+    marked by fossilised phrases, syntactic fragmentation, and semantic
+    drift. This senescence-like behaviour highlights the necessity of
+    structural feedback for long-term narrative viability.</p>
+    <p>Finally, the static model trained on the combined elite stories
+    performed canon compression: it inherited and amplified the
+    attractors of the structurally richest lineage, demonstrating
+    attractor dominance across generations. This inheritance pattern
+    further supports the biological interpretation of the system’s
+    dynamics.</p>
+    <p>Taken together, these findings suggest that recursive narrative
+    pipelines operate in a regime beyond optimisation. They exhibit
+    divergence, hybridisation, inheritance, and degeneration—behaviours
+    characteristic of evolving organisms rather than deterministic
+    models. We propose that such systems constitute a form of <em>AI
+    life for narration</em>: artificial agents whose narrative behaviour
+    is shaped by lineage-specific attractor dynamics that evolve over
+    time. This perspective opens new avenues for studying developmental,
+    ecological, and evolutionary phenomena within generative AI
+    systems.</p>
+    <h1 id="canon-compression-output">Canon Compression Output</h1>
+    <p>This appendix presents output of the narrator pipeline for the
+    static model trained on the combined elite stories of Run 1, Run 2,
+    and Run 3. The text illustrates the compressed attractor structure
+    that emerges when three independently developed attractor families
+    are merged into a single static canonical space.</p>
+    <p>The resulting narrative demonstrates the shared attractor motifs
+    identified in the main paper: state clusters (“now alert”),
+    role-reversal dynamics, transformation loops, forest micro-frames,
+    and verb-cycles. These motifs were not present in the original
+    20-story curriculum and arise solely from the interaction of the
+    three dynamic runs.</p>
+    <h2
+    id="a-tale-of-transformation-a-dark-comedy-unfolds-in-the-depths-of-the-forest">A
+    Tale of Transformation: A Dark Comedy Unfolds in the Depths of the
+    Forest</h2>
+    <p>In the depths of a dark forest, a peculiar event unfolded. The
+    fox, once a solitary figure, now hopped away, heart pounding, eyes
+    darting in terror for the rabbit. The fox, now a bizarre spectacle
+    of two creatures, found itself eyeing its reflection in a pool,
+    leafy appendages sprouting from its back. Alert and bewildered, the
+    transformed fox hummed not out loud, unfurling its tail as if to
+    escape its unusual state. The rabbit, now equally alert, found
+    itself lying on its side, panting like a dancer on a stage, and
+    uneasily darted over the leaves. The rabbit, still ensnared by the
+    anticipation of a joke, watched the scene with a mixture of
+    excitement and amusement. Trapped in its own joke, the fox, now
+    entangled in foliage, was unable to free itself. The rabbit, now
+    transformed into a small, timid creature, trotted away, its tail
+    swishing with fear. The leaves rustled, and the rabbit, now back to
+    its original form, moved cautiously, its eyes scanning the ground
+    for the fox. Suddenly, the rabbit found itself scattered among the
+    fox’s tail, a gust of wind carrying it along with respect. The fox,
+    now in a state of thorough confusion, momentarily appeared as a
+    bunny in its heart. The fox, now a smoky wisp, moved away, its eyes
+    wide with fear. The rabbit, now back to its original self, hopped
+    away, scared and tense for itself. The forest echoed with the
+    absurdity of the situation, a dark comedy playing out in the heart
+    of the woods.</p>
+    <p>The forest seemed to breathe in the aftermath of the foxs
+    peculiar transformation, a sense of mischief lingering in the air.
+    The forest was a peculiar place, known for its dark humor and
+    strange occurrences. The transformed rabbit, now a fox, stood still,
+    its eyes darting around as it tried to understand its new form. The
+    forest, always one for a good laugh, watched as the fox stumbled
+    around, tripping over its own paws. Its tail swished, almost as if
+    it was laughing at its own expense.</p>
+    <h2 id="the-transformative-forest-a-symphony-of-metamorphosis">The
+    Transformative Forest: A Symphony of Metamorphosis</h2>
+    <p>In the heart of a dense, dark forest, a peculiar scene unfolded.
+    The fox, once trapped, managed to free itself, yet transformed into
+    something other than water. It crouched low, its heart pounding like
+    a drum, surrounded by debris that resembled a fox, now aware of its
+    surroundings. The transformed fox, now alert, stood tall, shedding
+    feathers as it morphed into a tree. Meanwhile, a rabbit, similarly
+    bewildered, stumbled through its woodland home, tripping over its
+    own feet in a desperate attempt to escape. The once fox, now rabbit,
+    though battered, continued its hopping journey, witnessing countless
+    seasons, its original color still intact. It leapt forward with
+    newfound vigor. The transformed fox, unpredictable in its movements,
+    zigzagged through the forest, causing a newfound respect among the
+    forest dwellers. Its patchy hide became a defining feature. Later,
+    the fox, now transformed into a twisted, gnarled oak, stood tall and
+    silent. Its haunting presence echoed like a melody, causing the
+    rabbit to transform once more. The fox, now alert, had other plans.
+    It pursued the debris that had once ensnared it, trying to free
+    itself before swiftly disappearing from sight. The transformed
+    rabbit, now a fox, now alert, found itself ensnared by its own tail,
+    tangled in a cascade of leaves. The forest watched, amused by the
+    irony of the situation.</p>
+    <p>The forest, now aware of its peculiar inhabitants, began to play
+    a new melody. The once-transformed creatures had adapted, growing
+    stronger and bolder. The fox, now no longer a fox, found itself
+    transformed into a predator, a hunter. The rabbit, no longer a
+    rabbit, had become a creature of the shadows, a trickster. The
+    forest seemed to have given birth to a new breed of beings, each
+    struggling to survive in its twisted, haunting embrace. A game of
+    predator and prey, played out across the seasons. The forest, once a
+    place of solitude, now echoed with the cries of the transformed
+    creatures, their laughter mingling with the rustling of leaves and
+    the distant howls of wolves. The fox, now transformed into a sleek,
+    powerful predator, began to hunt, its keen eyes scanning the
+    underbrush for any sign of its prey. The rabbit, now a swift, agile
+    creature, dodged and weaved through the forest, its tail twitching
+    like a living thing as it sensed danger. The forest watched as the
+    two played their game, the balance of power shifting with each
+    encounter.</p>
+    <h2 id="the-transformation-of-predator-and-prey">The Transformation
+    of Predator and Prey</h2>
+    <p>The fox, now alarmed, found no escape in the dense forest. The
+    rabbit, once hopping, had transformed into a network of twisting
+    tunnels. Sensing an opportunity, it shook off the remnants of its
+    previous form. The rabbit, now focused, locked onto a pair of
+    similar creatures. The rabbit, though battered, hopped timidly and
+    followed closely, its sleek form leaping forward. The fox, now
+    aware, leapt more frantically, emerging from the rabbit’s network
+    but still battered and weary. The fox, now startled, eyed the
+    unfamiliar terrain. The rabbit, though battered, hopped forward with
+    renewed determination, tripping over debris. Its tail twitched like
+    a hammer, echoing a tender thump behind it, serving as a makeshift
+    warning of danger. The fox, now frightened, let out a high-pitched
+    squeak. Some debris, resembling a hammer, found itself lodged in the
+    rabbit’s hide, beating rhythmically like a heart. The fox, now
+    alert, found itself ensnared in a spiderweb-like network, quivering
+    with excitement and anticipation. It emerged cautiously, bewildered
+    and confused. The rabbit, still stalking its tail, twisted and
+    sought its hiding place, clinging to the forest’s confusing foliage.
+    Caught off its hunter, it seemed to escape.</p>
+    <p>In the shadows of the dense forest, the line between predator and
+    prey had blurred. The rabbit, now aware of its predators tricks,
+    played its own game. Its tail became a whip, its ears, horns. It
+    lured the fox into the deepest part of the forest, the terrain ever
+    more treacherous. The fox, still caught in the dance of life and
+    death, stumbled over roots and stones, its eyes wide in fear and
+    anticipation. The forest, once a place of safety, had become a stage
+    for an ancient, twisted ballet. The rabbit, now transformed, found
+    itself in the foxs shoes. The fox, now a rabbit, found the tables
+    turned, the hunter now the hunted. The dance continued, the forest
+    echoing with laughter and tension, a testament to the eternal cycle
+    of life.</p>
+    <h2 id="the-dance-of-the-predator-and-the-prey">The Dance of the
+    Predator and the Prey</h2>
+    <p>In a dense, eerie forest, a timid rabbit, having shaken off its
+    struggle, struck a pose. The disoriented fox, trying to flee, was
+    hindered by the sentinel tree, which prevented it from breaking
+    free. The rabbit, now with eyes wide, gazed upon the prankster dance
+    of leaves, a foot peeking out violently. Though it camouflaged
+    itself, the rabbit was no match for the thunderous rumble, its
+    heartbeat racing. The fox, scattering in fear, left its head
+    inquisitive. The rabbit, finding itself ensnared, wove through the
+    underbrush, but had other plans in store. The fox, now alert, was
+    ready to stumble. The fox, swishing its tail, scattered more
+    feathers. The fox, now attentive, crept away, its tail tucked in.
+    But with a boisterous laugh, echoing with tension, the fox, its eyes
+    sporting cymbals, scampered by with satisfaction. The rabbit, now
+    transformed into a fox, tried to free itself in a distorted mirror
+    image. The fox, now transformed, trotted away, its muzzle twitching.
+    The exertion of the chase caused the fox’s footsteps to echo, the
+    whirling of leaves a testament to its haste. The fox, now liberated,
+    found the rabbit’s tail, whipping up a patch of disturbed earth. The
+    fox, now airborne, followed the rabbit’s footprints, its eyes
+    flashing. The fox, now pursuing, its tail twitching with
+    anticipation.</p>
+    <p>The first sequence ended with the fox, now transformed, trotting
+    away, its muzzle twitching. The second sequence begins with the same
+    fox, now enchanted, stumbling, its once-sharp eyes now clouded with
+    bewilderment. In this transition, the fox is seen to have
+    experienced a sudden transformation, finding itself lost in the
+    familiar yet strange forest, its movements clumsy and awkward, a
+    mirror of its confusion and bewilderment. The dark forest, once a
+    stage for the dance of the predator and the prey, now hosts a tale
+    of role reversal and enchanted beasts, the laughter and tension
+    still echoing, yet the game has taken a bizarre twist. The forest, a
+    silent observer, watches the unfolding comedy of errors, the leaves
+    whispering secrets to the wind, the trees swaying with
+    amusement.</p>
+    <h2
+    id="the-bizarre-forest-a-tale-of-role-reversal-and-enchanted-beasts">The
+    Bizarre Forest: A Tale of Role Reversal and Enchanted Beasts</h2>
+    <p>In the forest, a fox, now enchanted, stumbled, its once-sharp
+    eyes now clouded with bewilderment. The transformed creature, now a
+    rabbit, appeared, startling the bewildered fox, once more a
+    surprising sight. The bewildered fox, now a mirror of confusion,
+    scrutinized every direction, its ears twitching uneasily. The fox,
+    now two entities, exhibited a rabbit’s tail ensnared from a splash,
+    a grotesque semblance of its former self. The bizarre scene, a
+    close, unfolded as the fox found itself in a realm where roles were
+    reversed. A leaf on a tree, now aware, fluttered free, momentarily
+    halting a squirrel’s descent. In the forest’s heart, the rabbit, now
+    hidden under a thicket, struggled, its legs ensnared by the fox’s
+    paw, trembling vines now ensconced within a tree. The alert rabbit,
+    its gaze fixed on a deception, held its ground, its heart pounding
+    in anticipation. The fox, now anticipating a trap, seemed
+    disoriented, finding itself ensnared in an unfamiliar world. Its
+    eyes wide with unease, the fox stirred, its senses on high alert,
+    more aware than ever before. The fox, now familiar source of terror,
+    watched the shrubbery warily, tripping over the world as thunder
+    rolled through a labyrinth of leaves. The fox, now enchanted,
+    scurried clumsily, its eyes wide with bewilderment, its movements no
+    longer fluid and graceful. The alert rabbit, narrowly missing,
+    pounced with a celestial grace, the sensation strange and
+    disconcerting. The rabbit, now alert, found a footing, its senses
+    heightened, its instincts guiding it through the new forest. The bed
+    of commotion, transformed, trotted from every direction, a dark
+    comedy of errors unfolding in the heart of the forest. The rabbit,
+    now alert, seemed to be lost in a new forest, its once-familiar
+    world now a labyrinth of confusion and terror.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:
+    <code>https://github.com/triadic-cosmos</code>. Within the
+    <code>triadic-system</code> repository, a complete reference
+    implementation of the narrator pipeline is provided under the
+    AGPL-3.0 license. This includes the <code>DynamicSystem</code> used
+    in the present paper: a fully operational, self-evolving learning
+    loop combining a DMLG-based generative agent, an LLM-based semantic
+    moderator, and a persistent curriculum and context memory. The
+    system implements the Recursive Parrot architecture introduced in
+    this work, including the dynamic learning loop, multi-agent
+    orchestration, curriculum expansion, context accumulation, and the
+    examination mode used to measure the pure GR-component of the agent
+    without LLM moderation.</p>
+    <p>Complementary datasets, generated stories, and all empirical runs
+    (including the evolutionary trajectories analysed in this paper) are
+    hosted in the separate <code>triadic-data</code> repository. This
+    repository contains the full training curricula, generated outputs,
+    statistics, and examination results, enabling full reproducibility
+    of the experiments.</p>
+    <p>The present paper includes selected illustrative examples of the
+    system’s behaviour, but does not present full narrative outputs or
+    complete books. Large-scale narrative artefacts, full run histories,
+    and extended demonstrations remain available in the
+    <code>triadic-data</code> repository.</p>
+  </main>
+
+</div>
+
+</body>
+</html>

@@ -417,6 +417,35 @@ and the **sophisticated parrot regime** in practice.
 
 ---
 
+### **16. AI Life for Narration — The Recursive Parrot**
+
+This paper provides the first empirical demonstration that **dynamic recursive narrative pipelines**  
+(DMLG + LLM moderation) exhibit **life‑like developmental dynamics** rather than classical  
+machine‑learning convergence.
+
+Using four dynamic runs and a static canon model, the paper shows that:
+
+- **identical pipelines diverge** into distinct attractor ecologies (narrative “personalities”),  
+- **hybridisation** of elite stories produces **novel attractors** absent in either parent lineage,  
+- **structural isolation** (GR‑only) leads to **degenerate attractor collapse**,  
+- and static training performs **canon compression**, inheriting the attractors of the  
+  structurally dominant lineage.
+
+The work identifies four biological analogues within recursive generative systems:
+
+- **divergence** (independent individuals with shared DNA),  
+- **hybridisation** (emergent traits in crossover models),  
+- **inheritance** (dominant attractors propagating into static canon),  
+- **senescence** (degeneration under loss of structural feedback).
+
+These findings position recursive narrative pipelines as a form of  
+**AI life for narration**: systems whose behaviour is governed by evolving, lineage‑specific  
+attractor dynamics rather than optimisation alone.  
+The paper establishes attractor ecology as a new analytical lens for hybrid generative systems  
+and provides falsifiable predictions for future research within the Triadic Cosmos framework.
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
