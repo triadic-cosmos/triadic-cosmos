@@ -170,6 +170,27 @@ general framework for **synthetic narratology** — a discipline where worlds ar
 A foundational contribution to the Triadic Cosmos ecosystem, revealing how structure, not  
 scale, enables coherent generative systems.
 
+### **11. Tales of the Dark Forest: The Chaotic Dance of Predators, Prey, and Unlikely Allies**
+
+A complete end‑to‑end demonstration of the Triadic Cosmos Narrator Pipeline:  
+a fully autonomous generative system that transforms distilled curricula into  
+canon‑consistent worlds, multi‑agent slapstick physics, and coherent long‑form  
+narration.
+
+This volume showcases how chaotic fragments from a tiny model can be stabilized  
+into a structured narrative through attractor extraction, tone alignment,  
+recursive remastering, and director’s‑cut refinement. The fox, rabbit, raccoon,  
+and monkey emerge as stable behavioral attractors, forming a miniature ecosystem  
+governed by slapstick physics, unstable ground, bubbling lava pits, and  
+multi‑agent comedic tension.
+
+The book includes ten complete chapters and AI‑generated illustrations  
+derived from director’s‑cut prompts — demonstrating multimodal consistency  
+across text and imagery. As a pipeline milestone, *Tales of the Dark Forest*  
+serves as the first fully transparent example of autonomous book generation  
+within the Triadic Cosmos ecosystem, validating the narrator architecture  
+before expansion into more complex worlds.
+
 ---
 
 ## 📄 Scientific Papers
