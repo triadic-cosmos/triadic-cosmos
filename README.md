@@ -467,7 +467,7 @@ and provides falsifiable predictions for future research within the Triadic Cosm
 
 ---
 
-### **17. A Narrator Pipeline driven by DMLG — Structural Hybrid Intelligence **
+### **17. A Narrator Pipeline driven by DMLG — Structural Hybrid Intelligence**
 
 This paper presents the first fully operational demonstration of **DMLG‑v3** as a  
 geometric–recursive generative substrate within a hybrid IEGR architecture.  
