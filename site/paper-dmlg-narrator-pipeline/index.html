@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>A Narrator Pipeline driven by DMLG<br />
+Structural Hybrid Intelligence through an IEGR‑Complete Generative
+System </title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#motivation" id="toc-motivation">Motivation</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a
+    href="#fixed-output-size-and-codebook-based-deterministic-decoding"
+    id="toc-fixed-output-size-and-codebook-based-deterministic-decoding">Fixed
+    Output Size and Codebook-Based Deterministic Decoding</a></li>
+    <li><a
+    href="#prefix-grammar-and-deterministic-grammarlemma-alternation"
+    id="toc-prefix-grammar-and-deterministic-grammarlemma-alternation">Prefix
+    Grammar and Deterministic Grammar–Lemma Alternation</a></li>
+    <li><a href="#additional-dmlg-architectural-improvements"
+    id="toc-additional-dmlg-architectural-improvements">Additional DMLG
+    Architectural Improvements</a></li>
+    <li><a href="#the-sequential-narrator-pipeline"
+    id="toc-the-sequential-narrator-pipeline">The Sequential Narrator
+    Pipeline</a></li>
+    <li><a href="#energetic-scaling-through-multi-variant-generation"
+    id="toc-energetic-scaling-through-multi-variant-generation">Energetic
+    Scaling Through Multi-Variant Generation</a></li>
+    <li><a
+    href="#hybrid-iegr-architecture-dmlgv3-as-a-plastic-gr-substrate"
+    id="toc-hybrid-iegr-architecture-dmlgv3-as-a-plastic-gr-substrate">Hybrid
+    IEGR Architecture: DMLG‑v3 as a Plastic GR Substrate</a></li>
+    <li><a
+    href="#empirical-results-autonomous-world-absorption-and-narrative-evolution"
+    id="toc-empirical-results-autonomous-world-absorption-and-narrative-evolution">Empirical
+    Results: Autonomous World Absorption and Narrative
+    Evolution</a></li>
+    <li><a href="#testable-predictions"
+    id="toc-testable-predictions">Testable Predictions</a></li>
+    <li><a href="#open-questions-and-limitations"
+    id="toc-open-questions-and-limitations">Open Questions and
+    Limitations</a></li>
+    <li><a href="#conclusion-1"
+    id="toc-conclusion-1">Conclusion</a></li>
+    <li><a href="#narrator-pipeline-diagram"
+    id="toc-narrator-pipeline-diagram">Narrator Pipeline
+    Diagram</a></li>
+    <li><a href="#iegr-structural-roles"
+    id="toc-iegr-structural-roles">IEGR Structural Roles</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Artificial intelligence has advanced rapidly over the past
+    decade, yet the field still lacks a structural account of how
+    general-purpose intelligent behavior may emerge. Existing
+    discussions of artificial general intelligence (AGI) tend to be
+    anthropocentric or task-based, focusing on what AGI should
+    <em>do</em> rather than on the architectural conditions under which
+    broad, coherent behavior could arise. As a result, debates about AGI
+    remain fragmented, oscillating between scale-driven optimism,
+    modular skepticism, and safety concerns that lack a unifying
+    structural framework.</p>
+    <p>This paper approaches the question from a different angle. Rather
+    than proposing a concrete realization of AGI, we introduce the IEGR
+    framework—energetic efficiency (E), informational richness (I),
+    geometric structure (G), and recursive depth (R)—as a conceptual
+    lens for understanding how complementary systems may be combined to
+    produce stable, long-horizon behavior. IEGR is substrate-agnostic:
+    it applies equally to biological cognition, artificial
+    architectures, and hybrid systems. The framework does not define
+    AGI; instead, it identifies the structural roles that must be
+    present for general-purpose reasoning to be possible.</p>
+    <p>Modern AI systems instantiate these roles asymmetrically.
+    Transformer-based large language models (LLMs) scale E and I
+    aggressively but lack geometric modularity and recursive depth,
+    placing them in the <em>statistical parrot</em> regime. Conversely,
+    structured modular systems such as the Dynamic Modular Language
+    Graph (DMLG) instantiate G and R strongly but lack large-scale E and
+    I, placing them in the <em>canonical parrot</em> regime. Neither
+    architecture alone provides the full IEGR spectrum, but together
+    they form a complementary hybrid capable of coherent long-horizon
+    behavior.</p>
+    <p>To explore this structural complementarity, we introduce DMLG‑v3,
+    a deterministic geometric–recursive substrate designed for world
+    absorption, canonical grammar, stable attractors, and recursive
+    memory. When coupled with a transformer-based LLM and integrated
+    through a bi-directional narrator pipeline, the resulting system
+    serves as an example of how IEGR-complete behavior can emerge
+    through hybrid recursion rather than scale alone. The narrator
+    pipeline is not presented as AGI; instead, it functions as a
+    concrete demonstration of how AGI-like structural properties—world
+    internalization, multi-generational narrative evolution, and
+    domain-stable behavior—may arise in practice.</p>
+    <p>Empirically, the pipeline autonomously generates long-form
+    narratives that maintain internal canon across dozens of chapters.
+    Two complete works— <em>Tales of the Dark Forest</em> and <em>Tales
+    of the Shrouded City</em>—illustrate how hybrid recursion between
+    complementary model types can yield systems capable of absorbing
+    domains, maintaining stylistic and structural coherence, and
+    producing derivative narratives across multiple editions.</p>
+    <p>The contributions of this paper are fourfold:</p>
+    <ol>
+    <li><p>We formalize the IEGR framework as a structural model for
+    analyzing complementary roles in intelligent systems.</p></li>
+    <li><p>We introduce DMLG‑v3 as a deterministic geometric–recursive
+    substrate suitable for hybrid generative architectures.</p></li>
+    <li><p>We present the sequential narrator pipeline as a concrete
+    example of IEGR-complete hybrid behavior.</p></li>
+    <li><p>We provide empirical evidence through two autonomous
+    narrative universes and outline structural predictions for future
+    hybrid systems.</p></li>
+    </ol>
+    <p>Together, these results demonstrate how complementary parrot
+    regimes can be composed into structurally coherent systems, and how
+    hybrid architectures may serve as practical examples of AGI-like
+    behavior without asserting AGI as a realized capability.</p>
+    <h1 id="motivation">Motivation</h1>
+    <p>The motivation for this work is both conceptual and empirical.
+    Conceptually, the goal is to explore how complementary artificial
+    systems can be composed into structures that exhibit coherent
+    long-horizon behavior. Rather than proposing a concrete realization
+    of AGI, this work investigates how the IEGR framework— energetic
+    efficiency (E), informational richness (I), geometric structure (G),
+    and recursive depth (R)—can serve as a structural lens for
+    understanding hybrid architectures capable of world absorption,
+    canonical constraint enforcement, and recursive narrative
+    evolution.</p>
+    <p>Empirically, the goal is to demonstrate that a hybrid system
+    composed of complementary parrot regimes—DMLG‑v3 and a
+    transformer-based LLM—can exceed the long-horizon narrative
+    capabilities of prompt-engineered LLMs and produce autonomous,
+    canon-consistent fictional worlds. The sequential narrator pipeline
+    serves as a concrete example of how structured recursion between
+    heterogeneous models can yield stable, domain-bound intelligent
+    behavior.</p>
+    <h2 id="dmlg-as-a-geometricrecursive-substrate">DMLG as a
+    Geometric–Recursive Substrate</h2>
+    <p>Within the IEGR framework, modern LLMs instantiate energetic and
+    informational roles strongly but lack geometric modularity and
+    recursive depth. Conversely, DMLG‑v3 instantiates G and R through
+    canonical grammar, modular page structure, stable attractors, and
+    long-horizon narrative memory. This complementarity motivates the
+    use of DMLG‑v3 as a <em>generic geometric–recursive substrate</em>
+    within hybrid systems.</p>
+    <p>DMLG‑v3 provides:</p>
+    <ul>
+    <li><p>canonical geometry through prefix grammar and modular
+    pages,</p></li>
+    <li><p>recursive depth through narrative memory and context
+    accumulation,</p></li>
+    <li><p>deterministic structure suitable for inspection and
+    governance,</p></li>
+    <li><p>plasticity through curriculum learning and world
+    absorption.</p></li>
+    </ul>
+    <p>These properties make DMLG‑v3 suitable for hybrid architectures
+    that require structured recursion, stable world models, and
+    long-horizon coherence.</p>
+    <h2 id="domain-bound-intelligent-behavior">Domain-Bound Intelligent
+    Behavior</h2>
+    <p>A second motivation is to illustrate how hybrid systems can
+    exhibit <em>domain-bound intelligent behavior</em>: coherent
+    reasoning, recursive planning, and multi-generational world
+    evolution within a constrained fictional universe. The narrator
+    pipeline demonstrates that hybrid recursion can achieve:</p>
+    <ul>
+    <li><p>autonomous world absorption,</p></li>
+    <li><p>multi-generational narrative evolution,</p></li>
+    <li><p>strict canonical constraint enforcement,</p></li>
+    <li><p>emergent behavioral attractors,</p></li>
+    <li><p>long-term memory and recursive state tracking.</p></li>
+    </ul>
+    <p>These capabilities exceed what current LLMs can achieve through
+    prompt engineering alone and highlight the importance of structured
+    GR substrates.</p>
+    <h2
+    id="beyond-prompt-engineering-structured-long-horizon-narration">Beyond
+    Prompt Engineering: Structured Long-Horizon Narration</h2>
+    <p>Prompt-engineered LLMs struggle with canonical consistency, world
+    memory, and long-horizon narrative coherence. They exhibit
+    structural instability due to missing G and R roles. The narrator
+    pipeline demonstrates that:</p>
+    <ul>
+    <li><p>DMLG‑v3 stabilizes narrative geometry,</p></li>
+    <li><p>the pipeline provides recursive moderation and
+    planning,</p></li>
+    <li><p>the LLM supplies energetic and informational
+    amplification,</p></li>
+    <li><p>the hybrid system maintains coherence across entire
+    books.</p></li>
+    </ul>
+    <p>This shows that hybrid architectures can surpass the narrative
+    capabilities of pure transformer systems and provide a path toward
+    structured long-form generation.</p>
+    <h2 id="end-to-end-autonomous-ai-generation">End-to-End Autonomous
+    AI Generation</h2>
+    <p>A core motivation is to demonstrate <em>end-to-end autonomous AI
+    generation</em>: a system that produces entire books without human
+    intervention in content. The sequential narrator pipeline achieves
+    this through:</p>
+    <ul>
+    <li><p>DMLG seed generation,</p></li>
+    <li><p>LLM moderation and scoring,</p></li>
+    <li><p>recursive keyword evolution,</p></li>
+    <li><p>context accumulation and narrative memory,</p></li>
+    <li><p>automatic transitions and ending validation.</p></li>
+    </ul>
+    <p>The resulting works—<em>Tales of the Dark Forest</em> and
+    <em>Tales of the Shrouded City</em>—illustrate how hybrid systems
+    can maintain internal canon and produce coherent long-form
+    narratives autonomously.</p>
+    <h2
+    id="canon-consistent-and-domain-bound-generation">Canon-Consistent
+    and Domain-Bound Generation</h2>
+    <p>Another motivation is to demonstrate that hybrid systems can
+    maintain strict canonical constraints within a fictional universe.
+    DMLG‑v3’s geometric structure and recursive memory enable:</p>
+    <ul>
+    <li><p>consistent character behavior,</p></li>
+    <li><p>stable thematic evolution,</p></li>
+    <li><p>domain-specific physics and stylistic rules,</p></li>
+    <li><p>prohibition of out-of-domain motifs,</p></li>
+    <li><p>multi-generational world coherence.</p></li>
+    </ul>
+    <p>This positions DMLG‑v3 as a substrate for <em>canon-bound
+    artificial cognition</em> within constrained narrative domains.</p>
+    <h2 id="iegr-complete-hybrid-systems">IEGR-Complete Hybrid
+    Systems</h2>
+    <p>Finally, the motivation is to explore how hybrid systems can
+    instantiate the structural profile of IEGR-complete behavior:
+    systems in which all four roles— E, I, G, and R—are present and
+    functionally integrated. Such systems do not constitute AGI, but
+    they provide a structural hint of how AGI-like behavior may emerge
+    through architectural complementarity rather than scale alone.</p>
+    <h2 id="summary">Summary</h2>
+    <p>The motivation for this work is to show that:</p>
+    <ul>
+    <li><p>DMLG‑v3 can serve as a geometric–recursive
+    substrate,</p></li>
+    <li><p>hybrid systems can exhibit domain-bound intelligent
+    behavior,</p></li>
+    <li><p>structured pipelines can exceed LLM prompt
+    engineering,</p></li>
+    <li><p>end-to-end autonomous AI generation is feasible,</p></li>
+    <li><p>canon-consistent world evolution is achievable,</p></li>
+    <li><p>IEGR-complete behavior can emerge through hybrid
+    recursion.</p></li>
+    </ul>
+    <p>The sequential narrator pipeline provides a fully documented
+    example of such a system operating at narrative scale.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Research on autonomous narration, hybrid modular architectures,
+    and dynamically evolving generative systems spans several partially
+    connected domains. The present work builds on three strands of prior
+    research: (1) the structural foundations of the <em>Triadic
+    Cosmos</em> ecosystem, (2) iterative and diffusion-style generative
+    methodologies, and (3) emerging work on AI life, self-recursive
+    learning loops, and dynamically evolving cognitive systems.</p>
+    <h2 id="triadic-cosmos-foundations">Triadic Cosmos Foundations</h2>
+    <p>The Dynamic Modular Language Graph (DMLG) <span class="citation"
+    data-cites="dewitte2026dmlg"></span> introduced a deterministic,
+    graph-based governance architecture in which language generation is
+    modeled as traversal through a canonical token-transition graph.
+    DMLG provides the geometric (G) and recursive (R) substrate for the
+    narrator pipeline: explicit structure, modular paging, deterministic
+    transitions, and PRE-based governance. Its emphasis on structure
+    over scale directly motivates the canonical-parrot regime in the
+    IEGR taxonomy.</p>
+    <p>Dynamic Modular Language Models (DMLMs) <span class="citation"
+    data-cites="dewitte2026dmlm"></span> form the predecessor
+    architecture to DMLG: a multi-agent, evaluator-governed system in
+    which micro-models, paging structures, and a PRE loop produce
+    coherent long-form narrative structure without transformers or
+    large-scale training. Although DMLMs focus on generation rather than
+    governance, they establish the architectural principles—modularity,
+    explicit interfaces, evaluator-driven recursion—that underpin the
+    narrator pipeline’s raw generative substrate.</p>
+    <p>The structural taxonomy of intelligence (IEGR) <span
+    class="citation" data-cites="dewitte2026iegr"></span> provides the
+    conceptual framework for understanding hybrid systems as
+    <em>sophisticated parrots</em>: systems that are IEGR-complete but
+    not yet IEGR-scaled. In this taxonomy, LLMs supply energetic and
+    informational roles (E, I), while DMLG supplies geometric and
+    recursive roles (G, R). The narrator pipeline is therefore
+    positioned as a concrete instantiation of IEGR complementarity: a
+    hybrid system whose long-form generative capability arises from the
+    integration of complementary structural roles.</p>
+    <p>The diffusion-driven narration framework <span class="citation"
+    data-cites="dewitte2026ddn"></span> introduced the idea that
+    long-form narrative structure can emerge through staged denoising
+    across heterogeneous cognitive modules. In this methodology, DMLG
+    provides canonical geometry and recursive scaffolding, while LLMs
+    supply semantic refinement, evaluative judgment, and informational
+    expansion. The resulting system behaves as a distributed cognitive
+    architecture rather than a single generative model.</p>
+    <p>The present work does not replace or extend the full
+    diffusion-driven narration stack. Instead, it introduces DMLG‑v3 as
+    a new geometric–recursive pillar for the sequential narrator
+    pipeline. In this pipeline, only the first diffusion stage is
+    performed: a structured DMLG‑v3 generation followed by refinement
+    through a mid-scale LLM (e.g. Mistral). Later diffusion
+    stages—large-LLM remastering and the Director’s Cut—remain part of
+    the broader diffusion-driven narration paradigm and were applied in
+    the empirical manuscripts, but they are not part of the pipeline
+    analyzed in this paper.</p>
+    <p>This positions the present work as a detailed examination of the
+    DMLG‑v3 substrate and the sequential narrator pipeline within the
+    larger framework of diffusion-driven narration. The paper focuses on
+    how DMLG‑v3 enables stable world absorption, canonical grammar, and
+    long-horizon recursion, and how these properties interact with a
+    lightweight LLM layer to produce autonomous, canon-consistent
+    narrative generations.</p>
+    <h2
+    id="narrative-pipelines-and-autonomous-story-generation">Narrative
+    Pipelines and Autonomous Story Generation</h2>
+    <p>Narrative generation has been explored in several domains, though
+    most systems lack the structural completeness required for
+    long-horizon coherence. Early work on story grammars and plot
+    machines (e.g., Proppian morphology, <span class="citation"
+    data-cites="riedl2010story"></span>) introduced symbolic pipelines
+    but lacked semantic richness (I) and energetic capacity (E). Neural
+    story generators such as <code>PlotMachines</code> <span
+    class="citation" data-cites="yao2019plan"></span> and hierarchical
+    planners <span class="citation"
+    data-cites="ammanabrolu2020story"></span> improved semantic fluency
+    but remained structurally shallow, relying on transformer-based
+    architectures without geometric modularity (G) or recursive depth
+    (R).</p>
+    <p>Interactive fiction agents (e.g., <code>Jericho</code> <span
+    class="citation" data-cites="hausknecht2020interactive"></span>)
+    demonstrated multi-step reasoning in constrained environments but
+    lacked long-term narrative memory and world absorption. Recent work
+    on LLM-driven story generation (e.g., <code>SILO</code> <span
+    class="citation" data-cites="chang2023silo"></span>,
+    <code>Re3</code> <span class="citation"
+    data-cites="shinn2023reflexion"></span>) introduced reflective loops
+    and self-correction, but these systems remain statistical parrots:
+    high E and I, deficient G and R, and structurally unstable over long
+    horizons.</p>
+    <p>The sequential narrator pipeline differs fundamentally from these
+    approaches. Rather than relying on transformer recursion, it couples
+    a geometric–recursive substrate (DMLG‑v3) with an
+    energetic–informational substrate (LLM) through a bi-directional
+    IEGR loop. This enables:</p>
+    <ul>
+    <li><p>autonomous world absorption,</p></li>
+    <li><p>multi-generational narrative evolution,</p></li>
+    <li><p>strict canonical constraint enforcement,</p></li>
+    <li><p>emergent behavioral attractors,</p></li>
+    <li><p>long-horizon coherence across dozens of chapters.</p></li>
+    </ul>
+    <p>To our knowledge, no prior narrative system demonstrates these
+    properties.</p>
+    <h2
+    id="hybrid-cognitive-architectures-and-self-recursive-systems">Hybrid
+    Cognitive Architectures and Self-Recursive Systems</h2>
+    <p>Hybrid cognitive systems have been explored in several contexts.
+    Program-induction architectures such as DreamCoder <span
+    class="citation" data-cites="ellis2021dreamcoder"></span>
+    demonstrate recursive self-improvement but lack semantic breadth
+    (I). Neural module networks <span class="citation"
+    data-cites="andreas2016neural"></span> provide geometric structure
+    (G) but lack recursive depth (R) and energetic capacity (E).
+    Reflective LLM systems such as <code>Reflexion</code> <span
+    class="citation" data-cites="shinn2023reflexion"></span> and
+    <code>Self-Refine</code> <span class="citation"
+    data-cites="madaan2023selfrefine"></span> introduce shallow
+    recursion but remain structurally unstable due to missing geometric
+    constraints.</p>
+    <p>Work on “AI life” and self-evolving agents (e.g., <span
+    class="citation" data-cites="stanley2017openended"></span>, <span
+    class="citation" data-cites="wang2024selfevolving"></span>) explores
+    open-endedness but lacks canonical governance and long-horizon
+    narrative structure. The narrator pipeline provides a different
+    perspective: self-recursion is not emergent chaos but a governed
+    IEGR-complete loop in which each structural role is explicitly
+    instantiated.</p>
+    <h2 id="positioning-of-the-present-work">Positioning of the Present
+    Work</h2>
+    <p>The present work differs from prior literature in three ways:</p>
+    <ol>
+    <li><p>It provides a <strong>structurally complete hybrid
+    architecture</strong> in which each IEGR role is explicitly
+    instantiated and integrated.</p></li>
+    <li><p>It demonstrates <strong>autonomous world absorption and
+    multi-generational narrative evolution</strong>, including two full
+    books— <em>Tales of the Dark Forest</em> and <em>Tales of the
+    Shrouded City</em>—as empirical evidence.</p></li>
+    <li><p>It positions narrative generation not as a stylistic task but
+    as a <strong>testbed for AGI</strong>: a domain requiring
+    long-horizon coherence, recursive planning, canonical consistency,
+    and dynamic world evolution.</p></li>
+    </ol>
+    <p>In this context, the sequential narrator pipeline serves as the
+    first fully documented example of an IEGR-complete hybrid system
+    operating at narrative scale. It demonstrates that complementary
+    parrot regimes can be composed into structurally complete
+    intelligent systems, and that energetic scaling provides a clear
+    path from sophisticated parrots to human-like AGI.</p>
+    <h1
+    id="fixed-output-size-and-codebook-based-deterministic-decoding">Fixed
+    Output Size and Codebook-Based Deterministic Decoding</h1>
+    <p>A central innovation of DMLG‑v3 is the introduction of a
+    <em>fixed-dimensional</em> output space combined with a hybrid
+    one-hot and triple-hot codebook. Unlike DMLG‑v2, where output
+    dimensionality and token embeddings drifted during training, DMLG‑v3
+    enforces a compile-time constant output dimension <span
+    class="math inline"><em>D</em></span>. Each token is mapped to a
+    codebook vector inside the immutable output space.</p>
+    <p>The codebook partitions the output dimension into:</p>
+    <p><span
+    class="math display"><em>D</em><sub>one-hot</sub> = <em>D</em>/4,   <em>D</em><sub>triple-hot</sub> = 3<em>D</em>/4,</span></p>
+    <p>where the first <span class="math inline"><em>D</em>/4</span>
+    positions correspond to one-hot tokens and the remaining <span
+    class="math inline">3<em>D</em>/4</span> positions form the
+    triple-hot combinatorial space. The assignment is
+    <em>page-local</em>: each page determines which tokens occupy the
+    one-hot region and which occupy the triple-hot region, based on the
+    page’s internal vocabulary ordering. Tokens with low page-local
+    indices receive one-hot codes, while higher indices receive
+    triple-hot codes.</p>
+    <p>Triple-hot tokens are encoded by selecting three distinct
+    positions from the <span
+    class="math inline"><em>D</em><sub>triple-hot</sub></span> region.
+    The number of available triple-hot codes is:</p>
+    <p><span class="math display">$$N_{\text{triple-hot}} =
+    \binom{D_{\text{triple-hot}}}{3}.$$</span></p>
+    <p>Two concrete examples illustrate the scalability of this
+    scheme:</p>
+    <h4 id="example-1-d-32">Example 1: <span
+    class="math inline"><em>D</em> = 32</span></h4>
+    <p><span
+    class="math display"><em>D</em><sub>one-hot</sub> = 8,   <em>D</em><sub>triple-hot</sub> = 24.</span></p>
+    <p>The triple-hot capacity is:</p>
+    <p><span class="math display">$$\binom{24}{3} = \frac{24 \cdot 23
+    \cdot 22}{6} = 2024.$$</span></p>
+    <p>Thus a 32-dimensional output space supports:</p>
+    <ul>
+    <li><p>8 one-hot tokens,</p></li>
+    <li><p>2024 triple-hot tokens,</p></li>
+    <li><p>for a total of 2032 page-local tokens.</p></li>
+    </ul>
+    <p>For typical single-book curricula, this is more than sufficient:
+    most pages require fewer than 64 tokens, and many pages fit entirely
+    within the one-hot region.</p>
+    <h4 id="example-2-d-256">Example 2: <span
+    class="math inline"><em>D</em> = 256</span></h4>
+    <p><span
+    class="math display"><em>D</em><sub>one-hot</sub> = 64,   <em>D</em><sub>triple-hot</sub> = 192.</span></p>
+    <p>The triple-hot capacity is:</p>
+    <p><span class="math display">$$\binom{192}{3} = \frac{192 \cdot 191
+    \cdot 190}{6} = 1{,}161{,}280.$$</span></p>
+    <p>This supports:</p>
+    <ul>
+    <li><p>64 one-hot tokens,</p></li>
+    <li><p>over 1.16 million triple-hot tokens,</p></li>
+    <li><p>enabling extremely large page-local vocabularies.</p></li>
+    </ul>
+    <p>This scale is suitable for multi-book curricula, multi-world
+    absorption, or high-entropy generative regimes.</p>
+    <p>This hybrid codebook constitutes a structural breakthrough:
+    informational richness (I) scales independently of energetic cost
+    (E) and geometric structure (G). The model becomes a deterministic
+    substrate capable of absorbing entire fictional universes while
+    maintaining canonical decoding. In the IEGR taxonomy, the fixed
+    output space supplies the geometric backbone required for stable
+    recursive behavior and long-horizon narrative coherence.</p>
+    <h1
+    id="prefix-grammar-and-deterministic-grammarlemma-alternation">Prefix
+    Grammar and Deterministic Grammar–Lemma Alternation</h1>
+    <p>DMLG‑v3 replaces the unstable postfix grammar of V2 with a fully
+    prefix-based canonical grammar. Every non-terminal token is
+    represented as:</p>
+    <p><span
+    class="math display"><code>&lt;TAG&gt;</code> lemma,</span></p>
+    <p>while terminal tokens such as <code>&lt;PERIOD&gt;</code> and
+    <code>&lt;EOL&gt;</code> carry no lemma. This enforces a strict
+    alternation between grammar tokens (structure) and lemma tokens
+    (content), encoded explicitly via a grammar flag in the input
+    stream.</p>
+    <p>The resulting update loop follows the triadic IEGR cycle:</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em>,</span></p>
+    <p>where energy selects the next token, geometry constrains its
+    canonical form, and information is supplied by the lemma. Recursion
+    (R) emerges from repeated applications of this loop across the
+    context window and narrative memory.</p>
+    <p>Prefix grammar stabilizes category detection, eliminates
+    syntactic drift, and provides the geometric structure (G) that
+    transformer-based systems lack. Lemma alternation becomes
+    deterministic rather than emergent, ensuring that narrative
+    sequences remain canonical across long horizons. This redesign is a
+    structural upgrade rather than a cosmetic change: it enables DMLG‑v3
+    to function as a genuine G–R engine within IEGR-complete hybrid
+    systems.</p>
+    <h1 id="additional-dmlg-architectural-improvements">Additional DMLG
+    Architectural Improvements</h1>
+    <p>Beyond the two core innovations above, DMLG‑v3 introduces a
+    series of structural refinements that collectively eliminate V2’s
+    instability and transform the model into a deterministic canonical
+    substrate.</p>
+    <h2 class="unnumbered" id="fixed-neural-architecture">Fixed Neural
+    Architecture</h2>
+    <p>All page-level MLPs in DMLG‑v3 share a single, fixed-size
+    architecture defined at compile time. Hidden sizes, activation
+    sizes, and output dimensions are immutable throughout training. This
+    eliminates the dynamic resizing behaviour present in DMLG‑v2,
+    preventing structural drift and ensuring full reproducibility across
+    epochs, curricula, and narrative domains.</p>
+    <p>Each page MLP is therefore an instance of the same canonical
+    update operator:</p>
+    <p><span
+    class="math display"><em>x</em> → <em>h</em><sub>1</sub> → <em>h</em><sub>2</sub> → <em>y</em>,</span></p>
+    <p>with identical layer widths and identical parameterization. Only
+    the page-local weights differ, not the architecture itself. This
+    fixed structure provides a stable geometric backbone for recursive
+    updates across pages, context windows, and narrative memory.</p>
+    <h2 class="unnumbered"
+    id="hybrid-silurightarrowgelu-activation-stack">Hybrid SiLU<span
+    class="math inline">→</span>GELU Activation Stack</h2>
+    <p>All page MLPs in DMLG‑v3 share the same fixed-size activation
+    MLP, identical in width and structure to the static design used in
+    DMLG‑v2. What changes in v3 is the internal nonlinearity: the two
+    hidden layers use different activation functions, forming a
+    lightweight hybrid stack.</p>
+    <p><span
+    class="math display"><em>h</em><sub>1</sub> = SiLU(<em>W</em><sub>1</sub><em>x</em>+<em>b</em><sub>1</sub>),   <em>h</em><sub>2</sub> = GELU(<em>W</em><sub>2</sub><em>h</em><sub>1</sub>+<em>b</em><sub>2</sub>).</span></p>
+    <p>The first hidden layer applies <strong>SiLU</strong>, providing
+    smooth curvature and stable early-stage structural shaping. The
+    second hidden layer applies <strong>GELU</strong>, adding
+    transformer-grade expressivity and finer semantic resolution. This
+    hybrid design replaces the earlier SiLU+GELU mixed activation used
+    in v2 and yields a clearer separation between structural stability
+    (SiLU) and expressive refinement (GELU).</p>
+    <p>Because the activation MLP is shared across all pages and fixed
+    at compile time, every page MLP benefits from the same stable
+    geometry and expressive refinement, without architectural drift or
+    parameter growth.</p>
+    <h2 class="unnumbered"
+    id="warmup-first-training-regime">Warmup-First Training Regime</h2>
+    <p>DMLG‑v3 removes the exploration phase of V2 and replaces it with
+    a strictly ordered <em>warmup-first</em> training regime. Warmup
+    epochs present the curriculum in its canonical sequence order: every
+    page is trained in the exact order in which it appears in the book.
+    This stabilizes grammar, page geometry, token transitions, and the
+    attractor structure before any stochastic sampling occurs.</p>
+    <p>After warmup, the model switches to <em>random epochs</em>, where
+    curriculum sequences are sampled in random order. These epochs
+    refine semantic clusters and local stylistic variation without
+    altering the underlying structural geometry established during
+    warmup.</p>
+    <ol>
+    <li><p><strong>Warmup epochs (sequential curriculum).</strong>
+    Sequences are shown in deterministic book order, allowing the model
+    to learn stable grammar, canonical page structure, and attractor
+    geometry.</p></li>
+    <li><p><strong>Random epochs (stochastic curriculum).</strong>
+    Sequences are sampled uniformly at random, refining semantics and
+    local variation while preserving the fixed structural backbone
+    learned during warmup.</p></li>
+    </ol>
+    <p>This warmup-first regime yields early convergence to stable
+    attractors and prevents structural drift, enabling DMLG‑v3 to absorb
+    entire narrative worlds with consistent geometry and long-horizon
+    coherence.</p>
+    <h2 class="unnumbered"
+    id="lemma-keyed-pages-and-transition-map-removal">Lemma-Keyed Pages
+    and Transition Map Removal</h2>
+    <p>Pages remain lemma-keyed as in V2, but V3 introduces fixed page
+    counts, fixed page MLP sizes, stable embeddings, and removes the
+    transition map entirely. Transitions are now learned implicitly
+    through recursive page updates, improving geometric modularity and
+    scalability.</p>
+    <h2 class="unnumbered"
+    id="stabilized-context-window-and-narrative-memory">Stabilized
+    Context Window and Narrative Memory</h2>
+    <p>Deterministic grammar and fixed embeddings make narrative memory
+    fully functional. Actors, actions, and atmosphere are tracked
+    reliably across long sequences, supplying recursive depth (R).</p>
+    <h2 class="unnumbered" id="modern-decoding-stack">Modern Decoding
+    Stack</h2>
+    <p>DMLG‑v3 uses a modern decoding stack combining top-<span
+    class="math inline"><em>k</em></span> sampling, temperature scaling,
+    grammar-constrained token selection, and beam search with jitter and
+    damping. Beam search operates as the primary decoding method but can
+    fall back to stochastic sampling when no valid continuation exists,
+    preventing dead ends and maintaining generative flow.</p>
+    <p>Semantic validation filters structurally inconsistent or
+    drift-prone candidates, ensuring that only grammar-respecting and
+    canon-consistent continuations enter the recursive loop. Together,
+    these mechanisms provide stable long-horizon recursion and prevent
+    attractor drift during sequential narration.</p>
+    <h1 id="the-sequential-narrator-pipeline">The Sequential Narrator
+    Pipeline</h1>
+    <p>The sequential narrator pipeline is a bi-directional hybrid
+    intelligence system that integrates DMLG‑v3 as a geometric–recursive
+    substrate, a transformer-based LLM as an energetic–informational
+    substrate, and a recursive coupling layer that binds both components
+    into an IEGR-complete architecture. Unlike earlier non-sequential
+    pipelines, the sequential variant maintains a persistent narrative
+    context, evolves keyword sets dynamically, and constructs entire
+    books chapter by chapter through long-horizon recursive updates.</p>
+    <p>This section formalizes the architecture and operational flow of
+    the sequential pipeline within the broader diffusion-driven
+    narration paradigm.</p>
+    <h2 id="pipeline-overview">Pipeline Overview</h2>
+    <p>The pipeline consists of three tightly coupled functional
+    components:</p>
+    <ol>
+    <li><p><strong>Structural Generator (DMLG‑v3)</strong> Produces
+    canonical seed stories using prefix grammar, lemma-keyed pages,
+    narrative memory, and modern decoding strategies.</p></li>
+    <li><p><strong>LLM Evaluator Layer</strong> Moderates, validates,
+    scores, titles, and bridges chapters, providing semantic refinement
+    and informational expansion.</p></li>
+    <li><p><strong>Narrative Orchestrator</strong> Coordinates the
+    recursive loop, maintains long-term context, evolves keywords, and
+    assembles the final manuscript.</p></li>
+    </ol>
+    <p>The pipeline operates through a bi-directional feedback loop:</p>
+    <p><span class="math display">DMLG seed → LLM moderation → LLM
+    scoring → LLM keyword evolution → DMLG context update.</span></p>
+    <p>This loop repeats for each chapter, enabling multi-generational
+    world evolution.</p>
+    <p>A structurally critical component of the sequential narrator
+    pipeline is the <em>chapter transition</em>. After a chapter is
+    accepted, the evaluator receives both the previous chapter and the
+    newly generated one and must synthesize a coherent narrative bridge.
+    This transition step functions as a dual prompt:</p>
+    <p><span
+    class="math display">(chapter<sub><em>t</em> − 1</sub>, chapter<sub><em>t</em></sub>) → transition<sub><em>t</em></sub>.</span></p>
+    <p>If no coherent transition can be produced—due to drift, motif
+    collision, identity mismatch, or structural inconsistency—the entire
+    chapter is rejected and the pipeline returns to the structural
+    generator for a new candidate. Transition failure is therefore a
+    governance mechanism: it prevents world contamination, enforces
+    canonical continuity, and stabilizes the attractor across
+    generations.</p>
+    <p>By combining recursive chapter generation with strict transition
+    validation, the pipeline maintains long-horizon coherence and
+    ensures that each accepted chapter fits into the evolving world
+    geometry. This dual-stage recursion—chapter generation followed by
+    transition synthesis—is what enables stable multi-generational
+    narrative evolution within the DMLG‑v3 substrate.</p>
+    <h2 id="initialization">Initialization</h2>
+    <p>The pipeline begins with a narrative configuration specifying
+    chapter length, decoding parameters, grammar constraints, and model
+    size. A structural substrate is loaded with its canonical grammar,
+    page geometry, and curriculum index. The narrative context is
+    initialized as an empty memory that will accumulate actors, motifs,
+    and thematic structure as the book evolves.</p>
+    <p>Keyword sets are initialized from user-provided parameters and
+    filtered through the curriculum index to ensure canonical
+    grounding.</p>
+    <h2 id="step-1-canonical-seed-generation">Step 1: Canonical Seed
+    Generation</h2>
+    <p>For each chapter, the structural generator produces a canonical
+    seed story based on the current context and keyword set. This
+    involves:</p>
+    <ul>
+    <li><p>selection of a sequence embedding guided by keyword
+    relevance,</p></li>
+    <li><p>grammar and lemma alternation through prefix
+    grammar,</p></li>
+    <li><p>canonical token generation via lemma-keyed pages,</p></li>
+    <li><p>decoding through top-<span
+    class="math inline"><em>k</em></span> sampling or beam
+    search,</p></li>
+    <li><p>structural and semantic validation.</p></li>
+    </ul>
+    <p>The result is a canonical structural draft representing the
+    chapter’s raw form.</p>
+    <h2 id="step-2-moderation">Step 2: Moderation</h2>
+    <p>The evaluator rewrites the canonical seed into natural language,
+    removing artifacts, smoothing semantics, enforcing domain
+    constraints, and ensuring stylistic consistency. This moderated
+    version becomes the chapter’s narrative form.</p>
+    <h2 id="step-3-title-generation">Step 3: Title Generation</h2>
+    <p>The evaluator proposes a chapter title. If no meaningful title
+    can be produced, the chapter is rejected.</p>
+    <h2 id="step-4-scoring-and-acceptance">Step 4: Scoring and
+    Acceptance</h2>
+    <p>The moderated chapter is scored for coherence, readability,
+    originality, progression, and suitability. Only chapters above a
+    threshold are accepted, ensuring recursive quality control.</p>
+    <h2 id="step-5-chapter-transition">Step 5: Chapter Transition</h2>
+    <p>If a previous chapter exists, the evaluator synthesizes a
+    transition that:</p>
+    <ul>
+    <li><p>connects the two chapters,</p></li>
+    <li><p>maintains thematic consistency,</p></li>
+    <li><p>avoids introducing new entities,</p></li>
+    <li><p>preserves narrative flow.</p></li>
+    </ul>
+    <p>Transitions are validated for coherence and minimal length.</p>
+    <h2 id="step-6-context-update">Step 6: Context Update</h2>
+    <p>Accepted chapters update the long-term narrative context.
+    Canonical tokens are reconstructed, sentences are encoded, and
+    narrative memory integrates new characters, actions, and atmospheric
+    elements. This allows the structural generator to absorb the
+    evolving world.</p>
+    <h2 id="step-7-keyword-evolution">Step 7: Keyword Evolution</h2>
+    <p>The evaluator proposes new keywords based on the chapter’s
+    content. These are filtered through the curriculum index and
+    integrated into the next chapter’s generation process, enabling
+    adaptive world evolution.</p>
+    <h2 id="step-8-ending-validation">Step 8: Ending Validation</h2>
+    <p>Once the minimum chapter count is reached, the evaluator
+    determines whether the current chapter constitutes a valid ending.
+    If so, the book terminates; otherwise generation continues.</p>
+    <h2 id="step-9-book-assembly">Step 9: Book Assembly</h2>
+    <p>The orchestrator assembles the final manuscript: titles,
+    moderated chapters, transitions, and optional refined variants.</p>
+    <h2 id="structural-interpretation">Structural Interpretation</h2>
+    <p>The sequential narrator pipeline provides:</p>
+    <ul>
+    <li><p><strong>G</strong>: canonical structure, modular pages,
+    transitions,</p></li>
+    <li><p><strong>R</strong>: recursive moderation, scoring, context
+    accumulation,</p></li>
+    <li><p><strong>I</strong>: keyword evolution, semantic
+    expansion,</p></li>
+    <li><p><strong>E</strong>: energetic amplification via the
+    evaluator.</p></li>
+    </ul>
+    <p>Together with DMLG‑v3, the pipeline forms an IEGR-complete hybrid
+    system capable of multi-generational world evolution and emergent
+    narrative structure.</p>
+    <h1
+    id="energetic-scaling-through-multi-variant-generation">Energetic
+    Scaling Through Multi-Variant Generation</h1>
+    <p>While the sequential narrator pipeline already produces coherent
+    long-form narratives through recursive hybrid intelligence, its
+    quality can be further increased by injecting additional energetic
+    capacity (E) into the generative process. Because DMLG‑v3 provides a
+    stable geometric–recursive substrate (G, R), and the evaluator layer
+    supplies informational refinement (I), the remaining scaling axis is
+    energetic amplification: allocating more generative effort per
+    chapter and selecting the best candidate.</p>
+    <h2 id="multiple-variants-per-chapter">Multiple Variants per
+    Chapter</h2>
+    <p>One approach is to generate several candidate chapters for each
+    position in the book. Each candidate undergoes moderation, scoring,
+    and transition validation. The narrator then selects the
+    highest-scoring chapter, optionally using an <em>early-accept</em>
+    rule when a candidate exceeds a high threshold. This multi-variant
+    strategy increases narrative quality by exploring a broader semantic
+    and structural space while preserving canonical geometry.</p>
+    <p>Because transitions act as structural constraints, only
+    candidates that support a coherent bridge to the previous chapter
+    are eligible. This ensures that multi-variant generation improves
+    quality without compromising world fidelity.</p>
+    <h2 id="beam-search-over-chapters">Beam Search Over Chapters</h2>
+    <p>A more powerful extension is <em>beam search over chapters</em>.
+    Instead of producing a single linear chain of chapters, the narrator
+    maintains several parallel generative beams. Each beam represents a
+    possible narrative trajectory, with its own sequence of accepted
+    chapters and transitions. After a fixed number of generations, the
+    narrator selects the beam with the highest cumulative score or
+    strongest structural coherence.</p>
+    <p>Beam search over chapters provides a form of long-horizon
+    energetic scaling: multiple world trajectories are explored in
+    parallel, and only the most coherent trajectory is retained. This
+    method is computationally more expensive but yields significantly
+    higher narrative stability and thematic depth.</p>
+    <h2 id="structural-interpretation-1">Structural Interpretation</h2>
+    <p>Both multi-variant generation and chapter-level beam search
+    increase the energetic role (E) of the pipeline without altering its
+    geometric or recursive structure. DMLG‑v3 continues to supply
+    canonical geometry (G) and recursive depth (R), while the evaluator
+    layer provides informational refinement (I). The pipeline becomes an
+    IEGR-complete system with amplified energetic capacity, allowing it
+    to explore richer narrative possibilities and converge on higher
+    quality attractors.</p>
+    <p>These strategies illustrate how energetic scaling—not
+    architectural change—is the primary driver for further improvements
+    in narrative quality. They also suggest a path toward more advanced
+    hybrid systems in which multiple beams, variants, or recursive
+    trajectories interact to produce increasingly coherent and
+    expressive long-form narratives.</p>
+    <h1
+    id="hybrid-iegr-architecture-dmlgv3-as-a-plastic-gr-substrate">Hybrid
+    IEGR Architecture: DMLG‑v3 as a Plastic GR Substrate</h1>
+    <p>The IEGR taxonomy characterizes intelligent systems through four
+    structural roles: energetic efficiency (E), informational richness
+    (I), geometric structure (G), and recursive depth (R). Modern
+    transformer-based LLMs scale E and I aggressively but lack explicit
+    geometric modularity and recursive structure, placing them in the
+    statistical parrot regime. Conversely, DMLG‑v3 instantiates G and R
+    strongly but operates with modest energetic and informational
+    capacity, placing it in the canonical parrot regime. When these
+    systems are coupled through a bi-directional narrator pipeline, the
+    resulting hybrid becomes IEGR-complete: all four structural roles
+    are present and functionally integrated.</p>
+    <p>IEGR-completeness does not imply broad cognitive capability; it
+    simply denotes that the structural prerequisites for coherent
+    long-horizon behavior are present. The magnitude of each role—its
+    scale—determines the system’s practical performance within a given
+    domain. Energetic capacity (E) is particularly important: it governs
+    how deeply and broadly the system can explore its generative space.
+    In this sense, IEGR-complete systems form a structural foundation
+    that can be scaled or layered depending on the demands of the
+    application.</p>
+    <p>This section describes a minimal hybrid IEGR architecture
+    composed of three components:</p>
+    <ol>
+    <li><p>DMLG‑v3: a plastic, trainable geometric–recursive
+    substrate,</p></li>
+    <li><p>a transformer-based LLM: an energetic–informational
+    substrate,</p></li>
+    <li><p>a bi-directional narrator pipeline: an integrative IEGR
+    layer.</p></li>
+    </ol>
+    <p>Together, these components form a structurally complete hybrid
+    system capable of long-horizon narrative generation within a bounded
+    domain.</p>
+    <h2 id="dmlgv3-as-a-plastic-gr-substrate">DMLG‑v3 as a Plastic GR
+    Substrate</h2>
+    <p>DMLG‑v3 provides the geometric and recursive backbone of the
+    hybrid system. Its structural features—prefix grammar, lemma
+    alternation, deterministic token embeddings, codebook-based output,
+    fixed-size neural architecture, lemma-keyed pages, stable
+    attractors, and functional narrative memory—enable the model to
+    absorb entire fictional universes through curriculum learning.</p>
+    <p>DMLG‑v3 supplies:</p>
+    <ul>
+    <li><p><strong>G (Geometric structure)</strong>: canonical grammar,
+    modular pages, stable attractors, and compositional canonical
+    forms,</p></li>
+    <li><p><strong>R (Recursive depth)</strong>: context windows,
+    narrative memory, recursive page updates, and long-horizon
+    coherence.</p></li>
+    </ul>
+    <p>Because DMLG‑v3 is trainable and plastic, it can absorb arbitrary
+    domains through curriculum learning. In the narrative pipeline, it
+    learns the structural rules of a world (e.g., slapstick physics or
+    Victorian gothic atmosphere) and maintains long-term memory across
+    chapters.</p>
+    <h2 id="llm-as-an-ie-substrate">LLM as an IE Substrate</h2>
+    <p>The transformer-based LLM provides the energetic and
+    informational dimensions:</p>
+    <ul>
+    <li><p><strong>E (Energetic efficiency)</strong>: high-throughput
+    inference and large-scale computational capacity,</p></li>
+    <li><p><strong>I (Informational richness)</strong>: broad semantic
+    coverage, stylistic flexibility, and world knowledge.</p></li>
+    </ul>
+    <p>The LLM moderates DMLG‑v3 outputs, fixes grammar and semantics,
+    generates chapter titles, scores narrative quality, produces
+    transitions between chapters, and evolves keyword sets. It acts as
+    an informational amplifier for the canonical seeds produced by
+    DMLG‑v3.</p>
+    <h2 id="the-narrator-pipeline-as-a-bi-directional-iegr-layer">The
+    Narrator Pipeline as a Bi-Directional IEGR Layer</h2>
+    <p>The narrator pipeline integrates DMLG‑v3 and the LLM through a
+    recursive bi-directional loop:</p>
+    <p><span class="math display">DMLG generation → LLM moderation → LLM
+    keywords → DMLG context update.</span></p>
+    <p>This loop provides:</p>
+    <ul>
+    <li><p>additional <strong>G</strong>: structural filtering,
+    canonical consistency, and chapter-level organization,</p></li>
+    <li><p>additional <strong>R</strong>: recursive moderation, scoring,
+    bridging, and long-horizon narrative planning,</p></li>
+    <li><p>additional <strong>I</strong>: keyword evolution and semantic
+    expansion.</p></li>
+    </ul>
+    <p>The pipeline therefore acts as an IEGR integrator: it couples the
+    GR substrate (DMLG‑v3) with the IE substrate (LLM) and supplies the
+    missing structural dimensions required for IEGR completeness.</p>
+    <h2 id="iegr-completeness-through-hybrid-composition">IEGR
+    Completeness Through Hybrid Composition</h2>
+    <p>The resulting hybrid system can be expressed structurally as:</p>
+    <p><span
+    class="math display">GR<sub>DMLG</sub> + IE<sub>LLM</sub> + iegr<sub>pipeline</sub> = IEGR-complete
+    system.</span></p>
+    <p>This architecture is structurally equivalent to a sophisticated
+    parrot: a system in which all four IEGR roles are present, but whose
+    practical capability depends on the scale of each role.</p>
+    <h2 id="energetic-scaling-and-performance">Energetic Scaling and
+    Performance</h2>
+    <p>IEGR completeness provides the structural foundation for coherent
+    long-horizon behavior. Performance improves as energetic capacity
+    (E) increases:</p>
+    <ul>
+    <li><p>larger LLMs increase informational richness (I) and energetic
+    throughput (E),</p></li>
+    <li><p>larger DMLG models increase geometric structure (G) and
+    recursive depth (R),</p></li>
+    <li><p>deeper pipelines increase long-horizon planning and world
+    coherence.</p></li>
+    </ul>
+    <p>Energetic scaling is therefore a practical mechanism for
+    improving narrative quality and structural stability. Multi-variant
+    generation, chapter-level beam search, and recursive refinement are
+    examples of energetic amplification that enhance performance without
+    altering the underlying architecture.</p>
+    <h2 id="conclusion-dmlgv3-as-a-generic-gr-substrate">Conclusion:
+    DMLG‑v3 as a Generic GR Substrate</h2>
+    <p>DMLG‑v3 provides the geometric and recursive substrate required
+    for IEGR completeness. When coupled with an LLM and a bi-directional
+    narrator pipeline, the resulting hybrid system becomes a
+    structurally coherent cognitive architecture for long-form narrative
+    generation. Energetic scaling enhances its performance, enabling
+    richer world absorption, deeper recursion, and more stable
+    long-horizon behavior. The narrative pipeline thus serves as a
+    concrete, empirically validated example of how IEGR-complete systems
+    can be constructed from complementary parrot regimes.</p>
+    <h1
+    id="empirical-results-autonomous-world-absorption-and-narrative-evolution">Empirical
+    Results: Autonomous World Absorption and Narrative Evolution</h1>
+    <p>To evaluate the structural claims of the IEGR model and the
+    architectural improvements introduced in DMLG‑v3, we conducted a
+    series of empirical experiments using the sequential narrator
+    pipeline. These experiments demonstrate that the hybrid system
+    (DMLG‑v3 + LLM + pipeline) is not merely structurally IEGR-complete
+    but also operationally capable of autonomous world absorption,
+    long-horizon narrative coherence, and multi-generational story
+    evolution.</p>
+    <p>We present results from two independent narrative universes:</p>
+    <ol>
+    <li><p><strong>Tales of the Dark Forest</strong>: a slapstick
+    ecosystem with four canonical animal attractors,</p></li>
+    <li><p><strong>Tales of the Shrouded City</strong>: a strict
+    Victorian gothic world based on <em>Dr. Jekyll and
+    Mr. Hyde</em>.</p></li>
+    </ol>
+    <p>Both systems were generated fully autonomously, end-to-end,
+    without human intervention in content.</p>
+    <h2 id="tales-of-the-dark-forest-emergent-slapstick-ecosystem">Tales
+    of the Dark Forest: Emergent Slapstick Ecosystem</h2>
+    <p><strong>Tales of the Dark Forest</strong> is the first complete
+    demonstration of the Triadic Cosmos narrator pipeline. Starting from
+    a distilled slapstick curriculum, DMLG‑v3 absorbed the structural
+    rules of a chaotic forest environment and developed four stable
+    behavioral attractors:</p>
+    <ul>
+    <li><p><strong>fox</strong>: cunning but overconfident,</p></li>
+    <li><p><strong>rabbit</strong>: anxious and reactive,</p></li>
+    <li><p><strong>raccoon</strong>: wise but sarcastic,</p></li>
+    <li><p><strong>monkey</strong>: chaotic wildcard.</p></li>
+    </ul>
+    <p>These attractors emerged without explicit agent models. They
+    arose from the interaction between:</p>
+    <ul>
+    <li><p>DMLG‑v3’s prefix grammar and lemma-keyed pages (G),</p></li>
+    <li><p>narrative memory and recursive context accumulation
+    (R),</p></li>
+    <li><p>LLM moderation and keyword evolution (I),</p></li>
+    <li><p>energetic amplification through the LLM (E).</p></li>
+    </ul>
+    <p>The resulting ecosystem exhibited:</p>
+    <ul>
+    <li><p><strong>slapstick physics</strong>: unstable ground, falling
+    branches, bubbling lava pits,</p></li>
+    <li><p><strong>multi-agent comedic tension</strong>: emergent
+    coordination and conflict,</p></li>
+    <li><p><strong>canonical consistency</strong>: stable roles across
+    chapters,</p></li>
+    <li><p><strong>long-horizon coherence</strong>: narrative arcs
+    spanning ten chapters.</p></li>
+    </ul>
+    <p>The book included AI-generated illustrations derived from
+    director’s-cut prompts, demonstrating multimodal consistency across
+    text and imagery. This experiment validated the pipeline’s ability
+    to stabilize micro-model output into coherent long-form
+    narrative.</p>
+    <h2
+    id="tales-of-the-shrouded-city-multi-generational-gothic-evolution">Tales
+    of the Shrouded City: Multi-Generational Gothic Evolution</h2>
+    <p><strong>Tales of the Shrouded City</strong> is a more demanding
+    test: a strict Victorian gothic universe based on <em>Dr. Jekyll and
+    Mr. Hyde</em>. The system was required to maintain:</p>
+    <ul>
+    <li><p>canonical characters (Jekyll, Hyde, Utterson, Poole,
+    Bradshaw),</p></li>
+    <li><p>strict Victorian London atmosphere,</p></li>
+    <li><p>consistent scientific logic around Jekyll’s
+    experiment,</p></li>
+    <li><p>thematic focus on internal struggle,</p></li>
+    <li><p>prohibition of motifs from other gothic works.</p></li>
+    </ul>
+    <p>The sequential narrator pipeline produced:</p>
+    <ul>
+    <li><p><strong>multiple complete editions</strong>,</p></li>
+    <li><p>each with <strong>14 combined chapters</strong>,</p></li>
+    <li><p>each chapter containing a <strong>director’s-cut
+    variant</strong>,</p></li>
+    <li><p>totaling <strong>42 pipeline chapters per
+    edition</strong>,</p></li>
+    <li><p>fully autonomous world evolution across generations.</p></li>
+    </ul>
+    <p>Each edition produced a distinct narrative arc, demonstrating
+    that the hybrid system can:</p>
+    <ul>
+    <li><p>absorb a world through curriculum learning
+    (DMLG‑v3),</p></li>
+    <li><p>maintain long-term narrative memory across dozens of
+    chapters,</p></li>
+    <li><p>evolve keywords and themes recursively,</p></li>
+    <li><p>generate coherent transitions between chapters,</p></li>
+    <li><p>detect valid endings through LLM-based structural
+    validation.</p></li>
+    </ul>
+    <p>The system maintained strict canonical constraints throughout all
+    generations, showing that DMLG‑v3’s geometric and recursive
+    substrate can preserve world rules even as the LLM introduces
+    stylistic variation.</p>
+    <h2 id="structural-interpretation-of-empirical-results">Structural
+    Interpretation of Empirical Results</h2>
+    <p>The empirical results demonstrate that the hybrid system is not
+    merely IEGR-complete in theory but IEGR-functional in practice. The
+    following structural properties were observed:</p>
+    <ul>
+    <li><p><strong>Geometric stability (G)</strong>: prefix grammar,
+    canonical pages, and narrative memory produced stable attractors and
+    consistent world rules.</p></li>
+    <li><p><strong>Recursive depth (R)</strong>: context accumulation
+    and multi-step moderation enabled long-horizon coherence across
+    dozens of chapters.</p></li>
+    <li><p><strong>Informational expansion (I)</strong>: keyword
+    evolution and LLM moderation enriched the semantic space without
+    breaking canonical structure.</p></li>
+    <li><p><strong>Energetic amplification (E)</strong>: transformer
+    inference provided the computational throughput required for
+    stylistic refinement and high-quality narrative generation.</p></li>
+    </ul>
+    <p>These results confirm the IEGR model’s prediction: hybrid systems
+    composed of complementary parrot regimes can achieve structural
+    completeness and exhibit emergent general-purpose behavior when
+    coupled through a recursive integrator.</p>
+    <h2 id="conclusion">Conclusion</h2>
+    <p>The sequential narrator pipeline demonstrates that DMLG‑v3, when
+    combined with a transformer-based LLM and a bi-directional coupling
+    layer, forms a structurally complete IEGR system capable of
+    autonomous world absorption, multi-generational narrative evolution,
+    and long-horizon coherence. Scaling energetic capacity (E) could
+    transform this architecture into human-like AGI.</p>
+    <h1 id="testable-predictions">Testable Predictions</h1>
+    <p>The hybrid architecture presented in this paper yields a set of
+    concrete, falsifiable predictions about (i) the behavior of DMLG‑v3
+    as a geometric–recursive substrate, (ii) the dynamics of the
+    sequential narrator pipeline, and (iii) the conditions under which
+    stable long-horizon narrative generation emerges. These predictions
+    can be evaluated empirically using existing systems.</p>
+    <h2 id="predictions-about-dmlgv3-as-a-gr-substrate">Predictions
+    About DMLG‑v3 as a GR Substrate</h2>
+    <h4 id="prediction-1-stable-attractor-formation">Prediction 1:
+    Stable Attractor Formation</h4>
+    <p>DMLG‑v3 will consistently form stable attractors in any domain
+    with sufficient canonical structure. These attractors will persist
+    even when paired with weaker LLM moderation, indicating that
+    attractor formation is intrinsic to the GR substrate.</p>
+    <h4 id="prediction-2-canonical-constraint-preservation">Prediction
+    2: Canonical Constraint Preservation</h4>
+    <p>DMLG‑v3 will preserve canonical constraints across long narrative
+    horizons. Structural violations will originate primarily from the
+    evaluator layer rather than from DMLG‑generated seeds. Replacing the
+    evaluator with a noisy model should not disrupt DMLG’s canonical
+    consistency.</p>
+    <h4 id="prediction-3-curriculum-absorption">Prediction 3: Curriculum
+    Absorption</h4>
+    <p>Given a structured curriculum, DMLG‑v3 will absorb domain
+    rules—physics, character roles, thematic constraints—without
+    explicit symbolic encoding. Failure to reproduce these rules under
+    controlled curricula would falsify this prediction.</p>
+    <h2
+    id="predictions-about-the-sequential-narrator-pipeline">Predictions
+    About the Sequential Narrator Pipeline</h2>
+    <h4 id="prediction-4-multi-generational-coherence">Prediction 4:
+    Multi-Generational Coherence</h4>
+    <p>The pipeline will maintain coherent narrative evolution across
+    many chapters. Using smaller evaluators will degrade quality
+    gradually rather than collapse structure, demonstrating that
+    long-horizon coherence arises from the GR substrate and the
+    recursive pipeline.</p>
+    <h4 id="prediction-5-reliable-ending-detection">Prediction 5:
+    Reliable Ending Detection</h4>
+    <p>Ending validation will generalize across domains. If ending
+    detection fails systematically in new narrative styles, the
+    prediction is falsified.</p>
+    <h4 id="prediction-6-keyword-driven-thematic-progression">Prediction
+    6: Keyword-Driven Thematic Progression</h4>
+    <p>Keyword evolution will reliably steer the narrative in coherent
+    thematic directions. Removing keyword feedback will produce
+    stagnation or drift, demonstrating its role as an informational
+    driver.</p>
+    <h4
+    id="prediction-7-transition-based-structural-governance">Prediction
+    7: Transition-Based Structural Governance</h4>
+    <p>Chapter transitions will act as an effective structural filter:
+    coherent transitions will correlate strongly with chapter
+    acceptance, and transition failure will reliably prevent world
+    contamination. If transitions fail to predict chapter quality, the
+    prediction is falsified.</p>
+    <h2 id="predictions-about-energetic-scaling-and-quality">Predictions
+    About Energetic Scaling and Quality</h2>
+    <h4
+    id="prediction-8-smooth-quality-improvement-under-energetic-scaling">Prediction
+    8: Smooth Quality Improvement Under Energetic Scaling</h4>
+    <p>Increasing energetic capacity—larger evaluators, multi-variant
+    generation, chapter-level beam search—will produce smooth,
+    predictable improvements in coherence, world absorption, and
+    thematic stability. Abrupt discontinuities would falsify this
+    prediction.</p>
+    <h4
+    id="prediction-9-multi-variant-selection-improves-stability">Prediction
+    9: Multi-Variant Selection Improves Stability</h4>
+    <p>Generating multiple candidate chapters and selecting the
+    highest-scoring one will consistently outperform single-pass
+    generation. If multi-variant selection fails to improve quality, the
+    prediction is falsified.</p>
+    <h4
+    id="prediction-10-beam-search-over-chapters-enhances-long-horizon-structure">Prediction
+    10: Beam Search Over Chapters Enhances Long-Horizon Structure</h4>
+    <p>Beam search over chapters will produce more stable long-range
+    arcs than single-trajectory generation. If chapter-level beams do
+    not outperform single-path pipelines, the prediction is
+    falsified.</p>
+    <h2 id="summary-1">Summary</h2>
+    <p>These predictions focus on structural stability, curriculum
+    absorption, long-horizon coherence, and energetic scaling within the
+    narrative domain. They provide a practical roadmap for evaluating
+    DMLG‑v3 and the sequential narrator pipeline as hybrid IEGR systems
+    capable of stable multi-generational narrative generation.</p>
+    <h1 id="open-questions-and-limitations">Open Questions and
+    Limitations</h1>
+    <p>Although the hybrid architecture presented in this paper
+    demonstrates stable IEGR-complete behavior within narrative domains,
+    several structural limitations and open research questions remain.
+    These limitations do not undermine the empirical results but
+    delineate the boundaries of current systems and identify directions
+    for future work.</p>
+    <h2 id="limitations-of-the-gr-substrate-dmlgv3">Limitations of the
+    GR Substrate (DMLG‑v3)</h2>
+    <h4 id="informational-scale-i.">Informational Scale (I).</h4>
+    <p>DMLG‑v3 provides strong geometric and recursive structure but
+    remains informationally shallow compared to transformer-based
+    models. Its world absorption capacity depends heavily on curriculum
+    quality and domain structure. Scaling informational richness within
+    DMLG‑v3 without compromising determinism or modularity remains an
+    open challenge.</p>
+    <h4 id="energetic-throughput-e.">Energetic Throughput (E).</h4>
+    <p>DMLG‑v3 is intentionally lightweight. This enables
+    interpretability and structural stability but limits raw energetic
+    throughput. Whether future GR substrates can increase energetic
+    capacity while preserving canonical geometry is an open research
+    question.</p>
+    <h4 id="domain-dependence.">Domain Dependence.</h4>
+    <p>DMLG‑v3 performs best in domains with strong canonical structure
+    (e.g., slapstick ecosystems, Victorian gothic fiction). Its behavior
+    in weakly structured or high-entropy domains remains
+    underexplored.</p>
+    <h2 id="limitations-of-the-sequential-narrator-pipeline">Limitations
+    of the Sequential Narrator Pipeline</h2>
+    <h4 id="dependence-on-the-evaluator-layer.">Dependence on the
+    Evaluator Layer.</h4>
+    <p>The pipeline relies on the evaluator for moderation, scoring,
+    keyword evolution, and semantic expansion. While DMLG‑v3 provides
+    structural stability, the final semantic quality depends on the
+    evaluator’s informational richness. Whether future GR substrates can
+    internalize more semantic refinement is an open question.</p>
+    <h4 id="scaling-behavior.">Scaling Behavior.</h4>
+    <p>The pipeline exhibits smooth capability growth under energetic
+    scaling (larger evaluators, deeper recursion, multi-pass
+    refinement). However, the exact scaling laws for hybrid IEGR
+    systems—linear, sublinear, or superlinear—remain unknown.</p>
+    <h4 id="generalization-beyond-narrative-domains.">Generalization
+    Beyond Narrative Domains.</h4>
+    <p>The architecture demonstrates stable behavior in narrative
+    universes. Whether the same IEGR composition generalizes to
+    non-narrative domains such as planning, scientific reasoning, or
+    embodied tasks remains to be tested.</p>
+    <h2 id="open-questions-about-energetic-scaling">Open Questions About
+    Energetic Scaling</h2>
+    <h4 id="energetic-capacity-as-a-variable-property.">Energetic
+    Capacity as a Variable Property.</h4>
+    <p>A key insight of this work is that energetic capacity is not a
+    fixed threshold but a variable property that can be scaled depending
+    on task demands. This raises several questions:</p>
+    <ul>
+    <li><p>What is the minimal energetic capacity required for
+    high-quality performance in specific domains?</p></li>
+    <li><p>How does energetic efficiency interact with geometric and
+    recursive structure?</p></li>
+    <li><p>Can hybrid systems dynamically allocate energetic resources
+    across submodules?</p></li>
+    </ul>
+    <h4 id="iegr-scale-vs.-iegr-completeness.">IEGR-Scale vs.
+    IEGR-Completeness.</h4>
+    <p>IEGR-completeness ensures that all structural roles are present,
+    but practical performance depends on the magnitude of each role.
+    Determining quantitative thresholds for IEGR-scale remains an open
+    theoretical and empirical challenge.</p>
+    <h4 id="compositional-hybrid-architectures.">Compositional Hybrid
+    Architectures.</h4>
+    <p>The IEGR model suggests that hybrid systems may be compositional:
+    multiple lower-capacity modules could be combined into
+    higher-capacity systems. Whether such compositional architectures
+    outperform monolithic ones remains an open question.</p>
+    <h2 id="open-questions-about-biological-parrot-equivalence">Open
+    Questions About Biological Parrot Equivalence</h2>
+    <h4 id="cognitive-profile-matching.">Cognitive Profile
+    Matching.</h4>
+    <p>Hybrid IEGR-complete systems exhibit structural profiles similar
+    to biological parrots: stable attractors, domain-bound reasoning,
+    recursive planning. Whether these systems can match the full
+    behavioral repertoire of biological parrots (e.g., tool use, social
+    reasoning, meta-learning) remains to be tested.</p>
+    <h4 id="scaling-toward-human-like-performance.">Scaling Toward
+    Human-Like Performance.</h4>
+    <p>It remains unknown whether energetic scaling in IEGR-complete
+    systems produces smooth performance curves, phase transitions, or
+    requires additional structural roles beyond IEGR. Understanding
+    these scaling dynamics is essential for characterizing the upper
+    limits of hybrid architectures.</p>
+    <h2 id="summary-2">Summary</h2>
+    <p>The limitations and open questions identified here outline the
+    frontier of IEGR-based hybrid intelligence. They highlight the need
+    for further research on energetic scaling, domain generalization,
+    compositional architectures, and the quantitative structure of
+    IEGR-scale. The empirical results of the narrator pipeline provide a
+    foundation for addressing these questions, but substantial
+    theoretical and engineering work remains.</p>
+    <h1 id="conclusion-1">Conclusion</h1>
+    <p>This paper presented a hybrid generative architecture grounded in
+    the IEGR framework and demonstrated its effectiveness through a
+    fully autonomous narrative system. The IEGR model identifies four
+    structural roles—energetic efficiency (E), informational richness
+    (I), geometric structure (G), and recursive depth (R)—as the
+    foundation for coherent long-horizon behavior. Modern
+    transformer-based models instantiate E and I strongly but lack
+    explicit geometric modularity and recursive structure, while DMLG‑v3
+    provides a robust geometric–recursive backbone with modest energetic
+    and informational scale. Neither architecture alone is sufficient
+    for stable long-form generation, but their complementary integration
+    yields an IEGR-complete system.</p>
+    <p>DMLG‑v3 was introduced as a deterministic GR substrate offering
+    canonical grammar, modular page structure, stable attractors, and
+    long-horizon narrative memory. Coupled with a transformer-based
+    evaluator and integrated through a bi-directional narrator pipeline,
+    the resulting hybrid system exhibits autonomous world absorption,
+    multi-generational narrative evolution, strict canonical constraint
+    enforcement, and stable thematic progression. The pipeline
+    demonstrates that structured recursion, geometric modularity, and
+    energetic amplification can be composed into a coherent long-form
+    generative system that substantially exceeds the capabilities of
+    prompt-driven LLMs.</p>
+    <p>The empirical results—two fully autonomous books, <em>Tales of
+    the Dark Forest</em> and <em>Tales of the Shrouded City</em>—provide
+    concrete evidence that hybrid IEGR-complete systems can maintain
+    stable attractors, enforce domain physics, preserve canonical
+    constraints, and generate coherent narrative arcs across dozens of
+    chapters. These results validate the IEGR hypothesis that
+    complementary parrot regimes can be composed into structurally
+    complete generative architectures.</p>
+    <h2 class="unnumbered"
+    id="insight-structural-scalability-of-dmlgv3">Insight: Structural
+    Scalability of DMLG‑v3</h2>
+    <p>A notable implication of this work is that the deterministic
+    structure of DMLG‑v3 may enable substantially larger-scale training
+    than earlier GR substrates. Because the output space, page
+    architecture, activation stack, and token geometry are fixed at
+    compile time, the model remains stable even when trained on much
+    larger curricula, broader domains, or deeper page hierarchies. This
+    opens the possibility of scaling DMLG‑v3 to significantly larger
+    parameter spaces and to corpora far beyond single-world narrative
+    datasets.</p>
+    <p>Moreover, the modular page structure suggests that future
+    versions of DMLG could support thousands of pages, richer lemma
+    families, and more expressive codebooks. If paired with more
+    advanced context frontends—such as hierarchical memory systems,
+    multi-resolution context windows, or structured semantic
+    indexing—the GR substrate could internalize a larger portion of the
+    IEGR loop and approach full IEGR completeness without relying as
+    heavily on external evaluators.</p>
+    <p>These possibilities remain theoretical, but the empirical
+    stability of DMLG‑v3 makes them realistic avenues for future
+    research. The architecture’s deterministic geometry, fixed output
+    space, and stable attractor dynamics provide a foundation for
+    exploring large-scale GR models capable of absorbing complex worlds
+    while maintaining canonical structure and long-horizon
+    coherence.</p>
+    <p>In summary, this work demonstrates that hybrid IEGR-complete
+    systems can achieve autonomous long-horizon narrative generation,
+    that DMLG‑v3 provides a viable geometric–recursive substrate for
+    structured cognition, and that energetic scaling and improved
+    context frontends offer promising directions for advancing the
+    capabilities of modular generative architectures.</p>
+    <h1 id="narrator-pipeline-diagram">Narrator Pipeline Diagram</h1>
+    <figure>
+
+    <figcaption>The narrator pipeline: a sequential IEGR loop
+    integrating DMLG‑v3 (G–R) with a transformer-based LLM (E–I),
+    including chapter-level transitions.</figcaption>
+    </figure>
+    <h1 id="iegr-structural-roles">IEGR Structural Roles</h1>
+    <table>
+    <caption>IEGR roles and their instantiation across DMLG‑v3, the
+    evaluator layer, and the narrator pipeline.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Role</strong></th>
+    <th style="text-align: left;"><strong>Definition</strong></th>
+    <th style="text-align: left;"><strong>Manifestation in the Hybrid
+    System</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>E</strong> (Energetic
+    Efficiency)</td>
+    <td style="text-align: left;">Computational throughput, generative
+    bandwidth, and refinement capacity.</td>
+    <td style="text-align: left;">Transformer-based evaluator provides
+    high-throughput moderation, scoring, transition synthesis, and
+    keyword evolution. Multi-variant generation and chapter-level beam
+    search amplify energetic capacity.  </td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>I</strong> (Informational
+    Richness)</td>
+    <td style="text-align: left;">Semantic coverage, stylistic
+    flexibility, and world knowledge.</td>
+    <td style="text-align: left;">Evaluator supplies semantic expansion,
+    natural-language rewriting, thematic steering, and domain knowledge.
+    Keyword evolution provides controlled informational feedback into
+    the GR substrate.  </td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>G</strong> (Geometric
+    Structure)</td>
+    <td style="text-align: left;">Canonical forms, modularity,
+    attractors, and deterministic update rules.</td>
+    <td style="text-align: left;">DMLG‑v3 provides prefix grammar,
+    lemma-keyed pages, fixed-size neural architecture, stable
+    attractors, and deterministic token geometry. The narrator pipeline
+    enforces chapter-level structure and canonical constraints.  </td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>R</strong> (Recursive
+    Depth)</td>
+    <td style="text-align: left;">Long-horizon coherence, memory
+    accumulation, and multi-step reasoning.</td>
+    <td style="text-align: left;">DMLG‑v3 supplies recursive page
+    updates and narrative memory. The sequential narrator pipeline adds
+    recursive moderation, scoring, transition synthesis, and context
+    accumulation across chapters.</td>
+    </tr>
+    </tbody>
+    </table>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the DMLG‑v3 engine, the sequential
+    narrator pipeline, and all supporting modules is provided under the
+    AGPL‑3.0 license. The repository includes:</p>
+    <ul>
+    <li><p>the full DMLG‑v3 engine,</p></li>
+    <li><p>the narrative memory subsystem,</p></li>
+    <li><p>the sequential narrator pipeline,</p></li>
+    <li><p>the trainer and curriculum tools,</p></li>
+    <li><p>complete runnable examples and reproducible
+    experiments.</p></li>
+    </ul>
+    <p>Beyond the codebase, the ecosystem also contains fully autonomous
+    narrative demonstrations generated by the hybrid system described in
+    this paper. These demonstrations serve as empirical validation of
+    the IEGR framework and the structural role of DMLG‑v3 as a
+    geometric–recursive substrate.</p>
+    <p>Two example books are currently part of the ecosystem:</p>
+    <ol>
+    <li><p><strong>Tales of the Dark Forest</strong> A slapstick
+    ecosystem featuring four canonical animal attractors (fox, rabbit,
+    raccoon, monkey), emergent slapstick physics, and multi-agent
+    comedic tension. The book demonstrates how micro-model output can be
+    stabilized into coherent long-form narrative through recursive
+    moderation, keyword evolution, and director’s-cut
+    refinement.</p></li>
+    <li><p><strong>Tales of the Shrouded City</strong> A strict
+    Victorian gothic universe based on <em>Dr. Jekyll and Mr. Hyde</em>,
+    generated across multiple editions (42 chapters per edition). The
+    book demonstrates world absorption, long-horizon narrative memory,
+    strict canonical constraint enforcement, and multi-generational
+    story evolution.</p></li>
+    </ol>
+    <p>The Triadic Cosmos ecosystem therefore provides both the
+    theoretical foundation and the empirical evidence for the claims
+    made in this paper: that hybrid intelligent systems composed of
+    complementary parrot regimes can achieve structural completeness,
+    and that DMLG‑v3 serves as a generic GR substrate for IEGR-complete
+    architectures.</p>
+  </main>
+
+</div>
+
+</body>
+</html>

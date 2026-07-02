@@ -467,6 +467,43 @@ and provides falsifiable predictions for future research within the Triadic Cosm
 
 ---
 
+### **17. A Narrator Pipeline driven by DMLG — Structural Hybrid Intelligence **
+
+This paper presents the first fully operational demonstration of **DMLG‑v3** as a  
+geometric–recursive generative substrate within a hybrid IEGR architecture.  
+Where earlier work positioned DMLG primarily as a governance and moderation layer,  
+this paper shows how DMLG can function as a **structural generator** when embedded  
+in a bi‑directional narrator pipeline.
+
+The system integrates:
+
+- a **deterministic GR substrate** (DMLG‑v3) providing canonical grammar, modular pages,  
+  stable attractors, and recursive memory,  
+- a **transformer‑based LLM layer** supplying energetic efficiency, semantic refinement,  
+  scoring, transitions, and informational expansion,  
+- a **sequential narrator pipeline** orchestrating seed generation, moderation,  
+  chapter‑level transitions, keyword evolution, context accumulation, and ending validation.
+
+The resulting architecture behaves as an **IEGR‑complete hybrid system**:  
+each structural role—energetic (E), informational (I), geometric (G), recursive (R)—is  
+explicitly instantiated and functionally integrated.  
+The pipeline produces **autonomous, canon‑consistent long‑form narratives** across dozens  
+of chapters, including *Tales of the Dark Forest* and *Tales of the Shrouded City*.
+
+Beyond its generative contribution, the paper provides a structural insight into hybrid  
+intelligence: DMLG supplies the **geometric (G)** and **recursive (R)** backbone required  
+for long‑horizon stability, while the LLM supplies **energetic (E)** and **informational (I)**  
+amplification.  
+The narrator pipeline demonstrates how **hybrid recursion** can yield stable world absorption,  
+multi‑generational narrative evolution, and strict canonical constraint enforcement using  
+existing models.
+
+This work establishes the first **end‑to‑end executable example** of DMLG functioning as a  
+generative substrate within the Triadic Cosmos ecosystem, completing the arc from  
+structural theory → modular architecture → autonomous hybrid generation.
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
