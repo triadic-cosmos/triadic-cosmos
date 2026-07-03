@@ -191,6 +191,37 @@ serves as the first fully transparent example of autonomous book generation
 within the Triadic Cosmos ecosystem, validating the narrator architecture  
 before expansion into more complex worlds.
 
+### **12. Tales of the Shrouded City: A Multiverse of Shadows and Transformation**
+
+A six‑edition narrative organism grown entirely through the  
+Triadic Cosmos Narrator Pipeline — a multiversal reconstruction of the Jekyll–Hyde  
+mythos in which each edition evolves a new ontological architecture.
+
+This volume demonstrates how long‑form narrative can emerge from *iterated  
+self‑transformation: Edition One (duality), Edition Two (dissolution), Edition  
+Three (fragmentation), Edition Four (recursion), Edition Five (emergence), and  
+Edition Six (multiversal convergence). Each edition is a distinct cognitive  
+geometry, a new attractor basin in the pipeline, and a new interpretation of  
+London as a living, adaptive system.
+
+Across these six worlds, the city becomes a progressively more complex entity —  
+from atmospheric witness to stratified labyrinth, recursive mechanism, emergent  
+organism, and finally multiversal archive. Jekyll and Hyde cease to be  
+characters and become *states* in a narrative dynamical system; Utterson evolves  
+from moral anchor to recursive conduit; Hyde transitions from figure to field to  
+phenomenon to emergent surplus.
+
+The book is the first complete demonstration of **multiversal narratology** in  
+the Triadic Cosmos ecosystem: a pipeline where each edition is not a rewrite but  
+a *phase‑shift* — a structural mutation produced by recursive remastering,  
+director‑cut refinement, and attractor stabilization across narrative layers.
+
+A landmark in synthetic literature, *Tales of the Shrouded City* shows how  
+structure, not scale, enables coherent generative worlds. It stands as the  
+definitive proof that narrative can evolve across editions, accumulate  
+ontologies, and converge into a final shape — a multiverse of shadows and  
+transformation grown entirely from its own lineage.
+
 ---
 
 ## 📄 Scientific Papers
