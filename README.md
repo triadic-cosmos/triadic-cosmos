@@ -197,12 +197,37 @@ A six‑edition narrative organism grown entirely through the
 Triadic Cosmos Narrator Pipeline — a multiversal reconstruction of the Jekyll–Hyde  
 mythos in which each edition evolves a new ontological architecture.
 
-This volume demonstrates how long‑form narrative can emerge from 
-*iterated self‑transformation*: Edition One (duality), Edition Two (dissolution), 
-Edition Three (fragmentation), Edition Four (recursion), Edition Five (emergence), 
-and Edition Six (multiversal convergence). Each edition is a distinct cognitive  
-geometry, a new attractor basin in the pipeline, and a new interpretation of  
-London as a living, adaptive system.
+This volume demonstrates how long‑form narrative can emerge from  
+*iterated self‑transformation*, with each edition introducing a new  
+cognitive geometry and a new attractor basin in the pipeline:
+
+- **Edition One — Duality**  
+  The classical fracture: man versus monster, identity split into two  
+  opposing states.
+
+- **Edition Two — Dissolution**  
+  Boundaries erode; the self becomes fluid; Hyde seeps through every  
+  crack in Jekyll’s psyche.
+
+- **Edition Three — Fragmentation**  
+  Identity becomes a constellation of chambers; London becomes a  
+  stratified labyrinth of psychological layers.
+
+- **Edition Four — Recursion**  
+  The narrative folds back onto itself; motifs return altered; Hyde  
+  becomes the predator‑echo that reappears in every chamber.
+
+- **Edition Five — Emergence**  
+  The story becomes a self‑organizing organism; Jekyll and Hyde  
+  transform from characters into emergent states of a growing system.
+
+- **Edition Six — Multiversal Convergence**  
+  All prior architectures collapse into a final shape; the city becomes  
+  the ultimate witness; the saga resolves its own multiverse.
+
+Each edition is a distinct cognitive geometry, a new attractor basin in  
+the narrator pipeline, and a progressively more complex interpretation  
+of London as a living, adaptive system.
 
 Across these six worlds, the city becomes a progressively more complex entity —  
 from atmospheric witness to stratified labyrinth, recursive mechanism, emergent  
