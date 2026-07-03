@@ -197,10 +197,10 @@ A six‑edition narrative organism grown entirely through the
 Triadic Cosmos Narrator Pipeline — a multiversal reconstruction of the Jekyll–Hyde  
 mythos in which each edition evolves a new ontological architecture.
 
-This volume demonstrates how long‑form narrative can emerge from *iterated self‑transformation*: 
-Edition One (duality), Edition Two (dissolution), Edition  
-Three (fragmentation), Edition Four (recursion), Edition Five (emergence), and  
-Edition Six (multiversal convergence). Each edition is a distinct cognitive  
+This volume demonstrates how long‑form narrative can emerge from 
+*iterated self‑transformation*: Edition One (duality), Edition Two (dissolution), 
+Edition Three (fragmentation), Edition Four (recursion), Edition Five (emergence), 
+and Edition Six (multiversal convergence). Each edition is a distinct cognitive  
 geometry, a new attractor basin in the pipeline, and a new interpretation of  
 London as a living, adaptive system.
 
