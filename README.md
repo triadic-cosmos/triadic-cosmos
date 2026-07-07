@@ -690,6 +690,37 @@ its boundaries, and its role within a closed universe.
 
 ---
 
+### **21. Local Closure Cosmology: Structural Consolidation of the Triadic Cosmos Physics Layer**
+
+A cosmological consolidation paper that extends the Triadic Cosmos physics program beyond
+architectural unification and into fully dynamical, observer‑level structure.  
+This work introduces **Local Closure Cosmology** as the physical projection of the triadic
+ontology, showing how every observer occupies a closure‑bounded dynamical niche defined by
+its causal cone, horizon geometry, recursion index, and emergent temporal structure.
+
+The paper demonstrates that:
+
+- inflation generates a **fractal hierarchy of closures**, not multiple universes,  
+- accelerated expansion drives **horizon growth** and **asymptotic closure shrink**,  
+- cosmological tensions (e.g., Hubble discrepancy) arise from **closure‑dependent reconstruction**,  
+- JWST early‑galaxy anomalies reflect **shallow‑recursion closures**,  
+- the absence of new high‑energy physics indicates **closure‑layer completeness**,  
+- AI‑driven stagnation follows from **informational and geometric limits** within our closure,  
+- the classical heat‑death scenario is reinterpreted as **closure‑specific isolation**,  
+- the global triadic system remains **finite yet effectively infinite** in closure depth.
+
+The paper also positions local closure cosmology relative to major alternative frameworks—
+multiverse theories, non‑local extensions, exotic GR solutions, and classical end‑state models—
+showing that the triadic architecture provides a **minimal, falsifiable, and structurally coherent**
+explanation without invoking new fields, dimensions, or non‑physical geometries.
+
+This work completes the physics arc of the Triadic Cosmos ecosystem:  
+a unified architectural ontology (Triadic Cycle), a structural unification of GR/QFT/SM/holography,
+a holographic dynamical refinement (AdS/CFT recursion), and now a **closure‑based cosmology**
+that explains the empirical stability and observational limits of modern physics.
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
