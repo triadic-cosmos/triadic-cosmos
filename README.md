@@ -709,10 +709,19 @@ The paper demonstrates that:
 - the classical heat‑death scenario is reinterpreted as **closure‑specific isolation**,  
 - the global triadic system remains **finite yet effectively infinite** in closure depth.
 
+In addition, **local closures are not discrete entities**.  
+Because observers are finite and horizon‑bounded, the number of active closures at any moment is finite, and closures form a **continuous, overlapping field** rather than a countable set of isolated regions.  
+The system’s effective infinity does not arise from an infinite number of observers or closures, but from the **unbounded recursive depth** of closure formation itself.  
+Overlapping closures are structurally expected: causal cones intersect, recursion indices blend, and horizon geometries partially coincide.  
+This refinement aligns local closure cosmology with the triadic ontology and clarifies that closure‑based infinity is a property of **recursion**, not **enumeration**.
+
 The paper also positions local closure cosmology relative to major alternative frameworks—
 multiverse theories, non‑local extensions, exotic GR solutions, and classical end‑state models—
 showing that the triadic architecture provides a **minimal, falsifiable, and structurally coherent**
-explanation without invoking new fields, dimensions, or non‑physical geometries.
+explanation without invoking new fields, dimensions, or non‑physical geometries.  
+The continuous, overlapping nature of closures strengthens this minimality: the observed unity
+of local physical law arises from shared closure‑geometry rather than from parallel universes or
+non‑local interactions.
 
 This work completes the physics arc of the Triadic Cosmos ecosystem:  
 a unified architectural ontology (Triadic Cycle), a structural unification of GR/QFT/SM/holography,
