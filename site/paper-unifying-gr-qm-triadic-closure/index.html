@@ -1,0 +1,1929 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Unifying General Relativity and Quantum Mechanics through
+Triadic Closure</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#triadic-closure-as-unification-mechanism"
+    id="toc-triadic-closure-as-unification-mechanism">Triadic Closure as
+    Unification Mechanism</a></li>
+    <li><a href="#gr-and-qm-as-complementary-triadic-roles"
+    id="toc-gr-and-qm-as-complementary-triadic-roles">GR and QM as
+    Complementary Triadic Roles</a></li>
+    <li><a
+    href="#revising-the-triadic-cosmos-unification-from-global-dualities-to-local-triadic-closure"
+    id="toc-revising-the-triadic-cosmos-unification-from-global-dualities-to-local-triadic-closure">Revising
+    the Triadic Cosmos Unification: From Global Dualities to Local
+    Triadic Closure</a></li>
+    <li><a href="#illustrative-implications-of-triadic-closure"
+    id="toc-illustrative-implications-of-triadic-closure">Illustrative
+    Implications of Triadic Closure</a></li>
+    <li><a href="#testable-predictions-and-falsifiability"
+    id="toc-testable-predictions-and-falsifiability">Testable
+    Predictions and Falsifiability</a></li>
+    <li><a href="#limitations-and-open-questions"
+    id="toc-limitations-and-open-questions">Limitations and Open
+    Questions</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#comparison-with-existing-unification-frameworks"
+    id="toc-comparison-with-existing-unification-frameworks">Comparison
+    With Existing Unification Frameworks</a></li>
+    <li><a href="#core-formalism-of-triadic-closure"
+    id="toc-core-formalism-of-triadic-closure">Core Formalism of Triadic
+    Closure</a></li>
+    <li><a
+    href="#worked-example-triadic-closure-in-a-double-slit-scenario"
+    id="toc-worked-example-triadic-closure-in-a-double-slit-scenario">Worked
+    Example: Triadic Closure in a Double-Slit Scenario</a></li>
+    <li><a href="#appendix:workedexampleBH"
+    id="toc-appendix:workedexampleBH">Worked Example: Triadic Closure in
+    a Black-Hole Scenario</a></li>
+    <li><a href="#appendix:closurestructure"
+    id="toc-appendix:closurestructure">Closure Structure: Black Holes
+    and Observer-Specific Closures</a></li>
+    <li><a href="#appendix:miniformula"
+    id="toc-appendix:miniformula">Minimal Instantiation of Triadic
+    Update Functions and Numerical Example</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>General Relativity (GR) and quantum mechanics (QM) form the two
+    foundational pillars of modern physics. GR describes spacetime as a
+    continuous geometric structure governed by the Einstein field
+    equations, while QM describes physical evolution through
+    informational and energetic constraints encoded in Hilbert-space
+    dynamics. Each framework is individually complete, precise, and
+    empirically validated, yet their architectural assumptions are
+    mutually incompatible. GR treats geometry as fundamental and time as
+    a geometric ordering; QM treats information as fundamental and time
+    as a parameter governing unitary evolution. A century of unification
+    attempts has not resolved this mismatch. Instead, major
+    programs—including string theory, loop quantum gravity, causal set
+    theory, emergent-spacetime proposals, and non-local extensions—have
+    introduced new microscopic ingredients without providing a minimal
+    and falsifiable architectural reconciliation of geometric and
+    informational roles.</p>
+    <p>The Triadic Cosmos ecosystem approaches this longstanding problem
+    from a different direction. Earlier work introduced a minimal
+    ontology consisting of three irreducible structural roles: energy,
+    geometry, and information <span class="citation"
+    data-cites="Witte2026c"></span>. These roles form a closed
+    interdependence expressed through the Triadic Cycle <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>
+    <span class="citation" data-cites="Witte2026d"></span>. Subsequent
+    papers derived theory-independent architectural constraints required
+    for physical realizability <span class="citation"
+    data-cites="Witte2026a"></span>, extended the triadic structure into
+    recursive and fractal domains <span class="citation"
+    data-cites="Witte2026b"></span>, embedded triadic recursion within
+    holographic renormalization <span class="citation"
+    data-cites="Witte2026e"></span>, and introduced local closure
+    cosmology as a structural explanation for the absence of new
+    fundamental physics across cosmology, high-energy experimentation,
+    computation, and theoretical research <span class="citation"
+    data-cites="Witte2026f"></span>. Together, these works revealed that
+    physical reality is organized by horizon-bounded, triadically
+    recursive closures whose emergent temporal structure arises from
+    successive triadic updates.</p>
+    <p>The present paper consolidates these insights into a single
+    architectural mechanism— <em>triadic closure</em>—that reconciles GR
+    and QM without new fields, dimensions, symmetries, or dynamical
+    extensions. Triadic closure provides the minimal structure through
+    which geometric, energetic, and informational roles cohere. Within
+    each closure, GR and QM become two complementary expressions of the
+    same triadic architecture: GR describes the geometric constraints
+    that shape informational capacity, while QM describes the
+    informational and energetic constraints that shape geometric
+    evolution. Time emerges from recursion rather than from geometry or
+    unitarity alone, resolving the temporal mismatch between the two
+    theories. Causal structure becomes horizon-bounded and
+    closure-dependent, eliminating non-locality paradoxes and
+    measurement inconsistencies. GR’s overcomplete solution space is
+    filtered by triadic closure, explaining why only a subset of
+    geometries are physically realizable. QM’s informational dynamics
+    become embedded within geometric constraints, resolving the
+    measurement problem and the apparent tension between entanglement
+    and relativistic causality.</p>
+    <p>By identifying triadic closure as the structural origin of
+    physical law, this paper positions the Triadic Cosmos as a complete
+    and falsifiable unification framework. It shows that modern physics
+    already contains all necessary ingredients for unification, and that
+    the apparent fragmentation between GR and QM arises not from missing
+    physics but from the absence of an architectural grammar linking
+    their roles. Triadic closure supplies that grammar, yielding a
+    minimal, coherent, and observationally grounded unification of
+    general relativity and quantum mechanics.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Unification efforts in modern physics span several major
+    traditions, each illuminating different structural aspects of
+    physical law. The present work differs from these approaches by
+    introducing <em>triadic closure</em> as a minimal architectural
+    mechanism capable of reconciling general relativity (GR) and quantum
+    mechanics (QM) without new fields, dimensions, or dynamical
+    extensions. This section situates triadic closure within the broader
+    landscape of gravitational theory, quantum information, holography,
+    emergent-time programs, and cosmology, and clarifies how the Triadic
+    Cosmos ecosystem provides the architectural foundation for the
+    present unification proposal.</p>
+    <h2
+    id="general-relativity-black-hole-thermodynamics-and-overcomplete-geometry">General
+    Relativity, Black-Hole Thermodynamics, and Overcomplete
+    Geometry</h2>
+    <p>General Relativity provides the geometric backbone of modern
+    physics, describing curvature through the Einstein field equations
+    <span class="citation" data-cites="Einstein1915"></span>. Black-hole
+    thermodynamics revealed that geometric area encodes informational
+    capacity, with Bekenstein’s entropy bound <span class="citation"
+    data-cites="Bekenstein1973"></span> and Hawking radiation <span
+    class="citation" data-cites="Hawking1975"></span> establishing a
+    deep link between geometry, energy, and information. These results
+    demonstrate that GR’s geometric degrees of freedom implicitly carry
+    informational structure, but GR itself does not constrain
+    informational embedding or recursive evolution.</p>
+    <p>Earlier work in the Triadic Cosmos program showed that GR is an
+    <em>overcomplete architectural model</em>: it admits geometries that
+    lack informational or energetic roles and therefore cannot
+    instantiate full triadic closure <span class="citation"
+    data-cites="Witte2026c"></span>. This overcompleteness motivates the
+    need for an architectural filter capable of distinguishing
+    physically realizable geometries from mathematically permissible
+    ones.</p>
+    <h2
+    id="holography-adscft-and-geometryinformation-duality">Holography,
+    AdS/CFT, and Geometry–Information Duality</h2>
+    <p>The holographic principle <span class="citation"
+    data-cites="tHooft1993 Susskind1995"></span> and the AdS/CFT
+    correspondence <span class="citation"
+    data-cites="Maldacena1998 Witten1998"></span> provide the most
+    explicit realization of geometry–information interdependence. The
+    Ryu–Takayanagi formula and its covariant extensions <span
+    class="citation" data-cites="RyuTakayanagi2006 Hubeny2007"></span>
+    relate entanglement entropy to extremal surfaces, while
+    tensor-network and quantum-error-correcting code models <span
+    class="citation" data-cites="Pastawski2015 VanRaamsdonk2010"></span>
+    show how bulk geometry can emerge from boundary informational
+    structure.</p>
+    <p>These developments instantiate the <span
+    class="math inline"><em>G</em> → <em>I</em></span> and <span
+    class="math inline"><em>I</em> → <em>G</em></span> legs of the
+    triadic cycle and demonstrate that informational structure
+    constrains geometric connectivity. Earlier work in the Triadic
+    Cosmos ecosystem embedded triadic recursion within holographic
+    renormalization, interpreting the recursion index as a discrete RG
+    direction and showing that AdS/CFT provides a canonical—but not
+    necessary—realization of triadic interdependence <span
+    class="citation" data-cites="Witte2026e"></span>. The present paper
+    extends this architectural perspective by showing that triadic
+    closure reconciles GR and QM even in the absence of global
+    holographic dualities.</p>
+    <h2
+    id="quantum-information-computational-limits-and-emergent-time">Quantum
+    Information, Computational Limits, and Emergent Time</h2>
+    <p>Information-theoretic approaches to physics—from Wheeler’s “it
+    from bit” to modern quantum information theory <span
+    class="citation" data-cites="NielsenChuang2010"></span>—highlight
+    the structural role of informational capacity in physical evolution.
+    Quantum speed limits <span class="citation"
+    data-cites="MargolusLevitin1998 MandelstamTamm1945"></span> and
+    computational bounds <span class="citation"
+    data-cites="Lloyd2000"></span> link energetic resources to the rate
+    of informational change, while the Page–Wootters mechanism <span
+    class="citation" data-cites="PageWootters1983"></span> interprets
+    temporal ordering as emerging from correlations rather than from a
+    fundamental time parameter.</p>
+    <p>The Triadic Cycle formalizes these insights by treating time as
+    the ordering induced by successive triadic updates <span
+    class="citation" data-cites="Witte2026d"></span>. This emergent-time
+    interpretation is compatible with both relativistic time dilation
+    and quantum unitary evolution, providing a shared temporal structure
+    for GR and QM. The present work builds on this foundation by showing
+    that emergent time is closure-dependent: each observer occupies a
+    horizon-bounded dynamical niche with its own recursion index <span
+    class="citation" data-cites="Witte2026f"></span>.</p>
+    <h2
+    id="quantum-gravity-relational-ontologies-and-structural-approaches">Quantum
+    Gravity, Relational Ontologies, and Structural Approaches</h2>
+    <p>Quantum gravity programs such as loop quantum gravity <span
+    class="citation" data-cites="Rovelli2004"></span>, spin-foam models
+    <span class="citation" data-cites="Perez2013"></span>, and causal
+    set theory <span class="citation" data-cites="Bombelli1987"></span>
+    explore discrete or relational realizations of geometry. Structural
+    realist and relational ontologies <span class="citation"
+    data-cites="LadymanRoss2007 Rovelli1996"></span> argue that
+    invariant relational structure may be more fundamental than objects
+    or fields. These approaches resonate with the triadic ontology,
+    which identifies energy, geometry, and information as irreducible
+    structural roles.</p>
+    <p>However, none of these frameworks provide a closed architectural
+    mechanism linking GR and QM. The Triadic Cosmos ecosystem introduced
+    such a mechanism by identifying triadic closure as the minimal
+    interdependence required for physical realizability <span
+    class="citation" data-cites="Witte2026a Witte2026b"></span>. The
+    present paper extends this architectural foundation into a full
+    unification proposal.</p>
+    <h2 id="cosmology-jwst-and-closure-dependent-parameters">Cosmology,
+    JWST, and Closure-Dependent Parameters</h2>
+    <p>Cosmological observation has entered a high-precision era, with
+    JWST revealing early-universe structure at unprecedented resolution
+    <span class="citation" data-cites="JWST2023"></span>. The persistent
+    Hubble tension—disagreement between early-time global measurements
+    and late-time local measurements <span class="citation"
+    data-cites="Riess2022 Planck2018"></span>—has motivated speculation
+    about new physics.</p>
+    <p>Local closure cosmology provides an alternative interpretation:
+    early-time and late-time measurements probe distinct closure regimes
+    with different recursion indices and horizon histories <span
+    class="citation" data-cites="Witte2026f"></span>. This reframes
+    cosmological parameters as closure-dependent rather than universal
+    and explains why no new fundamental physics has emerged despite
+    increasing observational reach.</p>
+    <h2
+    id="the-triadic-cosmos-ecosystem-and-architectural-unification">The
+    Triadic Cosmos Ecosystem and Architectural Unification</h2>
+    <p>The present work builds directly on the Triadic Cosmos ecosystem,
+    which introduced the triadic ontology <span class="citation"
+    data-cites="Witte2026c"></span>, formalized the triadic cycle <span
+    class="citation" data-cites="Witte2026d"></span>, derived
+    architectural constraints for physical unification <span
+    class="citation" data-cites="Witte2026a"></span>, extended the
+    framework into recursive and fractal domains <span class="citation"
+    data-cites="Witte2026b"></span>, embedded triadic recursion within
+    holographic renormalization <span class="citation"
+    data-cites="Witte2026e"></span>, and developed local closure
+    cosmology as a structural explanation for the absence of new physics
+    <span class="citation" data-cites="Witte2026f"></span>. Together,
+    these works provide the architectural backbone for the present
+    unification proposal.</p>
+    <p>The contribution of this paper is to consolidate these insights
+    into a single structural mechanism— <em>triadic closure</em>—that
+    reconciles GR and QM without new fields, dimensions, or dynamical
+    extensions. Triadic closure provides the minimal architecture
+    through which geometric, energetic, and informational roles cohere,
+    and thereby supplies a unified foundation for modern physics.</p>
+    <h1 id="triadic-closure-as-unification-mechanism">Triadic Closure as
+    Unification Mechanism</h1>
+    <p>Triadic closure is the minimal architectural mechanism through
+    which the structural roles of energy, geometry, and information
+    cohere into a single unified physical framework. It provides the
+    conceptual and mathematical foundation that reconciles general
+    relativity and quantum mechanics without introducing new fields,
+    dimensions, symmetries, or dynamical extensions. In this section we
+    formalize triadic closure, describe its structural consequences, and
+    show how it resolves the longstanding incompatibilities between GR
+    and QM.</p>
+    <h2 id="the-triadic-roles">The Triadic Roles</h2>
+    <p>Earlier work in the Triadic Cosmos ecosystem identified three
+    irreducible structural roles underlying all physical theories:
+    energy (<span class="math inline"><em>E</em></span>), geometry
+    (<span class="math inline"><em>G</em></span>), and information
+    (<span class="math inline"><em>I</em></span>) <span class="citation"
+    data-cites="Witte2026c"></span>. These roles are not microscopic
+    variables but architectural constraints that govern the organization
+    of physical law. Each role is indispensable:</p>
+    <ul>
+    <li><p><span class="math inline"><em>E</em></span> determines
+    dynamical resources, causal influence, and stress–energy
+    content.</p></li>
+    <li><p><span class="math inline"><em>G</em></span> determines causal
+    structure, horizon formation, and geometric connectivity.</p></li>
+    <li><p><span class="math inline"><em>I</em></span> determines
+    distinguishability, entropy, entanglement, and informational
+    capacity.</p></li>
+    </ul>
+    <p>The mutual interdependence of these roles is expressed through
+    the Triadic Cycle <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>,
+    which formalizes how each role reorganizes the others across
+    successive dynamical updates <span class="citation"
+    data-cites="Witte2026d"></span>. Triadic closure occurs when this
+    cycle is well-defined, complete, and recursively stable.</p>
+    <h2 id="the-recursive-update-operator">The Recursive Update
+    Operator</h2>
+    <p>The Triadic Cycle becomes dynamical when expressed through the
+    recursive update operator <span
+    class="math inline"><em>R</em></span>, defined by</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>),   <em>X</em><sub><em>n</em></sub> = (<em>E</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>,<em>I</em><sub><em>n</em></sub>).</span></p>
+    <p>Each update reorganizes the triadic roles according to their
+    functional dependencies:</p>
+    <p><span
+    class="math display"><em>E</em><sub><em>n</em> + 1</sub> = <em>f</em>(<em>G</em><sub><em>n</em></sub>,<em>I</em><sub><em>n</em></sub>),   <em>G</em><sub><em>n</em> + 1</sub> = <em>g</em>(<em>E</em><sub><em>n</em></sub>,<em>I</em><sub><em>n</em></sub>),   <em>I</em><sub><em>n</em> + 1</sub> = <em>h</em>(<em>E</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>).</span></p>
+    <p>This recursion induces an ordering on successive triadic states.
+    Temporal structure is therefore emergent rather than fundamental:
+    time is the ordering of <span
+    class="math inline">{<em>X</em><sub>0</sub>, <em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, …}</span>.
+    This interpretation is compatible with both relativistic and quantum
+    notions of time and provides a shared temporal architecture for GR
+    and QM.</p>
+    <h2 id="definition-of-triadic-closure">Definition of Triadic
+    Closure</h2>
+    <p>A physical structure exhibits <em>triadic closure</em> if and
+    only if:</p>
+    <ol>
+    <li><p>all three roles satisfy positivity constraints (<span
+    class="math inline"><em>E</em> &gt; 0</span>, <span
+    class="math inline"><em>G</em> &gt; 0</span>, <span
+    class="math inline"><em>I</em> &gt; 0</span>),</p></li>
+    <li><p>informational embedding is holographically
+    consistent,</p></li>
+    <li><p>energetic and geometric roles satisfy causal
+    accessibility,</p></li>
+    <li><p>the recursive update operator <span
+    class="math inline"><em>R</em></span> is well-defined,</p></li>
+    <li><p>the full cycle <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>
+    closes without contradiction.</p></li>
+    </ol>
+    <p>If any leg of the cycle fails, recursion becomes undefined,
+    emergent time cannot arise, and the structure cannot correspond to
+    physical reality <span class="citation"
+    data-cites="Witte2026a"></span>. Triadic closure therefore acts as
+    an architectural filter that distinguishes physically realizable
+    configurations from merely mathematically permissible ones.</p>
+    <h2
+    id="gr-as-overcomplete-geometry-and-qm-as-overcomplete-information">GR
+    as Overcomplete Geometry and QM as Overcomplete Information</h2>
+    <p>GR is intentionally broad: the Einstein equations constrain
+    curvature but do not restrict informational capacity, holographic
+    embedding, or recursive evolution. As a result, GR admits geometries
+    that lack informational or energetic roles, including white holes,
+    naked singularities, traversable wormholes, closed timelike curves,
+    and exotic compact objects. These geometries are mathematically
+    valid but architecturally incomplete <span class="citation"
+    data-cites="Witte2026c"></span>.</p>
+    <p>QM and QFT are likewise overcomplete: Hilbert-space dynamics
+    allow informational structures that cannot be embedded in consistent
+    geometric or causal frameworks. Triadic closure filters both
+    theories simultaneously, selecting the subset of GR geometries and
+    QM informational structures that can coexist within a single
+    recursive architecture.</p>
+    <h2 id="emergent-time-and-unified-causality">Emergent Time and
+    Unified Causality</h2>
+    <p>Triadic closure resolves the temporal mismatch between GR and QM.
+    In GR, time is geometric: it arises from spacetime curvature and
+    causal structure. In QM, time is parametric: it indexes unitary
+    evolution. Triadic recursion provides a shared origin for both:</p>
+    <ul>
+    <li><p>geometric time arises from the <span
+    class="math inline"><em>E</em> → <em>G</em></span> update,</p></li>
+    <li><p>quantum time arises from the <span
+    class="math inline"><em>I</em> → <em>E</em></span> update,</p></li>
+    <li><p>emergent time arises from the ordering of recursive triadic
+    states.</p></li>
+    </ul>
+    <p>Causality becomes horizon-bounded and closure-dependent,
+    eliminating non-locality paradoxes and reconciling entanglement with
+    relativistic causal structure.</p>
+    <h2 id="triadic-closure-as-the-unification-of-gr-and-qm">Triadic
+    Closure as the Unification of GR and QM</h2>
+    <p>Within each closure, GR and QM become two complementary
+    expressions of the same triadic architecture:</p>
+    <ul>
+    <li><p>GR describes how energetic and informational roles shape
+    geometric structure.</p></li>
+    <li><p>QM describes how geometric and informational roles constrain
+    energetic evolution.</p></li>
+    <li><p>holography describes how geometric structure encodes
+    informational capacity.</p></li>
+    <li><p>thermodynamics describes how informational change generates
+    energetic structure.</p></li>
+    </ul>
+    <p>Triadic closure therefore provides the minimal architectural
+    grammar linking GR and QM. It explains why no new fundamental
+    physics has been discovered, why GR’s exotic solutions are excluded,
+    why QM’s non-locality paradoxes dissolve, and why cosmological
+    parameters become closure-dependent rather than universal.</p>
+    <p>In this sense, triadic closure is not an extension of GR or QM
+    but the structural mechanism that reveals their coherence. It
+    supplies the architectural foundation through which general
+    relativity and quantum mechanics unify into a single, minimal, and
+    falsifiable physical framework.</p>
+    <h1 id="gr-and-qm-as-complementary-triadic-roles">GR and QM as
+    Complementary Triadic Roles</h1>
+    <p>General Relativity and quantum mechanics are traditionally viewed
+    as conceptually incompatible: GR treats geometry as fundamental and
+    continuous, while QM treats information and energetic constraints as
+    fundamental and discrete. Triadic closure reveals that this
+    incompatibility arises not from the theories themselves, but from
+    the absence of an architectural grammar linking their structural
+    roles. When energy, geometry, and information are treated as
+    irreducible and mutually interdependent, GR and QM emerge as
+    complementary realizations of the same triadic architecture.</p>
+    <h2 id="geometry-as-the-constraint-layer-gr">Geometry as the
+    Constraint Layer (GR)</h2>
+    <p>In GR, geometry determines causal structure, horizon formation,
+    and the accessibility of physical processes. The Einstein field
+    equations relate curvature to energetic content, but do not
+    constrain informational capacity or recursive evolution. Within
+    triadic closure, geometry (<span
+    class="math inline"><em>G</em></span>) plays the role of the
+    <em>constraint layer</em>:</p>
+    <ul>
+    <li><p>geometric curvature bounds informational capacity through
+    holographic area laws,</p></li>
+    <li><p>causal structure determines which informational updates are
+    accessible,</p></li>
+    <li><p>horizon formation defines the boundary of a closure and its
+    recursion index.</p></li>
+    </ul>
+    <p>GR therefore realizes the <span
+    class="math inline"><em>E</em> → <em>G</em></span> leg of the
+    triadic cycle: energetic structure shapes geometric constraints,
+    which in turn regulate informational embedding.</p>
+    <h2 id="information-as-the-generative-layer-qm">Information as the
+    Generative Layer (QM)</h2>
+    <p>Quantum mechanics describes physical evolution through
+    informational and energetic constraints encoded in Hilbert-space
+    dynamics. Entanglement, distinguishability, entropy, and measurement
+    all reflect informational structure. Within triadic closure,
+    information (<span class="math inline"><em>I</em></span>) plays the
+    role of the <em>generative layer</em>:</p>
+    <ul>
+    <li><p>informational structure determines energetic evolution
+    through unitarity,</p></li>
+    <li><p>entanglement generates geometric connectivity
+    (EP=EPR),</p></li>
+    <li><p>informational change drives energetic reconfiguration
+    (Landauer-type relations).</p></li>
+    </ul>
+    <p>QM therefore realizes the <span
+    class="math inline"><em>I</em> → <em>E</em></span> leg of the
+    triadic cycle: informational structure generates energetic
+    structure, which in turn shapes geometric evolution.</p>
+    <h2 id="energy-as-the-dynamical-layer-qft-and-thermodynamics">Energy
+    as the Dynamical Layer (QFT and Thermodynamics)</h2>
+    <p>Energy (<span class="math inline"><em>E</em></span>) mediates
+    between geometry and information. In QFT, energetic excitations
+    propagate through geometric structure; in thermodynamics,
+    informational change generates energetic cost; in holography,
+    boundary energy sources bulk geometry. Within triadic closure,
+    energy plays the role of the <em>dynamical layer</em>:</p>
+    <ul>
+    <li><p>energetic content determines curvature and causal
+    accessibility,</p></li>
+    <li><p>energetic processes generate or reorganize informational
+    structure,</p></li>
+    <li><p>energetic constraints regulate the rate of recursive updates
+    (quantum speed limits).</p></li>
+    </ul>
+    <p>Energy therefore realizes the <span
+    class="math inline"><em>G</em> → <em>I</em></span> leg of the
+    triadic cycle: geometric structure bounds informational capacity,
+    which in turn constrains energetic evolution.</p>
+    <h2 id="complementarity-through-triadic-closure">Complementarity
+    Through Triadic Closure</h2>
+    <p>When the triadic roles are considered jointly, GR and QM become
+    complementary rather than conflicting:</p>
+    <ul>
+    <li><p>GR provides the geometric constraints (<span
+    class="math inline"><em>G</em></span>) that bound informational
+    capacity (<span class="math inline"><em>I</em></span>).</p></li>
+    <li><p>QM provides the informational structure (<span
+    class="math inline"><em>I</em></span>) that generates energetic
+    evolution (<span class="math inline"><em>E</em></span>).</p></li>
+    <li><p>QFT and thermodynamics provide the energetic dynamics (<span
+    class="math inline"><em>E</em></span>) that shape geometry (<span
+    class="math inline"><em>G</em></span>).</p></li>
+    </ul>
+    <p>The full cycle closes:</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em>,</span></p>
+    <p>yielding a unified architecture in which GR and QM are not
+    competing descriptions but structural complements. GR describes the
+    constraint layer of physical reality; QM describes the generative
+    layer; QFT and thermodynamics describe the dynamical layer. Triadic
+    closure is the mechanism through which these layers cohere.</p>
+    <h2 id="unified-temporal-and-causal-structure">Unified Temporal and
+    Causal Structure</h2>
+    <p>Triadic closure also reconciles the temporal and causal
+    assumptions of GR and QM. In GR, time is geometric; in QM, time is
+    parametric; in triadic closure, time is emergent from recursion.
+    Causality becomes horizon-bounded and closure-dependent, eliminating
+    the apparent tension between entanglement and relativistic causal
+    structure. EP=EPR becomes a direct expression of the <span
+    class="math inline"><em>G</em> ↔︎ <em>I</em></span>
+    interdependence.</p>
+    <h2 id="summary">Summary</h2>
+    <p>GR and QM are not architecturally incompatible. They are two
+    complementary realizations of the same triadic structure: geometry
+    as constraint, information as generator, and energy as dynamics.
+    Triadic closure provides the minimal architectural grammar linking
+    these roles, yielding a unified and falsifiable foundation for
+    modern physics.</p>
+    <h1
+    id="revising-the-triadic-cosmos-unification-from-global-dualities-to-local-triadic-closure">Revising
+    the Triadic Cosmos Unification: From Global Dualities to Local
+    Triadic Closure</h1>
+    <p>The Triadic Cosmos: A Foundation for Unification <span
+    class="citation" data-cites="Witte2026c"></span> introduced the
+    first complete architectural synthesis of modern physics,
+    identifying energy, geometry, information, and recursive update as
+    the structural roles through which General Relativity (GR), quantum
+    field theory (QFT), the Standard Model (SM), holography, EP=EPR,
+    renormalization group (RG) flow, and black-hole thermodynamics align
+    into a single conceptual framework. In that formulation, AdS/CFT
+    played a central role as the canonical dynamical realization of
+    triadic recursion and as the clearest example of
+    geometry–information interdependence. The present work revises and
+    strengthens that unification by showing that AdS/CFT is not a
+    necessary ingredient of the triadic architecture. Instead, triadic
+    closure provides a fully local, horizon-bounded, and theory-neutral
+    mechanism through which GR and QM unify without requiring global
+    dualities, extra dimensions, or conformal boundary structure.</p>
+    <h2 id="limitations-of-global-holographic-dependence">Limitations of
+    Global Holographic Dependence</h2>
+    <p>In the original Triadic Cosmos formulation, holography and
+    AdS/CFT served as the primary instantiation of the <span
+    class="math inline"><em>G</em> → <em>I</em></span> and <span
+    class="math inline"><em>I</em> → <em>G</em></span> legs of the
+    triadic cycle. While this mapping is structurally elegant, it relies
+    on assumptions that are not universally realized in physical
+    spacetime:</p>
+    <ul>
+    <li><p>the existence of a global conformal boundary,</p></li>
+    <li><p>asymptotically AdS geometry,</p></li>
+    <li><p>conformal symmetry of boundary degrees of freedom,</p></li>
+    <li><p>global RG flow as a proxy for emergent time.</p></li>
+    </ul>
+    <p>These assumptions are mathematically powerful but cosmologically
+    restrictive. They do not apply to our universe, which is not
+    asymptotically AdS, does not possess a global conformal boundary,
+    and exhibits horizon-bounded causal structure rather than global
+    holographic accessibility. As a result, AdS/CFT can serve as an
+    illustrative special case of triadic interdependence, but not as a
+    universal foundation for unification.</p>
+    <h2
+    id="local-triadic-closure-as-the-correct-architectural-mechanism">Local
+    Triadic Closure as the Correct Architectural Mechanism</h2>
+    <p>Local closure cosmology <span class="citation"
+    data-cites="Witte2026f"></span> revealed that physical reality is
+    organized not by global dualities but by <em>local triadic
+    closures</em>: horizon-bounded dynamical niches defined by causal
+    structure, informational capacity, and recursion index. Within each
+    closure:</p>
+    <ul>
+    <li><p>geometry bounds informational capacity through horizon
+    area,</p></li>
+    <li><p>informational structure constrains energetic
+    evolution,</p></li>
+    <li><p>energetic structure shapes geometric curvature,</p></li>
+    <li><p>recursion generates emergent time.</p></li>
+    </ul>
+    <p>This mechanism is fully local, requires no global boundary, and
+    applies to all physically realized spacetimes. It therefore replaces
+    AdS/CFT as the universal dynamical realization of the triadic cycle.
+    Holography becomes a special case of closure-dependent informational
+    embedding rather than a global requirement for unification.</p>
+    <h2 id="strengthening-the-original-unification">Strengthening the
+    Original Unification</h2>
+    <p>The present work strengthens the unification proposed in <span
+    class="citation" data-cites="Witte2026c"></span> in three ways:</p>
+    <h4 id="removing-non-essential-theoretical-dependencies.">1.
+    Removing non-essential theoretical dependencies.</h4>
+    <p>AdS/CFT, conformal symmetry, and global holographic dualities are
+    no longer required for the triadic architecture. Triadic closure
+    provides a minimal and theory-neutral mechanism that applies equally
+    to GR, QM, QFT, thermodynamics, and cosmology.</p>
+    <h4 id="replacing-global-recursion-with-local-emergent-time.">2.
+    Replacing global recursion with local emergent time.</h4>
+    <p>In the original formulation, holographic RG flow served as the
+    dynamical interpretation of triadic recursion. Local closure
+    cosmology shows that recursion is inherently local and
+    horizon-bounded, yielding emergent time without requiring global
+    renormalization structure.</p>
+    <h4 id="providing-a-complete-reconciliation-of-gr-and-qm.">3.
+    Providing a complete reconciliation of GR and QM.</h4>
+    <p>The original Triadic Cosmos unified the structural roles of
+    modern physics but did not explicitly resolve the architectural
+    mismatch between GR and QM. Triadic closure completes this
+    unification: GR provides geometric constraints, QM provides
+    informational generativity, and QFT provides energetic dynamics. The
+    full cycle closes within each closure, yielding a unified and
+    falsifiable architecture.</p>
+    <h2 id="a-more-minimal-and-more-general-unification">A More Minimal
+    and More General Unification</h2>
+    <p>The revised unification presented in this paper is both more
+    minimal and more general than the original Triadic Cosmos
+    formulation:</p>
+    <ul>
+    <li><p>It requires no new physics beyond GR, QM, QFT, and
+    thermodynamics.</p></li>
+    <li><p>It applies to all physically realizable spacetimes, not only
+    holographic ones.</p></li>
+    <li><p>It explains the absence of exotic GR solutions through
+    architectural closure.</p></li>
+    <li><p>It resolves quantum non-locality and measurement paradoxes
+    through horizon-bounded informational structure.</p></li>
+    <li><p>It reframes cosmological tensions as closure-dependent rather
+    than anomalous.</p></li>
+    </ul>
+    <p>Triadic closure therefore supersedes the role previously played
+    by AdS/CFT in the unification architecture. Holography remains a
+    powerful illustration of geometry–information interdependence, but
+    the fundamental mechanism of unification is local, recursive, and
+    triadic.</p>
+    <h2 id="summary-1">Summary</h2>
+    <p>The Triadic Cosmos: A Foundation for Unification provided the
+    first architectural synthesis of modern physics. The present work
+    completes and refines that synthesis by identifying triadic closure
+    as the universal mechanism through which GR and QM unify. This
+    revision removes non-essential dependencies on global holographic
+    dualities, strengthens the dynamical interpretation of recursion,
+    and yields a minimal, coherent, and observationally grounded
+    unification of general relativity and quantum mechanics.</p>
+    <h1 id="illustrative-implications-of-triadic-closure">Illustrative
+    Implications of Triadic Closure</h1>
+    <p>Triadic closure is not merely an architectural mechanism linking
+    GR and QM; it yields concrete, observer-dependent implications for
+    measurement, temporal awareness, microscopic gravity, cosmological
+    interpretation, black-hole structure, global spacetime, and quantum
+    paradoxes. This section highlights several illustrative examples
+    that demonstrate how triadic closure reorganizes familiar phenomena
+    across quantum mechanics, relativity, and cosmology.</p>
+    <h2 id="wave-function-collapse-as-closure-dependent">Wave-Function
+    Collapse as Closure-Dependent</h2>
+    <p>In standard quantum mechanics, wave-function collapse is treated
+    as a non-unitary update triggered by measurement. Within triadic
+    closure, collapse is reinterpreted as a <em>closure-dependent
+    informational update</em>. Each observer occupies a horizon-bounded
+    closure with its own informational capacity, causal accessibility,
+    and recursion index. Collapse occurs when informational structure
+    becomes embedded within the observer’s closure and cannot be further
+    refined without violating triadic consistency.</p>
+    <p>Thus, collapse is not a universal physical event but an
+    <em>observer-specific triadic update</em>:</p>
+    <ul>
+    <li><p>different observers may collapse the same state at different
+    recursion depths,</p></li>
+    <li><p>collapse reflects informational embedding rather than
+    dynamical discontinuity,</p></li>
+    <li><p>entanglement is preserved globally but becomes
+    closure-specific locally.</p></li>
+    </ul>
+    <h2 id="awareness-of-time-as-closure-dependent">Awareness of Time as
+    Closure-Dependent</h2>
+    <p>In GR, time is geometric; in QM, time is parametric; in triadic
+    closure, time is emergent from recursive updates. Awareness of time
+    therefore becomes <em>closure-dependent</em>: each observer’s
+    temporal experience reflects the recursion index of their
+    closure.</p>
+    <p>Consequences include:</p>
+    <ul>
+    <li><p>temporal flow is perspectival rather than universal,</p></li>
+    <li><p>time dilation arises naturally from differences in recursion
+    accessibility,</p></li>
+    <li><p>cognitive time perception becomes a physical reflection of
+    informational update rate.</p></li>
+    </ul>
+    <h2 id="microscopic-gravity-without-new-physics">Microscopic Gravity
+    Without New Physics</h2>
+    <p>A longstanding tension in physics is that QM governs extremely
+    small scales while GR governs extremely large scales. Triadic
+    closure resolves this mismatch by showing that both theories operate
+    within the same architectural cycle:</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em>.</span></p>
+    <p>At extremely small scales:</p>
+    <ul>
+    <li><p>geometric structure (<span
+    class="math inline"><em>G</em></span>) becomes informationally
+    saturated,</p></li>
+    <li><p>informational capacity (<span
+    class="math inline"><em>I</em></span>) dominates energetic
+    evolution,</p></li>
+    <li><p>recursion rate increases, yielding rapid emergent-time
+    updates.</p></li>
+    </ul>
+    <p>Gravity does not “break down” at small scales; rather, geometric
+    constraints become triadically minimal. No new quantum-gravity
+    degrees of freedom are required.</p>
+    <h2 id="black-holes-as-triadic-closure-saturations">Black Holes as
+    Triadic Closure Saturations</h2>
+    <p>Black holes provide the clearest physical realization of triadic
+    closure saturation. At the horizon:</p>
+    <ul>
+    <li><p>geometric curvature maximizes informational capacity
+    (Bekenstein–Hawking),</p></li>
+    <li><p>informational structure becomes holographically
+    encoded,</p></li>
+    <li><p>energetic structure becomes fully constrained by
+    geometry.</p></li>
+    </ul>
+    <p>Inside the horizon, recursion halts:</p>
+    <ul>
+    <li><p>emergent time ceases (no <span
+    class="math inline"><em>R</em></span> updates),</p></li>
+    <li><p>informational accessibility collapses to zero,</p></li>
+    <li><p>singularities represent breakdowns of triadic closure, not
+    physical entities.</p></li>
+    </ul>
+    <p>This yields a unified interpretation of black holes across GR,
+    QM, and thermodynamics.</p>
+    <h2 id="no-global-spacetime-only-closure-dependent-spacetime">No
+    Global Spacetime: Only Closure-Dependent Spacetime</h2>
+    <p>Triadic closure implies that spacetime is not a global manifold
+    but a <em>closure-dependent structure</em>. Each observer occupies a
+    horizon-bounded closure with its own:</p>
+    <ul>
+    <li><p>causal cone,</p></li>
+    <li><p>informational capacity,</p></li>
+    <li><p>recursion index,</p></li>
+    <li><p>accessible dynamical layer.</p></li>
+    </ul>
+    <p>Consequences include:</p>
+    <ul>
+    <li><p>global paradoxes (horizon problem, flatness problem)
+    dissolve,</p></li>
+    <li><p>cosmological parameters become closure-dependent rather than
+    universal,</p></li>
+    <li><p>spacetime is perspectival and emergent, not globally
+    defined.</p></li>
+    </ul>
+    <h2 id="heat-death-is-not-a-physical-end-state">Heat Death Is Not a
+    Physical End-State</h2>
+    <p>The classical heat-death scenario assumes global thermodynamic
+    equilibrium. Triadic closure rejects this assumption:</p>
+    <ul>
+    <li><p>closures have finite informational capacity and finite
+    recursion index,</p></li>
+    <li><p>emergent time persists as long as triadic updates
+    occur,</p></li>
+    <li><p>“end of time” is not a physical event but a global
+    extrapolation.</p></li>
+    </ul>
+    <p>Heat death is therefore not a physically realizable state within
+    any closure.</p>
+    <h2 id="the-andromeda-galaxy-as-closure-dependent-structure">The
+    Andromeda Galaxy as Closure-Dependent Structure</h2>
+    <p>For observers on Earth, the Andromeda galaxy is not a globally
+    accessible physical object but a <em>closure-dependent informational
+    structure</em> embedded within our horizon. Its observed properties
+    reflect:</p>
+    <ul>
+    <li><p>the informational capacity of our cosmological
+    closure,</p></li>
+    <li><p>the causal accessibility of photons emitted millions of years
+    ago,</p></li>
+    <li><p>the recursion index of our local closure.</p></li>
+    </ul>
+    <p>The predicted collision between the Milky Way and Andromeda in
+    4–5 billion years is not a physical event within our closure. It is
+    a <em>closure-external geometric extrapolation</em>.</p>
+    <h2 id="quantum-paradoxes-as-closure-artifacts">Quantum Paradoxes as
+    Closure Artifacts</h2>
+    <p>Triadic closure provides natural resolutions to several quantum
+    paradoxes:</p>
+    <h4 id="schrödingers-cat.">Schrödinger’s Cat.</h4>
+    <p>Superposition reflects informational structure external to the
+    observer’s closure. Collapse occurs when the cat’s state becomes
+    embedded within the observer’s informational capacity.</p>
+    <h4 id="double-slit-experiment.">Double-Slit Experiment.</h4>
+    <p>Interference arises from informational structure that is not yet
+    closure-embedded. When which-path information becomes accessible
+    within the observer’s closure, the interference pattern
+    disappears.</p>
+    <h4 id="epr-and-non-locality.">EPR and Non-Locality.</h4>
+    <p>Entanglement reflects informational connectivity (<span
+    class="math inline"><em>I</em></span>) that is triadically
+    consistent but not geometrically accessible (<span
+    class="math inline"><em>G</em></span>) within a given closure.</p>
+    <h2 id="summary-2">Summary</h2>
+    <p>These examples illustrate how triadic closure reorganizes
+    familiar phenomena across quantum mechanics, relativity, and
+    cosmology. Collapse, temporal awareness, microscopic gravity,
+    black-hole structure, global spacetime, heat death, cosmological
+    interpretation, and quantum paradoxes all become natural
+    consequences of closure-dependent informational embedding and
+    emergent-time recursion. Triadic closure therefore provides not only
+    a unification of GR and QM, but a coherent interpretive framework
+    for the full spectrum of physical phenomena.</p>
+    <h1 id="testable-predictions-and-falsifiability">Testable
+    Predictions and Falsifiability</h1>
+    <p>A unification of General Relativity and quantum mechanics must be
+    empirically grounded and falsifiable. Triadic closure satisfies this
+    requirement by yielding concrete, observer-dependent,
+    horizon-bounded predictions that differ from both classical GR and
+    standard QM. These predictions arise from the architectural
+    constraints of the triadic cycle and from the closure- dependent
+    nature of emergent time, informational capacity, and causal
+    accessibility. In this section we outline several testable
+    consequences of triadic closure and identify observational and
+    experimental regimes capable of falsifying the framework.</p>
+    <h2
+    id="observer-dependent-collapse-and-informational-accessibility">Observer-Dependent
+    Collapse and Informational Accessibility</h2>
+    <p>Triadic closure predicts that wave-function collapse is not
+    universal but <em>closure-dependent</em>. Collapse occurs when
+    informational structure becomes embedded within an observer’s
+    horizon-bounded closure and cannot be further refined without
+    violating triadic consistency. This yields several testable
+    consequences:</p>
+    <ul>
+    <li><p>collapse thresholds differ for observers with different
+    informational capacities,</p></li>
+    <li><p>collapse timing depends on closure recursion index,</p></li>
+    <li><p>delayed-choice and weak-measurement experiments should
+    exhibit closure-dependent interference persistence,</p></li>
+    <li><p>macroscopic superpositions should decohere at rates
+    determined by closure saturation.</p></li>
+    </ul>
+    <p>Experiments involving entangled photons, weak measurements, and
+    macroscopic quantum systems (optomechanical resonators,
+    superconducting circuits) can test these predictions.</p>
+    <h2
+    id="emergent-time-and-recursion-dependent-temporal-flow">Emergent
+    Time and Recursion-Dependent Temporal Flow</h2>
+    <p>Triadic closure predicts that temporal flow is emergent from
+    recursive triadic updates and therefore <em>observer-dependent</em>.
+    This yields measurable consequences:</p>
+    <ul>
+    <li><p>time dilation arises from differences in recursion
+    accessibility rather than purely from geometric curvature,</p></li>
+    <li><p>observers with different informational capacities should
+    experience different effective temporal rates in cognitive-time
+    experiments,</p></li>
+    <li><p>quantum systems with high entanglement entropy should exhibit
+    recursion-induced temporal slowdown relative to low-entropy
+    systems.</p></li>
+    </ul>
+    <p>These predictions can be tested through relativistic quantum
+    clocks, entanglement-enhanced timekeeping, and cognitive-time
+    perception experiments.</p>
+    <h2
+    id="microscopic-gravity-without-new-degrees-of-freedom">Microscopic
+    Gravity Without New Degrees of Freedom</h2>
+    <p>Triadic closure predicts that gravity at extremely small scales
+    does not require new quantum- gravity degrees of freedom. Instead,
+    geometric constraints become triadically minimal and informational
+    structure dominates. This yields:</p>
+    <ul>
+    <li><p>deviations from classical Newtonian gravity at micron and
+    submicron scales,</p></li>
+    <li><p>absence of new particles or fields in high-energy scattering
+    experiments,</p></li>
+    <li><p>saturation of geometric response in high-density quantum
+    systems,</p></li>
+    <li><p>holographic scaling of informational capacity in microscopic
+    gravitational regimes.</p></li>
+    </ul>
+    <p>These predictions can be tested through short-range gravity
+    experiments, atom-interferometry near massive microstructures, and
+    high-energy collider data.</p>
+    <h2 id="black-hole-interior-structure-and-recursion-halt">Black-Hole
+    Interior Structure and Recursion Halt</h2>
+    <p>Triadic closure predicts that recursion halts inside black-hole
+    horizons, eliminating emergent time and informational accessibility.
+    This yields:</p>
+    <ul>
+    <li><p>no physical singularities; singularities represent breakdowns
+    of triadic closure,</p></li>
+    <li><p>horizon thermodynamics should reflect recursion
+    saturation,</p></li>
+    <li><p>Hawking radiation spectrum should encode closure-dependent
+    informational release,</p></li>
+    <li><p>black-hole evaporation should exhibit recursion-index
+    plateaus.</p></li>
+    </ul>
+    <p>These predictions can be tested through gravitational-wave
+    observations, black-hole shadow measurements, and high-precision
+    Hawking-radiation analog experiments.</p>
+    <h2
+    id="cosmological-predictions-closure-dependent-parameters">Cosmological
+    Predictions: Closure-Dependent Parameters</h2>
+    <p>Local closure cosmology predicts that cosmological parameters are
+    not universal but <em>closure-dependent</em>. This yields:</p>
+    <ul>
+    <li><p>the Hubble tension reflects closure differences rather than
+    new physics,</p></li>
+    <li><p>early-universe anomalies (JWST) arise from closure-dependent
+    recursion indices,</p></li>
+    <li><p>cosmological “end states” such as heat death are not
+    physically realizable within any closure,</p></li>
+    <li><p>large-scale structure formation should exhibit
+    closure-dependent scaling laws.</p></li>
+    </ul>
+    <p>These predictions can be tested through JWST observations,
+    precision cosmology, and comparative analysis of early- and
+    late-time measurements.</p>
+    <h2 id="quantum-paradoxes-as-closure-artifacts-1">Quantum Paradoxes
+    as Closure Artifacts</h2>
+    <p>Triadic closure predicts that quantum paradoxes arise from
+    closure-dependent informational embedding. This yields:</p>
+    <ul>
+    <li><p>EPR correlations should exhibit closure-dependent
+    informational accessibility,</p></li>
+    <li><p>double-slit interference should persist until closure
+    embedding occurs,</p></li>
+    <li><p>macroscopic superpositions should decohere at
+    closure-saturation thresholds,</p></li>
+    <li><p>delayed-choice experiments should reflect recursion-index
+    constraints.</p></li>
+    </ul>
+    <p>These predictions can be tested through entanglement distribution
+    experiments, quantum interference studies, and macroscopic
+    superposition experiments.</p>
+    <h2 id="falsifiability-criteria">Falsifiability Criteria</h2>
+    <p>Triadic closure is falsifiable. It would be disproven if any of
+    the following were observed:</p>
+    <ul>
+    <li><p>universal collapse thresholds independent of observer
+    informational capacity,</p></li>
+    <li><p>global spacetime structure accessible to all
+    observers,</p></li>
+    <li><p>new quantum-gravity degrees of freedom at microscopic
+    scales,</p></li>
+    <li><p>physical singularities inside black holes,</p></li>
+    <li><p>universal cosmological parameters independent of
+    closure,</p></li>
+    <li><p>entanglement correlations requiring superluminal
+    influence.</p></li>
+    </ul>
+    <p>Any of these observations would violate the architectural
+    constraints of triadic closure and falsify the unification proposed
+    in this paper.</p>
+    <h2 id="summary-3">Summary</h2>
+    <p>Triadic closure yields a rich set of testable predictions across
+    quantum mechanics, relativity, gravity, black-hole physics, and
+    cosmology. These predictions arise from the architectural structure
+    of the triadic cycle and from the closure-dependent nature of
+    emergent time, informational capacity, and causal accessibility. The
+    framework is therefore not only a conceptual unification of GR and
+    QM, but a falsifiable physical theory grounded in observational and
+    experimental accessibility.</p>
+    <h1 id="limitations-and-open-questions">Limitations and Open
+    Questions</h1>
+    <p>Triadic closure provides a minimal architectural mechanism
+    capable of reconciling General Relativity and quantum mechanics
+    without new fields, dimensions, or dynamical extensions. However,
+    the framework also introduces structural constraints and conceptual
+    boundaries that define its current scope. This section outlines the
+    principal limitations of the present formulation and identifies open
+    questions that require further investigation.</p>
+    <h2
+    id="architectural-rather-than-dynamical-formulation">Architectural
+    Rather Than Dynamical Formulation</h2>
+    <p>Triadic closure is an architectural mechanism, not a dynamical
+    theory. It specifies the conditions under which geometric,
+    energetic, and informational roles cohere, but it does not yet
+    provide:</p>
+    <ul>
+    <li><p>explicit dynamical equations for triadic recursion,</p></li>
+    <li><p>a closed-form mapping between recursion index and physical
+    observables,</p></li>
+    <li><p>a full mathematical characterization of closure
+    boundaries.</p></li>
+    </ul>
+    <p>The absence of a complete dynamical formalism limits the ability
+    to derive precise numerical predictions. Developing such a formalism
+    is an essential next step.</p>
+    <h2 id="incomplete-characterization-of-recursion-index">Incomplete
+    Characterization of Recursion Index</h2>
+    <p>The recursion index plays a central role in emergent time,
+    closure-dependent causality, and observer-specific informational
+    accessibility. However:</p>
+    <ul>
+    <li><p>its quantitative relation to geometric curvature is not fully
+    specified,</p></li>
+    <li><p>its evolution across cosmological scales remains partially
+    understood,</p></li>
+    <li><p>its role in black-hole evaporation and horizon thermodynamics
+    requires refinement.</p></li>
+    </ul>
+    <p>A more precise definition of recursion index would strengthen the
+    predictive power of the framework.</p>
+    <h2 id="local-closure-without-global-completion">Local Closure
+    Without Global Completion</h2>
+    <p>Triadic closure is inherently local and horizon-bounded. While
+    this resolves many global paradoxes, it also raises open
+    questions:</p>
+    <ul>
+    <li><p>Can closures be consistently patched together into a global
+    manifold?</p></li>
+    <li><p>Are closure transitions possible, and if so, under what
+    conditions?</p></li>
+    <li><p>How does closure-dependent spacetime relate to global
+    cosmological evolution?</p></li>
+    </ul>
+    <p>The relationship between local closures and global spacetime
+    structure remains an open architectural question.</p>
+    <h2 id="black-hole-interiors-and-recursion-halt">Black-Hole
+    Interiors and Recursion Halt</h2>
+    <p>The framework predicts that recursion halts inside black-hole
+    horizons, eliminating emergent time and informational accessibility.
+    This interpretation avoids singularities but raises further
+    questions:</p>
+    <ul>
+    <li><p>What is the precise mathematical structure of a
+    recursion-halted region?</p></li>
+    <li><p>How does halted recursion interact with Hawking radiation and
+    information release?</p></li>
+    <li><p>Can recursion resume under extreme conditions, or is halt
+    absolute?</p></li>
+    </ul>
+    <p>These questions are central to understanding the full triadic
+    structure of black holes.</p>
+    <h2
+    id="microscopic-gravity-and-experimental-accessibility">Microscopic
+    Gravity and Experimental Accessibility</h2>
+    <p>Triadic closure predicts that gravity at extremely small scales
+    is triadically minimal rather than requiring new quantum-gravity
+    degrees of freedom. However:</p>
+    <ul>
+    <li><p>current experimental sensitivity at micron and submicron
+    scales is limited,</p></li>
+    <li><p>deviations from Newtonian gravity may be subtle and difficult
+    to isolate,</p></li>
+    <li><p>informational saturation effects may require novel
+    experimental setups.</p></li>
+    </ul>
+    <p>Improved short-range gravity experiments are necessary to test
+    these predictions.</p>
+    <h2 id="cosmological-closure-and-parameter-variability">Cosmological
+    Closure and Parameter Variability</h2>
+    <p>Local closure cosmology reframes cosmological parameters as
+    closure-dependent rather than universal. This raises several open
+    questions:</p>
+    <ul>
+    <li><p>How do recursion indices evolve across cosmic time?</p></li>
+    <li><p>Can closure-dependent cosmological parameters be inferred
+    from observational data?</p></li>
+    <li><p>What is the relationship between closure transitions and
+    large-scale structure?</p></li>
+    </ul>
+    <p>A full cosmological model based on triadic closure remains to be
+    developed.</p>
+    <h2 id="quantum-paradoxes-and-informational-embedding">Quantum
+    Paradoxes and Informational Embedding</h2>
+    <p>Triadic closure resolves quantum paradoxes through
+    closure-dependent informational embedding. However:</p>
+    <ul>
+    <li><p>the precise boundary between closure-external and
+    closure-internal information is not yet mathematically
+    formalized,</p></li>
+    <li><p>the role of recursion index in entanglement accessibility
+    requires further study,</p></li>
+    <li><p>the relationship between informational embedding and
+    decoherence remains partly conceptual.</p></li>
+    </ul>
+    <p>A more rigorous treatment of informational boundaries would
+    strengthen the interpretive framework.</p>
+    <h2 id="summary-4">Summary</h2>
+    <p>Triadic closure provides a minimal and coherent architectural
+    unification of GR and QM, but it remains an early-stage structural
+    framework. Key limitations include the absence of a complete
+    dynamical formalism, incomplete characterization of recursion index,
+    and open questions regarding black-hole interiors, microscopic
+    gravity, cosmological closure, and informational embedding.
+    Addressing these limitations will be essential for developing
+    triadic closure into a fully predictive and mathematically complete
+    physical theory.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper has presented triadic closure as a minimal and
+    falsifiable architectural mechanism capable of reconciling General
+    Relativity and quantum mechanics without introducing new fields,
+    dimensions, symmetries, or dynamical extensions. Building on the
+    structural ontology developed in the Triadic Cosmos ecosystem, we
+    have shown that energy, geometry, and information form three
+    irreducible roles whose closed interdependence yields emergent time,
+    observer-dependent causality, horizon-bounded accessibility, and a
+    unified account of physical law.</p>
+    <p>Triadic closure resolves the longstanding incompatibility between
+    GR and QM by revealing that their apparent conflict arises not from
+    missing physics, but from the absence of an architectural grammar
+    linking their roles. GR describes the geometric constraints that
+    bound informational capacity; QM describes the informational
+    structure that generates energetic evolution; thermodynamics and QFT
+    describe the energetic dynamics that shape geometry. Within each
+    closure, these roles cohere through the triadic cycle</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em>,</span></p>
+    <p>yielding a unified and perspectival physical framework.</p>
+    <p>The implications of this architecture are broad. Wave-function
+    collapse becomes closure-dependent rather than universal; temporal
+    awareness becomes a reflection of recursion index; microscopic
+    gravity requires no new degrees of freedom; black holes become
+    triadic closure saturations rather than singularities; global
+    spacetime dissolves into closure-dependent causal structure;
+    cosmological parameters become horizon-specific rather than
+    universal; and classical quantum paradoxes emerge as artifacts of
+    closure-external informational structure. These consequences
+    demonstrate that triadic closure is not merely a conceptual
+    synthesis, but a physically meaningful reorganization of the
+    foundations of modern physics.</p>
+    <p>Triadic closure is also falsifiable. It yields testable
+    predictions across quantum mechanics, relativity, black-hole
+    physics, cosmology, and cognitive-time perception. The framework
+    would be disproven by universal collapse thresholds, global
+    spacetime accessibility, new quantum- gravity degrees of freedom,
+    physical singularities, closure-independent cosmological parameters,
+    or entanglement correlations requiring superluminal influence. This
+    falsifiability distinguishes triadic closure from many existing
+    unification programs.</p>
+    <p>At the same time, the framework has limitations. A complete
+    dynamical formalism for triadic recursion remains to be developed;
+    the quantitative structure of recursion index requires refinement;
+    the relationship between local closures and global cosmological
+    evolution remains an open question; and the mathematical
+    characterization of informational boundaries must be strengthened.
+    These limitations define a clear research agenda for future
+    work.</p>
+    <p>Overall, triadic closure provides a coherent, minimal, and
+    observationally grounded unification of GR and QM. It shows that
+    modern physics already contains all necessary ingredients for
+    unification, and that the fragmentation between its major theories
+    arises from architectural incompleteness rather than physical
+    inconsistency. By supplying the missing architectural grammar
+    linking energy, geometry, and information, triadic closure positions
+    the Triadic Cosmos as a complete and falsifiable foundation for a
+    unified description of physical reality.</p>
+    <h1 id="comparison-with-existing-unification-frameworks">Comparison
+    With Existing Unification Frameworks</h1>
+    <p>This appendix compares triadic closure with major contemporary
+    unification programs, including string theory, loop quantum gravity
+    (LQG), and holographic dualities such as AdS/CFT. The goal is not to
+    provide an exhaustive review, but to highlight structural
+    differences in assumptions, ontology, and explanatory scope.</p>
+    <h2 id="comparison-table">Comparison Table</h2>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Framework</strong></th>
+    <th style="text-align: left;"><strong>Core Ontology</strong></th>
+    <th style="text-align: left;"><strong>Unification
+    Mechanism</strong></th>
+    <th style="text-align: left;"><strong>Limitations /
+    Assumptions</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>String Theory</strong></td>
+    <td style="text-align: left;">1D strings, higher-dimensional
+    manifolds, supersymmetry</td>
+    <td style="text-align: left;">Unifies forces via vibrational modes
+    of strings; geometry emerges from compactification</td>
+    <td style="text-align: left;">Requires extra dimensions; relies on
+    supersymmetry; landscape problem; no observer-dependence</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Loop Quantum
+    Gravity</strong></td>
+    <td style="text-align: left;">Spin networks, discrete geometry,
+    quantized area/volume</td>
+    <td style="text-align: left;">Quantizes spacetime directly; GR
+    becomes a quantum theory of geometry</td>
+    <td style="text-align: left;">No unification with SM; limited
+    dynamical predictions; no informational role; no emergent time</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>AdS/CFT and
+    Holography</strong></td>
+    <td style="text-align: left;">Bulk geometry dual to boundary CFT;
+    entanglement versus geometry</td>
+    <td style="text-align: left;">Unifies gravity and QFT via duality;
+    geometry emerges from entanglement</td>
+    <td style="text-align: left;">Requires AdS boundary; global
+    conformal symmetry; not applicable to our universe; duality not
+    universal</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Triadic Closure</strong></td>
+    <td style="text-align: left;">Energy, geometry, information as
+    irreducible roles; horizon-bounded closures</td>
+    <td style="text-align: left;">Unifies GR and QM via architectural
+    cycle <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>;
+    time emerges from recursion</td>
+    <td style="text-align: left;">No extra dimensions; no new fields;
+    requires closure structure; dynamical formalism still
+    incomplete</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="discussion">Discussion</h2>
+    <p>Triadic closure differs from existing unification programs in
+    several fundamental ways:</p>
+    <h4 id="minimal-ontology.">1. Minimal Ontology.</h4>
+    <p>String theory and LQG introduce new fundamental entities
+    (strings, spin networks, discrete geometry). Triadic closure
+    introduces no new physical objects; it reorganizes existing physics
+    through architectural roles.</p>
+    <h4 id="no-extra-dimensions-or-global-boundaries.">2. No Extra
+    Dimensions or Global Boundaries.</h4>
+    <p>String theory requires compactified dimensions; holography
+    requires a global AdS boundary. Triadic closure is fully local and
+    horizon-bounded, applicable to any physically realized
+    spacetime.</p>
+    <h4 id="information-as-a-structural-role.">3. Information as a
+    Structural Role.</h4>
+    <p>Triadic closure treats informational structure as irreducible and
+    dynamically essential. Neither string theory nor LQG incorporate
+    information as a fundamental physical role.</p>
+    <h4 id="emergent-time-through-recursion.">4. Emergent Time Through
+    Recursion.</h4>
+    <p>Time emerges from recursive triadic updates. This differs
+    from:</p>
+    <ul>
+    <li><p>string theory (time is geometric),</p></li>
+    <li><p>LQG (time is quantized or relational),</p></li>
+    <li><p>holography (time is boundary-parametric).</p></li>
+    </ul>
+    <h4 id="observer-dependent-closures.">5. Observer-Dependent
+    Closures.</h4>
+    <p>Triadic closure predicts perspectival spacetime, collapse, and
+    temporal flow. Existing frameworks assume global spacetime or global
+    Hilbert-space structure.</p>
+    <h4 id="no-singularities.">6. No Singularities.</h4>
+    <p>Black-hole interiors become recursion-halted architectural gaps,
+    not physical singularities. String theory and LQG attempt to resolve
+    singularities dynamically; triadic closure resolves them
+    architecturally.</p>
+    <h4 id="falsifiability.">7. Falsifiability.</h4>
+    <p>Triadic closure yields explicit falsifiability criteria
+    (observer-dependent collapse thresholds, closure-dependent
+    cosmological parameters, absence of new quantum-gravity particles).
+    String theory and LQG have limited falsifiability due to high-energy
+    inaccessibility.</p>
+    <h2 id="summary-5">Summary</h2>
+    <p>Triadic closure provides a minimal, local, and perspectival
+    unification of GR and QM that differs structurally from string
+    theory, LQG, and holography. It requires no new fields, no extra
+    dimensions, and no global dualities. Instead, it reorganizes
+    existing physics through the interdependence of energy, geometry,
+    and information within horizon-bounded closures.</p>
+    <h1 id="core-formalism-of-triadic-closure">Core Formalism of Triadic
+    Closure</h1>
+    <p>This appendix presents the minimal mathematical formalism
+    underlying triadic closure. The formalism is architectural rather
+    than dynamical: it specifies the structural roles, constraints, and
+    update relations required for physical realizability. It provides
+    the foundation for the unification of General Relativity and quantum
+    mechanics developed in the main text.</p>
+    <h2 id="triadic-state-space">Triadic State Space</h2>
+    <p>A physical system is represented by a triadic state</p>
+    <p><span
+    class="math display"><em>X</em> = (<em>E</em>,<em>G</em>,<em>I</em>),</span></p>
+    <p>where:</p>
+    <ul>
+    <li><p><span class="math inline"><em>E</em></span> denotes energetic
+    structure (stress–energy, dynamical resources),</p></li>
+    <li><p><span class="math inline"><em>G</em></span> denotes geometric
+    structure (curvature, causal connectivity),</p></li>
+    <li><p><span class="math inline"><em>I</em></span> denotes
+    informational structure (entropy, entanglement,
+    distinguishability).</p></li>
+    </ul>
+    <p>These roles are irreducible: none can be derived from the others,
+    and each constrains the others through the triadic cycle.</p>
+    <h2 id="triadic-cycle">Triadic Cycle</h2>
+    <p>The interdependence of the triadic roles is expressed through the
+    cycle</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em>.</span></p>
+    <p>Each leg of the cycle represents a structural dependency: <span
+    class="math display">$$\begin{aligned}
+        E &amp;\rightarrow G &amp;&amp; \text{energetic structure shapes
+    geometric constraints}, \\
+        G &amp;\rightarrow I &amp;&amp; \text{geometric structure bounds
+    informational capacity}, \\
+        I &amp;\rightarrow E &amp;&amp; \text{informational structure
+    generates energetic evolution}.
+    \end{aligned}$$</span></p>
+    <p>The cycle must close for physical realizability.</p>
+    <h2 id="recursive-update-operator">Recursive Update Operator</h2>
+    <p>Dynamics arise from the recursive update operator</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>),</span></p>
+    <p>where <span class="math inline"><em>n</em></span> indexes
+    emergent-time steps. The operator decomposes into three structural
+    update functions: <span class="math display">$$\begin{aligned}
+        E_{n+1} &amp;= f(G_n, I_n), \\
+        G_{n+1} &amp;= g(E_n, I_n), \\
+        I_{n+1} &amp;= h(E_n, G_n).
+    \end{aligned}$$</span></p>
+    <p>The functions <span class="math inline"><em>f</em></span>, <span
+    class="math inline"><em>g</em></span>, and <span
+    class="math inline"><em>h</em></span> are not dynamical laws but
+    architectural constraints: they specify how each role reorganizes
+    the others across recursion.</p>
+    <h2 id="closure-definition">Closure Definition</h2>
+    <p>A <em>closure</em> <span class="math inline">𝒞</span> is a
+    horizon-bounded region of spacetime in which the triadic cycle is
+    well-defined and recursion is possible. Formally, a closure
+    satisfies:</p>
+    <ol>
+    <li><p><strong>Positivity:</strong> <span
+    class="math inline"><em>E</em> &gt; 0</span>, <span
+    class="math inline"><em>G</em> &gt; 0</span>, <span
+    class="math inline"><em>I</em> &gt; 0</span>.</p></li>
+    <li><p><strong>Holographic consistency:</strong> informational
+    capacity scales with horizon area.</p></li>
+    <li><p><strong>Causal accessibility:</strong> energetic and
+    geometric roles satisfy local causal bounds.</p></li>
+    <li><p><strong>Recursive stability:</strong> <span
+    class="math inline"><em>R</em></span> is well-defined for all <span
+    class="math inline"><em>X</em> ∈ 𝒞</span>.</p></li>
+    <li><p><strong>Cycle closure:</strong> <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>
+    completes without contradiction.</p></li>
+    </ol>
+    <p>If any condition fails, recursion halts and emergent time
+    ceases.</p>
+    <h2 id="emergent-time">Emergent Time</h2>
+    <p>Emergent time is defined as the ordering of recursive triadic
+    states:</p>
+    <p><span
+    class="math display"><em>t</em> ≡ <em>n</em>  where  <em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>).</span></p>
+    <p>Time is therefore:</p>
+    <ul>
+    <li><p>perspectival (closure-dependent),</p></li>
+    <li><p>discrete at the architectural level,</p></li>
+    <li><p>continuous only in the coarse-grained limit,</p></li>
+    <li><p>absent in recursion-halted regions (e.g., black-hole
+    interiors).</p></li>
+    </ul>
+    <h2 id="observer-specific-closures">Observer-Specific Closures</h2>
+    <p>Each observer occupies a distinct closure <span
+    class="math inline">𝒞<sub>obs</sub></span> with its own:</p>
+    <ul>
+    <li><p>informational capacity <span
+    class="math inline"><em>I</em><sub>obs</sub></span>,</p></li>
+    <li><p>causal cone <span
+    class="math inline"><em>G</em><sub>obs</sub></span>,</p></li>
+    <li><p>recursion index <span
+    class="math inline"><em>n</em><sub>obs</sub></span>,</p></li>
+    <li><p>accessible dynamical layer <span
+    class="math inline"><em>E</em><sub>obs</sub></span>.</p></li>
+    </ul>
+    <p>Closures may overlap but never coincide exactly. Collapse,
+    temporal awareness, and causal structure are therefore
+    observer-dependent.</p>
+    <h2 id="black-holes-as-recursion-halted-regions">Black Holes as
+    Recursion-Halted Regions</h2>
+    <p>A black-hole interior is characterized by:</p>
+    <p><span
+    class="math display"><em>R</em>(<em>X</em>)  undefined.</span></p>
+    <p>At the horizon:</p>
+    <ul>
+    <li><p><span class="math inline"><em>I</em></span> saturates
+    (holographic bound),</p></li>
+    <li><p>recursion halts (<span class="math inline"><em>n</em></span>
+    ceases to advance),</p></li>
+    <li><p>emergent time disappears,</p></li>
+    <li><p>causal accessibility collapses.</p></li>
+    </ul>
+    <p>Thus black holes are architectural gaps in closure rather than
+    physical volumes.</p>
+    <h2 id="global-spacetime-as-closure-external">Global Spacetime as
+    Closure-External</h2>
+    <p>Global spacetime manifolds are mathematical constructs. Physical
+    reality consists of closure-dependent spacetime patches <span
+    class="math inline">𝒞</span> with perspectival causal structure. No
+    observer has access to global spacetime; only closure-external
+    geometric extrapolations exist.</p>
+    <h2 id="summary-6">Summary</h2>
+    <p>The core formalism defines the triadic roles, their
+    interdependence, the recursive update operator, and the structural
+    constraints required for closure. It provides the mathematical
+    foundation for emergent time, observer-dependent causality,
+    closure-specific collapse, and the unification of GR and QM
+    developed in the main text.</p>
+    <h1
+    id="worked-example-triadic-closure-in-a-double-slit-scenario">Worked
+    Example: Triadic Closure in a Double-Slit Scenario</h1>
+    <p>This appendix presents a minimal worked example of triadic
+    closure in a double-slit-like quantum interference setup. The goal
+    is not to derive full experimental predictions, but to illustrate
+    how the triadic roles, recursive updates, and closure-dependent
+    collapse operate in a concrete scenario.</p>
+    <h2 id="setup">Setup</h2>
+    <p>Consider a single-photon source, a double-slit barrier, and a
+    detection screen. An observer <span class="math inline">𝒪</span> is
+    located behind the screen and occupies a closure <span
+    class="math inline">𝒞<sub>𝒪</sub></span> with:</p>
+    <ul>
+    <li><p>informational capacity <span
+    class="math inline"><em>I</em><sub>𝒪</sub></span>,</p></li>
+    <li><p>causal cone <span
+    class="math inline"><em>G</em><sub>𝒪</sub></span>,</p></li>
+    <li><p>recursion index <span
+    class="math inline"><em>n</em><sub>𝒪</sub></span>,</p></li>
+    <li><p>accessible dynamical layer <span
+    class="math inline"><em>E</em><sub>𝒪</sub></span>.</p></li>
+    </ul>
+    <p>The photon’s path from source to screen is represented by a
+    triadic state</p>
+    <p><span
+    class="math display"><em>X</em> = (<em>E</em>,<em>G</em>,<em>I</em>),</span></p>
+    <p>where:</p>
+    <ul>
+    <li><p><span class="math inline"><em>E</em></span> encodes the
+    photon’s energy and its coupling to the apparatus,</p></li>
+    <li><p><span class="math inline"><em>G</em></span> encodes the
+    geometric configuration (source, slits, screen),</p></li>
+    <li><p><span class="math inline"><em>I</em></span> encodes the
+    informational structure (path superposition, phase
+    relations).</p></li>
+    </ul>
+    <h2 id="triadic-evolution-without-which-path-information">Triadic
+    Evolution Without Which-Path Information</h2>
+    <p>Before any which-path information is accessible to <span
+    class="math inline">𝒪</span>, the triadic state evolves under
+    recursion:</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>),</span></p>
+    <p>with: <span class="math display">$$\begin{aligned}
+        E_{n+1} &amp;= f(G_n, I_n), \\
+        G_{n+1} &amp;= g(E_n, I_n), \\
+        I_{n+1} &amp;= h(E_n, G_n).
+    \end{aligned}$$</span></p>
+    <p>In this regime:</p>
+    <ul>
+    <li><p><span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> encodes a
+    coherent superposition of paths through both slits,</p></li>
+    <li><p><span
+    class="math inline"><em>G</em><sub><em>n</em></sub></span> encodes a
+    geometric configuration that supports interference,</p></li>
+    <li><p><span
+    class="math inline"><em>E</em><sub><em>n</em></sub></span> encodes
+    the photon’s energy and its coupling to the screen.</p></li>
+    </ul>
+    <p>The observer’s closure <span
+    class="math inline">𝒞<sub>𝒪</sub></span> does not yet contain
+    path-resolved information. Interference arises because <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> remains
+    closure-external: the full informational structure is not embedded
+    within <span class="math inline"><em>I</em><sub>𝒪</sub></span>.</p>
+    <h2
+    id="closure-dependent-collapse-with-which-path-information">Closure-Dependent
+    Collapse With Which-Path Information</h2>
+    <p>Now suppose a which-path detector is introduced, and its output
+    becomes accessible to <span class="math inline">𝒪</span>. The
+    observer’s closure <span class="math inline">𝒞<sub>𝒪</sub></span>
+    expands informationally:</p>
+    <p><span
+    class="math display"><em>I</em><sub>𝒪</sub> → <em>I</em><sub>𝒪</sub>′ &gt; <em>I</em><sub>𝒪</sub>,</span></p>
+    <p>such that path information becomes closure-internal.</p>
+    <p>Triadic closure predicts that collapse occurs when:</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em></sub> ⊆ <em>I</em><sub>𝒪</sub>′,</span></p>
+    <p>and further refinement of <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> would
+    violate triadic consistency (e.g., exceed holographic capacity or
+    causal accessibility). At this point:</p>
+    <ul>
+    <li><p>the superposition in <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> is
+    replaced by a path-resolved state,</p></li>
+    <li><p><span
+    class="math inline"><em>G</em><sub><em>n</em></sub></span>
+    reorganizes to reflect a non-interfering geometric
+    configuration,</p></li>
+    <li><p><span
+    class="math inline"><em>E</em><sub><em>n</em></sub></span> updates
+    to encode a classical-like detection event.</p></li>
+    </ul>
+    <p>Interference disappears not because the photon “chooses” a path,
+    but because the informational structure becomes closure-embedded and
+    the triadic cycle reorganizes.</p>
+    <h2 id="observer-dependence">Observer-Dependence</h2>
+    <p>Consider a second observer <span class="math inline">𝒪′</span>
+    who does not have access to the which-path detector output. Their
+    closure <span class="math inline">𝒞<sub>𝒪′</sub></span>
+    satisfies:</p>
+    <p><span
+    class="math display"><em>I</em><sub>𝒪′</sub> &lt; <em>I</em><sub>𝒪</sub>′,</span></p>
+    <p>and:</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em></sub> ⊈ <em>I</em><sub>𝒪′</sub>.</span></p>
+    <p>For <span class="math inline">𝒪′</span>, the informational
+    structure remains closure-external, and interference persists.
+    Collapse is therefore <em>observer-dependent</em>:</p>
+    <ul>
+    <li><p><span class="math inline">𝒪</span> observes a non-interfering
+    pattern,</p></li>
+    <li><p><span class="math inline">𝒪′</span> observes an interfering
+    pattern,</p></li>
+    <li><p>both are triadically consistent within their respective
+    closures.</p></li>
+    </ul>
+    <p>This illustrates how triadic closure reconciles perspectival
+    collapse without modifying quantum mechanics.</p>
+    <h2 id="recursion-index-and-temporal-ordering">Recursion Index and
+    Temporal Ordering</h2>
+    <p>The recursion index <span class="math inline"><em>n</em></span>
+    provides an emergent-time ordering of triadic states:</p>
+    <p><span
+    class="math display"><em>X</em><sub>0</sub> → <em>X</em><sub>1</sub> → <em>X</em><sub>2</sub> → ⋯.</span></p>
+    <p>For <span class="math inline">𝒪</span>:</p>
+    <ul>
+    <li><p>the introduction of which-path information increases
+    recursion complexity,</p></li>
+    <li><p>collapse occurs at a specific recursion step <span
+    class="math inline"><em>n</em><sub>collapse</sub></span>,</p></li>
+    <li><p>temporal awareness reflects the ordering of updates in <span
+    class="math inline">𝒞<sub>𝒪</sub></span>.</p></li>
+    </ul>
+    <p>For <span class="math inline">𝒪′</span>:</p>
+    <ul>
+    <li><p>recursion proceeds without path-resolved embedding,</p></li>
+    <li><p>interference persists across multiple recursion
+    steps,</p></li>
+    <li><p>temporal awareness reflects a different update
+    sequence.</p></li>
+    </ul>
+    <p>Emergent time is therefore closure-dependent and
+    perspectival.</p>
+    <h2 id="summary-7">Summary</h2>
+    <p>This worked example shows how triadic closure operates in a
+    double-slit-like scenario:</p>
+    <ul>
+    <li><p>interference arises when informational structure is
+    closure-external,</p></li>
+    <li><p>collapse occurs when informational structure becomes
+    closure-internal,</p></li>
+    <li><p>different observers inhabit different closures and therefore
+    experience different collapse behavior,</p></li>
+    <li><p>emergent time reflects the ordering of triadic updates within
+    each closure.</p></li>
+    </ul>
+    <p>The example illustrates the core claims of the main text in a
+    concrete setting, without requiring modifications to standard
+    quantum mechanics or General Relativity.</p>
+    <h1 id="appendix:workedexampleBH">Worked Example: Triadic Closure in
+    a Black-Hole Scenario</h1>
+    <p>This appendix presents a concrete worked example illustrating how
+    triadic closure operates in the context of a black hole. Conceptual
+    background on closure structure, recursion halt, and architectural
+    gaps is provided in Appendix <a href="#appendix:closurestructure"
+    data-reference-type="ref"
+    data-reference="appendix:closurestructure">14</a>. Here we focus on
+    the operational behavior of the triadic cycle in a specific physical
+    configuration.</p>
+    <h2 id="setup-1">Setup</h2>
+    <p>Consider a Schwarzschild-like black hole with mass <span
+    class="math inline"><em>M</em></span> and horizon radius</p>
+    <p><span class="math display">$$r_\mathrm{H} =
+    \frac{2GM}{c^2}.$$</span></p>
+    <p>An external observer <span class="math inline">𝒪</span> remains
+    at radius <span
+    class="math inline"><em>r</em> ≫ <em>r</em><sub>H</sub></span> and
+    occupies a closure <span class="math inline">𝒞<sub>𝒪</sub></span>
+    with triadic roles <span
+    class="math inline">(<em>E</em><sub>𝒪</sub>,<em>G</em><sub>𝒪</sub>,<em>I</em><sub>𝒪</sub>)</span>.</p>
+    <p>The black-hole region is represented by a triadic state</p>
+    <p><span
+    class="math display"><em>X</em><sub>BH</sub> = (<em>E</em><sub>BH</sub>,<em>G</em><sub>BH</sub>,<em>I</em><sub>BH</sub>),</span></p>
+    <p>encoding exterior curvature, horizon geometry, and holographic
+    informational capacity.</p>
+    <h2 id="horizon-as-operational-boundary">Horizon as Operational
+    Boundary</h2>
+    <p>For <span class="math inline">𝒪</span>, the horizon at <span
+    class="math inline"><em>r</em><sub>H</sub></span> acts as an
+    operational boundary:</p>
+    <ul>
+    <li><p><span class="math inline"><em>G</em><sub>BH</sub></span>
+    restricts causal accessibility,</p></li>
+    <li><p><span class="math inline"><em>I</em><sub>BH</sub></span>
+    saturates at the holographic bound,</p></li>
+    <li><p><span class="math inline"><em>E</em><sub>BH</sub></span>
+    couples to exterior dynamics through Hawking radiation.</p></li>
+    </ul>
+    <p>The observer’s closure includes <span
+    class="math inline"><em>r</em> &gt; <em>r</em><sub>H</sub></span>
+    but not the interior region.</p>
+    <h2 id="recursion-behavior">Recursion Behavior</h2>
+    <p>Triadic recursion proceeds normally in the exterior:</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub><sup>ext</sup> = <em>R</em>(<em>X</em><sub><em>n</em></sub><sup>ext</sup>),</span></p>
+    <p>where exterior triadic roles update through energetic inflow,
+    geometric curvature, and informational accessibility.</p>
+    <p>Inside the horizon, recursion halts:</p>
+    <p><span
+    class="math display"><em>R</em>(<em>X</em><sub>BH</sub>)  undefined
+    for  <em>r</em> &lt; <em>r</em><sub>H</sub>.</span></p>
+    <p>This operational halt is explained conceptually in Appendix <a
+    href="#appendix:closurestructure" data-reference-type="ref"
+    data-reference="appendix:closurestructure">14</a>.</p>
+    <h2 id="exterior-dynamics-and-evaporation">Exterior Dynamics and
+    Evaporation</h2>
+    <p>Hawking radiation appears as:</p>
+    <ul>
+    <li><p>a reorganization of <span
+    class="math inline"><em>E</em><sub>BH</sub></span> into <span
+    class="math inline"><em>E</em><sup>ext</sup></span>,</p></li>
+    <li><p>a release of <span
+    class="math inline"><em>I</em><sub>BH</sub></span> into <span
+    class="math inline"><em>I</em><sup>ext</sup></span>,</p></li>
+    <li><p>a gradual update of <span
+    class="math inline"><em>G</em><sup>ext</sup></span> as <span
+    class="math inline"><em>M</em></span> decreases.</p></li>
+    </ul>
+    <p>Evaporation is therefore an exterior recursion process.</p>
+    <h2 id="observer-specific-differences">Observer-Specific
+    Differences</h2>
+    <p>A second observer <span class="math inline">𝒪′</span> closer to
+    the horizon occupies a different closure <span
+    class="math inline">𝒞<sub>𝒪′</sub></span> with:</p>
+    <ul>
+    <li><p>different causal accessibility,</p></li>
+    <li><p>different informational capacity,</p></li>
+    <li><p>different recursion index.</p></li>
+    </ul>
+    <p>Both observers experience triadically consistent but
+    perspectivally different exterior dynamics.</p>
+    <h2 id="summary-8">Summary</h2>
+    <p>This example shows how triadic closure governs black-hole
+    behavior at the operational level: exterior recursion,
+    horizon-defined boundaries, evaporation as triadic reorganization,
+    and observer-dependent accessibility. Conceptual interpretation is
+    provided in Appendix <a href="#appendix:closurestructure"
+    data-reference-type="ref"
+    data-reference="appendix:closurestructure">14</a>.</p>
+    <h1 id="appendix:closurestructure">Closure Structure: Black Holes
+    and Observer-Specific Closures</h1>
+    <p>This appendix provides the conceptual background for closure
+    structure in triadic closure, including the architectural
+    interpretation of black holes and the perspectival nature of
+    observer-specific closures. Operational behavior in a concrete
+    black-hole scenario is given in Appendix <a
+    href="#appendix:workedexampleBH" data-reference-type="ref"
+    data-reference="appendix:workedexampleBH">13</a>; here we focus
+    exclusively on the structural and interpretive aspects.</p>
+    <h2 id="closures-as-horizon-bounded-physical-domains">Closures as
+    Horizon-Bounded Physical Domains</h2>
+    <p>A closure <span class="math inline">𝒞</span> is defined as a
+    horizon-bounded region in which the triadic cycle</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span></p>
+    <p>is well-defined and recursive updates are possible. Each closure
+    has:</p>
+    <ul>
+    <li><p><strong>informational capacity</strong> <span
+    class="math inline"><em>I</em><sub>𝒞</sub></span> bounded by its
+    horizon,</p></li>
+    <li><p><strong>geometric accessibility</strong> <span
+    class="math inline"><em>G</em><sub>𝒞</sub></span> defining causal
+    structure,</p></li>
+    <li><p><strong>energetic accessibility</strong> <span
+    class="math inline"><em>E</em><sub>𝒞</sub></span> defining dynamical
+    resources,</p></li>
+    <li><p><strong>recursion index</strong> <span
+    class="math inline"><em>n</em><sub>𝒞</sub></span> defining
+    emergent-time flow.</p></li>
+    </ul>
+    <p>Closures are inherently local and perspectival: no observer has
+    access to global spacetime, only to the horizon-bounded region
+    defined by their closure.</p>
+    <h2 id="black-holes-as-architectural-gaps-in-closure">Black Holes as
+    Architectural Gaps in Closure</h2>
+    <p>In General Relativity, black holes are geometric regions bounded
+    by an event horizon. Within triadic closure, their interpretation
+    becomes architectural: black holes correspond to <em>internal gaps
+    in closure</em>. At the horizon:</p>
+    <ul>
+    <li><p>informational capacity saturates at the holographic
+    bound,</p></li>
+    <li><p>causal accessibility collapses,</p></li>
+    <li><p>recursion halts,</p></li>
+    <li><p>emergent time ceases.</p></li>
+    </ul>
+    <p>Inside the horizon, the triadic cycle cannot close:</p>
+    <p><span class="math display"><em>R</em>(<em>X</em>)  undefined for
+    interior states.</span></p>
+    <p>Thus, black holes are not physical volumes within spacetime but
+    <em>regions where closure internally fails to exist</em>. They are
+    architectural voids rather than dynamical domains. This
+    interpretation unifies:</p>
+    <ul>
+    <li><p>horizon thermodynamics,</p></li>
+    <li><p>holographic entropy,</p></li>
+    <li><p>GR curvature,</p></li>
+    <li><p>quantum informational bounds,</p></li>
+    </ul>
+    <p>within a single structural mechanism.</p>
+    <h4 id="absence-of-black-holes-within-our-closure.">Absence of Black
+    Holes Within Our Closure.</h4>
+    <p>The nearest confirmed black-hole candidate (e.g., Gaia BH1 at
+    <span class="math inline"> ∼ 1.6</span> kpc) lies far outside the
+    causal and informational accessibility of any human observer. Within
+    triadic closure, this implies that our local closure <span
+    class="math inline">𝒞<sub>human</sub></span> contains no physically
+    accessible black holes. Black holes exist as closure-external
+    geometric structures, but not as triadically embedded regions within
+    our observer-specific closure.</p>
+    <p>This reinforces the perspectival nature of closure and the
+    fundamentally local character of triadic architecture.</p>
+    <h2 id="observer-specific-closures-1">Observer-Specific
+    Closures</h2>
+    <p>Triadic closure predicts that each observer occupies a distinct
+    closure <span class="math inline">𝒞<sub>obs</sub></span> with its
+    own:</p>
+    <ul>
+    <li><p>informational capacity <span
+    class="math inline"><em>I</em><sub>obs</sub></span>,</p></li>
+    <li><p>causal cone <span
+    class="math inline"><em>G</em><sub>obs</sub></span>,</p></li>
+    <li><p>recursion index <span
+    class="math inline"><em>n</em><sub>obs</sub></span>,</p></li>
+    <li><p>accessible dynamical layer <span
+    class="math inline"><em>E</em><sub>obs</sub></span>.</p></li>
+    </ul>
+    <p>Closures may overlap but never coincide exactly. Overlap
+    allows:</p>
+    <ul>
+    <li><p>shared perception of objects,</p></li>
+    <li><p>synchronized causal accessibility,</p></li>
+    <li><p>partial alignment of recursion indices,</p></li>
+    <li><p>mutual energetic and informational influence.</p></li>
+    </ul>
+    <p>However, differences in cognitive processing, informational
+    embedding, causal accessibility, and recursion rate ensure that each
+    observer experiences a slightly different emergent-time flow and
+    informational landscape.</p>
+    <p>This perspectival structure explains:</p>
+    <ul>
+    <li><p>observer-dependent collapse thresholds,</p></li>
+    <li><p>variations in temporal awareness,</p></li>
+    <li><p>differences in perceptual resolution,</p></li>
+    <li><p>perspectival interpretations of cosmological
+    phenomena.</p></li>
+    </ul>
+    <h2 id="relation-to-worked-examples">Relation to Worked
+    Examples</h2>
+    <p>Appendix <a href="#appendix:workedexampleBH"
+    data-reference-type="ref"
+    data-reference="appendix:workedexampleBH">13</a> provides a concrete
+    operational example of how these architectural principles manifest
+    in a black-hole scenario. The present appendix supplies the
+    conceptual foundation for that example.</p>
+    <h2 id="summary-9">Summary</h2>
+    <p>Black holes become architectural gaps in closure rather than
+    physical regions of spacetime, and individual observers inhabit
+    distinct but overlapping closures with their own informational and
+    causal structure. These consequences reinforce the local,
+    perspectival nature of triadic closure and clarify how GR and QM
+    unify within horizon-bounded dynamical niches.</p>
+    <h1 id="appendix:miniformula">Minimal Instantiation of Triadic
+    Update Functions and Numerical Example</h1>
+    <p>This appendix provides (i) a minimal concrete instantiation of
+    the triadic update functions <span
+    class="math inline"><em>f</em></span>, <span
+    class="math inline"><em>g</em></span>, and <span
+    class="math inline"><em>h</em></span> introduced in Appendix A, and
+    (ii) a numerical example illustrating closure capacity using the
+    horizon entropy of a Schwarzschild black hole. The goal is not to
+    propose final dynamical laws, but to demonstrate that the triadic
+    architecture admits simple, physically meaningful
+    instantiations.</p>
+    <h2
+    id="minimal-instantiation-of-the-triadic-update-functions">Minimal
+    Instantiation of the Triadic Update Functions</h2>
+    <p>Recall the recursive update operator:</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>),   <em>X</em><sub><em>n</em></sub> = (<em>E</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>,<em>I</em><sub><em>n</em></sub>).</span></p>
+    <p>A minimal, physically motivated instantiation of the update
+    functions is: <span class="math display">$$\begin{aligned}
+        E_{n+1} &amp;= E_n + \alpha\, \Delta I_n, \label{eq:Eupdate} \\
+        G_{n+1} &amp;= G_n + \beta\, \Delta E_n, \label{eq:Gupdate} \\
+        I_{n+1} &amp;= I_n + \gamma\, \Delta G_n, \label{eq:Iupdate}
+    \end{aligned}$$</span> where:</p>
+    <ul>
+    <li><p><span
+    class="math inline"><em>Δ</em><em>I</em><sub><em>n</em></sub></span>
+    is the change in accessible informational structure during step
+    <span class="math inline"><em>n</em></span>,</p></li>
+    <li><p><span
+    class="math inline"><em>Δ</em><em>E</em><sub><em>n</em></sub></span>
+    is the change in energetic structure,</p></li>
+    <li><p><span
+    class="math inline"><em>Δ</em><em>G</em><sub><em>n</em></sub></span>
+    is the change in geometric structure,</p></li>
+    <li><p><span
+    class="math inline"><em>α</em>, <em>β</em>, <em>γ</em></span> are
+    small, closure-dependent coupling coefficients.</p></li>
+    </ul>
+    <p>Equations (<a href="#eq:Eupdate" data-reference-type="ref"
+    data-reference="eq:Eupdate">[eq:Eupdate]</a>)–(<a href="#eq:Iupdate"
+    data-reference-type="ref"
+    data-reference="eq:Iupdate">[eq:Iupdate]</a>) express the triadic
+    cycle:</p>
+    <p><span
+    class="math display"><em>I</em> → <em>E</em>,   <em>E</em> → <em>G</em>,   <em>G</em> → <em>I</em>,</span></p>
+    <p>in a minimal algebraic form. These update rules satisfy:</p>
+    <ul>
+    <li><p><strong>architectural consistency</strong>: each role
+    reorganizes the next,</p></li>
+    <li><p><strong>closure dependence</strong>: <span
+    class="math inline"><em>α</em>, <em>β</em>, <em>γ</em></span> vary
+    with horizon size,</p></li>
+    <li><p><strong>emergent time</strong>: recursion index <span
+    class="math inline"><em>n</em></span> defines temporal
+    ordering,</p></li>
+    <li><p><strong>holographic bounds</strong>: <span
+    class="math inline"><em>I</em><sub><em>n</em> + 1</sub></span>
+    cannot exceed closure capacity.</p></li>
+    </ul>
+    <p>This instantiation is not intended as a final physical model, but
+    as a demonstration that the triadic architecture admits simple,
+    interpretable update rules.</p>
+    <h2
+    id="numerical-example-horizon-entropy-of-a-schwarzschild-black-hole">Numerical
+    Example: Horizon Entropy of a Schwarzschild Black Hole</h2>
+    <p>To illustrate closure capacity numerically, consider the horizon
+    entropy of a Schwarzschild black hole of mass</p>
+    <p><span
+    class="math display"><em>M</em> = 10<em>M</em><sub>⊙</sub>,</span></p>
+    <p>where <span class="math inline"><em>M</em><sub>⊙</sub></span> is
+    the solar mass.</p>
+    <h4 id="horizon-radius.">Horizon Radius.</h4>
+    <p>The Schwarzschild radius is:</p>
+    <p><span class="math display">$$r_\mathrm{H} = \frac{2GM}{c^2}
+    = \frac{2G(10 M_\odot)}{c^2}
+    \approx 29.5 \ \text{km}.$$</span></p>
+    <h4 id="horizon-area.">Horizon Area.</h4>
+    <p><span
+    class="math display"><em>A</em> = 4<em>π</em><em>r</em><sub>H</sub><sup>2</sup> ≈ 4<em>π</em>(2.95×10<sup>4</sup> m)<sup>2</sup> ≈ 1.1 × 10<sup>10</sup> m<sup>2</sup>.</span></p>
+    <h4 id="horizon-entropy.">Horizon Entropy.</h4>
+    <p>The Bekenstein–Hawking entropy is:</p>
+    <p><span class="math display">$$S_\mathrm{BH} = \frac{k_\mathrm{B}
+    c^3 A}{4 G \hbar}
+    \approx 1.5\times 10^{79} \ k_\mathrm{B}.$$</span></p>
+    <p>This value represents the maximal informational capacity <span
+    class="math inline"><em>I</em><sub>H</sub></span> of the horizon.
+    Within triadic closure:</p>
+    <ul>
+    <li><p><span class="math inline"><em>I</em><sub>H</sub></span> is
+    the upper bound for <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> in any
+    closure containing the horizon,</p></li>
+    <li><p>recursion halts when <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> reaches
+    <span class="math inline"><em>I</em><sub>H</sub></span>,</p></li>
+    <li><p>the interior region has no informational capacity (<span
+    class="math inline"><em>I</em> = 0</span>),</p></li>
+    <li><p>evaporation corresponds to a decrease in <span
+    class="math inline"><em>I</em><sub>H</sub></span> as <span
+    class="math inline"><em>A</em></span> shrinks.</p></li>
+    </ul>
+    <p>Thus, the numerical value of <span
+    class="math inline"><em>S</em><sub>BH</sub></span> provides a
+    concrete example of closure capacity and demonstrates how geometric
+    structure (<span class="math inline"><em>G</em></span>) bounds
+    informational structure (<span
+    class="math inline"><em>I</em></span>) in the triadic
+    architecture.</p>
+    <h2 id="summary-10">Summary</h2>
+    <p>This appendix provides:</p>
+    <ul>
+    <li><p>a minimal algebraic instantiation of the triadic update
+    functions,</p></li>
+    <li><p>a numerical example of closure capacity using black-hole
+    horizon entropy,</p></li>
+    <li><p>a demonstration of how geometric, energetic, and
+    informational roles interact quantitatively within triadic
+    closure.</p></li>
+    </ul>
+    <p>These elements complement the architectural formalism of
+    Appendix A and the operational examples of Appendices B and C.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>.</p>
+  </main>
+
+</div>
+
+</body>
+</html>

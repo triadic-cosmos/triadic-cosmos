@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Grammar Lemma Paged Language Models</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#motivation" id="toc-motivation">Motivation</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#glp-as-a-foundational-research-program"
+    id="toc-glp-as-a-foundational-research-program">GLP as a
+    Foundational Research Program</a></li>
+    <li><a
+    href="#architectural-divergence-from-traditional-language-models"
+    id="toc-architectural-divergence-from-traditional-language-models">Architectural
+    Divergence from Traditional Language Models</a></li>
+    <li><a href="#architecture"
+    id="toc-architecture">Architecture</a></li>
+    <li><a href="#training-regime" id="toc-training-regime">Training
+    Regime</a></li>
+    <li><a href="#model-hyperparameters-and-deterministic-geometry"
+    id="toc-model-hyperparameters-and-deterministic-geometry">Model
+    Hyperparameters and Deterministic Geometry</a></li>
+    <li><a href="#deterministic-mlp-parameter-count"
+    id="toc-deterministic-mlp-parameter-count">Deterministic MLP
+    Parameter Count</a></li>
+    <li><a href="#decoder-flexibility-and-architectural-generality"
+    id="toc-decoder-flexibility-and-architectural-generality">Decoder
+    Flexibility and Architectural Generality</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#architectural-comparison-glp-dmlg-and-llms"
+    id="toc-architectural-comparison-glp-dmlg-and-llms">Architectural
+    Comparison: GLP, DMLG, and LLMs</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Contemporary language models are dominated by transformer-based
+    architectures that rely on high-dimensional embeddings, attention
+    mechanisms, and large-scale statistical training. These systems have
+    achieved remarkable generative fluency, yet they remain structurally
+    monolithic: a single global parameter space, an undifferentiated
+    vocabulary, and no explicit separation between grammatical structure
+    and lexical content. As a result, transformer LMs exhibit well-known
+    limitations, including domain drift, style instability, opaque
+    internal representations, and the absence of deterministic control
+    over canonical form.</p>
+    <p>Parallel to these developments, the Dynamic Modular Language
+    Graph (DMLG) introduced a structurally governed alternative in which
+    language is represented as a canonical graph of tokens and
+    transitions. DMLG demonstrated that paging, deterministic grammar,
+    and local evaluators can provide strong governance and domain
+    isolation. However, DMLG is not a language model in the classical
+    sense: it generates text through graph traversal rather than
+    autoregressive prediction, and its structural commitments differ
+    fundamentally from LM design.</p>
+    <p>Grammar Lemma Paged Language Models (GLP) build on the structural
+    lineage of DMLG while introducing a new generative architecture. GLP
+    replaces graph traversal with a dual-channel language model in which
+    grammar and lemma tokens are produced by separate components under
+    deterministic alternation. Grammar tokens form a compact structural
+    backbone, while lemma tokens are drawn from a paged vocabulary whose
+    organization emerges dynamically during training. Each grammar token
+    activates a specific lemma page, ensuring domain isolation,
+    preventing cross-world interference, and enabling stable multi-world
+    blending without drift.</p>
+    <p>A key innovation of GLP is its fixed-dimensional output space.
+    Lemma tokens are encoded through a hybrid bit-vector and tri-hot
+    codebook, allowing the lemma model to scale its vocabulary
+    independently of parameter count. Combined with narrative memory,
+    curriculum-driven world absorption, and sentence-level PRE
+    (Propose–Retry–Evaluate), GLP provides a modular, interpretable, and
+    canon-stable alternative to transformer-based LMs.</p>
+    <p>This paper introduces the GLP architecture, formalizes its
+    dual-channel generative process, and positions it as a new class of
+    language models: structurally governed, domain-isolated, and capable
+    of emergent stylistic variation without reliance on large embedding
+    spaces. GLP demonstrates that deterministic grammar, paged lemma
+    organization, and fixed output encoding can serve as a foundation
+    for coherent language generation, offering a principled alternative
+    to monolithic transformer architectures.</p>
+    <h1 id="motivation">Motivation</h1>
+    <p>Modern language models are built on transformer architectures
+    that unify structure, content, and context into a single
+    high-dimensional embedding space. While these systems achieve
+    impressive fluency, their internal organization remains monolithic:
+    grammatical structure is implicit, lexical content is entangled with
+    geometry, and context is maintained only through statistical
+    attention. As a result, transformers provide no explicit separation
+    between structural constraints and informational realization, no
+    deterministic control over canonical form, and no stable mechanism
+    for domain isolation. Their scaling behaviour is driven primarily by
+    parameter count rather than architectural clarity.</p>
+    <p>Grammar Lemma Paged Language Models (GLP) are motivated by the
+    observation that language generation can be expressed as an explicit
+    triadic cycle. In the Triadic Cosmos framework, each generative step
+    consists of an energetic decision (E), a geometric constraint (G),
+    an informational realization (I), and a recursive update (R).
+    Transformers implement this cycle implicitly through dense
+    embeddings and attention, but they do not expose or operationalize
+    its structure. GLP makes the triadic cycle explicit and
+    computational: grammar selection provides the energetic decision,
+    lemma page activation provides geometric constraint, lemma selection
+    provides informational content, and context plus narrative memory
+    provide recursive state. Punctuation tokens are produced by the
+    grammar channel as terminal structural markers, but they do not
+    carry lemma content and do not affect page activation. Each token is
+    therefore generated through a deterministic</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>R</em></span></p>
+    <p>loop, making GLP a structurally triadic language model.</p>
+    <p>A second motivation is architectural alignment. Although DMLG
+    demonstrated that language can be generated through traversal of a
+    canonical graph, graph-based generation differs fundamentally from
+    mainstream expectations of language model design. GLP retains DMLG’s
+    structural commitments—deterministic grammar, paging, canonical
+    transitions—while recasting them into a next-token generative
+    architecture. The lemma model functions as the primary next-token
+    predictor, but its behaviour is governed by a compact grammar model
+    that never appears in the output except for punctuation. This
+    preserves the familiar autoregressive interface of transformer LMs
+    while providing explicit structural control.</p>
+    <p>A third motivation is deterministic scalability. GLP uses a
+    fixed-dimensional output space based on hybrid bit-vectors and
+    tri-hot codes, ensuring that vocabulary growth does not alter model
+    geometry or parameter count. Paging partitions the lemma vocabulary
+    into stable, domain-specific regions, preventing drift and enabling
+    multi-world blending without interference. The grammar backbone
+    remains compact and deterministic, providing a stable cadence across
+    long horizons.</p>
+    <p>Together, these motivations position GLP as a new architectural
+    class of language models: a structurally governed, deterministically
+    scalable, triadically organized next-token generator that aligns
+    with mainstream LM expectations while providing explicit grammar,
+    domain isolation, and canonical stability. GLP demonstrates that the
+    triadic cycle can serve not only as a conceptual model of cognition,
+    but as a practical foundation for language model design.</p>
+    <h2 id="glp-as-a-scalable-iegr-substrate">GLP as a Scalable IEGR
+    Substrate</h2>
+    <p>Beyond its architectural motivations, GLP is designed as a
+    structural substrate for IEGR-complete intelligence. In the IEGR
+    taxonomy, sophisticated parrots are systems that instantiate all
+    four structural roles—energetic efficiency (E), geometric structure
+    (G), informational richness (I), and recursive depth (R)—but remain
+    pre-AGI because these roles are not yet scaled. GLP fits this
+    profile precisely. Its dual-channel grammar–lemma architecture
+    operationalizes the triadic cycle (E→G→I→R), providing explicit
+    energetic decisions through grammar activation, geometric
+    constraints through page selection, and informational realization
+    through lemma refinement.</p>
+    <p>Crucially, GLP also instantiates the recursive role (R) through
+    sentence-level PRE (Propose–Retry–Evaluate). PRE performs reflective
+    evaluation after each complete sentence, validating canonical
+    grammar, semantic coherence, and page-level consistency. When a
+    sentence fails these criteria, GLP retries generation from scratch.
+    PRE therefore acts as the recursive operator of the triadic cycle: a
+    lightweight but explicit mechanism for self-correction, structural
+    reflection, and recursive update. This elevates GLP beyond a purely
+    grammar–lemma substrate and provides a native implementation of the
+    R-component within the IEGR framework.</p>
+    <p>Unlike transformer-based LMs, which scale only the E–I axis, GLP
+    provides native structural substrates for G and R: deterministic
+    grammar, paged lemma organization, rule-based coherence, and
+    PRE-driven recursive evaluation. At the same time, GLP’s
+    fixed-dimensional geometry and page-based scaling ensure that each
+    IEGR dimension can be expanded without altering model structure,
+    making GLP a scalable IEGR substrate rather than a fixed-capacity
+    system.</p>
+    <p>This positions GLP not merely as an alternative language model,
+    but as the first single-model architecture capable of instantiating
+    the full IEGR structure internally. GLP therefore represents a
+    foundational step toward sophisticated parrots in the IEGR taxonomy:
+    systems that are structurally complete but not yet scaled, and that
+    provide a principled pathway toward triadically organized,
+    domain-stable, and recursively coherent generative intelligence.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Research on language model architectures spans transformer-based
+    systems, modular and graph-based approaches, neuro-symbolic hybrids,
+    and grammar-driven generative models. Grammar Lemma Paged Language
+    Models (GLP) intersect with several of these strands while
+    introducing a distinct architectural separation between grammar
+    structure and paged lemma content.</p>
+    <h2 id="transformer-based-language-models">Transformer-Based
+    Language Models</h2>
+    <p>Transformer architectures <span class="citation"
+    data-cites="vaswani2017attention"></span> dominate contemporary NLP,
+    relying on high-dimensional embeddings, self-attention, and
+    large-scale statistical training. Models such as GPT-2 <span
+    class="citation" data-cites="radford2019language"></span>, GPT-3
+    <span class="citation" data-cites="brown2020language"></span>, and
+    subsequent open-weight variants <span class="citation"
+    data-cites="touvron2023llama"></span> demonstrate strong fluency and
+    broad generalization, yet they remain monolithic: a single global
+    parameter space, undifferentiated vocabularies, and no explicit
+    structural decomposition. These systems lack deterministic grammar
+    control, domain isolation, and interpretable token-level
+    structure—limitations that GLP addresses through dual-channel
+    generation and paged lemma organization.</p>
+    <p>Mixture-of-Experts architectures <span class="citation"
+    data-cites="shazeer2017outrageously lepikhin2021gshard fedus2022switch"></span>
+    introduce modularity at the routing level but preserve a shared
+    embedding space and do not provide explicit grammar–lemma separation
+    or page-level domain isolation.</p>
+    <h2 id="graph-based-and-structured-language-generators">Graph-Based
+    and Structured Language Generators</h2>
+    <p>GLP is structurally related to the Dynamic Modular Language Graph
+    (DMLG) <span class="citation" data-cites="dewitte2026dmlg"></span>,
+    which models language as traversal through a canonical graph of
+    tokens and transitions. DMLG provides deterministic grammar, paging
+    biomes, and structural governance, demonstrating that explicit
+    linguistic geometry can replace large embedding spaces. However,
+    DMLG is not a language model: it generates text through graph
+    traversal rather than autoregressive prediction. GLP inherits DMLG’s
+    structural commitments—paging, canonical grammar, deterministic
+    transitions—while introducing a dual-channel generative process that
+    operates as a true language model.</p>
+    <p>The DMLG narrator pipeline <span class="citation"
+    data-cites="dewitte2026narrator"></span> extends DMLG into a hybrid
+    system with transformer-based moderation, demonstrating long-horizon
+    narrative stability, world absorption, and recursive memory. GLP
+    draws on the architectural refinements of this work, including
+    prefix grammar, fixed output spaces, and tri-hot codebooks, but
+    replaces graph navigation with a compact grammar model and a paged
+    lemma model.</p>
+    <p>Earlier modular architectures such as Dynamic Modular Language
+    Models (DMLM) <span class="citation"
+    data-cites="dewitte2026dmlm"></span> introduced multi-agent
+    generation, paging, evaluators, and PRE-based governance. GLP can be
+    viewed as a successor that distills these structural principles into
+    a single dual-channel LM with deterministic alternation and
+    fixed-dimensional decoding.</p>
+    <h2 id="neuro-symbolic-and-grammar-based-models">Neuro-Symbolic and
+    Grammar-Based Models</h2>
+    <p>GLP also relates to neuro-symbolic systems that incorporate
+    explicit grammar or structured representations. Classical
+    grammar-driven generators <span class="citation"
+    data-cites="jurafsky2023speech"></span> and symbolic parsers provide
+    deterministic structure but lack scalable learning. Neural grammar
+    models <span class="citation"
+    data-cites="shen2018neural kim2019unsupervised"></span> attempt to
+    learn syntactic structure but do not separate grammar and lemma
+    channels or enforce deterministic alternation.</p>
+    <p>Hybrid systems combining symbolic structure with neural
+    components <span class="citation"
+    data-cites="besold2017neurosymbolic"></span> demonstrate the value
+    of explicit structure, yet they typically lack paging mechanisms or
+    fixed-dimensional output encoding. GLP contributes a new variant of
+    neuro-symbolic design: a deterministic grammar backbone paired with
+    a learned lemma space partitioned into pages.</p>
+    <h2 id="paging-modularization-and-domain-isolation">Paging,
+    Modularization, and Domain Isolation</h2>
+    <p>Paging has appeared in modular neural systems <span
+    class="citation" data-cites="andreas2016neural"></span> and
+    structured reasoning architectures, but GLP’s lemma paging is
+    unique: pages emerge dynamically from curriculum transitions,
+    isolate domain-specific lemma clusters, and prevent cross-domain
+    drift. This provides a form of structural domain isolation absent in
+    transformer LMs and most modular architectures.</p>
+    <h2 id="summary">Summary</h2>
+    <p>GLP occupies a distinct position in the landscape of language
+    model architectures. It inherits structural principles from
+    DMLG—paging, deterministic grammar, canonical transitions—while
+    introducing a dual-channel generative process, fixed output
+    encoding, and narrative memory. Compared to transformer-based LMs,
+    GLP offers explicit structure, domain isolation, and interpretable
+    generation dynamics. Compared to graph-based generators, GLP
+    provides a true language model with deterministic grammar–lemma
+    alternation. This combination places GLP as a new architectural
+    class: structurally governed, modular, and canon-stable.</p>
+    <h1 id="glp-as-a-foundational-research-program">GLP as a
+    Foundational Research Program</h1>
+    <p>Grammar Lemma Paged Language Models (GLP) are not presented as a
+    final or fully optimized architecture. Instead, GLP constitutes the
+    starting point of a broader research program aimed at exploring
+    structurally governed, domain-isolated, and deterministically
+    scalable language models. Like early transformer architectures, GLP
+    defines a geometric and organizational framework rather than a
+    single completed system.</p>
+    <p>The architecture introduced in this paper establishes core
+    principles—dual-channel grammar– lemma alternation, paged lemma
+    vocabularies, fixed-dimensional output geometry, narrative memory,
+    and deterministic structural filtering—but leaves open a wide design
+    space for future development. GLP is intended as a community effort:
+    a modular foundation that can be extended, refined, and scaled by
+    subsequent work.</p>
+    <p>Several research directions naturally emerge from the GLP
+    framework:</p>
+    <ul>
+    <li><p><strong>Scaling laws and asymptotic geometry</strong> for
+    fixed-dimensional output spaces.</p></li>
+    <li><p><strong>Page formation dynamics</strong> and
+    curriculum-driven lemma clustering.</p></li>
+    <li><p><strong>Grammar evolution</strong> and adaptive structural
+    backbones.</p></li>
+    <li><p><strong>World specialization and multi-world
+    blending</strong> through paging mechanisms.</p></li>
+    <li><p><strong>Narrative memory analysis</strong> and long-horizon
+    stability without attention.</p></li>
+    <li><p><strong>Compatibility matrix refinement</strong> and
+    symbolic–neural hybrid constraints.</p></li>
+    <li><p><strong>Distributed training regimes</strong> for large-scale
+    GLP models.</p></li>
+    <li><p><strong>Multi-agent GLP systems</strong> and emergent
+    canonical coordination.</p></li>
+    </ul>
+    <p>These directions illustrate that GLP is not a closed architecture
+    but an extensible design space. Its structural commitments define a
+    new class of language models, while its modular components invite
+    further exploration. GLP should therefore be understood as a
+    foundational architecture seed—an initial formulation of principles
+    that can support a long-term, community-driven research program in
+    structured generative systems.</p>
+    <h1
+    id="architectural-divergence-from-traditional-language-models">Architectural
+    Divergence from Traditional Language Models</h1>
+    <p>Grammar Lemma Paged Language Models (GLP) depart fundamentally
+    from the design principles of transformer-based language models.
+    Although GLP preserves the familiar autoregressive interface, its
+    internal organization differs along several structural, geometric,
+    and generative dimensions. These divergences are not incidental:
+    they arise from explicit architectural commitments aimed at
+    eliminating crosstalk, enforcing deterministic structure, and
+    providing domain-isolated lexical generation. This section
+    summarizes the core points where GLP diverges from mainstream LM
+    architectures.</p>
+    <h2 id="explicit-triadic-generative-structure">Explicit Triadic
+    Generative Structure</h2>
+    <p>Traditional LMs unify structural, geometric, and informational
+    roles within a single high-dimensional embedding space. GLP instead
+    operationalizes the triadic cycle</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>R</em>,</span></p>
+    <p>as a concrete generative mechanism. Grammar prediction implements
+    the energetic decision, page activation provides geometric
+    constraint, lemma selection realizes informational content, and
+    narrative memory performs recursive update. This explicit
+    decomposition replaces the implicit structural entanglement of
+    transformer architectures.</p>
+    <h2 id="dual-channel-grammarlemma-separation">Dual-Channel
+    Grammar–Lemma Separation</h2>
+    <p>Transformers employ a monolithic softmax over a unified
+    vocabulary. GLP separates grammar and lemma generation into two
+    independent MLPs under deterministic alternation. Grammar tokens
+    govern structural cadence but never carry lexical content; lemma
+    tokens provide lexical realization but are constrained by grammar
+    compatibility. This separation eliminates structural crosstalk and
+    prevents grammar decisions from being influenced by lemma
+    distributions.</p>
+    <p>Although grammar and lemma prediction could be merged into a
+    single model, such a design would reintroduce crosstalk, entangle
+    structural and lexical spaces, and undermine the compact determinism
+    of the grammar backbone. GLP therefore enforces architectural
+    independence between grammar and lemma channels.</p>
+    <h2
+    id="paged-lemma-vocabularies-instead-of-monolithic-embeddings">Paged
+    Lemma Vocabularies Instead of Monolithic Embeddings</h2>
+    <p>Transformer LMs rely on large embedding matrices whose geometry
+    grows with vocabulary size. GLP replaces this with paged lemma
+    vocabularies: compact, domain-specific clusters that emerge from
+    curriculum transitions. Paging isolates lexical domains, prevents
+    cross-world interference, and provides stable attractors for
+    multi-world blending. This design eliminates the monolithic
+    vocabulary and its associated drift.</p>
+    <h2 id="fixed-dimensional-output-geometry">Fixed-Dimensional Output
+    Geometry</h2>
+    <p>Traditional LMs scale their output dimension with vocabulary
+    size. GLP employs a fixed output space based on hybrid bit-vectors
+    and tri-hot codes. Vocabulary growth occurs through page expansion
+    rather than parameter growth, making GLP deterministically scalable
+    and geometry-stable across domains. This fixed geometry is
+    incompatible with transformer-style embedding matrices but central
+    to GLP’s structural commitments.</p>
+    <h2 id="grammar-based-structural-filtering">Grammar-Based Structural
+    Filtering</h2>
+    <p>Transformers rely on statistical attention to enforce structural
+    coherence. GLP applies deterministic rule-based filters that remove
+    invalid grammar and lemma proposals before sampling. Grammar
+    coherence rules prevent illegal punctuation sequences and terminal
+    misplacements, while lemma proposals are filtered through a
+    curriculum-learned compatibility matrix. These symbolic constraints
+    provide structural stability absent in mainstream LMs.</p>
+    <h2 id="context-driven-page-selection-with-fallback">Context-Driven
+    Page Selection with Fallback</h2>
+    <p>Transformers select tokens from a single global distribution. GLP
+    selects lemma tokens from a context-driven page determined by
+    grammar structure, narrative memory, and compressed context. If the
+    primary page yields no compatible lemma tokens, GLP falls back to
+    secondary pages. This hierarchical search mechanism replaces the
+    flat softmax of transformer models.</p>
+    <h2 id="compact-narrative-memory-instead-of-attention">Compact
+    Narrative Memory Instead of Attention</h2>
+    <p>Transformers maintain context through self-attention over large
+    hidden states. GLP employs a compact narrative memory that
+    integrates recent grammar structure, lemma usage, and page
+    transitions into a low-dimensional recurrent state. This recurrence
+    provides long-horizon coherence without attention mechanisms or
+    large hidden geometries.</p>
+    <h2
+    id="sentence-level-pre-as-post-hoc-quality-filtering">Sentence-Level
+    PRE as Post-Hoc Quality Filtering</h2>
+    <p>Transformers incorporate quality constraints implicitly through
+    sampling strategies. GLP applies PRE (Propose–Retry–Evaluate) at the
+    sentence level as a post-hoc validator. PRE does not modify
+    token-level prediction; instead, it evaluates complete sentences and
+    retries generation if canonical grammar or semantic coherence is
+    violated. This preserves GLP’s next-token identity while providing
+    deterministic quality control.</p>
+    <h2 id="summary-1">Summary</h2>
+    <p>GLP diverges from traditional language models along structural,
+    geometric, and generative axes: explicit triadic organization,
+    dual-channel grammar–lemma separation, paged vocabularies,
+    fixed-dimensional decoding, deterministic structural filtering,
+    context-driven page activation, compact recurrence, and post-hoc PRE
+    validation. These divergences are intentional and architecturally
+    coherent, forming a structurally governed alternative to monolithic
+    transformer designs.</p>
+    <h1 id="architecture">Architecture</h1>
+    <p>Grammar Lemma Paged Language Models (GLP) constitute a new
+    architectural class of language models built around the explicit
+    triadic cycle</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>R</em>,</span></p>
+    <p>where each generative step consists of an energetic decision, a
+    geometric constraint, an informational realization, and a recursive
+    update. Unlike transformer-based LMs, which unify these roles into a
+    single high-dimensional embedding space, GLP decomposes them into
+    two deterministic components: a compact grammar model and a paged
+    lemma model. Together, these components form a structurally governed
+    next-token generator whose behaviour is canonical, domain-isolated,
+    and fully deterministic in size and parameterization.</p>
+    <h2 id="dual-channel-generative-loop">Dual-Channel Generative
+    Loop</h2>
+    <p>GLP generates each token through an explicit alternation between
+    grammar and lemma channels. The grammar model produces structural
+    tokens—syntactic markers, phrase operators, and punctuation—that
+    determine the energetic and geometric state of the generator.
+    Grammar tokens never carry lexical content, but they constrain the
+    structural regime in which the next lemma token may be selected.
+    This yields a deterministic</p>
+    <p><span class="math display">grammar → page
+    selection → lemma</span></p>
+    <p>loop that replaces the monolithic softmax of transformer
+    architectures.</p>
+    <p>Punctuation tokens are produced by the grammar channel as
+    terminal structural markers. They do not carry lemma information and
+    do not influence page selection, preserving the triadic cycle while
+    maintaining natural-language output.</p>
+    <h2 id="dual-activation-mlps-for-grammar-and-lemma">Dual Activation
+    MLPs for Grammar and Lemma</h2>
+    <p>GLP employs two distinct activation MLPs: one dedicated to
+    grammar prediction and one dedicated to lemma prediction. This
+    separation reinforces the triadic structure of the model and ensures
+    that energetic and informational decisions remain architecturally
+    independent.</p>
+    <p>The grammar MLP is compact and deterministic. Its role is to
+    select the next grammar token and thereby determine the structural
+    cadence of the sequence. Because grammar tokens govern structural
+    constraints, the grammar MLP implements the energetic component of
+    the triadic cycle. Its activation function is optimized for
+    stability and low curvature, ensuring that grammar decisions remain
+    consistent across domains and do not drift as lemma vocabularies
+    expand.</p>
+    <p>The lemma MLP operates within the page selected by the
+    context-driven page selector. It produces the next lemma token from
+    a fixed-dimensional output space using hybrid bit-vector and tri-hot
+    encoding. Its activation function is optimized for expressive
+    refinement, enabling rich lexical variation within the geometric
+    constraints imposed by the grammar model. The lemma MLP therefore
+    implements the informational component of the triadic cycle.</p>
+    <h2 id="paged-lemma-space">Paged Lemma Space</h2>
+    <p>The lemma vocabulary is partitioned into pages: compact,
+    domain-specific clusters that emerge from curriculum transitions.
+    Each page contains a stable set of lemma tokens represented in a
+    fixed-dimensional output space using hybrid bit-vectors and tri-hot
+    codes. This encoding ensures that vocabulary growth does not alter
+    model geometry or parameter count, making GLP deterministically
+    scalable.</p>
+    <h2
+    id="context-driven-page-selection-and-grammar-based-filtering">Context-Driven
+    Page Selection and Grammar-Based Filtering</h2>
+    <p>GLP does not rely on a one-to-one mapping between grammar tokens
+    and lemma pages. Instead, lemma selection is governed by two
+    complementary mechanisms: context-driven page selection and
+    grammar-based compatibility filtering.</p>
+    <h4 id="context-driven-page-selection.">Context-Driven Page
+    Selection.</h4>
+    <p>Page activation is determined primarily by context rather than by
+    grammar tokens alone. Given the current grammar token, narrative
+    memory, compressed structural context, and sequence embedding, GLP
+    selects the most relevant lemma page using a one-hot page selector.
+    If the selected page contains no compatible lemma tokens after
+    filtering, GLP automatically falls back to the next best page. This
+    fallback mechanism continues until a page yields at least one valid
+    lemma candidate. The page-selection algorithm is modular and can be
+    replaced by alternative ranking or scoring strategies without
+    altering GLP’s geometry.</p>
+    <h4 id="grammar-based-filtering.">Grammar-Based Filtering.</h4>
+    <p>Grammar tokens do not select pages directly; instead, they
+    provide a compatibility filter learned during curriculum training.
+    Each lemma token is associated with a set of grammar tokens for
+    which it is structurally valid. During generation, lemma proposals
+    that are incompatible with the active grammar token are removed from
+    the candidate set:</p>
+    <p><span class="math display">lemma is
+    valid ⇔ lemma_grammar_dict.is_compatible(lemma, grammar).</span></p>
+    <p>This compatibility map is not a paging mechanism. It is a
+    structural filter that ensures that lemma tokens respect canonical
+    grammar constraints learned from the curriculum.</p>
+    <h4 id="interaction-between-paging-and-filtering.">Interaction
+    Between Paging and Filtering.</h4>
+    <p>Paging determines the <em>search region</em> for lemma selection,
+    while grammar filtering determines which lemma tokens within that
+    region are structurally permissible. If the primary page yields no
+    compatible lemma tokens, GLP falls back to secondary pages until a
+    valid candidate is found. This design ensures robustness across
+    sparse pages, domain transitions, and multi-world blending.</p>
+    <h2 id="canonical-grammar-and-context-compression">Canonical Grammar
+    and Context Compression</h2>
+    <p>GLP inherits the canonical grammar principles of DMLG. Grammar
+    tokens form a compact, deterministic backbone that governs
+    structural cadence and compresses context. Instead of storing long
+    surface sequences, GLP maintains a grammar-driven representation of
+    recent structure, enabling efficient long-range coherence without
+    attention mechanisms.</p>
+    <p>This grammar backbone provides the geometric component of the
+    triadic cycle. It determines which structural motifs should be
+    reinforced, which transitions are permissible, and how context
+    should be compressed. The grammar model is small, deterministic, and
+    stable across domains, ensuring consistent cadence even as lemma
+    vocabularies expand.</p>
+    <h2 id="narrative-memory-and-recursive-update">Narrative Memory and
+    Recursive Update</h2>
+    <p>The recursive component of the triadic cycle is implemented
+    through a compact narrative memory. This memory integrates recent
+    grammar structure, lemma usage, and page transitions into a
+    low-dimensional state that influences future grammar decisions.
+    Narrative memory originates in DMLG’s recursive context mechanisms
+    but is refined in GLP to operate as a lightweight, LM-compatible
+    recurrence.</p>
+    <p>After each lemma token is produced, the narrative memory is
+    updated, completing the triadic cycle:</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>R</em> → <em>E</em>.</span></p>
+    <p>This recursive loop provides long-horizon stability, motif
+    reinforcement, and stylistic coherence without requiring large
+    hidden states or transformer-style attention.</p>
+    <h2 id="rule-based-structural-coherence">Rule-Based Structural
+    Coherence</h2>
+    <p>GLP applies deterministic rule-based coherence filters that
+    operate directly at the token level. These filters intervene before
+    sampling by removing invalid grammar and lemma proposals from the
+    candidate set, ensuring that only structurally valid tokens enter
+    the sampling distribution.</p>
+    <p>Grammar coherence rules prevent illegal transitions such as
+    punctuation repetition, invalid terminal markers, or improper
+    end-of-line placement. Lemma proposals are filtered through the
+    curriculum-learned compatibility matrix, ensuring that lemma tokens
+    respect canonical grammar constraints.</p>
+    <p>These structural filters preserve GLP’s next-token identity while
+    providing a deterministic foundation for structural stability.</p>
+    <h2
+    id="sentence-level-pre-as-post-generation-quality-filtering">Sentence-Level
+    PRE as Post-Generation Quality Filtering</h2>
+    <p>GLP preserves a strict next-token generative process. PRE
+    (Propose–Retry–Evaluate) does not modify token-level prediction;
+    instead, it evaluates complete sentences after generation. If a
+    sentence fails canonical grammar or semantic validation, GLP retries
+    generation from scratch. Beam search integrates PRE similarly,
+    validating complete beams at end-of-line boundaries.</p>
+    <p>PRE therefore functions as a lightweight, post-hoc quality filter
+    that ensures canonical grammar, page-level domain isolation, and
+    semantic coherence without altering GLP’s deterministic
+    geometry.</p>
+    <h2 id="deterministic-output-geometry">Deterministic Output
+    Geometry</h2>
+    <p>A defining property of GLP is its fixed-dimensional output space.
+    Lemma tokens are encoded using a hybrid scheme: a small bit-vector
+    region for structural markers and a large tri-hot region for lemma
+    identities. This design ensures that the output dimension is
+    constant and independent of vocabulary size. As a result, GLP scales
+    through page expansion rather than parameter growth, providing
+    predictable computational cost and stable geometry across
+    domains.</p>
+    <h2 id="alignment-with-mainstream-lm-interfaces">Alignment with
+    Mainstream LM Interfaces</h2>
+    <p>Although GLP differs structurally from transformer-based LMs, it
+    preserves the familiar autoregressive interface: the lemma model
+    functions as the next-token predictor, producing natural-language
+    output one token at a time. The grammar model governs structure but
+    does not appear in the output except for punctuation, making GLP
+    compatible with standard LM evaluation protocols and downstream
+    usage.</p>
+    <h2 id="summary-2">Summary</h2>
+    <p>GLP integrates canonical grammar, paged lemma vocabularies,
+    fixed-dimensional decoding, dual activation MLPs, rule-based
+    structural coherence, context-driven page selection, and recursive
+    narrative memory into a unified triadic architecture. It
+    operationalizes the</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>R</em></span></p>
+    <p>cycle as the core mechanism of language generation, providing
+    deterministic structure, domain isolation, and scalable geometry.
+    GLP therefore constitutes a new class of language models:
+    structurally governed, triadically organized, and aligned with
+    mainstream expectations of next-token generative architectures.</p>
+    <h1 id="training-regime">Training Regime</h1>
+    <p>GLP employs a simple but effective training regime derived from
+    the DMLG lineage. Training is organized around canonical curriculum
+    sequences and follows a two-stage process: a warmup phase in which
+    all sequences are learned in deterministic order, and a random phase
+    in which sequences are sampled stochastically. This regime is
+    intentionally lightweight and preserves the triadic structure of GLP
+    without requiring complex optimization strategies.</p>
+    <h2 id="canonical-curriculum-and-training-units">Canonical
+    Curriculum and Training Units</h2>
+    <p>Training data is organized into a canonical curriculum consisting
+    of <span class="math inline"><em>N</em></span> sequences. Each
+    sequence is an atomic training unit containing a series of sentences
+    in canonical grammar form. During training, GLP does not reset
+    context between sequences: the context window, compressed grammar
+    history, and narrative memory evolve continuously across the entire
+    curriculum. This design allows GLP to absorb structural motifs, page
+    transitions, and long-range dependencies without attention
+    mechanisms.</p>
+    <h2 id="warmup-phase-deterministic-structural-stabilization">Warmup
+    Phase: Deterministic Structural Stabilization</h2>
+    <p>The warmup phase consists of <span
+    class="math inline"><em>W</em></span> epochs in which all <span
+    class="math inline"><em>N</em></span> curriculum sequences are
+    processed in fixed order. For each token in each sentence, GLP
+    receives a model input containing the current context window, the
+    sequence embedding, and a grammar/lemma indicator. The grammar and
+    lemma MLPs are trained jointly through next-token prediction, and
+    the lemma–grammar compatibility matrix is refined through repeated
+    exposure to canonical transitions.</p>
+    <p>Because context is not reset between sequences, the warmup phase
+    stabilizes:</p>
+    <ul>
+    <li><p>grammar cadence and structural motifs,</p></li>
+    <li><p>page formation and lemma clustering,</p></li>
+    <li><p>compatibility relations between grammar tokens and lemma
+    tokens,</p></li>
+    <li><p>narrative memory dynamics across long horizons.</p></li>
+    </ul>
+    <p>Warmup therefore establishes the deterministic backbone of GLP’s
+    generative behaviour.</p>
+    <h2 id="random-phase-variability-and-page-robustness">Random Phase:
+    Variability and Page Robustness</h2>
+    <p>After warmup, GLP enters a random training phase consisting of
+    <span class="math inline"><em>R</em></span> epochs. In each epoch, a
+    single curriculum sequence is sampled uniformly at random. This
+    introduces variability in structural transitions and prevents
+    overfitting to deterministic ordering. Random training reinforces
+    page robustness, improves lemma diversity within pages, and
+    strengthens the compatibility matrix by exposing grammar tokens to
+    lemma tokens in varied contexts.</p>
+    <p>The random phase also enhances GLP’s ability to blend multiple
+    worlds without drift: pages become stable attractors, grammar
+    transitions remain consistent, and narrative memory learns to
+    generalize across curriculum domains.</p>
+    <h2 id="batching-and-optimization">Batching and Optimization</h2>
+    <p>Training proceeds through incremental accumulation of samples in
+    a training batch. After a configurable number of epochs, the batch
+    is optimized in a single update step. This batching strategy is
+    inherited from DMLG and provides stable convergence without
+    requiring large batch sizes or complex scheduling. All learned
+    parameters reside in the grammar MLP, lemma MLP, and activation
+    MLPs; paging structures, compatibility matrices, and token
+    dictionaries remain deterministic and non-parametric.</p>
+    <h2 id="simplicity-and-extensibility">Simplicity and
+    Extensibility</h2>
+    <p>The GLP training regime is intentionally simple. It requires no
+    attention mechanisms, no transformer-style positional encodings, no
+    contrastive objectives, and no auxiliary losses. Nevertheless, it
+    produces stable grammar cadence, coherent page organization, and
+    robust lemma–grammar compatibility.</p>
+    <p>The regime is extensible: alternative sampling strategies,
+    curriculum shuffling, motif-based curriculum augmentation, or
+    domain-specific training schedules can be incorporated without
+    altering GLP’s deterministic geometry. The warmup/random structure
+    provides a reliable foundation for future enhancements while
+    preserving GLP’s triadic identity.</p>
+    <h1 id="model-hyperparameters-and-deterministic-geometry">Model
+    Hyperparameters and Deterministic Geometry</h1>
+    <p>The size and computational footprint of GLP are determined by a
+    small set of structural hyperparameters. Unlike transformer-based
+    language models, whose parameter count scales with vocabulary size
+    and embedding dimensionality, GLP maintains a fixed-dimensional
+    output space and separates grammar and lemma activations. As a
+    result, the model scales through page expansion rather than
+    parameter growth. Table <a href="#tab:hyperparameters"
+    data-reference-type="ref" data-reference="tab:hyperparameters">1</a>
+    summarizes the hyperparameters that define the geometry and size of
+    a GLP model.</p>
+    <div id="tab:hyperparameters">
+    <table>
+    <caption>Hyperparameters governing the size, geometry, and
+    deterministic scaling behaviour of GLP.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Hyperparameter</strong></th>
+    <th style="text-align: left;"><strong>Description</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Grammar Hidden
+    Size</strong></td>
+    <td style="text-align: left;">Dimensionality of the grammar
+    activation MLP. Determines structural cadence and governs page
+    activation. Small and deterministic across domains.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Lemma Hidden
+    Size</strong></td>
+    <td style="text-align: left;">Dimensionality of the lemma activation
+    MLP. Controls expressive lexical refinement within the active page.
+    Independent of vocabulary size.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Activation Hidden
+    Size</strong></td>
+    <td style="text-align: left;">Shared intermediate hidden size used
+    by both grammar and lemma MLPs for nonlinear transformations.
+    Influences computational cost but not vocabulary geometry.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Bits Dimension</strong></td>
+    <td style="text-align: left;">Number of binary structural bits in
+    the output encoding. Used for punctuation, structural markers, and
+    low-level grammar signals. Fixed and domain-independent.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Tri-Hot
+    Dimension</strong></td>
+    <td style="text-align: left;">Size of the tri-hot region used for
+    lemma identity encoding. Determines the maximum number of lemma
+    tokens per page. Vocabulary growth does not change this
+    dimension.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Total Pages</strong></td>
+    <td style="text-align: left;">Number of lemma pages. Each page is
+    represented as a one-hot selector in the output vector, contributing
+    directly to the output dimension. Scaling occurs by adding pages,
+    not by increasing model parameters.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Page Size (Lemma
+    Count)</strong></td>
+    <td style="text-align: left;">Number of lemma tokens assigned to
+    each page. Determined by curriculum transitions and domain
+    absorption. Does not affect model geometry.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Grammar Vocabulary
+    Size</strong></td>
+    <td style="text-align: left;">Number of grammar tokens (including
+    punctuation). Small, fixed, and canonical. Governs structural
+    transitions and page activation.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Narrative Memory
+    Size</strong></td>
+    <td style="text-align: left;">Dimensionality of the recurrent memory
+    state updated after each lemma token. Provides long-horizon
+    coherence and motif reinforcement.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Compressed Context
+    Size</strong></td>
+    <td style="text-align: left;">Number of recent sentences retained in
+    grammar-compressed form. Determines the effective context horizon
+    for structural recurrence and influences the recursive component of
+    the triadic cycle. Larger values increase long-range coherence
+    without affecting model geometry.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Output Dimension</strong></td>
+    <td style="text-align: left;"><p>Total dimensionality of the output
+    vector:</p>
+    <p><span
+    class="math display"><em>D</em><sub>out</sub> = <em>D</em><sub>bits</sub> + <em>D</em><sub>tri-hot</sub> + <em>D</em><sub>pages</sub>.</span></p>
+    <p>Fully deterministic and independent of vocabulary size.</p></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Model Parameter
+    Count</strong></td>
+    <td style="text-align: left;">Determined entirely by grammar hidden
+    size, lemma hidden size, activation hidden size, and output
+    dimension. Independent of vocabulary size and page count.</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h1 id="deterministic-mlp-parameter-count">Deterministic MLP
+    Parameter Count</h1>
+    <p>GLP contains four learned multilayer perceptrons (MLPs): the
+    grammar MLP, the lemma MLP, and two activation MLPs (one for
+    grammar, one for lemma). All four networks share the same structural
+    form:</p>
+    <p><span
+    class="math display">INPUT → <em>H</em><sub>1</sub> → <em>H</em><sub>2</sub> → OUTPUT,</span></p>
+    <p>and therefore contain exactly two weight matrices and two bias
+    vectors. Because the input dimension is fixed by the GLP generator
+    representation, the total number of parameters is fully
+    deterministic.</p>
+    <h2 id="exact-input-dimension">Exact Input Dimension</h2>
+    <p>The generator input size is defined in code as:</p>
+    <p><span
+    class="math display"><em>D</em><sub>in</sub> = <em>D</em><sub>history</sub> + <em>D</em><sub>current</sub> + 137,</span></p>
+    <p>where <span class="math inline">137 = 128</span> (narrative
+    memory) <span class="math inline"> + 8</span> (sequence embedding)
+    <span class="math inline"> + 1</span> (current position).</p>
+    <p>With grammar history of <span class="math inline">5</span>
+    sentences at <span class="math inline">24</span> features each, and
+    lemma history of <span class="math inline">15</span> tokens at <span
+    class="math inline">12</span> features each:</p>
+    <p><span
+    class="math display"><em>D</em><sub>history</sub> = 5 ⋅ 24 + 15 ⋅ 12 = 300,</span></p>
+    <p><span
+    class="math display"><em>D</em><sub>current</sub> = 30,</span></p>
+    <p><span
+    class="math display"><em>D</em><sub>in</sub> = 300 + 30 + 137 = 467.</span></p>
+    <p>Thus all four MLPs receive an input vector of dimension <span
+    class="math inline">467</span>.</p>
+    <h2 id="grammar-mlp">Grammar MLP</h2>
+    <p>Architecture:</p>
+    <p><span class="math display">467 → 384 → 384 → 27.</span></p>
+    <p>Parameter count:</p>
+    <p><span
+    class="math display"><em>P</em><sub>gram-1</sub> = 467 ⋅ 384 + 384 = 179, 712,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>gram-2</sub> = 384 ⋅ 384 + 384 = 147, 840,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>gram-out</sub> = 384 ⋅ 27 + 27 = 10, 395,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>grammar</sub> = 337, 947.</span></p>
+    <h2 id="lemma-mlp">Lemma MLP</h2>
+    <p>Output dimension:</p>
+    <p><span
+    class="math display"><em>D</em><sub>out</sub> = 16 + 75 + 209 = 300.</span></p>
+    <p>Architecture:</p>
+    <p><span class="math display">467 → 1536 → 1536 → 300.</span></p>
+    <p>Parameter count:</p>
+    <p><span
+    class="math display"><em>P</em><sub>lemma-1</sub> = 467 ⋅ 1536 + 1536 = 718, 848,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>lemma-2</sub> = 1536 ⋅ 1536 + 1536 = 2, 362, 752,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>lemma-out</sub> = 1536 ⋅ 300 + 300 = 460, 500,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>lemma</sub> = 3, 542, 100.</span></p>
+    <h2 id="grammar-activation-mlp">Grammar Activation MLP</h2>
+    <p>Architecture:</p>
+    <p><span class="math display">1 → 64 → 64 → 1.</span></p>
+    <p>Parameter count:</p>
+    <p><span
+    class="math display"><em>P</em><sub>act-g-1</sub> = 1 ⋅ 64 + 64 = 128,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>act-g-2</sub> = 64 ⋅ 64 + 64 = 4, 160,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>act-g-out</sub> = 64 ⋅ 1 + 1 = 65,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>act-g</sub> = 4, 353.</span></p>
+    <h2 id="lemma-activation-mlp">Lemma Activation MLP</h2>
+    <p>Architecture:</p>
+    <p><span class="math display">1 → 64 → 64 → 1.</span></p>
+    <p>Parameter count:</p>
+    <p><span
+    class="math display"><em>P</em><sub>act-l-1</sub> = 1 ⋅ 64 + 64 = 128,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>act-l-2</sub> = 64 ⋅ 64 + 64 = 4, 160,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>act-l-out</sub> = 64 ⋅ 1 + 1 = 65,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>act-l</sub> = 4, 353.</span></p>
+    <h2 id="total-mlp-parameters">Total MLP Parameters</h2>
+    <p>Summing all four networks:</p>
+    <p><span
+    class="math display"><em>P</em><sub>MLP-total</sub> = 337, 947 + 3, 542, 100 + 4, 353 + 4, 353 = 3, 888, 753.</span></p>
+    <p>Thus the four MLPs contain exactly <span
+    class="math inline">3, 888, 753</span> trainable parameters.</p>
+    <h2 id="model-size-in-32-bit-floating-point-format">Model Size in
+    32-bit Floating Point Format</h2>
+    <p>All learned parameters are stored as 32-bit floating point
+    values. The total storage required for the four MLPs is
+    therefore:</p>
+    <p><span
+    class="math display"><em>S</em><sub>MLP</sub> = <em>P</em><sub>MLP-total</sub> ⋅ 4
+    bytes = 3, 888, 753 ⋅ 4 = 15, 555, 012 bytes ≈ 14.8 MB.</span></p>
+    <p>This value represents the exact storage footprint of the four
+    MLPs.</p>
+    <h1 id="decoder-flexibility-and-architectural-generality">Decoder
+    Flexibility and Architectural Generality</h1>
+    <p>Although GLP has a fixed generative structure, it does not impose
+    a fixed choice of input or output decoders. The only architectural
+    constraint is that decoding proceeds through paging: grammar
+    activations select a page, and lemma refinement chooses a token
+    within that page. Beyond this requirement, both the input
+    representation and the output geometry are freely configurable.</p>
+    <p>The reference implementation presented in this work illustrates
+    one possible instantiation of this flexibility. It uses compressed
+    context, narrative memory, and a sequence embedding as input to the
+    grammar and lemma MLPs. On the output side, it employs a paged
+    decoder consisting of a page one-hot selector, a bit one-hot grammar
+    region, and a tri-hot lemma region. These components demonstrate how
+    GLP can be instantiated with compact and interpretable structures,
+    but they are not mandatory elements of the GLP concept.</p>
+    <p>Any alternative encoder—syntactic, semantic, positional, or
+    domain-specific—may be used as long as it produces a
+    fixed-dimensional input vector for the grammar and lemma MLPs.
+    Likewise, any paged output structure may be adopted, including
+    hierarchical pages, multi-hot lemma clusters, or domain-tailored
+    token organizations. GLP therefore supports a wide range of decoder
+    designs while preserving its core properties: deterministic
+    parameter count, fixed output geometry, and triadic
+    grammar–page–lemma generation.</p>
+    <p>This architectural generality ensures that GLP remains a
+    modelling framework rather than a single architecture. The reference
+    implementation serves as a concrete example of how context
+    compression, narrative memory, and paged decoding can be combined,
+    but the underlying concept admits many alternative instantiations
+    tailored to different domains, curricula, and design goals.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>Grammar Lemma Paged Language Models (GLP) show that expressive
+    next-token generation does not require large embedding spaces,
+    attention mechanisms, or vocabulary-sized output layers. By
+    structuring generation as a triadic cycle of grammar activation,
+    page selection, and lemma refinement, GLP provides a compact and
+    interpretable alternative to transformer-based architectures. Its
+    behaviour is governed by a fixed grammar backbone, a paged lemma
+    space, and a small number of multilayer perceptrons whose dimensions
+    are determined entirely by the model configuration.</p>
+    <p>A central property of GLP is that its learned parameter count is
+    fully deterministic. For any chosen set of hyperparameters, the
+    total number of trainable parameters can be computed exactly from
+    the dimensions of the grammar MLP, lemma MLP, and the two activation
+    MLPs. All remaining components are deterministic integer structures
+    and do not contribute to the learned parameter count. As a result,
+    GLP models have a predictable and stable size, independent of
+    vocabulary growth, domain expansion, or curriculum complexity.</p>
+    <p>This architectural separation yields compact models with stable
+    behaviour across domains. Grammar tokens govern structural cadence
+    and page activation; lemma pages provide controlled lexical
+    variation; and narrative memory supplies long-horizon coherence
+    without attention. Because the output geometry is fixed, GLP scales
+    through page expansion rather than parameter growth, enabling
+    predictable computational cost and eliminating drift across training
+    regimes.</p>
+    <p>GLP therefore represents a new class of language models:
+    deterministic in size, triadically organized, structurally governed,
+    and capable of producing coherent natural-language output with a
+    fraction of the complexity of mainstream architectures. The results
+    demonstrate that grammar-driven generation, paged lemma
+    organization, and fixed-dimensional decoding are sufficient to
+    support expressive next-token modelling, opening a path toward
+    compact, interpretable, and domain-stable generative systems.</p>
+    <h1 id="architectural-comparison-glp-dmlg-and-llms">Architectural
+    Comparison: GLP, DMLG, and LLMs</h1>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the GLP engine, the sequential narrator
+    pipeline, and all supporting modules is provided under the AGPL‑3.0
+    license.</p>
+  </main>
+
+</div>
+
+</body>
+</html>

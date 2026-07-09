@@ -730,6 +730,69 @@ that explains the empirical stability and observational limits of modern physics
 
 ---
 
+### **22. Unifying General Relativity and Quantum Mechanics through Triadic Closure**
+
+**The most architecturally pure unification paper in the Triadic Cosmos ecosystem.**  
+This work presents the definitive reconciliation of GR and QM through **triadic closure** —  
+the minimal architectural mechanism linking energy (E), geometry (G), and information (I)  
+into a single recursive structure.
+
+Building on the triadic ontology, recursive update operator, holographic embedding,  
+and local closure cosmology, the paper demonstrates that:
+
+- GR is **overcomplete geometry** filtered by triadic closure  
+- QM is **overcomplete information** filtered by triadic closure  
+- time is **emergent** from recursive triadic updates  
+- causality is **closure‑dependent** and horizon‑bounded  
+- black holes are **recursion‑halted architectural gaps**, not physical interiors  
+- global spacetime does not exist; only **closure‑dependent spacetime** exists  
+- quantum paradoxes arise from **closure‑external informational structure**
+
+The paper removes all non‑essential dependencies (AdS/CFT, global dualities, extra dimensions)  
+and provides a **fully local, horizon‑bounded, theory‑neutral** unification mechanism.
+
+It includes a complete formalism (triadic state space, update operator, closure definition),  
+worked examples (double slit, black hole), testable predictions, and explicit falsifiability criteria.
+
+**This is the canonical unification paper of the Triadic Cosmos ecosystem —  
+the cleanest, most minimal, and most structurally complete reconciliation of GR and QM.**
+
+---
+
+### **23. Grammar Lemma Paged Language Models (GLP)**
+
+**The canonical language‑model architecture paper of the Triadic Cosmos ecosystem.**  
+This work introduces **GLP**, a new class of language models built on deterministic grammar  
+structure, paged lemma vocabularies, fixed‑dimensional output geometry, and explicit triadic  
+generation (E → G → I → R).
+
+GLP evolves the Dynamic Modular Language Graph (DMLG) into a true next‑token LM:  
+grammar and lemma are produced by two independent MLPs under deterministic alternation,  
+with grammar providing structural cadence and lemma providing informational realization.  
+Lemma vocabularies are partitioned into dynamically learned **pages**, enabling domain isolation,  
+stable multi‑world blending, and drift‑free canonical generation.
+
+Key architectural contributions:
+
+- **Dual‑channel grammar–lemma separation**  
+- **Paged lemma vocabularies** instead of monolithic embeddings  
+- **Fixed‑dimensional output geometry** (bit‑vector + tri‑hot)  
+- **Context‑driven page selection with fallback**  
+- **Compact narrative memory** instead of attention  
+- **Sentence‑level PRE** as recursive quality filtering  
+- **Explicit triadic generative loop (E→G→I→R)**  
+- **Deterministic structural filtering and compatibility matrices**
+
+GLP is the first LM architecture to instantiate all four IEGR roles internally, making it a  
+native substrate for **sophisticated parrots** and a structural foundation for hybrid narrator  
+pipelines. It provides a modular, interpretable, and canon‑stable alternative to transformer  
+architectures, enabling structured generation without reliance on large embedding spaces.
+
+**This paper marks the evolution of DMLG from a graph into a full language model —  
+a foundational milestone in the Triadic Cosmos ecosystem.**
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
