@@ -247,7 +247,7 @@ definitive proof that narrative can evolve across editions, accumulate
 ontologies, and converge into a final shape — a multiverse of shadows and  
 transformation grown entirely from its own lineage.
 
-### **13. Honeymoon in Space: A Multi‑Canon Narrative Experiment**
+### **13. A Honeymoon in the Local Cluster: Grammar Lemma Paged Recursion**
 
 A fully transparent demonstration of *first‑run generative architecture*:  
 ten complete canon variants grown directly from the Triadic Cosmos Narrator Pipeline  
