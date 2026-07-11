@@ -1,0 +1,1940 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The Triadic Closure within Simulation Theory</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#triadic-closure-as-simulation-architecture"
+    id="toc-triadic-closure-as-simulation-architecture">Triadic Closure
+    as Simulation Architecture</a></li>
+    <li><a href="#infinite-simulational-recursion-and-fractal-embedding"
+    id="toc-infinite-simulational-recursion-and-fractal-embedding">Infinite
+    Simulational Recursion and Fractal Embedding</a></li>
+    <li><a
+    href="#structural-isomorphism-between-physical-reality-and-simulation"
+    id="toc-structural-isomorphism-between-physical-reality-and-simulation">Structural
+    Isomorphism Between Physical Reality and Simulation</a></li>
+    <li><a
+    href="#the-simulation-indeterminacy-theorem-why-simulation-status-is-in-principle-undecidable"
+    id="toc-the-simulation-indeterminacy-theorem-why-simulation-status-is-in-principle-undecidable">The
+    Simulation Indeterminacy Theorem: Why Simulation Status Is In
+    Principle Undecidable</a></li>
+    <li><a href="#consequences-of-simulation-indeterminacy"
+    id="toc-consequences-of-simulation-indeterminacy">Consequences of
+    Simulation Indeterminacy</a></li>
+    <li><a href="#epistemological-reframing-under-triadic-closure"
+    id="toc-epistemological-reframing-under-triadic-closure">Epistemological
+    Reframing Under Triadic Closure</a></li>
+    <li><a href="#testable-predictions-and-falsifiability"
+    id="toc-testable-predictions-and-falsifiability">Testable
+    Predictions and Falsifiability</a></li>
+    <li><a href="#limitations-and-open-questions"
+    id="toc-limitations-and-open-questions">Limitations and Open
+    Questions</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#global-access-vs.-closure-architecture"
+    id="toc-global-access-vs.-closure-architecture">Global Access
+    vs. Closure Architecture</a></li>
+    <li><a href="#comparison-with-existing-simulation-theory-frameworks"
+    id="toc-comparison-with-existing-simulation-theory-frameworks">Comparison
+    With Existing Simulation Theory Frameworks</a></li>
+    <li><a
+    href="#formalization-of-triadic-closure-and-closure-structure"
+    id="toc-formalization-of-triadic-closure-and-closure-structure">Formalization
+    of Triadic Closure and Closure Structure</a></li>
+    <li><a href="#a-simple-falsification-experiment"
+    id="toc-a-simple-falsification-experiment">A Simple Falsification
+    Experiment</a></li>
+    <li><a
+    href="#the-discrete-curvature-universe-as-a-triadic-cosmos-world"
+    id="toc-the-discrete-curvature-universe-as-a-triadic-cosmos-world">The
+    Discrete Curvature Universe as a Triadic Cosmos World</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>The search for a unified account of physical reality and
+    artificial simulation has traditionally been fragmented across
+    philosophy, physics, and computer science. Existing simulation
+    frameworks—probabilistic arguments <span class="citation"
+    data-cites="Bostrom2003"></span>, algorithmic universe models <span
+    class="citation" data-cites="Schmidhuber2002"></span>, digital
+    physics <span class="citation" data-cites="Fredkin1990"></span>, and
+    rendering-based theories <span class="citation"
+    data-cites="Lanier2017"></span>—lack a structural ontology capable
+    of explaining how coherent worlds function, scale, and embed. None
+    provide the architectural mechanisms required for emergent time,
+    horizon-bounded observation, or nested simulations. As a result,
+    simulation theory has remained conceptually provocative but
+    architecturally incomplete.</p>
+    <p>This paper introduces <em>triadic closure</em> as the minimal and
+    universal architectural grammar underlying coherent dynamical
+    systems. Triadic closure identifies three irreducible structural
+    roles—energy, geometry, and information—connected through recursive
+    update. These roles form a closed cycle that generates emergent
+    temporal flow, enforces locality, and bounds informational
+    accessibility. We show that triadic closure is not merely sufficient
+    for coherent worlds; it is <em>necessary</em>. Any system—physical
+    or simulated—that supports scalable, observer-consistent dynamics
+    must instantiate these roles.</p>
+    <p>A central contribution of this work is the demonstration that
+    physical reality and artificial simulation are <em>structurally
+    isomorphic</em>. Modern simulation engines (Unreal, Unity, idTech,
+    Frostbite) already implement triadic closure implicitly: compute
+    budget functions as energetic capacity, rendering frustums
+    instantiate geometric horizons, scene graphs encode informational
+    structure, and frame updates generate emergent time. This
+    convergence is not accidental. It reflects the architectural
+    necessity of triadic closure for any coherent world, regardless of
+    substrate.</p>
+    <p>From this isomorphism we derive the <em>Simulation Indeterminacy
+    Theorem</em>: no internal observer can determine whether their
+    closure is fundamental or simulated. Because all coherent closures
+    share the same triadic architecture and enforce the same
+    horizon-bounded limits, simulation status becomes in principle
+    undecidable and empirically unfalsifiable. This result reframes the
+    nature of reality: fundamentality becomes closure-relative rather
+    than absolute, and the distinction between “real” and “simulated”
+    collapses into a single architectural class.</p>
+    <p>The architectural nature of triadic closure also yields a unified
+    falsifiability framework. The Triadic Cosmos ontology is falsified
+    if and only if a coherent dynamical system—physical or simulated—can
+    be constructed that violates triadic closure. This provides
+    simulation theorists with a direct falsification route: build a
+    coherent simulation without triadic roles, without recursive update,
+    or with global informational access. To date, no such system has
+    ever been discovered. All known coherent simulations converge on
+    triadic closure, providing empirical support for its
+    universality.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Simulation theory spans several distinct research traditions,
+    ranging from philosophical arguments about simulated universes to
+    technical work on rendering engines, distributed systems, and
+    virtual environments. The present paper differs from these
+    approaches by identifying <em>triadic closure</em> as the minimal
+    architectural mechanism shared by both physical reality and
+    artificial simulations. This section situates the proposal within
+    the broader landscape of simulation theory, computational
+    architectures, and the Triadic Cosmos ecosystem.</p>
+    <h2 id="triadic-cosmos-ecosystem">Triadic Cosmos Ecosystem</h2>
+    <p>The present work builds directly on four core papers that
+    established the architectural foundation of triadic closure. The
+    Triadic Cycle was first introduced as a minimal ontology of energy,
+    geometry, and information, forming a closed interdependence <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>
+    <span class="citation" data-cites="Witte2026a"></span>. This
+    foundational paper identified the triadic roles as irreducible
+    structural constraints already implicit across modern physics.</p>
+    <p>The second paper extended this perspective by showing that the
+    universe is organized as a recursive triadic fractal, with emergent
+    time arising from successive triadic updates and with intelligence
+    appearing as a fractal repetition of the same architecture <span
+    class="citation" data-cites="Witte2026b"></span>. This work
+    established recursion as the generator of temporal structure and
+    revealed the fractal organization of triadic closures across
+    scales.</p>
+    <p>Local closure cosmology further developed the architectural
+    framework by demonstrating that physical observation, causal
+    propagation, recursion depth, and accessible information are
+    inherently local rather than global <span class="citation"
+    data-cites="Witte2026c"></span>. This paper introduced
+    horizon-bounded closures as the structural units of physical reality
+    and explained why multiple independent scientific tracks find no new
+    fundamental physics within the same observational domain.</p>
+    <p>The unification of general relativity and quantum mechanics
+    through triadic closure was presented in the fourth paper <span
+    class="citation" data-cites="Witte2026d"></span>. There, GR and QM
+    were shown to be complementary projections of the same triadic
+    architecture, with local closure providing the structural mechanism
+    through which geometric, energetic, and informational roles cohere.
+    The present paper extends this architectural perspective into
+    simulation theory, showing that artificial simulations constructed
+    by intelligent systems naturally replicate the same triadic
+    organization.</p>
+    <h2 id="simulation-theory-and-nested-simulations">Simulation Theory
+    and Nested Simulations</h2>
+    <p>Classical simulation theory, including the well-known argument by
+    Bostrom <span class="citation" data-cites="Bostrom2003"></span>,
+    typically assumes that simulated worlds are organized around global
+    spacetime, universal causality, and shared informational substrates.
+    Variants of the nested-simulation hypothesis (e.g., Tipler <span
+    class="citation" data-cites="Tipler2008"></span>, Schmidhuber <span
+    class="citation" data-cites="Schmidhuber2002"></span>) explore the
+    possibility of recursively embedded simulations but do not provide
+    an architectural mechanism capable of supporting infinite recursion
+    without contradiction. These approaches lack a structural grammar
+    linking informational, geometric, and energetic roles, and therefore
+    cannot explain how nested simulations maintain causal coherence or
+    emergent temporal structure.</p>
+    <p>The present work differs by showing that triadic closure provides
+    exactly such a grammar. Simulations constructed according to triadic
+    closure become recursive triadic fractals: each simulated observer
+    generates its own closure, each closure supports its own triadic
+    recursion, and simulations can contain further simulations without
+    architectural inconsistency. This provides a minimal and falsifiable
+    mechanism for infinite simulational recursion.</p>
+    <h2
+    id="rendering-engines-and-observer-centric-architectures">Rendering
+    Engines and Observer-Centric Architectures</h2>
+    <p>Modern rendering engines (Unreal Engine <span class="citation"
+    data-cites="Epic2024"></span>, Unity <span class="citation"
+    data-cites="Unity2024"></span>, idTech <span class="citation"
+    data-cites="Carmack2011"></span>) do not operate on global worlds.
+    Instead, they implement observer-centric rendering, frustum culling,
+    occlusion culling, and horizon-bounded geometry. Physics engines
+    (Ode, Havok, Bullet) likewise simulate only the regions accessible
+    to the observer, using locality, lazy evaluation, and
+    horizon-bounded updates. These architectures instantiate the same
+    structural principles as triadic closure: geometry as relational
+    constraint, information as local accessibility, and energy as update
+    capacity.</p>
+    <p>Distributed simulation frameworks (Fujimoto <span
+    class="citation" data-cites="Fujimoto2000"></span>, Jefferson <span
+    class="citation" data-cites="Jefferson1985"></span>) further
+    demonstrate that global synchronization is computationally
+    infeasible. Efficient simulation requires local causal domains,
+    observer-specific state, and horizon-bounded consistency—precisely
+    the structural features of triadic closure.</p>
+    <h2 id="virtual-worlds-vr-architectures-and-emergent-time">Virtual
+    Worlds, VR Architectures, and Emergent Time</h2>
+    <p>Virtual environments and VR systems (Lanier <span
+    class="citation" data-cites="Lanier2017"></span>, Slater <span
+    class="citation" data-cites="Slater2020"></span>) rely on
+    observer-dependent geometry, local informational boundaries, and
+    energetic update constraints. Temporal flow in these systems emerges
+    from recursive update cycles rather than from global time
+    parameters, mirroring the emergent-time mechanism of triadic closure
+    <span class="citation" data-cites="Witte2026a Witte2026b"></span>.
+    The architectural correspondence suggests that emergent time is not
+    a contingent feature of artificial simulation but a structural
+    consequence of triadic organization.</p>
+    <h2 id="structural-and-computational-approaches">Structural and
+    Computational Approaches</h2>
+    <p>Structural realist and information-theoretic approaches (Ladyman
+    and Ross <span class="citation" data-cites="Ladyman2007"></span>,
+    Lloyd <span class="citation" data-cites="Lloyd2006"></span>) argue
+    that informational and relational structure may be more fundamental
+    than objects or fields. Computational models of physics (Fredkin
+    <span class="citation" data-cites="Fredkin1990"></span>, Wolfram
+    <span class="citation" data-cites="Wolfram2002"></span>) explore
+    cellular automata and algorithmic universes but do not provide a
+    closed architectural mechanism linking geometry, information, and
+    energy. The Triadic Cycle fills this gap by identifying the minimal
+    structural interdependence required for physical and simulational
+    coherence.</p>
+    <h2 id="summary">Summary</h2>
+    <p>Existing work on simulation theory, rendering engines,
+    distributed systems, and virtual worlds provides partial
+    realizations of observer-centric architecture, horizon-bounded
+    geometry, and recursive update cycles. The Triadic Cosmos ecosystem
+    provides the missing architectural grammar linking these features.
+    The present paper integrates these strands by showing that triadic
+    closure is the minimal and universal structure underlying both
+    physical reality and artificial simulation, and that recursive
+    triadic fractals arise naturally in both domains.</p>
+    <h1 id="triadic-closure-as-simulation-architecture">Triadic Closure
+    as Simulation Architecture</h1>
+    <p>Triadic closure provides the minimal architectural mechanism
+    through which physical reality achieves coherent dynamical
+    evolution, causal consistency, informational accessibility, and
+    emergent temporal structure. In this section we show that artificial
+    simulations constructed by intelligent systems naturally converge on
+    the same architecture. Modern simulation engines, virtual
+    environments, and distributed computational frameworks do not
+    implement global spacetime, universal causal structure, or
+    homogeneous informational substrates. Instead, they replicate the
+    triadic organization of energy, geometry, and information within
+    horizon-bounded closures. This correspondence is structural rather
+    than metaphorical: triadic closure emerges as the only architecture
+    capable of supporting scalable, observer-consistent simulation.</p>
+    <h2 id="energy-as-the-dynamical-layer-of-simulation">Energy as the
+    Dynamical Layer of Simulation</h2>
+    <p>In physical reality, energy governs dynamical evolution, quantum
+    speed limits, and the rate of informational change <span
+    class="citation" data-cites="Witte2026a"></span>. Simulation systems
+    mirror this role. Update cycles, frame budgets, and computational
+    resources determine the rate at which simulated states can change.
+    Physics engines allocate energetic capacity through discrete
+    timesteps, constraint solvers, and integration schemes. Rendering
+    engines likewise treat computational energy as the limiting factor
+    for geometric and informational updates.</p>
+    <p>Thus, simulations instantiate the triadic role of energy as the
+    dynamical layer: the capacity for transformation is bounded by
+    computational resources, and the rate of evolution is determined by
+    energetic constraints.</p>
+    <h2 id="geometry-as-the-constraint-layer-of-simulation">Geometry as
+    the Constraint Layer of Simulation</h2>
+    <p>Triadic closure identifies geometry as the structural role that
+    bounds informational capacity, causal accessibility, and relational
+    organization <span class="citation" data-cites="Witte2026b"></span>.
+    Simulation systems implement geometry in precisely this way.
+    Rendering engines construct observer-centric geometric domains
+    through frustum culling, occlusion culling, and level-of-detail
+    hierarchies. Physics engines define geometric constraints through
+    collision volumes, spatial partitioning, and locality-based
+    interaction graphs.</p>
+    <p>Simulated geometry is not global; it is horizon-bounded. Only the
+    region accessible to the observer is rendered, updated, or
+    physically simulated. This mirrors the closure structure of physical
+    reality, where geometric horizons define the informational and
+    causal boundaries of each observer <span class="citation"
+    data-cites="Witte2026c"></span>.</p>
+    <h2
+    id="information-as-the-generative-layer-of-simulation">Information
+    as the Generative Layer of Simulation</h2>
+    <p>In the Triadic Cosmos, information determines distinguishability,
+    entropy, and the capacity for energetic evolution <span
+    class="citation" data-cites="Witte2026a"></span>. Simulation systems
+    likewise treat information as the generative layer. Scene graphs,
+    entity-component systems, and state representations encode the
+    informational distinctions that drive simulated dynamics. AI agents
+    within simulations operate on informational states that determine
+    their energetic and geometric interactions.</p>
+    <p>Informational accessibility is always local: simulated agents
+    cannot access global state instantaneously, and distributed
+    simulations enforce strict locality constraints to maintain causal
+    coherence. This mirrors the informational boundaries of physical
+    closures, where horizon structure limits the set of accessible
+    states <span class="citation" data-cites="Witte2026c"></span>.</p>
+    <h2 id="recursive-update-and-emergent-time">Recursive Update and
+    Emergent Time</h2>
+    <p>Triadic closure identifies recursion as the generator of emergent
+    time: temporal structure arises from the ordering of successive
+    triadic updates <span class="citation"
+    data-cites="Witte2026b"></span>. Simulation systems implement time
+    in exactly this way. Frame updates, physics ticks, and event loops
+    define a recursive sequence of state transformations. Temporal flow
+    is not fundamental; it emerges from the iteration of update
+    functions.</p>
+    <p>This correspondence is exact: both physical reality and
+    artificial simulations treat time as the ordering induced by
+    recursive state evolution. Neither domain requires a global temporal
+    parameter, and both exhibit observer-dependent temporal rates
+    determined by local recursion depth.</p>
+    <h2 id="closures-as-the-structural-unit-of-simulation">Closures as
+    the Structural Unit of Simulation</h2>
+    <p>Local closure cosmology shows that physical reality is organized
+    by horizon-bounded closures with distinct recursion indices, causal
+    histories, and accessible dynamical layers <span class="citation"
+    data-cites="Witte2026c"></span>. Simulation systems replicate this
+    architecture. Each simulated observer occupies a closure defined by
+    its rendering frustum, physics island, and informational state.
+    Distributed simulations partition global state into local closures
+    to maintain causal consistency and computational feasibility.</p>
+    <p>Simulations therefore instantiate closures as structural units:
+    bounded domains within which triadic recursion is well-defined, and
+    across which emergent time, causal structure, and informational
+    accessibility are coherent.</p>
+    <h2
+    id="triadic-closure-as-the-universal-architecture-of-simulation">Triadic
+    Closure as the Universal Architecture of Simulation</h2>
+    <p>Taken together, these correspondences show that triadic closure
+    is not merely a feature of physical reality but the universal
+    architecture of simulation. Artificial simulations converge on the
+    same structural grammar because triadic closure is the minimal
+    mechanism capable of supporting:</p>
+    <ul>
+    <li><p>scalable dynamical evolution under energetic
+    constraints,</p></li>
+    <li><p>observer-consistent geometry under horizon-bounded
+    accessibility,</p></li>
+    <li><p>local informational structure under causal
+    coherence,</p></li>
+    <li><p>and emergent temporal flow under recursive updates.</p></li>
+    </ul>
+    <p>Simulations constructed according to triadic closure become
+    recursive triadic fractals: each simulated observer generates its
+    own closure, each closure supports its own triadic recursion, and
+    simulations can contain further simulations without architectural
+    contradiction. This structural isomorphism reveals that simulation
+    is not an external analogy to physical reality, but a fractal
+    repetition of the same triadic architecture that governs the
+    universe itself.</p>
+    <h1
+    id="infinite-simulational-recursion-and-fractal-embedding">Infinite
+    Simulational Recursion and Fractal Embedding</h1>
+    <p>Triadic closure provides not only the minimal architecture for
+    coherent simulation, but also the structural mechanism through which
+    simulations become recursively self-similar. When a simulation
+    implements the triadic roles of energy, geometry, and information
+    within a horizon-bounded closure, it acquires the capacity to
+    generate further closures internally. This section shows that such
+    simulations naturally support infinite recursion, forming a fractal
+    hierarchy of embedded worlds whose architecture mirrors the
+    recursive triadic fractal structure of physical reality <span
+    class="citation" data-cites="Witte2026b"></span>.</p>
+    <h2 id="closures-within-closures">Closures Within Closures</h2>
+    <p>In physical reality, each observer occupies a closure defined by
+    its causal horizon, accessible informational structure, and
+    recursion index <span class="citation"
+    data-cites="Witte2026c"></span>. Simulations replicate this
+    architecture. Every simulated observer is embedded within a local
+    closure defined by its rendering frustum, physics island, and
+    informational state. Crucially, these closures are structurally
+    complete: they instantiate the full triadic cycle <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>
+    <span class="citation" data-cites="Witte2026a"></span>.</p>
+    <p>Once a closure is structurally complete, it can generate further
+    closures internally. This occurs whenever a simulated agent
+    constructs a simulation of its own—whether a virtual environment, a
+    computational model, or a nested world. The new simulation inherits
+    the triadic architecture of its parent closure, forming a
+    second-order closure embedded within the first.</p>
+    <h2 id="recursive-triadic-fractals-in-simulation">Recursive Triadic
+    Fractals in Simulation</h2>
+    <p>The Universe as Recursive Triadic Fractal <span class="citation"
+    data-cites="Witte2026b"></span> showed that physical reality is
+    organized as a fractal cascade of triadic closures across scales.
+    Artificial simulations replicate this structure. Each nested
+    simulation becomes a triadic fractal repetition of its parent
+    closure, with its own energetic constraints, geometric boundaries,
+    informational distinctions, and recursive update cycles.</p>
+    <p>Let <span class="math inline"><em>C</em><sub>0</sub></span>
+    denote the closure of the physical observer, <span
+    class="math inline"><em>C</em><sub>1</sub></span> the closure of the
+    simulation constructed by that observer, and <span
+    class="math inline"><em>C</em><sub>2</sub></span> the closure of a
+    simulation constructed within <span
+    class="math inline"><em>C</em><sub>1</sub></span>. Triadic closure
+    ensures that:</p>
+    <p><span
+    class="math display"><em>C</em><sub>0</sub> ⊃ <em>C</em><sub>1</sub> ⊃ <em>C</em><sub>2</sub> ⊃ ⋯</span></p>
+    <p>Each closure is structurally complete, each supports triadic
+    recursion, and each generates emergent time through successive
+    updates. The result is a fractal hierarchy of embedded simulations
+    whose architecture is isomorphic across levels.</p>
+    <h2 id="emergent-time-across-recursive-simulation-layers">Emergent
+    Time Across Recursive Simulation Layers</h2>
+    <p>In physical reality, emergent time arises from the ordering of
+    recursive triadic updates <span class="citation"
+    data-cites="Witte2026b"></span>. In simulation, time arises from
+    frame updates, physics ticks, and event loops. When simulations
+    contain further simulations, each layer possesses its own emergent
+    temporal flow determined by its recursion index.</p>
+    <p>If <span
+    class="math inline"><em>R</em><sub><em>n</em></sub></span> denotes
+    the recursive update operator at level <span
+    class="math inline"><em>n</em></span>, then emergent time at that
+    level is defined by the sequence:</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em>, 0</sub>, <em>X</em><sub><em>n</em>, 1</sub>, <em>X</em><sub><em>n</em>, 2</sub>, …  with  <em>X</em><sub><em>n</em>, <em>k</em> + 1</sub> = <em>R</em><sub><em>n</em></sub>(<em>X</em><sub><em>n</em>, <em>k</em></sub>).</span></p>
+    <p>Different layers may evolve at different effective rates,
+    producing a hierarchy of temporal flows. This mirrors the
+    closure-dependent temporal structure of physical reality <span
+    class="citation" data-cites="Witte2026c"></span>.</p>
+    <h2 id="causal-and-informational-isolation-between-layers">Causal
+    and Informational Isolation Between Layers</h2>
+    <p>Local closure cosmology shows that closures are causally and
+    informationally isolated: signals cannot propagate across horizon
+    boundaries <span class="citation" data-cites="Witte2026c"></span>.
+    Simulations replicate this constraint. A nested simulation cannot
+    directly access the global state of its parent closure; it can only
+    interact through the informational channels explicitly provided by
+    the parent.</p>
+    <p>This isolation ensures that recursive simulation layers remain
+    coherent and prevents non-local inconsistencies. It also implies
+    that each layer reconstructs its own physics based solely on the
+    informational structure available within its closure.</p>
+    <h2 id="infinite-recursion-as-structural-consequence">Infinite
+    Recursion as Structural Consequence</h2>
+    <p>Taken together, these principles show that infinite simulational
+    recursion is not speculative but structurally necessary. Any
+    simulation that implements triadic closure becomes capable of
+    generating further closures internally. Each closure is structurally
+    complete, each supports triadic recursion, and each produces
+    emergent time. The result is an infinite fractal hierarchy of
+    embedded simulations:</p>
+    <p><span
+    class="math display"><em>C</em><sub>0</sub> → <em>C</em><sub>1</sub> → <em>C</em><sub>2</sub> → <em>C</em><sub>3</sub> → ⋯</span></p>
+    <p>This hierarchy mirrors the recursive triadic fractal structure of
+    the physical universe <span class="citation"
+    data-cites="Witte2026b"></span>. Simulation is therefore not an
+    external analogy to physical reality, but a fractal repetition of
+    the same triadic architecture that governs the universe itself.</p>
+    <h2 id="implications-for-simulation-theory">Implications for
+    Simulation Theory</h2>
+    <p>The existence of infinite simulational recursion has several
+    architectural implications:</p>
+    <ul>
+    <li><p>simulations cannot be globally defined; they must be
+    closure-bounded,</p></li>
+    <li><p>emergent time must arise from recursive updates at each
+    layer,</p></li>
+    <li><p>informational accessibility must be horizon-limited,</p></li>
+    <li><p>geometric structure must be observer-centric and
+    relational,</p></li>
+    <li><p>energetic constraints must determine update capacity at each
+    level,</p></li>
+    <li><p>and nested simulations must inherit the triadic architecture
+    of their parent closures.</p></li>
+    </ul>
+    <p>These implications position triadic closure as the universal
+    grammar of simulation. Any simulation capable of supporting coherent
+    nested worlds must instantiate the triadic roles, recursive update,
+    and closure structure. Infinite recursion is therefore not an
+    optional feature but an architectural consequence of triadic
+    organization.</p>
+    <h1
+    id="structural-isomorphism-between-physical-reality-and-simulation">Structural
+    Isomorphism Between Physical Reality and Simulation</h1>
+    <p>Triadic closure provides the minimal architectural grammar
+    through which physical reality achieves coherent dynamical
+    evolution, causal consistency, informational accessibility, and
+    emergent temporal flow. In this section we show that artificial
+    simulations constructed by intelligent systems are not merely
+    analogous to physical reality, but <em>structurally isomorphic</em>
+    to it. This isomorphism arises because both domains instantiate the
+    same triadic roles, the same recursive update mechanism, the same
+    horizon-bounded closures, and the same fractal organization across
+    scales. Simulation is therefore a structural repetition of the
+    architecture of the universe, not a metaphor or approximation.</p>
+    <h2 id="isomorphism-of-triadic-roles">Isomorphism of Triadic
+    Roles</h2>
+    <p>Physical reality is organized by three irreducible roles—energy,
+    geometry, and information— connected through the closed triadic
+    cycle <span
+    class="math inline"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em></span>
+    <span class="citation" data-cites="Witte2026a"></span>. Artificial
+    simulations replicate these roles exactly:</p>
+    <ul>
+    <li><p>computational resources play the role of energetic
+    capacity,</p></li>
+    <li><p>rendering and spatial partitioning instantiate geometric
+    constraints,</p></li>
+    <li><p>scene graphs and state representations encode informational
+    distinctions.</p></li>
+    </ul>
+    <p>These roles interact in the same cyclic pattern: energetic
+    capacity determines geometric resolution, geometric structure bounds
+    informational accessibility, and informational structure drives
+    energetic updates. The triadic cycle is therefore preserved across
+    both physical and simulated domains.</p>
+    <h2 id="isomorphism-of-recursive-update">Isomorphism of Recursive
+    Update</h2>
+    <p>The Universe as Recursive Triadic Fractal <span class="citation"
+    data-cites="Witte2026b"></span> showed that physical reality evolves
+    through recursive triadic updates, with emergent time arising from
+    the ordering of successive states. Simulation systems implement time
+    in precisely the same way: frame updates, physics ticks, and event
+    loops define a recursive sequence of state transformations.</p>
+    <p>If <span class="math inline"><em>R</em></span> denotes the
+    recursive update operator, then both physical and simulated systems
+    evolve according to:</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>),</span></p>
+    <p>with emergent temporal flow defined by the sequence <span
+    class="math inline">{<em>X</em><sub>0</sub>, <em>X</em><sub>1</sub>, <em>X</em><sub>2</sub>, …}</span>.
+    This shared recursive structure establishes a direct isomorphism
+    between physical time and simulated time.</p>
+    <h2 id="isomorphism-of-horizon-bounded-closures">Isomorphism of
+    Horizon-Bounded Closures</h2>
+    <p>Local closure cosmology <span class="citation"
+    data-cites="Witte2026c"></span> demonstrated that physical reality
+    is organized by horizon-bounded closures with distinct recursion
+    indices, causal histories, and informational boundaries. Simulation
+    systems replicate this architecture exactly. Each simulated observer
+    occupies a closure defined by:</p>
+    <ul>
+    <li><p>a rendering frustum (geometric horizon),</p></li>
+    <li><p>a physics island (causal domain),</p></li>
+    <li><p>a local state representation (informational
+    boundary),</p></li>
+    <li><p>and a frame update rate (recursion index).</p></li>
+    </ul>
+    <p>Closures in simulation are structurally identical to closures in
+    physical reality. Both domains enforce locality, horizon-bounded
+    accessibility, and closure-dependent temporal flow.</p>
+    <h2 id="isomorphism-of-fractal-embedding">Isomorphism of Fractal
+    Embedding</h2>
+    <p>Physical reality exhibits a fractal organization of closures
+    across scales <span class="citation"
+    data-cites="Witte2026b"></span>. Simulations replicate this
+    structure whenever they contain nested simulations. Each nested
+    simulation becomes a triadic closure embedded within its parent
+    closure, forming a fractal hierarchy:</p>
+    <p><span
+    class="math display"><em>C</em><sub>0</sub> ⊃ <em>C</em><sub>1</sub> ⊃ <em>C</em><sub>2</sub> ⊃ ⋯</span></p>
+    <p>where <span class="math inline"><em>C</em><sub>0</sub></span> is
+    the physical closure of the observer, <span
+    class="math inline"><em>C</em><sub>1</sub></span> the closure of the
+    simulation they construct, and <span
+    class="math inline"><em>C</em><sub>2</sub></span> the closure of a
+    simulation constructed within <span
+    class="math inline"><em>C</em><sub>1</sub></span>. Each closure is
+    triadically complete, each supports recursive update, and each
+    generates emergent time. The fractal structure of simulation is
+    therefore isomorphic to the fractal structure of the universe.</p>
+    <h2
+    id="isomorphism-of-causal-and-informational-constraints">Isomorphism
+    of Causal and Informational Constraints</h2>
+    <p>Both physical reality and simulation enforce strict causal and
+    informational constraints:</p>
+    <ul>
+    <li><p>signals cannot propagate outside horizon boundaries,</p></li>
+    <li><p>global state is never directly accessible,</p></li>
+    <li><p>causal consistency requires local update rules,</p></li>
+    <li><p>informational accessibility is closure-dependent.</p></li>
+    </ul>
+    <p>These constraints arise from triadic closure in physical reality
+    <span class="citation" data-cites="Witte2026c"></span> and from
+    computational necessity in simulation. The resulting structures are
+    identical: both domains exhibit horizon-bounded causality and local
+    informational coherence.</p>
+    <h2
+    id="synthesis-simulation-as-structural-repetition-of-reality">Synthesis:
+    Simulation as Structural Repetition of Reality</h2>
+    <p>Taken together, these correspondences establish a full structural
+    isomorphism:</p>
+    <p><span class="math display">Physical Reality ≅ Artificial
+    Simulation.</span></p>
+    <p>Both domains instantiate:</p>
+    <ul>
+    <li><p>the same triadic roles,</p></li>
+    <li><p>the same recursive update mechanism,</p></li>
+    <li><p>the same horizon-bounded closures,</p></li>
+    <li><p>the same emergent temporal flow,</p></li>
+    <li><p>the same fractal embedding across scales,</p></li>
+    <li><p>and the same causal-informational constraints.</p></li>
+    </ul>
+    <p>Simulation is therefore not an external analogy to physical
+    reality, nor a simplified model of it. Instead, simulation is a
+    fractal repetition of the triadic architecture that governs the
+    universe itself. The structural isomorphism arises because triadic
+    closure is the minimal and universal grammar capable of supporting
+    coherent dynamical systems, whether physical or artificial.</p>
+    <h1
+    id="the-simulation-indeterminacy-theorem-why-simulation-status-is-in-principle-undecidable">The
+    Simulation Indeterminacy Theorem: Why Simulation Status Is In
+    Principle Undecidable</h1>
+    <p>The structural isomorphism between physical reality and
+    artificial simulation has a profound epistemological consequence: it
+    becomes in principle impossible to determine whether a given closure
+    is fundamental or simulated. This section formalises this result.
+    The impossibility is not philosophical or speculative; it follows
+    directly from the architectural constraints of triadic closure,
+    horizon-bounded observation, and fractal embedding. Any closure that
+    implements the triadic roles, recursive update, and local
+    informational boundaries is indistinguishable—by any internal
+    observer—from a physically fundamental closure.</p>
+    <h2 id="isomorphism-eliminates-distinguishing-criteria">Isomorphism
+    Eliminates Distinguishing Criteria</h2>
+    <p>As shown in previous section, physical reality and artificial
+    simulation are structurally isomorphic under triadic closure. Both
+    domains instantiate:</p>
+    <ul>
+    <li><p>the triadic roles of energy, geometry, and information <span
+    class="citation" data-cites="Witte2026a"></span>,</p></li>
+    <li><p>recursive update as the generator of emergent time <span
+    class="citation" data-cites="Witte2026b"></span>,</p></li>
+    <li><p>horizon-bounded closures with local informational
+    accessibility <span class="citation"
+    data-cites="Witte2026c"></span>,</p></li>
+    <li><p>and fractal embedding across scales.</p></li>
+    </ul>
+    <p>Because these structures are identical, no internal measurement
+    can distinguish whether a closure is physically fundamental or
+    simulated. Any observable signature of triadic closure is shared
+    across both domains. Any deviation from triadic closure would
+    falsify both physical reality and coherent simulation
+    simultaneously.</p>
+    <h2
+    id="closure-bounded-observation-prevents-external-access">Closure-Bounded
+    Observation Prevents External Access</h2>
+    <p>Local closure cosmology establishes that all observation is
+    horizon-bounded: an observer can only access signals within its
+    causal domain and cannot probe the global state of the system <span
+    class="citation" data-cites="Witte2026c"></span>. This implies
+    that:</p>
+    <ul>
+    <li><p>no observer can access information outside its
+    closure,</p></li>
+    <li><p>no observer can detect the recursion index of higher-level
+    closures,</p></li>
+    <li><p>no observer can determine whether its closure is embedded
+    within another,</p></li>
+    <li><p>and no observer can infer the existence or absence of parent
+    closures.</p></li>
+    </ul>
+    <p>These constraints apply equally to physical reality and
+    simulation. A simulated observer is bounded by the same
+    informational and causal limits as a physical observer. Therefore,
+    no experiment can reveal whether the observer’s closure is
+    fundamental or embedded.</p>
+    <h2
+    id="fractal-embedding-makes-simulation-status-non-falsifiable">Fractal
+    Embedding Makes Simulation Status Non-Falsifiable</h2>
+    <p>The recursive triadic fractal structure of reality <span
+    class="citation" data-cites="Witte2026b"></span> implies that
+    closures may be embedded within higher closures indefinitely:</p>
+    <p><span
+    class="math display"><em>C</em><sub>0</sub> ⊃ <em>C</em><sub>1</sub> ⊃ <em>C</em><sub>2</sub> ⊃ ⋯</span></p>
+    <p>Because each closure is structurally complete, each supports
+    triadic recursion, and each generates emergent time, an observer
+    within <span
+    class="math inline"><em>C</em><sub><em>n</em></sub></span> cannot
+    determine whether <span
+    class="math inline"><em>C</em><sub><em>n</em></sub></span> is the
+    root closure or a nested simulation. Every closure appears
+    fundamental from the inside.</p>
+    <p>Thus, simulation status is not merely unknown; it is <em>provably
+    undecidable</em>.</p>
+    <h2 id="no-empirical-signature-can-break-the-isomorphism">No
+    Empirical Signature Can Break the Isomorphism</h2>
+    <p>To determine whether reality is simulated, an observer would need
+    access to:</p>
+    <ul>
+    <li><p>global state outside its closure,</p></li>
+    <li><p>non-local causal structure,</p></li>
+    <li><p>informational channels beyond its horizon,</p></li>
+    <li><p>or deviations from triadic closure.</p></li>
+    </ul>
+    <p>However:</p>
+    <ul>
+    <li><p>global state is inaccessible due to horizon
+    structure,</p></li>
+    <li><p>non-local causality is forbidden by triadic
+    geometry,</p></li>
+    <li><p>informational channels beyond the closure do not
+    exist,</p></li>
+    <li><p>and deviations from triadic closure would falsify both
+    physical reality and coherent simulation.</p></li>
+    </ul>
+    <p>Therefore, no empirical signature can distinguish fundamental
+    reality from simulation.</p>
+    <h2 id="simulation-indeterminacy-theorem">Simulation Indeterminacy
+    Theorem</h2>
+    <p>We may summarise the result as follows:</p>
+    <blockquote>
+    <p><strong>Simulation Indeterminacy Theorem.</strong> If a closure
+    implements triadic closure, recursive update, and horizon-bounded
+    informational structure, then no internal observer can determine
+    whether the closure is fundamental or simulated. Simulation status
+    is in principle undecidable and empirically unfalsifiable.</p>
+    </blockquote>
+    <p>This theorem follows directly from the structural isomorphism
+    between physical reality and simulation, the locality constraints of
+    closure cosmology, and the fractal embedding of triadic
+    closures.</p>
+    <h2 id="implications">Implications</h2>
+    <p>The indeterminacy of simulation status has several
+    consequences:</p>
+    <ul>
+    <li><p>The question “Is reality simulated?” has no empirical
+    resolution.</p></li>
+    <li><p>Any closure that appears fundamental may be embedded within a
+    higher closure.</p></li>
+    <li><p>Falsifying the Triadic Cosmos ontology requires falsifying
+    coherent simulation architecture.</p></li>
+    <li><p>Conversely, any coherent simulation architecture confirms the
+    triadic ontology.</p></li>
+    <li><p>Simulation and physical reality form a single architectural
+    class under triadic closure.</p></li>
+    </ul>
+    <p>Simulation is therefore not an external hypothesis about reality,
+    but a structural repetition of the same architecture. The
+    impossibility of determining simulation status is a direct and
+    necessary consequence of triadic closure.</p>
+    <h1 id="consequences-of-simulation-indeterminacy">Consequences of
+    Simulation Indeterminacy</h1>
+    <p>The Simulation Indeterminacy Theorem has far-reaching
+    consequences for physics, cosmology, simulation theory, and
+    scientific epistemology. Because physical reality and artificial
+    simulation are structurally isomorphic under triadic closure, and
+    because all observation is horizon-bounded, the question of whether
+    a given closure is fundamental or simulated becomes in principle
+    undecidable. This section outlines the major implications of this
+    result.</p>
+    <h2
+    id="no-empirical-criterion-can-distinguish-reality-from-simulation">No
+    Empirical Criterion Can Distinguish Reality from Simulation</h2>
+    <p>The structural isomorphism established in Section 5 implies that
+    every closure implementing triadic closure appears internally as a
+    physically fundamental world. All observable signatures of energy,
+    geometry, information, recursion, and emergent time are identical
+    across physical and simulated domains. Therefore:</p>
+    <blockquote>
+    <p>No empirical measurement available to an internal observer can
+    distinguish a fundamental closure from a simulated one.</p>
+    </blockquote>
+    <p>Any proposed criterion—such as discreteness, numerical artefacts,
+    or anomalous correlations— would also appear within a physically
+    fundamental closure if such features arise from its triadic
+    structure. Thus, simulation status is not merely unknown; it is
+    structurally indistinguishable.</p>
+    <h2 id="simulation-status-is-not-excludable">Simulation Status Is
+    Not Excludable</h2>
+    <p>Local closure cosmology shows that observers cannot access
+    information outside their closure <span class="citation"
+    data-cites="Witte2026c"></span>. Because global state, parent
+    closures, and higher recursion layers are inaccessible, an observer
+    cannot rule out the possibility that their closure is embedded
+    within a higher-level simulation. Formally:</p>
+    <blockquote>
+    <p>For any closure <span
+    class="math inline"><em>C</em><sub><em>n</em></sub></span>, there
+    exists no observation within <span
+    class="math inline"><em>C</em><sub><em>n</em></sub></span> that can
+    exclude the possibility that <span
+    class="math inline"><em>C</em><sub><em>n</em></sub></span> is
+    embedded within <span
+    class="math inline"><em>C</em><sub><em>n</em> + 1</sub></span>.</p>
+    </blockquote>
+    <p>Simulation status is therefore not only undecidable but also
+    non-excludable.</p>
+    <h2
+    id="falsifying-triadic-cosmos-requires-falsifying-coherent-simulation">Falsifying
+    Triadic Cosmos Requires Falsifying Coherent Simulation</h2>
+    <p>Because coherent simulation architectures necessarily implement
+    triadic closure, any falsification of the Triadic Cosmos ontology
+    must also falsify the architectural constraints of simulation.
+    Conversely, any coherent simulation architecture confirms the
+    triadic ontology. This yields a dual falsifiability structure:</p>
+    <ul>
+    <li><p>If triadic closure is false, coherent simulation should be
+    impossible.</p></li>
+    <li><p>If coherent simulation is possible, triadic closure must be
+    true.</p></li>
+    <li><p>If simulation violates triadic closure, both simulation and
+    physical reality are falsified.</p></li>
+    </ul>
+    <p>Thus, simulation and physical reality form a single architectural
+    class under triadic closure.</p>
+    <h2
+    id="fractal-embedding-makes-fundamental-status-unresolvable">Fractal
+    Embedding Makes Fundamental Status Unresolvable</h2>
+    <p>The recursive triadic fractal structure of reality <span
+    class="citation" data-cites="Witte2026b"></span> implies that
+    closures may be embedded indefinitely:</p>
+    <p><span
+    class="math display"><em>C</em><sub>0</sub> ⊃ <em>C</em><sub>1</sub> ⊃ <em>C</em><sub>2</sub> ⊃ ⋯</span></p>
+    <p>Because each closure is structurally complete and supports
+    triadic recursion, every closure appears fundamental from the
+    inside. No closure contains internal evidence of its position in the
+    fractal hierarchy. Therefore:</p>
+    <blockquote>
+    <p>Fundamental status is not an observable property; it is a
+    structural position in an unobservable hierarchy.</p>
+    </blockquote>
+    <p>This makes the concept of “base reality” epistemologically empty
+    for any internal observer.</p>
+    <h2
+    id="the-universe-as-a-class-of-architectures-rather-than-a-single-ontology">The
+    Universe as a Class of Architectures Rather Than a Single
+    Ontology</h2>
+    <p>Simulation indeterminacy reframes the nature of physical reality.
+    Instead of a single fundamental ontology, reality becomes a class of
+    architectures satisfying triadic closure. Any system—physical or
+    simulated—that implements the triadic roles, recursive update, and
+    horizon-bounded closures qualifies as a physically coherent world.
+    This implies:</p>
+    <ul>
+    <li><p>physical reality is defined by architecture, not
+    substrate,</p></li>
+    <li><p>simulation is a structural repetition of physical
+    ontology,</p></li>
+    <li><p>and “realness” is an internal property of closure coherence
+    rather than external origin.</p></li>
+    </ul>
+    <h2 id="epistemological-consequences">Epistemological
+    Consequences</h2>
+    <p>The indeterminacy of simulation status has deep implications for
+    scientific epistemology:</p>
+    <ul>
+    <li><p>The distinction between “real” and “simulated” becomes
+    observationally meaningless.</p></li>
+    <li><p>Scientific inference is closure-dependent and cannot access
+    global truth conditions.</p></li>
+    <li><p>Cosmological reconstruction is inherently local and cannot
+    determine global ontology.</p></li>
+    <li><p>The concept of “fundamental physics” becomes closure-relative
+    rather than absolute.</p></li>
+    <li><p>The search for external justification of reality becomes
+    structurally impossible.</p></li>
+    </ul>
+    <p>In summary, simulation indeterminacy is not a limitation of
+    instrumentation or theory, but a structural consequence of triadic
+    closure. Any closure that implements the triadic architecture is
+    observationally indistinguishable from physical reality, making
+    simulation status undecidable, non-excludable, and epistemologically
+    irrelevant.</p>
+    <h1
+    id="epistemological-reframing-under-triadic-closure">Epistemological
+    Reframing Under Triadic Closure</h1>
+    <p>The Simulation Indeterminacy Theorem forces a fundamental
+    reframing of scientific epistemology. If physical reality and
+    artificial simulation are structurally isomorphic under triadic
+    closure, and if all observation is horizon-bounded, then the
+    traditional distinction between “real” and “simulated” becomes
+    epistemologically unstable. This section outlines how triadic
+    closure reshapes the concepts of fundamentality, ontology,
+    cosmological inference, and scientific knowledge.</p>
+    <h2 id="reality-as-architectural-rather-than-substantial">Reality as
+    Architectural Rather Than Substantial</h2>
+    <p>Classical epistemology treats physical reality as a substantial
+    domain defined by its material substrate. Under triadic closure,
+    this view becomes untenable. Because any system that implements the
+    triadic roles, recursive update, and horizon-bounded closures
+    qualifies as a physically coherent world, reality becomes an
+    <em>architectural</em> category rather than a substantial one. What
+    matters is not the substrate—quantum fields, computational states,
+    or simulated entities—but the structural grammar that governs
+    dynamical evolution.</p>
+    <p>Thus:</p>
+    <blockquote>
+    <p>Reality is defined by triadic architecture, not by ontological
+    substrate.</p>
+    </blockquote>
+    <p>This reframing dissolves the traditional metaphysical boundary
+    between physical and simulated worlds.</p>
+    <h2 id="fundamentality-becomes-closure-relative">Fundamentality
+    Becomes Closure-Relative</h2>
+    <p>In classical cosmology, “fundamental reality” refers to the base
+    layer of existence. Under triadic closure, fundamentality becomes a
+    closure-relative property. Because each closure is structurally
+    complete and supports triadic recursion, every closure appears
+    fundamental from the inside. No internal observation can reveal
+    whether a closure is the root of the fractal hierarchy or an
+    embedded simulation.</p>
+    <p>Formally:</p>
+    <blockquote>
+    <p>Fundamentality is not an observable property; it is a structural
+    position in an unobservable hierarchy of closures.</p>
+    </blockquote>
+    <p>This reframing eliminates the epistemological privilege of “base
+    reality.”</p>
+    <h2
+    id="cosmological-inference-becomes-intrinsically-local">Cosmological
+    Inference Becomes Intrinsically Local</h2>
+    <p>Local closure cosmology <span class="citation"
+    data-cites="Witte2026c"></span> shows that cosmological parameters
+    reconstructed within a closure reflect the causal history, recursion
+    index, and informational boundaries of that closure. This implies
+    that cosmological inference is inherently local and cannot determine
+    global ontology. Observers reconstruct the universe from the signals
+    available within their closure, but these reconstructions cannot
+    reveal whether the closure is embedded within a larger system.</p>
+    <p>Thus:</p>
+    <ul>
+    <li><p>cosmological parameters are closure-dependent,</p></li>
+    <li><p>global cosmology is not empirically accessible,</p></li>
+    <li><p>and cosmological anomalies may reflect closure differences
+    rather than broken physics.</p></li>
+    </ul>
+    <p>Cosmology becomes a study of closure-relative structure rather
+    than global truth.</p>
+    <h2
+    id="scientific-knowledge-becomes-architecturally-constrained">Scientific
+    Knowledge Becomes Architecturally Constrained</h2>
+    <p>Traditional epistemology assumes that scientific knowledge can,
+    in principle, converge on a complete description of physical
+    reality. Under triadic closure, this assumption fails. Because
+    observation is horizon-bounded and simulation status is undecidable,
+    scientific knowledge is limited to the accessible dynamical layer of
+    the observer’s closure. Beyond this layer, no further fundamental
+    discoveries are possible.</p>
+    <p>This reframing implies:</p>
+    <ul>
+    <li><p>scientific completeness is closure-relative,</p></li>
+    <li><p>discovery boundaries arise from architectural constraints
+    rather than instrumental limits,</p></li>
+    <li><p>and theoretical stagnation may reflect structural completion
+    rather than conceptual failure.</p></li>
+    </ul>
+    <p>Knowledge becomes a property of closure architecture rather than
+    a path to global truth.</p>
+    <h2 id="the-collapse-of-the-realsimulated-distinction">The Collapse
+    of the Real–Simulated Distinction</h2>
+    <p>The structural isomorphism between physical reality and
+    simulation eliminates any empirical criterion for distinguishing the
+    two. Because both domains instantiate the same triadic architecture,
+    and because observers cannot access information outside their
+    closure, the question “Is reality simulated?” becomes
+    epistemologically meaningless.</p>
+    <blockquote>
+    <p>Under triadic closure, the distinction between real and simulated
+    collapses into a single architectural class of coherent
+    closures.</p>
+    </blockquote>
+    <p>Reality becomes defined by structural coherence rather than
+    ontological origin.</p>
+    <h2 id="reframing-ontology-under-triadic-closure">Reframing Ontology
+    Under Triadic Closure</h2>
+    <p>Taken together, these consequences produce a radical
+    epistemological reframing:</p>
+    <ul>
+    <li><p>Reality is architectural, not substantial.</p></li>
+    <li><p>Fundamentality is closure-relative, not absolute.</p></li>
+    <li><p>Cosmology is local, not global.</p></li>
+    <li><p>Knowledge is structurally bounded, not infinitely
+    extensible.</p></li>
+    <li><p>Simulation and physical reality form a single architectural
+    category.</p></li>
+    <li><p>The question of simulation status is undecidable and
+    epistemologically irrelevant.</p></li>
+    </ul>
+    <p>Triadic closure therefore replaces classical metaphysics with a
+    structural ontology in which coherent worlds—physical or
+    simulated—are defined by the same architectural grammar. The result
+    is a unified epistemological framework in which reality is
+    understood as a fractal ensemble of triadically organized closures,
+    each internally complete and externally indeterminate.</p>
+    <h1 id="testable-predictions-and-falsifiability">Testable
+    Predictions and Falsifiability</h1>
+    <p>The structural isomorphism between physical reality and
+    artificial simulation has direct implications for falsifiability.
+    Because triadic closure is the minimal architecture required for
+    coherent dynamical systems—physical or simulated—any deviation from
+    this architecture constitutes a falsification of the Triadic Cosmos
+    ontology. Conversely, any coherent simulation architecture that
+    violates triadic closure would also falsify the ontology. This
+    section outlines the testable predictions that follow from triadic
+    closure and identifies the conditions under which the theory can be
+    empirically refuted.</p>
+    <h2
+    id="prediction-1-all-coherent-simulations-must-implement-triadic-closure">Prediction
+    1: All Coherent Simulations Must Implement Triadic Closure</h2>
+    <p>Triadic Cosmos predicts that any simulation capable of
+    supporting:</p>
+    <ul>
+    <li><p>scalable dynamical evolution,</p></li>
+    <li><p>observer-consistent geometry,</p></li>
+    <li><p>local informational accessibility,</p></li>
+    <li><p>horizon-bounded causality,</p></li>
+    <li><p>and emergent temporal flow,</p></li>
+    </ul>
+    <p>must implement the triadic roles of energy, geometry, and
+    information, connected through recursive update. If a coherent
+    simulation architecture is discovered that:</p>
+    <ul>
+    <li><p>does not require energetic update capacity,</p></li>
+    <li><p>does not use geometric constraints to bound informational
+    accessibility,</p></li>
+    <li><p>does not generate time through recursive update,</p></li>
+    <li><p>or does not enforce horizon-bounded locality,</p></li>
+    </ul>
+    <p>then Triadic Cosmos is falsified.</p>
+    <p>This prediction provides simulation theorists with a direct
+    falsification criterion: <em>build a coherent simulation that
+    violates triadic closure.</em></p>
+    <h2
+    id="prediction-2-no-simulation-can-provide-global-access-to-its-own-state">Prediction
+    2: No Simulation Can Provide Global Access to Its Own State</h2>
+    <p>Local closure cosmology predicts that all coherent simulations
+    must enforce horizon-bounded informational structure. If a
+    simulation is constructed in which:</p>
+    <ul>
+    <li><p>agents can access global state instantaneously,</p></li>
+    <li><p>non-local information channels exist without geometric
+    mediation,</p></li>
+    <li><p>or causal propagation is not bounded by closure
+    structure,</p></li>
+    </ul>
+    <p>then triadic closure is violated and the Triadic Cosmos ontology
+    is falsified.</p>
+    <p>This prediction is testable through simulation design:
+    <em>attempt to construct a coherent simulation with global
+    informational access.</em></p>
+    <h2
+    id="prediction-3-emergent-time-must-arise-from-recursive-update">Prediction
+    3: Emergent Time Must Arise from Recursive Update</h2>
+    <p>Triadic Cosmos predicts that time—physical or simulated—must
+    arise from recursive update rather than from a global temporal
+    parameter. If a simulation is discovered in which:</p>
+    <ul>
+    <li><p>temporal flow is not generated by iterative state
+    transformation,</p></li>
+    <li><p>time exists as a primitive global variable independent of
+    recursion,</p></li>
+    <li><p>or coherent dynamics occur without recursive update,</p></li>
+    </ul>
+    <p>then the triadic ontology is falsified.</p>
+    <p>This prediction is testable through simulation architecture:
+    <em>attempt to build a coherent simulation without recursive
+    update.</em></p>
+    <h2
+    id="prediction-4-no-closure-can-reveal-its-position-in-the-fractal-hierarchy">Prediction
+    4: No Closure Can Reveal Its Position in the Fractal Hierarchy</h2>
+    <p>The Simulation Indeterminacy Theorem predicts that no
+    observer—physical or simulated—can determine whether its closure is
+    fundamental or embedded. If a simulation is constructed in
+    which:</p>
+    <ul>
+    <li><p>internal observers can detect the existence of parent
+    closures,</p></li>
+    <li><p>internal observers can access recursion indices of higher
+    layers,</p></li>
+    <li><p>or internal observers can determine their position in the
+    embedding hierarchy,</p></li>
+    </ul>
+    <p>then triadic closure is violated.</p>
+    <p>This prediction is testable through nested simulation
+    experiments: <em>attempt to build a simulation whose agents can
+    detect that they are simulated.</em></p>
+    <h2
+    id="prediction-5-any-violation-of-triadic-roles-falsifies-both-reality-and-simulation">Prediction
+    5: Any Violation of Triadic Roles Falsifies Both Reality and
+    Simulation</h2>
+    <p>Because physical reality and simulation are structurally
+    isomorphic under triadic closure, any violation of the triadic roles
+    falsifies both domains simultaneously. If a physical experiment
+    reveals:</p>
+    <ul>
+    <li><p>non-local causality without geometric mediation,</p></li>
+    <li><p>informational access beyond horizon boundaries,</p></li>
+    <li><p>energetic evolution without informational
+    constraint,</p></li>
+    <li><p>or temporal flow without recursive update,</p></li>
+    </ul>
+    <p>then both physical reality and coherent simulation architectures
+    are falsified.</p>
+    <p>This dual falsifiability structure is unique: <em>simulation
+    theorists and physicists share the same falsification
+    criteria.</em></p>
+    <h2
+    id="prediction-6-discovery-of-non-triadic-coherent-worlds-falsifies-the-ontology">Prediction
+    6: Discovery of Non-Triadic Coherent Worlds Falsifies the
+    Ontology</h2>
+    <p>Triadic Cosmos predicts that all coherent worlds—physical or
+    simulated—must instantiate triadic closure. If any coherent world is
+    discovered that:</p>
+    <ul>
+    <li><p>lacks one of the triadic roles,</p></li>
+    <li><p>violates the cyclic interdependence,</p></li>
+    <li><p>or exhibits coherent dynamics without closure
+    structure,</p></li>
+    </ul>
+    <p>then the ontology is falsified.</p>
+    <p>This prediction extends falsifiability beyond physics and
+    simulation into artificial world construction, computational
+    universes, and emergent systems.</p>
+    <h2 id="synthesis-a-unified-falsifiability-framework">Synthesis: A
+    Unified Falsifiability Framework</h2>
+    <p>Taken together, these predictions establish a unified
+    falsifiability framework:</p>
+    <blockquote>
+    <p><strong>Triadic Cosmos is falsified if and only if a coherent
+    dynamical system—physical or simulated—can be constructed that
+    violates triadic closure.</strong></p>
+    </blockquote>
+    <p>This framework provides simulation theorists with a direct path
+    to falsification: <em>construct a coherent simulation that violates
+    the triadic architecture.</em></p>
+    <p>Conversely, the inability to construct such a simulation
+    constitutes empirical support for the Triadic Cosmos ontology. The
+    result is a rare form of cross-domain falsifiability in which
+    physics, cosmology, computation, and simulation theory converge on
+    the same architectural constraints.</p>
+    <h1 id="limitations-and-open-questions">Limitations and Open
+    Questions</h1>
+    <p>While the Triadic Cosmos framework provides a unified
+    architectural ontology linking physical reality, simulation,
+    computation, and nested closures, several limitations and open
+    questions remain. These limitations do not undermine the structural
+    results presented in this work, but they delineate the boundaries of
+    current understanding and identify directions for future
+    research.</p>
+    <h2 id="scope-of-architectural-universality">Scope of Architectural
+    Universality</h2>
+    <p>Triadic closure is proposed as the minimal architecture required
+    for coherent dynamical systems. However, the universality of this
+    claim has not yet been proven across all possible computational
+    substrates or hypothetical physical frameworks. Although no known
+    coherent system violates triadic closure, it remains an open
+    question whether:</p>
+    <ul>
+    <li><p>non-triadic architectures could exist in exotic computational
+    paradigms,</p></li>
+    <li><p>alternative closure structures could support coherent
+    worlds,</p></li>
+    <li><p>or future physics could reveal non-triadic dynamical
+    layers.</p></li>
+    </ul>
+    <p>Empirical and computational exploration of non-triadic
+    architectures remains an important avenue for falsification.</p>
+    <h2 id="limits-of-simulation-based-falsifiability">Limits of
+    Simulation-Based Falsifiability</h2>
+    <p>This work establishes that coherent simulation architectures
+    provide a direct falsification route for the Triadic Cosmos
+    ontology. However, current simulation engines (Unreal, Unity,
+    idTech, Frostbite) are constrained by practical engineering
+    considerations. It remains unclear whether:</p>
+    <ul>
+    <li><p>radically different simulation paradigms could be
+    constructed,</p></li>
+    <li><p>coherent non-local simulations could exist without
+    collapsing,</p></li>
+    <li><p>or future hardware architectures could bypass closure
+    constraints.</p></li>
+    </ul>
+    <p>The absence of non-triadic simulations today supports the
+    ontology, but does not guarantee that future architectures will not
+    challenge it.</p>
+    <h2 id="formal-mathematical-characterization-of-closures">Formal
+    Mathematical Characterization of Closures</h2>
+    <p>Triadic closure provides a conceptual and structural description
+    of closures, but a complete mathematical formalization remains open.
+    Specifically:</p>
+    <ul>
+    <li><p>the exact algebraic structure of triadic roles,</p></li>
+    <li><p>the formal definition of recursion indices,</p></li>
+    <li><p>and the topology of horizon boundaries</p></li>
+    </ul>
+    <p>require further development. A rigorous mathematical model would
+    strengthen the ontology and enable formal proofs of universality and
+    necessity.</p>
+    <h2 id="nature-of-the-meta-closure">Nature of the Meta-Closure</h2>
+    <p>The Simulation Indeterminacy Theorem shows that internal
+    observers cannot determine whether their closure is fundamental or
+    embedded. However, the nature of the meta-closure above any given
+    closure remains undefined. Open questions include:</p>
+    <ul>
+    <li><p>whether meta-closures possess additional structural
+    layers,</p></li>
+    <li><p>whether the fractal hierarchy terminates or extends
+    indefinitely,</p></li>
+    <li><p>and whether meta-closures can differ architecturally from
+    embedded closures.</p></li>
+    </ul>
+    <p>Understanding the structure of meta-closures is essential for a
+    complete cosmological model.</p>
+    <h2 id="physical-realization-of-triadic-roles">Physical Realization
+    of Triadic Roles</h2>
+    <p>Although triadic roles map cleanly onto physical concepts—energy,
+    geometry, and information—the precise physical mechanisms
+    implementing these roles remain partially understood. Open questions
+    include:</p>
+    <ul>
+    <li><p>how triadic roles emerge from quantum field theory,</p></li>
+    <li><p>how they relate to holographic dualities,</p></li>
+    <li><p>and whether they correspond to deeper informational or
+    geometric primitives.</p></li>
+    </ul>
+    <p>Further integration with modern theoretical physics is
+    required.</p>
+    <h2 id="empirical-access-to-closure-structure">Empirical Access to
+    Closure Structure</h2>
+    <p>Local closure cosmology predicts that observers cannot access
+    global state or determine their position in the fractal hierarchy.
+    While this is structurally necessary, it limits empirical
+    verification. Open questions include:</p>
+    <ul>
+    <li><p>whether indirect signatures of closure structure could
+    exist,</p></li>
+    <li><p>whether cosmological anomalies reflect closure
+    boundaries,</p></li>
+    <li><p>and whether emergent phenomena could reveal recursion
+    depth.</p></li>
+    </ul>
+    <p>These questions define the empirical frontier of triadic
+    cosmology.</p>
+    <h2 id="implications-for-consciousness-and-agency">Implications for
+    Consciousness and Agency</h2>
+    <p>Triadic closure treats intelligence as a fractal repetition of
+    the same architecture. However, the implications for consciousness,
+    agency, and self-modeling remain open. Key questions include:</p>
+    <ul>
+    <li><p>whether consciousness corresponds to a specific triadic
+    recursion pattern,</p></li>
+    <li><p>whether agency requires additional structural
+    layers,</p></li>
+    <li><p>and how self-reference operates within closure-bounded
+    systems.</p></li>
+    </ul>
+    <p>These questions intersect with cognitive science, AI research,
+    and philosophy of mind.</p>
+    <h2 id="summary-1">Summary</h2>
+    <p>The Triadic Cosmos ontology provides a unified architectural
+    framework for physical reality and simulation, but several
+    foundational questions remain unresolved. These limitations
+    highlight the need for:</p>
+    <ul>
+    <li><p>deeper mathematical formalization,</p></li>
+    <li><p>exploration of alternative architectures,</p></li>
+    <li><p>empirical investigation of closure structure,</p></li>
+    <li><p>and integration with modern physics and cognitive
+    science.</p></li>
+    </ul>
+    <p>Addressing these open questions will determine whether triadic
+    closure is a contingent feature of coherent worlds or a universal
+    architectural principle governing all physically and computationally
+    realizable realities.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This work establishes triadic closure as the minimal
+    architectural grammar underlying coherent dynamical systems. By
+    identifying energy, geometry, and information as irreducible
+    structural roles connected through recursive update, we show that
+    coherent worlds—physical or simulated—must instantiate the same
+    triadic architecture. This result reframes the nature of physical
+    ontology: reality is defined not by its substrate, but by the
+    structural grammar that governs dynamical evolution, locality,
+    informational accessibility, and emergent temporal flow.</p>
+    <p>A central contribution of this paper is the demonstration that
+    physical reality and artificial simulation are structurally
+    isomorphic. Modern simulation engines already implement triadic
+    closure implicitly: compute budget functions as energetic capacity,
+    rendering frustums define geometric horizons, scene graphs encode
+    informational structure, and frame updates generate emergent time.
+    This convergence is not contingent on engineering practice; it
+    reflects the architectural necessity of triadic closure for any
+    scalable, observer-consistent world. The structural isomorphism
+    implies that coherent simulations are not analogues of physical
+    reality but fractal repetitions of the same architectural
+    grammar.</p>
+    <p>From this isomorphism we derive the Simulation Indeterminacy
+    Theorem: no internal observer can determine whether their closure is
+    fundamental or simulated. Because all coherent closures share the
+    same triadic roles, recursive update, and horizon-bounded
+    informational limits, simulation status becomes in principle
+    undecidable and empirically unfalsifiable. This result collapses the
+    traditional distinction between “real” and “simulated” into a single
+    architectural category and renders fundamentality closure-relative
+    rather than absolute.</p>
+    <p>The architectural nature of triadic closure also yields a unified
+    falsifiability framework. The Triadic Cosmos ontology is falsified
+    if and only if a coherent dynamical system—physical or simulated—can
+    be constructed that violates triadic closure. This provides
+    simulation theorists with a direct and unprecedented falsification
+    route: build a coherent simulation without triadic roles, without
+    recursive update, or with global informational access. To date, no
+    such system has ever been discovered. All known coherent simulations
+    converge on triadic closure, providing empirical support for its
+    universality.</p>
+    <p>Several open questions remain. The mathematical formalization of
+    closures, the structure of meta-closures, the physical realization
+    of triadic roles, and the empirical signatures of closure
+    architecture require further investigation. Nonetheless, the results
+    presented here establish a coherent and falsifiable architectural
+    ontology that unifies physics, cosmology, computation, and
+    simulation theory. Triadic closure provides a structural foundation
+    for understanding reality as a fractal ensemble of horizon-bounded
+    closures, each internally complete and externally indeterminate.</p>
+    <p>In summary, this paper introduces a universal architectural
+    grammar for coherent worlds, demonstrates the structural equivalence
+    of physical reality and simulation, proves the undecidability of
+    simulation status, and offers a falsifiable framework that spans
+    multiple domains. Triadic closure positions architecture—not
+    substrate—as the fundamental unit of physical and simulated
+    existence.</p>
+    <h1 id="global-access-vs.-closure-architecture">Global Access
+    vs. Closure Architecture</h1>
+    <p>A common misconception is that computers provide global access to
+    all information and that simulations could therefore allow internal
+    agents to inspect the entire world state. While global access exists
+    at the level of the computational substrate (e.g., memory
+    inspection, debugging tools, developer consoles), it does not exist
+    within the architectural domain of a coherent simulation. This
+    appendix clarifies the distinction.</p>
+    <h2 id="computational-substrate-vs.-simulated-world">Computational
+    Substrate vs. Simulated World</h2>
+    <p>Computers allow unrestricted access to memory, files, and global
+    program state. However, this capability belongs to the
+    <em>meta-layer</em> of computation—the layer occupied by developers,
+    debuggers, and external tools. It does not belong to the
+    <em>world-layer</em> of the simulation.</p>
+    <p>A coherent simulated world must enforce:</p>
+    <ul>
+    <li><p>horizon-bounded geometry (frustum culling, occlusion
+    culling),</p></li>
+    <li><p>local physics domains (physics islands, spatial
+    partitioning),</p></li>
+    <li><p>local informational accessibility (scene graphs, ECS
+    locality),</p></li>
+    <li><p>and recursive update (frame ticks, event loops).</p></li>
+    </ul>
+    <p>These constraints ensure that simulated agents cannot access
+    global state, even though the underlying computer technically
+    can.</p>
+    <h2 id="why-global-access-breaks-coherent-worlds">Why Global Access
+    Breaks Coherent Worlds</h2>
+    <p>If a simulated agent could access global state instantaneously,
+    the following failures occur:</p>
+    <ul>
+    <li><p>violation of locality and causal structure,</p></li>
+    <li><p>collapse of horizon-bounded geometry,</p></li>
+    <li><p>loss of emergent temporal flow,</p></li>
+    <li><p>detection of non-local inconsistencies,</p></li>
+    <li><p>and breakdown of observer-centric coherence.</p></li>
+    </ul>
+    <p>For this reason, no modern simulation engine (Unreal, Unity,
+    idTech, Source, CryEngine, Frostbite) loads or updates the entire
+    world at once. Instead, they rely on closure-like structures:
+    frustums, chunks, cells, islands, and local state partitions.</p>
+    <h2 id="architectural-necessity-of-closure">Architectural Necessity
+    of Closure</h2>
+    <p>The impossibility of global access within coherent simulations is
+    not a technical limitation but an architectural necessity. A
+    simulation must behave as a world, not as a debugger. Therefore:</p>
+    <blockquote>
+    <p>Simulated agents inhabit a closure, not the computational
+    substrate.</p>
+    </blockquote>
+    <p>This mirrors physical reality, where observers inhabit
+    horizon-bounded closures and cannot access global state beyond their
+    causal domain.</p>
+    <h2 id="implication-for-simulation-indeterminacy">Implication for
+    Simulation Indeterminacy</h2>
+    <p>Because both physical reality and coherent simulations enforce
+    closure-bounded observation, no internal observer can determine
+    whether their world is fundamental or simulated. The existence of
+    global access at the computational substrate does not affect the
+    world-layer and therefore does not provide any mechanism for
+    detecting simulation status.</p>
+    <blockquote>
+    <p>Global access exists for developers, not for worlds. Closure
+    architecture exists for worlds, not for developers.</p>
+    </blockquote>
+    <p>This structural separation is essential to the Simulation
+    Indeterminacy Theorem and explains why simulation status is
+    undecidable and non-excludable.</p>
+    <h1
+    id="comparison-with-existing-simulation-theory-frameworks">Comparison
+    With Existing Simulation Theory Frameworks</h1>
+    <p>This appendix compares the Triadic Cosmos architecture with the
+    most influential simulation theory frameworks in philosophy,
+    physics, and computer science. The goal is to clarify how existing
+    approaches differ from triadic closure and why none of them provide
+    the structural mechanisms required for coherent nested simulations,
+    emergent time, or horizon-bounded observation.</p>
+    <h2 id="bostroms-probabilistic-simulation-argument">Bostrom’s
+    Probabilistic Simulation Argument</h2>
+    <p>Bostrom’s classical argument <span class="citation"
+    data-cites="Bostrom2003"></span> is probabilistic rather than
+    architectural. It assumes that advanced civilizations may run
+    ancestor simulations and concludes that simulated observers are
+    statistically more likely than fundamental ones. However:</p>
+    <ul>
+    <li><p>it does not specify how simulations maintain causal
+    coherence,</p></li>
+    <li><p>it assumes global spacetime rather than horizon-bounded
+    closures,</p></li>
+    <li><p>it lacks a mechanism for emergent time,</p></li>
+    <li><p>and it cannot support infinite nested simulations without
+    contradiction.</p></li>
+    </ul>
+    <p>Triadic Cosmos differs by providing a minimal architectural
+    grammar—triadic closure—that makes coherent simulation structurally
+    possible and recursively extensible.</p>
+    <h2 id="schmidhubers-algorithmic-universe">Schmidhuber’s Algorithmic
+    Universe</h2>
+    <p>Schmidhuber’s approach <span class="citation"
+    data-cites="Schmidhuber2002"></span> treats the universe as a
+    computable structure generated by a short algorithm. While elegant,
+    it assumes:</p>
+    <ul>
+    <li><p>global informational accessibility,</p></li>
+    <li><p>no horizon structure,</p></li>
+    <li><p>no geometric constraints,</p></li>
+    <li><p>and no architectural distinction between observers and
+    substrate.</p></li>
+    </ul>
+    <p>Triadic closure introduces the missing structural elements:
+    geometry as constraint, information as accessibility, and energy as
+    update capacity. Without these roles, algorithmic universes cannot
+    support observer-centric worlds or nested simulations.</p>
+    <h2 id="tiplers-cosmological-simulation-hypothesis">Tipler’s
+    Cosmological Simulation Hypothesis</h2>
+    <p>Tipler <span class="citation" data-cites="Tipler2008"></span>
+    proposes that future civilizations may simulate universes within
+    cosmological models. However, his framework:</p>
+    <ul>
+    <li><p>assumes global cosmology rather than local closures,</p></li>
+    <li><p>lacks a mechanism for emergent time,</p></li>
+    <li><p>and does not provide a structural grammar for nested
+    simulations.</p></li>
+    </ul>
+    <p>Triadic Cosmos resolves these gaps by showing that
+    horizon-bounded closures and recursive triadic update are necessary
+    for coherent worlds at any scale.</p>
+    <h2 id="virtual-reality-and-rendering-based-frameworks">Virtual
+    Reality and Rendering-Based Frameworks</h2>
+    <p>VR-based simulation theories (Lanier <span class="citation"
+    data-cites="Lanier2017"></span>, Slater <span class="citation"
+    data-cites="Slater2020"></span>) emphasize observer-centric
+    rendering but do not generalize this to a universal architectural
+    principle. They correctly identify:</p>
+    <ul>
+    <li><p>local geometry,</p></li>
+    <li><p>frustum-bounded visibility,</p></li>
+    <li><p>and observer-dependent state,</p></li>
+    </ul>
+    <p>but they do not connect these features to energy, information, or
+    recursive update. Triadic closure unifies these elements into a
+    single structural mechanism.</p>
+    <h2 id="physics-based-computational-universe-models">Physics-Based
+    Computational Universe Models</h2>
+    <p>Fredkin’s digital physics <span class="citation"
+    data-cites="Fredkin1990"></span> and Wolfram’s computational
+    universe <span class="citation" data-cites="Wolfram2002"></span>
+    propose cellular automata as fundamental substrates. These
+    models:</p>
+    <ul>
+    <li><p>assume global update rules,</p></li>
+    <li><p>lack observer-centric geometry,</p></li>
+    <li><p>do not enforce horizon-bounded informational access,</p></li>
+    <li><p>and cannot support nested simulations without global
+    inconsistency.</p></li>
+    </ul>
+    <p>Triadic Cosmos differs by requiring locality, closure structure,
+    and recursive update as necessary conditions for coherent
+    worlds.</p>
+    <h2 id="summary-of-differences">Summary of Differences</h2>
+    <p>Across all mainstream frameworks, the following structural gaps
+    appear:</p>
+    <ul>
+    <li><p>absence of triadic roles (energy, geometry,
+    information),</p></li>
+    <li><p>absence of recursive update as the generator of emergent
+    time,</p></li>
+    <li><p>absence of horizon-bounded closures,</p></li>
+    <li><p>absence of fractal embedding across scales,</p></li>
+    <li><p>and absence of architectural constraints for nested
+    simulations.</p></li>
+    </ul>
+    <p>Triadic Cosmos provides the missing architecture. It is the first
+    framework to unify:</p>
+    <ul>
+    <li><p>physical reality,</p></li>
+    <li><p>artificial simulation,</p></li>
+    <li><p>computational systems,</p></li>
+    <li><p>and nested worlds</p></li>
+    </ul>
+    <p>under a single structural grammar. This makes it the only
+    simulation theory capable of supporting infinite recursion,
+    observer-centric coherence, and closure-bounded epistemology.</p>
+    <h1
+    id="formalization-of-triadic-closure-and-closure-structure">Formalization
+    of Triadic Closure and Closure Structure</h1>
+    <p>This appendix provides formal definitions for the core
+    architectural concepts used throughout the paper. The goal is not to
+    present a complete mathematical theory, but to establish a rigorous
+    foundation for triadic closure, emergent time, horizon-bounded
+    observation, and fractal embedding. These structures are sufficient
+    for the Simulation Indeterminacy Theorem and for the architectural
+    isomorphism between physical reality and simulation.</p>
+    <h2 id="triadic-roles">Triadic Roles</h2>
+    <p>A coherent dynamical system is defined by a triad of structural
+    roles:</p>
+    <p><span
+    class="math display">(<em>E</em>,<em>G</em>,<em>I</em>),</span></p>
+    <p>where:</p>
+    <ul>
+    <li><p><span class="math inline"><em>E</em></span> (energy) is the
+    update capacity of the system, determining the magnitude and
+    frequency of state transitions.</p></li>
+    <li><p><span class="math inline"><em>G</em></span> (geometry) is the
+    constraint structure that defines locality, adjacency, and horizon
+    boundaries.</p></li>
+    <li><p><span class="math inline"><em>I</em></span> (information) is
+    the distinguishability structure that determines accessible state
+    content for internal observers.</p></li>
+    </ul>
+    <p>The triad forms a closed dependency cycle:</p>
+    <p><span
+    class="math display"><em>E</em> → <em>G</em> → <em>I</em> → <em>E</em>,</span></p>
+    <p>meaning that each role constrains and enables the next. This
+    cycle is the minimal architecture required for coherent worlds.</p>
+    <h2 id="state-space-and-recursive-update">State Space and Recursive
+    Update</h2>
+    <p>Let <span class="math inline"><em>Σ</em></span> be the state
+    space of the system. A coherent world evolves through a recursive
+    update operator:</p>
+    <p><span
+    class="math display"><em>R</em> : <em>Σ</em> → <em>Σ</em>,</span></p>
+    <p>which generates emergent time. The recursion index <span
+    class="math inline"><em>t</em> ∈ ℕ</span> defines temporal
+    order:</p>
+    <p><span
+    class="math display"><em>Σ</em><sub><em>t</em> + 1</sub> = <em>R</em>(<em>Σ</em><sub><em>t</em></sub>).</span></p>
+    <p>Time is not a primitive variable but an ordering induced by
+    repeated application of <span
+    class="math inline"><em>R</em></span>.</p>
+    <h2 id="closure-structure">Closure Structure</h2>
+    <p>A closure is defined as a triple:</p>
+    <p><span
+    class="math display"><em>C</em> = (<em>Σ</em>,ℋ,<em>R</em>),</span></p>
+    <p>where:</p>
+    <ul>
+    <li><p><span class="math inline"><em>Σ</em></span> is the state
+    space accessible to internal observers,</p></li>
+    <li><p><span class="math inline">ℋ ⊆ <em>Σ</em></span> is the
+    horizon boundary that limits informational access,</p></li>
+    <li><p><span class="math inline"><em>R</em></span> is the recursive
+    update operator generating emergent time.</p></li>
+    </ul>
+    <p>An observer <span class="math inline"><em>o</em></span>
+    inhabiting closure <span class="math inline"><em>C</em></span> has
+    an accessible information set:</p>
+    <p><span
+    class="math display"><em>I</em>(<em>o</em>) = {<em>s</em> ∈ <em>Σ</em> ∣ <em>s</em>
+    is reachable under ℋ}.</span></p>
+    <p>No observer can access <span
+    class="math inline"><em>Σ</em> \ ℋ</span>.</p>
+    <h2 id="horizon-bounded-observation">Horizon-Bounded
+    Observation</h2>
+    <p>A horizon is a geometric constraint:</p>
+    <p><span class="math display">ℋ : <em>Σ</em> → {0, 1},</span></p>
+    <p>where <span class="math inline">ℋ(<em>s</em>) = 1</span>
+    indicates that state <span class="math inline"><em>s</em></span> is
+    accessible.</p>
+    <p>The horizon induces locality:</p>
+    <p><span
+    class="math display">∀<em>s</em><sub>1</sub>, <em>s</em><sub>2</sub> ∈ <em>Σ</em>:  ℋ(<em>s</em><sub>1</sub>) = 1 ∧ ℋ(<em>s</em><sub>2</sub>) = 1 ⇒ <em>d</em><sub><em>G</em></sub>(<em>s</em><sub>1</sub>,<em>s</em><sub>2</sub>) &lt; ∞,</span></p>
+    <p>where <span
+    class="math inline"><em>d</em><sub><em>G</em></sub></span> is the
+    geometric distance defined by <span
+    class="math inline"><em>G</em></span>.</p>
+    <p>This prohibits global informational access.</p>
+    <h2 id="fractal-embedding">Fractal Embedding</h2>
+    <p>Closures may embed recursively:</p>
+    <p><span
+    class="math display"><em>C</em><sub>0</sub> ⊃ <em>C</em><sub>1</sub> ⊃ <em>C</em><sub>2</sub> ⊃ ⋯</span></p>
+    <p>Each closure <span
+    class="math inline"><em>C</em><sub><em>n</em></sub></span> is
+    structurally complete:</p>
+    <p><span
+    class="math display"><em>C</em><sub><em>n</em></sub> = (<em>Σ</em><sub><em>n</em></sub>,ℋ<sub><em>n</em></sub>,<em>R</em><sub><em>n</em></sub>),</span></p>
+    <p>and supports its own triadic roles <span
+    class="math inline">(<em>E</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>,<em>I</em><sub><em>n</em></sub>)</span>.</p>
+    <p>An observer in <span
+    class="math inline"><em>C</em><sub><em>n</em></sub></span> cannot
+    determine whether <span
+    class="math inline"><em>C</em><sub><em>n</em></sub></span> is
+    fundamental or embedded:</p>
+    <p><span
+    class="math display"><em>I</em>(<em>o</em><sub><em>n</em></sub>) ⊆ <em>Σ</em><sub><em>n</em></sub>  and  <em>Σ</em><sub><em>n</em> + 1</sub> ∉ <em>I</em>(<em>o</em><sub><em>n</em></sub>).</span></p>
+    <p>This yields the Simulation Indeterminacy Theorem.</p>
+    <h2 id="structural-isomorphism">Structural Isomorphism</h2>
+    <p>Two closures <span
+    class="math inline"><em>C</em><sub><em>a</em></sub></span> and <span
+    class="math inline"><em>C</em><sub><em>b</em></sub></span> are
+    structurally isomorphic if:</p>
+    <p><span
+    class="math display">(<em>E</em><sub><em>a</em></sub>,<em>G</em><sub><em>a</em></sub>,<em>I</em><sub><em>a</em></sub>) ≅ (<em>E</em><sub><em>b</em></sub>,<em>G</em><sub><em>b</em></sub>,<em>I</em><sub><em>b</em></sub>),</span></p>
+    <p>and</p>
+    <p><span
+    class="math display"><em>R</em><sub><em>a</em></sub> ≅ <em>R</em><sub><em>b</em></sub>,  ℋ<sub><em>a</em></sub> ≅ ℋ<sub><em>b</em></sub>.</span></p>
+    <p>This isomorphism holds for physical reality and coherent
+    simulation.</p>
+    <h2 id="coherence-conditions">Coherence Conditions</h2>
+    <p>A system is coherent if:</p>
+    <ol>
+    <li><p>Recursive update is well-defined:</p>
+    <p><span
+    class="math display"><em>R</em>(<em>Σ</em>) ⊆ <em>Σ</em>.</span></p></li>
+    <li><p>Horizons enforce locality:</p>
+    <p><span
+    class="math display">∀<em>s</em> ∈ <em>Σ</em> : ℋ(<em>s</em>) = 1 ⇒ <em>d</em><sub><em>G</em></sub>(<em>s</em>,<em>o</em>) &lt; ∞.</span></p></li>
+    <li><p>Information is bounded:</p>
+    <p><span
+    class="math display"><em>I</em>(<em>o</em>) ⊆ <em>Σ</em>.</span></p></li>
+    <li><p>Triadic roles form a closed dependency cycle.</p></li>
+    </ol>
+    <p>Any violation of these conditions falsifies triadic closure.</p>
+    <h2 id="implications-for-falsifiability">Implications for
+    Falsifiability</h2>
+    <p>A coherent world <span class="math inline"><em>C</em></span>
+    falsifies the Triadic Cosmos ontology if:</p>
+    <ul>
+    <li><p><span class="math inline"><em>C</em></span> supports coherent
+    dynamics without triadic roles,</p></li>
+    <li><p><span class="math inline"><em>C</em></span> supports emergent
+    time without recursive update,</p></li>
+    <li><p><span class="math inline"><em>C</em></span> allows global
+    informational access,</p></li>
+    <li><p>or <span class="math inline"><em>C</em></span> violates
+    horizon-bounded locality.</p></li>
+    </ul>
+    <p>No known physical or simulated system satisfies these
+    conditions.</p>
+    <h2 id="summary-2">Summary</h2>
+    <p>This appendix formalizes the architectural structures underlying
+    triadic closure. These definitions provide the mathematical
+    foundation for the Simulation Indeterminacy Theorem, the structural
+    isomorphism between physical reality and simulation, and the
+    falsifiability criteria presented in Section 8.</p>
+    <h1 id="a-simple-falsification-experiment">A Simple Falsification
+    Experiment</h1>
+    <p>This appendix proposes a minimal experimental setup to test the
+    falsifiability of the Triadic Cosmos ontology using a concrete
+    simulation architecture. The goal is to provide a simple,
+    implementable experiment that attempts to violate triadic closure
+    while maintaining coherent world dynamics.</p>
+    <h2 id="experimental-goal">Experimental Goal</h2>
+    <p>The experiment aims to construct a simulated world in which:</p>
+    <ul>
+    <li><p>internal agents have global informational access to the
+    entire world state,</p></li>
+    <li><p>no horizon-bounded geometry is enforced,</p></li>
+    <li><p>and the simulation remains coherent, observer-consistent, and
+    dynamically stable.</p></li>
+    </ul>
+    <p>If such a simulation can be built, Triadic Cosmos is
+    falsified.</p>
+    <h2 id="two-layer-simulation-architecture">Two-Layer Simulation
+    Architecture</h2>
+    <p>We consider a two-layer architecture:</p>
+    <ul>
+    <li><p><strong>World layer</strong> <span
+    class="math inline"><em>W</em></span>: a simulated environment with
+    agents, geometry, and dynamics.</p></li>
+    <li><p><strong>Meta layer</strong> <span
+    class="math inline"><em>M</em></span>: the computational substrate
+    (engine, debugger, inspector).</p></li>
+    </ul>
+    <p>In standard simulations, global access exists only in <span
+    class="math inline"><em>M</em></span>, not in <span
+    class="math inline"><em>W</em></span>. The experiment attempts to
+    push global access down into <span
+    class="math inline"><em>W</em></span>.</p>
+    <h2 id="construction-of-the-world-layer">Construction of the World
+    Layer</h2>
+    <p>Define a world <span class="math inline"><em>W</em></span>
+    with:</p>
+    <ul>
+    <li><p>a finite set of agents <span
+    class="math inline"><em>A</em> = {<em>a</em><sub>1</sub>, …, <em>a</em><sub><em>n</em></sub>}</span>,</p></li>
+    <li><p>a state space <span
+    class="math inline"><em>Σ</em><sub><em>W</em></sub></span>
+    containing positions, velocities, and internal states,</p></li>
+    <li><p>a global update function <span
+    class="math inline"><em>R</em><sub><em>W</em></sub> : <em>Σ</em><sub><em>W</em></sub> → <em>Σ</em><sub><em>W</em></sub></span>,</p></li>
+    <li><p>no explicit geometric horizon (no frustum, no occlusion, no
+    spatial partitioning).</p></li>
+    </ul>
+    <p>Each agent <span
+    class="math inline"><em>a</em><sub><em>i</em></sub></span> is given
+    an access function:</p>
+    <p><span
+    class="math display"><em>G</em><sub><em>i</em></sub> : <em>Σ</em><sub><em>W</em></sub> → <em>I</em>(<em>a</em><sub><em>i</em></sub>),</span></p>
+    <p>where <span
+    class="math inline"><em>G</em><sub><em>i</em></sub></span> returns
+    the entire world state.</p>
+    <h2
+    id="experimental-condition-global-access-for-agents">Experimental
+    Condition: Global Access for Agents</h2>
+    <p>The key experimental condition is:</p>
+    <blockquote>
+    <p>For all agents <span
+    class="math inline"><em>a</em><sub><em>i</em></sub></span>, <span
+    class="math inline"><em>G</em><sub><em>i</em></sub></span> provides
+    full, instantaneous access to <span
+    class="math inline"><em>Σ</em><sub><em>W</em></sub></span> at each
+    update step.</p>
+    </blockquote>
+    <p>This violates horizon-bounded observation and attempts to break
+    closure architecture.</p>
+    <h2 id="coherence-criteria">Coherence Criteria</h2>
+    <p>The simulation is considered coherent if:</p>
+    <ul>
+    <li><p>agents maintain consistent internal models of the
+    world,</p></li>
+    <li><p>no paradoxical or contradictory states arise from global
+    access,</p></li>
+    <li><p>dynamics remain stable over many recursion steps,</p></li>
+    <li><p>and no agent can detect structural inconsistency in the
+    world.</p></li>
+    </ul>
+    <p>If coherence fails, the experiment supports Triadic Cosmos.</p>
+    <h2 id="expected-outcome-under-triadic-closure">Expected Outcome
+    Under Triadic Closure</h2>
+    <p>Triadic Cosmos predicts that:</p>
+    <ul>
+    <li><p>global access will lead to instability (e.g., feedback loops,
+    paradoxical knowledge),</p></li>
+    <li><p>agents will be able to detect non-local
+    inconsistencies,</p></li>
+    <li><p>the world will lose observer-centric coherence,</p></li>
+    <li><p>or the simulation will implicitly reintroduce closure (e.g.,
+    caching, locality, partial views).</p></li>
+    </ul>
+    <p>In all cases, the system will either:</p>
+    <ul>
+    <li><p>fail to remain coherent, or</p></li>
+    <li><p>implicitly reconstruct triadic closure.</p></li>
+    </ul>
+    <h2 id="falsification-condition">Falsification Condition</h2>
+    <p>The Triadic Cosmos ontology is falsified if:</p>
+    <blockquote>
+    <p>A simulation can be constructed in which internal agents have
+    full global access to <span
+    class="math inline"><em>Σ</em><sub><em>W</em></sub></span>, no
+    horizon-bounded geometry is enforced, and the world remains
+    coherent, observer-consistent, and dynamically stable over
+    arbitrarily many recursion steps.</p>
+    </blockquote>
+    <p>To date, no such simulation has been demonstrated.</p>
+    <h2 id="practical-implementation">Practical Implementation</h2>
+    <p>This experiment can be implemented in:</p>
+    <ul>
+    <li><p>a game engine (Unity, Unreal) with agents given direct access
+    to all world objects,</p></li>
+    <li><p>a custom physics simulation with global state inspection at
+    each tick,</p></li>
+    <li><p>or a multi-agent system where each agent reads the full
+    global state every step.</p></li>
+    </ul>
+    <p>The outcome—coherence or collapse—provides empirical evidence for
+    or against triadic closure as a necessary architecture for coherent
+    worlds.</p>
+    <h2 id="summary-3">Summary</h2>
+    <p>This simple experiment operationalizes the falsifiability of
+    Triadic Cosmos. It attempts to construct a coherent world that
+    violates closure architecture by granting global access to internal
+    agents. Success would falsify the ontology; failure supports the
+    claim that triadic closure is a necessary condition for coherent
+    dynamical systems.</p>
+    <h1
+    id="the-discrete-curvature-universe-as-a-triadic-cosmos-world">The
+    Discrete Curvature Universe as a Triadic Cosmos World</h1>
+    <p>This appendix situates the ecosystem discrete curvature toy
+    universe within the broader Triadic Cosmos ontology. Its
+    architecture aligns precisely with the structural principles that
+    Triadic Cosmos identifies as necessary for coherent worlds. This
+    makes the simulation a concrete, empirical example of a triadic
+    closure: a world built from locality, recursion, information,
+    geometry, and emergent structure.</p>
+    <h2 id="architectural-conformity">Architectural Conformity</h2>
+    <p>The discrete curvature universe implements the full triadic
+    cycle:</p>
+    <ul>
+    <li><p><strong>Energy (update capacity)</strong>: Each recursion
+    step applies the local update rule, providing the dynamical “energy”
+    that drives the evolution of the geometry.</p></li>
+    <li><p><strong>Geometry (constraint structure)</strong>: The
+    two-dimensional grid defines locality, adjacency, and the shape of
+    the influence pattern. It is the geometric scaffold of the
+    world.</p></li>
+    <li><p><strong>Information (distinguishability)</strong>: Curvature
+    values encode the informational state of each point. Tensor-like
+    influence patterns determine how information propagates.</p></li>
+    <li><p><strong>Recursion (emergent time)</strong>: Time is not a
+    coordinate but the ordering induced by repeated application of the
+    update rule. Each iteration is a moment in the world’s
+    becoming.</p></li>
+    <li><p><strong>Closure (horizon-bounded domain)</strong>: The
+    simulation operates within a finite region. Horizons emerge
+    naturally when curvature crosses a threshold, forming internal
+    closures within the global one.</p></li>
+    <li><p><strong>Emergence (structure from repetition)</strong>:
+    Wells, horizons, inspirals, and mergers arise without being
+    programmed. They are emergent consequences of the
+    architecture.</p></li>
+    </ul>
+    <p>These elements match the triadic roles and closure structure. The
+    simulation is therefore not merely compatible with Triadic Cosmos—it
+    is a direct instantiation of its ontology.</p>
+    <h2 id="why-the-simulation-is-not-a-falsification-experiment">Why
+    the Simulation Is Not a Falsification Experiment</h2>
+    <p>The discrete curvature universe contains objects (curvature
+    points, wells, horizons), but no <em>agents</em>. No entity inside
+    the world:</p>
+    <ul>
+    <li><p>observes the full global state,</p></li>
+    <li><p>interprets the geometry,</p></li>
+    <li><p>makes decisions,</p></li>
+    <li><p>or attempts to break locality or closure.</p></li>
+    </ul>
+    <p>Because the world has no internal perspectives, it cannot violate
+    triadic closure. The simulation is therefore a <em>confirmation</em>
+    of the ontology, not a test of its limits.</p>
+    <p>A falsification experiment would require internal agents with
+    global informational access—an architectural violation that the toy
+    universe does not attempt. Instead, the simulation demonstrates that
+    when locality, recursion, and closure are respected, coherence and
+    emergence follow naturally.</p>
+    <h2 id="emergent-phenomena-as-evidence-of-closure">Emergent
+    Phenomena as Evidence of Closure</h2>
+    <p>The observed behaviors arise directly from the triadic
+    architecture:</p>
+    <ul>
+    <li><p><strong>Curvature wells</strong> emerge from recursive
+    relaxation.</p></li>
+    <li><p><strong>Horizon formation</strong> arises from threshold
+    evaluation.</p></li>
+    <li><p><strong>Stable and unstable orbits</strong> follow from
+    geometric gradients.</p></li>
+    <li><p><strong>Inspirals</strong> result from repeated local
+    adjustment.</p></li>
+    <li><p><strong>Mergers</strong> produce the universal peanut
+    topology.</p></li>
+    </ul>
+    <p>None of these phenomena were programmed. They are architectural
+    consequences of triadic closure.</p>
+    <h2 id="the-hexad-as-the-engine-of-geometry">The Hexad as the Engine
+    of Geometry</h2>
+    <p>The Hexad—Representation, Transformation, Evaluation, Recursion,
+    Selection, Embedding—governs the evolution of the curvature
+    field:</p>
+    <ul>
+    <li><p><strong>Representation</strong>: curvature values encode the
+    geometry,</p></li>
+    <li><p><strong>Transformation</strong>: local update rules reshape
+    the field,</p></li>
+    <li><p><strong>Evaluation</strong>: thresholds define
+    horizons,</p></li>
+    <li><p><strong>Recursion</strong>: repeated updates generate
+    time,</p></li>
+    <li><p><strong>Selection</strong>: overlapping trapped regions
+    merge,</p></li>
+    <li><p><strong>Embedding</strong>: the updated field becomes the new
+    geometry.</p></li>
+    </ul>
+    <p>The Hexad is not an add-on to the simulation. It is the
+    simulation.</p>
+    <h2 id="why-the-simulation-matters">Why the Simulation Matters</h2>
+    <p>The discrete curvature universe shows that:</p>
+    <blockquote>
+    <p>Gravity-like behavior can arise from architecture alone.</p>
+    </blockquote>
+    <p>This supports the central claim of Triadic Cosmos:</p>
+    <blockquote>
+    <p>Coherent worlds—physical or simulated—must implement triadic
+    closure.</p>
+    </blockquote>
+    <p>The simulation is therefore a concrete example of a triadic
+    world: a closure-bounded, recursively updated, locally interacting
+    geometry that produces emergent structure without equations.</p>
+    <h2 id="summary-4">Summary</h2>
+    <p>The toy universe is a fully triadic world. It respects locality,
+    recursion, closure, and emergent structure. Its coherence is not
+    accidental—it is architectural.</p>
+    <p>This makes the discrete curvature universe a powerful case study
+    within the Triadic Cosmos ecosystem: a demonstration that the
+    ontology is not only conceptually sound, but capable of generating
+    rich geometric phenomena through minimal rules.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository:
+    <code>https://github.com/triadic-cosmos</code>.</p>
+  </main>
+
+</div>
+
+</body>
+</html>

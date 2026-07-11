@@ -791,6 +791,51 @@ architectures, enabling structured generation without reliance on large embeddin
 **This paper marks the evolution of DMLG from a graph into a full language model —  
 a foundational milestone in the Triadic Cosmos ecosystem.**
 
+### **24. Triadic Closure within Simulation Theory**
+This paper establishes the simulation‑theoretic counterpart of the Triadic Cosmos framework.  
+Where earlier work developed triadic closure as the minimal architectural structure of physical reality,  
+this paper shows that **artificial simulations instantiate the same closure constraints**.
+
+It demonstrates that:
+
+- simulated worlds cannot exceed their own closure bounds,  
+- rendering, physics, and agent dynamics form a triadic cycle identical to physical law,  
+- recursion depth and informational geometry determine the limits of simulated expansion,  
+- and simulation architectures naturally produce **triadic fractal structure** across layers.
+
+The paper provides the first unified account of **closure‑boundedness** across both physical and artificial realities.  
+It positions simulation theory not as a speculative philosophical domain but as a **structurally constrained  
+architectural space** governed by the same minimal triad of energy, geometry, and information.
+
+A foundational contribution linking cosmology, computation, and AGI architecture,  
+showing that **no domain escapes triadic closure**.
+
+---
+
+### **25. Closed Ecosystems, Megastructures, and the Limits of Expansion**
+A societally critical paper that synthesizes the architectural, physical, and cosmological consequences  
+of triadic closure. It demonstrates that **closed ecosystem starships**, **Dyson‑scale megastructures**,  
+and **interstellar expansion trajectories** all fail for the same structural reason:  
+local closure is too small, too fragile, and too recursively unstable to support long‑range civilization growth.
+
+The analysis shows that:
+
+- closed systems accumulate entropy faster than they can export it,  
+- ecological and mechanical degradation scale superlinearly with isolation,  
+- megastructures violate geometric and energetic closure constraints,  
+- and the absence of cosmic engineering is a **structural inevitability**, not a historical accident.
+
+The paper reframes the **Fermi Paradox** and **Great Filter** as architectural consequences of closure finitude.  
+It argues that advanced civilizations converge not toward expansion but toward **local optimization**,  
+hybrid intelligence, and structural recursion within bounded domains.
+
+This work serves as the **overall conclusion of the Triadic Cosmos ecosystem** for the physics‑ and  
+reality‑oriented arc: a clear, testable, architecturally grounded explanation of why the universe  
+is silent, why megastructures do not exist, and why closure governs both intelligence and cosmology.
+
+A landmark synthesis with direct implications for astrophysics, sustainability, AGI safety,  
+and long‑term civilizational planning.
+
 ---
 
 ## 🔍 Purpose of This Repository
