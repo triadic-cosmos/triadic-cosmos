@@ -791,6 +791,8 @@ architectures, enabling structured generation without reliance on large embeddin
 **This paper marks the evolution of DMLG from a graph into a full language model —  
 a foundational milestone in the Triadic Cosmos ecosystem.**
 
+---
+
 ### **24. Triadic Closure within Simulation Theory**
 This paper establishes the simulation‑theoretic counterpart of the Triadic Cosmos framework.  
 Where earlier work developed triadic closure as the minimal architectural structure of physical reality,  
