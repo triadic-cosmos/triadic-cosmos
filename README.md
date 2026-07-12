@@ -247,7 +247,7 @@ definitive proof that narrative can evolve across editions, accumulate
 ontologies, and converge into a final shape — a multiverse of shadows and  
 transformation grown entirely from its own lineage.
 
-### **13. A Honeymoon in the Local Cluster: Grammar Lemma Paged Recursion**
+### **13. A Honeymoon in the Local Closure: Grammar Lemma Paged Recursion**
 
 A fully transparent demonstration of *first‑run generative architecture*:  
 ten complete canon variants grown directly from the Triadic Cosmos Narrator Pipeline  
@@ -263,7 +263,7 @@ produce coherent long‑form narratives even in their raw, unfiltered state.
 Each chapter is presented exactly as generated: spontaneous, uncurated, and  
 true to the pipeline’s internal dynamics.
 
-As a research artefact, *Honeymoon in Space* serves as the first complete  
+As a research artefact, *A Honeymoon in the Local Closure* serves as the first complete  
 multi‑canon corpus produced entirely from first‑run output.  
 It validates the narrator pipeline’s ability to maintain core‑world identity  
 across extreme stylistic variation, demonstrating how modular generative systems  
