@@ -881,6 +881,28 @@ empirical signatures of **dual temporal architecture**, predicted by local closu
 The paper also connects these insights to JWST early‑universe anomalies, showing how closure‑time
 mismatch explains “too early / too massive” galaxies without modifying standard cosmology.
 
+#### ⏳ Relation to Relativistic Time Dilation
+
+The Triadic Cosmos framework distinguishes two independent temporal mechanisms:
+
+##### **1. Geometric Time (General Relativity)**
+Time slows down in strong gravitational fields due to spacetime curvature.  
+This is the classical relativistic effect measured through electromagnetic signals  
+(redshift, pulsars, clocks). It corresponds to **global EM‑time** in the Triadic Cosmos.
+
+##### **2. Emergent Material Time (Triadic Closure)**
+Material processes evolve at rates determined by entropy and recursion index inside a closure.  
+Low‑entropy closures exhibit slower material time; high‑entropy closures evolve faster.  
+This corresponds to **local material time**.
+
+##### **No Contradiction**
+GR describes **geometric time dilation**.  
+Triadic closure describes **structural, entropy‑dependent emergent time**.  
+Voyager demonstrates both simultaneously: EM‑signals follow GR perfectly,  
+while its material degradation proceeds more slowly due to closure‑specific recursion.
+
+The two mechanisms operate on different layers and coexist without conflict.
+
 ---
 
 ### **27. Black and White Holes Do Not Host Universes: A Structural Refutation of Interior‑Cosmology**
