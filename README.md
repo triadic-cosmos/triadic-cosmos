@@ -871,6 +871,54 @@ and long‑term civilizational planning.
 
 ---
 
+### **26. Entropy‑Dependent Time and Electromagnetic Transversality: Voyager as an Empirical Demonstration**
+
+A structural physics paper showing that the Voyager probes provide the first natural experiment
+capable of disentangling **material time** (entropy‑dependent, closure‑specific) from **electromagnetic
+time** (closure‑transversal, universal).  
+It demonstrates that Voyager’s anomalously slow degradation and persistent EM coherence are
+empirical signatures of **dual temporal architecture**, predicted by local closure cosmology.
+The paper also connects these insights to JWST early‑universe anomalies, showing how closure‑time
+mismatch explains “too early / too massive” galaxies without modifying standard cosmology.
+
+---
+
+### **27. Black and White Holes Do Not Host Universes: A Structural Refutation of Interior‑Cosmology**
+
+A structural analysis showing why black‑hole and white‑hole interiors cannot host universes.
+Using triadic closure, emergent time, and holographic recursion, the paper demonstrates that
+black‑hole interiors lack independent informational, energetic, and geometric degrees of freedom,
+causing triadic recursion to halt at the horizon.  
+White holes are shown to be overcomplete GR geometries that fail closure entirely.
+The result is a unified architectural refutation of interior‑cosmology and recursive black‑hole
+multiverse models.
+
+---
+
+### **28. AI Datacenters in Space: Structural Constraints and Architectural Feasibility**
+
+A conceptual exploration of the structural, energetic, and geometric constraints involved in
+deploying large‑scale AI datacenters beyond Earth.  
+The paper examines closure‑bound computation, thermal dissipation limits, EM‑latency across
+closures, and the architectural mismatch between high‑entropy compute systems and low‑entropy
+external environments.  
+It outlines which configurations are structurally feasible, which are unstable, and how modular
+AGI architectures interact with extraterrestrial closure dynamics.
+
+---
+
+### **29. The Great Filter: A Structural Interpretation of Civilizational Bottlenecks**
+
+A structural reinterpretation of the Great Filter hypothesis using triadic closure, recursion depth,
+energetic accessibility, and informational capacity.  
+The paper argues that civilizational bottlenecks arise not from probabilistic rarity but from
+architectural constraints: mismatches between energetic scale, informational richness, and
+geometric accessibility.  
+It provides a unified framework for understanding why most civilizations fail to reach interstellar
+stability, and how modular AGI architectures may bypass classical filter regimes.
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
