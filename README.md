@@ -1190,6 +1190,19 @@ Paper #32 is the **central empirical pillar** of the Triadic Cosmos framework.
 It transforms Dual Time from a theoretical insight into a **cross‑scale empirical reality**, completing the
 physics‑to‑biology‑to‑AI arc of the ecosystem.
 
+### 🕒 Fun Fact: Why Clocks Fool Us
+
+All clocks — mechanical, atomic, biological, radiometric — measure **material time**, not universal time.  
+They track how fast matter changes inside a closure, not how fast the universe evolves.
+
+Electromagnetic time (t_EM) is carried by photons and gravity and is perfectly universal.  
+Material time (t_material) is closure‑dependent, entropy‑driven, and different in every domain.
+
+This means every clock you've ever used was only telling you **how fast your local closure is aging**,  
+not how fast time itself flows in the universe.
+
+Nature hid dual time in plain sight.
+
 ---
 
 ## 🔍 Purpose of This Repository
