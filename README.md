@@ -1149,6 +1149,49 @@ a complete architectural + encoding unification of the Triadic Cosmos.
 
 ---
 
+### **32. Dual Time in Nature: Empirical Evidence at All Scales**
+
+This paper provides the first complete empirical demonstration of **dual temporal architecture** across the full
+macro‑to‑micro hierarchy of nature. Building on the structural foundations established in Papers #26 and #30,
+it shows that **electromagnetic time (t_EM)** and **material time (t_material)** are not theoretical constructs
+but *empirically visible temporal layers* governing physical, biological, ecological, and artificial systems.
+
+#### Core Contributions
+- **Cosmology:** JWST early‑universe anomalies arise from interpreting closure‑specific material time through
+  universal electromagnetic signals. Dual Time resolves “too early / too massive” galaxies without modifying
+  ΛCDM.
+- **Astrophysics:** Black holes instantiate recursion halt; stellar mass–lifespan relations follow entropy‑driven
+  recursion index scaling.
+- **Interstellar Objects:** 1I/‘Oumuamua, 2I/Borisov, and 3I/ATLAS exhibit t_EM‑coherent trajectories but
+  t_material‑anomalous behaviour, providing natural closure‑drift experiments.
+- **Voyager:** The first engineered probe demonstrating dual time: slowed material degradation alongside
+  perfectly coherent EM communication after crossing the heliopause.
+- **Biology:** Species‑specific subjective time emerges from closure‑dependent recursion; extremophiles
+  demonstrate near‑zero material time under cryptobiosis.
+- **Carbon‑14 Dating:** Radiocarbon decay is governed by the weak nuclear force and thus measures *material
+  time*, providing a widely used biological clock for closure‑specific temporal flow.
+- **Artificial Systems:** Computation operates exclusively in t_EM; intelligence is substrate‑independent,
+  consciousness substrate‑dependent.
+
+#### Architectural Significance
+Paper #32 is the **empirical anchor** of the Triadic Cosmos ecosystem.  
+Where Papers #30 and #31 define the architectural and holographic layers, Paper #32 shows that Dual Time is
+**already visible in nature**, across cosmology, astrophysics, biology, ecology, and computation.
+
+It establishes:
+- dual time as a falsifiable structural feature of reality,
+- closure‑dependent recursion as the origin of biological and ecological time,
+- electromagnetic transversality as the universal temporal carrier,
+- and the separation between intelligence and consciousness as a physical consequence of temporal architecture.
+
+#### Ecosystem Role
+Paper #32 is the **central empirical pillar** of the Triadic Cosmos framework.  
+
+It transforms Dual Time from a theoretical insight into a **cross‑scale empirical reality**, completing the
+physics‑to‑biology‑to‑AI arc of the ecosystem.
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
