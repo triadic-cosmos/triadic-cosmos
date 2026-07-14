@@ -1190,6 +1190,19 @@ Paper #32 is the **central empirical pillar** of the Triadic Cosmos framework.
 It transforms Dual Time from a theoretical insight into a **cross‑scale empirical reality**, completing the
 physics‑to‑biology‑to‑AI arc of the ecosystem.
 
+### ⚡ Dual Time and Special Relativity
+
+Special Relativity remains fully correct — it describes **electromagnetic time (t_EM)**, the universal
+time carried by photons. Dual Time adds the missing second layer: **material time (t_material)**,
+the closure‑dependent, entropy‑driven time experienced by matter.
+
+SR explains why light‑based clocks dilate.  
+Dual Time explains why biological processes, decay rates, and mechanical clocks do not dilate in the
+same way.
+
+SR is the geometry of t_EM.  
+Dual Time is the architecture of reality.
+
 ### 🕒 Fun Fact: Why Clocks Fool Us
 
 All clocks — mechanical, atomic, biological, radiometric — measure **material time**, not universal time.  
