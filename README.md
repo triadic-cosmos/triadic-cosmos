@@ -1278,7 +1278,7 @@ We’ve been using Dual Time for decades without realizing it.
 
 ---
 
-### 33. Positioning of the Graviton within the Triadic Cosmos (2026)
+### 33. Positioning of the Graviton within the Triadic Cosmos
 
 **Core idea:**  
 This paper resolves the long‑standing tension between the graviton’s role in string theory and its absence in physical reality.  
