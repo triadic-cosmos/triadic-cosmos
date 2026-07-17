@@ -191,7 +191,7 @@ Extra curvature comes from **entanglement gradients** in the holographic encodin
 Inertia itself is a **horizon-bound thermodynamic effect**.  
 No dark matter particles — just **entropic corrections** to dynamics.
 
-# **The Triadic Explanation**
+## **The Triadic Explanation**
 The Triadic Cosmos interprets a galaxy as a **closure** with its own:
 
 - horizon structure  
@@ -208,7 +208,7 @@ The additional gravitational effect does not come from particles, but from:
 
 This naturally produces **flat rotation curves** without dark matter.
 
-# **Overlap Between Mainstream Theories and Triadic Cosmos**
+## **Overlap Between Mainstream Theories and Triadic Cosmos**
 
 | Theory | Holography | Entanglement Geometry | Horizon Entropy | No Dark Matter Particles | Closure Architecture | Recursion Index | Dual Time | Triadic Cycle |
 |--------|------------|------------------------|------------------|--------------------------|----------------------|-----------------|-----------|------------------------------|
@@ -217,7 +217,7 @@ This naturally produces **flat rotation curves** without dark matter.
 | **Horizon-Thermodynamic Inertia** | ✔ | ✖ | ✔ | ✔ | ✖ | ✖ | ✖ | ✖ |
 | **Triadic Cosmos** | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ | ✔ |
 
-# **Conclusion**
+## **Conclusion**
 All three mainstream non–dark-matter alternatives are **special cases** of the Triadic Cosmos architecture.  
 The triadic perspective is therefore **more general**, **richer**, and **architecturally complete** — a unifying framework that absorbs existing theories into a single coherent mechanism.
 
