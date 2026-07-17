@@ -1308,10 +1308,9 @@ and the graviton finds its precise role between them.
 
 ---
 
-## **34. The Triadic Architecture of Material Time**
+### **34. The Triadic Architecture of Material Time**
 
 **Core idea:**  
-
 Material time is introduced as an entropic temporal process distinct from electromagnetic time.  
 The paper formalizes aging as the acceleration of material time through rising recursion index, shows that lifetime is a monotonic function of entropy, and demonstrates that mass‑scaled recursion governs temporal rates across all closures.  
 The framework unifies biological aging, stellar evolution, planetary cooling, neutron‑star longevity, JWST anomalies, spacecraft degradation, and horizon‑bounded dynamics without new fields or dimensions.
