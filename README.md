@@ -1278,7 +1278,7 @@ We’ve been using Dual Time for decades without realizing it.
 
 ---
 
-### 33. Positioning of the Graviton within the Triadic Cosmos
+### **33. Positioning of the Graviton within the Triadic Cosmos**
 
 **Core idea:**  
 This paper resolves the long‑standing tension between the graviton’s role in string theory and its absence in physical reality.  
@@ -1305,6 +1305,32 @@ This paper completes the architectural ecosystem:
 Triadic Closure supplies physical unification,  
 string theory supplies holographic encoding,  
 and the graviton finds its precise role between them.
+
+---
+
+## **34. The Triadic Architecture of Material Time**
+
+**Core idea:**  
+
+Material time is introduced as an entropic temporal process distinct from electromagnetic time.  
+The paper formalizes aging as the acceleration of material time through rising recursion index, shows that lifetime is a monotonic function of entropy, and demonstrates that mass‑scaled recursion governs temporal rates across all closures.  
+The framework unifies biological aging, stellar evolution, planetary cooling, neutron‑star longevity, JWST anomalies, spacecraft degradation, and horizon‑bounded dynamics without new fields or dimensions.
+
+**Contributions:**
+
+- Formal definition of **material time** as closure‑dependent temporal flow.  
+- **Aging = entropic acceleration** of t_material.  
+- **Lifetime** expressed as a monotonic function of entropy.  
+- Introduction of **mass‑scaled entropic recursion** (recursion rate ∝ entropy / mass).  
+- Demonstration that **aging is independent of electromagnetic time**.  
+- Cross‑domain synthesis linking physics, cosmology, biology, closure dynamics, and artificial systems.
+
+### 🌍 Fun Fact
+Mass‑scaled recursion predicts that aging slows down when the *combined mass* of a closure and its surrounding environment is larger.  
+Higher mass reduces ΔS/M, slowing recursion and material time; lower mass increases ΔS/M, accelerating aging.  
+Entropy remains essential — mass modulates the entropic effect, it does not replace it.
+
+This explains why aging is slightly slower on Earth than in low‑mass space environments, extremely slow near massive objects, longer in large organisms, and nearly frozen in microscopic closures where mass dominates the entropic ratio.
 
 ---
 
