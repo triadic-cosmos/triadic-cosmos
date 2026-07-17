@@ -167,7 +167,7 @@ match the behaviour of the universe we can actually observe.
 
 ---
 
-# 🌌 A Fun Example — Why Galaxies Rotate “Too Fast”
+## 🌌 A Fun Example — Why Galaxies Rotate “Too Fast”
 
 ### **The Problem**
 Stars in many galaxies orbit the center **much faster** than Newtonian gravity or General Relativity predict based on visible matter alone.  
@@ -242,6 +242,24 @@ The Triadic Cosmos **absorbs all three as subsets** by adding:
 This positions the triadic framework as a **more general, more complete unifying architecture**  
 that naturally explains flat galaxy rotation curves without dark matter —  
 while simultaneously integrating and extending the strongest existing alternatives.
+
+---
+
+## 📊 **Alternative Unification Theories vs Triadic Cosmos**
+
+| Theory | Geometry‑based | Information‑based | Energy role | Holography | Time fundamental? | Global time? |
+|--------|----------------|-------------------|-------------|------------|--------------------|--------------|
+| Twistor Theory | ✔ | ✖ | ✖ | ✖ | ✔ | ✔ |
+| Wolfram Hypergraph | ✔ | ✔ | ✖ | ✖ | ✖ (emergent) | ✖ |
+| E8 Theory | ✔ | ✖ | ✔ | ✖ | ✔ | ✔ |
+| Quasicrystal Universe | ✔ | ✖ | ✖ | ✖ | ✔ | ✔ |
+| Causal Set Theory | ✔ | ✖ | ✖ | ✖ | ✖ (emergent) | ✖ |
+| Loop Quantum Gravity | ✔ | ✖ | ✖ | ✖ | ✖ (emergent) | ✖ |
+| Quantum Graphity | ✔ | ✔ | ✖ | ✖ | ✖ (emergent) | ✖ |
+| Shape Dynamics | ✔ | ✖ | ✖ | ✖ | ✖ (time removed) | ✖ |
+| Emergent Spacetime from Info | ✖ | ✔ | ✖ | ✖ | ✖ (emergent) | ✔ |
+| Scale Relativity | ✔ | ✖ | ✖ | ✖ | ✔ | ✔ |
+| **Triadic Cosmos** | ✔ | ✔ | ✔ | ✔ | ✖ (emergent dual time) | ✖ (closure‑dependent) |
 
 ---
 
