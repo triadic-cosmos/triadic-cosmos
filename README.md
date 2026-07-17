@@ -208,9 +208,9 @@ The additional gravitational effect does not come from particles, but from:
 
 This naturally produces **flat rotation curves** without dark matter.
 
-# **Comparison Table — Overlap Between Mainstream Theories and Triadic Cosmos**
+# **Overlap Between Mainstream Theories and Triadic Cosmos**
 
-| Theory | Holography | Entanglement Geometry | Horizon Entropy | No Dark Matter Particles | Closure Architecture | Recursion Index | Dual Time | Full Triadic Cycle (E–G–I) |
+| Theory | Holography | Entanglement Geometry | Horizon Entropy | No Dark Matter Particles | Closure Architecture | Recursion Index | Dual Time | Triadic Cycle |
 |--------|------------|------------------------|------------------|--------------------------|----------------------|-----------------|-----------|------------------------------|
 | **Emergent Gravity (Verlinde)** | ✔ | ✔ | ✔ | ✔ | ✖ | ✖ | ✖ | ✖ |
 | **Holographic Entanglement Gravity** | ✔ | ✔ | ✔ | ✔ | ✖ | ✖ | ✖ | ✖ |
