@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>A Dual-Time Formalism for Closure Dynamics and Cosmic
+Evolution</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#significance-statement"
+    id="toc-significance-statement">Significance Statement</a></li>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#formal-conjectures-of-dual-time"
+    id="toc-formal-conjectures-of-dual-time">Formal Conjectures of Dual
+    Time</a></li>
+    <li><a
+    href="#celestial-closures-and-the-empirical-behaviour-of-material-time"
+    id="toc-celestial-closures-and-the-empirical-behaviour-of-material-time">Celestial
+    Closures and the Empirical Behaviour of Material Time</a></li>
+    <li><a
+    href="#structural-corollaries-and-illustrative-consequences-of-dual-time"
+    id="toc-structural-corollaries-and-illustrative-consequences-of-dual-time">Structural
+    Corollaries and Illustrative Consequences of Dual Time</a></li>
+    <li><a href="#planck-time-and-the-dual-time-architecture"
+    id="toc-planck-time-and-the-dual-time-architecture">Planck Time and
+    the Dual-Time Architecture</a></li>
+    <li><a href="#dual-time-planck-time-and-the-early-universe"
+    id="toc-dual-time-planck-time-and-the-early-universe">Dual Time,
+    Planck Time, and the Early Universe</a></li>
+    <li><a href="#testable-predictions"
+    id="toc-testable-predictions">Testable Predictions</a></li>
+    <li><a href="#open-questions-and-limitations"
+    id="toc-open-questions-and-limitations">Open Questions and
+    Limitations</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#dual-time-as-an-independent-theoretical-contribution"
+    id="toc-dual-time-as-an-independent-theoretical-contribution">Dual
+    Time as an Independent Theoretical Contribution</a></li>
+    <li><a href="#alternative-forms-of-the-dual-time-ansatz"
+    id="toc-alternative-forms-of-the-dual-time-ansatz">Alternative Forms
+    of the Dual-Time Ansatz</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 class="unnumbered" id="significance-statement">Significance
+    Statement</h1>
+    <p>Time is treated as a single universal parameter in nearly all
+    branches of physics, from classical mechanics and electrodynamics to
+    quantum theory and cosmology. This paper introduces a formal
+    dual-time architecture that challenges this assumption by separating
+    electromagnetic time (<span
+    class="math inline"><em>t</em><sub>EM</sub></span>), which governs
+    the propagation of fields, from material time (<span
+    class="math inline"><em>t</em><sub>mat</sub></span>), which governs
+    the internal evolution of physical closures. The resulting framework
+    provides a structural explanation for the diverse temporal behaviour
+    observed across celestial bodies, degenerate matter, biological
+    systems, and high-energy phenomena.</p>
+    <p>The dual-time formalism yields eight explicit conjectures that
+    unify entropic acceleration, mass-scaled damping, closure
+    synchronization, horizon-bounded recursion, and Hawking-calibrated
+    black-hole evolution. These conjectures transform dual time from a
+    conceptual insight into a mathematically tangible and empirically
+    testable structure. The Earth’s near-unity ratio <span
+    class="math inline"><em>d</em><em>t</em><sub>mat</sub>/<em>d</em><em>t</em><sub>EM</sub></span>
+    is shown to create the illusion of universal time, while small
+    deviations from unity produce large differences on cosmic
+    timescales. This <em>Earth Bias</em> reframes several long-standing
+    astrophysical and cosmological anomalies as consequences of
+    cross-layer temporal mismatch rather than exotic physics.</p>
+    <p>A key contribution of this work is the reinterpretation of Planck
+    time as a limit of electromagnetic time rather than material time.
+    Material-time resolution is closure-specific and may be smaller or
+    larger than the Planck scale, offering new perspectives on the Big
+    Bang, inflation, and early-universe structure formation. The
+    formalism also provides structural explanations for EM flux
+    anomalies, radiation-reaction pathologies, and ultrafast material
+    response.</p>
+    <p>By proposing a layered temporal architecture and outlining a
+    broad set of testable predictions, this paper positions dual time as
+    a promising foundation for re-expressing time-dependent physics
+    across scales. It offers a unified temporal perspective for the
+    Triadic Cosmos and opens a path toward deeper theories in which
+    matter and fields evolve on distinct but dynamically coupled
+    clocks.</p>
+    <h1 id="introduction">Introduction</h1>
+    <p>Time is one of the most fundamental quantities in physics, yet
+    nearly all physical theories treat it as a single universal
+    parameter shared by matter, fields, observers, and the cosmos as a
+    whole. Classical mechanics, electrodynamics, quantum theory, general
+    relativity, and cosmology all assume that physical processes unfold
+    on a common temporal axis. This assumption is rarely questioned, not
+    because it is theoretically necessary, but because terrestrial
+    physics provides no obvious reason to distinguish between different
+    temporal layers. The Earth’s closure happens to satisfy</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \approx 1,$$</span></p>
+    <p>creating the illusion that material evolution and electromagnetic
+    propagation share the same clock. This <em>Earth Bias</em> has
+    shaped centuries of scientific intuition.</p>
+    <p>Recent empirical and theoretical developments challenge this
+    assumption. Astrophysical systems exhibit radically different aging
+    rates, stability profiles, and dynamical behaviour: massive stars
+    evolve orders of magnitude faster than red dwarfs; neutron stars and
+    white dwarfs change extremely slowly; black holes appear temporally
+    frozen; and early-universe structures observed by JWST seem
+    anomalously mature. These discrepancies are difficult to reconcile
+    within a single-time framework. They suggest that matter and fields
+    may not share the same notion of time, and that temporal evolution
+    may be closure-dependent.</p>
+    <p>This paper develops a formal <em>dual-time architecture</em> in
+    which electromagnetic time (<span
+    class="math inline"><em>t</em><sub>EM</sub></span>) is universal and
+    governs the propagation of fields, while material time (<span
+    class="math inline"><em>t</em><sub>mat</sub></span>) is
+    closure-specific and governed by entropy, mass, recursion index, and
+    interaction structure. Building on the triadic closure framework, we
+    introduce a conjectural dynamical relation linking these two
+    temporal layers and refine earlier qualitative insights into eight
+    explicit conjectures. These conjectures capture entropic
+    acceleration, mass-scaled damping, closure synchronization, the
+    non-vanishing nature of material time, the horizon-bounded limit,
+    and Hawking-calibrated black-hole evolution.</p>
+    <p>A central conceptual shift introduced in this work is the
+    reinterpretation of Planck time. Traditionally viewed as the
+    smallest meaningful temporal interval, Planck time is shown here to
+    be a limit of electromagnetic time rather than material time.
+    Material-time resolution is closure-dependent and may be smaller or
+    larger than the Planck scale. This distinction provides new
+    perspectives on the Big Bang, inflation, and early-universe
+    structure formation, reframing classical singularities and
+    superluminal expansion as cross-layer temporal mismatches rather
+    than breakdowns of physical law.</p>
+    <p>The dual-time architecture developed in this paper is not merely
+    conceptual. It yields structural corollaries that explain EM flux
+    anomalies, radiation-reaction pathologies, ultrafast material
+    response, and the apparent universality of terrestrial time. It also
+    produces a broad set of testable predictions across spacecraft
+    aging, astrophysical evolution, degenerate matter stability,
+    black-hole evaporation, and cosmological measurements. These
+    predictions position dual time as an empirically actionable
+    framework capable of resolving long-standing anomalies in multiple
+    domains.</p>
+    <p>The goal of this paper is not to claim a final theory of time,
+    but to provide a first mathematically tangible and empirically
+    testable formalization of dual time. The dynamical relation
+    introduced here is provisional, and future work may refine or
+    replace its specific functional form. What matters is the structural
+    insight: matter and fields evolve on distinct but dynamically
+    coupled clocks, and recognizing this distinction opens a path toward
+    a unified temporal architecture for the Triadic Cosmos.</p>
+    <h1 id="formal-conjectures-of-dual-time">Formal Conjectures of Dual
+    Time</h1>
+    <p>This section refines the structural theorems of the previous Dual
+    Time paper into explicit conjectures and introduces a formal
+    dynamical relation between electromagnetic time (<span
+    class="math inline"><em>t</em><sub>EM</sub></span>) and material
+    time (<span class="math inline"><em>t</em><sub>mat</sub></span>).
+    Together, these conjectures define the temporal behaviour of
+    closures under entropy, mass, recursion index, and inter-closure
+    interaction, and establish the limiting behaviour of material time
+    in horizon-bounded domains.</p>
+    <h2 id="dual-time-dynamics">Dual-Time Dynamics</h2>
+    <p>Material time is defined as the internal temporal flow of a
+    closure, governed by its entropic state, recursion index, and mass.
+    Electromagnetic time is closure-transversal and universal. The
+    interaction between these two temporal layers is captured by the
+    following conjectural dynamical relation: <span
+    class="math display">$$\frac{d t_{\mathrm{mat}}}{d t_{\mathrm{EM}}}
+            = 1 + \alpha S - \beta M_{\mathrm{eff}}
+            - \kappa(I)\,\bigl(t_{\mathrm{mat}} - t_{\mathrm{EM}}\bigr),
+            \label{eq:dual-time-dynamics}$$</span> where <span
+    class="math inline"><em>S</em></span> is the entropic footprint of
+    the closure, <span
+    class="math inline"><em>M</em><sub>eff</sub></span> its effective
+    mass (including overlap contributions from neighbouring closures),
+    and <span class="math inline"><em>κ</em>(<em>I</em>)</span> a
+    diffusion coefficient determined by electromagnetic interaction
+    strength <span class="math inline"><em>I</em></span>. Equation <a
+    href="#eq:dual-time-dynamics" data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>
+    is not a derived law but a structural ansatz that unifies the
+    temporal behaviour described in the conjectures below.</p>
+    <h2
+    id="conjecture-1-entropic-acceleration-of-material-time">Conjecture
+    1: Entropic Acceleration of Material Time</h2>
+    <p>Entropy accelerates material time. As the entropic footprint
+    <span class="math inline"><em>S</em></span> increases, the recursion
+    index rises and the internal temporal flow of the closure increases.
+    This behaviour is encoded in the positive entropic term <span
+    class="math inline"> + <em>α</em><em>S</em></span> in Eq. <a
+    href="#eq:dual-time-dynamics" data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>.</p>
+    <h2 id="conjecture-2-structural-inevitability-of-aging">Conjecture
+    2: Structural Inevitability of Aging</h2>
+    <p>Any active closure participating in the triadic cycle must
+    produce entropy. Since entropy accelerates material time, aging is
+    structurally inevitable. No closure with nonzero entropic production
+    can maintain a constant material-time rate.</p>
+    <h2
+    id="conjecture-3-material-lifetime-as-a-monotonic-function-of-entropy">Conjecture
+    3: Material Lifetime as a Monotonic Function of Entropy</h2>
+    <p>The lifetime of a closure is a monotonic function of its entropic
+    footprint. High-entropy closures evolve rapidly (e.g. massive
+    stars), while low-entropy closures evolve slowly (e.g. degenerate
+    matter, cryobiotic organisms). This behaviour follows directly from
+    the entropic acceleration term in Eq. <a
+    href="#eq:dual-time-dynamics" data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>.</p>
+    <h2 id="conjecture-4-mass-scaled-entropic-damping">Conjecture 4:
+    Mass-Scaled Entropic Damping</h2>
+    <p>Mass damps the entropic acceleration of material time. The rate
+    at which entropy increases recursion index is inversely proportional
+    to mass. In Eq. <a href="#eq:dual-time-dynamics"
+    data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>,
+    this appears as the negative term <span
+    class="math inline"> − <em>β</em><em>M</em><sub>eff</sub></span>,
+    where <span class="math inline"><em>M</em><sub>eff</sub></span>
+    includes overlap contributions from neighbouring closures: <span
+    class="math display"><em>M</em><sub>eff</sub> = <em>M</em> + ∑<sub><em>j</em> ∈ 𝒩</sub><em>w</em><sub><em>i</em><em>j</em></sub><em>M</em><sub><em>j</em></sub>.</span>
+    This principle explains rapid stellar evolution, moderate biological
+    aging, long-lived degenerate-matter structures, and the near-frozen
+    temporal behaviour of microscopic organisms.</p>
+    <h2
+    id="conjecture-5-independence-of-material-time-from-electromagnetic-time">Conjecture
+    5: Independence of Material Time from Electromagnetic Time</h2>
+    <p>Electromagnetic time does not influence aging or recursion index.
+    Material time evolves according to closure-internal dynamics, while
+    <span class="math inline"><em>t</em><sub>EM</sub></span> provides a
+    universal transversal reference. The diffusion term <span
+    class="math inline"> − <em>κ</em>(<em>I</em>)(<em>t</em><sub>mat</sub>−<em>t</em><sub>EM</sub>)</span>
+    in Eq. <a href="#eq:dual-time-dynamics" data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>
+    expresses inter-closure synchronization, not causal influence of
+    <span class="math inline"><em>t</em><sub>EM</sub></span> on
+    material-time acceleration.</p>
+    <h2 id="conjecture-6-non-vanishing-rate-principle">Conjecture 6:
+    Non-Vanishing Rate Principle</h2>
+    <p>For all physically realizable active closures, the material-time
+    rate is strictly positive: <span class="math display">$$\frac{d
+    t_{\mathrm{mat}}}{d t_{\mathrm{EM}}} &gt; 0.$$</span> Material time
+    cannot halt; it can only be slowed arbitrarily by mass damping and
+    reduced entropic drive.</p>
+    <h2 id="conjecture-7-black-hole-limit">Conjecture 7: Black-Hole
+    Limit</h2>
+    <p>In horizon-bounded closures, recursion halts and material time
+    becomes a limiting quantity. The material-time rate approaches zero
+    from above: <span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \to 0^{+},$$</span> but never becomes exactly zero.
+    Material time ceases as an emergent dynamical flow, yet remains
+    formally defined as a limit rather than a vanishing rate. This
+    refinement resolves the apparent discontinuity in horizon-bounded
+    dynamics.</p>
+    <h2 id="conjecture-8-hawking-calibrated-mass-damping">Conjecture 8:
+    Hawking-Calibrated Mass Damping</h2>
+    <p>Black-hole evaporation provides an empirical relation between
+    mass and evolution rate in electromagnetic time: <span
+    class="math display">$$\frac{dM}{d t_{\mathrm{EM}}} \propto
+    -\frac{1}{M^2}.
+            \label{eq:hawking-evap}$$</span> Within the dual-time
+    architecture, the evaporation rate observed in <span
+    class="math inline"><em>t</em><sub>EM</sub></span> must be
+    expressible as a composition of internal horizon-bounded evolution
+    in material time and the material-time rate itself: <span
+    class="math display">$$\frac{dM}{d t_{\mathrm{EM}}}
+            =
+            \frac{d t_{\mathrm{mat}}}{d t_{\mathrm{EM}}}
+            \cdot
+            \frac{dM}{d t_{\mathrm{mat}}},
+            \label{eq:chain-rule}$$</span> Equation <a
+    href="#eq:chain-rule" data-reference-type="eqref"
+    data-reference="eq:chain-rule">[eq:chain-rule]</a> is a structural
+    identity linking the two temporal layers. Matching the empirical
+    Hawking scaling <a href="#eq:hawking-evap"
+    data-reference-type="eqref"
+    data-reference="eq:hawking-evap">[eq:hawking-evap]</a> requires that
+    the material-time rate decreases with mass in a manner consistent
+    with the mass-damping term of Eq. <a href="#eq:dual-time-dynamics"
+    data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>.
+    Specifically, for horizon-bounded closures, <span
+    class="math display">$$\frac{d t_{\mathrm{mat}}}{d t_{\mathrm{EM}}}
+            \propto
+            \frac{1}{M^2},
+            \label{eq:hawking-mass-damping}$$</span> up to a
+    closure-internal constant determined by horizon-scale recursion.
+    This behaviour is precisely the limiting form of the mass-damping
+    term <span
+    class="math inline"> − <em>β</em><em>M</em><sub>eff</sub></span> in
+    Eq. <a href="#eq:dual-time-dynamics" data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>
+    when <span class="math inline"><em>M</em><sub>eff</sub></span> is
+    dominated by black-hole mass.</p>
+    <blockquote>
+    <p><strong>Conjecture 8 (Hawking-Calibrated Mass Damping).</strong>
+    For horizon-bounded closures, the mass-damping term in the dual-time
+    dynamics must asymptotically reproduce the Hawking evaporation
+    scaling. Small black holes exhibit faster material time and rapid
+    evaporation, while supermassive black holes approach the black-hole
+    limit with near-frozen material time and extremely long
+    lifetimes.</p>
+    </blockquote>
+    <p>This conjecture anchors the structural mass-damping principle in
+    empirical black-hole behaviour and provides a physical calibration
+    for the dual-time dynamics. Black holes thus serve as canonical
+    triadic closures in which horizon-bounded recursion, holographic
+    encoding, and dual-time evolution coincide with observational
+    data.</p>
+    <h2 id="summary">Summary</h2>
+    <p>Together, Conjectures 1–8 provide a formal temporal architecture
+    for dual time. They refine the intuitive structural theorems of the
+    previous paper, introduce a dynamical relation between <span
+    class="math inline"><em>t</em><sub>mat</sub></span> and <span
+    class="math inline"><em>t</em><sub>EM</sub></span>, and establish
+    the limiting behaviour of material time in high-mass and
+    horizon-bounded domains. Dual time thereby becomes a mathematically
+    tangible and empirically testable component of the Triadic Cosmos
+    framework.</p>
+    <h1
+    id="celestial-closures-and-the-empirical-behaviour-of-material-time">Celestial
+    Closures and the Empirical Behaviour of Material Time</h1>
+    <p>The conjectural dual-time dynamics of Eq. <a
+    href="#eq:dual-time-dynamics" data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>
+    imply that the effective rate of material time,</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}
+        = 1 + \alpha S - \beta M_{\mathrm{eff}}
+        - \kappa(I)\,\bigl(t_{\mathrm{mat}} -
+    t_{\mathrm{EM}}\bigr),$$</span></p>
+    <p>must vary systematically across celestial closures as a function
+    of entropy <span class="math inline"><em>S</em></span>, effective
+    mass <span class="math inline"><em>M</em><sub>eff</sub></span>,
+    horizon structure, and electromagnetic interaction. This section
+    applies the formalism to a representative set of astrophysical and
+    planetary bodies and shows that their observed evolution, aging
+    behaviour, and temporal stability follow directly from
+    Conjectures 1–8.</p>
+    <h2 id="large-black-hole">Large Black Hole</h2>
+    <p>Supermassive black holes possess extreme mass and horizon-bounded
+    recursion. Their effective mass <span
+    class="math inline"><em>M</em><sub>eff</sub></span> is maximal,
+    while internal entropic drive <span
+    class="math inline"><em>S</em></span> is bounded by holographic
+    capacity. The mass-damping term <span
+    class="math inline"> − <em>β</em><em>M</em><sub>eff</sub></span>
+    dominates, driving</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \to 0^{+}.$$</span></p>
+    <p>Material time approaches the black-hole limit (Conjecture 7):
+    internal evolution is effectively frozen, and all observable
+    behaviour is encoded at the horizon. Combined with Conjecture 8,
+    this explains the extremely slow Hawking evaporation of supermassive
+    black holes and their near-eternal stability.</p>
+    <h2 id="small-black-hole">Small Black Hole</h2>
+    <p>Stellar-mass black holes exhibit lower <span
+    class="math inline"><em>M</em><sub>eff</sub></span> than
+    supermassive black holes but retain horizon-bounded recursion. Their
+    material-time rate is still strongly damped,</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \ll 1,$$</span></p>
+    <p>yet remains significantly higher than in the supermassive case.
+    Conjecture 8 implies</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \propto \frac{1}{M^2},$$</span></p>
+    <p>so small black holes exhibit faster material time and therefore
+    faster Hawking evaporation. This matches the empirical scaling of
+    black-hole lifetimes and the rapid evaporation of primordial or
+    low-mass black holes.</p>
+    <h2 id="massive-star">Massive Star</h2>
+    <p>Large, luminous stars (e.g. O- and B-type) possess high entropic
+    footprint <span class="math inline"><em>S</em></span> due to intense
+    fusion, turbulent convection, and radiative output, combined with
+    substantial mass <span class="math inline"><em>M</em></span>. The
+    entropic acceleration term <span
+    class="math inline"> + <em>α</em><em>S</em></span> is large, while
+    <span class="math inline"> − <em>β</em><em>M</em></span> provides
+    partial damping. The net effect is a high material-time rate:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \gg 1,$$</span></p>
+    <p>leading to rapid aging, short lifetimes, and fast structural
+    evolution. This behaviour matches observed main-sequence lifetimes
+    of massive stars (millions of years).</p>
+    <h2 id="low-mass-star">Low-Mass Star</h2>
+    <p>Small stars (e.g. K- and M-type red dwarfs) have lower entropic
+    footprint and lower fusion rates, combined with moderate mass. The
+    entropic term <span
+    class="math inline"> + <em>α</em><em>S</em></span> is reduced, while
+    <span class="math inline"> − <em>β</em><em>M</em></span> still
+    provides damping. The resulting material-time rate is close to unity
+    or slightly above:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \gtrsim 1,$$</span></p>
+    <p>yielding slow aging and extremely long lifetimes (hundreds of
+    billions of years). This behaviour is consistent with the empirical
+    stability of red dwarfs.</p>
+    <h2 id="neutron-star">Neutron Star</h2>
+    <p>Neutron stars exhibit extreme mass density and low entropic
+    generativity. Their effective mass <span
+    class="math inline"><em>M</em><sub>eff</sub></span> is very large,
+    while internal entropy production <span
+    class="math inline"><em>S</em></span> is limited by degenerate
+    matter. The mass-damping term dominates:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \ll 1,$$</span></p>
+    <p>but remains strictly positive (Conjecture 6). Neutron stars
+    therefore evolve extremely slowly, with long spin-down and cooling
+    timescales, matching observed longevity and temporal stability.</p>
+    <h2 id="white-dwarf">White Dwarf</h2>
+    <p>White dwarfs possess high density and moderate mass, with low
+    entropic activity after fusion ceases. Their <span
+    class="math inline"><em>S</em></span> is small, <span
+    class="math inline"><em>M</em><sub>eff</sub></span> moderate,
+    yielding</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} &lt; 1,$$</span></p>
+    <p>but not as suppressed as in neutron stars. They cool and
+    crystallize over billions of years, consistent with a slowed but
+    non-frozen material time.</p>
+    <h2 id="brown-dwarf-and-giant-planet">Brown Dwarf and Giant
+    Planet</h2>
+    <p>Brown dwarfs and gas giants (e.g. Jupiter) occupy an intermediate
+    regime: substantial mass, limited fusion or none, and moderate
+    entropic activity from atmospheric dynamics and internal heat. The
+    balance</p>
+    <p><span
+    class="math display">1 + <em>α</em><em>S</em> − <em>β</em><em>M</em><sub>eff</sub></span></p>
+    <p>yields a material-time rate slightly below unity:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \lesssim 1.$$</span></p>
+    <p>Their internal evolution (cooling, contraction, atmospheric
+    reorganization) is slow, matching the observed long-term stability
+    of giant planets and substellar objects.</p>
+    <h2 id="rocky-planet-earth">Rocky Planet (Earth)</h2>
+    <p>Terrestrial planets such as Earth have lower mass than gas giants
+    but significant entropic activity: tectonics, atmospheric
+    circulation, chemical cycling, and biological processes. Here <span
+    class="math inline"> + <em>α</em><em>S</em></span> and <span
+    class="math inline"> − <em>β</em><em>M</em></span> are comparable,
+    yielding</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \approx 1,$$</span></p>
+    <p>with modest acceleration in high-entropy subsystems (biosphere,
+    crust) and slower evolution in low-entropy domains (deep mantle,
+    core). This explains the coexistence of rapid biological aging and
+    slow geological change within the same planetary closure.</p>
+    <h2 id="moon">Moon</h2>
+    <p>Low-mass, geologically inactive bodies such as the Moon exhibit
+    minimal entropic drive and small mass. With <span
+    class="math inline"><em>S</em></span> very low and <span
+    class="math inline"><em>M</em><sub>eff</sub></span> modest, the
+    material-time rate is close to unity but with extremely slow
+    structural change:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \approx 1,$$</span></p>
+    <p>and effectively negligible aging on human timescales. This
+    matches the empirical stability of lunar geology and surface
+    features.</p>
+    <h2 id="summary-1">Summary</h2>
+    <p>Across large black holes, small black holes, massive and low-mass
+    stars, neutron stars, white dwarfs, brown dwarfs, giant planets,
+    rocky planets, and moons, the conjectural dual-time dynamics
+    reproduce the observed spectrum of aging rates, lifetimes, and
+    temporal stability. High-entropy, moderate-mass closures age
+    rapidly; high-mass, low-entropy closures evolve slowly;
+    horizon-bounded closures approach the black-hole limit with
+    near-frozen material time. Conjecture 8 further anchors the
+    behaviour of black holes in empirical Hawking evaporation, providing
+    a unified temporal interpretation of celestial evolution within the
+    Triadic Cosmos framework.</p>
+    <h1
+    id="structural-corollaries-and-illustrative-consequences-of-dual-time">Structural
+    Corollaries and Illustrative Consequences of Dual Time</h1>
+    <p>The formal conjectures developed in previous sections allow
+    several intuitive observations to be expressed as structural
+    corollaries. These corollaries illustrate how dual-time dynamics
+    manifest in biological aging, electromagnetic flux, particle-field
+    interaction, ultrafast material response, and the apparent
+    universality of time in terrestrial physics.</p>
+    <h2 id="corollary-1-environmental-mass-modulates-aging">Corollary 1:
+    Environmental Mass Modulates Aging</h2>
+    <p>Conjectures 1 and 4 imply that the effective material-time rate
+    of a closure depends not only on its internal entropy <span
+    class="math inline"><em>S</em></span> and mass <span
+    class="math inline"><em>M</em></span>, but also on the mass of its
+    surrounding environment through <span
+    class="math inline"><em>M</em><sub>eff</sub></span>. The ratio</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}
+        = 1 + \alpha S - \beta M_{\mathrm{eff}}$$</span></p>
+    <p>therefore predicts that aging slows down in high-mass
+    environments and accelerates in low-mass environments. This explains
+    why biological aging is slightly slower on Earth than in low-mass
+    space environments, extremely slow near massive objects, longer in
+    large organisms, and nearly frozen in microscopic closures where
+    mass dominates the entropic ratio. Environmental mass does not
+    replace entropy; it modulates its temporal effect.</p>
+    <h2
+    id="corollary-2-em-flux-as-a-cross-closure-temporal-comparison">Corollary
+    2: EM Flux as a Cross-Closure Temporal Comparison</h2>
+    <p>Conjectures 1, 5, and 8 imply that electromagnetic radiation
+    provides a direct window into closure-specific material-time rates.
+    EM-time is universal, while material-time is closure-dependent. A
+    closure with a high recursion index emits EM events into the global
+    <span class="math inline"><em>t</em><sub>EM</sub></span> clock at a
+    rate determined by its own <span
+    class="math inline"><em>t</em><sub>mat</sub></span>. An observer
+    with a different material-time rate detects these events through
+    their own <span class="math inline"><em>t</em><sub>mat</sub></span>,
+    producing the appearance of anomalously high EM flux:</p>
+    <p><span class="math display">$$\text{Observed EM flux} \propto
+        \left(\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}\right)_{\text{source}}
+        \Big/
+        \left(\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}\right)_{\text{observer}}.$$</span></p>
+    <p>This corollary provides a complementary interpretation of the
+    extraordinary luminosity of pulsars, magnetars, gamma-ray bursts,
+    and early-universe phase transitions: their material time runs
+    faster than ours, while EM-time does not.</p>
+    <h2
+    id="corollary-3-dual-time-resolves-radiation-reaction-pathologies">Corollary
+    3: Dual Time Resolves Radiation-Reaction Pathologies</h2>
+    <p>Radiation reaction in classical electrodynamics produces
+    pre-acceleration and runaway solutions when particle dynamics and
+    field dynamics are forced to share a single global time.
+    Conjecture 5 implies that particle evolution occurs in <span
+    class="math inline"><em>t</em><sub>mat</sub></span> while field
+    propagation occurs in <span
+    class="math inline"><em>t</em><sub>EM</sub></span>. When these two
+    clocks are separated, the pathological solutions become
+    time-inconsistent and disappear. Dual time therefore provides a
+    structural resolution of radiation-reaction anomalies without
+    modifying the underlying electrodynamics.</p>
+    <h2
+    id="corollary-4-ultrafast-pumpprobe-dynamics-as-clock-mismatch">Corollary
+    4: Ultrafast Pump–Probe Dynamics as Clock Mismatch</h2>
+    <p>Ultrafast pump–probe experiments reveal delayed response,
+    asymmetric peaks, long relaxation tails, and memory-like behaviour
+    in electronic systems. Conjectures 1 and 5 imply that pump pulses
+    evolve in <span class="math inline"><em>t</em><sub>EM</sub></span>
+    while electronic relaxation evolves in <span
+    class="math inline"><em>t</em><sub>mat</sub></span>. A simple
+    mapping between these two clocks reproduces the observed features
+    without additional dynamical terms. Dual time therefore provides a
+    natural interpretation of ultrafast material response as a
+    cross-clock interaction.</p>
+    <h2
+    id="corollary-5-dual-time-as-a-structural-upgrade-to-time-dependent-physics">Corollary
+    5: Dual Time as a Structural Upgrade to Time-Dependent Physics</h2>
+    <p>Modern physics assumes a single global time for particles,
+    fields, materials, and observers. Conjectures 1–8 imply that this
+    assumption is a closure-specific artefact rather than a cosmic
+    principle. Re-expressing time-dependent equations with two
+    clocks—<span class="math inline"><em>t</em><sub>EM</sub></span> for
+    fields and <span class="math inline"><em>t</em><sub>mat</sub></span>
+    for matter—removes several long-standing anomalies, simplifies the
+    interpretation of ultrafast and high-energy processes, and provides
+    a structural foundation for cross-closure temporal comparison. Dual
+    time does not replace existing physics; it reorganizes it into a
+    more coherent temporal architecture.</p>
+    <h2
+    id="corollary-6-the-earth-bias-and-the-illusion-of-universal-time">Corollary
+    6: The Earth Bias and the Illusion of Universal Time</h2>
+    <p>The Earth’s closure satisfies</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \approx 1,$$</span></p>
+    <p>placing terrestrial physics in a narrow regime where entropic
+    acceleration and mass damping nearly cancel. This creates the
+    illusion of a universal temporal flow. On cosmic scales, even small
+    deviations from unity in this ratio produce enormous differences in
+    evolution, stability, and observable behaviour. The apparent
+    universality of time is therefore a local artefact of the
+    terrestrial closure rather than a cosmic principle.</p>
+    <h2 id="summary-2">Summary</h2>
+    <p>These corollaries demonstrate that dual-time dynamics provide
+    intuitive, structurally grounded explanations for phenomena ranging
+    from biological aging and EM flux to radiation reaction, ultrafast
+    material response, and the apparent universality of terrestrial
+    time. They illustrate how Conjectures 1–8 reorganize diverse
+    empirical behaviour into a coherent temporal architecture and
+    highlight the explanatory power of dual time across domains.</p>
+    <h1 id="planck-time-and-the-dual-time-architecture">Planck Time and
+    the Dual-Time Architecture</h1>
+    <p>The Planck time,</p>
+    <p><span class="math display">$$t_{\mathrm{P}} = \sqrt{\frac{\hbar
+    G}{c^5}} \approx 5.39 \times 10^{-44}\,\mathrm{s},$$</span></p>
+    <p>is traditionally interpreted as the smallest meaningful unit of
+    time in physics. Its definition depends exclusively on the constants
+    <span class="math inline"><em>c</em></span>, <span
+    class="math inline">ℏ</span>, and <span
+    class="math inline"><em>G</em></span>, which encode the propagation
+    of electromagnetic fields, quantum action, and gravitational
+    coupling. Crucially, none of these constants describe
+    closure-internal dynamics, entropy production, recursion index, or
+    mass-damping. Within the dual-time framework, this implies that
+    Planck time is a limit of electromagnetic time rather than a
+    universal limit of temporal evolution.</p>
+    <h2 id="planck-time-as-an-electromagnetic-time-limit">Planck Time as
+    an Electromagnetic-Time Limit</h2>
+    <p>Electromagnetic time <span
+    class="math inline"><em>t</em><sub>EM</sub></span> is
+    closure-transversal and governs the propagation of photons, field
+    quanta, and holographic information. The Planck time therefore
+    represents the smallest resolvable interval of <span
+    class="math inline"><em>t</em><sub>EM</sub></span> in which
+    electromagnetic processes retain physical meaning:</p>
+    <p><span
+    class="math display"><em>Δ</em><em>t</em><sub>EM</sub><sup>min</sup> = <em>t</em><sub>P</sub>.</span></p>
+    <p>This limit applies uniformly across all closures, independent of
+    their internal structure. Planck time is thus a fundamental pixel of
+    the electromagnetic clock.</p>
+    <h2 id="absence-of-a-universal-material-time-minimum">Absence of a
+    Universal Material-Time Minimum</h2>
+    <p>Material time <span
+    class="math inline"><em>t</em><sub>mat</sub></span>, by contrast, is
+    closure-specific and governed by the dual-time dynamics of Eq. <a
+    href="#eq:dual-time-dynamics" data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}
+        = 1 + \alpha S - \beta M_{\mathrm{eff}}
+        - \kappa(I)\,\bigl(t_{\mathrm{mat}} -
+    t_{\mathrm{EM}}\bigr).$$</span></p>
+    <p>Because this rate depends on entropy, effective mass, recursion
+    index, and closure interaction, material time does not inherit the
+    Planck limit. Instead, the smallest resolvable interval of material
+    time is closure-dependent:</p>
+    <p><span class="math display">$$\Delta t_{\mathrm{mat}}^{\min} =
+        \left(\frac{d t_{\mathrm{mat}}}{d t_{\mathrm{EM}}}\right) \Delta
+    t_{\mathrm{EM}}^{\min}
+        =
+        \left(\frac{d t_{\mathrm{mat}}}{d t_{\mathrm{EM}}}\right)
+    t_{\mathrm{P}}.$$</span></p>
+    <p>Closures with high entropic acceleration (<span
+    class="math inline"> + <em>α</em><em>S</em></span>) may exhibit
+    material-time intervals smaller than <span
+    class="math inline"><em>t</em><sub>P</sub></span>, while closures
+    dominated by mass damping (<span
+    class="math inline"> − <em>β</em><em>M</em><sub>eff</sub></span>)
+    may exhibit material-time intervals vastly larger than <span
+    class="math inline"><em>t</em><sub>P</sub></span>. Material time
+    therefore has no universal minimum.</p>
+    <h2 id="implications-for-closure-dynamics">Implications for Closure
+    Dynamics</h2>
+    <h4 id="black-holes.">Black holes.</h4>
+    <p>In horizon-bounded closures, the material-time rate approaches
+    zero from above (Conjecture 7):</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \to 0^{+}.$$</span></p>
+    <p>Material time becomes arbitrarily slow, while electromagnetic
+    time retains its Planck-scale resolution. This explains the
+    effective freezing of internal evolution and the persistence of
+    Hawking evaporation as an EM-time process (Conjecture 8).</p>
+    <h4 id="early-universe-closures.">Early-universe closures.</h4>
+    <p>High entropic drive and low mass damping imply</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \gg 1,$$</span></p>
+    <p>allowing material-time intervals smaller than <span
+    class="math inline"><em>t</em><sub>P</sub></span>. This provides a
+    natural interpretation of rapid early-universe evolution and the
+    apparent over-maturity of high-redshift galaxies.</p>
+    <h4 id="degenerate-matter.">Degenerate matter.</h4>
+    <p>Neutron stars and white dwarfs exhibit extremely low entropic
+    generativity and high effective mass, yielding</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \ll 1.$$</span></p>
+    <p>Material-time intervals become much larger than <span
+    class="math inline"><em>t</em><sub>P</sub></span>, explaining their
+    extreme stability and slow evolution.</p>
+    <h4 id="terrestrial-physics.">Terrestrial physics.</h4>
+    <p>The Earth’s closure satisfies</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \approx 1,$$</span></p>
+    <p>placing material-time intervals near the Planck scale and
+    creating the illusion of a universal temporal resolution. This is a
+    manifestation of the Earth Bias.</p>
+    <h2 id="conceptual-consequences">Conceptual Consequences</h2>
+    <p>The dual-time interpretation of Planck time has several
+    fundamental implications:</p>
+    <ul>
+    <li><p>Planck time is not the smallest possible interval in which
+    material changes can occur.</p></li>
+    <li><p>Material-time resolution varies across closures and may be
+    smaller or larger than <span
+    class="math inline"><em>t</em><sub>P</sub></span>.</p></li>
+    <li><p>The Planck scale governs electromagnetic processes, not
+    closure-internal evolution.</p></li>
+    <li><p>The apparent universality of Planck time is a consequence of
+    Earth-like closures where <span
+    class="math inline"><em>t</em><sub>mat</sub> ≈ <em>t</em><sub>EM</sub></span>.</p></li>
+    <li><p>Closure-specific temporal resolution provides a new lens for
+    interpreting early-universe dynamics, black-hole evolution, and
+    degenerate matter stability.</p></li>
+    </ul>
+    <h2 id="summary-3">Summary</h2>
+    <p>Planck time is a fundamental limit of electromagnetic time, not
+    material time. Within the dual-time architecture, material-time
+    resolution is closure-dependent and may diverge significantly from
+    the Planck scale. This distinction resolves several conceptual
+    tensions in cosmology and high-energy physics and reinforces the
+    structural separation between <span
+    class="math inline"><em>t</em><sub>mat</sub></span> and <span
+    class="math inline"><em>t</em><sub>EM</sub></span> as independent
+    temporal layers.</p>
+    <h1 id="dual-time-planck-time-and-the-early-universe">Dual Time,
+    Planck Time, and the Early Universe</h1>
+    <p>The dual-time architecture provides a new perspective on the Big
+    Bang, inflation, and the role of Planck time in early-universe
+    dynamics. In standard cosmology, the Planck time</p>
+    <p><span class="math display">$$t_{\mathrm{P}} = \sqrt{\frac{\hbar
+    G}{c^5}}$$</span></p>
+    <p>is interpreted as the smallest meaningful temporal interval,
+    below which classical notions of spacetime cease to apply. Within
+    the dual-time framework, this interpretation is revised: Planck time
+    is a limit of electromagnetic time (<span
+    class="math inline"><em>t</em><sub>EM</sub></span>), not of material
+    time (<span class="math inline"><em>t</em><sub>mat</sub></span>).
+    This distinction has profound implications for the earliest stages
+    of cosmic evolution.</p>
+    <h2
+    id="planck-time-as-an-em-time-limit-in-the-early-universe">Planck
+    Time as an EM-Time Limit in the Early Universe</h2>
+    <p>Electromagnetic time governs the propagation of photons, field
+    quanta, and holographic information. Its smallest resolvable
+    interval is the Planck time:</p>
+    <p><span
+    class="math display"><em>Δ</em><em>t</em><sub>EM</sub><sup>min</sup> = <em>t</em><sub>P</sub>.</span></p>
+    <p>This limit applies uniformly across all closures, including the
+    primordial closure of the early universe. However, material time is
+    closure-specific and governed by the dual-time dynamics:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}
+        = 1 + \alpha S - \beta M_{\mathrm{eff}}
+        - \kappa(I)\,\bigl(t_{\mathrm{mat}} -
+    t_{\mathrm{EM}}\bigr).$$</span></p>
+    <p>In the early universe, entropy production <span
+    class="math inline"><em>S</em></span> and recursion index are
+    extremely high, while effective mass <span
+    class="math inline"><em>M</em><sub>eff</sub></span> is initially
+    low. This implies</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \gg 1,$$</span></p>
+    <p>allowing material-time intervals smaller than the Planck
+    time:</p>
+    <p><span class="math display">$$\Delta t_{\mathrm{mat}}^{\min}
+        =
+        \left(\frac{d t_{\mathrm{mat}}}{d t_{\mathrm{EM}}}\right)
+    t_{\mathrm{P}}
+        \ll t_{\mathrm{P}}.$$</span></p>
+    <p>Material changes can therefore occur at rates faster than the
+    Planck-scale resolution of electromagnetic time.</p>
+    <h2 id="implications-for-the-big-bang">Implications for the Big
+    Bang</h2>
+    <p>The Big Bang is traditionally viewed as a singularity where
+    spacetime curvature diverges and classical physics breaks down. In
+    the dual-time framework, the primordial closure possesses an
+    extremely high entropic footprint and recursion index, yielding a
+    material-time rate far above unity. This implies:</p>
+    <ul>
+    <li><p>The earliest material evolution may have proceeded at rates
+    faster than the Planck time allows for electromagnetic
+    processes.</p></li>
+    <li><p>The apparent singularity may reflect the mismatch between
+    <span class="math inline"><em>t</em><sub>mat</sub></span> and <span
+    class="math inline"><em>t</em><sub>EM</sub></span>, rather than a
+    breakdown of physical law.</p></li>
+    <li><p>The Big Bang can be interpreted as a closure with extremely
+    rapid material-time evolution embedded within an EM-time layer that
+    retains its Planck-scale limit.</p></li>
+    </ul>
+    <p>This perspective reframes the singularity problem as a
+    temporal-layer mismatch rather than a geometric divergence.</p>
+    <h2 id="implications-for-inflation">Implications for Inflation</h2>
+    <p>Inflation requires an extremely rapid expansion of spacetime
+    within a tiny EM-time interval. In standard cosmology, this
+    expansion appears superluminal and requires a scalar field with
+    special properties. Within the dual-time architecture, inflation
+    emerges naturally from the closure-specific behaviour of material
+    time:</p>
+    <ul>
+    <li><p>High entropic drive (<span
+    class="math inline"> + <em>α</em><em>S</em></span>) and low mass
+    damping (<span
+    class="math inline"> − <em>β</em><em>M</em><sub>eff</sub></span>)
+    imply <span class="math inline">$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \gg 1$</span>.</p></li>
+    <li><p>Material-time evolution proceeds far faster than EM-time
+    evolution.</p></li>
+    <li><p>Processes that appear instantaneous or superluminal in <span
+    class="math inline"><em>t</em><sub>EM</sub></span> may be slow and
+    continuous in <span
+    class="math inline"><em>t</em><sub>mat</sub></span>.</p></li>
+    </ul>
+    <p>Inflation is therefore reinterpreted as a phase where the
+    primordial closure evolves rapidly in material time while
+    electromagnetic time remains constrained by the Planck limit. This
+    removes the need for superluminal expansion and reframes inflation
+    as a cross-clock phenomenon.</p>
+    <h2 id="early-universe-structure-formation">Early-Universe Structure
+    Formation</h2>
+    <p>High-redshift galaxies observed by JWST appear “too evolved”
+    relative to standard cosmic time. Dual time provides a natural
+    explanation:</p>
+    <ul>
+    <li><p>Early closures have <span class="math inline">$\frac{d
+    t_{\mathrm{mat}}}{d t_{\mathrm{EM}}} \gg 1$</span>.</p></li>
+    <li><p>Material-time evolution proceeds much faster than EM-time
+    evolution.</p></li>
+    <li><p>Structures that appear anomalously mature in <span
+    class="math inline"><em>t</em><sub>EM</sub></span> may be consistent
+    with rapid evolution in <span
+    class="math inline"><em>t</em><sub>mat</sub></span>.</p></li>
+    </ul>
+    <p>This resolves the tension between early-universe observations and
+    single-time cosmology.</p>
+    <h2 id="summary-4">Summary</h2>
+    <p>Planck time is a fundamental limit of electromagnetic time, not
+    material time. In the early universe, material-time evolution may
+    proceed at rates far exceeding the Planck-scale resolution of <span
+    class="math inline"><em>t</em><sub>EM</sub></span>. This distinction
+    provides new interpretations of the Big Bang, inflation, and early
+    structure formation, reframing several classical cosmological
+    puzzles as consequences of cross-layer temporal mismatch rather than
+    breakdowns of physical law.</p>
+    <h1 id="testable-predictions">Testable Predictions</h1>
+    <p>The dual-time formalism developed in this paper yields a broad
+    set of empirically testable predictions across spacecraft dynamics,
+    astrophysical evolution, planetary processes, biological aging,
+    electromagnetic phenomena, and cosmology. These predictions follow
+    directly from Conjectures 1–8 and provide a concrete experimental
+    and observational program for evaluating the dual-time
+    architecture.</p>
+    <h2 id="spacecraft-and-interstellar-probes">Spacecraft and
+    Interstellar Probes</h2>
+    <h4
+    id="prediction-1-reproducibility-of-the-voyager-effect.">Prediction
+    1: Reproducibility of the Voyager Effect.</h4>
+    <p>A low-entropy, low-recursion probe leaving the heliosphere will
+    exhibit measurably slower material degradation than identical probes
+    operating within the terrestrial closure, while maintaining perfect
+    electromagnetic coherence. (Conjectures 1, 4, 5.)</p>
+    <h4
+    id="prediction-2-entropy-dependent-aging-in-deep-space.">Prediction
+    2: Entropy-Dependent Aging in Deep Space.</h4>
+    <p>High-entropy probes (warm electronics, high dynamical complexity)
+    will age faster outside the heliosphere than low-entropy probes,
+    even under identical external conditions. (Conjectures 1, 4.)</p>
+    <h4
+    id="prediction-3-closure-boundary-drift-near-the-heliopause.">Prediction
+    3: Closure-Boundary Drift Near the Heliopause.</h4>
+    <p>Spacecraft approaching the heliopause will exhibit small but
+    measurable deviations in inertial behaviour consistent with a
+    changing ratio <span
+    class="math inline"><em>d</em><em>t</em><sub>mat</sub>/<em>d</em><em>t</em><sub>EM</sub></span>.
+    (Conjectures 4, 5.)</p>
+    <h2 id="astrophysical-evolution">Astrophysical Evolution</h2>
+    <h4 id="prediction-4-early-universe-over-evolution.">Prediction 4:
+    Early-Universe Over-Evolution.</h4>
+    <p>High-redshift galaxies observed by JWST will systematically
+    appear “too evolved” relative to standard cosmic-time expectations
+    due to elevated material-time rates in early closures.
+    (Conjectures 1, 5, Earth Bias.)</p>
+    <h4
+    id="prediction-5-ubiquity-of-early-supermassive-black-holes.">Prediction
+    5: Ubiquity of Early Supermassive Black Holes.</h4>
+    <p>Supermassive black holes at <span
+    class="math inline"><em>z</em> &gt; 7</span> must exist generically,
+    as early closures with high recursion index produce accelerated
+    material-time evolution and rapid mass assembly.
+    (Conjectures 1, 4, 8.)</p>
+    <h4 id="prediction-6-extreme-stability-of-neutron-stars.">Prediction
+    6: Extreme Stability of Neutron Stars.</h4>
+    <p>Neutron stars will exhibit cooling curves, spin-down rates, and
+    magnetic decay timescales significantly slower than predicted by
+    single-time models. (Conjectures 4, 6.)</p>
+    <h2 id="planetary-and-biological-processes">Planetary and Biological
+    Processes</h2>
+    <h4
+    id="prediction-7-aging-rate-depends-on-environmental-mass.">Prediction
+    7: Aging Rate Depends on Environmental Mass.</h4>
+    <p>Biological aging will be measurably slower in higher-mass
+    environments (e.g. gas giants) and measurably faster in low-mass
+    environments (e.g. orbital habitats). (Conjectures 1, 4.)</p>
+    <h4
+    id="prediction-8-near-frozen-material-time-in-microscopic-organisms.">Prediction
+    8: Near-Frozen Material Time in Microscopic Organisms.</h4>
+    <p>Cryptobiotic organisms (tardigrades, rotifers, nematodes) will
+    exhibit material-time rates significantly below unity, explaining
+    their extreme longevity and suspended animation.
+    (Conjectures 1, 4, 6.)</p>
+    <h4 id="prediction-9-closure-specific-radiocarbon-decay.">Prediction
+    9: Closure-Specific Radiocarbon Decay.</h4>
+    <p>Radiocarbon decay rates will remain constant within a closure but
+    exhibit detectable differences in interstellar or extra-solar
+    biological material. (Conjectures 1, 5.)</p>
+    <h2 id="electromagnetic-phenomena">Electromagnetic Phenomena</h2>
+    <h4
+    id="prediction-10-em-flux-anomalies-as-clock-mismatch-effects.">Prediction
+    10: EM Flux Anomalies as Clock-Mismatch Effects.</h4>
+    <p>Systems with high recursion index will appear overluminous
+    relative to standard expectations, producing higher EM event rates
+    per unit of observer material-time. (Conjectures 1, 5.)</p>
+    <h4
+    id="prediction-11-ultrafast-pumpprobe-asymmetry-from-dual-clocks.">Prediction
+    11: Ultrafast Pump–Probe Asymmetry from Dual Clocks.</h4>
+    <p>Ultrafast electronic response in materials will exhibit
+    asymmetric peaks, delayed onset, and long relaxation tails that can
+    be reproduced by mapping between <span
+    class="math inline"><em>t</em><sub>EM</sub></span> and <span
+    class="math inline"><em>t</em><sub>mat</sub></span>.
+    (Conjectures 1, 5.)</p>
+    <h4
+    id="prediction-12-resolution-of-radiation-reaction-pathologies.">Prediction
+    12: Resolution of Radiation-Reaction Pathologies.</h4>
+    <p>Pre-acceleration and runaway solutions in classical
+    electrodynamics will disappear when particle dynamics are expressed
+    in <span class="math inline"><em>t</em><sub>mat</sub></span> and
+    field propagation in <span
+    class="math inline"><em>t</em><sub>EM</sub></span>.
+    (Conjecture 5.)</p>
+    <h2 id="black-hole-dynamics">Black-Hole Dynamics</h2>
+    <h4
+    id="prediction-13-hawking-evaporation-rate-matches-dual-time-scaling.">Prediction
+    13: Hawking Evaporation Rate Matches Dual-Time Scaling.</h4>
+    <p>Small black holes will evaporate significantly faster than large
+    ones, with evaporation rates obeying</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}} \propto \frac{1}{M^2},$$</span></p>
+    <p>as required by Conjecture 8.</p>
+    <h4
+    id="prediction-14-horizon-bounded-recursion-halt-signatures.">Prediction
+    14: Horizon-Bounded Recursion-Halt Signatures.</h4>
+    <p>Black-hole ringdown, extremal-surface saturation, and the absence
+    of interior degrees of freedom will follow directly from the
+    recursion-halt limit <span
+    class="math inline"><em>d</em><em>t</em><sub>mat</sub>/<em>d</em><em>t</em><sub>EM</sub> → 0<sup>+</sup></span>.
+    (Conjecture 7.)</p>
+    <h2 id="cosmology">Cosmology</h2>
+    <h4
+    id="prediction-15-closure-dependent-hubble-measurements.">Prediction
+    15: Closure-Dependent Hubble Measurements.</h4>
+    <p>Local measurements of the Hubble constant will differ
+    systematically from CMB-derived values due to closure-specific
+    material-time rates. (Conjectures 5, Earth Bias.)</p>
+    <h4
+    id="prediction-16-cmb-anomalies-reflect-recursion-variation.">Prediction
+    16: CMB Anomalies Reflect Recursion Variation.</h4>
+    <p>Large-scale CMB anomalies (hemispherical asymmetry, cold spot,
+    quadrupole alignment) will correspond to closure-dependent recursion
+    differences in the early universe. (Conjectures 1, 5.)</p>
+    <h4
+    id="prediction-17-apparent-universality-of-time-only-in-earth-like-closures.">Prediction
+    17: Apparent Universality of Time Only in Earth-Like Closures.</h4>
+    <p>Closures satisfying <span
+    class="math inline"><em>d</em><em>t</em><sub>mat</sub>/<em>d</em><em>t</em><sub>EM</sub> ≈ 1</span>
+    will exhibit the illusion of universal time, while closures with
+    even small deviations from unity will show radically different
+    aging, evolution, and EM flux behaviour. (Earth Bias,
+    Conjectures 1–8.)</p>
+    <h2 id="summary-5">Summary</h2>
+    <p>These predictions demonstrate that dual-time dynamics are not
+    merely conceptual but empirically actionable. They define a broad
+    experimental and observational program spanning spacecraft
+    engineering, astrophysics, planetary science, condensed-matter
+    physics, and cosmology. The dual-time architecture is therefore
+    testable, falsifiable, and capable of producing precise quantitative
+    deviations from single-time models.</p>
+    <h1 id="open-questions-and-limitations">Open Questions and
+    Limitations</h1>
+    <p>The dual-time architecture presented in this paper is a first
+    attempt at formalizing the relationship between material time and
+    electromagnetic time. While the conjectures and dynamical relations
+    developed here provide a coherent structural framework, several open
+    questions remain. The effective formulas used in this proposal
+    should therefore be understood as provisional and subject to
+    refinement as empirical data, theoretical constraints, and
+    mathematical consistency evolve.</p>
+    <h2 id="provisional-nature-of-the-dynamical-ansatz">Provisional
+    Nature of the Dynamical Ansatz</h2>
+    <p>Equation <a href="#eq:dual-time-dynamics"
+    data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>
+    is a structural ansatz rather than a derived law. Its form captures
+    the interplay between entropy, mass, recursion index, and closure
+    interaction, but alternative formulations may reproduce the same
+    qualitative behaviour. The coefficients <span
+    class="math inline"><em>α</em></span>, <span
+    class="math inline"><em>β</em></span>, and <span
+    class="math inline"><em>κ</em>(<em>I</em>)</span> are not yet
+    grounded in a deeper theory and may require reinterpretation or
+    replacement in future work. The present formalism should therefore
+    be viewed as a conceptual scaffold rather than a final expression of
+    dual-time dynamics.</p>
+    <h2 id="uncertainty-in-the-entropic-term">Uncertainty in the
+    Entropic Term</h2>
+    <p>The entropic acceleration term <span
+    class="math inline"> + <em>α</em><em>S</em></span> captures the
+    intuitive relationship between entropy production and internal
+    temporal flow, but the precise functional dependence on <span
+    class="math inline"><em>S</em></span> remains unknown. Whether
+    entropy should enter linearly, logarithmically, or through a more
+    complex recursion-index mapping is an open question. High-entropy
+    astrophysical closures may provide empirical constraints on this
+    term.</p>
+    <h2 id="ambiguity-in-effective-mass">Ambiguity in Effective
+    Mass</h2>
+    <p>The definition of effective mass <span
+    class="math inline"><em>M</em><sub>eff</sub></span> incorporates
+    overlap contributions from neighbouring closures, but the weighting
+    factors <span
+    class="math inline"><em>w</em><sub><em>i</em><em>j</em></sub></span>
+    are not yet derived from first principles. The mass-damping term
+    <span
+    class="math inline"> − <em>β</em><em>M</em><sub>eff</sub></span> may
+    require modification to account for relativistic effects, horizon
+    geometry, or nonlocal mass distributions. The Hawking-calibrated
+    scaling in Conjecture 8 provides a strong empirical anchor, but the
+    general form of mass damping outside horizon-bounded systems remains
+    uncertain.</p>
+    <h2 id="diffusion-term-and-closure-interaction">Diffusion Term and
+    Closure Interaction</h2>
+    <p>The diffusion term <span
+    class="math inline"> − <em>κ</em>(<em>I</em>)(<em>t</em><sub>mat</sub>−<em>t</em><sub>EM</sub>)</span>
+    models inter-closure synchronization, but the functional dependence
+    of <span class="math inline"><em>κ</em></span> on electromagnetic
+    interaction strength <span class="math inline"><em>I</em></span> is
+    not yet established. Different closures may require different
+    interaction kernels, and the present linear form may be insufficient
+    for strongly coupled systems or high-energy environments.</p>
+    <h2 id="material-time-rate-in-microscopic-closures">Material-Time
+    Rate in Microscopic Closures</h2>
+    <p>Conjecture 6 asserts that the material-time rate is strictly
+    positive for all active closures, but the behaviour of <span
+    class="math inline"><em>d</em><em>t</em><sub>mat</sub>/<em>d</em><em>t</em><sub>EM</sub></span>
+    in extremely small or extremely cold systems remains unclear.
+    Microscopic closures may require a more detailed treatment of
+    quantum recursion, degeneracy, or entropic suppression.</p>
+    <h2 id="cosmological-boundary-conditions">Cosmological Boundary
+    Conditions</h2>
+    <p>The dual-time interpretation of early-universe evolution, CMB
+    anomalies, and Hubble tension depends on closure-specific recursion
+    rates in primordial environments. These rates are not yet
+    constrained by direct observation, and alternative cosmological
+    models may require adjustments to the dual-time mapping between
+    <span class="math inline"><em>t</em><sub>mat</sub></span> and <span
+    class="math inline"><em>t</em><sub>EM</sub></span>.</p>
+    <h2 id="need-for-a-deeper-underlying-theory">Need for a Deeper
+    Underlying Theory</h2>
+    <p>The present formalism provides a coherent phenomenological
+    structure, but a deeper theoretical foundation is needed. Whether
+    dual time emerges from quantum gravity, holographic recursion,
+    field-theoretic layering, or a more fundamental triadic mechanism
+    remains an open question. The conjectures developed here should
+    therefore be viewed as a first step toward a more complete
+    theory.</p>
+    <h2 id="summary-6">Summary</h2>
+    <p>The dual-time architecture offers a unified temporal
+    interpretation of closure dynamics, but its mathematical form is
+    provisional. The conjectures and dynamical relations presented here
+    are intended as a starting point for further refinement, empirical
+    testing, and theoretical development. Future work may modify,
+    extend, or replace the present formulas while preserving the
+    underlying structural principles of dual time.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper presents a first formalization of dual time: the
+    distinction between the closure‑internal temporal flow <span
+    class="math inline"><em>t</em><sub>mat</sub></span> and the
+    universal electromagnetic time <span
+    class="math inline"><em>t</em><sub>EM</sub></span>. Building on the
+    structural insights of the previous material‑time paper, we
+    introduced a conjectural dynamical relation linking entropy, mass,
+    recursion index, and closure interaction. The resulting architecture
+    provides a unified temporal framework for interpreting the evolution
+    of celestial bodies, the behaviour of matter and fields, and the
+    apparent universality of terrestrial time.</p>
+    <p>The eight conjectures developed here refine the earlier
+    qualitative theorems into explicit, testable statements. They
+    capture entropic acceleration, mass‑scaled damping, closure
+    synchronization, the non‑vanishing nature of material time, the
+    horizon‑bounded limit, and the Hawking‑calibrated behaviour of black
+    holes. Together, these conjectures define a coherent temporal
+    structure in which different closures evolve at different
+    material‑time rates while sharing a common electromagnetic
+    clock.</p>
+    <p>The application of this formalism to celestial closures
+    demonstrates that dual‑time dynamics reproduce the observed
+    diversity of aging rates, lifetimes, and stability across stars,
+    planets, degenerate matter, and black holes. The Earth Bias
+    highlights that the apparent universality of time is a local
+    artefact of the terrestrial closure, not a cosmic principle. Even
+    small deviations in the ratio <span
+    class="math inline"><em>d</em><em>t</em><sub>mat</sub>/<em>d</em><em>t</em><sub>EM</sub></span>
+    produce large differences on cosmic timescales, offering new
+    perspectives on early‑universe evolution, high‑redshift anomalies,
+    and the stability of compact objects.</p>
+    <p>The structural corollaries show that dual time provides intuitive
+    explanations for phenomena ranging from biological aging and EM flux
+    anomalies to radiation reaction and ultrafast material response. The
+    testable predictions outline a broad experimental and observational
+    program spanning spacecraft engineering, astrophysics,
+    condensed‑matter physics, and cosmology. Dual time is therefore not
+    only conceptually coherent but empirically actionable.</p>
+    <p>At the same time, the dynamical relation proposed here is
+    provisional. The precise functional dependence of entropy, mass, and
+    interaction terms may differ from the forms introduced in this
+    paper. The present formalism should be viewed as a first attempt at
+    capturing the temporal structure implied by triadic closure
+    dynamics. Future work may refine, extend, or replace these formulas
+    while preserving the underlying principles of dual time.</p>
+    <p>In summary, this paper transforms dual time from a conceptual
+    insight into a mathematically tangible and empirically testable
+    framework. It provides a foundation for reinterpreting
+    time‑dependent processes across scales and opens a path toward a
+    deeper theory in which material time and electromagnetic time
+    coexist as structurally distinct yet dynamically coupled temporal
+    layers.</p>
+    <h1 id="dual-time-as-an-independent-theoretical-contribution">Dual
+    Time as an Independent Theoretical Contribution</h1>
+    <p>Although the dual-time architecture is developed within the
+    broader context of the Triadic Cosmos, its conceptual and
+    mathematical structure stands on its own. The distinction between
+    electromagnetic time (<span
+    class="math inline"><em>t</em><sub>EM</sub></span>) and material
+    time (<span class="math inline"><em>t</em><sub>mat</sub></span>)
+    does not depend on the triadic unification programme, nor on
+    holographic layering, nor on the specific interpretation of closure
+    recursion. Dual time is a structurally independent proposal that can
+    be evaluated, tested, and applied without reference to the full
+    Triadic Cosmos framework.</p>
+    <p>Several aspects of the present formalization highlight this
+    independence:</p>
+    <ul>
+    <li><p><strong>Dual time introduces a new temporal
+    architecture</strong> that reorganizes time-dependent physics across
+    scales, regardless of the underlying unification mechanism.</p></li>
+    <li><p><strong>The dynamical relation between <span
+    class="math inline"><em>t</em><sub>mat</sub></span> and <span
+    class="math inline"><em>t</em><sub>EM</sub></span></strong> is
+    self-contained and empirically testable. Its validity does not rely
+    on triadic recursion, holography, or graviton positioning.</p></li>
+    <li><p><strong>The reinterpretation of Planck time</strong> as an
+    EM-time limit rather than a universal temporal bound is conceptually
+    independent and compatible with multiple theoretical frameworks,
+    including quantum gravity and semiclassical cosmology.</p></li>
+    <li><p><strong>The early-universe implications</strong>—including
+    the Big Bang as a temporal-layer mismatch and inflation as
+    accelerated material-time evolution—do not require the full Triadic
+    Cosmos to be meaningful.</p></li>
+    <li><p><strong>The testable predictions</strong> spanning spacecraft
+    aging, EM flux anomalies, ultrafast material response, radiation
+    reaction, black-hole evaporation, and cosmological measurements
+    arise directly from dual time and not from other triadic
+    components.</p></li>
+    <li><p><strong>Dual time resolves classical anomalies</strong>
+    (e.g. radiation reaction, early-universe over-evolution, black-hole
+    temporal freezing) through its own internal logic, independent of
+    unification.</p></li>
+    </ul>
+    <p>Dual time therefore occupies a dual role: it is a natural
+    component of the Triadic Cosmos, where it integrates seamlessly with
+    closure recursion, holographic encoding, and mass- scaled dynamics;
+    but it is also a standalone theoretical contribution that can be
+    adopted, tested, and developed independently. This independence
+    strengthens the scientific value of the present work and ensures
+    that the dual-time architecture remains robust even if other
+    elements of the Triadic Cosmos are revised or replaced.</p>
+    <h1 id="alternative-forms-of-the-dual-time-ansatz">Alternative Forms
+    of the Dual-Time Ansatz</h1>
+    <p>The dynamical relation introduced in Eq. <a
+    href="#eq:dual-time-dynamics" data-reference-type="eqref"
+    data-reference="eq:dual-time-dynamics">[eq:dual-time-dynamics]</a>,</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}
+        = 1 + \alpha S - \beta M_{\mathrm{eff}}
+        - \kappa(I)\,\bigl(t_{\mathrm{mat}} -
+    t_{\mathrm{EM}}\bigr),$$</span></p>
+    <p>is the simplest structural form capable of expressing the
+    temporal behaviour implied by Conjectures 1–8. It is linear,
+    additive, and first-order in the relevant quantities. This
+    simplicity is intentional: the goal of the present paper is to
+    formalize dual time and establish its empirical and conceptual
+    consequences, not to determine the unique or final functional form
+    of the dynamics. Several alternative formulations are possible and
+    may be explored in future work.</p>
+    <h2 id="multiplicative-forms">Multiplicative Forms</h2>
+    <p>In the present ansatz, entropy, mass, and closure interaction
+    contribute additively to the material-time rate. A multiplicative
+    structure is equally plausible:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}
+        = (1 + \alpha S)\,f(M_{\mathrm{eff}}, I),$$</span></p>
+    <p>where <span class="math inline"><em>f</em></span> is a damping or
+    modulation factor. This form naturally expresses the idea that
+    entropic acceleration may be scaled by mass or interaction strength
+    rather than simply offset by them.</p>
+    <h2 id="exponentially-damped-forms">Exponentially Damped Forms</h2>
+    <p>Mass damping may also enter through an exponential factor:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}
+        = e^{-\beta M_{\mathrm{eff}}}\,(1 + \alpha S),$$</span></p>
+    <p>which captures the intuition that large effective mass suppresses
+    material-time evolution more strongly than a linear term. This form
+    may be relevant for degenerate matter or horizon-bounded
+    closures.</p>
+    <h2 id="nonlinear-interaction-terms">Nonlinear Interaction
+    Terms</h2>
+    <p>The diffusion term <span
+    class="math inline"> − <em>κ</em>(<em>I</em>)(<em>t</em><sub>mat</sub>−<em>t</em><sub>EM</sub>)</span>
+    expresses linear synchronization between closures. Nonlinear
+    alternatives include</p>
+    <p><span
+    class="math display"> − <em>κ</em>(<em>I</em>) (<em>t</em><sub>mat</sub>−<em>t</em><sub>EM</sub>)<sup><em>n</em></sup>,</span></p>
+    <p>with <span class="math inline"><em>n</em> &gt; 1</span> producing
+    stronger synchronization when closures diverge and weaker
+    synchronization when they are nearly aligned. Such forms may be
+    appropriate for strongly coupled plasma environments or
+    early-universe closures.</p>
+    <h2 id="recursion-index-coupling">Recursion-Index Coupling</h2>
+    <p>Material-time evolution may depend explicitly on recursion index
+    <span class="math inline"><em>R</em></span>:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}
+        = g(R)\,(1 + \alpha S) - h(R)\,M_{\mathrm{eff}},$$</span></p>
+    <p>where <span class="math inline"><em>g</em></span> and <span
+    class="math inline"><em>h</em></span> encode how recursion amplifies
+    or suppresses entropic and mass-driven effects. This form may be
+    relevant for closures with rapidly changing internal structure.</p>
+    <h2 id="higher-order-or-mixed-forms">Higher-Order or Mixed
+    Forms</h2>
+    <p>More general ansätze may combine additive, multiplicative, and
+    nonlinear terms:</p>
+    <p><span class="math display">$$\frac{d t_{\mathrm{mat}}}{d
+    t_{\mathrm{EM}}}
+        = F(S, M_{\mathrm{eff}}, I, R)$$</span></p>
+    <p>with <span class="math inline"><em>F</em></span> an arbitrary
+    smooth function satisfying the structural constraints of
+    Conjectures 1–8. Such forms may arise naturally in future toy models
+    or in deeper theoretical developments linking dual time to
+    holographic recursion or quantum gravity.</p>
+    <h2 id="summary-7">Summary</h2>
+    <p>The dual-time ansatz used in the main text is a minimal
+    structural expression of the temporal behaviour implied by the
+    conjectures. It is not unique, nor intended as a final form.
+    Alternative multiplicative, exponential, nonlinear, or
+    recursion-dependent forms are compatible with the dual-time
+    architecture and may be explored in future work. The present paper
+    focuses on establishing the conceptual and empirical foundations of
+    dual time; more detailed dynamical refinements are deferred to
+    subsequent studies.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository.</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <div class="thebibliography">
+    <p>J. De Witte, “Entropy-Dependent Time and Electromagnetic
+    Transversality,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Dual Time in Nature: Empirical Evidence at All
+    Scales,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The Triadic Architecture of Material Time,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The Triadic Cosmos: A Minimum Viable Unification
+    Candidate,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “String Theory as the Holographic Encoding Layer of
+    Reality,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Positioning of the Graviton within the Triadic
+    Cosmos,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>S. W. Hawking, “Particle Creation by Black Holes,”
+    <em>Communications in Mathematical Physics</em>, vol. 43,
+    pp. 199–220, 1975.</p>
+    <p>J. D. Bekenstein, “Black Holes and Entropy,” <em>Physical Review
+    D</em>, vol. 7, pp. 2333–2346, 1973.</p>
+    <p>C. W. Misner, K. S. Thorne, and J. A. Wheeler,
+    <em>Gravitation</em>, W. H. Freeman, 1973.</p>
+    <p>R. Penrose, “Gravitational Collapse and Space-Time
+    Singularities,” <em>Physical Review Letters</em>, vol. 14,
+    pp. 57–59, 1965.</p>
+    <p>L. Susskind, “The World as a Hologram,” <em>Journal of
+    Mathematical Physics</em>, vol. 36, pp. 6377–6396, 1995.</p>
+    <p>T. Jacobson, “Thermodynamics of Spacetime: The Einstein Equation
+    of State,” <em>Physical Review Letters</em>, vol. 75, pp. 1260–1263,
+    1995.</p>
+    <p>T. Padmanabhan, “Thermodynamical Aspects of Gravity: New
+    Insights,” <em>Reports on Progress in Physics</em>, vol. 73, 046901,
+    2010.</p>
+    <p>A. K. Harding and D. Lai, “Physics of Strongly Magnetized Neutron
+    Stars,” <em>Reports on Progress in Physics</em>, vol. 69,
+    pp. 2631–2708, 2006.</p>
+    <p>B. Zhang, “Gamma-Ray Bursts in the Swift Era,” <em>Chinese
+    Journal of Astronomy and Astrophysics</em>, vol. 7, pp. 1–50,
+    2007.</p>
+    <p>G. Ferrante and P. M. P. Morse, “Ultrafast Phenomena in Solids,”
+    <em>Reviews of Modern Physics</em>, vol. 74, pp. 601–639, 2002.</p>
+    <p>F. Rohrlich, “The Self-Force and Radiation Reaction,”
+    <em>American Journal of Physics</em>, vol. 68, pp. 1109–1112,
+    2000.</p>
+    <p>Planck Collaboration, “Planck 2018 Results: I. Overview and the
+    Cosmological Legacy of Planck,” <em>Astronomy &amp;
+    Astrophysics</em>, 641, A1, 2020.</p>
+    <p>R. A. Windhorst et al., “The First Galaxies Observed by JWST,”
+    <em>Astrophysical Journal</em>, vol. 931, L8, 2022.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>

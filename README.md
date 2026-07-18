@@ -1542,6 +1542,76 @@ A small conceptual shift → a giant rewrite of how we model the world.
 
 ---
 
+### **35. A Dual-Time Formalism for Closure Dynamics and Cosmic Evolution**
+
+**The foundational temporal-dynamics paper of the Triadic Cosmos ecosystem.**  
+This work introduces the first complete formalization of **dual time**: the structural distinction between  
+**electromagnetic time (t_EM)** — universal, transversal, horizon-stable — and  
+**material time (t_material)** — closure-dependent, entropy-driven, recursion-index governed.
+
+Building on triadic closure, recursion dynamics, and horizon-bounded geometry, the paper demonstrates that:
+
+- matter and fields evolve on **distinct but dynamically coupled clocks**,  
+- entropy accelerates material time while mass damps it,  
+- horizon-bounded recursion induces **material-time freeze**,  
+- Planck time is a limit of **t_EM**, not t_material,  
+- early-universe anomalies (JWST) arise from **closure-time mismatch**,  
+- black-hole evaporation follows **Hawking-calibrated mass damping**,  
+- EM flux anomalies reflect **cross-closure temporal comparison**,  
+- ultrafast pump–probe dynamics are **clock-mismatch phenomena**,  
+- spacecraft aging (Voyager) reveals **closure-specific temporal drift**.
+
+The paper introduces a conjectural dynamical relation linking the two temporal layers
+and refines earlier qualitative insights into **eight explicit, testable conjectures** governing entropic acceleration,  
+mass-scaled damping, closure synchronization, non-vanishing material-time rate, horizon-bounded limits,  
+and Hawking-calibrated black-hole evolution.
+
+#### Architectural Significance
+
+Paper #35 is the **temporal cornerstone** of the Triadic Cosmos physics layer.  
+Where Papers #30–#32 establish architectural, holographic, and empirical foundations,  
+Paper #35 provides the **formal dynamical engine** that governs closure evolution across all scales.
+
+It shows that:
+
+- dual time is **structurally inevitable** once triadic recursion is accepted,  
+- closure dynamics require **local temporal autonomy**,  
+- cosmology must be interpreted through **closure-dependent time**,  
+- and the apparent universality of time is a **local Earth Bias**.
+
+The work stands fully **independent** yet naturally integrates with the triadic ontology,  
+forming one pole of the ecosystem’s conceptual arc (Triad ↔ Dual Time).
+
+#### Ecosystem Role
+
+Paper #35 is the **canonical reference** for temporal dynamics in the Triadic Cosmos ecosystem.  
+It anchors:
+
+- closure-dependent cosmology,  
+- recursion-index physics,  
+- horizon-bounded dynamics,  
+- black-hole temporal structure,  
+- biological and ecological time,  
+- ultrafast condensed-matter response,  
+- and spacecraft aging.
+
+It is the definitive, minimal, and empirically actionable description of **dual temporal architecture**  
+as a structural feature of reality.
+
+A landmark contribution completing the physics‑temporal axis of the Triadic Cosmos.
+
+### 🌌 Fun Fact: Dual Time Could Never Have Been the Starting Insight
+
+Dual Time looks like a standalone idea today — two clocks, one universe — but conceptually it **could not** have emerged first.  
+Even though the formalism can exist independently of the triadic cycle (energy → geometry → information → energy, with emergent time from recursion index), the **entire triadic deduction chain** was needed before Dual Time became visible.
+
+Without triadic closure, recursion, horizon‑bounded structure, and entropy‑driven evolution, Dual Time would have been an unexplained leap.  
+With the triadic architecture in place, it becomes a **natural and unavoidable consequence**.
+
+> **Dual Time appears independent, but it could only arise as the final step of the triadic derivation.**
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
