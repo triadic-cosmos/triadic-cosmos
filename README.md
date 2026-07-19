@@ -263,6 +263,37 @@ while simultaneously integrating and extending the strongest existing alternativ
 
 ---
 
+## 🌌 The Triadic Cosmos: Dual Time as Missing Link — Canonical Physical Unification
+
+**The Triadic Cosmos: Dual Time, Triadic Closure, and End‑to‑End Unification**  
+is the definitive consolidation of all physical‑architecture research in the Triadic Cosmos ecosystem.
+
+This 94‑page volume unifies every fragment from the physics papers into a single  
+architecturally complete arc:
+
+**Dual Time → Closure → Recursion → Holography → String‑Encoding → Unification → Fractal Cosmos**
+
+It is the first fully coherent, deductive, and structurally minimal unification candidate that:
+
+- derives **dual time** from empirical anomalies (Voyager, JWST),  
+- formalizes **material time** and **electromagnetic time** as a layered temporal architecture,  
+- introduces **closures** as horizon‑bounded physical domains,  
+- shows how **triadic recursion** generates emergent time,  
+- reinterprets **string theory** as a holographic encoding layer,  
+- demonstrates **GR–QM–QFT–SM** complementarity through triadic roles,  
+- satisfies all **nine structural principles for physical unification**,  
+- and reveals the universe as a **recursive triadic fractal**.
+
+This book is not an additional volume.  
+It is the **canonical foundation** of the physical branch of the Triadic Cosmos ecosystem —  
+the architectural layer from which all physics papers originate and to which they return.
+
+**License:** CC BY‑NC‑ND 4.0
+**Status:** Canonical Consolidation (v1.0)  
+**Role:** Foundational Physical Architecture  
+
+---
+
 ## 📚 Books
 
 The Triadic Cosmos Library is a collection of architectural volumes that explore how  
