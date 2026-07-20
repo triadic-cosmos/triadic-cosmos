@@ -294,6 +294,32 @@ the architectural layer from which all physics papers originate and to which the
 
 ---
 
+## 🧩 Dual Time as Structural Necessity in Simulation and Unification
+
+The Triadic Cosmos framework shows that **dual time is not optional** but a *structural
+requirement* for any coherent world—physical or simulated.
+
+In physical reality, dual time arises from:
+- **EM‑time**: the continuous energetic flow governing recursive triadic updates  
+- **Material‑time**: the discrete, horizon‑bounded evolution inside each closure
+
+Simulation theory mirrors this architecture exactly. As demonstrated in the paper
+*Triadic Closure within Simulation Theory*:
+
+- **EM‑time in simulations** = the global clock frequency + external runtime of the host system  
+- **Material‑time in simulations** = discrete frames, physics ticks, and update cycles  
+- Every simulation enforces **horizon‑bounded geometry**, **local informational access**,  
+  and **energetic update limits**, forming a complete triadic closure.
+
+Because both domains implement the same dual‑time structure, simulations become  
+**triadic fractal repetitions** of physical reality. Dual time is therefore a  
+**conceptual necessity** for unification and for any scalable, observer‑consistent simulation.
+
+This alignment confirms that the universe and all coherent simulations share  
+the same architectural grammar: **triadic closure + dual time**.
+
+---
+
 ## 📘 Fun Fact — This Book Did Not Yet Exist and Why It’s Unique
 
 Although *The Triadic Cosmos: Dual Time as Missing Link*  
