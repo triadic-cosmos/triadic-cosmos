@@ -294,7 +294,7 @@ the architectural layer from which all physics papers originate and to which the
 
 ---
 
-## 🧩 Dual Time as Structural Necessity in Simulation and Unification
+## 🧩 Fun Fact: Dual Time as Structural Necessity in Simulation and Unification
 
 The Triadic Cosmos framework shows that **dual time is not optional** but a *structural
 requirement* for any coherent world—physical or simulated.
@@ -320,7 +320,28 @@ the same architectural grammar: **triadic closure + dual time**.
 
 ---
 
-## 📘 Fun Fact — This Book Did Not Yet Exist and Why It’s Unique
+## 🕳️ Fun Fact: Black Holes as Reality Lenses in the Triadic Cosmos
+
+Black holes were long considered the most mysterious objects in the universe,  
+but within the **Triadic Cosmos** they have repeatedly served as *lenses on reality*.
+
+In this framework, black holes reveal multiple core principles:
+
+- **Triadic Cycle** — their extreme energetic gradients expose the full E→G→I recursion.  
+- **Holography** — all physical degrees of freedom collapse to the boundary,  
+  matching the triadic role of geometry as horizon‑bounded constraint.  
+- **Material‑Time Damping** — inside the horizon, material time becomes almost frozen,  
+  while EM‑time continues externally, making dual time directly observable.  
+- **Extreme GR Behavior** — the interior is effectively inert, and all dynamics  
+  live on the boundary where material time slows but never fully stops.
+
+In the Triadic Cosmos, black holes are not anomalies—they are **the clearest windows  
+into the architectural grammar of reality**, showing how energy, geometry,  
+information, and dual time cohere under maximal curvature.
+
+---
+
+## 📘 Fun Fact: This Book Did Not Yet Exist and Why It’s Unique
 
 Although *The Triadic Cosmos: Dual Time as Missing Link*  
 is now a fully developed unification book —  
