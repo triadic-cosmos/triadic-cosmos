@@ -335,7 +335,7 @@ Black holes expose the core structural principles of the Triadic Cosmos
 with unmatched clarity:
 
 - **Triadic Cycle** — extreme energetic gradients isolate the pure  
-  \(E \rightarrow G \rightarrow I\) recursion without interference  
+  \(E → G → I\) recursion without interference  
   from overlapping closures.
 
 - **Holography** — all physical degrees of freedom collapse to the horizon,  
