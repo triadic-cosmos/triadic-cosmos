@@ -268,7 +268,7 @@ while simultaneously integrating and extending the strongest existing alternativ
 **The Triadic Cosmos: Dual Time, Triadic Closure, and End‑to‑End Unification**  
 is the definitive consolidation of all physical‑architecture research in the Triadic Cosmos ecosystem.
 
-This 94‑page volume unifies every fragment from the physics papers into a single  
+This volume unifies every fragment from the physics papers into a single  
 architecturally complete arc:
 
 **Dual Time → Closure → Recursion → Holography → String‑Encoding → Unification → Fractal Cosmos**
