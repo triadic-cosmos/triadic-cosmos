@@ -322,22 +322,43 @@ the same architectural grammar: **triadic closure + dual time**.
 
 ## 🕳️ Fun Fact: Black Holes as Reality Lenses in the Triadic Cosmos
 
-Black holes were long considered the most mysterious objects in the universe,  
-but within the **Triadic Cosmos** they have repeatedly served as *lenses on reality*.
+Black holes were once seen as the places where physics *breaks*.  
+In the **Triadic Cosmos**, they do the opposite: they *reveal* physics.
 
-In this framework, black holes reveal multiple core principles:
+This framework reverses the traditional scientific paradigm.  
+Instead of building a theory and discovering that it fails at black holes,  
+the Triadic Cosmos **begins** with black holes and derives the architecture  
+of reality *from them*. The objects that once blocked theoretical progress  
+now *enable* it.
 
-- **Triadic Cycle** — their extreme energetic gradients expose the full E→G→I recursion.  
-- **Holography** — all physical degrees of freedom collapse to the boundary,  
-  matching the triadic role of geometry as horizon‑bounded constraint.  
-- **Material‑Time Damping** — inside the horizon, material time becomes almost frozen,  
-  while EM‑time continues externally, making dual time directly observable.  
-- **Extreme GR Behavior** — the interior is effectively inert, and all dynamics  
-  live on the boundary where material time slows but never fully stops.
+Black holes expose the core structural principles of the Triadic Cosmos  
+with unmatched clarity:
 
-In the Triadic Cosmos, black holes are not anomalies—they are **the clearest windows  
-into the architectural grammar of reality**, showing how energy, geometry,  
-information, and dual time cohere under maximal curvature.
+- **Triadic Cycle** — extreme energetic gradients isolate the pure  
+  \(E \rightarrow G \rightarrow I\) recursion without interference  
+  from overlapping closures.
+
+- **Holography** — all physical degrees of freedom collapse to the horizon,  
+  making black holes the cleanest geometric realization of triadic closure  
+  and boundary–bulk encoding.
+
+- **Material‑Time Damping** — internal recursion slows as \(1/M^2\),  
+  matching Hawking evaporation and revealing dual time in its purest form.
+
+- **Curvature Dominance** — gravitational geometry overwhelms all external  
+  influences, turning black holes into perfect laboratories for structural testing.
+
+- **Extreme GR Behavior** — the interior becomes dynamically inert,  
+  while all observable evolution is encoded at the boundary where  
+  material time never fully stops.
+
+In the Triadic Cosmos, black holes are not anomalies or theoretical obstacles.  
+They are **the clearest windows into the architectural grammar of reality** —  
+showing how energy, geometry, information, and dual time cohere under  
+maximal curvature.
+
+Black holes do not break the theory.  
+They *generate* it.
 
 ---
 
