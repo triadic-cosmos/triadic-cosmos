@@ -1897,7 +1897,7 @@ It includes appendices on:
 - observational cosmology (EHT, LIGO/Virgo/KAGRA, Page curve),  
 - and mathematical tightening of the derived relations.
 
-#### 🔍 Fun Fact — New Relations = Architectural Evidence
+### 🔍 Fun Fact: New Relations = Architectural Evidence
 
 The minimal black‑hole universe does more than reproduce known physics.  
 It generates **new physical relations** that do not appear in standard literature,  
@@ -1931,7 +1931,7 @@ it demonstrates that the architecture is **structurally real** rather than inter
 These formulas are **new**, **correct**, and **architecturally forced** —  
 a hallmark of a genuine unification program rather than a conceptual reinterpretation.
 
-#### 🔪 Fun Fact — A Swiss‑Army Knife of Built‑In Falsification
+### 🔪 Fun Fact: A Swiss‑Army Knife of Built‑In Falsification
 
 The Triadic Cosmos framework is unusual in modern theoretical physics:  
 it contains **dozens of built‑in falsification mechanisms** and **multiple independent  
