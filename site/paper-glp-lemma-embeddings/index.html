@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Learnable Lemma Embeddings for GLP Models</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#learnable-lemma-embeddings"
+    id="toc-learnable-lemma-embeddings">Learnable Lemma
+    Embeddings</a></li>
+    <li><a href="#advantages" id="toc-advantages">Advantages</a></li>
+    <li><a href="#a-trainable-world-engine"
+    id="toc-a-trainable-world-engine">A Trainable World Engine</a></li>
+    <li><a href="#narrative-behaviour-under-hybrid-glpllm-generation"
+    id="toc-narrative-behaviour-under-hybrid-glpllm-generation">Narrative
+    Behaviour Under Hybrid GLP+LLM Generation</a></li>
+    <li><a
+    href="#narrative-behaviour-under-a-hyde-trained-glp-world-model"
+    id="toc-narrative-behaviour-under-a-hyde-trained-glp-world-model">Narrative
+    Behaviour Under a Hyde-Trained GLP World Model</a></li>
+    <li><a
+    href="#ablation-learning-dynamics-in-the-lemma-embedding-space"
+    id="toc-ablation-learning-dynamics-in-the-lemma-embedding-space">Ablation:
+    Learning Dynamics in the Lemma Embedding Space</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#comparison-of-embedding-geometry-in-glp-and-llm"
+    id="toc-comparison-of-embedding-geometry-in-glp-and-llm">Comparison
+    of Embedding Geometry in GLP and LLM</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Grammar Lemma Paged Language Models (GLP) constitute a
+    structurally governed class of next–token generators built around
+    deterministic grammar structure, paged lemma vocabularies, and
+    fixed–dimensional output geometry. In contrast to transformer–based
+    language models, which unify grammar, lexical content, and context
+    into a single high–dimensional embedding space, GLP decomposes
+    generation into two alternating channels: a compact grammar model
+    that determines structural cadence, and a lemma model whose
+    vocabulary is organised into contextually activated pages. This
+    dual–channel architecture provides explicit structural control,
+    domain isolation, and stable long–horizon behaviour, making GLP a
+    modular alternative to monolithic embedding–softmax systems.</p>
+    <p>In its original formulation, GLP represented lemma tokens through
+    hybrid bit–vectors and tri–hot codes. While effective for
+    fixed–geometry decoding, these discrete encodings limit semantic
+    expressiveness, slow down sampling, and constrain vocabulary growth.
+    This paper introduces a continuous, learnable lemma embedding layer
+    that replaces the discrete codebook with a fixed–dimensional
+    geometric space. Lemma selection is performed through cosine–
+    similarity scoring within the active page, filtered by grammar
+    compatibility, yielding fast and stable ranking behaviour. The
+    embedding layer is trained through a two–stage mechanism: the lemma
+    MLP predicts a target embedding optimised via cosine similarity, and
+    after each training batch the stored lemma embedding is updated
+    through an <span class="math inline"><em>α</em></span>–damped mixing
+    rule. Empirically, this damping mechanism is essential for long–term
+    stability: without damping, extended training causes embedding
+    drift, degraded page coherence, and slower generation; with damping,
+    the embedding space converges and sampling remains fast even after
+    millions of training steps.</p>
+    <p>The learnable embedding layer integrates seamlessly with GLP’s
+    structural commitments. Grammar tokens remain deterministic symbols
+    with strict structural filtering; pages remain discrete geometric
+    regions; and lemma selection remains constrained by grammar
+    compatibility and page activation. The result is a hybrid
+    symbolic–geometric architecture: grammar provides deterministic
+    structure, paging provides domain isolation, and lemma embeddings
+    provide continuous semantic variation.</p>
+    <p>To evaluate the practical effectiveness of the approach, we
+    trained a 33 MB GLP model on <em>Thuvia, Maid of Mars</em>
+    (Gutenberg) and generated narrative sequences using the GLP narrator
+    pipeline. The generated stories were subsequently remastered by
+    transformer models (Mistral 7B and a larger LLM), producing the full
+    volume <em>The Cosmic Parrot: Triadic Pulp Fiction</em>. This case
+    study demonstrates that a lightweight structural model equipped with
+    learnable lemma embeddings can serve as a fast, stable, and
+    domain–faithful generative engine within hybrid GLP+LLM systems.</p>
+    <p>The remainder of this paper formalises the learnable lemma
+    embedding layer, describes its integration into GLP’s dual–channel
+    architecture, analyses the role of <span
+    class="math inline"><em>α</em></span>–damping in embedding
+    stability, and presents empirical results from narrator–pipeline
+    generation and hybrid LLM remastering.</p>
+    <h1 id="learnable-lemma-embeddings">Learnable Lemma Embeddings</h1>
+    <p>The original GLP architecture represented lemma tokens using
+    hybrid bit–vectors and tri–hot codes. While this fixed–geometry
+    encoding ensured deterministic output structure, it limited semantic
+    expressiveness, constrained vocabulary growth, and imposed discrete
+    matching during lemma selection. In this work, we replace the
+    discrete lemma encoding with a continuous, learnable embedding space
+    that integrates directly into GLP’s dual–channel architecture while
+    preserving its structural commitments.</p>
+    <h2 id="continuous-lemma-representation">Continuous lemma
+    representation</h2>
+    <p>Each lemma token <span class="math inline">ℓ</span> is assigned a
+    fixed–dimensional embedding <span
+    class="math inline"><em>e</em><sub>ℓ</sub> ∈ ℝ<sup><em>d</em></sup></span>,
+    where the lemma dimension <code>d</code> is a global hyperparameter.
+    Embeddings are deterministically initialised from the token’s hashed
+    identifier, ensuring reproducibility and stable early training
+    behaviour. Unlike transformer models, GLP does not use embeddings
+    for grammar tokens; grammar remains symbolic and deterministic. The
+    embedding space is used exclusively for lemma selection, providing a
+    continuous geometric layer within GLP’s structurally governed
+    generative loop.</p>
+    <h2 id="lemma-mlp-and-embedding-prediction">Lemma MLP and embedding
+    prediction</h2>
+    <p>During lemma generation, the lemma MLP receives the encoded model
+    input (context window, narrative memory, and story embedding) and
+    produces two outputs:</p>
+    <ol>
+    <li><p>a predicted lemma embedding <span
+    class="math inline"><em>ê</em> ∈ ℝ<sup><em>d</em></sup></span>,</p></li>
+    <li><p>a vector of page logits determining the most relevant lemma
+    page.</p></li>
+    </ol>
+    <p>The predicted embedding is normalised to unit length. Page logits
+    are used to rank pages in descending order, enabling context–driven
+    page activation with automatic fallback when the primary page yields
+    no valid candidates.</p>
+    <h2 id="cosinesimilarity-lemma-selection">Cosine–similarity lemma
+    selection</h2>
+    <p>Lemma selection is performed geometrically. For each candidate
+    lemma <span class="math inline">ℓ</span> in the active page, GLP
+    computes the cosine similarity between the predicted embedding and
+    the stored embedding:</p>
+    <p><span
+    class="math display">score(ℓ) = cos (<em>ê</em>,<em>e</em><sub>ℓ</sub>).</span></p>
+    <p>Grammar compatibility filtering removes lemma tokens that violate
+    structural constraints learned during curriculum training. The
+    remaining candidates are sorted by cosine similarity, and top–<span
+    class="math inline"><em>k</em></span> sampling with temperature is
+    applied to produce the final lemma token. This mechanism replaces
+    discrete codebook matching with a continuous geometric ranking,
+    yielding faster sampling and richer variation.</p>
+    <h2 id="twostage-embedding-learning">Two–stage embedding
+    learning</h2>
+    <p>Lemma embeddings are trained through a two–stage process:</p>
+    <ol>
+    <li><p><strong>Cosine–similarity optimisation.</strong> During
+    backpropagation, the lemma MLP is trained to predict embeddings
+    close to the stored lemma embeddings. The loss term</p>
+    <p><span
+    class="math display">ℒ<sub>emb</sub> = 1 − cos (<em>ê</em>,<em>e</em><sub>ℓ</sub>)</span></p>
+    <p>encourages alignment between predicted and stored
+    embeddings.</p></li>
+    <li><p><strong>Post–batch <span
+    class="math inline"><em>α</em></span>–damped update.</strong> After
+    each training batch, the stored embedding <span
+    class="math inline"><em>e</em><sub>ℓ</sub></span> is updated by
+    mixing it with the predicted embedding:</p>
+    <p><span
+    class="math display"><em>e</em><sub>ℓ</sub> ← (1−<em>α</em>)<em>e</em><sub>ℓ</sub> + <em>α</em><em>ê</em>,</span></p>
+    <p>where <span class="math inline"><em>α</em></span> decreases
+    gradually from <span
+    class="math inline"><em>α</em><sub>max</sub></span> to <span
+    class="math inline"><em>α</em><sub>min</sub></span> over a fixed
+    number of training steps. This damping mechanism allows rapid early
+    learning while ensuring long–term stability.</p></li>
+    </ol>
+    <h2 id="role-of-alphadamping">Role of <span
+    class="math inline"><em>α</em></span>–damping</h2>
+    <p>Empirical tests show that <span
+    class="math inline"><em>α</em></span>–damping is essential for
+    stable training. Without damping, lemma embeddings continue to drift
+    even after many epochs, causing page coherence to degrade,
+    cosine–similarity ranking to fluctuate, and sampling to slow down.
+    With damping, the embedding space converges smoothly, preserving
+    page structure and maintaining fast inference. This demonstrates
+    that the post–batch update rule is not merely an optimisation detail
+    but a structural requirement for GLP’s continuous lemma space.</p>
+    <h2 id="integration-with-paging-and-grammar-structure">Integration
+    with paging and grammar structure</h2>
+    <p>The learnable lemma embedding layer preserves all structural
+    components of GLP:</p>
+    <ul>
+    <li><p><strong>Grammar tokens</strong> remain deterministic symbols
+    with strict structural filtering.</p></li>
+    <li><p><strong>Pages</strong> remain discrete geometric regions that
+    isolate domain–specific lemma clusters.</p></li>
+    <li><p><strong>Compatibility masks</strong> ensure that lemma
+    selection respects canonical grammar.</p></li>
+    <li><p><strong>Narrative memory</strong> continues to guide page
+    activation and long–horizon coherence.</p></li>
+    </ul>
+    <p>The result is a hybrid symbolic–geometric architecture: grammar
+    provides deterministic structure, paging provides domain isolation,
+    and lemma embeddings provide continuous semantic variation.</p>
+    <h2 id="practical-impact">Practical impact</h2>
+    <p>The learnable lemma embedding layer significantly improves GLP’s
+    practical performance. Sampling becomes faster, vocabulary growth
+    becomes fully dynamic, and fewer epochs are required to obtain a
+    stable model. The continuous lemma space also aligns more closely
+    with the geometric behaviour of transformer models, enabling natural
+    hybrid pipelines where GLP provides the world engine and LLMs
+    provide stylistic refinement.</p>
+    <p>This section establishes the learnable lemma embedding layer as a
+    foundational extension of GLP, enabling a continuous semantic space
+    within a structurally governed generative architecture.</p>
+    <h1 id="advantages">Advantages</h1>
+    <p>The learnable lemma embedding layer introduces several practical
+    and architectural advantages over the earlier bit–vector and tri–hot
+    encoding used in GLP. These advantages arise from the combination of
+    continuous lemma embeddings, cosine–similarity scoring, and the
+    <span class="math inline"><em>α</em></span>–damped post–batch update
+    rule.</p>
+    <h2 class="unnumbered"
+    id="continuous-geometric-lemma-space">Continuous geometric lemma
+    space</h2>
+    <p>Lemma tokens are represented in a fixed–dimensional continuous
+    space, making the lemma representation much closer to the geometric
+    behaviour of modern LLM output embeddings. This improves hybrid
+    integration in narrator pipelines and enables richer semantic
+    variation within GLP’s structurally governed architecture. GLP
+    remains a structural language model: grammar is deterministic, pages
+    are discrete, and generation follows the dual–channel GLP loop
+    rather than transformer–style attention.</p>
+    <h2 class="unnumbered"
+    id="dynamic-vocabulary-without-geometric-constraints">Dynamic
+    vocabulary without geometric constraints</h2>
+    <p>Because lemma embeddings live in a fixed–dimensional vector
+    space, vocabulary growth is decoupled from model geometry. New lemma
+    tokens can be added dynamically without altering the output
+    dimension of the lemma MLP or the paging structure. This removes the
+    structural limitations of tri–hot encoding, where vocabulary size is
+    tied directly to output geometry.</p>
+    <h2 class="unnumbered" id="fast-sampling">Fast sampling</h2>
+    <p>Cosine–similarity scoring provides a lightweight and stable
+    ranking mechanism for lemma selection. Combined with page–restricted
+    candidate sets and grammar compatibility filtering, sampling becomes
+    significantly faster in practice.</p>
+    <h2 class="unnumbered"
+    id="improved-generation-quality-and-richness">Improved generation
+    quality and richness</h2>
+    <p>The continuous embedding space enables fine–grained semantic
+    variation within pages, yielding richer lemma diversity and more
+    expressive narrative output. Cosine–similarity scoring naturally
+    clusters semantically related lemma tokens, improving stylistic
+    variation without compromising canonical structure.</p>
+    <h2 class="unnumbered"
+    id="fewer-epochs-required-for-stable-training">Fewer epochs required
+    for stable training</h2>
+    <p>The <span class="math inline"><em>α</em></span>–damped post–batch
+    update rule allows lemma embeddings to converge rapidly during early
+    training while stabilising over time. Empirically, models trained
+    without damping show degraded performance after many epochs:
+    embedding drift slows down generation and reduces page coherence.
+    With damping, the embedding space converges smoothly, requiring
+    fewer epochs to reach a stable and usable model state.</p>
+    <h2 class="unnumbered" id="no-observed-disadvantages">No observed
+    disadvantages</h2>
+    <p>Across all experiments, including narrator–pipeline generation
+    and hybrid LLM remastering, no disadvantages were observed. The
+    learnable lemma embedding layer integrates cleanly with GLP’s
+    deterministic grammar structure, paging organisation, and PRE–based
+    sentence validation, while improving speed, stability, and
+    expressive power.</p>
+    <h1 id="a-trainable-world-engine">A Trainable World Engine</h1>
+    <p>Grammar Lemma Paged Language Models (GLP) are not merely
+    structural language models; they function as <em>trainable world
+    engines</em>. When trained on a single book or corpus, GLP absorbs
+    the underlying narrative geometry: its grammar cadence, lemma
+    distribution, page structure, stylistic attractors, and
+    domain–specific semantic regularities. Through curriculum training,
+    paging dynamics, and the learnable lemma embedding layer introduced
+    in this paper, GLP internalises the world model implicit in the
+    source text and reconstructs it as a compact, inspectable generative
+    substrate.</p>
+    <p>This world engine behaviour differs fundamentally from
+    transformer–based LLMs. GLP does not memorise surface text or rely
+    on high–dimensional embeddings; instead, it learns a structural
+    ontology of the domain. Grammar tokens encode the syntactic and
+    rhythmic backbone of the world, lemma pages capture domain–specific
+    semantic clusters, and the continuous lemma embedding space provides
+    fine–grained variation within these clusters. The result is a
+    lightweight model that can reproduce the <em>world</em> of a book
+    rather than its literal sentences.</p>
+    <p>Once trained, GLP can be used to generate <em>proto–stories</em>:
+    structurally coherent, canon–faithful narrative sequences that
+    reflect the learned world model. These proto–stories serve as raw
+    material for hybrid refinement. In the narrator pipeline, GLP
+    provides the world engine, sampling provides expressive exploration,
+    and transformer models (such as Mistral 7B and a larger LLM) provide
+    iterative stylistic polishing. This hybrid process mirrors human–LLM
+    collaboration, where a human supplies world knowledge and structural
+    constraints while the LLM supplies surface fluency. GLP is not
+    equivalent to a human and does not replicate human creativity, but
+    it provides a structurally governed world model that plays a similar
+    functional role in the generative pipeline.</p>
+    <p>This approach was demonstrated empirically by training a 33 MB
+    GLP model on <em>Thuvia, Maid of Mars</em> (Gutenberg). The trained
+    model acted as a compact world engine for Barsoom–style pulp
+    fiction, generating proto–stories that were subsequently refined by
+    transformer models into the full volume <em>The Cosmic Parrot:
+    Triadic Pulp Fiction</em>. This case study illustrates how GLP can
+    absorb a narrative domain, generate new stories within that domain,
+    and collaborate with LLMs to produce polished literary output.</p>
+    <p>GLP therefore occupies a unique position in the Triadic Cosmos
+    ecosystem: a modular, trainable world engine that provides
+    structural, canonical, and domain–faithful generative behaviour,
+    enabling hybrid pipelines where lightweight structural models and
+    large transformers complement each other in the creation of new
+    narrative worlds.</p>
+    <h1
+    id="narrative-behaviour-under-hybrid-glpllm-generation">Narrative
+    Behaviour Under Hybrid GLP+LLM Generation</h1>
+    <p>The narrative corpus analysed in this section was produced by the
+    narrator pipeline using the 33 MB GLP world model trained on
+    <em>Thuvia, Maid of Mars</em>, followed by a light transformer-based
+    remastering step using Mistral 7B. This remastering was
+    intentionally minimal: the LLM received only high-level narrative
+    guidance such as</p>
+    <blockquote>
+    <p>Make sure there is proper and exciting narrative arc. Keep all
+    story elements related and realistic. Fill the gaps. A male main
+    character is called Marvin and a female main character is called
+    Alice.</p>
+    </blockquote>
+    <p>No stylistic constraints, world-building hints, or Barsoom
+    references were provided. This setup allows us to observe how GLP’s
+    structural world model interacts with a transformer LLM that
+    performs <em>interpretive refinement</em> rather than content
+    invention. The resulting stories therefore reflect a hybrid
+    generative process: GLP supplies the world geometry and proto-story
+    structure, while the LLM supplies surface coherence, narrative arc
+    formation, and stylistic polish.</p>
+    <h2 id="glp-as-the-structural-substrate">GLP as the structural
+    substrate</h2>
+    <p>Even after LLM remastering, the underlying GLP world model
+    remains clearly visible. Across all generated stories, GLP
+    consistently provides:</p>
+    <ul>
+    <li><p>Barsoom-like spatial geometry (palaces, towers, deserts,
+    barrooms),</p></li>
+    <li><p>a stable social ontology (Pathans, nobles, warriors,
+    princesses),</p></li>
+    <li><p>action grammar (pursuit, confrontation, rescue,
+    infiltration),</p></li>
+    <li><p>narrative cadence (danger <span class="math inline">→</span>
+    struggle <span class="math inline">→</span> escape),</p></li>
+    <li><p>domain-specific motifs (honour, courage, loyalty,
+    peril),</p></li>
+    <li><p><strong>triadic narrative structure</strong> (three-part
+    arcs, three-stage conflicts, three-agent scenes).</p></li>
+    </ul>
+    <p>The last element is particularly notable: GLP frequently produces
+    triadic configurations such as <em>Marvin–Alice–antagonist</em>,
+    <em>pursuit–battle–escape</em>, or
+    <em>discovery–danger–resolution</em>. This triadic geometry emerges
+    naturally from GLP’s grammar cadence and page activation mechanisms,
+    which favour compact, modular narrative units. The continuous lemma
+    embedding space reinforces this behaviour by clustering semantically
+    related lemmas into three-part interaction motifs. The LLM
+    remastering step does not invent this triadic structure; it merely
+    interprets and connects the GLP-generated fragments, preserving the
+    underlying world model.</p>
+    <p>It is worth noting that the training domain itself exhibits a
+    pronounced triadic character. Burroughs’ Barsoom narratives
+    frequently unfold through three-part conflicts, trio-based character
+    groupings, and modular three-stage adventure arcs. GLP absorbs this
+    structural ontology without reproducing the original text, and the
+    hybrid GLP+LLM pipeline preserves the triadic geometry while
+    providing stylistic coherence.</p>
+    <p>This emergent triadic behaviour is one of the reasons the
+    resulting volume carries the subtitle <em>Triadic Pulp Fiction</em>:
+    the stories inhabit a Barsoom-derived world while exhibiting the
+    modular, three-part narrative rhythm characteristic of GLP’s
+    structural generative process.</p>
+    <h2 id="llm-remastering-as-interpretive-refinement">LLM remastering
+    as interpretive refinement</h2>
+    <p>Because the remastering prompt is minimal and non-directive,
+    Mistral 7B acts primarily as an interpreter of GLP’s proto-stories.
+    It performs:</p>
+    <ul>
+    <li><p><strong>gap filling</strong>: smoothing transitions between
+    GLP-generated segments,</p></li>
+    <li><p><strong>arc formation</strong>: shaping GLP’s episodic
+    fragments into coherent narrative arcs,</p></li>
+    <li><p><strong>stylistic elevation</strong>: improving readability,
+    pacing, and emotional clarity,</p></li>
+    <li><p><strong>character grounding</strong>: maintaining Marvin and
+    Alice as consistent protagonists.</p></li>
+    </ul>
+    <p>Crucially, the LLM does not override GLP’s world model. The
+    scenes, conflicts, settings, and motifs remain structurally
+    Barsoomian, even though the surface text is
+    transformer-polished.</p>
+    <h2
+    id="evidence-of-world-absorption-without-textual-replication">Evidence
+    of world absorption without textual replication</h2>
+    <p>The analysed corpus demonstrates that GLP does not memorise or
+    reproduce the training text. Instead, it reconstructs the latent
+    world model of <em>Thuvia, Maid of Mars</em>. The stories
+    contain:</p>
+    <ul>
+    <li><p>barroom confrontations,</p></li>
+    <li><p>palace infiltrations,</p></li>
+    <li><p>rooftop escapes,</p></li>
+    <li><p>duels with Pathan warriors,</p></li>
+    <li><p>alliances with princesses,</p></li>
+    </ul>
+    <p>— all recognisable Barsoomian motifs — yet none of these scenes
+    appear in the original book. The LLM remastering step preserves this
+    property: it refines GLP’s proto-stories but does not introduce
+    Barsoom text or plotlines.</p>
+    <p>This confirms that GLP learns a structural ontology rather than a
+    corpus, and that the hybrid pipeline maintains this ontology through
+    refinement.</p>
+    <h2 id="emergent-recombination-under-hybrid-generation">Emergent
+    recombination under hybrid generation</h2>
+    <p>The stories exhibit a characteristic form of recombinative
+    creativity. GLP provides new configurations of familiar elements,
+    while the LLM ensures coherence:</p>
+    <ul>
+    <li><p>GLP recombines domain motifs into new proto-scenes,</p></li>
+    <li><p>the LLM interprets these scenes and links them into
+    arcs,</p></li>
+    <li><p>GLP supplies world fidelity, the LLM supplies narrative
+    fluency.</p></li>
+    </ul>
+    <p>This hybrid behaviour mirrors human–LLM collaboration: GLP plays
+    the role of a world-builder, and the LLM plays the role of a
+    stylistic editor.</p>
+    <h2
+    id="implications-for-hybrid-structural-generative-systems">Implications
+    for hybrid structural generative systems</h2>
+    <p>The corpus demonstrates that:</p>
+    <ul>
+    <li><p>GLP provides a stable world engine,</p></li>
+    <li><p>GLP does not replicate training text,</p></li>
+    <li><p>GLP generates structurally coherent proto-stories,</p></li>
+    <li><p>LLM remastering elevates these proto-stories without altering
+    the world model,</p></li>
+    <li><p>minimal prompting is sufficient for high-quality hybrid
+    output.</p></li>
+    </ul>
+    <p>This confirms that learnable lemma embeddings strengthen GLP’s
+    ability to reconstruct and extend narrative worlds, and that hybrid
+    GLP+LLM pipelines can produce rich, coherent narratives while
+    preserving structural fidelity to the learned domain.</p>
+    <h1
+    id="narrative-behaviour-under-a-hyde-trained-glp-world-model">Narrative
+    Behaviour Under a Hyde-Trained GLP World Model</h1>
+    <p>To evaluate whether GLP can internalise and reproduce
+    fundamentally different narrative domains, we trained a second 34 MB
+    GLP model on <em>Strange Case of Dr Jekyll and Mr Hyde</em> using
+    the same hyperparameters, curriculum structure, and epoch count as
+    the Barsoom model analysed in the previous section. The narrator
+    pipeline and remastering prompt were kept identical: the LLM
+    received only minimal stylistic guidance and the fixed protagonist
+    names <em>Marvin</em> and <em>Alice</em>, with no hints,
+    constraints, or references to the Hyde domain. This setup allows us
+    to isolate the contribution of the GLP world model itself.</p>
+    <h2 id="glp-as-a-gothic-structural-substrate">GLP as a gothic
+    structural substrate</h2>
+    <p>Across all generated stories, the Hyde-trained GLP model exhibits
+    a distinct and consistent narrative geometry that differs sharply
+    from the Barsoom world model. The stories contain:</p>
+    <ul>
+    <li><p>claustrophobic interiors (mines, basements, laboratories,
+    guest houses),</p></li>
+    <li><p>shadow-filled corridors, echoing chambers, and dimly lit
+    rooms,</p></li>
+    <li><p>moral ambiguity, paranoia, and introspective
+    tension,</p></li>
+    <li><p>mysterious strangers, concealed motives, and cryptic
+    letters,</p></li>
+    <li><p>chemical apparatus, phials, vials, and experimental
+    devices,</p></li>
+    <li><p>transformations, inner turmoil, and dual-identity
+    motifs,</p></li>
+    <li><p>foggy streets, deserted avenues, and oppressive
+    atmospheres.</p></li>
+    </ul>
+    <p>These motifs are canonical to the gothic psychological domain of
+    <em>Jekyll and Hyde</em>, yet none of the generated scenes appear in
+    the original text. The GLP world model reconstructs the latent
+    ontology of the domain—its spatial geometry, emotional cadence, and
+    thematic attractors—without memorising or replicating the training
+    corpus.</p>
+    <h2 id="contrast-with-the-barsoom-world-model">Contrast with the
+    Barsoom world model</h2>
+    <p>The contrast with the Barsoom-trained GLP model is striking.
+    Where Barsoom stories exhibit:</p>
+    <ul>
+    <li><p>triadic action grammar,</p></li>
+    <li><p>modular three-part conflicts,</p></li>
+    <li><p>heroic rescue arcs,</p></li>
+    <li><p>palace infiltrations and desert escapes,</p></li>
+    <li><p>stable social ontologies (nobles, warriors,
+    princesses),</p></li>
+    </ul>
+    <p>the Hyde stories instead display:</p>
+    <ul>
+    <li><p>introspective psychological conflict,</p></li>
+    <li><p>moral uncertainty and internal struggle,</p></li>
+    <li><p>claustrophobic spatial geometry,</p></li>
+    <li><p>chemical experimentation and hidden laboratories,</p></li>
+    <li><p>ambiguous social interactions and unreliable
+    witnesses.</p></li>
+    </ul>
+    <p>This demonstrates that GLP does not impose a fixed narrative
+    style. Instead, it absorbs the structural ontology of the training
+    domain and reproduces it faithfully under pure sampling, even when
+    the narrator pipeline and remastering prompt contain no domain
+    hints.</p>
+    <h2
+    id="evidence-of-world-absorption-without-stylistic-prompting">Evidence
+    of world absorption without stylistic prompting</h2>
+    <p>The Hyde corpus shows that GLP can generate:</p>
+    <ul>
+    <li><p>gothic introspection without being prompted for gothic
+    style,</p></li>
+    <li><p>Hyde-like characters without being told to include
+    Hyde,</p></li>
+    <li><p>laboratory scenes without any mention of science or
+    chemistry,</p></li>
+    <li><p>foggy London streets without geographical hints,</p></li>
+    <li><p>moral duality without explicit thematic guidance.</p></li>
+    </ul>
+    <p>The LLM remastering step again acts only as an interpretive
+    refiner: it smooths transitions and improves readability, but it
+    does not introduce Hyde motifs. All domain-specific behaviour
+    originates from the GLP world model.</p>
+    <h2 id="implications-for-multi-world-glp-models">Implications for
+    multi-world GLP models</h2>
+    <p>The Barsoom and Hyde experiments together demonstrate that GLP
+    can internalise multiple, structurally distinct narrative worlds.
+    Each world model produces coherent proto-stories that reflect its
+    learned ontology, and hybrid GLP+LLM pipelines preserve this
+    ontology even under minimal prompting.</p>
+    <p>This confirms that GLP is not a stylistic variant of transformer
+    models, but a <em>trainable world engine</em> capable of
+    reconstructing and extending diverse narrative domains through its
+    hybrid symbolic–geometric architecture.</p>
+    <h1
+    id="ablation-learning-dynamics-in-the-lemma-embedding-space">Ablation:
+    Learning Dynamics in the Lemma Embedding Space</h1>
+    <p>This section presents a minimal but informative ablation study
+    designed to isolate the effect of the newly introduced <em>learnable
+    lemma embeddings</em> and the associated <em>damping schedule</em>.
+    To avoid confounding factors, we use an extremely small curriculum
+    and a very small GLP model of approximately 9 MB. All generations
+    are produced using pure sampling.</p>
+    <p>The dataset is intentionally tiny: a dark-forest micro-world
+    containing rabbits, raccoons, foxes, caverns, fissures, mist,
+    pulses, and other recurring motifs. This scale allows us to observe
+    the structural behavior of the embedding space under different
+    learning-rate regimes without the smoothing effect of large
+    corpora.</p>
+    <h2 id="experimental-setup">Experimental Setup</h2>
+    <p>We vary three parameters governing the lemma embedding
+    dynamics:</p>
+    <ul>
+    <li><p>the learning rate <span
+    class="math inline"><em>α</em></span>,</p></li>
+    <li><p>the damping factor <span
+    class="math inline"><em>d</em></span> controlling exponential decay
+    of <span class="math inline"><em>α</em></span>,</p></li>
+    <li><p>the number of transitions before <span
+    class="math inline"><em>α</em></span> reaches its minimum.</p></li>
+    </ul>
+    <p>Five configurations are tested:</p>
+    <ol>
+    <li><p><strong>No learning:</strong> <span
+    class="math inline"><em>α</em> = 0</span>.</p></li>
+    <li><p><strong>Low learning rate with damping:</strong> <span
+    class="math inline"><em>α</em> = 0.1 → 0.01</span>.</p></li>
+    <li><p><strong>Low learning rate without damping:</strong> <span
+    class="math inline"><em>α</em> = 0.1</span> constant.</p></li>
+    <li><p><strong>High learning rate with damping:</strong> <span
+    class="math inline"><em>α</em> = 0.5 → 0.05</span>.</p></li>
+    <li><p><strong>High learning rate with faster damping:</strong>
+    <span class="math inline"><em>α</em> = 0.5 → 0.05</span> with half
+    the transition horizon.</p></li>
+    </ol>
+    <p>All models are trained for 10k epochs, producing approximately
+    2.7M training steps.</p>
+    <h2 id="results">Results</h2>
+    <p>The five runs reveal a clear and interpretable pattern:</p>
+    <h4 id="no-learning-alpha-0.">1. No learning (<span
+    class="math inline"><em>α</em> = 0</span>).</h4>
+    <p>Lemma embeddings remain at their hash initialization. The model
+    collapses into a small set of attractors
+    (e.g. <em>cavern–tendril–surge</em>), with minimal variation and
+    repetitive structure. This demonstrates that learnable embeddings
+    are structurally necessary for world absorption.</p>
+    <h4 id="low-learning-rate-with-damping-0.1-rightarrow-0.01.">2. Low
+    learning rate with damping (<span
+    class="math inline">0.1 → 0.01</span>).</h4>
+    <p>Embeddings evolve quickly at first and then stabilize. The
+    resulting world is coherent, varied, and preserves the triadic
+    structure of the micro-world. This is the most stable configuration
+    at small scale.</p>
+    <h4 id="low-learning-rate-without-damping-0.1-constant.">3. Low
+    learning rate without damping (<span class="math inline">0.1</span>
+    constant).</h4>
+    <p>Embeddings continue to drift throughout training. The world
+    remains recognizable but becomes increasingly chaotic, with weaker
+    scene structure and looser lemma associations. This demonstrates the
+    role of damping in preventing semantic drift.</p>
+    <h4 id="high-learning-rate-with-damping-0.5-rightarrow-0.05.">4.
+    High learning rate with damping (<span
+    class="math inline">0.5 → 0.05</span>).</h4>
+    <p>Embeddings absorb the world extremely quickly, producing richer
+    variation and sharper motifs. Damping prevents collapse and yields a
+    stable world after the initial “turbo phase”. This configuration
+    shows that higher learning rates can be beneficial when paired with
+    appropriate damping.</p>
+    <h4 id="high-learning-rate-with-faster-damping.">5. High learning
+    rate with faster damping.</h4>
+    <p>Reducing the transition horizon produces an even cleaner balance
+    between rapid absorption and stable consolidation. The world remains
+    coherent, varied, and free of drift, confirming that the damping
+    schedule is a critical control mechanism.</p>
+    <h2 id="discussion">Discussion</h2>
+    <p>Across all five conditions, the ablation demonstrates that:</p>
+    <ul>
+    <li><p>learnable lemma embeddings are essential for world
+    formation,</p></li>
+    <li><p>damping is required to prevent drift in the embedding
+    space,</p></li>
+    <li><p>higher learning rates can accelerate world absorption when
+    properly damped,</p></li>
+    <li><p>even at extremely small scale, the learned embedding space
+    outperforms fixed-bit encodings such as tri-hot.</p></li>
+    </ul>
+    <p>These results support the relevance of the proposed feature: the
+    lemma embedding space is not merely a convenience, but a structural
+    component of GLP’s world engine. The ablation also shows that the
+    mechanism behaves predictably across learning-rate regimes,
+    reinforcing the theoretical claims made earlier in the paper.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper introduced a learnable lemma embedding layer for
+    Grammar Lemma Paged Language Models (GLP), replacing the earlier
+    bit–vector and tri–hot encoding with a continuous, fixed–dimensional
+    geometric representation. The new layer integrates seamlessly into
+    GLP’s dual–channel architecture: grammar remains deterministic and
+    structurally governing, pages remain discrete and domain–isolating,
+    and lemma selection becomes a geometric process driven by
+    cosine–similarity scoring and grammar compatibility.</p>
+    <p>A key contribution of this work is the <span
+    class="math inline"><em>α</em></span>–damped post–batch update rule
+    for lemma embeddings. Empirical tests demonstrate that damping is
+    essential for long–term stability: without damping, extended
+    training causes embedding drift, degraded page coherence, and slower
+    generation; with damping, the embedding space converges smoothly,
+    and sampling remains fast even after millions of training steps.
+    This shows that the learnable embedding mechanism is not merely an
+    optimisation detail but a structural component of GLP’s generative
+    behaviour.</p>
+    <p>The learnable lemma embedding layer significantly improves
+    practical performance. Sampling is faster, narrative variation is
+    richer, and fewer epochs are required to obtain a usable model.
+    Vocabulary growth becomes fully dynamic, decoupled from model
+    geometry, and hybrid integration with transformer models becomes
+    more natural due to the continuous embedding space.</p>
+    <p>The approach was validated through a full narrator–pipeline
+    demonstration. A 33 MB GLP model trained on <em>Thuvia, Maid of
+    Mars</em> generated coherent pulp–fiction stories using sampling,
+    which were subsequently remastered by transformer models (Mistral 7B
+    and a larger LLM). The resulting volume, <em>The Cosmic Parrot:
+    Triadic Pulp Fiction</em>, illustrates how a lightweight structural
+    model equipped with learnable lemma embeddings can serve as a fast,
+    stable, and domain–faithful generative engine within hybrid GLP+LLM
+    systems.</p>
+    <p>Together, these results position learnable lemma embeddings as a
+    foundational extension of GLP. They preserve the architecture’s
+    structural commitments while unlocking a continuous semantic space
+    that enhances expressiveness, stability, and practical usability.
+    This work therefore strengthens GLP as a modular, interpretable, and
+    scalable alternative to monolithic transformer architectures, and
+    provides a concrete pathway for future research in structurally
+    governed generative systems within the Triadic Cosmos ecosystem.</p>
+    <h1 id="comparison-of-embedding-geometry-in-glp-and-llm">Comparison
+    of Embedding Geometry in GLP and LLM</h1>
+    <p>This appendix clarifies the conceptual and architectural
+    differences between the learnable lemma embeddings introduced in GLP
+    and the embedding mechanisms used in transformer–based language
+    models (LLMs). Although GLP now includes a learnable geometric
+    layer, its embedding dynamics, training behaviour, and generative
+    role differ fundamentally from those of LLMs.</p>
+    <h2
+    id="llm-embeddings-unified-fully-learnable-and-backpropagated">LLM
+    Embeddings: Unified, Fully Learnable, and Backpropagated</h2>
+    <p>Transformer models employ a single, unified embedding space:</p>
+    <ul>
+    <li><p><strong>Input embeddings</strong> are fully learnable. Each
+    vocabulary token is assigned a vector that evolves through gradient
+    descent.</p></li>
+    <li><p><strong>Output logits</strong> are computed through a
+    dot–product between the hidden state and an output matrix that is
+    often <em>tied</em> to the input embedding matrix.</p></li>
+    <li><p><strong>Backpropagation</strong> updates both input and
+    output embeddings jointly, producing a monolithic, high–dimensional
+    space in which grammar, semantics, and token identity
+    coexist.</p></li>
+    <li><p><strong>Softmax over the full vocabulary</strong> determines
+    token selection.</p></li>
+    </ul>
+    <p>Thus, LLMs rely on a single geometric space for both encoding and
+    decoding, and all token behaviour is governed by gradient descent
+    within that space.</p>
+    <h2
+    id="glp-embeddings-deterministic-input-partially-learnable-output">GLP
+    Embeddings: Deterministic Input, Partially Learnable Output</h2>
+    <p>GLP differs structurally:</p>
+    <ul>
+    <li><p><strong>Deterministic input embeddings.</strong> Every GLP
+    token is associated with a small set of fixed, deterministic vectors
+    used for structural encoding. These include grammar–state encodings,
+    page identifiers, narrative–memory projections, and
+    context–compression signals. These vectors do not form a unified
+    embedding space, do not encode semantic similarity, and do not
+    participate in backpropagation. Their role is purely organisational:
+    they provide compact structural descriptors that allow GLP’s
+    dual–channel architecture to maintain long–horizon coherence without
+    learned input embeddings.</p></li>
+    <li><p><strong>Output embeddings are learnable.</strong> Each lemma
+    token <span class="math inline">ℓ</span> has a stored embedding
+    <span class="math inline"><em>e</em><sub>ℓ</sub></span> used
+    exclusively for <em>output selection</em> via cosine similarity.
+    These embeddings are deterministically initialised (via hashing) and
+    become partially learnable during training.</p></li>
+    <li><p><strong>No backpropagation into lemma embeddings.</strong>
+    The lemma MLP is trained through gradient descent, but the stored
+    lemma embeddings are updated through an <span
+    class="math inline"><em>α</em></span>–damped mixing rule:</p>
+    <p><span
+    class="math display"><em>e</em><sub>ℓ</sub> ← (1−<em>α</em>)<em>e</em><sub>ℓ</sub> + <em>α</em><em>ê</em>,</span></p>
+    <p>where <span class="math inline"><em>ê</em></span> is the
+    predicted embedding. This update is not a gradient step but a
+    controlled geometric interpolation, allowing rapid early learning
+    and smooth long–term convergence.</p></li>
+    <li><p><strong>Page–restricted cosine ranking.</strong> Lemma
+    selection is performed by computing</p>
+    <p><span
+    class="math display">cos (<em>ê</em>,<em>e</em><sub>ℓ</sub>)</span></p>
+    <p>for candidates within the active page, filtered by grammar
+    compatibility. GLP does not perform a full–vocabulary
+    softmax.</p></li>
+    </ul>
+    <p>GLP therefore separates structure and geometry: grammar and
+    context remain symbolic and deterministic, while lemma selection
+    becomes geometric and continuous.</p>
+    <h2 id="structural-consequences">Structural Consequences</h2>
+    <p>These differences have several implications:</p>
+    <ul>
+    <li><p><strong>GLP is not a monolithic embedding model.</strong>
+    Structural input signals are deterministic and non-learnable; only
+    lemma output embeddings participate in learning.</p></li>
+    <li><p><strong>GLP’s embedding space is an output space
+    only.</strong> It represents <em>world geometry</em> (motifs,
+    clusters, attractors), not input token identity or syntactic
+    encoding.</p></li>
+    <li><p><strong>GLP’s embedding updates are stable and
+    interpretable.</strong> The <span
+    class="math inline"><em>α</em></span>–damped mixing rule avoids the
+    instability associated with gradient descent on discrete
+    vocabularies.</p></li>
+    <li><p><strong>GLP’s generative behaviour remains structurally
+    governed.</strong> Cosine ranking operates within grammar–filtered
+    pages, preserving canonical structure even as semantic variation
+    increases.</p></li>
+    </ul>
+    <h2 id="summary">Summary</h2>
+    <p>Although GLP now includes a learnable geometric layer, it remains
+    fundamentally different from transformer models:</p>
+    <ul>
+    <li><p>LLMs learn <em>input</em> embeddings; GLP uses deterministic
+    structural embeddings for all input signals.</p></li>
+    <li><p>LLM embeddings are updated by backpropagation; GLP lemma
+    embeddings are updated by <span
+    class="math inline"><em>α</em></span>–blended
+    interpolation.</p></li>
+    <li><p>LLMs use a global softmax over the entire vocabulary; GLP
+    applies a local softmax only over the top–<span
+    class="math inline"><em>k</em></span> cosine-ranked lemma candidates
+    within the active page.</p></li>
+    <li><p>LLMs unify grammar and semantics in one space; GLP keeps
+    grammar symbolic and deterministic while adding a geometric lemma
+    layer.</p></li>
+    </ul>
+    <p>This distinction is essential: GLP’s learnable lemma embeddings
+    enhance semantic expressiveness without altering its structural
+    commitments, preserving GLP as a hybrid symbolic–geometric world
+    engine rather than a transformer–style language model.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the GLP engine, the sequential narrator
+    pipeline, and all supporting modules is provided under the AGPL‑3.0
+    license. These components form a modular stack: deterministic
+    grammar structure, paged lemma vocabularies, learnable lemma
+    embeddings, PRE‑based sentence validation, and hybrid LLM
+    remastering.</p>
+    <p>The learnable lemma embedding layer introduced in this paper
+    integrates directly into this ecosystem. It is used in the narrator
+    pipeline to generate long‑form narrative content, followed by
+    transformer‑based remastering. A 33 MB GLP model trained on
+    <em>Thuvia, Maid of Mars</em> (Gutenberg) serves as the structural
+    engine for a new volume of pulp‑fiction stories titled <em>The
+    Cosmic Parrot: Triadic Pulp Fiction</em>. This book demonstrates the
+    practical effectiveness of the GLP+LLM hybrid pipeline: GLP provides
+    canonical structure, domain fidelity, and narrative stability, while
+    transformer models (Mistral 7B and a larger LLM) provide stylistic
+    refinement and surface fluency.</p>
+    <div class="thebibliography">
+    <p>J. De Witte, “Grammar Lemma Paged Language Models,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Language as Graph Traversal: The DMLG
+    Architecture,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Dynamic and Modular Architecture for Language
+    Modeling,” Triadic Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>

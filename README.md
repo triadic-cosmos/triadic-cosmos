@@ -666,6 +666,28 @@ A milestone in synthetic narratology,
 that structured recursion — not scale — is the key to coherent,  
 canon‑anchored synthetic literature.
 
+### **15. The Cosmic Parrot: Triadic Pulp Fiction**
+
+A complete end‑to‑end showcase of *Grammar Lemma Paged (GLP) v2* combined with the  
+Triadic Cosmos Narrator Pipeline — the first volume to demonstrate how an entire  
+100‑chapter pulp‑fiction saga can emerge from **pure structural autonomy** without  
+any human selection, moderation, curation, or narrative steering.
+
+This book is grown entirely from GLP’s internal world model, trained on  
+*Thuvia, Maid of Mars* as its pulp‑fiction canonical backbone.  
+
+The book contains:
+- **100 fully remastered chapters**, forming a coherent synthetic pulp‑epic  
+  across deserts, Martian cities, palace corridors, barrooms, and Pathan lands.
+- **100 original narrator pipeline chapters**, presented unedited in the final chapter  
+  as a transparent record of the generative substrate.
+
+This volume stands as a rare example of **fully autonomous synthetic literature**:  
+a world generated entirely by GLP v2, refined only by automated remastering stages,  
+and produced with minimal prompting and maximal emergence.  
+It demonstrates GLP as a world model, the narrator pipeline as autonomous storyteller,  
+and the viability of end‑to‑end generative books without human creative intervention.
+
 ---
 
 ## 📄 Scientific Papers
@@ -1794,6 +1816,54 @@ it is **exactly the type of existing empirical test that naturally supports it**
 
 This makes the quantum eraser a **perfect real-world demonstration** of the Dual Time architecture:  
 it doesn’t contradict it, it strengthens it, and it shows why a two‑clock universe is the most coherent interpretation.
+
+---
+
+### **36. Learnable Lemma Embeddings for GLP Models — Continuous Geometry for Structural World Engines**
+
+This paper introduces the first continuous geometric lemma‑embedding layer for  
+Grammar Lemma Paged (GLP) Language Models, replacing the earlier bit‑vector and  
+tri‑hot encodings with a fixed‑dimensional, learnable semantic space.  
+It demonstrates how GLP — a structurally governed, dual‑channel language model —  
+can absorb world geometry, narrative cadence, and domain‑specific semantics through  
+a lightweight embedding mechanism while preserving deterministic grammar structure  
+and paged vocabulary organisation.
+
+The core contribution is a **two‑stage learning mechanism**:
+
+- a lemma‑MLP that predicts target embeddings optimised via cosine similarity,  
+- a post‑batch **α‑damped mixing rule** that updates stored embeddings and prevents  
+  semantic drift, instability, and page incoherence.
+
+Empirical results across both tiny (9 MB) and mid‑scale (33 MB) GLP models show that  
+learnable lemma embeddings transform GLP into a **trainable world engine**:  
+a compact model capable of reconstructing the latent ontology of a narrative domain  
+rather than memorising surface text.  
+With α‑damping, the embedding space converges smoothly, enabling fast sampling,  
+stable long‑horizon behaviour, and rich semantic variation.
+
+A larger GLP model trained on *Thuvia, Maid of Mars* demonstrates the practical  
+effectiveness of the approach: GLP generates structurally coherent pulp‑fiction  
+proto‑stories that are subsequently refined by transformer models (Mistral 7B and  
+a larger LLM) into the full volume *The Cosmic Parrot: Triadic Pulp Fiction*.  
+The hybrid pipeline preserves GLP’s world geometry while adding stylistic fluency,  
+confirming GLP’s role as a domain‑faithful structural substrate within modular  
+IEGR‑hybrid systems.
+
+The paper also presents a detailed ablation study showing that:
+
+- without learning (α = 0), GLP collapses into attractor repetition,  
+- without damping, embeddings drift and degrade page coherence,  
+- with high learning rates + damping, GLP rapidly absorbs world structure,  
+- continuous embeddings consistently outperform discrete tri‑hot encodings.
+
+This work establishes learnable lemma embeddings as a **foundational extension** of  
+GLP: a continuous geometric layer integrated into a symbolic‑deterministic architecture,  
+enabling hybrid symbolic‑geometric generation, dynamic vocabulary growth, and  
+domain‑faithful world modelling.  
+It positions GLP as a lightweight, interpretable, structurally governed alternative  
+to monolithic LLMs — and as a key world‑engine component within the Triadic Cosmos  
+ecosystem.
 
 ---
 
