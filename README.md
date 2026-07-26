@@ -1897,7 +1897,7 @@ It includes appendices on:
 - observational cosmology (EHT, LIGO/Virgo/KAGRA, Page curve),  
 - and mathematical tightening of the derived relations.
 
-#### 🎉 Fun Fact — New Relations = Architectural Evidence
+#### 🔍 Fun Fact — New Relations = Architectural Evidence
 
 The minimal black‑hole universe does more than reproduce known physics.  
 It generates **new physical relations** that do not appear in standard literature,  
@@ -1916,11 +1916,17 @@ When a unification framework:
 
 it demonstrates that the architecture is **structurally real** rather than interpretive.
 
-The new paper confirms this through relations such as:
+- **Evaporation–Entropy Relation:**  
+  The lifetime of a black hole grows with the three‑halves power of its holographic entropy.  
+  Larger horizon area → more information → disproportionately longer evaporation time.
 
-- \(t_{\mathrm{evap}} \sim \alpha S^{3/2}\)  
-- \(\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}} \propto \frac{1}{M^2}\)  
-- \(P \cdot t_{\mathrm{evap}} \sim E\)
+- **Dual‑Time Scaling:**  
+  Material time inside a black hole slows down in proportion to the inverse square of its mass.  
+  Massive black holes evolve extremely slowly; small ones evolve rapidly.
+
+- **Triadic Consistency Identity:**  
+  The total Hawking energy emitted over a black hole’s lifetime equals its initial mass.  
+  Radiative power × lifetime = original energetic content.
 
 These formulas are **new**, **correct**, and **architecturally forced** —  
 a hallmark of a genuine unification program rather than a conceptual reinterpretation.
