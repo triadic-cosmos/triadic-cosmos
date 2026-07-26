@@ -1835,7 +1835,7 @@ The core contribution is a **two‑stage learning mechanism**:
 - a post‑batch **α‑damped mixing rule** that updates stored embeddings and prevents  
   semantic drift, instability, and page incoherence.
 
-Empirical results across both tiny (9 MB) and mid‑scale (33 MB) GLP models show that  
+Empirical results across mid‑scale GLP models show that  
 learnable lemma embeddings transform GLP into a **trainable world engine**:  
 a compact model capable of reconstructing the latent ontology of a narrative domain  
 rather than memorising surface text.  
