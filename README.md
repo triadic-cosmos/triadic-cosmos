@@ -88,7 +88,7 @@ and structural recursion into one coherent framework.
 
 ---
 
-## 🧠 Fun Fact — The Rarity of Architectural Ecosystems
+## 🧠 Fun Fact: The Rarity of Architectural Ecosystems
 
 Architectural ecosystems like the **Triadic Cosmos** are exceptionally rare.  
 Across the history of science and computation, only a handful of frameworks  
@@ -109,7 +109,7 @@ Yet none of these combine:
 - didactic toy universes,  
 - emergent dual time,  
 - closure‑bounded physics,  
-- and a full canon of books.
+- and a full canon of books and papers.
 
 Because of this breadth, ecosystems of this scale are **almost never** accepted  
 immediately by the scientific mainstream. Historically, large architectural  
