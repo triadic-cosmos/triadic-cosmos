@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The GLP–Mono Architecture<br />
+A Monolithic Paged Grammar–Lemma Language Model</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#significance-of-the-glpmono-architecture"
+    id="toc-significance-of-the-glpmono-architecture">Significance of
+    the GLP–Mono Architecture</a></li>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#from-dmlg-to-glpmono"
+    id="toc-from-dmlg-to-glpmono">From DMLG to GLP–Mono</a></li>
+    <li><a href="#architecture"
+    id="toc-architecture">Architecture</a></li>
+    <li><a href="#inference" id="toc-inference">Inference</a></li>
+    <li><a href="#training-regime" id="toc-training-regime">Training
+    Regime</a></li>
+    <li><a href="#glpmono-as-a-canon-engine-and-narrative-substrate"
+    id="toc-glpmono-as-a-canon-engine-and-narrative-substrate">GLP–Mono
+    as a Canon Engine and Narrative Substrate</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#glpmono-and-dmlg-as-a-distinct-architectural-lineage"
+    id="toc-glpmono-and-dmlg-as-a-distinct-architectural-lineage">GLP–Mono
+    and DMLG as a Distinct Architectural Lineage</a></li>
+    <li><a href="#glpmono-vs-transformer-language-models"
+    id="toc-glpmono-vs-transformer-language-models">GLP–Mono vs
+    Transformer Language Models</a></li>
+    <li><a href="#comparison-between-glpmono-and-the-dmlg-architecture"
+    id="toc-comparison-between-glpmono-and-the-dmlg-architecture">Comparison
+    Between GLP–Mono and the DMLG Architecture</a></li>
+    <li><a href="#integration-in-the-narrator-pipeline"
+    id="toc-integration-in-the-narrator-pipeline">Integration in The
+    Narrator Pipeline</a></li>
+    <li><a href="#learned-activation-behaviour-in-glp-models"
+    id="toc-learned-activation-behaviour-in-glp-models">Learned
+    Activation Behaviour in GLP Models</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="significance-of-the-glpmono-architecture">Significance of
+    the GLP–Mono Architecture</h1>
+    <p>GLP–Mono occupies a distinct position within the broader
+    landscape of language model architectures. It does not aim to
+    compete with large transformer-based models in scale, fluency, or
+    dataset coverage. Instead, GLP–Mono demonstrates that coherent
+    next-token behaviour, domain-faithful world geometry, and
+    interpretable generative structure can emerge from a compact
+    architecture built around deterministic grammar, paged lemma
+    organization, and fixed-dimensional context encoding. Its
+    significance lies not in raw generative power, but in the
+    architectural principles it makes possible.</p>
+    <h2 id="a-structured-alternative-to-attention-based-models">A
+    Structured Alternative to Attention-Based Models</h2>
+    <p>Contemporary language models rely almost universally on
+    self-attention over high-dimensional hidden states. GLP–Mono shows
+    that this paradigm is not the only viable route to coherent
+    generation. By combining symbolic grammar tokens, paged lexical
+    clusters, cosine-based ranking, and a monolithic MLP, GLP–Mono
+    provides a structurally governed alternative in which:</p>
+    <ul>
+    <li><p>grammar remains deterministic and interpretable,</p></li>
+    <li><p>lemma geometry is compact and domain-isolated,</p></li>
+    <li><p>paging replaces global softmax over large
+    vocabularies,</p></li>
+    <li><p>context is encoded without attention,</p></li>
+    <li><p>long-horizon coherence arises from recurrent narrative
+    memory.</p></li>
+    </ul>
+    <p>This architecture demonstrates that explicit structure can
+    coexist with learned lexical geometry, yielding a model that is both
+    inspectable and expressive at small scale.</p>
+    <h2 id="successor-to-dmlg-and-earlier-glp-variants">Successor to
+    DMLG and Earlier GLP Variants</h2>
+    <p>GLP–Mono inherits the structural insights of DMLG—deterministic
+    grammar, paging, recursive evaluation, and IEGR completeness—while
+    resolving the limitations of modular micro-model ensembles. Earlier
+    GLP variants employed a dual grammar/lemma network that restricted
+    generative performance. GLP–Mono collapses this duality into a
+    single monolithic network, enabling stronger next-token behaviour
+    while preserving the structural cadence of its predecessors.</p>
+    <p>Although GLP–Mono remains small-scale, trained on limited
+    datasets with modest compute budgets, it provides a more LM-like
+    generative core than DMLG. It is therefore the natural architectural
+    successor: structurally grounded, compact, and capable of producing
+    domain-faithful proto-stories suitable for downstream
+    refinement.</p>
+    <h2 id="hybrid-generative-systems-and-domain-bound-agi">Hybrid
+    Generative Systems and Domain-Bound AGI</h2>
+    <p>The significance of GLP–Mono becomes most apparent in hybrid
+    systems. When paired with a transformer LLM, GLP–Mono acts as a
+    deterministic canon engine: it supplies world geometry, narrative
+    motifs, and structural attractors, while the LLM supplies stylistic
+    refinement and narrative shaping. Because GLP–Mono encodes the full
+    canonical ontology of its training domain, the LLM can reproduce
+    this canon <em>without any world prompting</em>. The GLP-generated
+    proto-story implicitly carries the world model, and the LLM merely
+    rewrites it into fluent natural language.</p>
+    <p>This hybrid configuration enables a form of domain-bound AGI: a
+    system in which world reasoning, narrative coherence, and stylistic
+    expression emerge from the interaction between a structured LM and a
+    large transformer. The narrator pipeline serves as a fully worked
+    example of this paradigm, illustrating how GLP–Mono can steer a
+    general-purpose LLM through context rather than parameter
+    modification.</p>
+    <h2 id="scope-and-ecosystem-boundaries">Scope and Ecosystem
+    Boundaries</h2>
+    <p>Scaling GLP–Mono to the size of contemporary LLMs—billions of
+    parameters, massive datasets, and industrial training budgets—is
+    outside the scope of the ecosystem. The ecosystem is built around
+    unification, structural clarity, and compact world engines rather
+    than large-scale pretraining. GLP–Mono is designed to be small,
+    deterministic, and domain-stable, providing a canonical substrate
+    for hybrid generative systems rather than serving as a standalone
+    large LM.</p>
+    <h2 id="summary">Summary</h2>
+    <p>GLP–Mono is significant not because it rivals transformers in
+    scale, but because it demonstrates a different architectural path:
+    one in which deterministic grammar, paged lexical geometry, and
+    compact context encoding yield coherent next-token behaviour and
+    stable world models. Its role as a canon engine in hybrid systems
+    highlights the value of structured LM architectures and provides a
+    foundation for domain-bound generative intelligence within the
+    broader ecosystem.</p>
+    <h1 id="introduction">Introduction</h1>
+    <p>Contemporary language models are dominated by transformer-based
+    architectures that unify grammar, lexical content, and contextual
+    structure into a single high-dimensional embedding space governed by
+    self-attention. While these systems achieve strong generative
+    fluency, their internal organization remains monolithic: all tokens
+    share the same embedding geometry, vocabulary size determines output
+    dimension, and long-horizon coherence depends on large hidden states
+    and deep attention stacks. As a result, transformer LMs provide no
+    explicit structural backbone, no deterministic grammar regime, and
+    no mechanism for domain-isolated lexical organization.</p>
+    <p>GLP–Mono introduces a fundamentally different approach to
+    next-token language modeling. Instead of attention over a global
+    vocabulary, GLP–Mono employs a single feedforward network whose
+    output is split into two components: a fixed-dimensional lemma
+    embedding and a one-hot page selector. Each page contains a compact
+    set of grammar–lemma token pairs discovered during training, while
+    terminal grammar tokens are implicitly available in every page.
+    Next-token prediction is performed by selecting the highest-scoring
+    page (with fallback), ranking all token pairs in that page by cosine
+    similarity to the predicted lemma embedding, and sampling from the
+    top-<span class="math inline"><em>k</em></span> candidates.</p>
+    <p>Context is represented through grammar-driven compression,
+    sentence-level embeddings, and a compact recurrent narrative memory.
+    This yields a fixed-size input vector without attention, enabling
+    stable long-horizon behaviour even at small scale. Grammar tokens
+    remain symbolic and deterministic, providing structural cadence,
+    while lemma tokens are represented as learned output embeddings
+    updated through a damped mixing rule. Paging acts as a sparse
+    routing mechanism that isolates domain-specific token clusters and
+    prevents cross-domain drift.</p>
+    <p>The result is a structurally governed, domain-isolated language
+    model whose geometry is fixed, whose grammar is deterministic, and
+    whose next-token behaviour emerges from a combination of learned
+    lemma embeddings and context-driven page activation. GLP–Mono
+    demonstrates that coherent language generation does not require
+    large embedding spaces or attention mechanisms: a single monolithic
+    MLP, paired with deterministic grammar and paged lexical
+    organization, is sufficient to produce stable, expressive, and
+    interpretable next-token dynamics.</p>
+    <h1 id="from-dmlg-to-glpmono">From DMLG to GLP–Mono</h1>
+    <p>GLP–Mono is the architectural successor to the Dynamic Modular
+    Language Graph (DMLG). Both systems share a structural lineage:
+    deterministic grammar tokens, paged lexical organization,
+    context-driven state, and recursive mechanisms for sentence-level
+    validation. However, GLP–Mono represents a decisive shift toward a
+    monolithic next-token language model that aligns more closely with
+    mainstream LM design while preserving the structural governance
+    principles of DMLG.</p>
+    <h2 id="dmlg-as-a-structural-precursor">DMLG as a Structural
+    Precursor</h2>
+    <p>DMLG introduced a graph-based generative substrate in which
+    grammar, lemma structure, paging, and evaluator-governed recursion
+    formed a deterministic backbone for controlled text generation. Its
+    architecture was IEGR-complete: it possessed explicit geometry,
+    recursive evaluation loops, and domain-isolated paging. Yet DMLG
+    operated at small scale: limited datasets, low energy budgets,
+    micro-model ensembles, and short training cycles. As a result, its
+    generative output was structurally coherent but not competitive with
+    large transformer models in fluency or stylistic richness.</p>
+    <p>DMLG demonstrated that structured generation was possible without
+    attention, but its modular micro-model design constrained its
+    expressive capacity. The dual-network grammar/lemma architecture of
+    early GLP variants inherited these limitations: strong structural
+    cadence, but reduced generative performance.</p>
+    <h2 id="glpmono-as-a-generative-successor">GLP–Mono as a Generative
+    Successor</h2>
+    <p>GLP–Mono resolves these constraints by collapsing the
+    architecture into a single monolithic MLP with deterministic grammar
+    and learned lemma geometry. Paging remains central, but routing is
+    now driven by a unified network rather than distributed
+    micro-models. Context encoding retains the structural ideas of
+    DMLG—history compression, recurrent narrative memory, and
+    grammar-driven sentence embeddings—yet GLP–Mono learns how these
+    components interact rather than relying on evaluator-based
+    traversal.</p>
+    <p>This shift yields a model that is architecturally compact,
+    structurally interpretable, and generatively stronger than its
+    predecessors. GLP–Mono does not match the fluency of large
+    transformer LMs—its dataset, training budget, and model size remain
+    intentionally small—but it provides a coherent, domain-faithful
+    generative substrate that behaves like a true language model rather
+    than a modular graph engine.</p>
+    <h2 id="hybrid-strength-in-the-narrator-pipeline">Hybrid Strength in
+    the Narrator Pipeline</h2>
+    <p>The combination of GLP–Mono and a transformer LLM enables a form
+    of hybrid generation that neither architecture can achieve alone.
+    GLP–Mono supplies the world geometry, canonical grammar, and
+    narrative attractors; the LLM supplies stylistic refinement,
+    narrative shaping, and quality control. Because GLP–Mono produces
+    structurally coherent proto-stories, the LLM can reproduce the full
+    canon of the GLP-trained domain <em>without any world
+    prompting</em>. The world is implicitly encoded in the GLP output,
+    and the LLM merely rewrites it into fluent natural language.</p>
+    <p>This hybrid configuration demonstrates the architectural value of
+    GLP–Mono: a compact, deterministic canon engine that can steer a
+    large LLM through context rather than parameter modification. It
+    preserves the structural insights of DMLG while providing a more
+    expressive and LM-like generative core, enabling structured
+    long-form generation in downstream systems such as the narrator
+    pipeline.</p>
+    <h1 id="architecture">Architecture</h1>
+    <p>GLP–Mono is a monolithic next-token language model built around
+    deterministic grammar tokens, paged grammar–lemma token pairs, and
+    fixed-dimensional output geometry. The architecture consists of four
+    tightly integrated components: a context encoder, a recurrent
+    narrative memory, a single feedforward network with learned
+    activation, and a paged output space containing all grammar–lemma
+    pairs observed during training. Together, these components form a
+    deterministic, domain-isolated next-token generator without
+    attention, alignment, or auxiliary control mechanisms.</p>
+    <h2 id="context-encoding">Context Encoding</h2>
+    <p>At each generative step, GLP–Mono receives a fixed-dimensional
+    context vector constructed from three sources:</p>
+    <ol>
+    <li><p><strong>History embeddings:</strong> A sliding window of
+    previously generated sentences is encoded into large and medium
+    embeddings using a grammar-driven sentence encoder. These embeddings
+    compress structural information such as part-of-speech cadence and
+    lemma distribution.</p></li>
+    <li><p><strong>Current-sentence embedding:</strong> Lemma tokens in
+    the partially generated sentence are represented through clipped
+    medium embeddings, combined with a normalized position
+    scalar.</p></li>
+    <li><p><strong>Narrative memory:</strong> A compact recurrent state
+    tracks actors, actions, moments, and atmosphere using GRU-like
+    updates over learned lemma embeddings. This state provides
+    long-horizon coherence without attention.</p></li>
+    </ol>
+    <p>The concatenation of these components yields a single fixed-size
+    input vector supplied to the monolithic network.</p>
+    <h2 id="monolithic-network-with-learned-activation">Monolithic
+    Network with Learned Activation</h2>
+    <p>GLP–Mono employs a single feedforward network:</p>
+    <p><span
+    class="math display"><em>f</em>(<em>x</em>) = <em>W</em><sub>3</sub> <em>σ</em>(<em>W</em><sub>2</sub> <em>σ</em>(<em>W</em><sub>1</sub><em>x</em>)),</span></p>
+    <p>where <span class="math inline"><em>σ</em></span> is a learned
+    activation function implemented as a small three-layer MLP. This
+    activation MLP enables expressive non-linear behaviour while
+    preserving deterministic geometry. The network outputs a vector
+    split into two parts:</p>
+    <ol>
+    <li><p>a <strong>lemma embedding</strong> in <span
+    class="math inline">ℝ<sup><em>d</em></sup></span>,</p></li>
+    <li><p>a <strong>page-logit vector</strong> in <span
+    class="math inline">ℝ<sup><em>P</em></sup></span>.</p></li>
+    </ol>
+    <p>The lemma embedding is normalized to unit length. The page logits
+    determine which page of grammar–lemma token pairs is active for the
+    next-token decision.</p>
+    <h2 id="paged-output-space">Paged Output Space</h2>
+    <p>During training, GLP–Mono constructs a set of pages. Each page
+    contains:</p>
+    <ul>
+    <li><p>a set of input lemma keys used for routing,</p></li>
+    <li><p>a set of grammar–lemma token pairs <span
+    class="math inline">(<em>G</em>,<em>L</em>)</span> observed during
+    training.</p></li>
+    </ul>
+    <p>Terminal tokens (<code>&lt;PERIOD&gt;</code>,
+    <code>&lt;COMMA&gt;</code>, <code>&lt;EXCLAMATION&gt;</code>,
+    <code>&lt;QUESTION&gt;</code>, <code>&lt;EOL&gt;</code>) are
+    implicitly present in every page and require no routing. Pages act
+    as sparse MoE-style clusters: only the highest scoring page (with
+    fallback) is used for next-token selection.</p>
+    <h2 id="next-token-selection">Next-Token Selection</h2>
+    <p>Next-token prediction proceeds as follows:</p>
+    <ol>
+    <li><p>The monolithic network outputs a lemma embedding <span
+    class="math inline"><em>ê</em></span> and page logits.</p></li>
+    <li><p>The highest-scoring page is selected; if it contains no valid
+    token pairs, the model falls back to the next page.</p></li>
+    <li><p>All grammar–lemma pairs <span
+    class="math inline">(<em>G</em>,<em>L</em>)</span> in the active
+    page, plus the five terminal tokens, are scored by cosine
+    similarity:</p>
+    <p><span
+    class="math display"><em>s</em>(<em>G</em>,<em>L</em>) = cos (<em>ê</em>,<em>e</em><sub><em>G</em>, <em>L</em></sub>),</span></p>
+    <p>where <span
+    class="math inline"><em>e</em><sub><em>G</em>, <em>L</em></sub></span>
+    is the learned output embedding for the pair.</p></li>
+    <li><p>The ranked list is truncated to the top-<span
+    class="math inline"><em>k</em></span> candidates and sampled using
+    temperature-scaled softmax.</p></li>
+    </ol>
+    <p>Grammar tokens are deterministic symbols; lemma tokens are
+    learned embeddings. No grammar–lemma filtering is applied:
+    compatibility is encoded implicitly in the page structure learned
+    during training.</p>
+    <h2 id="learned-output-embeddings">Learned Output Embeddings</h2>
+    <p>Each grammar–lemma pair <span
+    class="math inline">(<em>G</em>,<em>L</em>)</span> has a learned
+    output embedding updated through a damped mixing rule after each
+    training batch:</p>
+    <p><span
+    class="math display"><em>e</em><sub><em>G</em>, <em>L</em></sub> ← (1−<em>α</em>)<em>e</em><sub><em>G</em>, <em>L</em></sub> + <em>α</em><em>ê</em>,</span></p>
+    <p>where <span class="math inline"><em>α</em></span> decreases
+    gradually over training. This mechanism allows rapid early learning
+    while ensuring long-term stability and preventing drift in the paged
+    output space.</p>
+    <h2 id="deterministic-geometry">Deterministic Geometry</h2>
+    <p>GLP–Mono maintains fixed geometry throughout training and
+    inference:</p>
+    <ul>
+    <li><p>grammar tokens are symbolic and deterministic,</p></li>
+    <li><p>lemma embeddings have fixed dimension,</p></li>
+    <li><p>pages provide domain-isolated clusters,</p></li>
+    <li><p>the monolithic network has fixed parameter count,</p></li>
+    <li><p>vocabulary growth does not alter model geometry.</p></li>
+    </ul>
+    <p>This deterministic structure enables stable multi-world blending,
+    predictable long-horizon behaviour, and interpretable generation
+    dynamics without reliance on large embedding spaces or attention
+    mechanisms.</p>
+    <h2 id="model-hyperparameters">Model Hyperparameters</h2>
+    <p>GLP–Mono is defined by a compact set of hyperparameters that
+    determine its geometry, paging structure, context representation,
+    and sampling behaviour. All hyperparameters are fixed at
+    initialization and remain constant throughout training and
+    inference. Paging is fully static: the number of pages is fixed and
+    does not grow dynamically. Likewise, the dimensionality of all input
+    and output vectors is configurable and independent of the number of
+    grammar–lemma pairs observed during training.</p>
+    <p>Table <a href="#tab:hyperparams" data-reference-type="ref"
+    data-reference="tab:hyperparams">1</a> summarizes the principal
+    hyperparameters that define a GLP–Mono model.</p>
+    <div id="tab:hyperparams">
+    <table>
+    <caption>Principal hyperparameters defining the GLP–Mono
+    architecture.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Category</strong></th>
+    <th style="text-align: left;"><strong>Hyperparameter</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Paging</strong></td>
+    <td style="text-align: left;">Number of pages (default: 256)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Fixed paging; no dynamic page creation
+     </td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Lemma Embeddings</strong></td>
+    <td style="text-align: left;">Output embedding dimension (default:
+    256)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Embedding update rate and damping
+    schedule  </td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Network Geometry</strong></td>
+    <td style="text-align: left;">Hidden layer size of the monolithic
+    MLP (default: 1536)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Hidden layer size of the activation
+    MLP (default: 64)</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Total input dimension (computed from
+    context encoder)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Total output dimension (pages + lemma
+    embedding)  </td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><strong>Context Encoding</strong></td>
+    <td style="text-align: left;">History structure: 5 large sentence
+    encodings, 15 medium sentence encodings</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Maximum lemmas for current sentence
+    (default: 30)</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Narrative memory dimension (default:
+    128)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><strong>Sampling</strong></td>
+    <td style="text-align: left;">Top-<span
+    class="math inline"><em>k</em></span> sampling parameter (default:
+    20)</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"></td>
+    <td style="text-align: left;">Temperature (default: 0.8)</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>These hyperparameters determine the complete geometry of
+    GLP–Mono: the size of the monolithic network, the dimensionality of
+    lemma embeddings, the structure of the context encoder, the number
+    of pages, and the behaviour of the sampling mechanism. Because
+    paging and output dimensions are fixed, vocabulary growth does not
+    alter model size, and all grammar–lemma pairs discovered during
+    training are mapped into the existing paged output space.</p>
+    <h1 id="inference">Inference</h1>
+    <p>Inference in GLP–Mono is a deterministic, paged next-token
+    process driven by a single feedforward network, a fixed-dimensional
+    context encoder, and a learned set of grammar–lemma token pairs.
+    Unlike transformer-based models, GLP–Mono does not rely on
+    attention, softmax over a global vocabulary, or probabilistic
+    routing. Instead, next-token prediction is executed through a
+    sequence of structured operations: context encoding, monolithic
+    network evaluation, page selection, cosine-based ranking, and
+    top-<span class="math inline"><em>k</em></span> sampling.</p>
+    <h2 id="context-preparation">Context Preparation</h2>
+    <p>At each generation step, the model constructs a fixed-dimensional
+    context vector consisting of:</p>
+    <ol>
+    <li><p>history embeddings from previously generated
+    sentences,</p></li>
+    <li><p>a medium-resolution embedding of the current partial
+    sentence,</p></li>
+    <li><p>the recurrent narrative memory state,</p></li>
+    <li><p>the stable dataset sequence embedding associated with a
+    keyword set.</p></li>
+    </ol>
+    <p>This vector is supplied directly to the monolithic network. No
+    attention mechanism or dynamic context expansion is used.</p>
+    <h2 id="network-evaluation">Network Evaluation</h2>
+    <p>The monolithic MLP produces a single output vector that is split
+    into:</p>
+    <ol>
+    <li><p>a normalized lemma embedding <span
+    class="math inline"><em>ê</em></span>,</p></li>
+    <li><p>a vector of page logits determining the relevance of each
+    page.</p></li>
+    </ol>
+    <p>The lemma embedding represents the model’s prediction of the next
+    lexical content, while the page logits determine which cluster of
+    grammar–lemma pairs is most appropriate given the current
+    context.</p>
+    <h2 id="page-selection">Page Selection</h2>
+    <p>Pages act as sparse MoE-style routing units. Inference proceeds
+    by:</p>
+    <ol>
+    <li><p>sorting pages by descending logit score,</p></li>
+    <li><p>selecting the highest-scoring page,</p></li>
+    <li><p>falling back to lower-ranked pages if the selected page
+    contains no valid token pairs.</p></li>
+    </ol>
+    <p>Terminal tokens (<code>&lt;PERIOD&gt;</code>,
+    <code>&lt;COMMA&gt;</code>, <code>&lt;EXCLAMATION&gt;</code>,
+    <code>&lt;QUESTION&gt;</code>, <code>&lt;EOL&gt;</code>) are
+    implicitly available in every page and do not require routing.</p>
+    <h2 id="cosine-based-ranking">Cosine-Based Ranking</h2>
+    <p>Once a page is selected, GLP–Mono evaluates all grammar–lemma
+    pairs <span class="math inline">(<em>G</em>,<em>L</em>)</span> in
+    that page by computing cosine similarity between the predicted lemma
+    embedding <span class="math inline"><em>ê</em></span> and the stored
+    output embedding <span
+    class="math inline"><em>e</em><sub><em>G</em>, <em>L</em></sub></span>:</p>
+    <p><span
+    class="math display"><em>s</em>(<em>G</em>,<em>L</em>) = cos (<em>ê</em>,<em>e</em><sub><em>G</em>, <em>L</em></sub>).</span></p>
+    <p>This ranking mechanism replaces the global softmax used in
+    transformer models. Grammar tokens are deterministic symbols; lemma
+    tokens are learned embeddings. No grammar filtering is applied:
+    compatibility is encoded implicitly in the page structure learned
+    during training.</p>
+    <h2 id="top-k-sampling">Top-<span
+    class="math inline"><em>k</em></span> Sampling</h2>
+    <p>The ranked list of token pairs is truncated to the top-<span
+    class="math inline"><em>k</em></span> candidates. Sampling proceeds
+    by applying temperature-scaled softmax to their cosine scores:</p>
+    <p><span class="math display">$$p(G, L) =
+    \frac{\exp(s(G,L)/T)}{\sum_{(G',L') \in \text{top-}k}
+            \exp(s(G',L')/T)}.$$</span></p>
+    <p>A single grammar–lemma pair is drawn from this distribution. The
+    grammar token is always emitted first; the lemma token is emitted
+    only if it differs from the grammar token (terminals emit only the
+    grammar symbol).</p>
+    <h2 id="sentence-finalization">Sentence Finalization</h2>
+    <p>When the grammar token is <code>&lt;EOL&gt;</code>, the model
+    performs:</p>
+    <ol>
+    <li><p>canonical grammar validation,</p></li>
+    <li><p>natural-language reconstruction,</p></li>
+    <li><p>semantic validation using the narrator’s quality
+    filters.</p></li>
+    </ol>
+    <p>If validation fails, the sentence is discarded and regenerated.
+    If validation succeeds, the sentence is appended to the story and
+    the context window is updated.</p>
+    <h2 id="deterministic-behaviour">Deterministic Behaviour</h2>
+    <p>Inference in GLP–Mono is fully deterministic except for the
+    sampling step. Paging, grammar tokens, context geometry, and output
+    dimensionality are fixed. Vocabulary growth does not alter model
+    size, and all grammar–lemma pairs discovered during training are
+    mapped into the existing paged output space.</p>
+    <p>This yields stable long-horizon behaviour, predictable narrative
+    cadence, and domain-faithful generation even at small scale.</p>
+    <h1 id="training-regime">Training Regime</h1>
+    <p>GLP–Mono is trained on a curriculum consisting of a finite set of
+    stories. Each story is a sequence of canonical sentences,
+    accompanied by a stable story embedding, and a keyword set derived
+    from the nouns and verbs present in the entire story. These keywords
+    serve two roles: they provide a compact semantic signature of the
+    story domain, and they act as a steering mechanism during inference,
+    allowing the narrator pipeline to select or bias world geometry
+    without modifying model parameters.</p>
+    <h2 id="curriculum-structure">Curriculum Structure</h2>
+    <p>A curriculum story contains:</p>
+    <ol>
+    <li><p>a sequence of canonical grammar–lemma sentences,</p></li>
+    <li><p>a deterministic story embedding computed from its token
+    set,</p></li>
+    <li><p>a keyword set consisting of all nouns and verbs in the
+    story.</p></li>
+    </ol>
+    <p>The curriculum therefore defines the structural ontology of the
+    domain: grammar cadence, lemma distribution, page formation, and
+    narrative motifs.</p>
+    <h2 id="epoch-definition">Epoch Definition</h2>
+    <p>Training proceeds in epochs, where <em>each epoch corresponds to
+    exactly one curriculum story</em>. If the curriculum contains <span
+    class="math inline"><em>S</em></span> stories, then one full pass
+    over the curriculum consists of <span
+    class="math inline"><em>S</em></span> epochs.</p>
+    <p>GLP–Mono uses two training phases:</p>
+    <ul>
+    <li><p>a <strong>warmup phase</strong> of <span
+    class="math inline"><em>W</em></span> passes over the curriculum in
+    story order,</p></li>
+    <li><p>a <strong>randomized phase</strong> of <span
+    class="math inline"><em>M</em></span> additional epochs.</p></li>
+    </ul>
+    <p>The total number of epochs is therefore:</p>
+    <p><span
+    class="math display">epochs = <em>W</em> × <em>S</em> + <em>M</em>.</span></p>
+    <p>Warmup epochs traverse the curriculum in fixed order; randomized
+    epochs select a single story uniformly at random.</p>
+    <h2 id="warmup-phase">Warmup Phase</h2>
+    <p>During warmup, the model iterates over all stories in
+    deterministic order. For each story:</p>
+    <ol>
+    <li><p>The story embedding is injected into the context
+    window.</p></li>
+    <li><p>Each sentence is processed sequentially:</p>
+    <ul>
+    <li><p>the context vector is encoded,</p></li>
+    <li><p>the monolithic network predicts a lemma embedding and page
+    logits,</p></li>
+    <li><p>a training sample is created containing the input vector, the
+    grammar–lemma target pair, and the page index,</p></li>
+    <li><p>the context window is updated with the sentence
+    embedding.</p></li>
+    </ul></li>
+    </ol>
+    <p>Warmup stabilizes grammar cadence, initializes page structure,
+    and aligns predicted lemma embeddings with stored output
+    embeddings.</p>
+    <h2 id="randomized-phase">Randomized Phase</h2>
+    <p>After warmup, training continues for <span
+    class="math inline"><em>M</em></span> epochs. At each epoch:</p>
+    <ol>
+    <li><p>A random story is selected from the curriculum.</p></li>
+    <li><p>All sentences in the story are processed as in
+    warmup.</p></li>
+    <li><p>Training samples are accumulated into a batch.</p></li>
+    </ol>
+    <p>Randomization ensures that page structure, lemma embeddings, and
+    narrative memory converge across all domains present in the dataset.
+    This phase is responsible for <em>world blending</em>: multiple
+    narrative domains become superimposed into a single coherent
+    generative substrate.</p>
+    <h2 id="batch-learning">Batch Learning</h2>
+    <p>At fixed intervals, the accumulated batch is used to update the
+    model.</p>
+    <h4 id="network-update.">Network Update.</h4>
+    <p>The monolithic MLP is trained using:</p>
+    <ul>
+    <li><p>cosine loss for lemma embeddings,</p></li>
+    <li><p>cross-entropy loss for page selection for non-terminal
+    targets,</p></li>
+    <li><p>mean-squared error for page selection for terminal
+    targets.</p></li>
+    </ul>
+    <h4 id="lemma-embedding-update.">Lemma Embedding Update.</h4>
+    <p>After each batch, stored lemma embeddings are updated using a
+    damped mixing rule:</p>
+    <p><span
+    class="math display"><em>e</em><sub><em>G</em>, <em>L</em></sub> ← (1−<em>α</em>)<em>e</em><sub><em>G</em>, <em>L</em></sub> + <em>α</em><em>ê</em>,</span></p>
+    <p>where <span class="math inline"><em>ê</em></span> is the
+    predicted lemma embedding and <span
+    class="math inline"><em>α</em></span> decreases monotonically over
+    training.</p>
+    <h2 id="page-formation">Page Formation</h2>
+    <p>Pages are constructed dynamically during training. For each
+    grammar–lemma pair:</p>
+    <ol>
+    <li><p>The previous lemma token determines the routing key.</p></li>
+    <li><p>If a page exists for this key, the pair is added to that
+    page.</p></li>
+    <li><p>If no page exists and the page limit is not reached, a new
+    page is created.</p></li>
+    <li><p>If the page limit is reached, the pair is assigned to the
+    smallest page.</p></li>
+    </ol>
+    <p>This yields compact, domain-specific clusters of grammar–lemma
+    pairs that serve as sparse routing units during inference.</p>
+    <h2 id="canonical-closure">Canonical Closure</h2>
+    <p>After training, GLP–Mono forms a structural closure over the
+    curriculum: the model compresses the grammar cadence, lemma
+    distribution, page geometry, and narrative motifs of all stories
+    into a single deterministic generative substrate. Distinct worlds
+    become superimposed into a unified canonical geometry, enabling
+    stable multi-world generation without drift.</p>
+    <p>The resulting model is a compact, domain-faithful canon engine
+    that provides structural and semantic grounding for the narrator
+    pipeline.</p>
+    <h1 id="glpmono-as-a-canon-engine-and-narrative-substrate">GLP–Mono
+    as a Canon Engine and Narrative Substrate</h1>
+    <p>After training, a GLP–Mono model becomes a compact and
+    deterministic representation of the narrative domains present in its
+    curriculum. The model does not memorize surface text, nor does it
+    rely on guardrails, reinforcement learning, or externally imposed
+    behavioural constraints. Instead, GLP–Mono forms a structural
+    closure over the dataset: it compresses the grammar cadence, lemma
+    distributions, page structure, and recurrent narrative patterns of
+    all worlds it has observed into a single monolithic generative
+    substrate.</p>
+    <p>Because paging organizes grammar–lemma token pairs into stable
+    clusters, and because lemma embeddings converge through damped
+    mixing, the trained model exhibits a form of <em>canon
+    compression</em>. Distinct narrative domains present in the
+    curriculum are superimposed into a single coherent generative
+    geometry. Worlds do not interfere; instead, they coexist as
+    overlapping attractors within the paged token space. During
+    sampling, GLP–Mono navigates these attractors according to context,
+    narrative memory, and page activation, producing text that reflects
+    the structural ontology of the combined dataset rather than any
+    individual source.</p>
+    <p>This behaviour makes GLP–Mono fundamentally different from
+    transformer-based LMs. Transformers require large-scale embeddings,
+    attention stacks, and alignment procedures to maintain coherence
+    across domains. GLP–Mono requires none of these: its behaviour is
+    entirely determined by the dataset and the deterministic geometry of
+    its pages, embeddings, and grammar tokens. The model is not aligned,
+    steered, or filtered; it is simply shaped by the worlds it has
+    absorbed.</p>
+    <p>Within the narrator pipeline, GLP–Mono functions as a <em>world
+    engine</em>. Its role is not to produce polished text, but to
+    generate structurally coherent proto-stories that encode the
+    canonical geometry of the learned domains. These proto-stories serve
+    as creative groundstock: they provide the narrative ontology,
+    spatial motifs, character roles, and action grammar that define the
+    world. A transformer-based LLM then performs interpretive
+    refinement, smoothing transitions, forming arcs, and elevating
+    style, while preserving the underlying world model supplied by
+    GLP–Mono.</p>
+    <p>In this hybrid configuration, GLP–Mono effectively
+    <em>steers</em> the LLM through context rather than through
+    fine-tuning. The proto-stories act as a story bible: a structured,
+    domain-faithful substrate that guides the LLM’s stylistic and
+    narrative decisions without modifying its parameters. This enables
+    world specialization without LoRA layers, without alignment
+    procedures, and without architectural modification. GLP–Mono
+    provides the world; the LLM provides the surface.</p>
+    <p>Thus, after training, GLP–Mono is best understood not merely as a
+    language model, but as a deterministic canon engine: a compact,
+    inspectable, and domain-stable substrate that reconstructs the
+    worlds present in its curriculum and supplies them as creative
+    context to downstream generative systems.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>GLP–Mono introduces a structurally governed alternative to
+    contemporary transformer-based language models. Its architecture is
+    defined not by attention mechanisms or large embedding spaces, but
+    by deterministic grammar tokens, paged grammar–lemma clusters,
+    fixed-dimensional output geometry, and a single monolithic
+    feedforward network. Through curriculum-driven training, GLP–Mono
+    forms a canonical closure over all stories in the dataset: grammar
+    cadence, lemma distributions, page structure, and narrative motifs
+    are compressed into a stable generative substrate that reflects the
+    structural ontology of the combined domains.</p>
+    <p>Because paging is fixed and vocabulary growth does not alter
+    model geometry, GLP–Mono remains compact and predictable even as it
+    absorbs multiple narrative worlds. Distinct domains become
+    superimposed into a unified canonical space, yielding coherent
+    multi-world behaviour without drift. Lemma embeddings converge
+    through damped updates, pages stabilize into domain-specific
+    clusters, and narrative memory provides long-horizon coherence
+    without attention.</p>
+    <p>In the narrator pipeline, GLP–Mono functions as a world engine
+    rather than a surface generator. It produces structurally coherent
+    proto-stories that encode the learned world geometry, while a
+    transformer-based model performs interpretive refinement. This
+    hybrid configuration allows GLP–Mono to steer a large LLM through
+    context rather than parameter modification, enabling world
+    specialization without fine-tuning or alignment procedures.</p>
+    <p>The resulting system demonstrates that coherent, domain-faithful
+    language generation does not require monolithic vocabularies or
+    attention stacks. A single MLP, paired with deterministic grammar,
+    paged lexical organization, and compact context encoding, is
+    sufficient to produce stable, expressive, and interpretable
+    next-token behaviour. GLP–Mono therefore represents a distinct
+    architectural path: a modular, inspectable, and canon-stable
+    foundation for structured generative systems.</p>
+    <h1
+    id="glpmono-and-dmlg-as-a-distinct-architectural-lineage">GLP–Mono
+    and DMLG as a Distinct Architectural Lineage</h1>
+    <p>GLP–Mono and DMLG do not belong to the broad class of
+    “alternative transformer variants” that populate contemporary
+    research. They represent a structurally divergent lineage: a family
+    of language-centric systems built on deterministic geometry, paged
+    lexical organization, and explicit governance rather than monolithic
+    embeddings and attention. This appendix clarifies why these
+    architectures are fundamentally distinct, and why they occupy a
+    unique position within the landscape of language model design.</p>
+    <h2 id="beyond-transformer-variants">Beyond Transformer
+    Variants</h2>
+    <p>Most non-transformer proposals—state-space models, recurrent
+    kernels, convolutional hybrids, mixture-of-experts routers—retain
+    the core transformer assumptions: a single global vocabulary, a
+    unified embedding space, probabilistic next-token prediction via
+    softmax, and contextual structure encoded implicitly in hidden
+    states. GLP–Mono and DMLG diverge from this paradigm at every
+    structural level. They replace global embeddings with paged lexical
+    clusters, softmax with cosine-ranking inside deterministic routing,
+    and attention with grammar-driven compression and compact narrative
+    memory.</p>
+    <h2
+    id="deterministic-grammar-and-canon-closed-geometry">Deterministic
+    Grammar and Canon-Closed Geometry</h2>
+    <p>Both architectures treat grammar as a symbolic, deterministic
+    backbone rather than a learned statistical pattern. This yields
+    predictable cadence, stable long-horizon structure, explicit
+    constraints on lexical realization, and domain isolation through
+    paging. Transformers do not provide deterministic grammar; GLP–Mono
+    and DMLG do. This alone places them in a separate architectural
+    category.</p>
+    <h2 id="paging-as-a-geometric-mechanism">Paging as a Geometric
+    Mechanism</h2>
+    <p>Paging is not a routing trick or sparsity optimization. It is a
+    geometric principle: a partitioning of lemma space into
+    domain-specific clusters that remain stable across training. Paging
+    prevents cross-domain drift, enables multi-world blending, and
+    provides a structural substrate for canonical closure. No mainstream
+    LM uses paging as a geometric constraint.</p>
+    <h2 id="canon-engines-rather-than-statistical-models">Canon Engines
+    Rather Than Statistical Models</h2>
+    <p>DMLG and GLP–Mono do not attempt to maximize fluency or mimic
+    human text. They aim to reconstruct the structural ontology of a
+    domain: grammar cadence, lemma distribution, narrative motifs, page
+    geometry, and world attractors. Transformers memorize and
+    interpolate; GLP–Mono and DMLG compress and reconstruct. This makes
+    them canon engines rather than statistical predictors.</p>
+    <h2 id="hybridization-without-fine-tuning">Hybridization Without
+    Fine-Tuning</h2>
+    <p>A transformer LLM can be steered by GLP–Mono purely through
+    context, without modifying its parameters. This hybrid
+    behaviour—world specialization without fine-tuning—is not available
+    in transformer-only systems. It emerges from GLP–Mono’s
+    deterministic geometry and canonical closure.</p>
+    <h2 id="iegr-complete-structural-roles">IEGR-Complete Structural
+    Roles</h2>
+    <p>Within the Triadic Cosmos framework, GLP–Mono and DMLG
+    instantiate all four structural roles: energetic grammar decisions,
+    geometric paging, informational lemma refinement, and recursive
+    PRE-based evaluation. Transformers instantiate only the
+    informational role at scale. GLP–Mono and DMLG therefore constitute
+    a structurally complete substrate rather than a statistical
+    engine.</p>
+    <h2
+    id="architectural-minimalism-and-full-implementability">Architectural
+    Minimalism and Full Implementability</h2>
+    <p>A striking property of both architectures is their
+    implementational minimalism. The complete functional behaviour of
+    GLP–Mono and DMLG—including grammar cadence, paging, context
+    encoding, narrative memory, canonical closure, and next-token
+    generation—can be expressed in a small number of Python classes. A
+    typical reference implementation fits comfortably within a few
+    thousand lines of code.</p>
+    <p>This stands in sharp contrast to transformer-based systems, whose
+    operational behaviour depends on millions of lines of framework
+    code, distributed training infrastructure, and opaque optimization
+    pipelines. GLP–Mono and DMLG are architectures that can be fully
+    understood, inspected, and modified by a single researcher. Their
+    simplicity is not a limitation but a defining feature: they
+    demonstrate that coherent world models, canonical geometry, and
+    hybrid generative behaviour do not require large-scale
+    infrastructure or monolithic parameter spaces.</p>
+    <h2 id="full-traceability-and-non-blackbox-behaviour">Full
+    Traceability and Non-Blackbox Behaviour</h2>
+    <p>A defining characteristic of both GLP–Mono and DMLG is their
+    complete traceability. Unlike transformer-based systems, whose
+    internal behaviour emerges from billions of parameters distributed
+    across opaque attention layers, GLP–Mono and DMLG expose every
+    structural decision, routing step, and generative transition in a
+    fully inspectable form. Their operational logic is not implicit in
+    high-dimensional embeddings but explicit in deterministic grammar
+    rules, paged lexical geometry, and small, modular components.</p>
+    <p>This traceability is not merely conceptual. The full functional
+    behaviour of both architectures can be implemented in a compact set
+    of Python classes. A typical reference implementation of GLP–Mono
+    consists of:</p>
+    <ul>
+    <li><p>a grammar module defining deterministic structural
+    tokens,</p></li>
+    <li><p>a paging module managing lemma clusters and routing
+    keys,</p></li>
+    <li><p>a context encoder producing fixed-dimensional input
+    vectors,</p></li>
+    <li><p>a monolithic MLP with learned activation,</p></li>
+    <li><p>a cosine-based ranking module for next-token
+    selection,</p></li>
+    <li><p>a narrative memory module with GRU-like updates,</p></li>
+    <li><p>a sampling module implementing top-<span
+    class="math inline"><em>k</em></span> selection,</p></li>
+    <li><p>a training loop with damped lemma embedding updates.</p></li>
+    </ul>
+    <p>DMLG is similarly compact: its canonical graph, paging biomes,
+    local evaluators, grammar-driven compression, and PRE-based
+    governance can be expressed in a small collection of classes that
+    fit comfortably within a few hundred lines of code.</p>
+    <p>This minimalism stands in stark contrast to transformer-based
+    systems, whose behaviour depends on extensive framework
+    infrastructure, distributed training pipelines, and millions of
+    lines of auxiliary code. GLP–Mono and DMLG are not blackbox engines:
+    every transition, every routing decision, every page activation, and
+    every grammar-lemma interaction is explicitly represented and fully
+    inspectable. Their simplicity is a structural advantage, enabling
+    researchers to understand, modify, and extend the architecture
+    without relying on opaque emergent mechanisms.</p>
+    <p>The result is a class of language systems that are not only
+    deterministic and modular, but also uniquely transparent. GLP–Mono
+    and DMLG demonstrate that coherent world models, canonical geometry,
+    and hybrid generative behaviour can be achieved without blackbox
+    complexity, and that full interpretability is compatible with
+    expressive next-token dynamics.</p>
+    <h2 id="a-distinct-architectural-category">A Distinct Architectural
+    Category</h2>
+    <p>Taken together, these properties define a new class of language
+    systems: deterministic grammar engines, paged lexical geometries,
+    canonical world substrates, hybrid steering mechanisms, explicit
+    governance layers, and multi-world attractor dynamics. GLP–Mono and
+    DMLG are not transformer alternatives. They are structurally
+    governed language architectures with their own geometric principles,
+    training dynamics, and generative behaviour. They form a coherent
+    lineage within the Triadic Cosmos ecosystem: a modular, inspectable,
+    and canon-stable foundation for hybrid intelligent systems.</p>
+    <h1 id="glpmono-vs-transformer-language-models">GLP–Mono vs
+    Transformer Language Models</h1>
+    <p>This appendix provides a formal comparison between the
+    <em>GLP–Mono</em> architecture and contemporary transformer-based
+    language models.</p>
+    <h2 id="overview">Overview</h2>
+    <p>Transformer LMs unify grammar, lexical content, and context into
+    a single high-dimensional embedding space governed by
+    self-attention. GLP–Mono, by contrast, performs next-token
+    prediction through a single monolithic MLP whose output is split
+    into:</p>
+    <ol>
+    <li><p>a fixed-dimensional lemma embedding,</p></li>
+    <li><p>a one-hot page selector over a learned set of pages.</p></li>
+    </ol>
+    <p>Each page contains a set of <em>grammar+lemma token pairs</em>.
+    Terminals (<code>&lt;PERIOD&gt;</code>, <code>&lt;COMMA&gt;</code>,
+    <code>&lt;EXCLAMATION&gt;</code>, <code>&lt;QUESTION&gt;</code>,
+    <code>&lt;EOL&gt;</code>) are implicitly present in every page.
+    Lemma selection is performed by cosine-similarity ranking between
+    the predicted lemma embedding and the stored embeddings of all token
+    pairs in the active page.</p>
+    <h2 id="structural-organization">Structural Organization</h2>
+    <ul>
+    <li><p><strong>Transformers:</strong> A single global parameter
+    space with no explicit separation between grammar and lexical
+    content. Grammar is implicit in learned embeddings and attention
+    patterns.</p></li>
+    <li><p><strong>GLP–Mono:</strong> Grammar tokens are deterministic
+    symbolic tokens. Lemma tokens are represented as learned output
+    embeddings. Next-token prediction produces a <em>pair</em> <span
+    class="math inline">(<em>G</em>,<em>L</em>)</span> directly. Grammar
+    and lemma are not predicted by separate models; they are jointly
+    represented in the output space.</p></li>
+    </ul>
+    <h2 id="context-mechanisms">Context Mechanisms</h2>
+    <ul>
+    <li><p><strong>Transformers:</strong> Context is maintained through
+    multi-head self-attention over large hidden states.</p></li>
+    <li><p><strong>GLP–Mono:</strong> Context is encoded through
+    grammar-based compression, sentence-level embeddings, and a compact
+    recurrent narrative memory. The model receives a single
+    fixed-dimensional context vector; no attention mechanism is
+    used.</p></li>
+    </ul>
+    <h2 id="vocabulary-geometry">Vocabulary Geometry</h2>
+    <ul>
+    <li><p><strong>Transformers:</strong> Vocabulary size determines
+    output dimension. Larger vocabularies require larger embedding
+    matrices and softmax layers.</p></li>
+    <li><p><strong>GLP–Mono:</strong> Vocabulary growth does not alter
+    model geometry. Lemma tokens are represented as fixed-dimensional
+    learned embeddings. Grammar tokens remain symbolic. Pages partition
+    the <span class="math inline">(<em>G</em>,<em>L</em>)</span> pairs
+    into compact clusters learned during training.</p></li>
+    </ul>
+    <h2 id="routing-and-modularity">Routing and Modularity</h2>
+    <ul>
+    <li><p><strong>Transformers:</strong> Routing is implicit in
+    attention weights; all tokens share the same embedding space and
+    parameter matrices.</p></li>
+    <li><p><strong>GLP–Mono:</strong> Page logits provide sparse
+    MoE-style routing. The highest-scoring page is selected; if no valid
+    token pairs exist, the model falls back to the next page. Pages
+    contain only <span
+    class="math inline">(<em>G</em>,<em>L</em>)</span> pairs observed
+    during training. Terminals are always available.</p></li>
+    </ul>
+    <h2 id="next-token-prediction">Next-Token Prediction</h2>
+    <ul>
+    <li><p><strong>Transformers:</strong> Next-token prediction is
+    performed over a monolithic softmax distribution across the entire
+    vocabulary.</p></li>
+    <li><p><strong>GLP–Mono:</strong> Next-token prediction is performed
+    as follows:</p>
+    <ol>
+    <li><p>The monolithic MLP outputs a lemma embedding and page
+    logits.</p></li>
+    <li><p>The highest-scoring page is selected (with
+    fallback).</p></li>
+    <li><p>All <span class="math inline">(<em>G</em>,<em>L</em>)</span>
+    token pairs in the page, plus the five terminal tokens, are scored
+    by cosine similarity.</p></li>
+    <li><p>Top-<span class="math inline"><em>k</em></span> sampling is
+    applied to the ranked list.</p></li>
+    </ol>
+    <p>No grammar filtering is applied. Grammar and lemma are not
+    predicted separately; they are jointly encoded in the page
+    structure.</p></li>
+    </ul>
+    <h2 id="deterministic-geometry-1">Deterministic Geometry</h2>
+    <ul>
+    <li><p><strong>Transformers:</strong> Geometry scales with model
+    size, vocabulary size, and attention width.</p></li>
+    <li><p><strong>GLP–Mono:</strong> Geometry is fixed and
+    deterministic: grammar tokens are symbolic, lemma embeddings have
+    fixed dimension, and pages provide domain isolation. Model size does
+    not depend on vocabulary size.</p></li>
+    </ul>
+    <h2 id="long-horizon-behaviour">Long-Horizon Behaviour</h2>
+    <ul>
+    <li><p><strong>Transformers:</strong> Long-horizon coherence depends
+    on attention depth and training scale.</p></li>
+    <li><p><strong>GLP–Mono:</strong> Narrative memory provides compact
+    recurrence; paging stabilizes domain-specific token clusters;
+    grammar cadence enforces canonical structure. Long-horizon behaviour
+    is stable even at small scale.</p></li>
+    </ul>
+    <h2 id="summary-1">Summary</h2>
+    <p>GLP–Mono and transformer LMs represent two fundamentally
+    different approaches to language modeling. Transformers rely on
+    large-scale statistical geometry and attention, while GLP–Mono
+    relies on a monolithic MLP, paged token clusters, fixed-dimensional
+    output embeddings, and deterministic grammar tokens. These
+    differences make GLP–Mono a structurally governed, domain-isolated,
+    and interpretable alternative to monolithic transformer designs.</p>
+    <h1
+    id="comparison-between-glpmono-and-the-dmlg-architecture">Comparison
+    Between GLP–Mono and the DMLG Architecture</h1>
+    <p>This appendix provides a unified comparison between GLP–Mono and
+    the Dynamic Modular Language Graph (DMLG) architecture as developed
+    across the structural papers in the Triadic Cosmos ecosystem.
+    Although GLP–Mono inherits several structural ideas from DMLG, the
+    two systems occupy fundamentally different architectural categories:
+    DMLG is a deterministic, graph-based governance and world-absorption
+    substrate, while GLP–Mono is a monolithic paged next-token language
+    model.</p>
+    <h2 id="conceptual-foundations">Conceptual Foundations</h2>
+    <h4 id="dmlg.">DMLG.</h4>
+    <p>Across its architectural formulations, DMLG models language as
+    traversal through a canonical graph of tokens and transitions.
+    Tokens are canonical lemmas, grammar markers, or structural symbols;
+    edges encode admissible transitions. Paging partitions the graph
+    into modular biomes, enabling domain isolation, stylistic fidelity,
+    and controlled traversal. Local evaluators score transitions, and
+    sentence-level PRE (Propose–Retry–Evaluate) enforces structural
+    validity. DMLG is not a language model: it is a structural
+    governance substrate that can guide, constrain, or audit any
+    generative system.</p>
+    <h4 id="glpmono.">GLP–Mono.</h4>
+    <p>GLP–Mono is a monolithic next-token generator. It predicts a
+    lemma embedding and page logits using a single feedforward network.
+    Pages contain grammar–lemma token pairs discovered during training.
+    Next-token selection is performed by choosing the highest-scoring
+    page, ranking all token pairs by cosine similarity, and sampling
+    from the top-<span class="math inline"><em>k</em></span> candidates.
+    GLP–Mono is not a graph: it is a paged LM with fixed geometry and
+    deterministic grammar.</p>
+    <h2 id="representation-of-language">Representation of Language</h2>
+    <h4 id="dmlg-canonical-graph.">DMLG: Canonical Graph.</h4>
+    <p>Language is represented as an explicit graph <span
+    class="math inline"><em>G</em> = (<em>V</em>,<em>E</em>)</span>:</p>
+    <ul>
+    <li><p><span class="math inline"><em>V</em></span> contains
+    canonical tokens (lemmas, grammar markers, structural
+    units),</p></li>
+    <li><p><span class="math inline"><em>E</em></span> contains
+    admissible transitions,</p></li>
+    <li><p>paging partitions <span class="math inline"><em>V</em></span>
+    into modular biomes,</p></li>
+    <li><p>traversal instantiates meaning through structured
+    navigation.</p></li>
+    </ul>
+    <p>This representation is deterministic, inspectable, and
+    corpus-grounded.</p>
+    <h4 id="glpmono-paged-token-pairs.">GLP–Mono: Paged Token
+    Pairs.</h4>
+    <p>Language is represented as grammar–lemma token pairs stored in
+    fixed pages:</p>
+    <ul>
+    <li><p>grammar tokens are deterministic symbols,</p></li>
+    <li><p>lemma tokens are learned output embeddings,</p></li>
+    <li><p>pages cluster <span
+    class="math inline">(<em>G</em>,<em>L</em>)</span> pairs discovered
+    during training,</p></li>
+    <li><p>terminals are implicitly available in every page.</p></li>
+    </ul>
+    <p>No graph structure or transitions exist; paging is used only for
+    routing.</p>
+    <h2 id="generative-mechanism">Generative Mechanism</h2>
+    <h4 id="dmlg-graph-traversal.">DMLG: Graph Traversal.</h4>
+    <p>Generation is navigation through the canonical graph:</p>
+    <ul>
+    <li><p>local evaluators score transitions,</p></li>
+    <li><p>grammar-driven context compression activates relevant
+    regions,</p></li>
+    <li><p>beam search explores candidate transition paths,</p></li>
+    <li><p>PRE validates full sentences and triggers retries.</p></li>
+    </ul>
+    <p>Generation is structural, not statistical.</p>
+    <h4 id="glpmono-next-token-prediction.">GLP–Mono: Next-Token
+    Prediction.</h4>
+    <p>Generation is next-token prediction:</p>
+    <ul>
+    <li><p>monolithic MLP outputs lemma embedding + page
+    logits,</p></li>
+    <li><p>highest-scoring page is selected (with fallback),</p></li>
+    <li><p>cosine similarity ranks all token pairs in the page,</p></li>
+    <li><p>top-<span class="math inline"><em>k</em></span> sampling
+    selects the next token.</p></li>
+    </ul>
+    <p>Generation is statistical, not structural.</p>
+    <h2 id="paging-and-modularity">Paging and Modularity</h2>
+    <h4 id="dmlg-paging-as-biomes.">DMLG: Paging as Biomes.</h4>
+    <p>Paging defines modular subgraphs:</p>
+    <ul>
+    <li><p>pages represent semantic or structural biomes,</p></li>
+    <li><p>traversal across pages is explicitly controlled,</p></li>
+    <li><p>evaluators may be page-specific,</p></li>
+    <li><p>paging provides domain isolation and stylistic
+    fidelity.</p></li>
+    </ul>
+    <h4 id="glpmono-paging-as-routing.">GLP–Mono: Paging as
+    Routing.</h4>
+    <p>Paging is fixed and used only for routing:</p>
+    <ul>
+    <li><p>pages cluster grammar–lemma pairs,</p></li>
+    <li><p>no transitions exist between pages,</p></li>
+    <li><p>paging does not encode structure, only selection,</p></li>
+    <li><p>pages do not evolve after initialization.</p></li>
+    </ul>
+    <h2 id="context-and-memory">Context and Memory</h2>
+    <h4 id="dmlg-recursive-structural-context.">DMLG: Recursive
+    Structural Context.</h4>
+    <p>DMLG maintains a rich structural context built from canonical
+    grammar, recursive memory, and graph-based state tracking. Its
+    context mechanisms include:</p>
+    <ul>
+    <li><p>grammar-driven context compression,</p></li>
+    <li><p>recursive narrative memory and attractor-based world
+    state,</p></li>
+    <li><p>canonical graph state tracking across pages and
+    transitions,</p></li>
+    <li><p>evaluator-governed structural coherence during
+    traversal.</p></li>
+    </ul>
+    <p>This context is structurally expressive but distributed across
+    multiple evaluators, paging biomes, and traversal states. As a
+    result, context is explicit and modular, yet its influence on
+    generation is mediated through many small components rather than a
+    single learned function.</p>
+    <h4 id="glpmono-learned-fixed-dimensional-context-vector.">GLP–Mono:
+    Learned Fixed-Dimensional Context Vector.</h4>
+    <p>GLP–Mono inherits the core context-encoding principles of
+    DMLG—history compression, sentence embeddings, narrative memory, and
+    keyword-derived story state—but integrates them into a single
+    fixed-dimensional vector consumed by a monolithic network:</p>
+    <ul>
+    <li><p>history embeddings capturing long-range structural
+    cadence,</p></li>
+    <li><p>sentence embeddings encoding local grammar–lemma
+    structure,</p></li>
+    <li><p>a compact recurrent narrative memory tracking actors and
+    events,</p></li>
+    <li><p>a stable story embedding derived from keyword sets (nouns and
+    verbs).</p></li>
+    </ul>
+    <p>Because GLP–Mono is monolithic rather than modular, this context
+    is not merely consulted but <em>learned</em>: the network
+    internalizes how context influences next-token prediction. This
+    yields a more effective and globally coherent use of context than in
+    DMLG, where context is distributed across micro-models or graph
+    evaluators. In GLP–Mono, the entire context vector participates
+    directly in the learned mapping from narrative state to next-token
+    behaviour, enabling stronger long-horizon coherence at small
+    scale.</p>
+    <h2 id="functional-role-in-hybrid-systems">Functional Role in Hybrid
+    Systems</h2>
+    <h4 id="dmlg-governance-and-world-absorption.">DMLG: Governance and
+    World Absorption.</h4>
+    <p>DMLG provides:</p>
+    <ul>
+    <li><p>canonical grammar and deterministic structural
+    tokens,</p></li>
+    <li><p>explicit transitions in a canonical graph,</p></li>
+    <li><p>domain-locked behaviour through modular paging
+    biomes,</p></li>
+    <li><p>world absorption and stable attractors across long
+    horizons,</p></li>
+    <li><p>structural governance for LLMs through evaluator-based
+    traversal and PRE.</p></li>
+    </ul>
+    <p>Within the IEGR taxonomy, DMLG functions primarily as a
+    <strong>G–R substrate</strong>: it supplies geometric structure (G)
+    and recursive depth (R) through canonical grammar, graph traversal,
+    paging biomes, and sentence-level PRE.</p>
+    <h4
+    id="glpmono-creative-substrate-with-sentence-level-pre.">GLP–Mono:
+    Creative Substrate with Sentence-Level PRE.</h4>
+    <p>GLP–Mono provides:</p>
+    <ul>
+    <li><p>structurally coherent proto-stories generated by a monolithic
+    LM,</p></li>
+    <li><p>canon-compressed world geometry learned from the
+    curriculum,</p></li>
+    <li><p>creative ground material for narrator pipelines and hybrid
+    refinement,</p></li>
+    <li><p>context steering for LLMs through stable embeddings and paged
+    lexical structure,</p></li>
+    <li><p>sentence-level PRE inherited from DMLG, ensuring structural
+    validity.</p></li>
+    </ul>
+    <p>Although GLP–Mono is monolithic and statistical rather than
+    graph-based, it <em>retains sentence-level PRE</em>, making it not
+    only an <strong>I–G</strong> substrate but also a lightweight
+    <strong>R substrate</strong>. Its recursive behaviour emerges from
+    the interaction between fixed-dimensional context encoding,
+    recurrent narrative memory, and PRE-based sentence validation.</p>
+    <p>In hybrid systems, GLP–Mono therefore complements DMLG: DMLG
+    supplies explicit structural governance and world absorption, while
+    GLP–Mono supplies compact creative generation with learned context
+    and retained recursive structure.</p>
+    <h2 id="summary-2">Summary</h2>
+    <p>DMLG and GLP–Mono represent two structurally related but
+    architecturally distinct approaches to controlled language
+    generation. DMLG provides the structural foundations: canonical
+    grammar, deterministic transitions, modular paging biomes,
+    evaluator-governed traversal, and PRE-based sentence validation. It
+    is a governance and world-absorption substrate designed for
+    stability, domain fidelity, and explicit control.</p>
+    <p>GLP–Mono is the generative successor to DMLG. It inherits DMLG’s
+    structural principles—deterministic grammar, paged lexical
+    organization, context encoding, and sentence-level PRE—but
+    integrates them into a single monolithic network that learns how
+    context, paging, and lemma geometry interact. As a result, GLP–Mono
+    provides:</p>
+    <ul>
+    <li><p>compact and efficient next-token generation,</p></li>
+    <li><p>canon-compressed world geometry learned directly from the
+    curriculum,</p></li>
+    <li><p>structurally coherent proto-stories suitable for narrator
+    pipelines,</p></li>
+    <li><p>effective use of context through a learned fixed-dimensional
+    vector,</p></li>
+    <li><p>retained recursive behaviour through sentence-level
+    PRE.</p></li>
+    </ul>
+    <p>In this sense, GLP–Mono is not merely complementary to DMLG: it
+    is a <em>descendant</em>. DMLG supplies explicit structure and
+    governance; GLP–Mono distills these structural commitments into a
+    compact, learned generative model that is far more effective for
+    narrative production. Together, they form a coherent architectural
+    lineage in which DMLG provides the structural substrate and GLP–Mono
+    provides the generative engine.</p>
+    <h1 id="integration-in-the-narrator-pipeline">Integration in The
+    Narrator Pipeline</h1>
+    <p>The narrator pipeline is a hybrid generative system in which
+    GLP–Mono provides the structural and creative substrate, while a
+    transformer-based LLM supplies stylistic refinement, narrative
+    shaping, and quality control. The pipeline operates in incremental
+    stages, gradually constructing chapters from small GLP-generated
+    units and refining them into polished literary output.</p>
+    <h2 id="incremental-glp-generation">Incremental GLP Generation</h2>
+    <p>Each chapter begins with a fresh context window and a set of
+    steering keywords. GLP–Mono uses these keywords to select an
+    appropriate internal embedding and then generates a sequence of
+    short proto-sections. Each proto-section consists of multiple lines,
+    and each line is chosen from several GLP-generated candidates. The
+    selection criterion is intentionally simple—typically the longest or
+    most coherent candidate—ensuring that GLP’s learned world model
+    drives the creative content without interference from the LLM.</p>
+    <p>After each line is selected, it is canonically fixed and added to
+    GLP’s context window. This creates a recursive memory loop: GLP
+    continually builds upon its own output, maintaining world
+    consistency and long-horizon coherence.</p>
+    <h2 id="keyword-evolution">Keyword Evolution</h2>
+    <p>At the end of each proto-section, the LLM proposes a new set of
+    keywords based on the moderated content. These keywords are
+    restricted to noun and verb lemmas and filtered by GLP–Mono to
+    ensure domain fidelity. The updated keyword set guides the next
+    proto-section, allowing the narrative to evolve while remaining
+    anchored in GLP’s canonical world geometry.</p>
+    <h2 id="assembly-of-proto-material">Assembly of Proto-Material</h2>
+    <p>A full chapter is constructed by generating several
+    proto-sections in sequence. Each proto-section contributes a block
+    of GLP-driven narrative, resulting in a larger proto-story composed
+    entirely of GLP output. This proto-story expresses the world,
+    characters, physics, and thematic attractors learned by GLP–Mono,
+    but remains stylistically raw and structurally unpolished.</p>
+    <h2 id="llm-remastering">LLM Remastering</h2>
+    <p>Once the proto-story is complete, the LLM performs a full
+    remastering pass. This is not a minor grammatical correction: the
+    LLM may reorganize sentences, adjust pacing, strengthen thematic
+    cohesion, or reshape the narrative flow. The remastering is guided
+    by a generic or domain-specific moderation prompt, ensuring that the
+    final chapter adheres to the desired literary style while preserving
+    the world and events defined by GLP.</p>
+    <p>The LLM then assigns a chapter title and evaluates the remastered
+    chapter using a numerical score. If the score is insufficient, the
+    remastered chapter is used as new input for another refinement
+    cycle. This recursive moderation continues until a version is
+    produced that meets the required quality threshold.</p>
+    <h2 id="summary-3">Summary</h2>
+    <p>The narrator pipeline is therefore a two-layer generative
+    system:</p>
+    <ul>
+    <li><p><strong>GLP–Mono</strong> provides the structural creativity:
+    world geometry, canonical grammar, narrative attractors,
+    long-horizon coherence, and the full proto-story material from which
+    chapters are built.</p></li>
+    <li><p>The <strong>LLM</strong> provides stylistic refinement:
+    keyword evolution, narrative remastering, title generation, and
+    quality scoring.</p></li>
+    </ul>
+    <p>All narrative content originates from GLP–Mono; the LLM shapes
+    the expression without altering the underlying world. Because the
+    GLP proto-story fully encodes the canonical geometry of the domain,
+    the LLM does not require any world prompting to remain within the
+    correct canon. Its remastering step rewrites the GLP material into
+    fluent natural language while preserving the world, physics,
+    characters, and motifs defined by GLP–Mono.</p>
+    <p>The result is a hybrid architecture capable of producing
+    coherent, domain-faithful long-form narratives through structured
+    recursion and controlled refinement, with GLP–Mono supplying the
+    world and the LLM supplying the prose.</p>
+    <h1 id="learned-activation-behaviour-in-glp-models">Learned
+    Activation Behaviour in GLP Models</h1>
+    <p>GLP–Mono employs a learned activation function implemented as a
+    compact three-layer MLP. Unlike fixed nonlinearities such as SiLU or
+    GELU, the activation function in GLP models is not hand-designed: it
+    is <em>emergent</em>. Its geometry is shaped entirely by the
+    manifold of the training closure, the grammar cadence, the lemma
+    distribution, and the attractor ecology of the domain.</p>
+    <h2 id="activation-as-learned-nonlinear-geometry">Activation as
+    Learned Nonlinear Geometry</h2>
+    <p>The monolithic GLP network uses a learned activation <span
+    class="math inline"><em>σ</em><sub><em>θ</em></sub></span>,
+    parameterized by a small MLP with weights <span
+    class="math inline"><em>θ</em></span>. During training, <span
+    class="math inline"><em>σ</em><sub><em>θ</em></sub></span> evolves
+    jointly with the main network:</p>
+    <p><span
+    class="math display"><em>f</em>(<em>x</em>) = <em>W</em><sub>3</sub> <em>σ</em><sub><em>θ</em></sub>(<em>W</em><sub>2</sub> <em>σ</em><sub><em>θ</em></sub>(<em>W</em><sub>1</sub><em>x</em>)).</span></p>
+    <p>Because <span
+    class="math inline"><em>σ</em><sub><em>θ</em></sub></span> is itself
+    a neural network, its nonlinear geometry adapts to the structural
+    constraints of the world closure. This produces activation functions
+    that differ substantially from classical smooth nonlinearities: they
+    may exhibit oscillatory behaviour, sharp curvature changes, damping
+    regions, local plateaus, or multi-modal transitions. These features
+    arise naturally from the manifold of the domain and are not imposed
+    externally.</p>
+    <h2 id="emergent-activation-dynamics">Emergent Activation
+    Dynamics</h2>
+    <p>The learned activation function encodes several structural
+    properties of the GLP world:</p>
+    <ul>
+    <li><p><strong>Semantic density:</strong> high-density lemma regions
+    induce sharper nonlinear transitions, reflecting frequent shifts in
+    lexical geometry.</p></li>
+    <li><p><strong>Grammar cadence:</strong> deterministic grammar
+    tokens constrain the activation shape, producing stable curvature
+    patterns aligned with canonical sentence structure.</p></li>
+    <li><p><strong>Attractor ecology:</strong> stable motifs and
+    recurrent structures generate smooth activation basins, while
+    unstable attractors produce oscillatory or multi-modal
+    behaviour.</p></li>
+    <li><p><strong>Recursion depth:</strong> narrative memory influences
+    the activation geometry by shaping how past context affects current
+    nonlinear routing.</p></li>
+    </ul>
+    <p>These behaviours demonstrate that GLP activations are not trivial
+    functions but <em>learned nonlinear laws</em> governing how energy
+    flows through the network.</p>
+    <h2 id="activation-as-local-physics">Activation as Local
+    Physics</h2>
+    <p>Within the GLP closure, the activation function acts as a form of
+    <em>local physics</em>. Its geometry determines:</p>
+    <ul>
+    <li><p>how strongly next-token energy is amplified or
+    damped,</p></li>
+    <li><p>how paging geometry interacts with semantic
+    transitions,</p></li>
+    <li><p>how lemma embeddings evolve across recursion,</p></li>
+    <li><p>how attractors stabilize or destabilize narrative
+    flow.</p></li>
+    </ul>
+    <p>In this sense, <span
+    class="math inline"><em>σ</em><sub><em>θ</em></sub></span> is the
+    nonlinear signature of the world: each GLP model learns its own
+    activation physics, reflecting the manifold of its closure.</p>
+    <h2 id="triadic-interpretation">Triadic Interpretation</h2>
+    <p>The learned activation function fits naturally into the Triadic
+    Cosmos framework. Each activation update corresponds to a triadic
+    cycle:</p>
+    <ul>
+    <li><p><strong>Energy (E):</strong> next-token prediction produces
+    activation input.</p></li>
+    <li><p><strong>Geometry (G):</strong> the learned activation defines
+    nonlinear routing.</p></li>
+    <li><p><strong>Information (I):</strong> the output token embedding
+    encodes semantic content.</p></li>
+    <li><p><strong>Recursion (R):</strong> narrative memory feeds back
+    into the next cycle.</p></li>
+    </ul>
+    <p>Because GLP–Mono is a local closure, the activation geometry
+    becomes the world-specific instantiation of triadic physics: a
+    learned nonlinear law governing how energy, geometry, information,
+    and recursion interact inside the closure.</p>
+    <h2 id="summary-4">Summary</h2>
+    <p>The activation MLP in GLP models is not a fixed nonlinearity but
+    an emergent, domain-specific geometric structure. Its behaviour
+    reflects the manifold of the world closure, encoding semantic
+    density, grammar cadence, attractor ecology, and recursive dynamics.
+    This learned activation physics is a defining feature of GLP–Mono
+    and illustrates how compact LM architectures can internalize
+    nontrivial nonlinear laws directly from the dataset manifold.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the GLP engine, the narrator pipeline,
+    and all supporting modules is provided under the AGPL‑3.0 license.
+    These components form the operational substrate for structured
+    generation, world absorption, paging dynamics, and hybrid
+    refinement.</p>
+    <p>A demonstration book, <em>The Monolithic Parrot: Multi-World
+    Closures</em>, will also be part of the ecosystem. It presents a
+    collection of unedited narrative outputs generated by the narrator
+    pipeline across multiple domains, including single‑world closures
+    (e.g., science, Kafka) and multi‑world blends derived from six
+    distinct worlds. The book serves as a tangible illustration of
+    GLP‑Mono’s canonical geometry and its ability to steer a transformer
+    LLM through context without world prompting, providing a practical
+    showcase of hybrid generative behaviour within the Triadic Cosmos
+    framework.</p>
+    <div class="thebibliography">
+    <p>J. De Witte, “Grammar Lemma Paged Language Models,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Learnable Lemma Embeddings for GLP Models,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Narrator Pipeline driven by DMLG,” Triadic Cosmos
+    Ecosystem, 2026.</p>
+    <p>J. De Witte, “Language as Graph Traversal: The DMLG
+    Architecture,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Dynamic and Modular Architecture for Language
+    Modeling,” Triadic Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>
