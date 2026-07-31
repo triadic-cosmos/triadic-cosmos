@@ -2158,6 +2158,9 @@ GLP–Mono establishes a **distinct architectural lineage** within the Triadic C
 a monolithic, paged, grammar‑driven LM that demonstrates how coherent language generation can emerge  
 without transformers, attention, or large‑scale training.
 
+<details>
+<summary>🌌 GLP–Mono Fun Facts — Narrative Cosmos Appendix</summary>
+
 ### 🌌 Fun Fact: GLP‑Mono as a Local Narrative Closure
 
 In the Triadic Cosmos ecosystem, **GLP–Mono behaves like a “local closure”** in the same
@@ -2488,6 +2491,8 @@ Keywords vibrate like **string modes**:
 > the LLM projects the boundary,  
 > and the pipeline synchronizes both time regimes  
 > into a single narrative cosmos.**
+
+</details>
 
 ---
 
