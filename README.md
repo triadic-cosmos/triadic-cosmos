@@ -2579,6 +2579,22 @@ its philosophy.
 
 ---
 
+## 🌍 Key Takeaway: Expansionism Shortens the Lifespan of a Closed World
+
+In a local closure, all resources and materials are finite.  
+Expansionism accelerates internal entropy production and increases the rate  
+at which those finite resources are consumed.  
+Because the system cannot export its waste or import new resources,  
+higher entropy directly reduces the lifespan of the world.
+
+Advanced technology can slow this degradation by improving efficiency,  
+reducing waste, and stretching limited resources —  
+but even the best technology cannot eliminate entropy or make a closed  
+system infinite.  
+A closed ecosystem can only remain viable by respecting its own limits.
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
