@@ -2662,6 +2662,35 @@ HST was always trying to describe *local closures* —
 it simply never had a **global closure architecture** to embed them in.
 Triadic Cosmos provides exactly that missing layer.
 
+### 🌀 Fun Fact: Why People Think the Universe Is Inside a Black Hole
+
+The popular idea that “our universe sits inside a black hole” does **not** come from GR itself,  
+but from an **architectural confusion between two completely different holographic boundaries**:
+
+- In **AdS/CFT**, the *boundary* is an **external** holographic shell that encodes a **fully dynamical bulk**.  
+- In a **black hole**, the *horizon* is an **internal** holographic shell that encodes **no dynamical bulk**,  
+  only a **holographic shadow** of the *external* causal domain.
+
+Because both surfaces are “2D boundaries with area‑entropy,” it *looks* like they play the same role.  
+But architecturally, they are opposites:
+
+- 🌌 **AdS/CFT boundary:** encodes a *universe*.  
+- ⚫ **Black‑hole horizon:** encodes *the outside world*, not the interior.
+
+Under **Triadic Closure**, the misunderstanding is resolved completely:
+
+- the black‑hole interior has **no information**,  
+- **no energetic evolution**,  
+- **no causal structure**,  
+- **no triadic recursion**,  
+- and therefore **no time**.
+
+In short:  
+> 🧱 **A black hole has a holographic wall, not a holographic world.**
+
+That’s why black holes cannot contain universes —  
+and why “interior cosmology” is architecturally impossible within the Triadic Cosmos.
+
 ---
 
 ## 🪐 Fun Fact: A Tiny Universe in Its Own Bubble
