@@ -486,6 +486,8 @@ architecturally coherent unification book of its kind.**
 <details>
 <summary>📚 Ecosystem Books</summary>
 
+### **The Triadic Cosmos Library**
+
 The Triadic Cosmos Library is a collection of architectural volumes that explore how  
 structure, modularity, and explicit mechanisms can replace monolithic black‑box models  
 across language, cognition, physics, and artificial intelligence.  
