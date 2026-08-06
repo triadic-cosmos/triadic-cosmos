@@ -1,11 +1,14 @@
 # The Triadic Cosmos  
+
+🔺 This repository represents the Triadic Cosmos ecosystem. 🔺
+
+---
+
 Foundational Books and Papers by Joachim De Witte  
 © 2026 Joachim De Witte  
 Licensed under CC BY‑NC‑ND 4.0
 
 ---
-
-🔺 This repository represents the Triadic Cosmos ecosystem. 🔺
 
 ## 🪐 A Micro‑Cosmos Within Its Own Closure
 
