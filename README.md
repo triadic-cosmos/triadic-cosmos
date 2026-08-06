@@ -27,7 +27,7 @@ and structurally elegant entirely on its own terms.
 
 ---
 
-## Overview
+## 🌐 Overview
 
 **The Triadic Cosmos** is a unified intellectual ecosystem that develops  
 a safe, modular, and architecturally grounded framework for:
@@ -481,6 +481,8 @@ architecturally coherent unification book of its kind.**
 
 ---
 
+## 🔺 Ecosystem Books and Scientific Papers
+
 <details>
 <summary>📚 Ecosystem Books</summary>
 
@@ -800,8 +802,6 @@ different ontologies — all within a single architectural run.
 **A foundational pillar of the Monolithic Parrot project.**
 
 </details>
-
----
 
 <details>
 <summary>📄 Scientific Papers</summary>
@@ -2246,7 +2246,7 @@ In other words:
 
 > **An LLM is the universe.  
 > GLP–Mono is a world.  
-> The dataset is its horizon.
+> The dataset is its horizon.  
 > Grammar is its physics.  
 > Lemma geometry is its matter.  
 > Narrative memory is its time.**
