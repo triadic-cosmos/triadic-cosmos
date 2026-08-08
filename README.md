@@ -2476,6 +2476,45 @@ It may need to **become** a world.
 A closure with its own geometry, its own material time,  
 and its own evolving canon—continuously shaped by the boundary we call reality.
 
+---
+
+### **43. A Geometric Origin of the Great Filter within Local Closure Systems**
+
+A foundational paper that extends the Triadic Cosmos ecosystem into the domain of  
+**strategic geometry**. It demonstrates that the Great Filter is not merely ecological,  
+technological, or cognitive, but fundamentally **geometric**: civilisations collapse the  
+moment they fragment their local closure across planetary distances.
+
+The analysis shows that multi‑planet expansion introduces unavoidable asymmetries in:
+
+- detection latency and horizon discontinuity,  
+- temporal desynchronisation and decision gaps,  
+- launch dynamics and kinetic feasibility,  
+- vulnerability profiles between planetary environments,  
+- biocompatibility and generational divergence,  
+- cultural evolution and escalation norms.
+
+These asymmetries **destroy MAD symmetry**, making deterrence physically impossible  
+outside a single closure. Once MAD collapses, pre‑emptive logic becomes rational,  
+closure fragmentation becomes architecturally unstable, and the Great Filter activates  
+as a deterministic geometric boundary.
+
+The paper further dismantles common sci‑fi stabilisation proposals—interplanetary  
+deterrence vessels, nuclear‑armed patrol ships, or submarine‑analog spacecraft—showing  
+that such systems fail for the same structural reasons as closed‑ecosystem starships,  
+megastructures, warp drives, and interstellar travel. They cannot restore symmetry  
+because symmetry is a **geometric property of closure**, not a technological one.
+
+This work reframes the Fermi Paradox and the Great Filter as consequences of  
+**geometric locality**: civilisations that remain within a single closure stay stable  
+and introvert; civilisations that attempt multi‑planet expansion activate irreversible  
+failure modes. The silence of the cosmos is therefore not mysterious but the natural  
+result of closure geometry.
+
+A major conceptual expansion of the ecosystem, linking physics, strategy, cosmology,  
+and civilisational dynamics into a single architectural argument. Direct implications  
+for astrobiology, geopolitics, AGI safety, and long‑term civilisational planning.
+
 </details>
 
 ---
