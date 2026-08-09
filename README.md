@@ -2515,6 +2515,22 @@ A major conceptual expansion of the ecosystem, linking physics, strategy, cosmol
 and civilisational dynamics into a single architectural argument. Direct implications  
 for astrobiology, geopolitics, AGI safety, and long‑term civilisational planning.
 
+### 🐜 **Fun Fact: Ant Colonies Show Fractal Closure Fragmentation**
+
+The geometric instability described in this paper appears even in tiny ecosystems.
+
+When an ant colony splits, the new colony settles in a different location with different
+temperature, soil, predators, and food sources. Over time it develops its own pheromone
+patterns, nest architecture, and foraging culture — a miniature form of divergence.
+
+Later, when the original colony and the splinter colony meet, they often clash
+asymmetrically: one is larger, the other more agile, and their communication signals no
+longer match. The result is a small‑scale version of closure fragmentation and geometric
+instability.
+
+A playful reminder that the Triadic Cosmos architecture is fractal:  
+**from planets to ant hills, geometry shapes destiny.**
+
 ### 🌘 **Fun Fact: “Mars Occupation” Is a Special Case of Closure Fragmentation**
 
 The popular *Occupy Mars* slogan imagines Mars as a frontier that grants strategic freedom,  
