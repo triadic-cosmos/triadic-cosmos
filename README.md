@@ -2643,6 +2643,23 @@ Instead, the universe remains silent.
 A poetic confirmation that even the most extreme megastructure  
 cannot outrun closure geometry.
 
+### ☀️ Fun Fact: A Civilization Would *Absolutely* Take Its Own Star
+
+If superluminal travel were possible, a Dyson‑Spaceship would be the most rational design.
+A star provides everything at once:
+
+- unlimited fusion energy,
+- enormous momentum,
+- a stable galactic trajectory,
+- a megastructure habitat,
+- and a carrier for an entire civilization.
+
+Why travel in a tiny ship with limited fuel, when you can take your own sun?
+
+The Dyson Spaceship is the ultimate sci‑fi solution — and Paper #45 shows that even this
+perfect FTL architecture collapses under closure geometry, causal propagation, and
+boundary normalization.
+
 ### 🕳️ **Fun Fact: Warp Drives Fail for the Same Reason Wormholes Fail**
 
 Although warp drives and wormholes look different,  
