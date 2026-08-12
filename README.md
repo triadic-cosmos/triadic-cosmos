@@ -2584,6 +2584,89 @@ but a **necessary emergent behaviour** of closure–boundary systems governed by
 Paper #44 is the moment where the entire Triadic Cosmos snaps together.  
 It is the structural “glue” that binds the ecosystem into a single coherent architecture.
 
+---
+
+### **45. The Structural Impossibility of Superluminal Travel**  
+*Unified No‑Go Theorem Across Empirical, Operational, Technical, and Causal Layers*
+
+Paper #45 establishes one of the most decisive boundaries in the Triadic Cosmos:  
+**superluminal travel is structurally impossible** in any universe governed by closure geometry,  
+boundary normalization, and coherent causal propagation.
+
+Where science‑fiction imagines warp drives, wormholes, tachyonic channels, or hyperspace shortcuts,  
+the Triadic Cosmos shows that faster‑than‑light motion collapses under five independent constraints:
+
+- **Empirical** — A superluminal object, especially a stellar‑scale **Dyson Spaceship**,  
+  would generate unmistakable compression artefacts, superluminousity zones,  
+  and gravitational‑wave latency trails.  
+  None exist anywhere in the observable universe.
+
+- **Operational** — Any superluminal bubble becomes an **unguided projectile**,  
+  causally isolated from its environment, unable to sense, navigate, or correct course.
+
+- **Technical** — All known FTL mechanisms require exotic matter, negative energy,  
+  or closure‑breaking physics explicitly filtered out by triadic admissibility.
+
+- **Causal** — Superluminal motion violates holographic consistency, EM propagation,  
+  gravitational curvature updates, and classical cause–effect ordering —  
+  breaking UCBNP at every layer.
+
+- **Structural** — Integrating these failures yields a unified no‑go theorem:  
+  **no causally coherent universe can support superluminal transport.**
+
+The core claim:
+
+> **Superluminal travel is not merely unrealised —  
+> it is structurally forbidden by closure geometry, causal propagation,  
+> and boundary normalization.**
+
+Paper #45 reframes faster‑than‑light travel not as a technological challenge,  
+but as a geometric impossibility.  
+Warp drives, wormholes, tachyonic channels, and hyperspace shortcuts all collapse  
+under the same triadic constraints.
+
+The result is a definitive boundary in the ecosystem:  
+**the superluminal dream ends not in engineering limits,  
+but in the structure of reality itself.**
+
+### 🚀 **Fun Fact: The Dyson Spaceship Was the Final Test**
+
+Paper #45 introduces the **Dyson Spaceship** —  
+a star enclosed in a Dyson sphere and used as a warp‑bubble engine —  
+as the ultimate Kardashev II+ thought experiment.
+
+If superluminal travel were possible *at all*,  
+a stellar engine would reveal it.
+
+Instead, the universe remains silent.
+
+A poetic confirmation that even the most extreme megastructure  
+cannot outrun closure geometry.
+
+### 🕳️ **Fun Fact: Warp Drives Fail for the Same Reason Wormholes Fail**
+
+Although warp drives and wormholes look different,  
+their failure mode is identical:
+
+> **Both require closure‑breaking stress‑energy configurations  
+> that cannot be embedded in any triadic ontology.**
+
+The ecosystem shows that “exotic matter” is not just hard to find —  
+it is structurally inadmissible.
+
+### 🕰️ **Fun Fact: A Superluminal Ship Can Receive Its Own Message From the Future**
+
+Paper #45 includes the cleanest causal paradox in the ecosystem:
+
+A ship travels A→B superluminally, sends an EM message back to A,  
+and returns superluminally **before** the EM message arrives.
+
+The ship then receives its own message —  
+**from an event that has not yet occurred in A’s timeline.**
+
+A perfect demonstration that superluminal motion breaks temporal coherence  
+even without wormholes or tachyons.
+
 </details>
 
 ---
