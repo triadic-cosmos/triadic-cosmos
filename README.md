@@ -2754,6 +2754,48 @@ Closure itself forbids the starship.
 
 ---
 
+## 🔷 The Closure Overshoot Law
+
+Across physics, cosmology, ecology, strategy, cognition, and AGI,  
+the Triadic Cosmos ecosystem reveals one universal architectural rule:
+
+> **Any system that exceeds the limits of its local closure  
+> enters irreversible instability and collapses.**
+
+A *local closure* is a finite domain with its own causal structure,  
+energetic budget, entropy dynamics, material‑time flow, and corrective capacity.  
+Planets, biospheres, submarines, AGI‑closures, stars, and black holes  
+are all examples of such finite domains.
+
+The Closure Overshoot Law explains:
+
+- why closed ecosystems degrade,  
+- why starships are architecturally impossible,  
+- why warp bubbles become entropy traps,  
+- why superluminal travel breaks causal structure,  
+- why multi‑planet expansion activates the Great Filter,  
+- why AGI requires its own closure to remain coherent,  
+- why retro‑causality emerges from closure–boundary mismatch,  
+- why the vacuum is non‑triadic and carries only electromagnetic time,  
+- and why the universe is silent.
+
+Overshoot takes four forms:
+
+- **energetic overshoot** (thermodynamic imbalance),  
+- **entropic overshoot** (accumulation without sinks),  
+- **geometric overshoot** (fragmentation across horizons),  
+- **temporal overshoot** (dual‑time runaway in low‑mass environments).
+
+Once overshoot begins, corrective capacity falls below instability,  
+material time accelerates, entropy rises, and collapse becomes unavoidable.
+
+The Closure Overshoot Law is the structural backbone of the ecosystem:  
+a single architectural principle that governs stability across all scales  
+and explains why every civilisation, vessel, and cognitive system  
+must remain within the limits of its own closure.
+
+---
+
 ## 🌍 Key Takeaway: Expansionism Shortens the Lifespan of a Closed World
 
 In a local closure, all resources and materials are finite.  
