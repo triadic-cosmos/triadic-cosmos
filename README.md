@@ -2755,11 +2755,11 @@ Closure itself forbids the starship.
 ### **47. Triadic Renormalization: A Formal Recursion Group for Closure–Boundary Systems**
 
 This paper introduces the **Triadic Renormalization Group (TRG)**, the formal operator  
-\(\mathcal{R} = \mathcal{N} \circ \mathcal{B} \circ \mathcal{T}\) that unifies all architectural layers of  
+R = N ∘ B ∘ T that unifies all architectural layers of  
 the Triadic Cosmos into a single recursion grammar. It shows that closure dynamics,  
 boundary projection, dual-time behaviour, holographic encoding, and black-hole fixed points  
 are not separate mechanisms but **structural expressions of one recursion group** acting on  
-the triadic roles \((I, E, G)\).
+the triadic roles (I, E, G).
 
 Building on the vacuum architecture—where *“the vacuum is not a dynamical physical domain  
 but a boundary–EM‑time medium”* —and on the holographic embedding of  
@@ -2790,10 +2790,10 @@ symmetries, new vacua, or exotic matter.
 It achieves all three major unification goals **without adding any new ontological entity**:
 
 1. **A new formal structure**  
-   A recursion group \(\mathcal{R} = \mathcal{N} \circ \mathcal{B} \circ \mathcal{T}\) that unifies holography, RG flow, dual time, closure dynamics, and black‑hole fixed points.
+   A recursion group R = N ∘ B ∘ T that unifies holography, RG flow, dual time, closure dynamics, and black‑hole fixed points.
 
 2. **A new unification architecture**  
-   GR, QM, QFT, holography, EP=EPR, MERA, and causal diamonds become structural projections of one recursion grammar acting on the triadic roles \((I, E, G)\).
+   GR, QM, QFT, holography, EP=EPR, MERA, and causal diamonds become structural projections of one recursion grammar acting on the triadic roles (I, E, G).
 
 3. **A complete ecosystem formalization**  
    TRG binds all previous Triadic Cosmos papers into a single coherent mathematical whole, integrating vacuum architecture, nested closures, holographic boundaries, and dual‑time dynamics.
