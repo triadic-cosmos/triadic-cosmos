@@ -2750,6 +2750,59 @@ But Paper #46 shows why even the perfect shape cannot save them:
 
 Closure itself forbids the starship.
 
+---
+
+### **47. Triadic Renormalization: A Formal Recursion Group for Closure–Boundary Systems**
+
+This paper introduces the **Triadic Renormalization Group (TRG)**, the formal operator  
+\(\mathcal{R} = \mathcal{N} \circ \mathcal{B} \circ \mathcal{T}\) that unifies all architectural layers of  
+the Triadic Cosmos into a single recursion grammar. It shows that closure dynamics,  
+boundary projection, dual-time behaviour, holographic encoding, and black-hole fixed points  
+are not separate mechanisms but **structural expressions of one recursion group** acting on  
+the triadic roles \((I, E, G)\).
+
+Building on the vacuum architecture—where *“the vacuum is not a dynamical physical domain  
+but a boundary–EM‑time medium”* —and on the holographic embedding of  
+local closures inside the cosmic boundary—*“HST supplies the local causal architecture,  
+AdS/CFT supplies the holographic encoding, Triadic Cosmos supplies the global recursion  
+and dual-time dynamics”* —Paper #47 provides the missing formal layer  
+that makes the entire ecosystem mathematically complete.
+
+TRG reveals that:
+
+- **material time** is the recursion index of a closure,  
+- **electromagnetic time** is the invariant boundary clock,  
+- **black-hole interiors** are recursion-halted fixed points,  
+- **nested closures** produce nested RG flows,  
+- **holographic RG, Wilsonian RG, MERA, and causal diamonds** are structural projections  
+  of the same triadic recursion architecture.
+
+The result is a unified renormalization framework that requires **no new fields, no new  
+dimensions, no exotic matter, and no ontological extensions**. It reorganizes existing physics  
+rather than replacing it.
+
+### 🧩 **Fun Fact: The First Unification Framework That Checks Every Box Without New Ontology**
+
+Most unification attempts introduce new ingredients—extra dimensions, new particles, new  
+symmetries, new vacua, or exotic matter.  
+**This paper does the opposite.**
+
+It achieves all three major unification goals **without adding any new ontological entity**:
+
+1. **A new formal structure**  
+   A recursion group \(\mathcal{R} = \mathcal{N} \circ \mathcal{B} \circ \mathcal{T}\) that unifies holography, RG flow, dual time, closure dynamics, and black‑hole fixed points.
+
+2. **A new unification architecture**  
+   GR, QM, QFT, holography, EP=EPR, MERA, and causal diamonds become structural projections of one recursion grammar acting on the triadic roles \((I, E, G)\).
+
+3. **A complete ecosystem formalization**  
+   TRG binds all previous Triadic Cosmos papers into a single coherent mathematical whole, integrating vacuum architecture, nested closures, holographic boundaries, and dual‑time dynamics.
+
+And it does all of this **without introducing new fields, new dimensions, exotic matter, or any new ontological layer**.
+
+TRG unifies by **structure**, not by **invention** —  
+a rare achievement in the history of theoretical physics.
+
 </details>
 
 ---

@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Triadic Renormalization<br />
+A Formal Recursion Group for Closure‑Boundary Systems</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#significance-statement"
+    id="toc-significance-statement">Significance Statement</a></li>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#sec:TRG" id="toc-sec:TRG">The Triadic Renormalization
+    Group</a></li>
+    <li><a href="#sec:BHfixedpoints" id="toc-sec:BHfixedpoints">Black
+    Holes as Triadic Renormalization Fixed Points</a></li>
+    <li><a href="#sec:nestedclosures" id="toc-sec:nestedclosures">Nested
+    Closures, Boundaries, and Bulks</a></li>
+    <li><a href="#sec:mainstreamRG" id="toc-sec:mainstreamRG">Mapping to
+    Mainstream Renormalization Frameworks</a></li>
+    <li><a href="#sec:projectionmapping"
+    id="toc-sec:projectionmapping">Mainstream Theories as Projections of
+    the Triadic Cosmos</a></li>
+    <li><a href="#sec:dualtime-fractal"
+    id="toc-sec:dualtime-fractal">Dual Time in Fractal Closures:
+    Earth–Mars as a Solar-Closure Experiment</a></li>
+    <li><a href="#sec:testablepredictions"
+    id="toc-sec:testablepredictions">Testable Predictions from TRG
+    Dual-Time Dynamics</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#scope-limitations-and-ecosystem-positioning"
+    id="toc-scope-limitations-and-ecosystem-positioning">Scope,
+    Limitations, and Ecosystem Positioning</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 class="unnumbered" id="significance-statement">Significance
+    Statement</h1>
+    <p>The Triadic Cosmos ecosystem proposes that energy, geometry, and
+    information form three irreducible structural roles linked through a
+    closed triadic cycle. Earlier work established the architectural
+    components of this framework—triadic recursion, closure–boundary
+    normalization, dual-time scaling, holographic encoding, and
+    recursion-halted interior domains—but lacked a single formal
+    mechanism capable of unifying these elements into a coherent
+    mathematical structure.</p>
+    <p>Triadic Renormalization provides this missing mechanism. By
+    defining a renormalization operator <span
+    class="math inline">ℛ = 𝒩 ∘ ℬ ∘ 𝒯</span> acting on triadic state
+    vectors, the present paper shows that closure dynamics, boundary
+    constraints, and emergent temporal behaviour arise from a single
+    recursion group. Material time becomes the recursion index of this
+    group, electromagnetic time becomes the invariant boundary clock,
+    and black-hole interiors appear as fixed points of the
+    renormalization flow. This formalism reveals that holographic RG,
+    Wilsonian coarse-graining, MERA tensor networks, and causal-diamond
+    hierarchies are not disparate techniques but structural projections
+    of the same triadic recursion architecture.</p>
+    <p>The significance of this work lies in its unificatory power.
+    Triadic Renormalization elevates the Triadic Cosmos from an
+    architectural program to a mathematically grounded framework in
+    which GR, QM, QFT, holography, EP=EPR, and RG flow emerge as
+    coherent expressions of a single recursion grammar. It provides a
+    structural lens for interpreting closure-dependent cosmology,
+    horizon-bounded dynamics, and dual-time behaviour without
+    introducing new fields or dimensions. As such, Triadic
+    Renormalization offers a promising foundation for future unification
+    efforts across theoretical physics.</p>
+    <h1 id="introduction">Introduction</h1>
+    <p>Modern theoretical physics contains several empirically
+    successful pillars—general relativity, quantum mechanics, quantum
+    field theory, holography, EP=EPR, and renormalization group flow—yet
+    lacks a structural grammar explaining <em>why</em> these frameworks
+    cohere. The Triadic Cosmos ecosystem proposes such a grammar. It
+    identifies energy (<span class="math inline"><em>E</em></span>),
+    geometry (<span class="math inline"><em>G</em></span>), and
+    information (<span class="math inline"><em>I</em></span>) as three
+    irreducible structural roles linked through a closed triadic cycle,
+    and shows that closure dynamics, boundary constraints, and emergent
+    temporal behaviour arise from their recursive interaction. As stated
+    in <span class="citation"
+    data-cites="DeWitte2026Unification"></span>, “The core dynamical
+    object is the triadic update operator <span
+    class="math inline"><em>R</em></span>, which recursively reorganizes
+    the triadic roles.”</p>
+    <p>A second foundational component of the ecosystem is the Universal
+    Closure–Boundary Normalization Principle (UCBNP) <span
+    class="citation" data-cites="DeWitte2026Normalization"></span>,
+    which formalizes how a finite closure interacts with a holographic
+    boundary possessing a time-invariant canonical structure. The
+    triadic cycle</p>
+    <p><span
+    class="math display"><em>I</em> → <em>E</em> → <em>G</em> → <em>I</em></span></p>
+    <p>implements this normalization flow and provides the structural
+    mechanism through which closures coarse-grain, reorganize, and
+    advance their internal recursion index.</p>
+    <p>The present paper introduces <em>Triadic Renormalization</em>: a
+    formal recursion group that unifies the triadic update operator,
+    closure–boundary normalization, and the dual temporal architecture
+    into a single renormalization framework. We show that the recursive
+    update</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = <em>R</em>(<em>X</em><sub><em>n</em></sub>)</span></p>
+    <p>admits a precise renormalization-group interpretation when viewed
+    as a coarse-graining operator acting on the triadic state space of a
+    closure. Electromagnetic time (<span
+    class="math inline"><em>t</em><sub>EM</sub></span>) becomes the
+    universal boundary time governing projection and canonical
+    structure, while material time (<span
+    class="math inline"><em>t</em><sub>mat</sub></span>) emerges as the
+    recursion index measuring the rate at which the closure advances
+    through triadic renormalization steps.</p>
+    <p>Within this framework, dual time does not introduce an
+    independent temporal theory; rather, it provides a structural
+    interpretation of how quickly the renormalization flow proceeds
+    inside a closure relative to the boundary’s electromagnetic clock.
+    The scaling between <span
+    class="math inline"><em>t</em><sub>mat</sub></span> and <span
+    class="math inline"><em>t</em><sub>EM</sub></span> is
+    closure-dependent and may be expressed through multiplicative forms
+    developed in <span class="citation"
+    data-cites="DeWitte2026DualTime"></span>, such as</p>
+    <p><span
+    class="math display">$$\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}
+        = (1 + \alpha S)\, f(M_{\mathrm{eff}}, I),$$</span></p>
+    <p>where <span class="math inline"><em>S</em></span> is the entropic
+    footprint of the triadic state and <span
+    class="math inline"><em>f</em></span> is a closure-specific damping
+    or modulation factor. In horizon-bounded closures, <span
+    class="math inline"><em>f</em></span> reproduces the
+    Hawking-calibrated scaling <span
+    class="math inline"><em>f</em> ∝ 1/<em>M</em><sup>2</sup></span>,
+    but this behaviour is a special case rather than a universal law.
+    Dual time therefore appears as a natural temporal expression of
+    triadic recursion rather than a standalone dynamical principle.</p>
+    <p>This interpretation is suggestively aligned with empirical
+    anomalies such as Voyager’s unusually slow material degradation and
+    the apparent over-maturity of early cosmic structures observed by
+    JWST, while remaining fully consistent with the dual-time formalism
+    developed in <span class="citation"
+    data-cites="DeWitte2026DualTime"></span>. Triadic Renormalization
+    thereby provides the structural bridge linking triadic recursion,
+    closure–boundary normalization, holographic encoding, and
+    closure-dependent cosmology.</p>
+    <p>The goal of this paper is therefore twofold: (i) to define a
+    formal renormalization group acting on triadic state vectors <span
+    class="math inline">(<em>I</em>,<em>E</em>,<em>G</em>)</span> within
+    closure–boundary systems, and (ii) to demonstrate that this
+    renormalization group provides the missing mathematical layer
+    linking triadic recursion, holographic RG flow, dual-time dynamics,
+    and closure-dependent cosmology. The resulting structure shows that
+    GR, QM, QFT, holography, EP=EPR, and RG flow are not disparate
+    theories but coherent expressions of a single recursion group acting
+    on the triadic roles of energy, geometry, and information.</p>
+    <h1 id="sec:TRG">The Triadic Renormalization Group</h1>
+    <p>In this section we introduce the <em>Triadic Renormalization
+    Group</em> (TRG): a formal recursion group acting on triadic state
+    vectors associated with closure–boundary systems. The TRG provides
+    the mathematical structure underlying triadic recursion,
+    closure–boundary normalization, dual-time dynamics, and holographic
+    renormalization. It generalizes standard renormalization group flow
+    by treating information, energy, and geometry as irreducible
+    structural roles and by incorporating the dual temporal architecture
+    <span
+    class="math inline">(<em>t</em><sub>EM</sub>,<em>t</em><sub>mat</sub>)</span>.</p>
+    <h2 id="triadic-state-space">Triadic State Space</h2>
+    <p>Let <span class="math inline">𝒳</span> denote the triadic state
+    space of a closure. Each state is a vector <span
+    class="math display"><em>X</em><sub><em>n</em></sub> = (<em>I</em><sub><em>n</em></sub>,<em>E</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>),</span>
+    where</p>
+    <ul>
+    <li><p><span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> is the
+    informational role (distinguishability, entropy,
+    entanglement),</p></li>
+    <li><p><span
+    class="math inline"><em>E</em><sub><em>n</em></sub></span> is the
+    energetic role (Hamiltonian content, flux, dynamical
+    resources),</p></li>
+    <li><p><span
+    class="math inline"><em>G</em><sub><em>n</em></sub></span> is the
+    geometric role (causal structure, horizon configuration,
+    curvature).</p></li>
+    </ul>
+    <p>A state <span
+    class="math inline"><em>X</em><sub><em>n</em></sub></span> is
+    admissible only if it satisfies the closure conditions of the
+    Triadic Cosmos: positivity, holographic consistency, causal
+    accessibility, recursive stability, and full triadic-cycle closure
+    <span class="citation"
+    data-cites="DeWitte2026Unification DeWitte2026Formalism"></span>.</p>
+    <h2 id="boundary-canon-and-projection-operator">Boundary Canon and
+    Projection Operator</h2>
+    <p>Each closure interacts with a holographic boundary possessing a
+    time-invariant canonical structure. The boundary evolves solely in
+    electromagnetic time <span
+    class="math inline"><em>t</em><sub>EM</sub></span> and is
+    represented by a projection operator <span
+    class="math display">ℬ : 𝒳 → 𝒳,</span> which maps generative closure
+    states to boundary-consistent geometric constraints. In the notation
+    of <span class="citation"
+    data-cites="DeWitte2026Normalization"></span>, this corresponds to
+    the operator <span
+    class="math inline">II<sub><em>B</em></sub></span>.</p>
+    <h2 id="triadic-generative-operator">Triadic Generative
+    Operator</h2>
+    <p>The closure generates new internal configurations through a
+    triadic generative operator <span
+    class="math display">𝒯 : 𝒳 → 𝒳,</span> which implements the
+    informational-to-energetic transition <span
+    class="math inline"><em>I</em><sub><em>n</em></sub> → <em>E</em><sub><em>n</em></sub></span>
+    and the energetic-to-geometric transition <span
+    class="math inline"><em>E</em><sub><em>n</em></sub> → <em>G</em><sub><em>n</em></sub></span>.
+    This operator captures the internal dynamics of the closure in
+    material time <span
+    class="math inline"><em>t</em><sub>mat</sub></span>.</p>
+    <h2 id="normalization-operator">Normalization Operator</h2>
+    <p>The normalization operator <span
+    class="math display">𝒩 : 𝒳 × 𝒳 → 𝒳</span> integrates boundary
+    projections into the closure’s internal geometry, producing the next
+    informational state <span
+    class="math inline"><em>I</em><sub><em>n</em> + 1</sub></span>. This
+    operator implements the geometric-to-informational transition <span
+    class="math inline"><em>G</em><sub><em>n</em></sub> → <em>I</em><sub><em>n</em> + 1</sub></span>.</p>
+    <h2 id="definition-of-the-triadic-renormalization-group">Definition
+    of the Triadic Renormalization Group</h2>
+    <div class="definition">
+    <p><strong>Definition 1</strong> (Triadic Renormalization Group).
+    The <em>Triadic Renormalization Group</em> (TRG) is the recursion
+    group generated by the operator <span
+    class="math display">ℛ = 𝒩 ∘ ℬ ∘ 𝒯,</span> acting on triadic state
+    vectors <span
+    class="math inline"><em>X</em><sub><em>n</em></sub> ∈ 𝒳</span>
+    through the update rule <span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = ℛ(<em>X</em><sub><em>n</em></sub>).</span>
+    The integer <span class="math inline"><em>n</em></span> is the
+    recursion index and defines the closure’s material time: <span
+    class="math display"><em>t</em><sub>mat</sub> = <em>n</em>.</span>
+    Electromagnetic time <span
+    class="math inline"><em>t</em><sub>EM</sub></span> parametrizes the
+    boundary canon and remains invariant under <span
+    class="math inline">ℛ</span>.</p>
+    </div>
+    <p>The TRG is a semigroup in general, since <span
+    class="math inline">ℛ</span> is typically non-invertible due to
+    holographic coarse-graining and entropy increase. In special cases
+    (e.g. conformal closures), <span class="math inline">ℛ</span> may
+    admit invertible substructures.</p>
+    <h2 id="fixed-points-and-structural-equilibria">Fixed Points and
+    Structural Equilibria</h2>
+    <p>A triadic state <span
+    class="math inline"><em>X</em><sup>*</sup></span> is a fixed point
+    of the TRG if <span
+    class="math display">ℛ(<em>X</em><sup>*</sup>) = <em>X</em><sup>*</sup>.</span>
+    Fixed points correspond to closure–boundary equilibria in the sense
+    of <span class="citation"
+    data-cites="DeWitte2026Normalization"></span>, satisfying <span
+    class="math display">lim<sub><em>n</em> → ∞</sub>diff(<em>X</em><sub><em>n</em></sub>,ℬ(<em>X</em><sub><em>n</em></sub>)) = 0.</span></p>
+    <p>In holographic settings, TRG fixed points coincide with conformal
+    fixed points of holographic renormalization <span class="citation"
+    data-cites="DeWitte2026AdSCFT"></span>. In black-hole closures,
+    recursion-halted interior regions correspond to fixed points where
+    <span class="math inline">𝒯</span> becomes undefined <span
+    class="citation" data-cites="DeWitte2026Formalism"></span>.</p>
+    <h2 id="beta-functions-and-dual-time-scaling">Beta-Functions and
+    Dual-Time Scaling</h2>
+    <p>The TRG induces beta-functions for the triadic roles, <span
+    class="math display"><em>β</em><sub><em>I</em></sub> = <em>I</em><sub><em>n</em> + 1</sub> − <em>I</em><sub><em>n</em></sub>,   <em>β</em><sub><em>E</em></sub> = <em>E</em><sub><em>n</em> + 1</sub> − <em>E</em><sub><em>n</em></sub>,   <em>β</em><sub><em>G</em></sub> = <em>G</em><sub><em>n</em> + 1</sub> − <em>G</em><sub><em>n</em></sub>,</span>
+    which describe how informational, energetic, and geometric structure
+    reorganizes under the triadic update. These beta-functions encode
+    the internal dynamics of the closure in material time <span
+    class="math inline"><em>t</em><sub>mat</sub></span>, while the
+    boundary canon evolves solely in electromagnetic time <span
+    class="math inline"><em>t</em><sub>EM</sub></span>.</p>
+    <p>Dual-time dynamics relate the recursion rate of a closure to its
+    triadic state. Because material time is defined by the recursion
+    index <span class="math inline"><em>n</em></span>, its rate of
+    progression relative to electromagnetic time must be a
+    closure-dependent scaling function of the triadic roles: <span
+    class="math display">$$\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}
+            = F(I_n, E_n, G_n),$$</span> where <span
+    class="math inline"><em>F</em></span> is a structural scaling
+    function rather than an exact dynamical law. In the dual-time
+    formalism <span class="citation"
+    data-cites="DeWitte2026DualTime"></span>, <span
+    class="math inline"><em>F</em></span> admits both additive and
+    multiplicative forms; the latter naturally expresses the idea that
+    entropic acceleration may be modulated by mass or interaction
+    strength: <span
+    class="math display">$$\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}
+            = (1 + \alpha\,S_n)\, f(M_{\mathrm{eff}}, I_n),$$</span>
+    with <span
+    class="math inline"><em>S</em><sub><em>n</em></sub></span> the
+    entropic footprint of the triadic state and <span
+    class="math inline"><em>f</em></span> a closure-specific damping or
+    modulation factor.</p>
+    <p>The functional form of <span
+    class="math inline"><em>f</em></span> depends on closure type. For
+    generic closures (planetary, stellar, biological, artificial), <span
+    class="math inline"><em>f</em></span> is determined by effective
+    mass, interaction strength, and boundary coupling. In
+    horizon-bounded closures, however, <span
+    class="math inline"><em>f</em></span> must reproduce the
+    Hawking-calibrated scaling of black-hole evaporation. Because
+    horizon interiors are recursion-halted fixed points of the TRG, the
+    exterior material-time rate satisfies <span
+    class="math display">$$\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}
+            \;\propto\;
+            \frac{1}{M^2},$$</span> but <em>only</em> in the black-hole
+    regime where mass dominates the closure’s effective damping and
+    Hawking evaporation provides the relevant physical beta-function.
+    This <span class="math inline">1/<em>M</em><sup>2</sup></span>
+    behaviour is therefore a special case of the general scaling
+    function <span class="math inline"><em>F</em></span>, not a
+    universal law.</p>
+    <p>In summary, the TRG supplies the structural mechanism linking
+    triadic recursion to dual-time behaviour: beta-functions describe
+    how closures reorganize internally, while dual-time scaling
+    describes how rapidly this reorganization proceeds relative to the
+    boundary’s electromagnetic clock. The specific form of the scaling
+    function <span class="math inline"><em>F</em></span> is
+    closure-dependent, with black holes providing the unique
+    Hawking-calibrated limit.</p>
+    <h2 id="interpretation">Interpretation</h2>
+    <p>The TRG provides the missing formal layer linking triadic
+    recursion, closure–boundary normalization, dual-time dynamics,
+    holographic RG flow, and closure-dependent cosmology. It shows that
+    GR, QM, QFT, holography, EP=EPR, and RG flow are structurally
+    coherent expressions of a single recursion group acting on the
+    triadic roles <span
+    class="math inline">(<em>I</em>,<em>E</em>,<em>G</em>)</span>.</p>
+    <h1 id="sec:BHfixedpoints">Black Holes as Triadic Renormalization
+    Fixed Points</h1>
+    <p>Black holes provide the clearest physical instantiation of the
+    Triadic Renormalization Group (TRG). They are the smallest
+    physically realizable closures, possess horizon-bounded causal
+    domains, saturate holographic informational capacity, and exhibit
+    recursion-halted interiors. In the Triadic Cosmos ecosystem, black
+    holes have repeatedly been identified as canonical triadic closures
+    <span class="citation"
+    data-cites="DeWitte2026Formalism DeWitte2026AdSCFT"></span>. In this
+    section we show that, within the TRG, black-hole interiors
+    correspond to fixed points of the renormalization operator <span
+    class="math inline">ℛ = 𝒩 ∘ ℬ ∘ 𝒯</span>, while the horizon provides
+    the boundary canon that drives the renormalization flow of the
+    exterior closure.</p>
+    <h2 id="the-black-hole-boundary-as-canonical-projection-layer">The
+    Black-Hole Boundary as Canonical Projection Layer</h2>
+    <p>The boundary of a black hole is its event horizon. In the Triadic
+    Cosmos, the horizon is the locus of holographic encoding: all
+    physically meaningful degrees of freedom of the black hole are
+    encoded on this surface, consistent with Bekenstein–Hawking entropy
+    and extremal-surface reconstruction. As stated in <span
+    class="citation" data-cites="DeWitte2026Formalism"></span>, “the
+    horizon saturates holographic capacity and defines the complete
+    informational boundary of the closure.”</p>
+    <p>Within the TRG, the horizon therefore plays the role of the
+    boundary projection operator <span class="math inline">ℬ</span>. For
+    any exterior triadic state <span
+    class="math inline"><em>X</em><sub><em>n</em></sub></span>, the
+    horizon supplies a time-invariant canonical structure evolving
+    solely in electromagnetic time <span
+    class="math inline"><em>t</em><sub>EM</sub></span>. This boundary
+    canon constrains the renormalization flow of the exterior closure
+    but does not reorganize in material time. Formally, <span
+    class="math display">ℬ(<em>X</em><sub><em>n</em></sub>) = <em>X</em><sub>horizon</sub>,</span>
+    where <span class="math inline"><em>X</em><sub>horizon</sub></span>
+    is constant across all recursion steps.</p>
+    <h2 id="the-interior-as-a-recursion-halted-domain">The Interior as a
+    Recursion-Halted Domain</h2>
+    <p>The interior of a black hole possesses no independent
+    informational, energetic, or geometric degrees of freedom. It is a
+    holographic shadow of boundary data and does not support triadic
+    recursion. As shown in <span class="citation"
+    data-cites="DeWitte2026Formalism"></span>, “the interior does not
+    support emergent temporal structure and is best understood as a
+    holographic shadow rather than a dynamical region.”</p>
+    <p>In TRG terms, this means:</p>
+    <ul>
+    <li><p>the generative operator <span class="math inline">𝒯</span> is
+    undefined in the interior,</p></li>
+    <li><p>the boundary projection <span class="math inline">ℬ</span> is
+    constant and induces no change,</p></li>
+    <li><p>the normalization operator <span class="math inline">𝒩</span>
+    has no effect because no new geometry or information is
+    produced.</p></li>
+    </ul>
+    <p>Thus, for any interior state <span
+    class="math inline"><em>X</em><sub>int</sub></span>, <span
+    class="math display">ℛ(<em>X</em><sub>int</sub>) = <em>X</em><sub>int</sub>.</span></p>
+    <p>This is precisely the definition of a TRG fixed point.</p>
+    <h2 id="black-hole-interiors-as-trg-fixed-points">Black-Hole
+    Interiors as TRG Fixed Points</h2>
+    <p>A triadic state <span
+    class="math inline"><em>X</em><sup>*</sup></span> is a fixed point
+    of the TRG if <span
+    class="math inline">ℛ(<em>X</em><sup>*</sup>) = <em>X</em><sup>*</sup></span>.
+    Black-hole interiors satisfy this condition because: <span
+    class="math display">𝒯(<em>X</em><sub>int</sub>) is
+    undefined,   ℬ(<em>X</em><sub>int</sub>) = <em>X</em><sub>horizon</sub>,   𝒩(<em>X</em><sub>horizon</sub>,<em>X</em><sub>int</sub>) = <em>X</em><sub>int</sub>.</span></p>
+    <p>Therefore, <span
+    class="math display"><em>X</em><sub>int</sub> ∈ Fix(ℛ),</span> the
+    set of TRG fixed points.</p>
+    <p>This result formalizes earlier architectural claims: black-hole
+    interiors are recursion-halted domains, material time satisfies
+    <span
+    class="math inline"><em>d</em><em>t</em><sub>mat</sub>/<em>d</em><em>t</em><sub>EM</sub> → 0</span>,
+    and all physically meaningful structure resides on the horizon. The
+    TRG now provides the mathematical mechanism underlying these
+    claims.</p>
+    <h2 id="consistency-with-holographic-rg-and-adscft">Consistency with
+    Holographic RG and AdS/CFT</h2>
+    <p>In holographic renormalization, the radial direction of AdS plays
+    the role of an RG scale. Bulk regions that lack independent degrees
+    of freedom correspond to RG fixed points. The Triadic Cosmos mapping
+    <span class="citation" data-cites="DeWitte2026AdSCFT"></span>
+    identifies the triadic recursion index with the holographic RG
+    direction. Black-hole interiors therefore correspond to holographic
+    RG fixed points: <span class="math display">$$\frac{dX}{dn} = 0
+    \quad \Longleftrightarrow \quad \text{interior region}.$$</span></p>
+    <p>This matches the AdS/CFT statement that the interior is a
+    non-dynamical reconstruction from boundary data and confirms that
+    the TRG formalism is fully compatible with mainstream holographic RG
+    flow.</p>
+    <h2 id="interpretation-1">Interpretation</h2>
+    <p>Black holes thus provide a physically grounded example of TRG
+    fixed points. Their horizons act as canonical boundary projection
+    layers, while their interiors correspond to recursion-halted domains
+    in which triadic evolution ceases. This formalizes and unifies
+    earlier results across the Triadic Cosmos ecosystem: holographic
+    encoding at the horizon, absence of interior dynamics, recursion
+    halt, dual-time collapse, and boundary-determined structure. The TRG
+    supplies the mathematical architecture that makes these results
+    precise.</p>
+    <h1 id="sec:nestedclosures">Nested Closures, Boundaries, and
+    Bulks</h1>
+    <p>The Triadic Cosmos contains no single global bulk. Instead,
+    physical reality is organized into a <em>fractal hierarchy of
+    closures</em>, each possessing its own boundary, bulk, and interior.
+    This architecture explains how multiple boundaries can constrain the
+    same spatial region, why black-hole horizons behave as internal
+    holographic screens inside the cosmic bulk, and how the Triadic
+    Renormalization Group (TRG) operates consistently across nested
+    recursion domains.</p>
+    <h2 id="closures-and-their-local-geometry">Closures and Their Local
+    Geometry</h2>
+    <p>A closure <span class="math inline"><em>C</em></span> is defined
+    by a triadic state space <span
+    class="math inline"><em>X</em><sup>(<em>C</em>)</sup></span>, a
+    boundary <span
+    class="math inline"><em>B</em><sup>(<em>C</em>)</sup></span>, and a
+    bulk <span class="math inline">ℬ<sup>(<em>C</em>)</sup></span>:</p>
+    <p><span
+    class="math display"><em>C</em> = (<em>B</em><sup>(<em>C</em>)</sup>, ℬ<sup>(<em>C</em>)</sup>, <em>R</em><sub><em>C</em></sub>),</span></p>
+    <p>where <span
+    class="math inline"><em>R</em><sub><em>C</em></sub></span> is the
+    renormalization operator acting on triadic states inside the bulk.
+    The boundary <span
+    class="math inline"><em>B</em><sup>(<em>C</em>)</sup></span>
+    provides the canonical structure for the closure, evolving solely in
+    electromagnetic time <span
+    class="math inline"><em>t</em><sub>EM</sub></span>, while the bulk
+    <span class="math inline">ℬ<sup>(<em>C</em>)</sup></span> contains
+    the closure’s material-time recursion domain.</p>
+    <h2 id="child-closures-embedded-in-parent-bulks">Child Closures
+    Embedded in Parent Bulks</h2>
+    <p>Closures may contain smaller closures. If <span
+    class="math inline"><em>C</em>′</span> is a child closure embedded
+    inside the bulk of a parent closure <span
+    class="math inline"><em>C</em></span>, then</p>
+    <p><span
+    class="math display"><em>B</em><sup>(<em>C</em>′)</sup> ⊂ ℬ<sup>(<em>C</em>)</sup>,   ℬ<sup>(<em>C</em>′)</sup> ⊂ ℬ<sup>(<em>C</em>)</sup>.</span></p>
+    <p>The parent bulk therefore interacts with two distinct
+    boundaries:</p>
+    <ul>
+    <li><p>its <em>own</em> boundary <span
+    class="math inline"><em>B</em><sup>(<em>C</em>)</sup></span>, which
+    defines the outer holographic constraints,</p></li>
+    <li><p>the <em>child boundary</em> <span
+    class="math inline"><em>B</em><sup>(<em>C</em>′)</sup></span>, which
+    defines an internal holographic constraint.</p></li>
+    </ul>
+    <p>The TRG of the parent closure must therefore incorporate both
+    projection layers:</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub><sup>(<em>C</em>)</sup> = <em>R</em><sub><em>C</em></sub>(<em>X</em><sub><em>n</em></sub><sup>(<em>C</em>)</sup>; <em>B</em><sup>(<em>C</em>)</sup>, {<em>B</em><sup>(<em>C</em>′)</sup>}),</span></p>
+    <p>where <span
+    class="math inline">{<em>B</em><sup>(<em>C</em>′)</sup>}</span>
+    denotes the set of all child boundaries inside <span
+    class="math inline">ℬ<sup>(<em>C</em>)</sup></span>.</p>
+    <h2 id="black-holes-as-minimal-child-closures">Black Holes as
+    Minimal Child Closures</h2>
+    <p>A black hole is a minimal closure <span
+    class="math inline"><em>C</em><sub>BH</sub></span> embedded inside
+    the cosmic bulk:</p>
+    <p><span
+    class="math display"><em>C</em><sub>BH</sub> = (<em>B</em><sub>BH</sub>, ℬ<sub>BH</sub>, <em>R</em><sub>BH</sub>).</span></p>
+    <p>Its boundary <span
+    class="math inline"><em>B</em><sub>BH</sub></span> is the event
+    horizon. Its bulk <span class="math inline">ℬ<sub>BH</sub></span>
+    consists only of the exterior region of the black hole. The interior
+    is not a bulk but a recursion-halted holographic shadow:</p>
+    <p><span
+    class="math display">ℬ<sub>BH</sub> = exterior,   interior = fixed
+    point of <em>R</em><sub>BH</sub>.</span></p>
+    <p>Thus the cosmic bulk contains the black-hole exterior:</p>
+    <p><span
+    class="math display">ℬ<sub>BH</sub> ⊂ ℬ<sub>cosmos</sub>,</span></p>
+    <p>and the cosmic boundary and black-hole boundary both constrain
+    the same spatial region, but at different recursion scales.</p>
+    <h2 id="two-boundaries-acting-on-one-bulk-region">Two Boundaries
+    Acting on One Bulk Region</h2>
+    <p>For any spatial region containing a black hole, the effective
+    bulk is</p>
+    <p><span
+    class="math display">ℬ<sub>eff</sub> = ℬ<sub>cosmos</sub> \ interior(<em>C</em><sub>BH</sub>).</span></p>
+    <p>This region is constrained by:</p>
+    <ul>
+    <li><p>the <em>cosmic boundary</em> <span
+    class="math inline"><em>B</em><sub>cosmos</sub></span> (outer
+    holographic screen),</p></li>
+    <li><p>the <em>black-hole boundary</em> <span
+    class="math inline"><em>B</em><sub>BH</sub></span> (inner
+    holographic screen).</p></li>
+    </ul>
+    <p>The resulting structure is an open interval:</p>
+    <p><span
+    class="math display"><em>B</em><sub>cosmos</sub> → ℬ<sub>cosmos</sub> ⊃ ℬ<sub>BH</sub> → interior<sub>BH</sub>,</span></p>
+    <p>where the cosmic boundary and black-hole boundary flank the same
+    bulk region from different sides. This is not a contradiction but a
+    direct consequence of nested closures: each boundary governs its own
+    recursion domain, and the TRG flows of parent and child closures
+    coexist consistently.</p>
+    <h2
+    id="compatibility-with-mainstream-holographic-frameworks">Compatibility
+    with Mainstream Holographic Frameworks</h2>
+    <p>This nested-boundary architecture is fully compatible with
+    mainstream holographic approaches:</p>
+    <ul>
+    <li><p>In AdS/CFT, nested causal diamonds and horizons impose
+    multiple holographic screens on overlapping bulk regions.</p></li>
+    <li><p>In holographic RG, different radial scales correspond to
+    different effective boundaries acting on the same bulk.</p></li>
+    <li><p>In black-hole thermodynamics, the event horizon is an
+    internal holographic screen inside the cosmic bulk.</p></li>
+    </ul>
+    <p>The TRG formalism provides the structural mechanism that unifies
+    these observations: each closure has its own renormalization
+    operator, its own boundary canon, and its own recursion domain, and
+    nested closures produce nested holographic constraints on shared
+    bulk regions.</p>
+    <h2 id="interpretation-2">Interpretation</h2>
+    <p>Nested closures therefore produce nested boundaries acting on
+    nested bulks. The cosmic boundary governs the cosmic bulk, while the
+    black-hole boundary governs the black-hole exterior. Both boundaries
+    constrain the same spatial region, but at different recursion scales
+    and with different canonical structures. The black-hole interior is
+    a recursion-halted fixed point of the local TRG, while the cosmic
+    TRG continues to evolve the surrounding bulk. This architecture
+    confirms and formalizes the fractal closure hierarchy of the Triadic
+    Cosmos.</p>
+    <h1 id="sec:mainstreamRG">Mapping to Mainstream Renormalization
+    Frameworks</h1>
+    <p>The Triadic Renormalization Group (TRG) provides a structural
+    recursion framework acting on the triadic roles <span
+    class="math inline">(<em>I</em>,<em>E</em>,<em>G</em>)</span> of a
+    closure. In this section we show that the TRG is fully compatible
+    with mainstream renormalization methods in theoretical physics,
+    including Wilsonian renormalization, holographic RG flow in AdS/CFT,
+    tensor-network renormalization (MERA), and causal-diamond
+    coarse-graining. Each of these frameworks can be interpreted as a
+    special case of triadic recursion under appropriate identification
+    of informational, energetic, and geometric roles.</p>
+    <h2
+    id="wilsonian-renormalization-as-energetic-coarse-graining">Wilsonian
+    Renormalization as Energetic Coarse-Graining</h2>
+    <p>In Wilsonian renormalization, high-energy degrees of freedom are
+    integrated out to produce an effective theory at lower scales. This
+    process corresponds to a triadic update</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em></sub> → <em>E</em><sub><em>n</em></sub> → <em>G</em><sub><em>n</em></sub> → <em>I</em><sub><em>n</em> + 1</sub>,</span></p>
+    <p>where:</p>
+    <ul>
+    <li><p><span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span>:
+    microscopic couplings and distinguishability structure,</p></li>
+    <li><p><span
+    class="math inline"><em>E</em><sub><em>n</em></sub></span>:
+    energetic content of modes above the cutoff,</p></li>
+    <li><p><span
+    class="math inline"><em>G</em><sub><em>n</em></sub></span>:
+    geometric constraints on accessible processes,</p></li>
+    <li><p><span
+    class="math inline"><em>I</em><sub><em>n</em> + 1</sub></span>:
+    effective couplings after coarse-graining.</p></li>
+    </ul>
+    <p>The Wilsonian beta-functions</p>
+    <p><span class="math display">$$\beta(g) = \frac{dg}{d\ln
+    \Lambda}$$</span></p>
+    <p>correspond to the TRG beta-functions</p>
+    <p><span
+    class="math display"><em>β</em><sub><em>I</em></sub> = <em>I</em><sub><em>n</em> + 1</sub> − <em>I</em><sub><em>n</em></sub>,</span></p>
+    <p>with recursion index <span class="math inline"><em>n</em></span>
+    playing the role of the logarithmic scale parameter. Thus Wilsonian
+    RG is a special case of triadic recursion where the boundary canon
+    is the ultraviolet cutoff and the closure is the effective field
+    theory at scale <span class="math inline"><em>Λ</em></span>.</p>
+    <h2 id="holographic-rg-in-adscft">Holographic RG in AdS/CFT</h2>
+    <p>In AdS/CFT, the radial coordinate <span
+    class="math inline"><em>r</em></span> of AdS plays the role of an RG
+    scale. Moving inward corresponds to coarse-graining the boundary
+    theory, while moving outward corresponds to refining it. The Triadic
+    Cosmos mapping <span class="citation"
+    data-cites="DeWitte2026AdSCFT"></span> identifies the recursion
+    index <span class="math inline"><em>n</em></span> with the
+    holographic RG direction:</p>
+    <p><span class="math display"><em>n</em> ↔︎ <em>r</em>.</span></p>
+    <p>The triadic roles map naturally onto holographic quantities:</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em></sub> ↔︎ boundary
+    entanglement,   <em>E</em><sub><em>n</em></sub> ↔︎ boundary
+    Hamiltonian content,   <em>G</em><sub><em>n</em></sub> ↔︎ bulk
+    extremal surfaces.</span></p>
+    <p>The holographic RG equation</p>
+    <p><span class="math display">$$\frac{d g(r)}{dr} =
+    \beta(g)$$</span></p>
+    <p>corresponds to the TRG update</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = ℛ(<em>X</em><sub><em>n</em></sub>),</span></p>
+    <p>with fixed points of <span class="math inline">ℛ</span>
+    corresponding to conformal fixed points of the boundary theory.
+    Black- hole interiors, which satisfy <span
+    class="math inline">ℛ(<em>X</em><sub>int</sub>) = <em>X</em><sub>int</sub></span>,
+    therefore correspond to holographic RG fixed points where bulk
+    degrees of freedom cease to evolve.</p>
+    <h2 id="tensor-network-renormalization-mera">Tensor-Network
+    Renormalization (MERA)</h2>
+    <p>Tensor-network renormalization, particularly MERA, provides a
+    discrete realization of holographic coarse-graining. Each MERA layer
+    performs:</p>
+    <ul>
+    <li><p>disentangling (informational reorganization),</p></li>
+    <li><p>coarse-graining (energetic reduction),</p></li>
+    <li><p>geometric rescaling (network connectivity).</p></li>
+    </ul>
+    <p>This is precisely the triadic cycle:</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em></sub> → <em>E</em><sub><em>n</em></sub> → <em>G</em><sub><em>n</em></sub> → <em>I</em><sub><em>n</em> + 1</sub>.</span></p>
+    <p>The MERA network geometry corresponds to the bulk geometry <span
+    class="math inline"><em>G</em><sub><em>n</em></sub></span>, while
+    the boundary state corresponds to <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span>. The TRG
+    operator <span class="math inline">ℛ</span> is equivalent to a MERA
+    layer, and the recursion index <span
+    class="math inline"><em>n</em></span> corresponds to the depth of
+    the tensor network. This confirms that MERA is a discrete
+    instantiation of triadic renormalization.</p>
+    <h2 id="causal-diamond-coarse-graining">Causal-Diamond
+    Coarse-Graining</h2>
+    <p>In causal-diamond frameworks, each causal diamond has a finite
+    Hilbert-space dimension determined by its boundary area.
+    Coarse-graining corresponds to moving to larger diamonds with larger
+    boundaries. This matches the closure architecture:</p>
+    <p><span
+    class="math display"><em>C</em>′ ⊂ <em>C</em>  ⇒  <em>B</em><sup>(<em>C</em>′)</sup> ⊂ <em>B</em><sup>(<em>C</em>)</sup>.</span></p>
+    <p>The TRG update</p>
+    <p><span
+    class="math display"><em>X</em><sub><em>n</em> + 1</sub> = ℛ(<em>X</em><sub><em>n</em></sub>)</span></p>
+    <p>corresponds to moving from a smaller causal diamond to a larger
+    one, with the boundary canon <span
+    class="math inline"><em>B</em><sup>(<em>C</em>)</sup></span>
+    determining the accessible degrees of freedom. Black-hole horizons
+    correspond to minimal causal diamonds whose interiors are
+    recursion-halted fixed points.</p>
+    <h2 id="nested-rg-flows-and-multi-boundary-constraints">Nested RG
+    Flows and Multi-Boundary Constraints</h2>
+    <p>Mainstream frameworks typically consider a single boundary or
+    cutoff. The TRG generalizes this by allowing nested closures with
+    nested boundaries:</p>
+    <p><span
+    class="math display"><em>B</em><sup>(<em>C</em>)</sup>  and  <em>B</em><sup>(<em>C</em>′)</sup></span></p>
+    <p>acting simultaneously on the same bulk region. This corresponds
+    to:</p>
+    <ul>
+    <li><p>global RG flow (cosmic boundary),</p></li>
+    <li><p>local RG flow (black-hole boundary),</p></li>
+    <li><p>recursion-halted endpoints (black-hole interior).</p></li>
+    </ul>
+    <p>This nested RG structure is consistent with multi-scale
+    holography, nested causal diamonds, and multi-boundary AdS/CFT
+    constructions.</p>
+    <h2 id="interpretation-3">Interpretation</h2>
+    <p>Mainstream renormalization frameworks—Wilsonian RG, holographic
+    RG, MERA, and causal-diamond coarse-graining—are all special cases
+    of triadic renormalization. The TRG provides a unified recursion
+    group acting on informational, energetic, and geometric roles, with
+    nested boundaries producing nested RG flows. Black-hole interiors
+    appear as fixed points of local RG, while cosmic evolution
+    corresponds to global RG flow. This mapping confirms that the
+    Triadic Cosmos architecture is fully compatible with mainstream
+    unification programs.</p>
+    <h1 id="sec:projectionmapping">Mainstream Theories as Projections of
+    the Triadic Cosmos</h1>
+    <p>The Triadic Cosmos provides a general architectural framework in
+    which energy (<span class="math inline"><em>E</em></span>), geometry
+    (<span class="math inline"><em>G</em></span>), and information
+    (<span class="math inline"><em>I</em></span>) form three irreducible
+    structural roles linked through the triadic cycle <span
+    class="math inline"><em>I</em> → <em>E</em> → <em>G</em> → <em>I</em></span>.
+    The Triadic Renormalization Group (TRG) formalizes the recursive
+    update of these roles within horizon-bounded closures. Mainstream
+    physical theories can be understood as <em>projections</em> of this
+    more general triadic architecture, each illuminating one or more
+    legs of the triadic cycle or one layer of the closure–boundary
+    structure.</p>
+    <p>This section summarizes how major pillars of modern physics
+    correspond to specific projections of the Triadic Cosmos. The goal
+    is not to replace these theories but to show that their structural
+    coherence arises from the triadic architecture itself.</p>
+    <h2 id="projection-table">Projection Table</h2>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Theory</strong></th>
+    <th style="text-align: center;"><strong>Triadic
+    Role(s)</strong></th>
+    <th style="text-align: center;"><strong>Closure Layer</strong></th>
+    <th style="text-align: center;"><strong>Boundary/Bulk
+    Interpretation</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">General Relativity (GR)</td>
+    <td style="text-align: center;"><span
+    class="math inline"><em>G</em></span> (geometry)</td>
+    <td style="text-align: center;">Bulk of cosmic closure</td>
+    <td style="text-align: center;">Causal structure, horizons</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Quantum Mechanics (QM)</td>
+    <td style="text-align: center;"><span
+    class="math inline"><em>I</em></span> (information)</td>
+    <td style="text-align: center;">Interior recursion domain</td>
+    <td style="text-align: center;">Hilbert space, entanglement</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Quantum Field Theory (QFT)</td>
+    <td style="text-align: center;"><span
+    class="math inline"><em>E</em></span> (energy)</td>
+    <td style="text-align: center;">Bulk excitations</td>
+    <td style="text-align: center;">Stress-energy, propagators</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Holography (AdS/CFT)</td>
+    <td style="text-align: center;"><span
+    class="math inline"><em>I</em>, <em>G</em></span></td>
+    <td style="text-align: center;">Boundary <span
+    class="math inline">↔︎</span> bulk</td>
+    <td style="text-align: center;">Entanglement generates geometry</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">EP=EPR</td>
+    <td style="text-align: center;"><span
+    class="math inline"><em>I</em>, <em>G</em></span></td>
+    <td style="text-align: center;">Boundary connectivity</td>
+    <td style="text-align: center;">Entanglement = geometric link</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Black-Hole Thermodynamics</td>
+    <td style="text-align: center;"><span
+    class="math inline"><em>G</em>, <em>I</em></span></td>
+    <td style="text-align: center;">Child closure boundary</td>
+    <td style="text-align: center;">Horizon entropy, area law</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Causal Diamonds</td>
+    <td style="text-align: center;"><span
+    class="math inline"><em>G</em>, <em>I</em></span></td>
+    <td style="text-align: center;">Nested closures</td>
+    <td style="text-align: center;">Finite Hilbert-space per
+    boundary</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Wilsonian RG</td>
+    <td style="text-align: center;"><span
+    class="math inline"><em>I</em>, <em>E</em></span></td>
+    <td style="text-align: center;">Scale-dependent closure</td>
+    <td style="text-align: center;">Coarse-graining of modes</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Cosmology (<span
+    class="math inline"><em>Λ</em></span>CDM)</td>
+    <td style="text-align: center;"><span
+    class="math inline"><em>E</em>, <em>G</em></span></td>
+    <td style="text-align: center;">Cosmic closure bulk</td>
+    <td style="text-align: center;">Expansion, curvature, matter
+    content</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="interpretation-4">Interpretation</h2>
+    <p>The table shows that mainstream theories do not conflict with the
+    Triadic Cosmos; instead, they arise as lower-dimensional projections
+    of its structural roles and recursion dynamics:</p>
+    <ul>
+    <li><p>GR isolates the geometric constraint role <span
+    class="math inline"><em>G</em></span>.</p></li>
+    <li><p>QM isolates the informational generative role <span
+    class="math inline"><em>I</em></span>.</p></li>
+    <li><p>QFT isolates the energetic dynamical role <span
+    class="math inline"><em>E</em></span>.</p></li>
+    <li><p>Holography and AdS/CFT reveal the full triadic cycle through
+    boundary–bulk duality.</p></li>
+    <li><p>Black-hole thermodynamics reveals recursion-halted fixed
+    points of the TRG.</p></li>
+    <li><p>Wilsonian RG reveals the informational-to-energetic leg of
+    triadic recursion.</p></li>
+    <li><p>Causal diamonds reveal nested closures and nested
+    boundaries.</p></li>
+    <li><p>Cosmology reveals global TRG flow under the cosmic
+    boundary.</p></li>
+    </ul>
+    <p>Each theory highlights one structural aspect of the triadic
+    architecture. Together, they form a coherent projection of the
+    Triadic Cosmos, explaining why modern physics is empirically stable
+    yet architecturally fragmented. The TRG provides the unifying
+    mechanism that links these projections into a single structural
+    framework.</p>
+    <h2 id="unified-view">Unified View</h2>
+    <p>Under the Triadic Cosmos, the apparent diversity of physical
+    theories is a consequence of projecting the triadic roles and
+    closure–boundary structure onto specific operational domains. The
+    TRG shows that:</p>
+    <ul>
+    <li><p>all physical dynamics arise from recursive triadic
+    updates,</p></li>
+    <li><p>all causal and geometric structure arises from closure
+    boundaries,</p></li>
+    <li><p>all informational structure arises from holographic
+    encoding,</p></li>
+    <li><p>all renormalization arises from triadic recursion,</p></li>
+    <li><p>all black-hole interiors correspond to TRG fixed
+    points,</p></li>
+    <li><p>all cosmological evolution corresponds to global TRG
+    flow.</p></li>
+    </ul>
+    <p>Thus mainstream physics is not replaced but reorganized: each
+    theory becomes a projection of the triadic architecture, and their
+    coherence arises from the structural unity of the Triadic
+    Cosmos.</p>
+    <h1 id="sec:dualtime-fractal">Dual Time in Fractal Closures:
+    Earth–Mars as a Solar-Closure Experiment</h1>
+    <p>Dual time in the Triadic Cosmos is a property of
+    <em>closures</em>, not of individual objects. A closure is a
+    horizon-bounded causal domain with its own boundary canon, bulk
+    recursion dynamics, and TRG flow. Material time <span
+    class="math inline"><em>t</em><sub>mat</sub></span> is therefore
+    defined at the level of closures, and child closures inherit the
+    dual-time structure of their parent closure up to the limits imposed
+    by causal coupling. This is directly analogous to gravitational
+    fields: a planet possesses its own gravitational field, yet the
+    dominant causal structure is set by the parent closure (the solar
+    system), with local deviations bounded by causal consistency.</p>
+    <h2 id="planets-as-child-closures">Planets as Child Closures</h2>
+    <p>A planet with an atmosphere forms a legitimate closure: it has a
+    boundary (the atmospheric horizon), internal entropic dynamics, and
+    a well-defined causal domain. However, its dual-time behaviour is
+    not independent. Earth and Mars are child closures embedded within
+    the solar closure</p>
+    <p><span
+    class="math display"><em>C</em><sub>solar</sub> = (<em>B</em><sub>⊙</sub>, ℬ<sub>⊙</sub>, <em>R</em><sub>⊙</sub>),</span></p>
+    <p>where the Sun dominates both the entropic drive and the damping
+    of material-time evolution. The effective material-time rate of a
+    child closure is therefore determined multiplicatively by the parent
+    closure’s recursion dynamics:</p>
+    <p><span
+    class="math display">$$\left(\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}\right)_{\!\mathrm{child}}
+        \;\approx\;
+        \left(\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}\right)_{\!\mathrm{parent}}
+        \cdot
+        \Phi_{\mathrm{child}},$$</span></p>
+    <p>where <span class="math inline"><em>Φ</em><sub>child</sub></span>
+    is a closure-internal correction factor determined by the child’s
+    entropic footprint and mass. Because the solar closure dominates the
+    causal envelope, we have</p>
+    <p><span
+    class="math display"><em>Φ</em><sub>Earth</sub>, <em>Φ</em><sub>Mars</sub> ≪ 1,</span></p>
+    <p>and thus</p>
+    <p><span
+    class="math display">$$\left(\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}\right)_{\!\mathrm{Earth}}
+        \;\approx\;
+        \left(\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}\right)_{\!\mathrm{Mars}}
+        \;\approx\;
+        \left(\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}\right)_{\!\mathrm{solar}}.$$</span></p>
+    <h2 id="entropic-drive-and-mass-damping">Entropic Drive and Mass
+    Damping</h2>
+    <p>Material-time evolution is governed by the balance between
+    entropic acceleration and mass-induced damping. Entropy accelerates
+    material time, while mass damps this acceleration. In child
+    closures, both contributions are small compared to the solar
+    closure:</p>
+    <p><span
+    class="math display"><em>S</em><sub>Earth</sub>, <em>S</em><sub>Mars</sub> ≪ <em>S</em><sub>⊙</sub>,   <em>M</em><sub>Earth</sub>, <em>M</em><sub>Mars</sub> ≪ <em>M</em><sub>⊙</sub>.</span></p>
+    <p>Thus the correction factors <span
+    class="math inline"><em>Φ</em><sub>Earth</sub></span> and <span
+    class="math inline"><em>Φ</em><sub>Mars</sub></span> differ only
+    slightly, yielding</p>
+    <p><span
+    class="math display">$$\Delta\!\left(\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}\right)_{\!\mathrm{Earth-Mars}}
+        \ll
+        \left(\frac{dt_{\mathrm{mat}}}{dt_{\mathrm{EM}}}\right)_{\!\mathrm{solar}},$$</span></p>
+    <p>yet the difference is nonzero and must be persistent, monotonic,
+    and hardware-independent.</p>
+    <h2 id="causal-confinement-of-dual-time-deviations">Causal
+    Confinement of Dual-Time Deviations</h2>
+    <p>Child closures cannot deviate arbitrarily from the dual-time
+    dynamics of their parent closure. The causal coupling between parent
+    and child ensures that material-time deviations remain confined
+    within the causal envelope set by the solar closure. This mirrors
+    gravitational confinement: local gravitational fields exist, but the
+    dominant structure is set by the parent mass distribution. Dual time
+    behaves analogously: planets possess local entropic and mass-damping
+    structure, but the solar closure determines the dominant recursion
+    rate.</p>
+    <h2 id="earthmars-as-a-natural-dual-time-laboratory">Earth–Mars as a
+    Natural Dual-Time Laboratory</h2>
+    <p>Because Earth and Mars reside in the same parent closure,
+    dual-time differences between them must be small but detectable.
+    These differences should manifest as residual drift in long-duration
+    timing systems, electronics aging, and mechanical wear on Mars
+    rovers, beyond what is predicted by relativistic time dilation,
+    temperature, and radiation models. Existing rover telemetry already
+    reports persistent, monotonic clock drift and unexplained aging
+    patterns, consistent with the expected child-closure deviations.</p>
+    <h2 id="other-stellar-closures">Other Stellar Closures</h2>
+    <p>In other stellar systems, such as Alpha Centauri, material-time
+    scaling may differ significantly. Red dwarfs have lower mass and
+    higher entropic activity than the Sun, implying that child closures
+    within such systems may experience noticeably different dual-time
+    dynamics. This provides a future avenue for observational tests once
+    interstellar probes become feasible.</p>
+    <h2 id="summary">Summary</h2>
+    <p>Earth–Mars dual-time comparison constitutes one of the most
+    concrete and currently accessible tests of TRG dual-time dynamics.
+    The fractal closure structure predicts small but consistent
+    deviations, bounded by solar causal structure, and these deviations
+    appear compatible with existing rover telemetry. This makes the
+    Earth–Mars system an ideal precursor to the broader testable
+    predictions presented in the next section.</p>
+    <h1 id="sec:testablepredictions">Testable Predictions from TRG
+    Dual-Time Dynamics</h1>
+    <p>The fractal closure structure and causal confinement principles
+    developed in the previous section imply that dual-time deviations
+    must be small, persistent, and closure-consistent for child closures
+    embedded within a dominant parent closure.</p>
+    <h2 id="prediction-1-residual-clock-drift-on-mars">Prediction 1:
+    Residual Clock Drift on Mars</h2>
+    <p>Because Earth and Mars share the same parent closure, dual-time
+    deviations between them must be small but nonzero. TRG predicts a
+    persistent residual drift in timing systems on Mars rovers:</p>
+    <ul>
+    <li><p>the drift must be monotonic and
+    hardware-independent,</p></li>
+    <li><p>it must persist over multi-year timescales,</p></li>
+    <li><p>it must remain after correcting for relativistic time
+    dilation, temperature, and radiation,</p></li>
+    <li><p>it must be identical in direction across all rover
+    platforms.</p></li>
+    </ul>
+    <p>Existing telemetry from the Mars Exploration Rovers already
+    reports persistent clock drift not fully explained by environmental
+    models, consistent with this prediction.</p>
+    <h2
+    id="prediction-2-residual-electronics-aging-in-low-mass-low-entropy-closures">Prediction
+    2: Residual Electronics Aging in Low-Mass, Low-Entropy Closures</h2>
+    <p>In closures with low effective mass and low entropy
+    (e.g. interplanetary or interstellar space), TRG does not predict a
+    universal acceleration of material time. Because entropy is the
+    primary driver of material-time acceleration and mass only damps
+    this acceleration, the multiplicative dual-time structure implies
+    that material-time progression may be slower, faster, or nearly
+    static depending on the local balance of these terms.</p>
+    <p>Interstellar space has exceptionally low entropy and weak causal
+    coupling to the solar closure. TRG therefore predicts that probes
+    such as Voyager should exhibit <em>slower</em> material-time
+    progression than in the solar closure, even though mass-damping is
+    reduced. This manifests as:</p>
+    <ul>
+    <li><p>slower-than-expected electronics aging,</p></li>
+    <li><p>non-linear drift patterns not correlated with radiation or
+    temperature,</p></li>
+    <li><p>oscillator stability that degrades more slowly than predicted
+    by classical models.</p></li>
+    </ul>
+    <p>Telemetry from long-duration missions such as Voyager indeed
+    reports unusually slow aging behaviour, consistent with the expected
+    dynamics of probes operating in low-mass, low-entropy closures with
+    weak parent-closure influence.</p>
+    <h2
+    id="prediction-3-horizon-limited-dynamics-in-black-holes">Prediction
+    3: Horizon-Limited Dynamics in Black Holes</h2>
+    <p>The dual-time relation is multiplicative in horizon-bounded
+    closures, where material-time evolution enters the Hawking
+    evaporation scaling. Because recursion halts inside the horizon, TRG
+    predicts:</p>
+    <ul>
+    <li><p>all observable dynamics must originate at the
+    horizon,</p></li>
+    <li><p>no interior-dependent modulation may appear in
+    gravitational-wave spectra,</p></li>
+    <li><p>deviations from classical ringdown must correlate with
+    boundary-canon corrections rather than interior structure.</p></li>
+    </ul>
+    <p>Any detection of interior-dependent gravitational-wave signatures
+    would falsify the horizon-bounded limit of dual time.</p>
+    <h2
+    id="prediction-4-nested-closure-effects-in-multi-horizon-environments">Prediction
+    4: Nested Closure Effects in Multi-Horizon Environments</h2>
+    <p>Fractal closures imply that nested horizons (e.g. black holes
+    embedded in galaxy clusters) generate nested TRG flows. Because
+    dual-time dynamics are multiplicative across closure layers, nested
+    horizons produce small but measurable deviations in EM-time
+    observables:</p>
+    <ul>
+    <li><p>weak lensing anomalies beyond GR predictions,</p></li>
+    <li><p>multi-scale correlation peaks in cluster lensing
+    maps,</p></li>
+    <li><p>non-Gaussian tails arising from closure-overlap contributions
+    to effective mass.</p></li>
+    </ul>
+    <p>These effects should be detectable in high-resolution lensing
+    surveys and provide a direct probe of closure-overlap structure.</p>
+    <h2 id="prediction-5-boundary-canon-drift-in-cosmology">Prediction
+    5: Boundary-Canon Drift in Cosmology</h2>
+    <p>The cosmological constant <span
+    class="math inline"><em>Λ</em></span> appears as a boundary-canon
+    parameter of the cosmic closure. Because the dual-time relation is
+    conceptual, it does not fix the exact functional dependence of <span
+    class="math inline"><em>Λ</em></span> on cosmic recursion. TRG
+    predicts:</p>
+    <ul>
+    <li><p>a slow, monotonic drift in <span
+    class="math inline"><em>Λ</em></span> over cosmic time,</p></li>
+    <li><p>a logarithmic evolution rather than dynamical dark-energy
+    behaviour,</p></li>
+    <li><p>correlation with large-scale entropic evolution rather than
+    scalar-field dynamics.</p></li>
+    </ul>
+    <p>Future precision cosmology missions may detect such
+    boundary-canon drift as a small deviation from the standard <span
+    class="math inline"><em>Λ</em></span>CDM expansion history.</p>
+    <h2
+    id="prediction-6-entropy-correlated-deviations-in-planetary-closures">Prediction
+    6: Entropy-Correlated Deviations in Planetary Closures</h2>
+    <p>Child closures inherit dual-time structure from their parent
+    closure up to causal limits. Because entropy is the primary driver
+    of material-time acceleration and mass only damps this acceleration,
+    TRG predicts that planetary closures with significantly different
+    entropic structure (e.g. planets orbiting turbulent red dwarfs) may
+    exhibit measurable dual-time deviations relative to solar-system
+    baselines:</p>
+    <ul>
+    <li><p>residual drift in timing systems,</p></li>
+    <li><p>closure-dependent electronics aging rates,</p></li>
+    <li><p>measurable deviations in mechanical wear.</p></li>
+    </ul>
+    <p>These deviations should be small but consistent, and detectable
+    once interstellar probes become feasible.</p>
+    <h2 id="prediction-7-no-firewall-signatures">Prediction 7: No
+    Firewall Signatures</h2>
+    <p>Because horizon-bounded recursion halts and material time
+    approaches the black-hole limit from above, the dual-time
+    architecture forbids firewall-like phenomena. The multiplicative
+    structure of dual-time evolution implies that interior dynamics
+    cannot produce discontinuous or divergent behaviour. TRG
+    predicts:</p>
+    <ul>
+    <li><p>all quantum deviations must be horizon-localized,</p></li>
+    <li><p>no firewall signatures may appear in horizon-scale quantum
+    measurements,</p></li>
+    <li><p>any firewall-like detection would falsify the TRG interior
+    fixed-point structure.</p></li>
+    </ul>
+    <h2 id="summary-1">Summary</h2>
+    <p>The predictions above follow directly from the formal TRG
+    definition and the causal confinement principles governing
+    parent–child closures. The Earth–Mars system provides the most
+    immediate and accessible test of dual-time dynamics, with existing
+    rover telemetry already exhibiting patterns compatible with TRG
+    predictions. Additional tests arise in gravitational-wave astronomy,
+    cosmology, and future interstellar exploration.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>Triadic Renormalization provides a unified structural framework
+    in which closure dynamics, recursion, boundary canon, and
+    scale-dependent evolution emerge from a single renormalization
+    architecture. The formalism developed in this paper shows that the
+    triadic update operator, when interpreted as a renormalization flow,
+    naturally reproduces the behaviour of physical, biological, and
+    artificial closures across scales. The renormalization group
+    structure clarifies how closures coarse-grain, how horizons bound
+    recursion, and how fixed points encode long-term stability.</p>
+    <p>Within this broader architecture, dual time appears not as an
+    independent theory but as a secondary temporal layer induced by the
+    renormalization flow itself. Material time reflects the internal
+    recursion rate of a closure, while electromagnetic time provides the
+    transversal reference against which this rate is measured. The
+    multiplicative relation between these temporal layers ensures
+    compatibility with horizon-bounded dynamics, Hawking-calibrated mass
+    scaling, and the causal hierarchy of parent–child closures. Dual
+    time therefore acts as a temporal expression of the renormalization
+    structure rather than a replacement for conventional time-dependent
+    physics.</p>
+    <p>The empirical consequences of Triadic Renormalization follow
+    directly from its structural principles. Horizon-localized dynamics,
+    nested closure effects, slow evolution in high-mass domains,
+    accelerated evolution in high-entropy domains, and small but
+    persistent deviations in planetary closures all arise naturally from
+    the renormalization flow. These predictions are modest in magnitude
+    yet precise in structure, making them accessible to current and
+    near-future observational platforms ranging from Mars rovers and
+    long-duration spacecraft to gravitational-wave detectors and
+    cosmological surveys.</p>
+    <p>Triadic Renormalization thus provides a coherent and empirically
+    actionable extension of the Triadic Cosmos framework. It reorganizes
+    closure dynamics, temporal behaviour, and horizon structure into a
+    single renormalization group, offering a unified perspective on
+    evolution across scales. Future work may refine the dynamical form
+    of the renormalization operator, explore deeper connections with
+    holographic RG flow, and extend the empirical program outlined here.
+    What remains clear is that renormalization, rather than time itself,
+    provides the structural backbone of closure evolution in the Triadic
+    Cosmos.</p>
+    <h1 id="scope-limitations-and-ecosystem-positioning">Scope,
+    Limitations, and Ecosystem Positioning</h1>
+    <h2 id="conceptual-scope-and-limitations">Conceptual Scope and
+    Limitations</h2>
+    <p>Triadic Renormalization (TRG) provides a structural recursion
+    framework for closure–boundary systems. Its purpose is architectural
+    rather than dynamical: TRG formalizes how informational, energetic,
+    and geometric roles reorganize under recursive normalization, and
+    how this reorganization induces material time. Several limitations
+    follow naturally from this scope:</p>
+    <ul>
+    <li><p><strong>No microscopic dynamics.</strong> TRG does not
+    specify microphysical laws for <span
+    class="math inline"><em>I</em></span>, <span
+    class="math inline"><em>E</em></span>, or <span
+    class="math inline"><em>G</em></span>. It formalizes their recursive
+    reorganization but does not derive their internal evolution from
+    first principles.</p></li>
+    <li><p><strong>Dual time as scaling, not law.</strong> The relation
+    between <span class="math inline"><em>t</em><sub>mat</sub></span>
+    and <span class="math inline"><em>t</em><sub>EM</sub></span> is a
+    closure-dependent scaling function <span
+    class="math inline"><em>F</em>(<em>I</em><sub><em>n</em></sub>,<em>E</em><sub><em>n</em></sub>,<em>G</em><sub><em>n</em></sub>)</span>,
+    not a universal dynamical equation. Multiplicative forms such as
+    <span
+    class="math inline">(1+<em>α</em><em>S</em>) <em>f</em>(<em>M</em><sub>eff</sub>,<em>I</em>)</span>
+    are structural ansätze rather than exact physical laws.</p></li>
+    <li><p><strong>Black-hole scaling is a special case.</strong> The
+    Hawking-calibrated behaviour <span
+    class="math inline"><em>d</em><em>t</em><sub>mat</sub>/<em>d</em><em>t</em><sub>EM</sub> ∝ 1/<em>M</em><sup>2</sup></span>
+    applies only to horizon-bounded closures where mass dominates
+    effective damping and evaporation provides the relevant
+    beta-function. It is not a general closure law.</p></li>
+    <li><p><strong>No claim of empirical completeness.</strong> TRG
+    offers structural interpretations of phenomena such as slow
+    spacecraft aging or early-universe maturity, but these
+    interpretations are hypothesis-level and not presented as definitive
+    explanations.</p></li>
+    <li><p><strong>Coarse-graining, not prediction engine.</strong> TRG
+    organizes closure dynamics into a renormalization flow; it does not
+    compute detailed time-dependent behaviour of specific physical
+    systems.</p></li>
+    </ul>
+    <p>These limitations reflect the intended role of TRG: a structural
+    grammar for closure recursion rather than a replacement for
+    established physical theories.</p>
+    <h2 id="positioning-within-the-triadic-cosmos-ecosystem">Positioning
+    Within the Triadic Cosmos Ecosystem</h2>
+    <p>This paper occupies a central position within the Triadic Cosmos
+    ecosystem. Earlier papers introduced key architectural
+    components:</p>
+    <ul>
+    <li><p>the triadic roles <span
+    class="math inline">(<em>I</em>,<em>E</em>,<em>G</em>)</span> and
+    their update operator <span class="math inline"><em>R</em></span>
+    <span class="citation"
+    data-cites="DeWitte2026Unification"></span>,</p></li>
+    <li><p>the Universal Closure–Boundary Normalization Principle
+    (UCBNP) <span class="citation"
+    data-cites="DeWitte2026Normalization"></span>,</p></li>
+    <li><p>the dual-time architecture linking recursion index to
+    temporal behaviour <span class="citation"
+    data-cites="DeWitte2026DualTime"></span>,</p></li>
+    <li><p>the holographic and black-hole formalism <span
+    class="citation"
+    data-cites="DeWitte2026Formalism DeWitte2026AdSCFT"></span>,</p></li>
+    <li><p>the vacuum architecture and boundary-only evolution in <span
+    class="math inline"><em>t</em><sub>EM</sub></span> <span
+    class="citation" data-cites="DeWitte2026Vacuum"></span>.</p></li>
+    </ul>
+    <p>Triadic Renormalization provides the missing formal layer that
+    unifies these components. It shows that:</p>
+    <ul>
+    <li><p>triadic recursion is a renormalization flow on <span
+    class="math inline">(<em>I</em>,<em>E</em>,<em>G</em>)</span>,</p></li>
+    <li><p>material time is the recursion index of this flow,</p></li>
+    <li><p>electromagnetic time is the invariant boundary
+    clock,</p></li>
+    <li><p>black-hole interiors are TRG fixed points,</p></li>
+    <li><p>nested closures produce nested RG flows,</p></li>
+    <li><p>mainstream RG, holographic RG, MERA, and causal-diamond
+    coarse-graining arise as projections of the same triadic recursion
+    structure.</p></li>
+    </ul>
+    <p>In this sense, TRG elevates the ecosystem from a collection of
+    architectural insights to a unified formal framework. It provides a
+    single mathematical object—<span
+    class="math inline">ℛ = 𝒩 ∘ ℬ ∘ 𝒯</span>—through which closure
+    dynamics, boundary constraints, dual-time behaviour, holographic
+    encoding, and cosmological structure can be expressed
+    coherently.</p>
+    <h2 id="relevance-for-unification">Relevance for Unification</h2>
+    <p>By treating energy, geometry, and information as irreducible
+    roles linked through a renormalization group, TRG offers a
+    structural lens through which GR, QM, QFT, holography, EP=EPR, and
+    RG flow can be understood as coherent manifestations of a single
+    recursion architecture. This positions TRG as a promising foundation
+    for future unification programs: not by adding new fields or
+    dimensions, but by revealing the shared recursion grammar underlying
+    existing theories.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>This paper is part of the <em>Triadic Cosmos</em> ecosystem,
+    which develops a unified conceptual and computational framework
+    spanning physical ontology and modular architectures for intelligent
+    systems. All materials, extended notes, and evolving documentation
+    are available in the public repository.</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <div class="thebibliography">
+    <p>J. De Witte, “The Universal Closure–Boundary Normalization
+    Principle,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The Triadic Cosmos: A Minimal Viable Unification
+    Candidate,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Dual-Time Formalism for Closure Dynamics and
+    Cosmic Evolution,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Triadic Formalism for a Universe of Black Holes,”
+    Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The Triadic Cosmos: The Role of the Vacuum,”
+    Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Retro‑Causality within the Triadic Cosmos,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The Triadic Cycle with AdS/CFT,” Triadic Cosmos
+    Ecosystem, 2026.</p>
+    <p>J. De Witte, “From Holographic Space‑Time to The Triadic Cosmos,”
+    Triadic Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>
