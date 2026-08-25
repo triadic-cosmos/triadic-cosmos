@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The GLP–Graph Architecture: Combining GLP–Mono with
+DMLG</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#significance-statement"
+    id="toc-significance-statement">Significance Statement</a></li>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#from-dmlg-and-glp-to-glpg"
+    id="toc-from-dmlg-and-glp-to-glpg">From DMLG and GLP to
+    GLPG</a></li>
+    <li><a href="#glpmono-improvements-and-dmlg-integration"
+    id="toc-glpmono-improvements-and-dmlg-integration">GLP–Mono
+    Improvements and DMLG Integration</a></li>
+    <li><a href="#learning-behavior" id="toc-learning-behavior">Learning
+    Behavior</a></li>
+    <li><a href="#generation-modes-graph-traversal-and-pure-mlp"
+    id="toc-generation-modes-graph-traversal-and-pure-mlp">Generation
+    Modes: Graph Traversal and Pure MLP</a></li>
+    <li><a href="#formal-definition-of-glpg"
+    id="toc-formal-definition-of-glpg">Formal Definition of
+    GLPG</a></li>
+    <li><a href="#example-model-size-and-parameters"
+    id="toc-example-model-size-and-parameters">Example Model Size and
+    Parameters</a></li>
+    <li><a href="#example-datasets" id="toc-example-datasets">Example
+    Datasets</a></li>
+    <li><a href="#micro-model-with-very-small-dataset"
+    id="toc-micro-model-with-very-small-dataset">Micro-Model with Very
+    Small Dataset</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 class="unnumbered" id="significance-statement">Significance
+    Statement</h1>
+    <p>The GLP–Graph (GLPG) architecture represents a unification of two
+    complementary paradigms of structured language generation: the
+    monolithic semantic engine of GLP–Mono and the deterministic
+    graph-based routing of DMLG. By integrating learned lemma geometry
+    with explicit canonical transitions, GLPG provides a traceable,
+    interpretable, and highly dynamic substrate for intelligent
+    systems.</p>
+    <p>GLPG is architecturally significant for several reasons. First,
+    it restores deterministic graph traversal as the primary mechanism
+    for structural cadence, while retaining the expressive next-token
+    behaviour of a single large MLP. Second, it offers a fully
+    inspectable governance layer whose transitions, paging structure,
+    and grammar rules remain explicit and auditable. Third, the
+    architecture scales naturally within hybrid AI pipelines: GLPG
+    supplies canonical structure and world geometry, while external
+    models contribute stylistic refinement and surface fluency.</p>
+    <p>Beyond its engineering value, GLPG exhibits cognitive
+    characteristics uncommon in conventional language models. Training
+    proceeds through identifiable life-cycle phases, from proto-semantic
+    attractors to mature canon compression, without collapse or
+    overfitting. Even small datasets suffice to induce stable world
+    models, making GLPG an efficient and domain-faithful compressor of
+    narrative and semantic structure.</p>
+    <p>By combining the strengths of GLP–Mono (semantic absorption,
+    expressive lemma geometry, recurrent narrative memory) with those of
+    DMLG (deterministic routing, structural guarantees, PRE-based
+    governance), GLPG reduces the limitations of both parent
+    architectures and establishes a unified, scalable, and structurally
+    grounded foundation for hybrid generative intelligence.</p>
+    <h1 id="introduction">Introduction</h1>
+    <p>Contemporary language models unify grammar, lexical content, and
+    contextual structure into large, statistically entangled embedding
+    spaces. While transformer-based architectures have achieved
+    remarkable generative fluency, their internal organisation remains
+    opaque: grammar is implicit, domain boundaries are soft, and
+    long-horizon coherence depends on deep attention stacks rather than
+    explicit structure. As a result, these systems provide limited
+    guarantees about determinism, traceability, or domain
+    fidelity—properties that become increasingly important as language
+    models are deployed in hybrid intelligent systems.</p>
+    <p>Two recent architectures address these limitations from
+    complementary directions. The Dynamic Modular Language Graph (DMLG)
+    models language as deterministic graph traversal: tokens,
+    transitions, and paging biomes form an explicit structural
+    substrate, and generation emerges from context-sensitive navigation
+    governed by rule-based coherence and PRE-driven sentence validation.
+    In contrast, GLP–Mono demonstrates that coherent next-token
+    behaviour can arise from a single monolithic MLP equipped with
+    deterministic grammar tokens, paged lemma clusters, cosine-based
+    ranking, and compact recurrent narrative memory. DMLG offers strong
+    structural guarantees but limited semantic absorption; GLP–Mono
+    offers expressive lemma geometry but weaker deterministic
+    routing.</p>
+    <p>The GLP–Graph (GLPG) architecture introduced in this paper
+    unifies these paradigms into a single hybrid system. GLPG retains
+    DMLG’s deterministic graph routing, explicit paging, and rule-based
+    grammar coherence, while inheriting GLP–Mono’s monolithic semantic
+    engine, learned lemma embeddings, and stable next-token dynamics.
+    This synthesis yields a substrate that is simultaneously
+    deterministic and expressive: a language graph with emergent
+    semantic behaviour, and a next-token model with explicit structural
+    guarantees.</p>
+    <p>GLPG supports two generative modes. In paged graph traversal
+    mode, deterministic routing restricts the target vocabulary per
+    transition, enabling fast, stable, and canon-faithful generation. In
+    pure MLP mode, the architecture evaluates the full vocabulary,
+    allowing free-form semantic emergence similar to transformer models.
+    The coexistence of these modes reveals that the monolithic network
+    learns internal structure that mirrors the deterministic graph,
+    while the graph provides a controllable manifold for semantic
+    injection.</p>
+    <p>Training exhibits lifecycle-like behaviour: early models produce
+    proto-semantic attractors, while sufficiently trained models
+    compress entire narrative domains into stable canonical geometries.
+    Even small datasets suffice to induce coherent world models, making
+    GLPG an efficient canon compressor and a practical substrate for
+    hybrid pipelines in which GLPG provides structure and external LLMs
+    provide stylistic refinement.</p>
+    <p>By combining the strengths of DMLG and GLP–Mono while reducing
+    their weaknesses, GLPG establishes a unified, scalable, and
+    interpretable architecture for structured language generation. It
+    provides deterministic routing, emergent semantics, and hybrid
+    generative modes within a single system, forming a dynamic and
+    domain-stable foundation for future hybrid intelligent systems.</p>
+    <h1 id="from-dmlg-and-glp-to-glpg">From DMLG and GLP to GLPG</h1>
+    <p>The GLP–Graph (GLPG) architecture emerges from the convergence of
+    two structurally distinct yet complementary paradigms: the
+    deterministic graph-based governance of DMLG and the monolithic
+    next-token semantics of GLP–Mono. GLPG unifies these approaches into
+    a single hybrid system that restores explicit structural determinism
+    while preserving expressive lemma geometry and context-driven
+    semantic behaviour.</p>
+    <p>DMLG models language as traversal through a canonical graph of
+    grammar and lemma transitions. Its strengths lie in deterministic
+    routing, strong structural guarantees, fast generation, and
+    efficient learning. However, its reliance on numerous page-specific
+    micro-models limits semantic absorption, reduces creative variation,
+    and introduces training imbalance.</p>
+    <p>GLP–Mono, in contrast, demonstrates that coherent next-token
+    behaviour can arise from a single large MLP equipped with
+    deterministic grammar tokens, paged lemma clusters, cosine ranking,
+    and recurrent narrative memory. It offers strong semantic absorption
+    and higher creative capacity, but its paging is weaker, its
+    structural determinism is reduced, and both training and inference
+    are slower.</p>
+    <p>GLPG combines the strengths of both architectures while reducing
+    their weaknesses. It retains the monolithic semantic engine of
+    GLP–Mono, enabling expressive lemma embeddings and stable next-token
+    dynamics, but replaces learned page selection with deterministic
+    graph-based routing derived from the last lemma token—a key feature
+    of DMLG. This restores explicit structural cadence, improves paging
+    determinism, and eliminates the need for page-specific micro-models.
+    As a result, GLPG behaves once again as a language graph rather than
+    a purely statistical language model.</p>
+    <p>A notable property of the architecture is its dual generative
+    capability. The monolithic MLP can operate in paged mode, using
+    deterministic graph routing to restrict the target vocabulary per
+    transition, or in pure MLP mode, evaluating the full vocabulary
+    without paging. The latter reveals that the network learns internal
+    structure that mirrors the deterministic graph, enabling GLPG to
+    function simultaneously as a structured language graph and as a
+    fully emergent next-token model.</p>
+    <p>By integrating deterministic routing, explicit paging, rule-based
+    grammar filtering, and monolithic semantic absorption, GLPG
+    establishes a unified and scalable architecture that inherits the
+    structural clarity of DMLG and the expressive power of GLP–Mono. It
+    forms a dynamic, interpretable, and domain-stable substrate for
+    hybrid generative systems.</p>
+    <h1 id="glpmono-improvements-and-dmlg-integration">GLP–Mono
+    Improvements and DMLG Integration</h1>
+    <p>GLPG extends the GLP–Mono architecture with a series of
+    structural, contextual, and algorithmic improvements that restore
+    deterministic graph routing while preserving the expressive semantic
+    behaviour of the monolithic MLP. These modifications form the core
+    of the GLPG architecture and reflect a synthesis of GLP–Mono
+    innovations with the canonical graph principles of DMLG.</p>
+    <h2 id="mlp-geometry-and-activation">MLP Geometry and
+    Activation</h2>
+    <p>GLPG employs a deeper and more expressive monolithic network than
+    GLP–Mono. The architecture uses four hidden layers instead of two,
+    with the first hidden layer optionally configured to be
+    significantly larger than subsequent layers. This increases the
+    absorption capacity of the input context vector and improves
+    semantic expressiveness.</p>
+    <p>To reduce computational cost and eliminate the instability
+    associated with learned activation functions, GLPG replaces the
+    learned activation MLP of GLP–Mono with a fixed SiLU activation.
+    This prevents the “linear model trap” in which a single MLP
+    collapses into quasi-linear behaviour, ensuring strong non-linear
+    dynamics while substantially accelerating training and
+    inference.</p>
+    <h2 id="context-encoding-enhancements">Context Encoding
+    Enhancements</h2>
+    <p>GLPG expands the context representation to provide richer
+    structural signals to the monolithic network. In addition to the
+    lemma-based current sentence embedding inherited from GLP–Mono, the
+    model now incorporates:</p>
+    <ul>
+    <li><p>the current grammar sequence alongside the current lemma
+    sequence,</p></li>
+    <li><p>explicit embeddings for the previous grammar token and
+    previous lemma token,</p></li>
+    <li><p>a binary indicator for comma presence,</p></li>
+    <li><p>a normalized line number to encode narrative
+    progression.</p></li>
+    </ul>
+    <p>These additions strengthen structural cadence, improve routing
+    stability, and enhance long-horizon coherence.</p>
+    <h2 id="output-geometry-and-embedding-dynamics">Output Geometry and
+    Embedding Dynamics</h2>
+    <p>GLPG removes the page one-hot vector from the MLP output. Page
+    selection is no longer learned but determined deterministically
+    through graph routing based on the last lemma token, restoring the
+    DMLG principle of canonical paging.</p>
+    <p>The lemma embedding update rule is simplified: instead of a
+    gradually decaying damping schedule, GLPG uses a fixed small
+    blending coefficient (e.g. <span
+    class="math inline"><em>α</em> = 0.001</span>), improving stability
+    and reducing training variance. Punctuation tokens are no longer
+    implicitly present in all pages; they appear explicitly as graph
+    transitions, increasing structural clarity.</p>
+    <h2 id="rule-based-structural-filtering">Rule-Based Structural
+    Filtering</h2>
+    <p>GLPG integrates a deterministic rule-based filter that rejects
+    incompatible grammar–lemma pairs before cosine ranking. This filter
+    enforces:</p>
+    <ul>
+    <li><p>grammar compatibility constraints,</p></li>
+    <li><p>lemma compatibility constraints,</p></li>
+    <li><p>repetition suppression similar to the semantic
+    engine.</p></li>
+    </ul>
+    <p>This mechanism reduces invalid transitions and improves both
+    structural coherence and sampling efficiency.</p>
+    <h2 id="paging-improvements">Paging Improvements</h2>
+    <p>Paging is fully restored as a deterministic graph mechanism. GLPG
+    uses the last lemma token as the routing key, with <code>EOL</code>
+    treated as a special-case lemma. Pages may grow dynamically without
+    affecting model size, though typical configurations limit the number
+    of pages to 512 or 1024.</p>
+    <p>To prevent bloated pages, GLPG enforces a maximum number of
+    inputs per page. Increasing the number of pages reduces the number
+    of candidate tokens per transition, yielding faster generation, more
+    deterministic behaviour, and fewer cosine evaluations.</p>
+    <h2 id="sampling-mechanism">Sampling Mechanism</h2>
+    <p>Cosine distances produced by the monolithic MLP tend to be
+    tightly clustered. Softmax sampling therefore produces nearly
+    uniform probabilities across the top candidates. GLPG replaces
+    softmax with a simpler normalization scheme:</p>
+    <p><span class="math display">$$p_i = \frac{(s_i - s_{\min} +
+    \tau)}{\sum_j (s_j - s_{\min} + \tau)},$$</span></p>
+    <p>where <span class="math inline"><em>τ</em></span> is a small
+    temperature increment ensuring non-zero probabilities.</p>
+    <p>To increase narrative decisiveness, GLPG applies top-<span
+    class="math inline">5</span> boosting using Fibonacci scaling
+    (e.g. <span class="math inline">13, 8, 5, 3, 2</span>), while
+    retaining the remaining logits unchanged. Beam search becomes
+    functional again due to deterministic graph routing, though it
+    remains slower than paged sampling.</p>
+    <h2 id="training-regime">Training Regime</h2>
+    <p>GLPG simplifies the training process by removing warm-up epochs
+    entirely. Training proceeds exclusively through randomized epochs,
+    with two context modes:</p>
+    <ol>
+    <li><p><strong>Continuation mode</strong>: each sequence is learned
+    with the context of preceding sequences, producing long-form
+    narrative behaviour.</p></li>
+    <li><p><strong>Replication mode</strong>: each sequence is learned
+    with its own context, producing story-to-story canonical
+    compression.</p></li>
+    </ol>
+    <p>All sample batches are preprocessed and cached once, as they
+    remain constant throughout training. <code>EOL</code> transitions
+    are deterministic and no longer learned.</p>
+    <h2 id="overall-result">Overall Result</h2>
+    <p>These improvements yield substantially faster training and
+    inference. The removal of learned activation, deterministic graph
+    routing, and sample caching reduce computational overhead, while the
+    expanded context and refined paging increase structural stability.
+    GLPG exhibits generative capability at very low epoch counts and
+    continues to refine semantic behaviour smoothly across extended
+    training cycles.</p>
+    <h1 id="learning-behavior">Learning Behavior</h1>
+    <p>GLPG exhibits a distinctive learning trajectory that mirrors
+    several aspects of human language acquisition, despite being a fully
+    artificial architecture. Training proceeds through recognisable
+    developmental phases in which structural competence emerges early,
+    followed by gradual semantic enrichment and world formation. This
+    behaviour arises from the interaction between deterministic graph
+    routing, monolithic semantic absorption, and the PRE-based recursive
+    evaluation loop.</p>
+    <h2 id="early-structural-acquisition">Early Structural
+    Acquisition</h2>
+    <p>During the initial epochs, GLPG learns grammar cadence and
+    structural transitions extremely quickly. Deterministic graph
+    routing provides a stable backbone that constrains generation from
+    the outset, enabling the model to produce syntactically valid but
+    semantically shallow sentences. This phase resembles a “child-like”
+    linguistic stage: vocabulary is limited, semantics are minimal, and
+    attractor-driven repetition dominates. The model already generates
+    coherent structure, but meaning remains underdeveloped.</p>
+    <h2 id="gradual-semantic-enrichment">Gradual Semantic
+    Enrichment</h2>
+    <p>As training progresses, the monolithic MLP begins to inject
+    semantic content into the deterministic structure. Cosine-based
+    lemma selection allows context to modulate transitions within the
+    graph, producing increasingly complex, coherent, and connected
+    sentences. This phase corresponds to an “adult-like” linguistic
+    stage: semantic fields expand, narrative relations strengthen, and
+    world-specific motifs emerge. Structure remains stable due to graph
+    routing, while semantics grow through repeated exposure to the
+    curriculum.</p>
+    <h2 id="cognitive-parallels">Cognitive Parallels</h2>
+    <p>Several components of GLPG exhibit functional analogues to
+    cognitive processes:</p>
+    <ul>
+    <li><p><strong>Deterministic graph routing</strong> simulates human
+    incremental sentence construction, where grammar constrains
+    allowable continuations.</p></li>
+    <li><p><strong>The monolithic MLP</strong> acts as a semantic
+    injector, analogous to how humans integrate context and meaning into
+    syntactic frames.</p></li>
+    <li><p><strong>The PRE loop</strong> (Propose–Retry–Evaluate)
+    resembles recursive reasoning: proposing candidates, evaluating
+    structural validity, and retrying when necessary.</p></li>
+    </ul>
+    <p>These mechanisms collectively yield a form of artificial
+    linguistic development that is structurally grounded yet
+    semantically emergent.</p>
+    <h2 id="stability-and-absence-of-overtraining">Stability and Absence
+    of Overtraining</h2>
+    <p>GLPG shows no sensitivity to overtraining. Because paging,
+    grammar transitions, and graph routing remain deterministic, the
+    model cannot collapse into degenerate attractors. Instead, semantic
+    refinement continues gradually across epochs, with improvements
+    becoming smaller but consistently positive. The architecture
+    supports early generative capability and maintains stable behaviour
+    throughout extended training cycles.</p>
+    <h2 id="lifecycle-dynamics">Lifecycle Dynamics</h2>
+    <p>Training in GLPG follows a lifecycle-like pattern:</p>
+    <ol>
+    <li><p><strong>Proto-semantic phase</strong>: rapid acquisition of
+    grammar and structure, minimal semantics, strong
+    attractors.</p></li>
+    <li><p><strong>Emergent semantic phase</strong>: expansion of lemma
+    geometry, improved coherence, formation of narrative
+    motifs.</p></li>
+    <li><p><strong>Canon compression phase</strong>: stable world
+    models, domain-faithful generation, consistent structural and
+    semantic behaviour.</p></li>
+    </ol>
+    <p>This progression reflects the architecture’s ability to generate
+    meaningful text early while continuing to refine its internal world
+    geometry over time.</p>
+    <h2 id="training-dynamics">Training Dynamics</h2>
+    <p>The average number of learned token transitions can be estimated
+    as:</p>
+    <p><span class="math display">$$\text{learned transitions} =
+        \frac{\text{total samples} \times \text{epochs}}{\text{number of
+    sequences}}.$$</span></p>
+    <p>For example, with <span class="math inline">200</span> sequences,
+    <span class="math inline">30, 000</span> samples, and <span
+    class="math inline">200, 000</span> epochs:</p>
+    <p><span class="math display">$$\frac{200{,}000 \times
+    30{,}000}{200}
+        = 30\,\text{million}$$</span></p>
+    <p>estimated learned transitions. This illustrates how even small
+    datasets, when cycled through many epochs, yield rich and stable
+    canonical world models.</p>
+    <p>Overall, GLPG demonstrates a learning behaviour that is
+    structurally deterministic, semantically emergent, and cognitively
+    interpretable, forming a robust developmental trajectory uncommon in
+    conventional language models.</p>
+    <h1 id="generation-modes-graph-traversal-and-pure-mlp">Generation
+    Modes: Graph Traversal and Pure MLP</h1>
+    <p>GLPG supports two distinct generative modes that reflect its
+    hybrid nature as both a deterministic language graph and an emergent
+    next-token model. These modes—paged graph traversal and pure MLP
+    sampling—provide complementary behaviours and reveal how the
+    architecture integrates explicit structural determinism with learned
+    semantic geometry.</p>
+    <h2 id="paged-graph-traversal-mode">Paged Graph Traversal Mode</h2>
+    <p>In paged mode, GLPG uses deterministic graph routing to restrict
+    the target vocabulary for each token transition. The last lemma
+    token determines the active page, and only the grammar–lemma pairs
+    within that page are considered during cosine ranking. This
+    mechanism mirrors the canonical paging behaviour of DMLG and
+    yields:</p>
+    <ul>
+    <li><p>fast generation due to reduced candidate sets,</p></li>
+    <li><p>high structural determinism,</p></li>
+    <li><p>strong canon stability,</p></li>
+    <li><p>guided narrative flow,</p></li>
+    <li><p>explicit manifold structure.</p></li>
+    </ul>
+    <p>Rule-based grammar and lemma filtering further reduce invalid
+    transitions, ensuring tight structural coherence. Paged mode
+    therefore behaves as a deterministic language graph with semantic
+    modulation provided by the monolithic MLP.</p>
+    <h2 id="pure-mlp-mode">Pure MLP Mode</h2>
+    <p>In pure MLP mode, GLPG evaluates the entire target vocabulary for
+    each token transition. Paging is disabled, and the model relies
+    solely on cosine similarity between the predicted lemma embedding
+    and all stored output embeddings. This mode removes structural
+    determinism and exposes the learned internal geometry of the
+    monolithic network.</p>
+    <p>Pure MLP mode reveals that the network has implicitly learned
+    manifold structure from the training data: semantic zones,
+    attractors, and narrative tendencies emerge without explicit graph
+    constraints. The behaviour resembles small transformer models:</p>
+    <ul>
+    <li><p>diffuse semantic organisation,</p></li>
+    <li><p>emergent world models,</p></li>
+    <li><p>conceptual and drifting narrative flow,</p></li>
+    <li><p>self-balancing semantic emergence.</p></li>
+    </ul>
+    <p>However, rule-based grammar and lemma filtering remain active,
+    preventing invalid transitions and maintaining minimal structural
+    coherence.</p>
+    <p>Pure MLP mode is computationally expensive: cosine evaluation
+    over the full vocabulary is typically an order of magnitude slower
+    than paged traversal. A practical acceleration trick is to sample a
+    random subset of 512–1024 tokens per step and include the period
+    token to ensure sentence completion. This preserves variation while
+    significantly improving speed.</p>
+    <h2 id="hybrid-nature-of-glpg">Hybrid Nature of GLPG</h2>
+    <p>The coexistence of these two modes demonstrates that GLPG is the
+    first architecture to combine a deterministic language graph with a
+    fully emergent next-token model. Paged mode shows explicit
+    structure; pure MLP mode shows implicit structure learned by the
+    network. Together, they reveal that GLPG’s monolithic MLP
+    internalises aspects of the deterministic graph, while the graph
+    provides a controllable manifold for semantic injection.</p>
+    <h2 id="comparison-of-generative-modes">Comparison of Generative
+    Modes</h2>
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Property</strong></th>
+    <th style="text-align: left;"><strong>Paged Mode</strong></th>
+    <th style="text-align: left;"><strong>Pure MLP Mode</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">Generation Style</td>
+    <td style="text-align: left;">Structured prose</td>
+    <td style="text-align: left;">Associative cloud</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Semantic Organization</td>
+    <td style="text-align: left;">Clustered, zone-based</td>
+    <td style="text-align: left;">Diffuse, transformer-like</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Canon Stability</td>
+    <td style="text-align: left;">High, explicit</td>
+    <td style="text-align: left;">Moderate, emergent</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Narrative Flow</td>
+    <td style="text-align: left;">Linear, guided</td>
+    <td style="text-align: left;">Conceptual, drifting</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Manifold Structure</td>
+    <td style="text-align: left;">Explicit (paging)</td>
+    <td style="text-align: left;">Implicit, self-learned</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Grammar Behavior</td>
+    <td style="text-align: left;">Deterministic and tight</td>
+    <td style="text-align: left;">Deterministic but looser</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">World Model</td>
+    <td style="text-align: left;">Organized and coherent</td>
+    <td style="text-align: left;">Emergent and broad</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Overall Feel</td>
+    <td style="text-align: left;">Guided narration</td>
+    <td style="text-align: left;">Free-form thought</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Cognitive Character</td>
+    <td style="text-align: left;">Structured reasoning</td>
+    <td style="text-align: left;">Self-balancing emergence</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Paged traversal provides deterministic structure with semantic
+    modulation; pure MLP mode provides emergent semantics with minimal
+    structural constraints. GLPG’s ability to operate in both regimes is
+    central to its identity as a hybrid architecture that unifies
+    explicit canonical structure with learned semantic behaviour.</p>
+    <h1 id="formal-definition-of-glpg">Formal Definition of GLPG</h1>
+    <p>A GLP–Graph (GLPG) is a hybrid, structurally deterministic, and
+    semantically emergent language generator built on top of a canonical
+    grammar–lemma graph and a monolithic semantic engine. It unifies the
+    explicit structural substrate of DMLG with the learned lemma
+    geometry of GLP–Mono. This section provides a formal definition of
+    the GLPG architecture.</p>
+    <h2 id="canonical-graph-structural-substrate">Canonical Graph:
+    Structural Substrate</h2>
+    <p>GLPG is grounded in a canonical grammar–lemma graph</p>
+    <p><span
+    class="math display"><em>G</em> = (<em>V</em>,<em>E</em>,<em>P</em>),</span></p>
+    <p>where:</p>
+    <ul>
+    <li><p><span class="math inline"><em>V</em></span> is the set of
+    canonical tokens, consisting of grammar tokens and lemma
+    tokens;</p></li>
+    <li><p><span
+    class="math inline"><em>E</em> ⊆ <em>V</em> × <em>V</em></span> is
+    the set of admissible transitions, defined by grammar rules, paging
+    structure, and domain-specific constraints;</p></li>
+    <li><p><span
+    class="math inline"><em>P</em> = {<em>p</em><sub>1</sub>, <em>p</em><sub>2</sub>, …, <em>p</em><sub><em>n</em></sub>}</span>
+    is the set of pages, each representing a compact grammar–lemma
+    biome.</p></li>
+    </ul>
+    <p>The graph is <em>canon-closed</em>: no unseen tokens or
+    transitions may be generated. Grammar tokens define deterministic
+    structural invariants; lemma tokens define semantic content.</p>
+    <h2 id="deterministic-paging-via-last-lemma-routing">Deterministic
+    Paging via Last Lemma Routing</h2>
+    <p>Paging is determined by a deterministic routing function</p>
+    <p><span
+    class="math display"><em>π</em> : <em>V</em> → <em>P</em>,</span></p>
+    <p>which maps the last lemma token to its corresponding page. The
+    special token <code>EOL</code> acts as a dedicated routing key.
+    Paging restricts traversal to a small subset of grammar–lemma pairs,
+    reducing search complexity and enforcing domain structure.</p>
+    <p>Unlike GLP–Mono, page selection is not learned. It is derived
+    entirely from the canonical graph, restoring the deterministic
+    routing behaviour of DMLG.</p>
+    <h2 id="monolithic-semantic-engine">Monolithic Semantic Engine</h2>
+    <p>GLPG employs a single feedforward network</p>
+    <p><span
+    class="math display"><em>f</em>(<em>x</em>) = <em>W</em><sub>4</sub>(<em>σ</em>(<em>W</em><sub>3</sub>(<em>σ</em>(<em>W</em><sub>2</sub>(<em>σ</em>(<em>W</em><sub>1</sub><em>x</em>))))))</span></p>
+    <p>with four hidden layers and fixed SiLU activation <span
+    class="math inline"><em>σ</em></span>. The network outputs:</p>
+    <ul>
+    <li><p>a normalized lemma embedding <span
+    class="math inline"><em>ê</em> ∈ ℝ<sup><em>d</em></sup></span>,</p></li>
+    <li><p>a structural context vector used for ranking candidate
+    transitions.</p></li>
+    </ul>
+    <p>Lemma embeddings for grammar–lemma pairs are stored as <span
+    class="math inline"><em>e</em><sub><em>G</em>, <em>L</em></sub></span>
+    and updated through a fixed blending rule:</p>
+    <p><span
+    class="math display"><em>e</em><sub><em>G</em>, <em>L</em></sub> ← (1−<em>α</em>)<em>e</em><sub><em>G</em>, <em>L</em></sub> + <em>α</em><em>ê</em>,</span></p>
+    <p>with small constant <span class="math inline"><em>α</em></span>
+    (e.g. <span class="math inline">0.001</span>). This yields stable
+    long-term geometry.</p>
+    <h2 id="context-compression-and-structural-signals">Context
+    Compression and Structural Signals</h2>
+    <p>The input vector <span class="math inline"><em>x</em></span>
+    consists of:</p>
+    <ul>
+    <li><p>compressed sentence history,</p></li>
+    <li><p>recurrent narrative memory,</p></li>
+    <li><p>current lemma and grammar sequences,</p></li>
+    <li><p>previous lemma and grammar tokens,</p></li>
+    <li><p>punctuation indicators,</p></li>
+    <li><p>normalized line number,</p></li>
+    <li><p>story-level sequence embedding.</p></li>
+    </ul>
+    <p>These signals provide both structural cadence and semantic
+    context.</p>
+    <h2 id="rule-based-coherence-layer">Rule-Based Coherence Layer</h2>
+    <p>GLPG enforces deterministic coherence through a rule-based
+    filter</p>
+    <p><span
+    class="math display"><em>Φ</em> : <em>V</em> × <em>V</em> → {0, 1},</span></p>
+    <p>which rejects transitions violating:</p>
+    <ul>
+    <li><p>grammar adjacency rules,</p></li>
+    <li><p>lemma compatibility constraints,</p></li>
+    <li><p>repetition suppression criteria.</p></li>
+    </ul>
+    <p>This filter operates before cosine ranking and ensures structural
+    validity.</p>
+    <h2 id="transition-scoring-and-selection">Transition Scoring and
+    Selection</h2>
+    <p>GLPG selects the next grammar–lemma pair through a multi-stage
+    pipeline integrating deterministic structural filtering with learned
+    semantic geometry. The process consists of: candidate selection,
+    cosine scoring, ranking, normalized sampling, and optional
+    boosting.</p>
+    <h4 id="candidate-selection">1. Candidate Selection</h4>
+    <p>Let <span class="math inline">𝒱</span> be the full vocabulary of
+    grammar–lemma pairs.<br />
+    In paged mode, The candidate set <span class="math inline">𝒞</span>
+    is defined as:</p>
+    <p><span
+    class="math display">𝒞<sub>paged</sub> = <em>Φ</em> (<em>P</em><sub><em>π</em>(ℓ<sub>last</sub>)</sub>).</span></p>
+    <p>In pure MLP mode, the candidate set is:</p>
+    <p><span
+    class="math display">𝒞<sub>mlp</sub> = <em>Φ</em> (𝒱).</span></p>
+    <p>In accelerated MLP mode, the candidate set is:</p>
+    <p><span
+    class="math display">𝒞<sub>acc</sub> = <em>Φ</em> (𝒱<sub>subset</sub>).</span></p>
+    <p>where:</p>
+    <ul>
+    <li><p><span
+    class="math inline"><em>P</em><sub><em>π</em>(ℓ<sub>last</sub>)</sub></span>
+    is the page selected by deterministic last-lemma routing,</p></li>
+    <li><p><span class="math inline">𝒱<sub>subset</sub></span> is a
+    random subset of 512–1024 pairs,</p></li>
+    <li><p><span class="math inline"><em>Φ</em>(⋅)</span> is the
+    rule-based filter removing grammar-incompatible, lemma-incompatible,
+    or repetitive transitions.</p></li>
+    </ul>
+    <p>This ensures that only structurally valid transitions are
+    considered.</p>
+    <h4 id="cosine-scoring">2. Cosine Scoring</h4>
+    <p>For each candidate <span
+    class="math inline">(<em>G</em>,<em>L</em>) ∈ 𝒞</span>, GLPG
+    computes:</p>
+    <p><span
+    class="math display"><em>s</em>(<em>G</em>,<em>L</em>) = cos  (<em>ê</em>, <em>e</em><sub><em>G</em>, <em>L</em></sub>),</span></p>
+    <p>where <span class="math inline"><em>ê</em></span> is the
+    predicted lemma embedding and <span
+    class="math inline"><em>e</em><sub><em>G</em>, <em>L</em></sub></span>
+    is the stored embedding.</p>
+    <h4 id="ranking-and-top-k-selection">3. Ranking and Top-<span
+    class="math inline"><em>k</em></span> Selection</h4>
+    <p>Candidates are sorted by descending score:</p>
+    <p><span
+    class="math display">(<em>G</em><sub>1</sub>,<em>L</em><sub>1</sub>), (<em>G</em><sub>2</sub>,<em>L</em><sub>2</sub>), …, (<em>G</em><sub><em>k</em></sub>,<em>L</em><sub><em>k</em></sub>),</span></p>
+    <p>and truncated to the top-<span
+    class="math inline"><em>k</em></span> items (typically <span
+    class="math inline"><em>k</em> = 20</span>). Let <span
+    class="math inline"><em>s</em><sub><em>i</em></sub> = <em>s</em>(<em>G</em><sub><em>i</em></sub>,<em>L</em><sub><em>i</em></sub>)</span>
+    denote the sorted scores.</p>
+    <h4 id="normalized-sampling">4. Normalized Sampling</h4>
+    <p>GLPG uses linear normalization with temperature increment <span
+    class="math inline"><em>τ</em></span>:</p>
+    <p><span class="math display">$$p_i =
+        \frac{s_i - s_{\min} + \tau}
+        {\sum_{j=1}^{k} (s_j - s_{\min} + \tau)},$$</span></p>
+    <p>where <span class="math inline"><em>s</em><sub>min</sub></span>
+    is the minimum score in the top-<span
+    class="math inline"><em>k</em></span> set.</p>
+    <h4 id="integrated-top-5-boosting">5. Integrated Top-<span
+    class="math inline">5</span> Boosting</h4>
+    <p>To increase narrative decisiveness, GLPG applies a boosting
+    vector:</p>
+    <p><span
+    class="math display"><em>B</em> = [13, 8, 5, 3, 2, 1, …, 1],</span></p>
+    <p>yielding boosted probabilities:</p>
+    <p><span class="math display">$$p_i^{\text{boost}} =
+        \frac{B_i \cdot (s_i - s_{\min} + \tau)}
+        {\sum_{j=1}^{k} B_j \cdot (s_j - s_{\min} + \tau)}.$$</span></p>
+    <p>Sampling is performed over <span
+    class="math inline"><em>p</em><sub><em>i</em></sub><sup>boost</sup></span>.</p>
+    <h4 id="summary">Summary</h4>
+    <p>The transition scoring pipeline integrates:</p>
+    <ul>
+    <li><p>deterministic structural filtering,</p></li>
+    <li><p>graph-based paging or full-vocab evaluation,</p></li>
+    <li><p>cosine-based semantic scoring,</p></li>
+    <li><p>top-<span class="math inline"><em>k</em></span>
+    ranking,</p></li>
+    <li><p>temperature-stabilized normalization,</p></li>
+    <li><p>Fibonacci-style boosting.</p></li>
+    </ul>
+    <p>This yields a next-token mechanism that is both structurally
+    coherent and semantically expressive.</p>
+    <h2 id="sentence-level-pre-governance">Sentence-Level PRE
+    Governance</h2>
+    <p>GLPG incorporates a sentence-level Propose–Retry–Evaluate (PRE)
+    mechanism:</p>
+    <ol>
+    <li><p><strong>Propose</strong>: generate a candidate sentence via
+    paged or pure MLP mode;</p></li>
+    <li><p><strong>Evaluate</strong>: apply deterministic structural
+    checks (grammar validity, closure, repetition suppression);</p></li>
+    <li><p><strong>Retry</strong>: regenerate the sentence if evaluation
+    fails.</p></li>
+    </ol>
+    <p>PRE ensures global structural integrity independent of
+    token-level sampling.</p>
+    <h2 id="dual-generative-modes">Dual Generative Modes</h2>
+    <p>GLPG supports two generative regimes:</p>
+    <ul>
+    <li><p><strong>Paged Graph Traversal</strong>: deterministic routing
+    restricts candidate tokens, yielding structured, canon-faithful
+    prose;</p></li>
+    <li><p><strong>Pure MLP Mode</strong>: the full vocabulary is
+    evaluated, yielding emergent, transformer-like semantic
+    behaviour.</p></li>
+    </ul>
+    <p>Both modes share grammar determinism and rule-based
+    filtering.</p>
+    <h2 id="summary-1">Summary</h2>
+    <p>A GLPG is defined by:</p>
+    <ul>
+    <li><p>a deterministic canonical grammar–lemma graph,</p></li>
+    <li><p>lemma-based paging with explicit routing,</p></li>
+    <li><p>a monolithic semantic engine with learned lemma
+    geometry,</p></li>
+    <li><p>rule-based structural coherence,</p></li>
+    <li><p>PRE-based sentence governance,</p></li>
+    <li><p>and dual generative modes integrating structure and
+    emergence.</p></li>
+    </ul>
+    <p>GLPG is therefore a hybrid architecture: a deterministic language
+    graph with an emergent semantic manifold, forming a unified
+    substrate for structured and expressive language generation.</p>
+    <h1 id="example-model-size-and-parameters">Example Model Size and
+    Parameters</h1>
+    <p>To illustrate the compact geometry of a typical GLPG model, we
+    provide a concrete example based on a mid-scale configuration.
+    Despite its expressive behaviour, the model remains small: the
+    persisted Python model occupies only 40–50 MB on disk, including all
+    learned parameters, lemma embeddings, paging structures, and
+    metadata.</p>
+    <h2 id="network-geometry">Network Geometry</h2>
+    <p>The monolithic MLP uses four hidden layers with the following
+    sizes:</p>
+    <ul>
+    <li><p>first hidden layer: <span class="math inline">1536</span>
+    units,</p></li>
+    <li><p>subsequent hidden layers: <span
+    class="math inline">768</span> units each,</p></li>
+    <li><p>lemma output embedding dimension: <span
+    class="math inline">128</span>,</p></li>
+    <li><p>total pages: <span class="math inline">512</span> (minimal
+    influence on model size),</p></li>
+    <li><p>maximum page input size: <span class="math inline">16</span>
+    (no influence on model size).</p></li>
+    </ul>
+    <h2 id="input-vector-composition">Input Vector Composition</h2>
+    <p>The input context vector is composed of several structural and
+    semantic components:</p>
+    <p><span class="math display">$$\begin{aligned}
+            \text{compressed sentence history} &amp;= 24 \times 5 + 12
+    \times 15 = 300,\\
+            \text{narrative memory} &amp;= 128,\\
+            \text{current grammar + lemma sentence} &amp;= 2 \times (30
+    \times 2 + 1) = 122,\\
+            \text{previous grammar + lemma + comma flag} &amp;= 2 \times
+    16 + 1 = 31,\\
+            \text{sequence embedding} &amp;= 8,\\
+            \text{line number} &amp;= 1.
+        \end{aligned}$$</span></p>
+    <p>Thus the total input vector dimension is:</p>
+    <p><span
+    class="math display">590 = 300 + 128 + 122 + 31 + 8 + 1.</span></p>
+    <h2 id="parameter-count">Parameter Count</h2>
+    <p>The total number of learned parameters in the monolithic MLP
+    is:</p>
+    <p><span class="math display">MLP
+    parameters = 590 × 1536 + 1536 × 768 + 768 × 768 + 768 × 768 + 768 × 128 ≈ 3, 366, 608.</span></p>
+    <p>This includes all weights and biases across the four hidden
+    layers and the output layer.</p>
+    <h2 id="vocabulary-and-embedding-storage">Vocabulary and Embedding
+    Storage</h2>
+    <p>Each grammar–lemma pair has a learned output embedding of
+    dimension <span class="math inline">128</span>. Thus:</p>
+    <p><span class="math display">1M parameters ≈ 8000 vocabulary
+    entries.</span></p>
+    <p>For example:</p>
+    <ul>
+    <li><p>a vocabulary of <span class="math inline">6000</span> pairs
+    requires <span class="math inline"> ≈ 0.75</span>M
+    parameters,</p></li>
+    <li><p>a vocabulary of <span class="math inline">8000</span> pairs
+    requires <span class="math inline"> ≈ 1.0</span>M
+    parameters.</p></li>
+    </ul>
+    <p>Paging structures (512 pages) store only text-based routing
+    metadata and have negligible impact on model size.</p>
+    <h2 id="total-model-size">Total Model Size</h2>
+    <p>Combining:</p>
+    <ul>
+    <li><p><span class="math inline"> ≈ 3.37</span>M MLP
+    parameters,</p></li>
+    <li><p><span class="math inline"> ≈ 0.5</span>–<span
+    class="math inline">1.0</span>M lemma embedding parameters,</p></li>
+    <li><p>paging metadata and routing tables,</p></li>
+    </ul>
+    <p>yields a persisted Python model of approximately:</p>
+    <p><span class="math display">40–50 MB.</span></p>
+    <p>This demonstrates that GLPG achieves expressive semantic
+    behaviour and deterministic graph routing within a compact parameter
+    budget, enabling fast training, fast inference, and efficient
+    deployment.</p>
+    <h1 id="example-datasets">Example Datasets</h1>
+    <p>To illustrate the behaviour of GLPG across domains, we evaluate
+    four datasets of varying size, structure, and narrative density. All
+    experiments use the same model geometry described in the previous
+    section: a 40–50 MB persisted Python model with a 590-dimensional
+    input vector, four hidden layers, 128-dimensional lemma embeddings,
+    and 512 pages.</p>
+    <p>Dataset size refers to raw text size prior to tokenization. Model
+    size refers to the stored Python model, not the parameter count.
+    Vocabulary size denotes the number of distinct grammar–lemma pairs
+    discovered during training. The number of samples corresponds to the
+    unique token transitions learned by the model; this number is
+    extremely small compared to what transformer models typically
+    require for functional behaviour.</p>
+    <h2 id="dataset-overview">Dataset Overview</h2>
+    <table>
+    <caption>Dataset characteristics and learned vocabulary sizes for a
+    fixed GLPG model geometry.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Dataset</strong></th>
+    <th style="text-align: right;"><strong>Raw Size</strong></th>
+    <th style="text-align: right;"><strong>Sequences</strong></th>
+    <th style="text-align: right;"><strong>Samples</strong></th>
+    <th style="text-align: right;"><strong>Vocab</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">forest (LLM)</td>
+    <td style="text-align: right;">20 KB</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">3<span>,</span>432</td>
+    <td style="text-align: right;">586</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">jekyll &amp; hyde (Gutenberg)</td>
+    <td style="text-align: right;">139 KB</td>
+    <td style="text-align: right;">201</td>
+    <td style="text-align: right;">26<span>,</span>706</td>
+    <td style="text-align: right;">4<span>,</span>285</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">odyssey (Gutenberg)</td>
+    <td style="text-align: right;">611 KB</td>
+    <td style="text-align: right;">806</td>
+    <td style="text-align: right;">121<span>,</span>144</td>
+    <td style="text-align: right;">7<span>,</span>716</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">planet (self-recursive)</td>
+    <td style="text-align: right;">1<span>,</span>418 KB</td>
+    <td style="text-align: right;">720</td>
+    <td style="text-align: right;">254<span>,</span>108</td>
+    <td style="text-align: right;">5<span>,</span>489</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Despite the large variation in dataset size, the stored model
+    size remains between 39 MB and 50 MB. This demonstrates that GLPG
+    scales primarily with vocabulary size and not with raw dataset
+    length, enabling compact world engines even for large narrative
+    corpora.</p>
+    <h2 id="training-behaviour-3k-vs-200k-epochs">Training Behaviour: 3K
+    vs 200K Epochs</h2>
+    <p>To study learning dynamics, we compare undertrained models
+    (3<span>,</span>000 epochs) with sufficiently trained models
+    (200<span>,</span>000 epochs). All experiments use identical model
+    geometry and identical datasets.</p>
+    <h4 id="k-epochs-child-like-proto-language">3K Epochs: Child-Like
+    Proto-Language</h4>
+    <p>At 3K epochs, GLPG exhibits a “child phase” characterised by:</p>
+    <ul>
+    <li><p>rapid acquisition of grammar and structure,</p></li>
+    <li><p>minimal semantic absorption,</p></li>
+    <li><p>strong attractor behaviour around a few dominant
+    lemmas,</p></li>
+    <li><p>repetitive pseudo-grammar,</p></li>
+    <li><p>absence of global coherence.</p></li>
+    </ul>
+    <p>This phase does <em>not</em> resemble human child language. A
+    more accurate analogy is:</p>
+    <blockquote>
+    <p>A child who already knows words but has no grammar, and who
+    obsessively repeats one semantic theme.</p>
+    </blockquote>
+    <p>Undertrained models produce artificial proto-language:
+    semantically narrow, structurally rudimentary, and dominated by
+    attractor kernels. This behaviour is similar to:</p>
+    <ul>
+    <li><p>tiny transformers trained on a single corpus,</p></li>
+    <li><p>distilled GPT-2 variants,</p></li>
+    <li><p>attractor networks,</p></li>
+    <li><p>emergent multi-agent languages,</p></li>
+    <li><p>minimal world models.</p></li>
+    </ul>
+    <p>The model compresses the dataset into a small set of semantic
+    attractors but cannot yet reconstruct full syntax or narrative
+    structure.</p>
+    <h4 id="k-epochs-adult-like-canon-compression">200K Epochs:
+    Adult-Like Canon Compression</h4>
+    <p>At 200K epochs, GLPG transitions into a mature “adult phase”:</p>
+    <ul>
+    <li><p>stable syntactic behaviour,</p></li>
+    <li><p>domain-wide vocabulary usage,</p></li>
+    <li><p>coherent narrative flow,</p></li>
+    <li><p>fully developed canonical world geometry,</p></li>
+    <li><p>attractor <em>worlds</em> instead of attractor
+    <em>kerns</em>.</p></li>
+    </ul>
+    <p>This stage resembles:</p>
+    <ul>
+    <li><p>NanoGPT trained on a single book,</p></li>
+    <li><p>Char-transformers trained on one corpus,</p></li>
+    <li><p>distilled world-models,</p></li>
+    <li><p>story-world agents,</p></li>
+    <li><p>mini-LLMs with domain training.</p></li>
+    </ul>
+    <p>The model reconstructs a complete semantic world with stable
+    grammar and rich domain motifs, but without general-purpose language
+    competence. This is an artificial linguistic stage with no human
+    analogue: a fully developed world engine with narrow domain
+    focus.</p>
+    <h2 id="comparison-of-learning-stages">Comparison of Learning
+    Stages</h2>
+    <table>
+    <caption>Comparison between early-stage and mature GLPG training
+    behaviour.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Property</strong></th>
+    <th style="text-align: left;"><strong>Undertrained
+    (3K)</strong></th>
+    <th style="text-align: left;"><strong>Sufficiently Trained
+    (200K)</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">Syntax</td>
+    <td style="text-align: left;">fragmentary</td>
+    <td style="text-align: left;">stable, variable</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Vocabulary</td>
+    <td style="text-align: left;">very limited</td>
+    <td style="text-align: left;">domain-wide</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Canon</td>
+    <td style="text-align: left;">rudimentary</td>
+    <td style="text-align: left;">fully developed</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Coherence</td>
+    <td style="text-align: left;">local</td>
+    <td style="text-align: left;">partially global</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Variation</td>
+    <td style="text-align: left;">low</td>
+    <td style="text-align: left;">moderate</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Semantics</td>
+    <td style="text-align: left;">attractor core</td>
+    <td style="text-align: left;">attractor world</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="interpretation">Interpretation</h2>
+    <p>Across all datasets, GLPG demonstrates a consistent developmental
+    trajectory:</p>
+    <ol>
+    <li><p><strong>Proto-semantic phase</strong>: rapid structural
+    learning, minimal semantics.</p></li>
+    <li><p><strong>Emergent semantic phase</strong>: expansion of lemma
+    geometry, improved coherence.</p></li>
+    <li><p><strong>Canon compression phase</strong>: stable world models
+    and domain-faithful generation.</p></li>
+    </ol>
+    <p>The evolution from 3K to 200K epochs corresponds to the
+    transition from artificial proto-language to mature domain-language:
+    a form of linguistic development unique to structured neural systems
+    and not observed in human language acquisition. Remarkably, the same
+    GLPG model geometry can absorb datasets with widely varying canon,
+    scale, and narrative density—ranging from miniature corpora such as
+    <em>forest</em>, to full-length Gutenberg novels such as
+    <em>hyde</em> and <em>odyssey</em>, and even fully self-recursive
+    synthetic datasets such as <em>planet</em>. This demonstrates that
+    GLPG does not merely learn a dataset, but constructs a stable
+    canonical world model regardless of dataset size. The architecture
+    compresses each domain into a coherent semantic manifold while
+    preserving structural determinism, enabling a single fixed-size
+    model to function effectively across heterogeneous narrative
+    worlds.</p>
+    <h1 id="micro-model-with-very-small-dataset">Micro-Model with Very
+    Small Dataset</h1>
+    <p>One of the defining strengths of DMLG was its ability to produce
+    coherent, domain-faithful output even when trained on extremely
+    small datasets. GLPG restores this capability: the combination of
+    deterministic graph routing, compact lemma geometry, and rule-based
+    structural filtering allows even microscopic models to generate
+    recognizable literary worlds.</p>
+    <h2 id="model-geometry">Model Geometry</h2>
+    <p>For this experiment, we use a drastically reduced GLPG
+    configuration:</p>
+    <ul>
+    <li><p>first hidden layer: <span class="math inline">144</span>
+    units,</p></li>
+    <li><p>subsequent hidden layers: <span class="math inline">72</span>
+    units,</p></li>
+    <li><p>lemma output dimension: <span
+    class="math inline">32</span>,</p></li>
+    <li><p>total pages: <span class="math inline">128</span>,</p></li>
+    <li><p>max page input size: <span
+    class="math inline">16</span>.</p></li>
+    </ul>
+    <p>The total number of learned MLP parameters is:</p>
+    <p><span
+    class="math display">590 × 144 + 144 × 72 + 72 × 72 + 72 × 72 + 72 × 32 ≈ 118, 000.</span></p>
+    <p>Vocabulary embeddings contribute:</p>
+    <p><span class="math display">385 × 32 ≈ 12, 000,</span></p>
+    <p>yielding a total of roughly <span
+    class="math inline">130, 000</span> parameters plus page metadata.
+    The persisted Python model occupies only <span
+    class="math inline"> ≈ 1.5</span> MB.</p>
+    <h2 id="dataset-characteristics">Dataset Characteristics</h2>
+    <p>The micro-model is trained on a tiny corpus:</p>
+    <ul>
+    <li><p>dataset size: <span class="math inline">6</span> KB raw
+    text,</p></li>
+    <li><p>sequences: <span class="math inline">3</span>,</p></li>
+    <li><p>samples: <span class="math inline">994</span> unique token
+    transitions,</p></li>
+    <li><p>vocabulary: <span class="math inline">385</span>
+    grammar–lemma pairs.</p></li>
+    </ul>
+    <p>Despite the minimal dataset, GLPG constructs a stable canonical
+    world model. Structure, canon, and repetition alone suffice to
+    induce a coherent literary domain.</p>
+    <h2 id="paged-vs-pure-mlp-generation">Paged vs Pure MLP
+    Generation</h2>
+    <p>We evaluate the micro-model at two training stages—1K epochs and
+    20K epochs—and in two generation modes: paged graph traversal and
+    pure MLP sampling.</p>
+    <h4 id="k-epochs-child-phase">1K Epochs (Child Phase)</h4>
+    <p>At 1K epochs, both paged and pure MLP modes produce artificial
+    proto-language:</p>
+    <ul>
+    <li><p>strong attractor behaviour around a few dominant
+    lemmas,</p></li>
+    <li><p>repetitive pseudo-grammar,</p></li>
+    <li><p>narrow semantic field,</p></li>
+    <li><p>minimal narrative coherence.</p></li>
+    </ul>
+    <p>Paged mode yields more structural stability, while pure MLP mode
+    produces diffuse, transformer-like drift. In both cases, the model
+    already exhibits a recognizable “observatory world”: ridges, domes,
+    stars, instruments, and the caretaker appear consistently, despite
+    the microscopic dataset.</p>
+    <h4 id="k-epochs-adult-phase">20K Epochs (Adult Phase)</h4>
+    <p>At 20K epochs, the micro-model transitions into mature canon
+    compression:</p>
+    <ul>
+    <li><p>stable syntax and page routing,</p></li>
+    <li><p>coherent narrative motifs,</p></li>
+    <li><p>domain-wide vocabulary usage,</p></li>
+    <li><p>emergent world geometry,</p></li>
+    <li><p>consistent structural cadence.</p></li>
+    </ul>
+    <p>Paged mode produces structured prose with clear canonical
+    transitions. Pure MLP mode produces free-form associative text that
+    nevertheless remains faithful to the observatory domain. The model
+    reconstructs a miniature literary world with only 130K
+    parameters.</p>
+    <h2 id="interpretation-1">Interpretation</h2>
+    <p>This experiment demonstrates that GLPG can compress even a tiny
+    dataset into a coherent semantic manifold. The architecture does not
+    require large corpora: deterministic graph routing, rule-based
+    filtering, and compact lemma geometry allow a fixed-size model to
+    function across radically different dataset scales—from miniature
+    corpora such as <em>observatory</em>, to full-length Gutenberg
+    novels, to fully self-recursive synthetic datasets.</p>
+    <p>GLPG therefore restores a key property of DMLG: the ability to
+    generate structured, domain-faithful text even at microscopic
+    parameter counts. The micro-model behaves as a complete world
+    engine, despite being smaller than many classical RNNs or tiny
+    transformers.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>GLPG demonstrates that structured language generation does not
+    require vast parameter counts, transformer-scale datasets, or opaque
+    attention mechanisms. By unifying the deterministic graph routing of
+    DMLG with the monolithic semantic engine of GLP–Mono, the
+    architecture establishes a hybrid paradigm in which explicit
+    structure and emergent semantics reinforce rather than constrain one
+    another. Deterministic paging, rule-based coherence, compact lemma
+    geometry, and dual generative modes together form a stable substrate
+    capable of producing coherent, domain-faithful text across a wide
+    range of training regimes.</p>
+    <p>The learning behaviour of GLPG follows a clear developmental
+    trajectory: rapid acquisition of grammar and structural cadence,
+    gradual semantic enrichment, and eventual formation of a mature
+    canonical world model. This progression is robust across dataset
+    sizes and domains. A single fixed-size GLPG model can absorb
+    miniature corpora such as <em>forest</em>, full-length Gutenberg
+    novels such as <em>jekyll &amp; hyde</em> and <em>odyssey</em>, and
+    even fully self-recursive synthetic datasets such as
+    <em>planet</em>. In each case, the architecture compresses the
+    domain into a coherent semantic manifold while preserving structural
+    determinism, enabling consistent generation without architectural
+    changes or scale-dependent tuning.</p>
+    <p>The micro-model experiment further illustrates the resilience of
+    the architecture. With only 130K parameters and fewer than one
+    thousand training samples, GLPG reconstructs a recognizable literary
+    world, complete with stable motifs, structural cadence, and emergent
+    semantic attractors. This capability, once unique to DMLG, is
+    restored and strengthened in GLPG: even microscopic models behave as
+    complete world engines.</p>
+    <p>Together, these results show that GLPG provides a compact,
+    interpretable, and scalable foundation for structured language
+    generation. It bridges the gap between deterministic language graphs
+    and emergent neural semantics, offering a unified architecture that
+    remains functional at every scale—from tiny micro-models to large
+    domain compressors. GLPG demonstrates that meaningful world
+    formation can arise from structure, repetition, and canonical
+    constraints alone, and that hybrid architectures can achieve
+    expressive behaviour without sacrificing determinism, efficiency, or
+    clarity.</p>
+    <h1 id="related-work">Related Work</h1>
+    <h2
+    id="deterministic-language-graphs-and-structured-routing">Deterministic
+    Language Graphs and Structured Routing</h2>
+    <p>Early graph‑based language systems modelled text generation as
+    traversal through explicit state machines or grammar graphs.
+    Classical approaches include deterministic finite automata,
+    probabilistic context‑free grammars, and rule‑driven dialogue
+    systems. These models provided strong structural guarantees but
+    limited semantic absorption.</p>
+    <p>DMLG extended this lineage by introducing paged lemma biomes,
+    rule‑based coherence, and PRE‑driven sentence validation. Its
+    deterministic routing and explicit canonical structure enabled fast
+    generation and high interpretability, though semantic expressiveness
+    was constrained by its reliance on numerous page‑specific
+    micro‑models.</p>
+    <p>GLPG inherits the structural clarity of DMLG while resolving its
+    semantic limitations through monolithic lemma geometry.</p>
+    <h2 id="monolithic-nexttoken-models">Monolithic Next‑Token
+    Models</h2>
+    <p>Single‑network next‑token architectures have been explored in
+    various forms, including early feedforward language models,
+    RNN‑based sequence generators, and compact transformer variants such
+    as NanoGPT‑style single‑book models. These systems demonstrate that
+    coherent next‑token behaviour can emerge from relatively small
+    networks when trained on domain‑specific corpora.</p>
+    <p>GLP–Mono belongs to this lineage: it showed that a single MLP
+    equipped with grammar tokens, paged lemma clusters, cosine ranking,
+    and recurrent narrative memory can produce stable next‑token
+    behaviour without attention mechanisms. However, its learned paging
+    reduced determinism and weakened structural guarantees.</p>
+    <p>GLPG restores deterministic routing while retaining monolithic
+    semantic absorption.</p>
+    <h2 id="hybrid-and-modular-generative-architectures">Hybrid and
+    Modular Generative Architectures</h2>
+    <p>Hybrid architectures that combine explicit structure with learned
+    semantics have appeared in several domains. Examples include:</p>
+    <ul>
+    <li><p>neural‑symbolic systems that integrate rule‑based reasoning
+    with learned embeddings,</p></li>
+    <li><p>modular world‑model pipelines where symbolic planners
+    interact with neural generative components,</p></li>
+    <li><p>graph‑neural architectures that embed structured transitions
+    into learned manifolds,</p></li>
+    <li><p>domain‑compressed mini‑transformers trained on single books
+    or narrow corpora.</p></li>
+    </ul>
+    <p>These systems aim to balance interpretability with expressive
+    power. GLPG contributes a distinctive variant of this paradigm: a
+    deterministic language graph with an emergent semantic manifold
+    learned by a single feedforward network.</p>
+    <h2 id="domain-compression-and-world-models">Domain Compression and
+    World Models</h2>
+    <p>Recent work on world models, distilled transformers, and
+    single‑corpus LLMs shows that small architectures can compress
+    entire narrative domains into compact latent geometries.
+    NanoGPT‑style models trained on one book, tiny transformers trained
+    on narrow corpora, and distilled GPT‑2 variants all demonstrate
+    domain‑faithful generation at small scales.</p>
+    <p>GLPG extends this idea by providing explicit structural
+    guarantees. Its deterministic paging, rule‑based filtering, and
+    canonical transitions ensure that domain compression remains stable,
+    interpretable, and resistant to collapse—even in micro‑models with
+    fewer than 200K parameters.</p>
+    <h2 id="positioning-glpg">Positioning GLPG</h2>
+    <p>GLPG occupies a unique position within the landscape of
+    generative architectures:</p>
+    <ul>
+    <li><p>like DMLG, it provides deterministic routing, explicit
+    paging, and rule‑based structural coherence;</p></li>
+    <li><p>like GLP–Mono, it provides expressive lemma geometry,
+    semantic absorption, and stable next‑token behaviour;</p></li>
+    <li><p>like hybrid neural‑symbolic systems, it unifies explicit
+    canonical structure with emergent neural semantics;</p></li>
+    <li><p>like domain‑compressed world models, it produces coherent
+    literary worlds even at microscopic parameter counts.</p></li>
+    </ul>
+    <p>This combination yields a hybrid architecture that is
+    simultaneously deterministic and emergent, interpretable and
+    expressive, compact and domain‑stable. GLPG therefore contributes a
+    structurally grounded alternative to transformer‑based language
+    models, particularly in settings where determinism, traceability,
+    and canonical world formation are essential.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the GLPG engine, the narrator pipeline,
+    and all supporting modules is provided under the AGPL‑3.0
+    license.</p>
+    <h2 id="scope-and-ecosystem-boundaries">Scope and Ecosystem
+    Boundaries</h2>
+    <p>Scaling GLP–Graph to the size of contemporary LLMs—billions of
+    parameters, massive datasets, and industrial training budgets—is
+    outside the scope of the ecosystem. The ecosystem is built around
+    unification, structural clarity, and compact world engines rather
+    than large-scale pretraining. GLP–Graph is designed to be small,
+    deterministic, and domain-stable, providing a canonical substrate
+    for hybrid generative systems rather than serving as a standalone
+    large LM.</p>
+    <div class="thebibliography">
+    <p>J. De Witte, “Grammar Lemma Paged Language Models,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Learnable Lemma Embeddings for GLP Models,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The GLP–Mono Architecture,” Triadic Cosmos
+    Ecosystem, 2026.</p>
+    <p>J. De Witte, “Language as Graph Traversal: The DMLG
+    Architecture,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Dynamic and Modular Architecture for Language
+    Modeling,” Triadic Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>

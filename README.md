@@ -2803,6 +2803,94 @@ And it does all of this **without introducing new fields, new dimensions, exotic
 TRG unifies by **structure**, not by **invention** —  
 a rare achievement in the history of theoretical physics.
 
+---
+
+### **48. The GLP‑Graph Architecture: A Deterministic‑Emergent Hybrid Language Graph**
+
+This paper introduces **GLP‑Graph (GLPG)**, the first architecture in the Triadic Cosmos ecosystem  
+that **unifies deterministic graph‑based routing with a fully emergent monolithic semantic engine**.  
+Where earlier systems (PAGED‑PRE‑CAS, DMLM, DMLG, GLP, GLP‑Mono) explored these paradigms  
+as *independent experimental lineages*, GLPG is the point where both converge into a single,  
+structurally grounded, semantically expressive hybrid LM.
+
+GLPG restores the canonical graph substrate of DMLG:
+
+- **deterministic grammar transitions**,  
+- **explicit paging via last‑lemma routing**,  
+- **rule‑based structural coherence**,  
+- **PRE‑governed sentence validation**,  
+
+while inheriting the semantic engine of GLP‑Mono:
+
+- **a single 4‑layer feedforward MLP**,  
+- **learned lemma geometry**,  
+- **cosine‑ranking over grammar–lemma pairs**,  
+- **compact recurrent narrative memory**,  
+- **stable next‑token behaviour without attention**.
+
+The result is the first architecture that behaves simultaneously as:
+
+- **a deterministic language graph**,  
+- **and a fully emergent next‑token model**.
+
+GLPG supports two generative regimes:
+
+1. **Paged Graph Traversal** — deterministic routing restricts the candidate vocabulary,  
+   yielding fast, canon‑faithful, structurally guided prose.
+
+2. **Pure MLP Mode** — the full vocabulary is evaluated, revealing transformer‑like  
+   semantic emergence, conceptual drift, and self‑balancing world geometry.
+
+The coexistence of these modes shows that the monolithic network **internalizes**  
+the deterministic graph, while the graph provides a **controllable manifold**  
+for semantic injection.
+
+GLPG is fully **traceable**, **inspectable**, and **non‑blackbox**:  
+the entire architecture—including grammar rules, paging structure, lemma embeddings,  
+context encoding, and transition scoring—can be implemented in a compact set of  
+Python classes. This makes GLPG one of the few hybrid LM architectures that is  
+both structurally deterministic and semantically emergent.
+
+Within the Triadic Cosmos ecosystem, GLPG is positioned as the **unified successor**  
+to both DMLG and GLP‑Mono: a scalable, domain‑stable substrate capable of producing  
+structured canonical prose, emergent semantic worlds, and hybrid narrative behaviour  
+across long horizons.
+
+### 🌌 Fun Fact: GLP & DMLG Evolved as Independent Species — GLPG Is Their Convergence
+
+In the Triadic Cosmos ecosystem, **GLP** and **DMLG** began as two separate experimental  
+micro‑LM species:
+
+- **DMLG** explored deterministic canonical graphs, paging biomes, and PRE governance.  
+- **GLP** explored monolithic lemma geometry, semantic absorption, and emergent world models.
+
+These lineages evolved independently — each solving problems the other could not.  
+GLPG is the moment where both evolutionary branches **merge**:
+
+> **GLPG is the hybrid organism where deterministic structure and emergent semantics  
+> finally coexist inside one architecture.**
+
+This convergence mirrors the ecosystem’s broader evolutionary arc:
+
+- PAGED‑PRE‑CAS →  
+- DMLM →  
+- DMLG →  
+- GLP →  
+- GLP‑Mono →  
+- **GLP‑Graph**  
+
+Each step is documented with reference implementations, forming a complete historical record  
+of how canonical paged micro‑LMs matured into a unified hybrid generative system.
+
+In other words:
+
+> **DMLG is structure.  
+> GLP‑Mono is semantics.  
+> GLPG is the synthesis.**
+
+A hybrid LM that behaves like a **deterministic graph** and a **semantic manifold** at the same time—  
+a structural milestone in the Triadic Cosmos.
+
 </details>
 
 ---
