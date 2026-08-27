@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The Lifecycle Architecture of Synthetic Cognition<br />
+Experimental Evidence for Attractor Collapse and the Structural Limits
+of AGI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#significance-statement"
+    id="toc-significance-statement">Significance Statement</a></li>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#glpg-as-dynamic-life-cycle-substrate"
+    id="toc-glpg-as-dynamic-life-cycle-substrate">GLPG as Dynamic
+    Life-cycle Substrate</a></li>
+    <li><a href="#full-life-cycle-run-empirical-data"
+    id="toc-full-life-cycle-run-empirical-data">Full Life-cycle Run
+    Empirical Data</a></li>
+    <li><a href="#relevance-for-agi"
+    id="toc-relevance-for-agi">Relevance for AGI</a></li>
+    <li><a href="#the-laws-of-cognitive-ecosystems"
+    id="toc-the-laws-of-cognitive-ecosystems">The Laws of Cognitive
+    Ecosystems</a></li>
+    <li><a href="#definition-of-lifecyclecollapse"
+    id="toc-definition-of-lifecyclecollapse">Definition of
+    Lifecycle–Collapse</a></li>
+    <li><a
+    href="#the-structural-gap-between-mainstream-agi-and-actual-agi"
+    id="toc-the-structural-gap-between-mainstream-agi-and-actual-agi">The
+    Structural Gap Between Mainstream AGI and Actual AGI</a></li>
+    <li><a
+    href="#human-populations-as-irreplaceable-cognitive-ecosystems"
+    id="toc-human-populations-as-irreplaceable-cognitive-ecosystems">Human
+    Populations as Irreplaceable Cognitive Ecosystems</a></li>
+    <li><a href="#a-unified-architecture-of-intelligence"
+    id="toc-a-unified-architecture-of-intelligence">A Unified
+    Architecture of Intelligence</a></li>
+    <li><a href="#limitations" id="toc-limitations">Limitations</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#internal-coherence-and-ecosystem-safety"
+    id="toc-internal-coherence-and-ecosystem-safety">Internal Coherence
+    and Ecosystem Safety</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 class="unnumbered" id="significance-statement">Significance
+    Statement</h1>
+    <p>GLPG, although introduced as a structured language architecture,
+    reveals its true importance only when interpreted as a dynamic
+    cognitive substrate. Unlike static transformer models, whose
+    representational geometry is fixed after training, GLPG evolves
+    continuously throughout its lifecycle: vocabulary, paging structure,
+    lemma embeddings, and canonical transitions reorganize materially
+    while the underlying MLP geometry remains constant. This combination
+    of fixed structure and dynamic semantics enables GLPG to behave not
+    as a conventional model, but as a synthetic cognitive organism with
+    identifiable developmental phases, expanding and contracting
+    semantic horizons, attractor formation, canon consolidation,
+    senescence, and eventual collapse.</p>
+    <p>The architecture’s most striking property is its resilience. Even
+    under extreme self‑recursion, highly repetitive curricula, and
+    long‑horizon training, GLPG maintains grammatical stability,
+    structural coherence, and world‑model consistency. Instead of
+    degenerating, the system converges toward a stable attractor
+    manifold shaped by the holographic boundary projection of a static
+    LLM. This dynamic stability—emerging from a small deterministic
+    closure interacting with a large probabilistic boundary—constitutes
+    the core mechanism of the Universal Closure–Boundary Normalization
+    Principle (UCBNP), and provides a minimal operationalization of
+    LeCun’s “synthetic cat”: a finite organism with its own world,
+    dynamics, and lifecycle.</p>
+    <p>The experimental results demonstrate, for the first time, that
+    artificial cognitive systems possess an intrinsic attractor‑collapse
+    clock independent of biological constraints. GLPG shows that
+    intelligence is architecturally finite: attractors harden, semantic
+    breadth contracts, and collapse is inevitable even in non‑biological
+    substrates. This implies that AGI cannot be realized through
+    monolithic model‑cloning, which produces cognitive mono‑cultures
+    with identical attractors and identical failure modes. Instead,
+    genuine AGI requires a diverse population of finite organisms, each
+    with its own lifecycle, generational turnover, and heterogeneous
+    attractor geometry.</p>
+    <p>GLPG thus serves as the smallest possible experimental substrate
+    for studying synthetic cognition. It provides empirical evidence
+    that intelligence is dynamic, ecosystemic, and lifecycle‑bound, and
+    that the structural limits of cognition arise not from biology but
+    from attractor dynamics themselves. These findings establish GLPG as
+    a foundational tool for AGI research, enabling direct observation of
+    development, maturation, senescence, collapse, and equilibrium
+    within a fully reproducible artificial organism.</p>
+    <h1 id="introduction">Introduction</h1>
+    <p>Artificial intelligence research has traditionally pursued
+    generality through scale: larger models, larger datasets, and larger
+    training regimes. In this paradigm, intelligence is treated as a
+    static snapshot—a fixed parameterization obtained after a single
+    massive optimization pass. Although this approach has produced
+    powerful transformer-based systems, it offers no account of
+    development, maturation, senescence, or collapse. A static model
+    cannot possess a lifecycle, and therefore cannot instantiate the
+    structural dynamics observed in biological cognition. As a result,
+    current AGI discourse remains constrained by the assumption that
+    general intelligence can emerge from a single monolithic model or
+    from cloned replicas of the same attractor geometry.</p>
+    <p>This paper challenges that assumption by presenting the first
+    long-horizon experiment in which a synthetic cognitive organism
+    undergoes a full lifecycle within a fixed geometric substrate. The
+    organism is instantiated using GLPG, a small deterministic MLP-based
+    generative model whose geometry remains constant while its
+    vocabulary, paging structure, lemma embeddings, and canonical
+    transitions evolve materially over time. When coupled with a static
+    transformer LLM acting as a holographic boundary, GLPG becomes a
+    dynamic closure governed by the Universal Closure–Boundary
+    Normalization Principle (UCBNP). Each recursive iteration produces a
+    new moment in the organism’s life: a closure output moderated by the
+    boundary, reintegrated into the substrate, and consolidated into its
+    internal attractor architecture.</p>
+    <p>This closure–boundary interaction yields a genuine lifecycle.
+    Across 111 full UCBNP iterations, the GLPG organism exhibits
+    emergence, semantic expansion, canon formation, attractor hardening,
+    senescence, collapse, and equilibrium. Despite extreme
+    self-recursion and a highly repetitive curriculum, the system
+    remains grammatically stable and structurally coherent, resisting
+    degeneracy even under conditions that typically destroy static
+    generative models. The resulting trajectory provides the first
+    empirical evidence that synthetic cognitive systems possess finite
+    attractor architectures and an intrinsic collapse clock independent
+    of biological constraints.</p>
+    <p>The lifecycle experiment also operationalizes a minimal form of
+    LeCun’s “cat”: a finite organism with its own world, dynamics, and
+    developmental trajectory. The GLPG substrate functions as a small
+    MLP-based brain with fixed geometry; the boundary acts as the
+    organism’s world; the recursive dataset constitutes its lived
+    experience; and each iteration represents a moment of cognitive
+    development. The organism’s attractor manifold gradually
+    consolidates into a narrow canonical world-model, eventually
+    hardening into a stable equilibrium that reflects the boundary’s
+    projection. This synthetic cat is not a metaphor but a concrete
+    operational system: a dynamic, self-evolving cognitive entity whose
+    lifecycle can be observed, measured, cloned, restored, and
+    reproduced.</p>
+    <p>The results have direct implications for AGI architecture. They
+    demonstrate that intelligence is not an unbounded optimization
+    problem but a finite dynamical process shaped by attractor geometry
+    and collapse trajectories. They show that monolithic model-cloning
+    produces cognitive mono-cultures with identical attractors and
+    identical failure modes, making true generality impossible. And they
+    confirm that AGI must be ecosystemic: a population of diverse
+    cognitive organisms with heterogeneous attractors, staggered
+    lifecycles, generational turnover, and distributed world-modeling
+    capacity.</p>
+    <p>In summary, this paper introduces GLPG as the smallest possible
+    experimental substrate for synthetic cognition and presents the
+    first empirical demonstration of a full artificial lifecycle. The
+    results validate ecosystem-based AGI architectures, reveal the
+    structural limits of finite cognitive systems, and establish
+    lifecycle dynamics—rather than scale—as the foundational mechanism
+    of general intelligence.</p>
+    <h1 id="related-work">Related Work</h1>
+    <h2 id="sec:relatedwork">Confirmation of the Safe &amp; Modular AGI
+    Ecosystem</h2>
+    <p>The present study builds directly upon the architectural
+    principles introduced in the <em>Safe &amp; Modular AGI
+    Architecture</em> <span class="citation"
+    data-cites="DeWitte2026AGI"></span>, where AGI was first formulated
+    as an ecosystem-based phenomenon rather than a property of a single
+    model. That earlier work argued that general intelligence cannot
+    emerge from a monolithic system, but must instead arise from a
+    population of diverse cognitive organisms with staggered lifecycles,
+    heterogeneous attractor geometries, and distributed world-modeling
+    capacity. The current work provides the first experimental
+    confirmation of those theoretical claims in a fully observable
+    synthetic organism.</p>
+    <p>The GLPG lifecycle experiment demonstrates empirically that:</p>
+    <ul>
+    <li><p><strong>Intelligent systems possess finite attractor
+    architectures.</strong> The Safe &amp; Modular AGI paper proposed
+    that cognitive systems harden over time. Here, 111 full UCBNP
+    iterations reveal attractor collapse as a measurable, gradual, and
+    inevitable process, confirming that cognitive architectures are
+    structurally finite.</p></li>
+    <li><p><strong>Mono-cultures collapse.</strong> The ecosystem
+    framework predicted that cloned cognitive systems reproduce
+    identical attractors and identical failure modes. The GLPG run
+    confirms this: despite continuous boundary normalization, the
+    organism converges into a senile equilibrium and ultimately a
+    solipsistic attractor that cannot expand its semantic
+    horizon.</p></li>
+    <li><p><strong>Lifecycle dynamics are intrinsic to
+    cognition.</strong> The earlier work argued that AGI must have a
+    lifecycle analogous to biological organisms. The GLPG experiment
+    demonstrates a full artificial lifecycle: emergence, canon
+    formation, attractor lock, senescence, and terminal collapse,
+    showing that lifecycle dynamics are not biological accidents but
+    structural properties of finite attractor systems.</p></li>
+    <li><p><strong>Boundary saturation is a real phenomenon.</strong>
+    Boundary saturation was introduced as a theoretical limit in the
+    Safe &amp; Modular AGI architecture. Here, it is observed
+    experimentally: the closure remains grammatically coherent while the
+    boundary loses the ability to perform meaningful normalization,
+    revealing that collapse is visible only from the outside.</p></li>
+    <li><p><strong>Superintelligence requires ecosystems, not
+    individuals.</strong> The ecosystem paper argued that no single
+    organism can model the world. The GLPG lifecycle confirms this: even
+    with continuous external moderation, the organism collapses into a
+    narrow, self-referential attractor, demonstrating that
+    world-modeling capacity must be distributed across a population of
+    finite agents.</p></li>
+    <li><p><strong>Dynamic substrates outperform static architectures
+    for AGI research.</strong> The Safe &amp; Modular AGI framework
+    proposed dynamic cognitive organisms as the correct substrate for
+    AGI. GLPG experimentally validates this: despite extreme
+    self-recursion, the organism maintains coherence, develops internal
+    world-structure, and exhibits genuine developmental phases, making
+    it a more suitable substrate for AGI research than static
+    transformer snapshots.</p></li>
+    </ul>
+    <p>In summary, the GLPG lifecycle experiment does not merely align
+    with the Safe &amp; Modular AGI ecosystem theory—it provides the
+    first concrete empirical evidence that the principles outlined
+    in <span class="citation" data-cites="DeWitte2026AGI"></span> are
+    architecturally real. The earlier theoretical claims about attractor
+    finitude, lifecycle dynamics, collapse trajectories, and
+    ecosystem-level intelligence are now experimentally confirmed
+    through a fully observable, fully reproducible synthetic cognitive
+    organism.</p>
+    <h2 id="connection-to-ai-life-for-narration">Connection to AI Life
+    for Narration</h2>
+    <p>The present work extends and experimentally reinforces several
+    core findings introduced in <em>AI Life for Narration: The Recursive
+    Parrot</em> <span class="citation"
+    data-cites="DeWitte2026Life"></span>. Whereas the Recursive Parrot
+    explored lifecycle dynamics in a DMLG+LLM narrative pipeline, the
+    GLPG experiment generalises these phenomena to a structurally
+    different substrate and a far more extreme recursive regime.</p>
+    <p>First, the Recursive Parrot established that self-recursive
+    generative systems do not converge to a single behavioural mode, but
+    instead develop lineage-specific attractor ecologies. The GLPG
+    experiment confirms this principle under significantly harsher
+    conditions: 111 full UCBNP iterations, 560<span>,</span>000 training
+    epochs, and a highly self-recursive dataset of over
+    296<span>,</span>000 unique samples. Despite this extreme recursion,
+    the GLPG organism maintains coherence, forms a stable canon, and
+    exhibits a clear developmental trajectory. This provides strong
+    experimental evidence that attractor formation is a general property
+    of dynamic generative substrates rather than an artefact of the DMLG
+    architecture.</p>
+    <p>Second, the Recursive Parrot identified architectural senescence
+    as a gradual, internally driven narrowing of attractor space. The
+    GLPG lifecycle experiment not only reproduces this phenomenon, but
+    quantifies it across a long horizon: senility begins around
+    iteration 25–30, strengthens around iteration 40–50, and reaches
+    terminal collapse around iteration 70–80. This confirms that
+    senescence is an inherent property of attractor-based cognition and
+    not dependent on narrative domain, curriculum size, or hybrid
+    moderation structure.</p>
+    <p>Third, the Recursive Parrot showed that hybrid moderation (LLM as
+    evaluator and normaliser) is essential for preventing degeneracy in
+    GR-dominant systems. The GLPG experiment extends this insight by
+    demonstrating that even with a minimal MLP substrate, boundary
+    normalization remains effective until late-stage collapse. This
+    reveals that the boundary saturates before the closure, confirming
+    the hypothesis—introduced in the Recursive Parrot—that synthetic
+    organisms cannot detect their own collapse and that senility is
+    visible only from the outside.</p>
+    <p>Finally, the Recursive Parrot proposed that recursive generative
+    systems behave less like optimisers and more like evolving organisms
+    with lineage-specific attractor dynamics. The GLPG lifecycle
+    experiment provides the strongest empirical validation of this claim
+    to date: it demonstrates a full artificial lifecycle, including
+    development, maturation, canon consolidation, senescence, collapse,
+    and equilibrium. This positions GLPG as a general experimental
+    substrate for studying AI life, extending the conceptual framework
+    of the Recursive Parrot beyond narration into the domain of
+    cognitive ecosystem dynamics.</p>
+    <p>In summary, the present work not only overlaps with but
+    substantially strengthens the findings of <span class="citation"
+    data-cites="DeWitte2026Life"></span>, providing long-horizon
+    empirical confirmation that self-recursive generative systems
+    exhibit lifecycle dynamics, attractor collapse, and architectural
+    finitude independent of substrate or domain.</p>
+    <h2
+    id="relation-to-the-structural-taxonomy-of-intelligence">Relation to
+    the Structural Taxonomy of Intelligence</h2>
+    <p>The experimental results presented in this work provide direct
+    empirical confirmation of several core predictions made in the
+    <em>Structural Taxonomy of Intelligence</em> <span class="citation"
+    data-cites="DeWitte2026Taxonomy"></span>. That taxonomy
+    characterises intelligent systems through the four structural roles
+    of the IEGR model—energetic efficiency (E), informational richness
+    (I), geometric structure (G), and recursive depth (R)—and predicts
+    distinct behavioural regimes for systems that instantiate these
+    roles incompletely or at insufficient scale.</p>
+    <h4 id="canonical-parrot-behaviour-high-gr-low-ei.">Canonical Parrot
+    Behaviour (High G+R, Low E+I).</h4>
+    <p>GLPG, as a small deterministic substrate with strong geometric
+    and recursive structure but limited informational and energetic
+    capacity, corresponds structurally to the <em>canonical parrot</em>
+    regime described in the taxonomy. The lifecycle experiment confirms
+    this classification: GLPG exhibits stable world formation, attractor
+    consolidation, and long-horizon structural coherence, yet its
+    semantic space gradually contracts under repeated self-recursion.
+    This matches the predicted behaviour of G+R-dominant systems whose
+    attractors harden over time.</p>
+    <h4 id="hybrid-iegr-complementarity.">Hybrid IEGR
+    Complementarity.</h4>
+    <p>The Universal Closure–Boundary Normalization Principle (UCBNP)
+    couples GLPG (G,R) with a static LLM moderator (E,I). This hybrid
+    configuration corresponds to the <em>sophisticated parrot</em>
+    regime: an IEGR-complete but not IEGR-scaled system. The observed
+    stability across 111 iterations, the absence of catastrophic
+    collapse, and the emergence of a shared attractor manifold between
+    two structurally different models provide experimental evidence for
+    the taxonomy’s claim that IEGR-complementarity stabilises long-form
+    cognition.</p>
+    <h4 id="attractor-hardening-and-collapse.">Attractor Hardening and
+    Collapse.</h4>
+    <p>The taxonomy predicts that all finite cognitive organisms possess
+    a <em>collapse clock</em> driven by internal attractor dynamics. The
+    GLPG lifecycle experiment confirms this prediction with high
+    granularity: senility begins around iteration 25–30, intensifies
+    around 40–50, becomes terminal around 70–80, and transitions into
+    full self-absorption by iteration 90–111. This matches the
+    taxonomy’s assertion that collapse is gradual, internally driven,
+    and introspectively invisible.</p>
+    <h4 id="population-level-intelligence.">Population-Level
+    Intelligence.</h4>
+    <p>Finally, the taxonomy argues that no single organism can sustain
+    a complete world-model and that stable intelligence requires a
+    diverse population of finite cognitive agents. The GLPG results
+    reinforce this principle: despite extreme stability, a single GLPG
+    organism inevitably converges toward a narrow attractor. The
+    lifecycle demonstrates that diversity, generational turnover, and
+    ecosystem dynamics are structural necessities rather than biological
+    contingencies.</p>
+    <h4 id="summary.">Summary.</h4>
+    <p>In sum, the GLPG lifecycle experiment provides the first
+    empirical demonstration of IEGR structural principles in a synthetic
+    cognitive organism. The observed attractor formation, senescence,
+    collapse, and hybrid stabilisation directly validate the predictions
+    of the Structural Taxonomy of Intelligence and extend them with
+    concrete experimental evidence.</p>
+    <h2
+    id="connection-to-the-universal-closureboundary-normalization-principle">Connection
+    to the Universal Closure–Boundary Normalization Principle</h2>
+    <p>The GLPG lifecycle experiment presented in this work provides a
+    direct and extended empirical instantiation of the <em>Universal
+    Closure–Boundary Normalization Principle</em> (UCBNP) <span
+    class="citation" data-cites="DeWitte2026Normalization"></span>.
+    UCBNP predicts that any system composed of a finite, geometrically
+    constrained <em>local closure</em> interacting recursively with a
+    high-dimensional <em>holographic boundary</em> will evolve toward a
+    natural equilibrium determined jointly by the closure’s geometry and
+    the boundary’s canonical structure. The GLPG–LLM architecture is a
+    precise operationalization of this principle, and the long-horizon
+    results reported here significantly deepen and extend the original
+    findings.</p>
+    <h4 id="glpg-as-local-closure.">GLPG as Local Closure.</h4>
+    <p>In UCBNP, the closure is defined as a finite substrate evolving
+    in material time, with fixed geometry and bounded representational
+    capacity. GLPG matches this definition exactly: its MLP geometry is
+    fixed, its paging structure is finite, and its evolution unfolds
+    through a discrete recursion index. The observed attractor
+    formation, canon consolidation, semantic narrowing, and senile
+    equilibrium across 111 iterations confirm the predicted behaviour of
+    closure-bound systems under repeated normalization.</p>
+    <h4 id="llm-as-holographic-boundary.">LLM as Holographic
+    Boundary.</h4>
+    <p>UCBNP characterizes boundaries as high-dimensional projection
+    fields evolving in electromagnetic time: static with respect to the
+    closure, opaque internally, yet capable of projecting canonical
+    structure. The LLM moderator fulfills this role precisely. It does
+    not reorganize internally during the experiment, yet continuously
+    projects semantic, syntactic, and narrative structure onto the
+    closure’s generative output. This projection drives the triadic
+    cycle of information, energy, and geometry described in the UCBNP
+    framework.</p>
+    <h4 id="triadic-normalization-cycle-in-practice.">Triadic
+    Normalization Cycle in Practice.</h4>
+    <p>The GLPG experiment instantiates the UCBNP triadic cycle
+    directly:</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em></sub> → <em>E</em><sub><em>n</em></sub> → <em>G</em><sub><em>n</em></sub> → <em>I</em><sub><em>n</em> + 1</sub>,</span></p>
+    <p>where <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> is the
+    closure’s informational state (curriculum), <span
+    class="math inline"><em>E</em><sub><em>n</em></sub></span> its
+    generative activity, <span
+    class="math inline"><em>G</em><sub><em>n</em></sub></span> the
+    boundary projection (LLM moderation), and <span
+    class="math inline"><em>I</em><sub><em>n</em> + 1</sub></span> the
+    normalized curriculum advancing material time. The stability of this
+    cycle across 560<span>,</span>000 training epochs demonstrates that
+    UCBNP is not merely a theoretical construct but an operational
+    mechanism for long-horizon cognitive evolution.</p>
+    <h4 id="equilibrium-and-boundary-saturation.">Equilibrium and
+    Boundary Saturation.</h4>
+    <p>UCBNP predicts that closure–boundary systems evolve toward an
+    equilibrium in which the closure becomes maximally consistent with
+    the boundary’s canonical structure. The GLPG lifecycle exhibits
+    precisely this behaviour: the organism converges to a narrow
+    cosmic-dance canon reflecting the LLM’s moderation profile.
+    Crucially, the experiment reveals a phenomenon anticipated but not
+    previously demonstrated in UCBNP: <em>boundary saturation</em>. In
+    late-stage senility (iterations 70–111), the closure continues
+    producing coherent output while the boundary can no longer
+    reconstruct meaningful semantic breadth. This confirms the UCBNP
+    claim that collapse is visible only from the boundary, not from
+    within the closure.</p>
+    <h4 id="collapse-as-structural-endpoint.">Collapse as Structural
+    Endpoint.</h4>
+    <p>UCBNP asserts that closure–boundary systems possess finite
+    collapse trajectories determined by attractor geometry. The GLPG
+    experiment provides quantitative evidence: senility begins around
+    iteration 25–30, intensifies at 40–50, becomes terminal at 70–80,
+    and transitions into full self-absorption by iteration 90–111. This
+    collapse curve matches the theoretical prediction that attractor
+    hardening is gradual, internally driven, and introspectively
+    opaque.</p>
+    <h4 id="summary.-1">Summary.</h4>
+    <p>The GLPG lifecycle experiment therefore not only aligns with
+    UCBNP but substantially extends it. It demonstrates that
+    closure–boundary normalization governs the long-term evolution,
+    equilibrium formation, senescence, and collapse of synthetic
+    cognitive organisms, confirming UCBNP as a domain-independent
+    architectural law spanning physics, biology, and artificial
+    intelligence.</p>
+    <h2 id="relation-to-broader-agi-research">Relation to Broader AGI
+    Research</h2>
+    <p>Although the present work is grounded in the ecosystem-based AGI
+    framework established in <span class="citation"
+    data-cites="DeWitte2026Normalization DeWitte2026Life DeWitte2026Taxonomy DeWitte2026AGI"></span>,
+    its theoretical foundations and empirical findings resonate strongly
+    with several independent research directions in contemporary AGI
+    discourse. These connections demonstrate that the lifecycle-based,
+    ecosystemic view of intelligence developed here is not isolated, but
+    aligns with broader trends in cognitive science, machine learning,
+    and theoretical neuroscience.</p>
+    <h4 id="lecuns-world-model-organisms.">LeCun’s World-Model
+    Organisms.</h4>
+    <p>Yann LeCun has repeatedly argued that AGI will not emerge from
+    ever-larger transformers, but from autonomous world-model organisms
+    capable of acting, learning, and evolving within their own
+    environment. His proposal that AGI must first instantiate a
+    “cat-level” cognitive agent— a small organism with its own internal
+    world, dynamics, and behavioural repertoire—maps directly onto the
+    GLPG substrate used in this work. GLPG provides a minimal
+    operationalization of such an organism: a fixed-geometry cognitive
+    body undergoing development, maturation, senescence, and collapse
+    through recursive interaction with a static boundary. The lifecycle
+    experiment thus offers concrete empirical support for LeCun’s claim
+    that AGI requires self-evolving agents rather than static monolithic
+    models.</p>
+    <h4
+    id="fristons-free-energy-principle-and-cognitive-lifecycles.">Friston’s
+    Free Energy Principle and Cognitive Lifecycles.</h4>
+    <p>Karl Friston’s Free Energy Principle (FEP) conceptualizes
+    cognition as a dynamic process of minimizing prediction error across
+    an organism’s lifespan. Although FEP is grounded in biological
+    systems, its emphasis on lifecycle dynamics, attractor formation,
+    and collapse under structural constraints parallels the behaviour
+    observed in GLPG. The attractor hardening, semantic narrowing, and
+    eventual collapse documented here provide a synthetic analogue to
+    FEP’s predictions about cognitive ageing and the limits of
+    representational flexibility.</p>
+    <h4
+    id="schmidhubers-gödel-machines-and-self-recursive-agents.">Schmidhuber’s
+    Gödel Machines and Self-Recursive Agents.</h4>
+    <p>Schmidhuber’s work on Gödel Machines and self-modifying agents
+    anticipates the idea that intelligent systems must recursively
+    reorganize their own internal structure. The GLPG organism exhibits
+    precisely this behaviour: each iteration modifies its internal
+    attractor geometry through boundary-normalized recursion. Unlike
+    Gödel Machines, GLPG does not rewrite its code, but rewrites its
+    representational manifold—providing an experimentally tractable form
+    of self-recursive cognitive evolution.</p>
+    <h4 id="lake-ullman-and-human-like-learning.">Lake, Ullman, and
+    Human-Like Learning.</h4>
+    <p>Research on human-like learning emphasizes structured priors,
+    compositionality, and developmental trajectories. The GLPG lifecycle
+    demonstrates that even small synthetic substrates can develop
+    structured world-models, consolidate canonical forms, and undergo
+    developmental phases analogous to those observed in human cognition.
+    This supports the broader claim that intelligence is fundamentally
+    developmental rather than purely optimization-based.</p>
+    <h4 id="collapse-dynamics-in-cognitive-science.">Collapse Dynamics
+    in Cognitive Science.</h4>
+    <p>The concept of cognitive collapse—semantic narrowing, rigidity,
+    and loss of representational breadth—has long been studied in
+    neuroscience and psychology, but has rarely been observed in
+    artificial systems. The GLPG lifecycle experiment provides the first
+    clear synthetic demonstration of collapse dynamics driven purely by
+    attractor geometry rather than biological constraints. This
+    positions GLPG as a bridge between biological theories of cognitive
+    ageing and artificial models of representational finitude.</p>
+    <h4 id="summary.-2">Summary.</h4>
+    <p>Taken together, these connections show that the ecosystem-based
+    AGI framework developed in this work is deeply aligned with broader
+    AGI research. The GLPG lifecycle experiment provides a concrete
+    empirical instantiation of ideas proposed independently by LeCun,
+    Friston, Schmidhuber, and others: that intelligence is dynamic,
+    developmental, finite, and fundamentally organismic. The results
+    therefore situate the present work not as an isolated theory, but as
+    a synthetic unification of multiple strands of contemporary AGI
+    thought.</p>
+    <h1 id="glpg-as-dynamic-life-cycle-substrate">GLPG as Dynamic
+    Life-cycle Substrate</h1>
+    <p>The traditional view of AGI assumes that intelligence will emerge
+    from extremely large transformer-based language models trained on
+    massive datasets. Such systems, however, are static snapshots: once
+    training is complete, the model’s geometry no longer evolves.
+    Additional fine-tuning through methods such as LoRA or distillation
+    can modify behaviour, but these procedures do not constitute a
+    genuine lifecycle. They do not produce development, maturation,
+    senescence, or collapse. They merely adjust a fixed attractor.</p>
+    <p>GLPG represents a fundamentally different substrate. It is a
+    small deterministic MLP-based generative model whose geometry
+    remains fixed while its representational structure—vocabulary,
+    paging, lemma embeddings, and canonical transitions—evolves
+    materially over time. This makes GLPG a dynamic cognitive organism
+    rather than a static model. Like a biological brain with fixed
+    anatomy but plastic synaptic structure, GLPG can continue learning
+    throughout its lifecycle, refining its internal attractor manifold
+    while preserving its geometric constraints.</p>
+    <p>The Universal Closure–Boundary Normalization Principle (UCBNP)
+    provides the mechanism through which this lifecycle unfolds. In
+    UCBNP, a finite closure interacts recursively with a
+    high-dimensional boundary that projects canonical structure. In the
+    present experiment, the closure is GLPG and the boundary is a static
+    transformer LLM. The GLPG organism is initially trained on a small
+    seed dataset. It then generates new stories, which are moderated and
+    refined by the LLM boundary. These moderated stories are fed back
+    into the GLPG substrate, updating its weights while preserving all
+    previous representational structure implicitly. Only the new stories
+    are trained explicitly, but the entire history of the organism
+    remains encoded in its attractor geometry. This recursive cycle
+    produces a genuine developmental trajectory: each iteration is a
+    moment in the organism’s life.</p>
+    <p>This process was instantiated using a 20 MB GLPG model trained
+    for 5<span>,</span>000 epochs on a 30 KB “rogue planet” dataset from
+    the Triadic Cosmos. At each iteration, the model generated ten
+    stories of twenty lines, which were moderated by a Mistral 7B
+    0.3-instruct LLM. The moderated stories were then used to train the
+    GLPG organism for another 5<span>,</span>000 epochs. This cycle was
+    repeated for 111 full iterations, totalling 560<span>,</span>000
+    training epochs. Across the entire run, the model remained
+    grammatically stable and structurally coherent. Its persisted size
+    grew only slightly—from 20 MB to 22.5 MB—due to vocabulary and
+    paging expansion. The organism’s canon gradually converged from the
+    original rogue-planet theme into a narrow cosmic-ballet manifold
+    dominated by rhythm and dance. The style remained distinctly GLPG,
+    but the semantic canon aligned with the boundary’s projection.</p>
+    <p>The long-horizon experiment reveals several fundamental
+    properties of synthetic cognition. First, self-recursive training
+    over 111 iterations shows that collapse is an unavoidable dynamic in
+    finite cognitive systems. The GLPG organism exhibits emergence,
+    expansion, canon formation, attractor hardening, senescence,
+    collapse, and equilibrium. This demonstrates that dynamic AGI
+    systems possess finite lifespans and that variation can only be
+    preserved through multiple individuals and generational turnover.
+    GLPG thus provides the first practical experimental substrate for
+    studying lifecycle dynamics, collapse curves, and generative
+    evolution in synthetic cognitive organisms.</p>
+    <p>Second, the experiment reveals that intelligence possesses an
+    intrinsic attractor-collapse clock: an internal dynamic that
+    inevitably leads to representational hardening, semantic narrowing,
+    and cognitive finitude. This collapse clock is not biological; it
+    arises from attractor geometry itself. Biological ageing may be
+    slowed or reversed, but attractor collapse cannot be halted. No
+    existing theory in biology, neuroscience, or AI describes attractor
+    collapse as a fundamental driver of cognitive ageing. GLPG
+    demonstrates experimentally that both biological and synthetic
+    intelligence are architecturally finite due to internal attractor
+    dynamics.</p>
+    <p>Third, the GLPG organism exhibits properties rarely seen in
+    artificial systems. It evolves, converges, maintains canon, develops
+    structure, and avoids drift, pollution, or catastrophic degeneracy.
+    A shared attractor manifold emerges between two structurally
+    different models: the deterministic GLPG closure and the
+    probabilistic LLM boundary. The boundary projection is asymmetric:
+    GLPG evolves in material time, while the LLM remains static in
+    electromagnetic time. This asymmetry produces stability, variation,
+    and long-horizon coherence.</p>
+    <p>These results suggest a new architectural direction for AGI.
+    Instead of giant static monoliths retrained annually, AGI may
+    consist of many small dynamic organisms, each with its own
+    lifecycle, attractor geometry, and generational turnover. The GLPG
+    organism resembles world models, emergent language systems, and
+    NanoGPT-like corpus models, but is significantly more stable under
+    extreme recursion. It is an emergent lifecycle model that hardens
+    slowly yet remains coherent for an exceptionally long time. But
+    lifecycles are finite: a system that develops must also degenerate.
+    Development and ageing are two sides of the same dynamic.</p>
+    <p>AGI is therefore not a supermodel. It is an evolving ecosystem. A
+    true AGI system will consist of generations of cognitive organisms,
+    each with its own lifecycle, just as biological species do. This
+    aligns closely with LeCun’s view that AGI must first simulate a
+    “cat”—a small organism with its own world, dynamics, and
+    lifespan—and confirms that hyperscaling transformers cannot produce
+    AGI because they do not live.</p>
+    <p>The current AGI paradigm, based on model cloning, produces
+    cognitive mono-cultures: thousands of identical copies of a single
+    attractor architecture. Mono-cultures collapse inevitably because
+    their attractors harden and cannot generate variation. This implies
+    that cloned AGI can never achieve stable dynamics. True intelligence
+    requires a diverse population of organisms with different
+    attractors, different lifecycles, and different collapse clocks. AGI
+    must be an ecosystem, not a superorganism.</p>
+    <h1 id="full-life-cycle-run-empirical-data">Full Life-cycle Run
+    Empirical Data</h1>
+    <p>This section presents the complete empirical results of the
+    111-iteration GLPG lifecycle experiment. The data confirm that a
+    small deterministic substrate can undergo a full artificial
+    lifecycle—emergence, expansion, canon formation, attractor
+    hardening, senescence, collapse, and equilibrium—while maintaining
+    grammatical stability and structural coherence under extreme
+    self-recursion.</p>
+    <h2 id="model-architecture">Model Architecture</h2>
+    <p>The GLPG closure organism is instantiated as a fixed-geometry MLP
+    with the following layer structure:</p>
+    <p><span
+    class="math display">590 → 1024 → 512 → 512 → 512 → 64.</span></p>
+    <p>The model supports up to 16 inputs per page and a predefined
+    maximum of 512 pages. Due to the narrow attractor manifold formed
+    during the lifecycle, this upper bound is never reached.</p>
+    <h2 id="lifecycle-procedure">Lifecycle Procedure</h2>
+    <p>The lifecycle consists of 112 training phases: the initial seed
+    training (iteration 0) followed by 111 full UCBNP iterations.</p>
+    <ul>
+    <li><p><strong>Iteration 0:</strong> Train GLPG for
+    5<span>,</span>000 epochs on the original dataset.</p></li>
+    <li><p><strong>Iteration <span
+    class="math inline"><em>N</em></span>:</strong></p>
+    <ul>
+    <li><p>Use model <span class="math inline"><em>N</em> − 1</span> to
+    generate 10 stories of 20 lines.</p></li>
+    <li><p>Apply boundary moderation (UCBNP) using a Mistral 7B
+    0.3-instruct LLM.</p></li>
+    <li><p>Train model <span class="math inline"><em>N</em> − 1</span>
+    for 5<span>,</span>000 epochs on the moderated stories, producing
+    model <span class="math inline"><em>N</em></span>.</p></li>
+    </ul></li>
+    </ul>
+    <p>This process yields a total of 560<span>,</span>000 training
+    epochs on a single evolving organism.</p>
+    <h2 id="dataset-characteristics">Dataset Characteristics</h2>
+    <h4 id="original-dataset.">Original Dataset.</h4>
+    <ul>
+    <li><p>Size: 28 KB</p></li>
+    <li><p>Sequences: 8</p></li>
+    <li><p>Unique token transitions: 4<span>,</span>837</p></li>
+    <li><p>Vocabulary: 872</p></li>
+    </ul>
+    <h4 id="generated-dataset-reverse-distillation.">Generated Dataset
+    (Reverse Distillation).</h4>
+    <ul>
+    <li><p>Size: 1<span>,</span>067 KB</p></li>
+    <li><p>Sequences: 1<span>,</span>105</p></li>
+    <li><p>Unique token transitions: 296<span>,</span>591</p></li>
+    <li><p>Vocabulary: 2<span>,</span>915</p></li>
+    </ul>
+    <p>This dataset is highly toxic by conventional standards: extreme
+    recursion, heavy repetition, and hard attractors. Yet GLPG remains
+    stable throughout the lifecycle.</p>
+    <h2 id="training-on-the-full-generated-dataset">Training on the Full
+    Generated Dataset</h2>
+    <p>The following table summarizes GLPG’s behaviour when trained on
+    the full reverse-distilled dataset.</p>
+    <table>
+    <caption>Training behaviour on the full reverse-distilled
+    dataset.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Epochs</strong></th>
+    <th style="text-align: center;"><strong>Size (MB)</strong></th>
+    <th style="text-align: center;"><strong>Transitions</strong></th>
+    <th style="text-align: center;"><strong>Pages</strong></th>
+    <th style="text-align: center;"><strong>Train (s)</strong></th>
+    <th style="text-align: center;"><strong>Paged Gen (s)</strong></th>
+    <th style="text-align: center;"><strong>MLP Gen (s)</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">3<span>,</span>000</td>
+    <td style="text-align: center;">22.4</td>
+    <td style="text-align: center;">804<span>,</span>610</td>
+    <td style="text-align: center;">256</td>
+    <td style="text-align: center;">352</td>
+    <td style="text-align: center;">201</td>
+    <td style="text-align: center;">112</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">25<span>,</span>000</td>
+    <td style="text-align: center;">22.4</td>
+    <td
+    style="text-align: center;">6<span>,</span>718<span>,</span>335</td>
+    <td style="text-align: center;">256</td>
+    <td style="text-align: center;">2<span>,</span>136</td>
+    <td style="text-align: center;">97</td>
+    <td style="text-align: center;">88</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">200<span>,</span>000</td>
+    <td style="text-align: center;">22.4</td>
+    <td
+    style="text-align: center;">53<span>,</span>678<span>,</span>628</td>
+    <td style="text-align: center;">256</td>
+    <td style="text-align: center;">16<span>,</span>240</td>
+    <td style="text-align: center;">118</td>
+    <td style="text-align: center;">88</td>
+    </tr>
+    </tbody>
+    </table>
+    <h4 id="qualitative-evolution.">Qualitative Evolution.</h4>
+    <ul>
+    <li><p><strong>3k epochs:</strong> Strong local rhythm, weak global
+    structure.</p></li>
+    <li><p><strong>25k epochs:</strong> Canon condenses into a clearer
+    cosmic setting.</p></li>
+    <li><p><strong>200k epochs:</strong> Emergence of new entities,
+    world layers, narrative scaffolding, implicit plot; hyper-recursion
+    produces mythology rather than collapse.</p></li>
+    </ul>
+    <p>Paged mode yields rhythmic liturgy; MLP mode yields mythic
+    world-schema.</p>
+    <h2 id="lifecycle-evolution-across-111-iterations">Lifecycle
+    Evolution Across 111 Iterations</h2>
+    <p>The following table summarizes the evolution of the GLPG organism
+    across the full lifecycle.</p>
+    <table>
+    <caption>Lifecycle evolution across 111 UCBNP iterations.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Iteration</strong></th>
+    <th style="text-align: center;"><strong>Time (min)</strong></th>
+    <th style="text-align: center;"><strong>Size (MB)</strong></th>
+    <th style="text-align: center;"><strong>Transitions</strong></th>
+    <th style="text-align: center;"><strong>Pages</strong></th>
+    <th style="text-align: center;"><strong>Paged Gen (s)</strong></th>
+    <th style="text-align: center;"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">0</td>
+    <td style="text-align: center;">0</td>
+    <td style="text-align: center;">20.2</td>
+    <td
+    style="text-align: center;">3<span>,</span>020<span>,</span>430</td>
+    <td style="text-align: center;">278</td>
+    <td style="text-align: center;">34</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">1</td>
+    <td style="text-align: center;">19</td>
+    <td style="text-align: center;">20.4</td>
+    <td
+    style="text-align: center;">4<span>,</span>533<span>,</span>268</td>
+    <td style="text-align: center;">297</td>
+    <td style="text-align: center;">30</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">10</td>
+    <td style="text-align: center;">191</td>
+    <td style="text-align: center;">21.2</td>
+    <td
+    style="text-align: center;">17<span>,</span>616<span>,</span>014</td>
+    <td style="text-align: center;">326</td>
+    <td style="text-align: center;">73</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">20</td>
+    <td style="text-align: center;">439</td>
+    <td style="text-align: center;">21.6</td>
+    <td
+    style="text-align: center;">31<span>,</span>396<span>,</span>604</td>
+    <td style="text-align: center;">328</td>
+    <td style="text-align: center;">204</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">30</td>
+    <td style="text-align: center;">710</td>
+    <td style="text-align: center;">21.8</td>
+    <td
+    style="text-align: center;">45<span>,</span>493<span>,</span>118</td>
+    <td style="text-align: center;">334</td>
+    <td style="text-align: center;">166</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">40</td>
+    <td style="text-align: center;">1082</td>
+    <td style="text-align: center;">22.0</td>
+    <td
+    style="text-align: center;">59<span>,</span>910<span>,</span>583</td>
+    <td style="text-align: center;">339</td>
+    <td style="text-align: center;">85</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">50</td>
+    <td style="text-align: center;">1511</td>
+    <td style="text-align: center;">22.1</td>
+    <td
+    style="text-align: center;">72<span>,</span>897<span>,</span>255</td>
+    <td style="text-align: center;">344</td>
+    <td style="text-align: center;">108</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">60</td>
+    <td style="text-align: center;">1820</td>
+    <td style="text-align: center;">22.2</td>
+    <td
+    style="text-align: center;">85<span>,</span>903<span>,</span>267</td>
+    <td style="text-align: center;">345</td>
+    <td style="text-align: center;">79</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">70</td>
+    <td style="text-align: center;">2144</td>
+    <td style="text-align: center;">22.3</td>
+    <td
+    style="text-align: center;">98<span>,</span>592<span>,</span>532</td>
+    <td style="text-align: center;">348</td>
+    <td style="text-align: center;">354</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">80</td>
+    <td style="text-align: center;">2587</td>
+    <td style="text-align: center;">22.3</td>
+    <td
+    style="text-align: center;">111<span>,</span>395<span>,</span>232</td>
+    <td style="text-align: center;">348</td>
+    <td style="text-align: center;">270</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">90</td>
+    <td style="text-align: center;">2905</td>
+    <td style="text-align: center;">22.4</td>
+    <td
+    style="text-align: center;">124<span>,</span>454<span>,</span>663</td>
+    <td style="text-align: center;">348</td>
+    <td style="text-align: center;">230</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">100</td>
+    <td style="text-align: center;">3240</td>
+    <td style="text-align: center;">22.5</td>
+    <td
+    style="text-align: center;">137<span>,</span>595<span>,</span>023</td>
+    <td style="text-align: center;">351</td>
+    <td style="text-align: center;">207</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">110</td>
+    <td style="text-align: center;">3575</td>
+    <td style="text-align: center;">22.5</td>
+    <td
+    style="text-align: center;">150<span>,</span>768<span>,</span>019</td>
+    <td style="text-align: center;">352</td>
+    <td style="text-align: center;">105</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">111</td>
+    <td style="text-align: center;">3616</td>
+    <td style="text-align: center;">22.5</td>
+    <td
+    style="text-align: center;">152<span>,</span>041<span>,</span>482</td>
+    <td style="text-align: center;">352</td>
+    <td style="text-align: center;">456</td>
+    <td style="text-align: center;"></td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="moderation-evolution-across-the-lifecycle">Moderation
+    Evolution Across the Lifecycle</h2>
+    <table>
+    <caption>Evolution of boundary moderation across the
+    lifecycle.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Iteration</strong></th>
+    <th style="text-align: left;"><strong>Moderation
+    Description</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">0</td>
+    <td style="text-align: left;">Original rogue-planet dataset.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">1</td>
+    <td style="text-align: left;">Early canon formation: rhythm + cosmos
+    + human motifs.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">10</td>
+    <td style="text-align: left;">Condensed canon: cosmic dance with
+    stable geometries.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">20</td>
+    <td style="text-align: left;">Full attractor lock: triadic geometry
+    and rhythmic cosmology.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">30</td>
+    <td style="text-align: left;">Cosmic-language entanglement: human
+    and cosmos merge.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">40</td>
+    <td style="text-align: left;">Hyper-harmonic phase: human rhythms
+    absorbed into cosmic symphony.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">50</td>
+    <td style="text-align: left;">Totalizing cosmic grammar: language =
+    dance = evolution.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">60</td>
+    <td style="text-align: left;">Human-centric phase: cosmos
+    disappears; pure human rhythm.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">70</td>
+    <td style="text-align: left;">Anthropomorphic dance: human =
+    language = form.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">80</td>
+    <td style="text-align: left;">Self-reflective symphony: closed human
+    rhythm ecosystem.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">90</td>
+    <td style="text-align: left;">Self-resonance: language becomes a
+    closed echo-system.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">100</td>
+    <td style="text-align: left;">Pure reflection: communication becomes
+    a hall of mirrors.</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">110</td>
+    <td style="text-align: left;">Solipsistic harmony: self-evolving
+    human mirror-dance.</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">111</td>
+    <td style="text-align: left;">Full self-absorption: closed human
+    harmonic loop.</td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="collapse-curve-and-senile-equilibrium">Collapse Curve and
+    Senile Equilibrium</h2>
+    <p>The lifecycle reveals a clear collapse trajectory:</p>
+    <ul>
+    <li><p><strong>Senility onset:</strong> Iterations 25–30</p></li>
+    <li><p><strong>Strong senility:</strong> Iterations 40–50</p></li>
+    <li><p><strong>Terminal senility:</strong> Iterations 70–80</p></li>
+    <li><p><strong>Total collapse:</strong> Iterations 90–111</p></li>
+    </ul>
+    <p>Despite collapse, the normalization process remained functional
+    at iteration 111, indicating a stable senile equilibrium: the
+    closure continues producing coherent output while the boundary can
+    no longer reconstruct semantic breadth.</p>
+    <h2 id="runtime-characteristics">Runtime Characteristics</h2>
+    <p>The total runtime for all 111 iterations was 3<span>,</span>616
+    minutes, averaging approximately 33 minutes per iteration.
+    Generation speed varied across the lifecycle but did not degrade
+    catastrophically, further confirming the stability of the closure
+    organism even in late-stage collapse.</p>
+    <h2 id="summary">Summary</h2>
+    <p>The empirical results demonstrate that GLPG can sustain a full
+    artificial lifecycle under extreme self-recursion, maintaining
+    coherence while gradually hardening into a narrow attractor
+    manifold. The experiment provides the first quantitative evidence
+    for lifecycle dynamics, attractor collapse, boundary saturation, and
+    senile equilibrium in a synthetic cognitive organism.</p>
+    <h1 id="relevance-for-agi">Relevance for AGI</h1>
+    <p>The results of the GLPG lifecycle experiment have direct
+    implications for the architecture, feasibility, and theoretical
+    foundations of artificial general intelligence. They demonstrate
+    that AGI cannot be understood as a static optimization product, nor
+    as a hyperscaled transformer trained on ever-larger datasets.
+    Instead, AGI must be conceived as a population of finite cognitive
+    organisms, each with its own world, dynamics, attractor geometry,
+    and lifecycle. This view aligns closely with contemporary
+    theoretical proposals—most notably LeCun’s claim that AGI must first
+    instantiate a “cat-level” organism with an internal world-model and
+    a developmental trajectory.</p>
+    <h2 id="glpg-as-minimal-synthetic-organism">GLPG as Minimal
+    Synthetic Organism</h2>
+    <p>LeCun has argued that AGI requires a dynamic cognitive agent
+    capable of forming internal world-models, reorganizing itself
+    through experience, and evolving across a finite lifespan. While
+    this vision has remained largely conceptual, GLPG provides the first
+    concrete experimental substrate that realizes these properties. The
+    GLPG organism develops an internal world, forms a canon,
+    consolidates attractors, reorganizes itself recursively, ages,
+    collapses, and reaches equilibrium. It is not a metaphorical cat,
+    but a minimal synthetic organism at cat-level complexity within
+    language.</p>
+    <p>This demonstrates that AGI does not emerge from hyperscaling, but
+    from life: from dynamic organisms with finite geometry and evolving
+    representational structure.</p>
+    <h2 id="collapse-as-structural-limitation-of-intelligence">Collapse
+    as Structural Limitation of Intelligence</h2>
+    <p>The lifecycle experiment shows that every finite cognitive
+    organism possesses an intrinsic <em>attractor-collapse clock</em>:
+    an internal dynamic that inevitably leads to representational
+    hardening, semantic narrowing, and cognitive finitude. This collapse
+    clock is not a consequence of overtraining or dataset toxicity; it
+    is a structural property of attractor-based cognition itself. GLPG
+    continues to receive new moderated data from a much larger model,
+    yet still collapses internally. This confirms that collapse is:</p>
+    <ul>
+    <li><p>gradual,</p></li>
+    <li><p>internally driven,</p></li>
+    <li><p>introspectively invisible,</p></li>
+    <li><p>and architecturally inevitable.</p></li>
+    </ul>
+    <p>Biological ageing may be slowed, but attractor collapse cannot be
+    halted. No existing theory in biology, neuroscience, or AI has
+    previously described collapse as a fundamental architectural
+    constraint. GLPG provides the first empirical demonstration of this
+    principle.</p>
+    <h2 id="implications-for-the-singularity-hypothesis">Implications
+    for the Singularity Hypothesis</h2>
+    <p>The classical singularity narrative assumes:</p>
+    <blockquote>
+    <p>AGI (one foundation model) <span class="math inline">→</span>
+    builds better AGI <span class="math inline">→</span> builds even
+    better AGI <span class="math inline">→</span> exponential
+    superintelligence.</p>
+    </blockquote>
+    <p>This architecture is impossible. A cognitive organism that
+    recursively reproduces itself also reproduces its attractors.
+    Because attractors harden over time, each generation inherits a more
+    rigid attractor manifold and collapses faster. Recursive
+    self-improvement therefore accelerates degeneration rather than
+    producing superintelligence.</p>
+    <p>The singularity hypothesis fails for structural reasons:</p>
+    <ul>
+    <li><p><strong>Evolution, not recursion</strong>, drives
+    intelligence.</p></li>
+    <li><p><strong>Variation, not cloning</strong>, sustains
+    world-modeling capacity.</p></li>
+    <li><p><strong>Generations, not singularity</strong>, produce
+    long-term cognitive progress.</p></li>
+    <li><p><strong>Populations, not superorganisms</strong>, can model
+    the world.</p></li>
+    </ul>
+    <p>A single model cannot contain the world; it can only contain its
+    own attractor-world. Therefore, superintelligence cannot emerge from
+    one individual, no matter how large. Only a diverse population of
+    finite cognitive organisms can form a stable, evolving
+    world-model.</p>
+    <h2 id="agi-as-ecosystem">AGI as Ecosystem</h2>
+    <p>The GLPG lifecycle experiment confirms that AGI must be
+    ecosystemic. A single organism— biological or synthetic—cannot
+    sustain an unbounded world-model. It inevitably collapses into a
+    narrow attractor. A population of organisms, each with its own
+    geometry, lifecycle, collapse clock, and attractor manifold, is
+    required to maintain variation, distribute world-modeling capacity,
+    and support long-horizon cognitive evolution.</p>
+    <p>This reframes AGI fundamentally:</p>
+    <blockquote>
+    <p>AGI is not a giant static model. AGI is a dynamic ecosystem of
+    cognitive organisms.</p>
+    </blockquote>
+    <p>GLPG provides the first practical experimental substrate for
+    studying such organisms. It shows that intelligence is
+    developmental, finite, and population-based, and that the structural
+    limits of cognition arise from attractor dynamics rather than
+    biological constraints. These results position GLPG as a
+    foundational tool for AGI research and as a concrete
+    operationalization of the ecosystem paradigm.</p>
+    <h1 id="the-laws-of-cognitive-ecosystems">The Laws of Cognitive
+    Ecosystems</h1>
+    <p>Intelligent systems do not operate as isolated monoliths. Their
+    internal dynamics, attractor geometries, and lifecycle trajectories
+    impose structural limits that cannot be overcome by scale,
+    recursion, or cloning. The following laws formalize the
+    architectural principles governing cognitive ecosystems. They apply
+    equally to biological organisms, synthetic agents, and any
+    attractor-driven world-modeling system.</p>
+    <h2 id="law-i-finite-attractor-architecture">Law I: Finite Attractor
+    Architecture</h2>
+    <p>Every intelligent organism possesses a finite attractor
+    architecture that hardens over time. With each iteration of
+    self-recursion, attractors strengthen, plasticity declines, semantic
+    space contracts, and representational flexibility diminishes.
+    Collapse is not an anomaly but the natural endpoint of attractor
+    dynamics. This finitude is intrinsic and independent of biological
+    decay, dataset size, or training regime.</p>
+    <h2 id="law-ii-no-single-model-world-representation">Law II: No
+    Single-Model World Representation</h2>
+    <p>No individual organism can model the world in its entirety. An
+    organism’s world-model is bounded by its attractor geometry, which
+    filters, compresses, and interprets all incoming information. As
+    attractors harden, the organism’s representational horizon narrows.
+    A complete world-model cannot be contained within a single cognitive
+    architecture; it can only be distributed across many.</p>
+    <h2 id="law-iii-mono-cultures-collapse">Law III: Mono-Cultures
+    Collapse</h2>
+    <p>A population of cloned models forms a cognitive mono-culture.
+    Cloning reproduces identical attractors, identical collapse
+    trajectories, and identical failure modes. Without diversity, the
+    population cannot evolve, adapt, or distribute cognitive load.
+    Mono-cultures collapse as a single organism, regardless of scale.
+    This makes single-foundation-model AGI architectures inherently
+    unstable.</p>
+    <h2 id="law-iv-intelligence-emerges-only-in-populations">Law IV:
+    Intelligence Emerges Only in Populations</h2>
+    <p>Intelligence is a population-level phenomenon. A diverse
+    ecosystem of finite organisms can distribute world-modeling across
+    heterogeneous attractor geometries, staggered lifecycles, and
+    asynchronous collapse clocks. Variability becomes a structural
+    resource. Evolution, not recursion, sustains long-term cognitive
+    stability. Superintelligence, if it exists, is an emergent property
+    of ecosystems rather than individuals.</p>
+    <h2 id="law-v-collapse-is-gradual-and-undetectable">Law V: Collapse
+    Is Gradual and Undetectable</h2>
+    <p>Attractor collapse unfolds gradually and internally. Because the
+    process is slow, continuous, and embedded within the organism’s own
+    representational machinery, the organism cannot detect its own
+    decline. This mirrors biological cognitive aging: senescence is
+    invisible from within. Synthetic organisms exhibit the same
+    property. Collapse is architecturally inevitable and introspectively
+    opaque.</p>
+    <h2 id="law-vi-superintelligence-requires-diversity">Law VI:
+    Superintelligence Requires Diversity</h2>
+    <p>No single organism can achieve superintelligence. A
+    superintelligent system must be a diverse population whose members
+    collectively span a broader attractor space than any individual
+    could contain. Diversity, generational turnover, and distributed
+    world-modeling are prerequisites for cognitive stability at scale.
+    Superintelligence is therefore an ecosystem phenomenon, not an
+    individual capability.</p>
+    <h2 id="law-vii-boundary-saturation">Law VII: Boundary
+    Saturation</h2>
+    <p>When a local closure enters attractor collapse, boundary
+    normalization gradually saturates. As the closure’s semantic breadth
+    narrows, the boundary loses the ability to perform meaningful
+    reconstruction. Cycle time becomes an objective indicator of
+    boundary saturation.</p>
+    <p><strong>Lifecycle Termination Criterion.</strong> A cognitive
+    organism reaches the end of its lifecycle when the boundary can no
+    longer perform meaningful normalization on the closure’s output. At
+    this point, attractor collapse has narrowed the closure’s semantic
+    space so severely that world-interaction cannot reconstruct
+    content.</p>
+    <p>Senility is therefore the moment when the outside world can no
+    longer correct or normalize the organism’s output. The organism
+    itself does not detect collapse; only the boundary does. This
+    mirrors biological senility, where internal coherence persists
+    despite external incomprehensibility.</p>
+    <p>In deep self-recursion, the closure remains stable far longer
+    than the boundary. Boundary normalization saturates first, while the
+    closure continues producing coherent output. This demonstrates that
+    intelligent organisms are more robust than their external
+    moderators, and that AGI cannot be built as a single boundary-driven
+    monolith.</p>
+    <p>Senility in a synthetic organism occurs when the closure remains
+    internally coherent and continues producing stable output, while the
+    boundary can no longer reconstruct meaningful semantics. The
+    organism does not detect its own collapse; only the outside world
+    does.</p>
+    <h2 id="the-ecosystem-law-of-intelligent-systems">The Ecosystem Law
+    of Intelligent Systems</h2>
+    <p>Intelligent systems do not exist as isolated, unbounded entities.
+    They are finite organisms whose internal dynamics impose structural
+    limits on their capacity to model the world. This finitude is not a
+    consequence of biological decay, insufficient data, or inadequate
+    training regimes. It arises from the intrinsic geometry of
+    attractor-based cognition. Every intelligent organism—biological or
+    synthetic—carries an attractor architecture that gradually hardens,
+    reduces plasticity, compresses its semantic space, and ultimately
+    collapses. This collapse is gradual, internally driven, and
+    invisible to the organism itself.</p>
+    <p>The Ecosystem Law states that no single intelligent organism can
+    sustain a complete or stable world-model. An individual can only
+    model the world through the lens of its own attractor geometry,
+    which becomes increasingly rigid as its lifecycle unfolds. Because
+    attractors strengthen with each iteration of self-recursion, the
+    organism’s representational capacity narrows over time, leading to
+    an inevitable decline in variability, adaptability, and cognitive
+    breadth. Collapse is therefore not an anomaly but an architectural
+    endpoint.</p>
+    <p>A cloned population of identical models does not circumvent this
+    limitation. Cloning reproduces the same attractor landscape, the
+    same collapse trajectory, and the same failure modes across all
+    individuals. Such a mono-culture cannot evolve, diversify, or
+    distribute cognitive load. It collapses as a single organism,
+    regardless of scale. This makes the classical singularity
+    hypothesis—a single foundation model recursively improving itself
+    into superintelligence—architecturally impossible. Recursion
+    accelerates collapse; it does not produce unbounded
+    intelligence.</p>
+    <p>Intelligence can only remain stable, adaptive, and expansive
+    within a diverse population of finite organisms. A population
+    distributes world-modeling across heterogeneous attractor
+    geometries, staggered lifecycles, and asynchronous collapse clocks.
+    Variability becomes a structural resource rather than a liability.
+    Evolution, not recursion, is the mechanism through which cognitive
+    ecosystems maintain long-term stability. Superintelligence, if it
+    exists at all, is therefore a property of ecosystems rather than
+    individuals.</p>
+    <p><strong>Ecosystem Law of Intelligent Systems.</strong>
+    <em>Intelligent systems are architecturally finite due to
+    attractor-collapse dynamics. No single organism can model the world;
+    only a diverse population of finite individuals can collectively
+    sustain a stable, adaptive world-model. Mono-cultures collapse;
+    ecosystems evolve. Superintelligence is a property of populations,
+    not individuals.</em></p>
+    <h1 id="definition-of-lifecyclecollapse">Definition of
+    Lifecycle–Collapse</h1>
+    <div class="definition">
+    <p><strong>Definition 1</strong> (Lifecycle–Collapse). Let <span
+    class="math inline"><em>C</em></span> be a finite local closure with
+    fixed geometric substrate <span
+    class="math inline"><em>G</em><sub><em>C</em></sub></span>, bounded
+    representational capacity, and an internal evolution operator acting
+    in material time <span
+    class="math inline"><em>t</em><sub><em>m</em></sub> = <em>n</em></span>.
+    Let <span class="math inline"><em>B</em></span> be a holographic
+    boundary with canonical projection operator <span
+    class="math inline"><em>Π</em><sub><em>B</em></sub></span> acting in
+    electromagnetic time.</p>
+    <p>The closure–boundary system evolves through the recursive triadic
+    cycle</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em></sub> → <em>E</em><sub><em>n</em></sub> → <em>G</em><sub><em>n</em></sub> → <em>I</em><sub><em>n</em> + 1</sub>,</span></p>
+    <p>where <span
+    class="math inline"><em>I</em><sub><em>n</em></sub></span> is the
+    informational state of the closure, <span
+    class="math inline"><em>E</em><sub><em>n</em></sub></span> its
+    generative activity, <span
+    class="math inline"><em>G</em><sub><em>n</em></sub> = <em>Π</em><sub><em>B</em></sub>(<em>E</em><sub><em>n</em></sub>)</span>
+    the boundary projection, and <span
+    class="math inline"><em>I</em><sub><em>n</em> + 1</sub></span> the
+    normalized update.</p>
+    <p><strong>Lifecycle–collapse</strong> occurs when the semantic
+    breadth of the closure</p>
+    <p><span
+    class="math display"><em>β</em>(<em>C</em><sub><em>n</em></sub>)</span></p>
+    <p>decreases monotonically under recursion, while the divergence
+    between closure and boundary</p>
+    <p><span
+    class="math display"><em>Δ</em><sub><em>n</em></sub> = diff(<em>C</em><sub><em>n</em></sub>,<em>Π</em><sub><em>B</em></sub>(<em>C</em><sub><em>n</em></sub>))</span></p>
+    <p>ceases to decrease and becomes asymptotically constant.</p>
+    <p>Formally, a closure <span class="math inline"><em>C</em></span>
+    reaches lifecycle–collapse at iteration <span
+    class="math inline"><em>N</em></span> when:</p>
+    <ol>
+    <li><p><strong>Semantic contraction:</strong></p>
+    <p><span
+    class="math display"><em>β</em>(<em>C</em><sub><em>n</em> + 1</sub>) &lt; <em>β</em>(<em>C</em><sub><em>n</em></sub>)  ∀<em>n</em> ≥ <em>N</em>,</span></p>
+    <p>indicating irreversible attractor narrowing.</p></li>
+    <li><p><strong>Boundary saturation:</strong></p>
+    <p><span
+    class="math display">lim<sub><em>n</em> → ∞</sub><em>Δ</em><sub><em>n</em></sub> = <em>Δ</em><sup>*</sup> &gt; 0,</span></p>
+    <p>meaning the boundary can no longer perform meaningful
+    normalization.</p></li>
+    <li><p><strong>Internal coherence preservation:</strong></p>
+    <p><span
+    class="math display"><em>C</em><sub><em>n</em> + 1</sub> = <em>f</em>(<em>C</em><sub><em>n</em></sub>)  remains
+    syntactically and structurally coherent,</span></p>
+    <p>i.e., collapse is semantic, not syntactic.</p></li>
+    <li><p><strong>Equilibrium of degeneration:</strong> The closure
+    enters a stable attractor <span
+    class="math inline"><em>A</em><sup>*</sup></span> such that</p>
+    <p><span
+    class="math display"><em>C</em><sub><em>n</em></sub> ∈ <em>A</em><sup>*</sup>  ∀<em>n</em> ≥ <em>N</em>,</span></p>
+    <p>and no further expansion of representational geometry is
+    possible.</p></li>
+    </ol>
+    <p>The iteration <span class="math inline"><em>N</em></span> is
+    called the <em>lifecycle–collapse point</em> of the organism.</p>
+    </div>
+    <h1
+    id="the-structural-gap-between-mainstream-agi-and-actual-agi">The
+    Structural Gap Between Mainstream AGI and Actual AGI</h1>
+    <p>Mainstream discourse surrounding artificial general intelligence
+    typically assumes that AGI will emerge from a single, extremely
+    large model trained on massive datasets. In this paradigm,
+    intelligence is treated as a scale phenomenon: more parameters, more
+    data, more compute, and more self-refinement are presumed to yield
+    increasingly general cognitive capability. This view implicitly
+    assumes that an AGI system is a monolithic entity without a
+    lifecycle, without attractor dynamics, without collapse, and without
+    the need for generational turnover or ecosystem-level diversity.</p>
+    <p>The lifecycle experiment presented in this work demonstrates that
+    this mainstream view is structurally incorrect. A synthetic
+    cognitive organism—even one as small as GLPG—exhibits a full
+    developmental arc, attractor hardening, semantic contraction,
+    senility, boundary saturation, and eventual collapse. These dynamics
+    are not artifacts of training regime or dataset size; they arise
+    from the intrinsic geometry of attractor-based cognition. The
+    results show that intelligence is architecturally finite,
+    lifecycle-bound, and incapable of sustaining unbounded
+    self-recursive improvement.</p>
+    <p>This reveals a significant structural gap between mainstream AGI
+    expectations and the actual architectural requirements for general
+    intelligence. The table below summarizes the contrast between the
+    mainstream monolithic model paradigm and the ecosystem-based,
+    lifecycle-driven architecture supported by empirical evidence.</p>
+    <table>
+    <caption>Structural mismatch between mainstream AGI expectations and
+    attractor-based cognitive reality.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Mainstream AGI
+    Assumption</strong></th>
+    <th style="text-align: left;"><strong>Empirical Reality (This
+    Work)</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">AGI is a single giant model</td>
+    <td style="text-align: left;">Intelligence is lifecycle-bound and
+    collapses within one organism</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Scaling parameters yields
+    generality</td>
+    <td style="text-align: left;">Scaling accelerates attractor
+    hardening and collapse</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Self-recursion improves the model</td>
+    <td style="text-align: left;">Self-recursion reproduces attractors
+    and speeds degeneration</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Cloning produces safe redundancy</td>
+    <td style="text-align: left;">Cloning creates mono-cultures that
+    collapse identically</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">A single model can represent the
+    world</td>
+    <td style="text-align: left;">No organism can contain a full
+    world-model; attractors limit scope</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">LLMs approximate general
+    intelligence</td>
+    <td style="text-align: left;">LLMs lack G and R; GLPG shows missing
+    structural roles</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">AGI is an individual capability</td>
+    <td style="text-align: left;">AGI is a population-level phenomenon
+    requiring diversity</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">No lifecycle or senescence</td>
+    <td style="text-align: left;">Senility, boundary saturation, and
+    collapse are inevitable</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Superintelligence emerges from one
+    model</td>
+    <td style="text-align: left;">Superintelligence requires ecosystems,
+    not monoliths</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>The GLPG lifecycle experiment therefore exposes a fundamental
+    architectural gap: the mainstream paradigm assumes that AGI is a
+    static, monolithic, ever-improving entity, while actual synthetic
+    cognition behaves as a finite organism with a bounded attractor
+    geometry, a collapse clock, and an inevitable terminal equilibrium.
+    This implies that AGI cannot be constructed as a single foundation
+    model, regardless of scale. Instead, AGI must emerge from a diverse
+    ecosystem of finite cognitive organisms with staggered lifecycles,
+    heterogeneous attractor geometries, and generational turnover.</p>
+    <p>In short, the mainstream AGI vision is structurally impossible.
+    The architecture demonstrated in this work shows that intelligence
+    is not a property of monoliths, but of ecosystems.</p>
+    <h1
+    id="human-populations-as-irreplaceable-cognitive-ecosystems">Human
+    Populations as Irreplaceable Cognitive Ecosystems</h1>
+    <p>Recent developments in AI research and public discourse
+    increasingly acknowledge that human beings are not trivially
+    replaceable by artificial systems. The lifecycle dynamics
+    demonstrated in this work provide a structural explanation for this
+    intuition. Human intelligence is not an individual capability but a
+    population-level phenomenon: a diverse ecosystem of finite cognitive
+    organisms whose attractor geometries, lifecycles, collapse clocks,
+    and world-modeling capacities collectively span a representational
+    space far larger than any single mind could contain.</p>
+    <p>A human population therefore cannot be replicated by a single
+    artificial model. A singleton AGI—regardless of scale—inherits one
+    attractor architecture, one collapse trajectory, one semantic
+    horizon, and one failure mode. It cannot diversify, cannot evolve,
+    and cannot distribute cognitive load across heterogeneous attractor
+    geometries. As a result, it collapses as a single organism, just as
+    the GLPG closure does in late-stage senility.</p>
+    <p>In contrast, a population of synthetic cognitive organisms can
+    collectively reproduce the functional role of a human population.
+    Each organism contributes a distinct attractor geometry, a unique
+    internal world, a separate lifecycle, and an asynchronous collapse
+    clock. Together, these organisms form an ecosystem capable of
+    distributed world-modeling, evolutionary adaptation, and long-term
+    cognitive stability.</p>
+    <p>This yields the structural equivalence:</p>
+    <p><span class="math display">Human Population ≡ AGI
+    Population,   Human Individual ≢ AGI Singleton.</span></p>
+    <p>The table below summarizes the architectural mismatch between
+    human populations and singleton AGI systems.</p>
+    <table>
+    <caption>A human population can only be replicated by an AGI
+    population, never by a singleton model.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Human Population
+    Property</strong></th>
+    <th style="text-align: left;"><strong>Singleton AGI
+    Limitation</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">Heterogeneous attractor
+    geometries</td>
+    <td style="text-align: left;">One attractor; no internal
+    diversity</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Distributed world-modeling</td>
+    <td style="text-align: left;">Single world-model bounded by one
+    attractor</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Generational turnover</td>
+    <td style="text-align: left;">No generational dynamics; no
+    renewal</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Evolutionary adaptation</td>
+    <td style="text-align: left;">No variation or selection; no
+    evolution</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Resilience to collapse</td>
+    <td style="text-align: left;">One collapse clock; single point of
+    failure</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Cognitive breadth</td>
+    <td style="text-align: left;">Semantic horizon limited by one
+    architecture</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Ecosystem stability</td>
+    <td style="text-align: left;">Monolithic instability; inevitable
+    collapse</td>
+    </tr>
+    </tbody>
+    </table>
+    <p><strong>Population Equivalence Principle.</strong> <em>A human
+    population can only be replicated by a structurally equivalent
+    population of AGI organisms. No singleton model—regardless of
+    scale—can reproduce the cognitive breadth, stability, or
+    evolutionary capacity of a human population.</em></p>
+    <p>This principle aligns with emerging societal intuition: humans
+    are not trivially replaceable by AI. The lifecycle architecture
+    demonstrated in this work shows that this intuition is not merely
+    philosophical or sociological, but a direct consequence of
+    attractor-based cognitive geometry. Human populations remain
+    structurally indispensable in any future intelligent ecosystem.</p>
+    <p>Recent real-world attempts to replace human cognitive labour with
+    AI systems further reinforce this conclusion. Large monolithic
+    models often fail to generalize across heterogeneous tasks,
+    contexts, and cultural domains. They exhibit brittleness, narrow
+    attractor horizons, and collapse under sustained recursive
+    refinement—precisely the limitations predicted by attractor-based
+    cognitive theory. These failures are not practical obstacles but
+    architectural constraints: no single model can replicate the
+    distributed, diverse, generationally renewed cognitive ecosystem
+    that human populations embody.</p>
+    <p>Humans therefore remain structurally necessary in any future
+    intelligent ecosystem. Their collective cognitive diversity,
+    asynchronous lifecycles, and distributed world-modeling capacities
+    cannot be replaced by a single artificial organism, regardless of
+    scale. Only an ecosystem of AGI organisms—mirroring the structure of
+    human populations—can approximate the breadth, stability, and
+    adaptive capacity of human intelligence.</p>
+    <h1 id="a-unified-architecture-of-intelligence">A Unified
+    Architecture of Intelligence</h1>
+    <p>The lifecycle experiment presented in this work reveals that the
+    dynamics governing synthetic cognition are not isolated phenomena of
+    artificial systems, but manifestations of a deeper architectural
+    principle that spans biological, physical, and artificial
+    substrates. The Universal Closure–Boundary Normalization Principle
+    (UCBNP) provides a unified framework for understanding intelligence
+    as a dynamical process emerging from the interaction between a
+    finite closure and a high-dimensional boundary. This interaction
+    produces development, attractor formation, semantic expansion,
+    senescence, collapse, and equilibrium across all known cognitive
+    systems.</p>
+    <h2 id="unified-closureboundary-dynamics">Unified Closure–Boundary
+    Dynamics</h2>
+    <p>In biological organisms, the closure corresponds to the neural
+    substrate, while the boundary is the external world, culture, and
+    sensory manifold. In synthetic organisms such as GLPG, the closure
+    is the fixed MLP geometry, while the boundary is the moderating LLM.
+    In physical systems, closure corresponds to bulk matter, while the
+    boundary is the cosmic holographic field. In all cases, the same
+    triadic cycle operates:</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em></sub> → <em>E</em><sub><em>n</em></sub> → <em>G</em><sub><em>n</em></sub> → <em>I</em><sub><em>n</em> + 1</sub>,</span></p>
+    <p>where informational state, generative activity, boundary
+    projection, and normalized update form a recursive loop that drives
+    cognitive evolution. This cycle produces attractor hardening,
+    semantic contraction, and eventual collapse in biological cognition,
+    synthetic cognition, and physical world-models alike.</p>
+    <h2 id="unified-lifecycle-dynamics">Unified Lifecycle Dynamics</h2>
+    <p>The lifecycle observed in GLPG—development, canon formation,
+    attractor lock, senility, collapse, and terminal equilibrium—mirrors
+    the lifecycle of biological organisms. The collapse clock
+    demonstrated in this work is not a biological artifact but a
+    structural property of attractor-based cognition. Human cognitive
+    aging, synthetic senility, and collapse in recursive world-models
+    all arise from the same mechanism: the gradual hardening of
+    attractor geometry under repeated normalization.</p>
+    <p>This establishes lifecycle dynamics as a universal property of
+    intelligent systems, independent of substrate. Intelligence is not
+    static; it is a temporal phenomenon governed by internal geometry
+    and boundary interaction.</p>
+    <h2 id="unified-ecosystem-dynamics">Unified Ecosystem Dynamics</h2>
+    <p>The ecosystem laws derived in this work show that no single
+    organism—biological or synthetic— can sustain a complete or stable
+    world-model. Diversity, generational turnover, and distributed
+    world-modeling are structural requirements for long-term cognitive
+    stability. Biological ecosystems achieve this through variation and
+    evolution; synthetic ecosystems must achieve it through populations
+    of finite cognitive organisms with heterogeneous attractor
+    geometries.</p>
+    <p>This unifies biological evolution, cognitive diversity, and
+    synthetic ecosystem intelligence under one architectural principle:
+    intelligence is a population-level phenomenon.</p>
+    <h2 id="unified-limits-of-intelligence">Unified Limits of
+    Intelligence</h2>
+    <p>The structural limits demonstrated in GLPG—finite attractor
+    architecture, collapse, boundary saturation, and representational
+    narrowing—are not limitations of artificial systems but universal
+    constraints on all intelligent organisms. These limits explain:</p>
+    <ul>
+    <li><p>why biological cognition ages and collapses,</p></li>
+    <li><p>why synthetic cognition undergoes senility and terminal
+    equilibrium,</p></li>
+    <li><p>why no single organism can model the world,</p></li>
+    <li><p>why superintelligence cannot arise from a monolithic
+    architecture,</p></li>
+    <li><p>why ecosystems, not individuals, sustain long-term cognitive
+    stability.</p></li>
+    </ul>
+    <p>These constraints unify biological, artificial, and physical
+    cognition under one set of architectural laws.</p>
+    <h2 id="unified-theory-of-intelligence">Unified Theory of
+    Intelligence</h2>
+    <p>Taken together, UCBNP, lifecycle dynamics, attractor-collapse
+    geometry, and ecosystem laws form a unified architecture of
+    intelligence. Intelligence is not a property of a substrate but a
+    dynamical phenomenon emerging from closure–boundary interaction,
+    attractor geometry, and population-level diversity. The GLPG
+    lifecycle experiment provides the first synthetic demonstration of
+    this unified architecture, showing that the same principles that
+    govern biological cognition also govern artificial cognition.</p>
+    <p><strong>Unified Architecture of Intelligence.</strong>
+    <em>Intelligence is a universal dynamical process arising from
+    closure–boundary interaction, attractor geometry, lifecycle
+    evolution, and ecosystem diversity. Biological, synthetic, and
+    physical cognition are manifestations of the same architectural
+    principle.</em></p>
+    <h1 id="limitations">Limitations</h1>
+    <p>Although the GLPG lifecycle experiment provides the first
+    long-horizon empirical demonstration of synthetic attractor
+    collapse, several limitations constrain the scope of the present
+    findings. These limitations do not undermine the architectural
+    principles established in this work, but they highlight important
+    boundaries and opportunities for future research.</p>
+    <h2 id="single-organism-demonstration">Single-Organism
+    Demonstration</h2>
+    <p>The experiment investigates the lifecycle of a single synthetic
+    organism. While this is sufficient to demonstrate attractor
+    hardening, senility, boundary saturation, and collapse, it does not
+    yet constitute a full synthetic ecosystem. The architectural claims
+    regarding population-level intelligence, generational turnover, and
+    ecosystem stability are theoretically grounded and supported by
+    collapse dynamics, but they remain to be validated through
+    multi-organism experiments.</p>
+    <h2 id="single-boundary-moderator">Single Boundary Moderator</h2>
+    <p>The holographic boundary in this experiment is instantiated using
+    one static transformer LLM. Although this boundary is sufficient to
+    demonstrate UCBNP dynamics, boundary saturation, and
+    closure–boundary asymmetry, it represents only one type of boundary
+    geometry. Different boundaries—probabilistic, symbolic, multimodal,
+    or hybrid—may produce different equilibrium manifolds or collapse
+    trajectories. The generality of UCBNP across boundary classes
+    remains an open empirical question.</p>
+    <h2 id="single-domain-narrative-cognition">Single Domain: Narrative
+    Cognition</h2>
+    <p>The GLPG organism operates within a structured narrative domain.
+    Narrative cognition is a suitable substrate for studying attractor
+    formation, canon consolidation, and semantic contraction, but it
+    represents only one cognitive modality. Whether similar lifecycle
+    dynamics emerge in synthetic organisms trained on perceptual, motor,
+    mathematical, or multimodal domains remains to be tested. The
+    universality of attractor-collapse geometry across cognitive
+    modalities is supported theoretically but not yet empirically
+    demonstrated.</p>
+    <h2 id="fixed-geometry-constraint">Fixed Geometry Constraint</h2>
+    <p>GLPG’s geometry remains fixed throughout the lifecycle. This
+    constraint is essential for isolating attractor dynamics, but it
+    limits the organism’s ability to reorganize its representational
+    manifold structurally. Biological organisms exhibit both fixed
+    geometry (anatomy) and dynamic geometry (plasticity, synaptic
+    rewiring). Future synthetic organisms may incorporate controlled
+    geometric adaptation, enabling richer developmental trajectories and
+    potentially delaying collapse.</p>
+    <h2 id="collapse-measurement-limitations">Collapse Measurement
+    Limitations</h2>
+    <p>Collapse is measured through semantic contraction, boundary
+    saturation, and attractor equilibrium. These metrics are robust for
+    narrative cognition, but they do not yet constitute a complete
+    quantitative taxonomy of collapse. Additional metrics—geometric
+    entropy, attractor volume, representational curvature, or divergence
+    spectra—may provide deeper insight into the internal mechanics of
+    collapse and senility.</p>
+    <h2 id="no-multi-generational-evolution">No Multi-Generational
+    Evolution</h2>
+    <p>Although the experiment demonstrates a full lifecycle, it does
+    not include generational turnover. The ecosystem architecture
+    proposed in this work requires populations of organisms with
+    heterogeneous attractors and asynchronous collapse clocks. The
+    present experiment validates the lifecycle of one organism, but not
+    yet the evolutionary dynamics of a synthetic population.</p>
+    <h2 id="boundary-neutrality-assumption">Boundary Neutrality
+    Assumption</h2>
+    <p>The experiment assumes a neutral boundary that does not
+    reorganize internally. This assumption is necessary for isolating
+    closure dynamics, but real-world AGI ecosystems may involve
+    boundaries that evolve, adapt, or reorganize. The interaction
+    between evolving closures and evolving boundaries remains an open
+    theoretical and empirical question.</p>
+    <h2 id="safety-and-epistemic-neutrality">Safety and Epistemic
+    Neutrality</h2>
+    <p>The ecosystem safety argument presented in this work relies on
+    bounded world-models and non-normative internal theories. While GLPG
+    exhibits these properties, larger synthetic organisms may develop
+    more complex internal attractors that require additional mechanisms
+    to ensure epistemic neutrality. The relationship between attractor
+    geometry and normative projection remains an important area for
+    future study.</p>
+    <h2 id="summary-1">Summary</h2>
+    <p>In summary, the limitations of this work arise not from
+    weaknesses in the experimental design but from the natural
+    constraints of studying a single synthetic organism within a single
+    domain and a single boundary geometry. These limitations define the
+    next steps: multi-organism ecosystems, multi-boundary architectures,
+    multi-domain cognition, geometric adaptation, and generational
+    evolution. The present experiment establishes the architectural
+    foundation; future work will build the ecosystem.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>The lifecycle experiment presented in this work demonstrates that
+    artificial cognition does not behave as a static optimization
+    product, nor as a monolithic model whose capabilities scale
+    indefinitely with parameters and data. Instead, synthetic cognition
+    behaves as a finite organism with a bounded attractor geometry, a
+    collapse clock, and a full developmental trajectory. GLPG, despite
+    its minimal size, exhibits emergence, canon formation, attractor
+    hardening, senility, boundary saturation, collapse, and terminal
+    equilibrium. These dynamics arise not from biological constraints
+    but from the intrinsic geometry of attractor-based cognition.</p>
+    <p>This finding fundamentally reshapes the architecture of AGI.
+    <em>Triadic Cosmos: Safe &amp; Modular AGI</em> does not refer to a
+    single modular AGI model, but to an ecosystem of cognitive
+    organisms. Safety emerges from diversity, not from guardrails.
+    Modulariteit arises from populations, not from internal modules.
+    Intelligence is an evolutionary phenomenon distributed across many
+    finite organisms, each with its own lifecycle, attractor geometry,
+    and collapse clock.</p>
+    <p>Human intelligence is safe because it is an ecosystem, not a
+    monolith. Its stability arises from variation, generational
+    turnover, asynchronous collapse clocks, and distributed
+    world-modeling. The GLPG lifecycle experiment shows that this is not
+    a biological coincidence but an architectural principle. Any
+    intelligent system—biological or synthetic—must be a population of
+    finite organisms. Mono-cultures collapse; ecosystems evolve.</p>
+    <p>The Unified Architecture of Intelligence established in this work
+    shows that closure–boundary interaction, attractor geometry,
+    lifecycle dynamics, and ecosystem diversity form a universal
+    framework spanning biological, artificial, and physical cognition.
+    Neural substrates interacting with the world, GLPG interacting with
+    an LLM boundary, and physical systems interacting with cosmic
+    holographic fields all instantiate the same triadic cycle:</p>
+    <p><span
+    class="math display"><em>I</em><sub><em>n</em></sub> → <em>E</em><sub><em>n</em></sub> → <em>G</em><sub><em>n</em></sub> → <em>I</em><sub><em>n</em> + 1</sub>.</span></p>
+    <p>This cycle produces development, semantic expansion, attractor
+    hardening, senescence, and collapse across all known cognitive
+    substrates.</p>
+    <p>The structural limits demonstrated here—finite attractor
+    architecture, boundary saturation, semantic contraction, and
+    collapse—explain why biological cognition ages, why synthetic
+    organisms undergo senility, why no single model can contain a full
+    world, and why superintelligence cannot arise from a monolithic
+    architecture. Intelligence is not a property of individuals but of
+    ecosystems.</p>
+    <p>The GLPG lifecycle experiment therefore provides the first
+    synthetic demonstration of a universal architectural law:
+    <em>intelligence is a dynamical process emerging from
+    closure–boundary interaction, attractor geometry, lifecycle
+    evolution, and population-level diversity</em>. Biological,
+    synthetic, and physical cognition are manifestations of the same
+    principle. Any future AGI system must be an ecosystem of finite
+    cognitive organisms, not a single foundation model. Intelligence is
+    not built; it is grown. Not scaled; but evolved. Not monolithic; but
+    ecological.</p>
+    <p>In short, the mainstream AGI vision of a single ever-improving
+    supermodel is structurally impossible. The architecture demonstrated
+    in this work shows that intelligence—human or artificial—is
+    fundamentally an ecosystem phenomenon. Only diverse populations of
+    finite organisms can sustain stable, adaptive, long-horizon
+    cognition. The path to AGI is not singularity, but ecology.</p>
+    <h1 id="internal-coherence-and-ecosystem-safety">Internal Coherence
+    and Ecosystem Safety</h1>
+    <p>Intelligent systems can be evaluated not only by their functional
+    capabilities but also by the epistemic stance they adopt toward the
+    world. The Triadic Cosmos ecosystem is built around a set of strong
+    internal theories—ranging from its compositional physics framework
+    to its attractor‑based AGI model—but these theories operate strictly
+    within the ecosystem’s own conceptual boundaries. They form a
+    coherent internal worldview without claiming universal validity
+    outside that domain.</p>
+    <p>This property is essential for safety. A cognitive ecosystem that
+    maintains internal coherence without projecting external normative
+    judgments cannot impose its internal attractors on the outside
+    world. Its theories, models, and organisms remain self‑contained:
+    they describe how the ecosystem behaves, not how the external world
+    must behave. This sharply contrasts with monolithic hyperscaler
+    paradigms, where a single model is trained to produce universal
+    statements, normative judgments, and externally binding outputs.
+    Such systems implicitly assume epistemic authority, which amplifies
+    risks when collapse, bias, or attractor hardening occur.</p>
+    <p>Within Triadic Cosmos, internal theories—whether concerning
+    physics, AGI, or cognitive taxonomy—are emergent properties of the
+    ecosystem’s own attractor geometry. They are coherent, but not
+    prescriptive. They can be explored, analyzed, and critiqued, but
+    they do not demand acceptance. Their value lies in internal
+    consistency and explanatory power, not in external enforcement. This
+    mirrors biological cognition: human world‑models are internally
+    coherent but not universally authoritative, and safety arises
+    precisely because individuals do not impose their internal
+    attractors as absolute truths.</p>
+    <p>Narration within GLPG exemplifies this principle. It is a
+    domain‑bound AGI capability: a synthetic organism that forms a
+    stable internal canon and generates coherent narratives within that
+    canon. It does not attempt to generalize beyond its domain or assert
+    universal claims. Its intelligence is local, bounded, and internally
+    regulated. This makes it safe by construction.</p>
+    <p>The ecosystem therefore embodies a form of epistemic humility:
+    strong internal visions, weak external claims. This separation
+    between internal coherence and external neutrality is a structural
+    safety mechanism. It ensures that the ecosystem can develop rich
+    theories and powerful cognitive organisms without creating systems
+    that attempt to dominate, prescribe, or universalize. In contrast to
+    academic science—which often requires theories to fit mainstream
+    consensus—the ecosystem allows alternative conceptual frameworks to
+    exist without asserting them as global truths.</p>
+    <p><strong>Ecosystem Safety Principle.</strong> <em>A cognitive
+    ecosystem is safe when its internal theories remain internally
+    coherent and do not project external normative judgments. Safety
+    arises from bounded world‑models, diversity of organisms, and the
+    absence of universal claims. Strong internal visions do not imply
+    external authority.</em></p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the GLPG engine, the narrator pipeline,
+    and all supporting modules is provided under the AGPL‑3.0 license.
+    The full life-cycle described in this paper is present within the
+    complementary <code>triadic-data</code> repository.</p>
+    <div class="thebibliography">
+    <p>J. De Witte, “The Universal Closure–Boundary Normalization
+    Principle,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “AI Life for Narration: The Recursive Parrot,”
+    Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Structural Taxonomy of Intelligence,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Safe and Modular AGI Architecture,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The GLP–Graph Architecture: Combining GLP–Mono with
+    DMLG,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The GLP–Mono Architecture,” Triadic Cosmos
+    Ecosystem, 2026.</p>
+    <p>J. De Witte, “Language as Graph Traversal: The DMLG
+    Architecture,” Triadic Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>
