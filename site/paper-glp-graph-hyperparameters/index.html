@@ -1,0 +1,1849 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GLP–Graph Behaviour Under Hyperparameter Variation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#significance-statement"
+    id="toc-significance-statement">Significance Statement</a></li>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#experimental-setup"
+    id="toc-experimental-setup">Experimental Setup</a></li>
+    <li><a href="#training-epochs" id="toc-training-epochs">Training
+    Epochs</a></li>
+    <li><a href="#hidden-layer-sizes" id="toc-hidden-layer-sizes">Hidden
+    Layer Sizes</a></li>
+    <li><a href="#output-dimension-and-learnable-target-embeddings"
+    id="toc-output-dimension-and-learnable-target-embeddings">Output
+    Dimension and Learnable Target Embeddings</a></li>
+    <li><a href="#amount-of-hidden-layers"
+    id="toc-amount-of-hidden-layers">Amount of Hidden Layers</a></li>
+    <li><a href="#forward-layer-recursion"
+    id="toc-forward-layer-recursion">Forward Layer Recursion</a></li>
+    <li><a href="#activation-functions"
+    id="toc-activation-functions">Activation Functions</a></li>
+    <li><a href="#inputs-per-page" id="toc-inputs-per-page">Inputs per
+    Page</a></li>
+    <li><a href="#sampling-parameters"
+    id="toc-sampling-parameters">Sampling Parameters</a></li>
+    <li><a href="#context-input-vector-tuning"
+    id="toc-context-input-vector-tuning">Context Input Vector
+    Tuning</a></li>
+    <li><a href="#final-new-baseline-model-and-minimum-viable-model"
+    id="toc-final-new-baseline-model-and-minimum-viable-model">Final New
+    Baseline Model and Minimum Viable Model</a></li>
+    <li><a href="#other-gutenberg-datasets"
+    id="toc-other-gutenberg-datasets">Other Gutenberg Datasets</a></li>
+    <li><a href="#glpg-as-cognitive-substrate"
+    id="toc-glpg-as-cognitive-substrate">GLPG as Cognitive
+    Substrate</a></li>
+    <li><a
+    href="#architectural-innovations-hybrid-recursion-and-token-history"
+    id="toc-architectural-innovations-hybrid-recursion-and-token-history">Architectural
+    Innovations: Hybrid Recursion and Token History</a></li>
+    <li><a href="#conclusion-5"
+    id="toc-conclusion-5">Conclusion</a></li>
+    <li><a href="#glossary-of-cognitive-and-architectural-terms"
+    id="toc-glossary-of-cognitive-and-architectural-terms">Glossary of
+    Cognitive and Architectural Terms</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 class="unnumbered" id="significance-statement">Significance
+    Statement</h1>
+    <p>The GLP–Graph (GLPG) architecture is not presented here as a
+    specialised language model, but as a minimal and interpretable
+    cognitive substrate within the broader <em>Triadic Cosmos</em>
+    ecosystem. The ecosystem aims to unify conceptual theory,
+    computational architectures, and empirical demonstrations into a
+    coherent framework for studying intelligence and AGI. Within this
+    context, GLPG serves as a concrete, executable instance of a
+    low-dimensional dynamical system capable of producing coherent
+    linguistic behaviour without relying on large-scale attention
+    mechanisms or statistical correlation.</p>
+    <p>The hyperparameter study reported in this paper shows that GLPG
+    exhibits structured cognitive dynamics across scale: proto-semantic
+    attractors in small models, emergent semantic manifolds in mid-scale
+    configurations, and canon compression in larger models. These
+    transitions mirror developmental phases observed in biological and
+    artificial cognitive systems, demonstrating that language-like
+    behaviour can arise from a compact, modular substrate governed by
+    deterministic routing, learned lemma geometry, and stable attractor
+    basins.</p>
+    <p>Crucially, GLPG maintains coherence, stylistic adaptation, and
+    world-model formation even in minimal configurations, revealing that
+    its generative capabilities stem from architectural principles
+    rather than parameter count. This positions GLPG as a foundational
+    component of the Triadic Cosmos program: a scalable, interpretable,
+    and structurally grounded substrate that illustrates how
+    intelligence can emerge from unified cognitive dynamics rather than
+    from statistical scale alone.</p>
+    <h1 id="introduction">Introduction</h1>
+    <p>The GLP–Graph (GLPG) architecture, introduced in the companion
+    paper <span class="citation" data-cites="DeWitte2026Graph"></span>,
+    establishes a hybrid generative substrate that unifies deterministic
+    graph routing with learned lemma geometry inside a single monolithic
+    MLP. GLPG was designed not as a specialised language model but as a
+    minimal, modular, and interpretable cognitive system capable of
+    producing coherent linguistic behaviour through structural and
+    semantic dynamics rather than through large-scale statistical
+    correlation. Its dual generative modes, paged graph traversal and
+    pure MLP sampling, reveal an architecture that combines explicit
+    structural determinism with emergent semantic manifolds.</p>
+    <p>The present paper investigates how this substrate behaves under
+    systematic variation of its hyperparameters. Whereas the
+    architecture paper defines the mechanisms that make GLPG possible,
+    the current work examines the conditions under which those
+    mechanisms become expressive, stable, brittle, or transformative. We
+    conduct extensive ablation studies across model scale, hidden-layer
+    geometry, output embedding dimension, paging configuration, sampling
+    regimes, context vector design, activation functions, recursion
+    mechanisms, and training depth. These experiments are performed on
+    multiple canonical datasets spanning different narrative biomes,
+    allowing us to observe how GLPG’s internal dynamics adapt across
+    domains and across scales.</p>
+    <p>Our findings show that GLPG exhibits structured cognitive
+    behaviour across hyperparameter regimes. Underscaled models produce
+    proto-semantic attractors and highly plastic narrative drift;
+    mid-scale models develop coherent semantic manifolds and stable
+    biome adaptation; large models compress their internal worlds into
+    rigid canonical structures with deep attractor basins. These
+    transitions are not numerical artefacts but architectural phase
+    changes: GLPG behaves as a dynamical cognitive system whose manifold
+    geometry, attractor structure, and narrative coherence evolve
+    predictably with capacity.</p>
+    <p>This behaviour is significant within the broader <em>Triadic
+    Cosmos</em> ecosystem, which aims to unify conceptual theory,
+    computational substrates, and empirical demonstrations into a
+    coherent framework for studying intelligence and AGI. GLPG provides
+    a concrete example of a minimal cognitive substrate: a
+    low-dimensional, interpretable system that generates coherent
+    language through deterministic routing, semantic injection, and
+    stable attractor dynamics. By showing how GLPG deforms, stabilises,
+    and reorganises its internal manifold under hyperparameter
+    variation, this paper demonstrates that coherent linguistic
+    behaviour can emerge from compact cognitive principles rather than
+    from large-scale attention mechanisms.</p>
+    <p>The goal of this work is therefore twofold: to identify an
+    optimal baseline configuration for GLPG, and to show that its
+    generative behaviour arises from cognitive dynamics intrinsic to the
+    architecture. The results provide both a practical foundation for
+    future GLPG-based systems and a conceptual bridge between minimal
+    cognitive substrates and scalable hybrid intelligent systems within
+    the Triadic Cosmos program.</p>
+    <h1 id="experimental-setup">Experimental Setup</h1>
+    <p>All experiments in this paper are performed on a single canonical
+    dataset: <em>Alice in Wonderland, Retold in Words of One
+    Syllable</em> (Gutenberg). This dataset is intentionally chosen for
+    its unique combination of grammatical simplicity, semantic clarity,
+    and narrative completeness. It is a full book, not a fragment, yet
+    small enough to permit extensive ablation studies while remaining
+    structurally rich. Its constrained vocabulary and regular syntactic
+    cadence make it an ideal substrate for observing how GLPG’s internal
+    dynamics respond to hyperparameter variation.</p>
+    <h2 id="dataset-characteristics">Dataset Characteristics</h2>
+    <p>The one-syllable Alice corpus contains:</p>
+    <ul>
+    <li><p>97 KB of raw text,</p></li>
+    <li><p>222 KB of canonical grammar–lemma tokens,</p></li>
+    <li><p>331 sequences after preprocessing,</p></li>
+    <li><p>17<span>,</span>179 unique samples,</p></li>
+    <li><p>a target vocabulary of 1<span>,</span>660 grammar–lemma
+    pairs.</p></li>
+    </ul>
+    <p>At 20<span>,</span>000 training epochs, the model processes
+    approximately one million learned token transitions, meaning that
+    each unique sample is encountered roughly 57 times. This repetition
+    is sufficient to induce stable world-model formation without
+    overfitting, allowing us to observe GLPG’s developmental phases
+    under controlled conditions.</p>
+    <h2 id="default-model-configuration">Default Model
+    Configuration</h2>
+    <p>Unless otherwise specified, experiments begin from a standard
+    baseline architecture:</p>
+    <p><span
+    class="math display">592 → 1024 → 512 → 512 → 512 → 64,</span></p>
+    <p>a monolithic MLP with four hidden layers and a 64-dimensional
+    lemma output embedding. Paging is configured with a maximum of 512
+    pages, though the dataset naturally occupies 204 pages when
+    restricted to 16 inputs per page. This provides a balanced manifold
+    width: narrow enough for deterministic routing, yet broad enough for
+    semantic modulation.</p>
+    <h2 id="generative-modes-and-evaluation">Generative Modes and
+    Evaluation</h2>
+    <p>Each configuration is evaluated in both generative regimes
+    supported by GLPG:</p>
+    <ul>
+    <li><p><strong>Paged graph traversal</strong>, which restricts
+    candidate transitions via deterministic last-lemma routing,
+    and</p></li>
+    <li><p><strong>Pure MLP mode</strong>, which evaluates the full
+    vocabulary and exposes the learned semantic manifold.</p></li>
+    </ul>
+    <p>For every tested hyperparameter setting, the model generates ten
+    independent stories of twenty lines each in both modes. These
+    outputs are analysed for:</p>
+    <ul>
+    <li><p>syntactic stability,</p></li>
+    <li><p>semantic coherence,</p></li>
+    <li><p>narrative flow,</p></li>
+    <li><p>attractor formation and collapse behaviour,</p></li>
+    <li><p>biome-specific stylistic adaptation,</p></li>
+    <li><p>recursion robustness,</p></li>
+    <li><p>and overall cognitive profile.</p></li>
+    </ul>
+    <p>This setup provides a controlled environment in which the effects
+    of model scale, embedding dimension, paging geometry, sampling
+    parameters, context vector design, and training depth can be
+    observed directly and compared systematically. The simplicity of the
+    Alice corpus ensures that emergent behaviour arises from the
+    architecture itself rather than from dataset complexity, making it
+    an ideal benchmark for studying GLPG as a cognitive substrate.</p>
+    <h1 id="training-epochs">Training Epochs</h1>
+    <p>Training depth plays a central role in shaping GLPG’s internal
+    dynamics. Because the architecture learns through repeated traversal
+    of a fixed canonical dataset, the number of epochs directly
+    determines how strongly structural cadence, semantic motifs, and
+    attractor basins become internalised. This section examines four
+    training regimes on the Alice one-syllable corpus, using the default
+    model architecture and paging configuration.</p>
+    <h2 id="experimental-results">Experimental Results</h2>
+    <p>Table <a href="#tab:epochs" data-reference-type="ref"
+    data-reference="tab:epochs">[tab:epochs]</a> summarises the
+    behaviour of the default Alice model under different epoch counts.
+    All other hyperparameters remain fixed.</p>
+    <div class="tabular">
+    <p><span>p<span>1.8cm</span> p<span>1.8cm</span> p<span>1.8cm</span>
+    p<span>1.8cm</span> p<span>6.5cm</span></span> <strong>Size
+    (MB)</strong> &amp; <strong>Train (s)</strong> &amp; <strong>Paged
+    Gen (s)</strong> &amp; <strong>MLP Gen (s)</strong> &amp;
+    <strong>Scenario &amp; Result</strong><br />
+    </p>
+    <p>21.0 &amp; 49 &amp; 38 &amp; 86 &amp; <strong>3K epochs</strong>:
+    underfit. Grammar cadence emerges, but semantic fields are minimal;
+    attractors are shallow and narrative flow is fragmented.<br />
+    21.0 &amp; 174 &amp; 50 &amp; 110 &amp; <strong>10K epochs</strong>:
+    mid-regime. Semantic motifs begin to form; clause chains stabilise;
+    paging becomes more reliable.<br />
+    21.0 &amp; 296 &amp; 37 &amp; 127 &amp; <strong>20K epochs
+    (default)</strong>: broad but chaotic. Strong semantic emergence,
+    rich variation, and stable paging. Pure MLP mode shows high flux but
+    remains coherent.<br />
+    21.0 &amp; 478 &amp; 48 &amp; 194 &amp; <strong>30K epochs</strong>:
+    overfit. Attractor basins deepen, creative drift decreases, and
+    narrative becomes rigid with strong canon pressure.<br />
+    </p>
+    </div>
+    <h2 id="dataset-derived-epoch-heuristics">Dataset-Derived Epoch
+    Heuristics</h2>
+    <p>The Alice corpus contains 331 sequences and 17<span>,</span>179
+    unique samples. At 20<span>,</span>000 epochs, the model processes
+    roughly one million learned token transitions, meaning each unique
+    sample is seen approximately 57 times. This density is sufficient to
+    induce stable world-model formation without collapse.</p>
+    <p>Two empirical heuristics emerge:</p>
+    <ul>
+    <li><p><strong>Epochs per canonical dataset size:</strong></p>
+    <p><span class="math display">$$\frac{20{,}000}{222 \text{ KB}}
+    \approx 90
+            \text{ epochs per KB}.$$</span></p>
+    <p>This ratio consistently yields strong semantic emergence on
+    compact canonical corpora, where only grammar–lemma tokens
+    contribute to manifold formation.</p></li>
+    <li><p><strong>Epochs per sequence:</strong></p>
+    <p><span class="math display">$$\frac{20{,}000}{331} \approx 60
+            \text{ epochs per sequence}.$$</span></p>
+    <p>This ensures repeated traversal of each structural unit, allowing
+    lemma embeddings to stabilise and attractor basins to form.</p></li>
+    </ul>
+    <h2 id="cognitive-dynamics-across-training-depth">Cognitive Dynamics
+    Across Training Depth</h2>
+    <p>GLPG exhibits a clear developmental progression as training depth
+    increases:</p>
+    <ul>
+    <li><p><strong>Underfit (3K)</strong>: structure without meaning;
+    weak attractors; fragmented narrative flow.</p></li>
+    <li><p><strong>Mid-regime (10K)</strong>: semantic fields begin to
+    form; paging stabilises; clause chains lengthen.</p></li>
+    <li><p><strong>Optimal regime (20K)</strong>: rich semantic
+    emergence, balanced variation, strong attractor basins, and
+    expressive pure MLP behaviour.</p></li>
+    <li><p><strong>Overfit (30K)</strong>: excessive attractor depth;
+    reduced plasticity; rigid canon; diminished creative drift.</p></li>
+    </ul>
+    <p>Unlike transformer models, GLPG does not collapse under extended
+    training. Instead, excessive training compresses the semantic
+    manifold, reducing variability while preserving coherence. For the
+    Alice corpus, 20<span>,</span>000 epochs represent the optimal
+    balance between semantic richness, structural stability, and
+    narrative flexibility.</p>
+    <h1 id="hidden-layer-sizes">Hidden Layer Sizes</h1>
+    <p>The GLPG architecture employs a monolithic MLP with four hidden
+    layers. In the default configuration, the first hidden layer is
+    significantly larger (1024 units) than the subsequent three layers
+    (512 units each). This asymmetry was initially motivated by the
+    intuition that the first layer must absorb the full context vector
+    and project it into a sufficiently expressive semantic manifold.
+    However, the ablation results below show that increasing the first
+    layer alone provides limited benefit, and that balanced layer sizes
+    often yield more stable and expressive behaviour.</p>
+    <h2 id="experimental-results-1">Experimental Results</h2>
+    <p>Table <a href="#tab:hiddenlayers" data-reference-type="ref"
+    data-reference="tab:hiddenlayers">[tab:hiddenlayers]</a> summarises
+    the behaviour of the Alice model under different hidden-layer
+    configurations. All experiments use the same dataset, paging
+    geometry, and sampling parameters; only the hidden-layer widths are
+    varied.</p>
+    <div class="tabular">
+    <p><span>p<span>1.8cm</span> p<span>1.8cm</span> p<span>1.8cm</span>
+    p<span>1.8cm</span> p<span>6.5cm</span></span> <strong>Size
+    (MB)</strong> &amp; <strong>Train (s)</strong> &amp; <strong>Paged
+    Gen (s)</strong> &amp; <strong>MLP Gen (s)</strong> &amp;
+    <strong>Scenario &amp; Result</strong><br />
+    </p>
+    <p>33.9 &amp; 337 &amp; 56 &amp; 144 &amp; <strong>2048 first
+    layer</strong>: small improvement. Slightly richer semantic
+    manifold, but diminishing returns relative to compute cost.<br />
+    27.7 &amp; 308 &amp; 44 &amp; 137 &amp; <strong>All layers =
+    768</strong>: weaker than hybrid configurations. Stable but less
+    expressive; reduced stylistic variation.<br />
+    9.7 &amp; 272 &amp; 64 &amp; 132 &amp; <strong>128 first
+    layer</strong>: stable but compressed. Semantic fields form, but
+    manifold width is limited.<br />
+    9.5 &amp; 259 &amp; 51 &amp; 203 &amp; <strong>64 other
+    layers</strong>: stable but fragmented. Paging remains coherent, but
+    semantic continuity weakens.<br />
+    2.8 &amp; 272 &amp; 36 &amp; 100 &amp; <strong>128 first, 64
+    others</strong>: functional but less expressive. Canon remains
+    intact; semantic drift increases.<br />
+    1.9 &amp; 242 &amp; 49 &amp; 154 &amp; <strong>32 first, 16
+    others</strong>: stable but minimal. Produces coherent syntax but
+    very shallow semantic attractors.<br />
+    1.8 &amp; 226 &amp; 33 &amp; 281 &amp; <strong>16 first, 8
+    others</strong>: stable with minimal expression. Telegraphic
+    behaviour; pure MLP mode becomes noisy.<br />
+    1.7 &amp; 230 &amp; 27 &amp; 58 &amp; <strong>2 first, 1
+    others</strong>: stable without expression. Structure survives,
+    semantics collapse; resembles DMLG micro-model behaviour.<br />
+    </p>
+    </div>
+    <h2 id="interpretation">Interpretation</h2>
+    <p>Several clear patterns emerge from these ablations:</p>
+    <ul>
+    <li><p><strong>Increasing only the first layer yields limited
+    benefit.</strong> The 2048-unit first layer slightly enriches
+    semantic variation, but the improvement is small relative to the
+    computational cost. GLPG’s semantic manifold does not depend
+    strongly on a single wide layer.</p></li>
+    <li><p><strong>Balanced layers outperform asymmetric
+    configurations.</strong> When all four layers are set to the same
+    width (e.g. 768), the model becomes more stable but also less
+    expressive. Balanced layers reduce flux and stylistic variation,
+    producing a narrower manifold.</p></li>
+    <li><p><strong>Small layers remain surprisingly functional.</strong>
+    Even extremely small configurations (32/16/16/16 or 16/8/8/8) retain
+    structural coherence. This confirms that GLPG’s routing and grammar
+    filtering provide a strong backbone independent of MLP
+    capacity.</p></li>
+    <li><p><strong>Semantic expressiveness scales with total manifold
+    width.</strong> Larger layers deepen attractor basins and improve
+    biome adaptation, while smaller layers increase creative drift but
+    reduce coherence.</p></li>
+    </ul>
+    <h2 id="cognitive-dynamics">Cognitive Dynamics</h2>
+    <p>These results highlight an important property of GLPG: the MLP
+    acts primarily as a <em>semantic router</em> rather than as a
+    high-capacity transformer-like encoder. Even very small MLPs can
+    sustain coherent generation because the deterministic graph provides
+    structural cadence and routing constraints. Larger MLPs enrich the
+    semantic manifold but do not fundamentally change the system’s
+    behaviour.</p>
+    <p>The optimal configuration for the Alice corpus lies between the
+    extremes: moderately wide layers (512–1024) provide sufficient
+    semantic expressiveness without inducing excessive canon rigidity or
+    computational cost. This balance supports stable attractor
+    formation, coherent narrative flow, and controlled stylistic
+    variation.</p>
+    <h1 id="output-dimension-and-learnable-target-embeddings">Output
+    Dimension and Learnable Target Embeddings</h1>
+    <p>GLPG uses learned lemma embeddings as the semantic anchors of its
+    manifold. The dimensionality of these embeddings determines how much
+    semantic structure the model can store in its output space. Unlike
+    transformer architectures, GLPG does not rely on attention layers
+    for semantic organisation; instead, the learned grammar–lemma pair
+    embeddings encode a large portion of the world-model. Varying the
+    output dimension therefore directly affects the depth, breadth, and
+    stability of the semantic attractor landscape.</p>
+    <p>This section examines output dimensions ranging from a single
+    scalar to 1024-dimensional embeddings, revealing how GLPG
+    transitions from purely graph-driven behaviour to fully emergent
+    semantic modelling.</p>
+    <h2 id="experimental-results-2">Experimental Results</h2>
+    <p>Table <a href="#tab:outputdim" data-reference-type="ref"
+    data-reference="tab:outputdim">[tab:outputdim]</a> summarises the
+    behaviour of the Alice model under different output embedding sizes.
+    All other hyperparameters remain fixed.</p>
+    <div class="tabular">
+    <p><span>p<span>1.8cm</span> p<span>1.8cm</span> p<span>1.8cm</span>
+    p<span>1.8cm</span> p<span>6.5cm</span></span> <strong>Size
+    (MB)</strong> &amp; <strong>Train (s)</strong> &amp; <strong>Paged
+    Gen (s)</strong> &amp; <strong>MLP Gen (s)</strong> &amp;
+    <strong>Scenario &amp; Result</strong><br />
+    </p>
+    <p>19.7 &amp; 259 &amp; 41 &amp; – &amp; <strong>1
+    dimension</strong>: stable but graph-dependent. Pure MLP mode
+    non-functional; semantic manifold collapses to a line.<br />
+    19.7 &amp; 255 &amp; 42 &amp; – &amp; <strong>1 dimension, 64
+    pages</strong>: still stable with graph routing; paging provides all
+    structure.<br />
+    19.6 &amp; 291 &amp; 86 &amp; – &amp; <strong>1 dimension, 16
+    pages</strong>: minimal behaviour; paging dominates; semantics
+    remain extremely shallow.<br />
+    19.6 &amp; 321 &amp; 337 &amp; – &amp; <strong>1 dimension, 4
+    pages</strong>: almost pure MLP mode. Graph constraints weaken;
+    model becomes unstable and noisy.<br />
+    19.7 &amp; 295 &amp; 37 &amp; 322 &amp; <strong>4
+    dimensions</strong>: shallow canon, good syntaxis. Semantic clusters
+    begin to form but remain weak.<br />
+    20.0 &amp; 256 &amp; 52 &amp; 258 &amp; <strong>16
+    dimensions</strong>: diffuse canon. Semantic fields broaden but lose
+    coherence; attractors remain shallow.<br />
+    22.3 &amp; 383 &amp; 50 &amp; 164 &amp; <strong>128
+    dimensions</strong>: sweet spot. Strong semantic emergence; pure MLP
+    mode matches paged mode; stable attractor basins.<br />
+    24.9 &amp; 384 &amp; 45 &amp; 171 &amp; <strong>256
+    dimensions</strong>: larger canon. Deeper semantic clusters; pure
+    MLP mode fully functional; slightly reduced variation.<br />
+    40.5 &amp; 664 &amp; 147 &amp; 594 &amp; <strong>1024
+    dimensions</strong>: oversized. Diminishing returns; manifold
+    becomes over-compressed; compute cost increases sharply.<br />
+    </p>
+    </div>
+    <h2 id="interpretation-1">Interpretation</h2>
+    <p>Several clear patterns emerge:</p>
+    <ul>
+    <li><p><strong>1-dimensional embeddings rely entirely on the
+    graph.</strong> GLPG remains structurally coherent because paging
+    and grammar rules provide deterministic routing, but semantic
+    emergence is impossible. Pure MLP mode collapses.</p></li>
+    <li><p><strong>Small dimensions (4–16) produce shallow semantic
+    manifolds.</strong> Syntax stabilises, but semantic clusters remain
+    weak and diffuse. Canon formation is inconsistent.</p></li>
+    <li><p><strong>128 dimensions represent the optimal
+    balance.</strong> This configuration yields:</p>
+    <ul>
+    <li><p>strong semantic coherence,</p></li>
+    <li><p>stable attractor basins,</p></li>
+    <li><p>rich biome adaptation,</p></li>
+    <li><p>pure MLP mode nearly identical to paged mode,</p></li>
+    <li><p>manageable compute cost.</p></li>
+    </ul></li>
+    <li><p><strong>256 dimensions deepen the manifold but reduce
+    variation.</strong> Canon becomes stronger; creative drift
+    decreases; attractors become more inertial.</p></li>
+    <li><p><strong>1024 dimensions overshoot the manifold
+    capacity.</strong> The model becomes slower, more rigid, and less
+    expressive. Semantic compression reduces stylistic
+    variation.</p></li>
+    </ul>
+    <h2 id="cognitive-dynamics-1">Cognitive Dynamics</h2>
+    <p>The output embedding dimension determines the <em>semantic
+    bandwidth</em> of GLPG. Larger dimensions allow the model to encode
+    richer world geometry directly in the grammar–lemma embeddings. This
+    explains the remarkable observation that GLPG can function with a
+    single scalar output when paging is active: the graph provides all
+    structural constraints, and the MLP merely selects transitions.</p>
+    <p>As the dimension increases, the model transitions from:</p>
+    <ul>
+    <li><p><strong>graph-only cognition</strong> (1–4 dims),</p></li>
+    <li><p><strong>shallow semantic emergence</strong> (16
+    dims),</p></li>
+    <li><p><strong>full semantic manifolds</strong> (128–256
+    dims),</p></li>
+    <li><p><strong>semantic over-compression</strong> (1024
+    dims).</p></li>
+    </ul>
+    <p>The 128-dimensional configuration consistently provides the
+    richest and most balanced cognitive behaviour: expressive yet
+    stable, varied yet coherent, emergent yet structurally grounded.
+    This dimension allows pure MLP mode to model the world as
+    effectively as paged mode, demonstrating that GLPG’s learned
+    embeddings contain a large portion of the canonical domain.</p>
+    <h2 id="embedding-alpha">Embedding Alpha</h2>
+    <p>GLPG updates its grammar–lemma embeddings using a fixed blending
+    rule that mixes the stored embedding with the predicted embedding at
+    each transition. The blend coefficient <span
+    class="math inline"><em>α</em></span> determines the rate of
+    semantic adaptation: small values preserve long-term stability,
+    while larger values induce higher flux and faster drift in the
+    semantic manifold. Because GLPG relies on stable attractor basins
+    for coherent world-model formation, the choice of <span
+    class="math inline"><em>α</em></span> has a direct impact on
+    narrative behaviour, canon width, and MLP expressiveness.</p>
+    <p>Table <a href="#tab:alpha" data-reference-type="ref"
+    data-reference="tab:alpha">[tab:alpha]</a> summarises the behaviour
+    of the default Alice model under four alpha settings, including the
+    standard configuration <span
+    class="math inline"><em>α</em> = 0.001</span>.</p>
+    <div class="tabular">
+    <p><span>p<span>1.8cm</span> p<span>1.8cm</span> p<span>1.8cm</span>
+    p<span>1.8cm</span> p<span>6.5cm</span></span> <strong>Size
+    (MB)</strong> &amp; <strong>Train (s)</strong> &amp; <strong>Paged
+    Gen (s)</strong> &amp; <strong>MLP Gen (s)</strong> &amp;
+    <strong>Scenario &amp; Result</strong><br />
+    </p>
+    <p>21.0 &amp; 363 &amp; 61 &amp; 182 &amp; <strong><span
+    class="math inline"><em>α</em> = 0</span></strong>: rigid and narrow
+    canon. Embeddings become static; semantic drift disappears; pure MLP
+    mode weakens significantly.<br />
+    21.0 &amp; 296 &amp; 37 &amp; 127 &amp; <strong>Default <span
+    class="math inline"><em>α</em> = 0.001</span></strong>: balanced
+    regime. Stable attractor basins, coherent semantics, and expressive
+    but controlled MLP behaviour.<br />
+    21.0 &amp; 295 &amp; 44 &amp; 200 &amp; <strong><span
+    class="math inline"><em>α</em> = 0.002</span></strong>: richer
+    world, moderate flux. Semantic fields expand; MLP mode becomes more
+    expressive; slight increase in noise.<br />
+    21.0 &amp; 337 &amp; 37 &amp; 250 &amp; <strong><span
+    class="math inline"><em>α</em> = 0.01</span></strong>: strong
+    blending, high flux. Semantic manifold becomes highly dynamic;
+    attractor basins destabilise; narrative becomes noisy.<br />
+    </p>
+    </div>
+    <h3 class="unnumbered" id="interpretation-2">Interpretation</h3>
+    <p>The blend coefficient controls the <em>semantic plasticity</em>
+    of GLPG:</p>
+    <ul>
+    <li><p><strong><span
+    class="math inline"><em>α</em> = 0</span></strong> freezes the
+    semantic manifold. The model behaves almost like a pure graph
+    system: structurally coherent but semantically narrow, with reduced
+    variation and weaker MLP behaviour.</p></li>
+    <li><p><strong>Default <span
+    class="math inline"><em>α</em> = 0.001</span></strong> provides the
+    most stable behaviour. Attractor basins deepen gradually, semantic
+    motifs stabilise, and pure MLP mode remains expressive without
+    collapsing. This regime consistently yields coherent world-models
+    across datasets.</p></li>
+    <li><p><strong><span
+    class="math inline"><em>α</em> = 0.002</span></strong> increases
+    semantic richness. The manifold becomes broader and more varied, but
+    also slightly noisier. MLP mode benefits from the increased
+    plasticity.</p></li>
+    <li><p><strong><span
+    class="math inline"><em>α</em> = 0.01</span></strong> induces
+    excessive flux. Embeddings drift too quickly, semantic clusters
+    dissolve, and narrative coherence decreases. Paging remains stable,
+    but pure MLP mode becomes noisy and unstable.</p></li>
+    </ul>
+    <h3 class="unnumbered" id="cognitive-dynamics-2">Cognitive
+    Dynamics</h3>
+    <p>Alpha determines how quickly GLPG “rewires” its semantic manifold
+    during training. Small values allow the model to accumulate stable
+    semantic structure over many epochs, mirroring slow consolidation in
+    biological cognitive systems. Large values induce rapid plasticity,
+    which increases variation but destabilises long-term coherence.</p>
+    <p>Across all datasets tested, the range <span
+    class="math inline"><em>α</em> ≈ 0.001</span>–<span
+    class="math inline">0.002</span> consistently produces the strongest
+    cognitive behaviour: expressive yet stable, varied yet coherent, and
+    resistant to collapse. This regime allows GLPG to refine its
+    semantic geometry without erasing previously learned attractors,
+    making it the preferred setting for both paged and pure MLP
+    generation.</p>
+    <h1 id="amount-of-hidden-layers">Amount of Hidden Layers</h1>
+    <p>Depth in GLPG determines how many nonlinear refinements the
+    semantic projection undergoes before cosine scoring. Unlike
+    transformer architectures, additional layers do not introduce
+    hierarchical attention patterns; instead, they modulate the flux
+    dynamics of the semantic manifold and determine how expressive or
+    rigid the attractor landscape becomes. This section evaluates
+    configurations ranging from one to eight hidden layers, under
+    different embedding blend coefficients <span
+    class="math inline"><em>α</em></span>.</p>
+    <h2 id="experimental-results-3">Experimental Results</h2>
+    <p>Table <a href="#tab:hiddenlayercount" data-reference-type="ref"
+    data-reference="tab:hiddenlayercount">[tab:hiddenlayercount]</a>
+    presents the results. We separate the configurations into three
+    groups: (A) aggressive blending (<span
+    class="math inline"><em>α</em> = 0.01</span>), (B) default blending
+    (<span class="math inline"><em>α</em> = 0.001</span>), and (C) mild
+    variations (<span class="math inline"><em>α</em> = 0.002</span> and
+    <span class="math inline"><em>α</em> = 0.005</span>).</p>
+    <div class="tabular">
+    <p><span>p<span>1.8cm</span> p<span>1.8cm</span> p<span>1.8cm</span>
+    p<span>1.8cm</span> p<span>6.5cm</span></span> <strong>Size
+    (MB)</strong> &amp; <strong>Train (s)</strong> &amp; <strong>Paged
+    Gen (s)</strong> &amp; <strong>MLP Gen (s)</strong> &amp;
+    <strong>Scenario &amp; Result</strong><br />
+    <br />
+    </p>
+    <p>9.4 &amp; 203 &amp; 94 &amp; – &amp; <strong>1 layer</strong>:
+    story-focused but only graph mode works; semantic manifold too
+    shallow for pure MLP mode.<br />
+    14.9 &amp; 259 &amp; 37 &amp; 192 &amp; <strong>2 layers</strong>:
+    fully functional; pure MLP slow but coherent; attractors begin to
+    form.<br />
+    17.9 &amp; 251 &amp; 47 &amp; 255 &amp; <strong>3 layers</strong>:
+    strict, telegraphic canon; limited semantic variation.<br />
+    24.0 &amp; 375 &amp; 40 &amp; 145 &amp; <strong>5 layers</strong>:
+    pure MLP much faster; broad and stable manifold; reduced
+    noise.<br />
+    27.0 &amp; 419 &amp; 40 &amp; 84 &amp; <strong>6 layers</strong>:
+    pure MLP faster; small improvement in coherence.<br />
+    30.0 &amp; 486 &amp; 27 &amp; 85 &amp; <strong>7 layers</strong>:
+    consistent but telegraphic; manifold becomes rigid.<br />
+    33.0 &amp; 718 &amp; 33 &amp; 79 &amp; <strong>8 layers</strong>:
+    oversized; reduced expressiveness; no real benefits.<br />
+    <br />
+    </p>
+    <p>21.0 &amp; 296 &amp; 37 &amp; 127 &amp; <strong>Default 4
+    layers</strong>: balanced regime. Stable attractor basins, coherent
+    semantics, expressive but controlled MLP behaviour.<br />
+    24.0 &amp; 381 &amp; 40 &amp; 120 &amp; <strong>5 layers</strong>:
+    less flux, less interesting than <span
+    class="math inline"><em>α</em> = 0.01</span>; stable but narrow
+    manifold.<br />
+    27.0 &amp; 407 &amp; 52 &amp; 125 &amp; <strong>6 layers</strong>:
+    rich but chaotic manifold; increased variation.<br />
+    30.0 &amp; 454 &amp; 37 &amp; 78 &amp; <strong>7 layers</strong>:
+    fast, expressive, deep manifold; reduced creative drift.<br />
+    33.0 &amp; 468 &amp; 30 &amp; 62 &amp; <strong>8 layers</strong>:
+    fast but oversized; semantic compression reduces variation.<br />
+    <br />
+    </p>
+    <p>24.0 &amp; 380 &amp; 30 &amp; 84 &amp; <strong>5 layers, <span
+    class="math inline"><em>α</em> = 0.002</span></strong>: more flux,
+    improved expressiveness; balanced variation and stable
+    attractors.<br />
+    24.0 &amp; 375 &amp; 40 &amp; 145 &amp; <strong>5 layers, <span
+    class="math inline"><em>α</em> = 0.005</span></strong>: sweet spot.
+    Rich, stable, broad, fluent semantic behaviour.<br />
+    </p>
+    </div>
+    <h2 id="interpretation-3">Interpretation</h2>
+    <p>Three key patterns emerge:</p>
+    <ul>
+    <li><p><strong>Aggressive blending (<span
+    class="math inline"><em>α</em> = 0.01</span>) amplifies
+    flux.</strong> Shallow networks collapse into telegraphic behaviour;
+    deeper networks become rigid and over-compressed. Pure MLP mode
+    becomes fast but noisy.</p></li>
+    <li><p><strong>Default blending (<span
+    class="math inline"><em>α</em> = 0.001</span>) is stable across
+    depths.</strong> The default 4-layer model provides balanced
+    expressiveness and stability. Depth increases semantic richness but
+    also reduces creative drift.</p></li>
+    <li><p><strong>Mild blending (<span
+    class="math inline"><em>α</em> = 0.002</span>–<span
+    class="math inline">0.005</span>) improves 5-layer models.</strong>
+    These settings produce the richest and most coherent behaviour:
+    attractors deepen without collapsing, semantic fields broaden, and
+    narrative flow becomes fluent.</p></li>
+    </ul>
+    <h2 id="cognitive-dynamics-3">Cognitive Dynamics</h2>
+    <p>Depth and blending interact strongly:</p>
+    <ul>
+    <li><p><strong>Depth increases manifold complexity.</strong> More
+    layers refine the semantic projection, deepening attractor
+    basins.</p></li>
+    <li><p><strong>Blending controls manifold plasticity.</strong> Small
+    <span class="math inline"><em>α</em></span> stabilises semantics;
+    large <span class="math inline"><em>α</em></span> destabilises
+    them.</p></li>
+    <li><p><strong>Optimal cognitive regime: 5 layers + <span
+    class="math inline"><em>α</em> = 0.002</span>–<span
+    class="math inline">0.005</span>.</strong> This combination
+    yields:</p>
+    <ul>
+    <li><p>rich semantic emergence,</p></li>
+    <li><p>stable attractor geometry,</p></li>
+    <li><p>fluent narrative flow,</p></li>
+    <li><p>balanced creative drift,</p></li>
+    <li><p>controlled flux.</p></li>
+    </ul></li>
+    </ul>
+    <p>Overall, GLPG behaves as a dynamical system with an optimal
+    depth. Too few layers limit expressiveness; too many layers reduce
+    variation and induce rigidity. For the Alice corpus, five hidden
+    layers with mild blending produce the strongest cognitive
+    behaviour.</p>
+    <h1 id="forward-layer-recursion">Forward Layer Recursion</h1>
+    <p>The previous section showed that increasing depth in a naïve
+    feedforward MLP improves semantic expressiveness but eventually
+    leads to rigidity and over-compression. GLPG, however, is not
+    limited to simple depth scaling: the architecture supports recursive
+    refinement blocks that transform the MLP into a dynamic substrate
+    with internal iterative behaviour. These recursion mechanisms allow
+    the model to perform multiple semantic refinement steps within a
+    single forward pass, effectively increasing functional depth without
+    increasing parameter count.</p>
+    <p>This section evaluates several recursion strategies, including
+    residual skips, gated refinement, self-feedback loops, and hybrid
+    combinations. The results demonstrate that recursion fundamentally
+    changes GLPG’s cognitive dynamics and leads to a new baseline
+    architecture.</p>
+    <h2 id="experimental-results-4">Experimental Results</h2>
+    <p>Table <a href="#tab:recursion" data-reference-type="ref"
+    data-reference="tab:recursion">[tab:recursion]</a> summarises the
+    behaviour of the Alice model under different recursion mechanisms.
+    All experiments use hidden sizes of 768 unless otherwise noted and a
+    default of four semantic hidden layers.</p>
+    <div class="tabular">
+    <p><span>p<span>1.8cm</span> p<span>1.8cm</span> p<span>1.8cm</span>
+    p<span>1.8cm</span> p<span>6.5cm</span></span> <strong>Size
+    (MB)</strong> &amp; <strong>Train (s)</strong> &amp; <strong>Paged
+    Gen (s)</strong> &amp; <strong>MLP Gen (s)</strong> &amp;
+    <strong>Scenario &amp; Result</strong><br />
+    </p>
+    <p>21.3 &amp; 403 &amp; 57 &amp; 190 &amp; <strong>1024 units, 2
+    layers, repeat layer 2 (3×)</strong>: narrow manifold; attractor
+    hardening; limited semantic variation.<br />
+    27.7 &amp; 375 &amp; 39 &amp; 168 &amp; <strong>R-skip</strong>:
+    clear upgrade. Stable, expressive manifold; improved semantic
+    continuity.<br />
+    34.4 &amp; 586 &amp; 63 &amp; 114 &amp; <strong>R-gate</strong>:
+    larger upgrade. Iterative refinement with selective retention;
+    stronger attractor basins.<br />
+    27.7 &amp; 309 &amp; 39 &amp; 113 &amp;
+    <strong>Self-feedback</strong>: coherent but modest improvement;
+    lacks selective gating.<br />
+    27.7 &amp; 339 &amp; 37 &amp; 98 &amp; <strong>Refinement
+    loop</strong>: demonstrates need for gating and residuals; unstable
+    without selective control.<br />
+    34.4 &amp; 491 &amp; 41 &amp; 116 &amp; <strong>Hybrid (R-gate +
+    R-skip)</strong>: best upgrade. Stable, less chaotic, consistent
+    manifold; improved narrative flow; fast generation.<br />
+    34.4 &amp; 934 &amp; 44 &amp; 122 &amp; <strong>Super
+    hybrid</strong>: excessive recursion; slower and worse; semantic
+    over-compression.<br />
+    </p>
+    </div>
+    <h2 id="interpretation-4">Interpretation</h2>
+    <p>Several conclusions emerge:</p>
+    <ul>
+    <li><p><strong>Simple repetition (repeat layer 2)</strong> increases
+    functional depth but hardens attractors and reduces
+    variation.</p></li>
+    <li><p><strong>Residual skips (R-skip)</strong> improve stability
+    and semantic continuity by preserving previous states.</p></li>
+    <li><p><strong>Gated recursion (R-gate)</strong> introduces
+    selective refinement, allowing the model to retain or overwrite
+    semantic features.</p></li>
+    <li><p><strong>Self-feedback and ungated loops</strong> refine
+    semantics but lack control, leading to instability.</p></li>
+    <li><p><strong>Hybrid recursion</strong> (R-gate + R-skip) is the
+    strongest configuration: stable, expressive, less chaotic, and
+    consistent across datasets.</p></li>
+    <li><p><strong>Excessive recursion (super hybrid)</strong> leads to
+    semantic over-compression and reduced variation.</p></li>
+    </ul>
+    <h2 id="the-hybrid-recursion-block">The Hybrid Recursion Block</h2>
+    <p>The hybrid block combines gated residual recursion with an
+    additional refinement step. It performs three gated refinement
+    iterations followed by a residual projection. This structure
+    provides both stability and expressiveness.</p>
+    <p>The forward pass is:</p>
+    <ul>
+    <li><p>initial projection into semantic space,</p></li>
+    <li><p>three gated residual refinement iterations,</p></li>
+    <li><p>one ungated residual enhancement,</p></li>
+    <li><p>final projection to output embeddings.</p></li>
+    </ul>
+    <p>Formally:</p>
+    <p><span
+    class="math display"><em>h</em> ← <em>h</em> + <em>g</em> ⋅ (<em>u</em>−<em>h</em>)</span></p>
+    <p>where:</p>
+    <p><span
+    class="math display"><em>g</em> = <em>σ</em>(<em>W</em><sub>gate</sub><em>h</em>),   <em>u</em> = silu(<em>W</em><sub>refine</sub><em>h</em>).</span></p>
+    <p>This mechanism allows the model to selectively update semantic
+    features while preserving stable attractor geometry.</p>
+    <h2 id="cognitive-dynamics-4">Cognitive Dynamics</h2>
+    <p>Recursion transforms GLPG from a static feedforward network into
+    a dynamic system:</p>
+    <ul>
+    <li><p><strong>R-skip</strong> preserves long-term semantic
+    structure.</p></li>
+    <li><p><strong>R-gate</strong> enables selective semantic
+    retention.</p></li>
+    <li><p><strong>Hybrid recursion</strong> creates a controlled
+    iterative refinement process.</p></li>
+    </ul>
+    <p>The result is a deeper, more stable semantic manifold with:</p>
+    <ul>
+    <li><p>stronger attractor basins,</p></li>
+    <li><p>reduced chaotic drift,</p></li>
+    <li><p>improved biome adaptation,</p></li>
+    <li><p>more coherent narrative flow,</p></li>
+    <li><p>faster pure MLP generation.</p></li>
+    </ul>
+    <h2 id="new-baseline-architecture">New Baseline Architecture</h2>
+    <p>The hybrid recursion block, combined with five hidden layers
+    (four semantic layers + one gating layer), forms the new baseline
+    GLPG architecture. This configuration consistently outperforms naïve
+    depth scaling and provides the best balance between:</p>
+    <ul>
+    <li><p>semantic richness,</p></li>
+    <li><p>structural stability,</p></li>
+    <li><p>compute efficiency,</p></li>
+    <li><p>narrative coherence,</p></li>
+    <li><p>attractor robustness.</p></li>
+    </ul>
+    <p>Recursion is therefore not an optimisation but a
+    <strong>qualitative architectural improvement</strong> that shifts
+    GLPG into a higher cognitive regime.</p>
+    <h1 id="activation-functions">Activation Functions</h1>
+    <p>Activation functions determine the energy profile of GLPG’s
+    semantic manifold. Because the architecture relies on stable
+    attractor basins, controlled flux, and smooth semantic refinement,
+    the choice of activation has a direct impact on narrative coherence,
+    stylistic variation, and manifold stability. This section evaluates
+    several activation functions under identical conditions, revealing
+    that SiLU provides the strongest qualitative behaviour for the
+    computational cost.</p>
+    <h2 id="experimental-results-5">Experimental Results</h2>
+    <p>Table <a href="#tab:activations" data-reference-type="ref"
+    data-reference="tab:activations">[tab:activations]</a> summarises
+    the behaviour of the Alice model under different activation
+    functions. All experiments use the same baseline configuration.</p>
+    <div class="tabular">
+    <p><span>p<span>1.8cm</span> p<span>1.8cm</span> p<span>1.8cm</span>
+    p<span>1.8cm</span> p<span>6.5cm</span></span> <strong>Size
+    (MB)</strong> &amp; <strong>Train (s)</strong> &amp; <strong>Paged
+    Gen (s)</strong> &amp; <strong>MLP Gen (s)</strong> &amp;
+    <strong>Scenario &amp; Result</strong><br />
+    </p>
+    <p>21.0 &amp; 274 &amp; 39 &amp; 132 &amp;
+    <strong>Hardtanh</strong>: cold, low-energy manifold; clamped
+    dynamics; low variation.<br />
+    21.0 &amp; 275 &amp; 38 &amp; 127 &amp; <strong>Tanh</strong>:
+    coherent but low variation; limited semantic emergence.<br />
+    21.0 &amp; 281 &amp; 41 &amp; 135 &amp; <strong>ReLU</strong>:
+    fragmentary canon; half-clamped behaviour; blocky syntax.<br />
+    21.0 &amp; 266 &amp; 51 &amp; 125 &amp; <strong>Leaky ReLU</strong>:
+    slightly better than ReLU; still limited semantic depth.<br />
+    21.0 &amp; 296 &amp; 37 &amp; 127 &amp; <strong>SiLU</strong>:
+    baseline activation.<br />
+    21.0 &amp; 455 &amp; 48 &amp; 234 &amp; <strong>GELU</strong>:
+    significantly slower; less interesting than SiLU; diffuse
+    manifold.<br />
+    21.0 &amp; 295 &amp; 47 &amp; 266 &amp; <strong>Cosine-Gate
+    Activation</strong>: slower and more diffuse; weaker attractor
+    basins.<br />
+    21.0 &amp; 576 &amp; 50 &amp; 153 &amp; <strong>SiLU + CGA</strong>:
+    different but not better; increased diffusion; reduced
+    coherence.<br />
+    21.0 &amp; 503 &amp; 40 &amp; 151 &amp; <strong>SiLU
+    Cos-gate</strong>: more diffuse than pure SiLU; less stable.<br />
+    </p>
+    </div>
+    <h2 id="interpretation-5">Interpretation</h2>
+    <p>The results show a clear hierarchy:</p>
+    <ul>
+    <li><p><strong>Hardtanh and Tanh</strong> produce low-energy
+    manifolds. They clamp semantic variation and suppress emergence.
+    Syntax remains coherent but narrative flow is flat.</p></li>
+    <li><p><strong>ReLU and Leaky ReLU</strong> introduce
+    discontinuities. Canon becomes fragmentary; syntax becomes blocky;
+    attractor basins become unstable due to half-clamping.</p></li>
+    <li><p><strong>GELU</strong> is smooth but computationally
+    expensive. Despite its popularity in transformers, GELU performs
+    worse in GLPG: slower training, slower generation, and more diffuse
+    semantics.</p></li>
+    <li><p><strong>Cosine-based activations</strong> (CGA, SiLU+gate)
+    increase diffusion. They weaken attractor basins and reduce
+    coherence.</p></li>
+    <li><p><strong>SiLU is the strongest performer.</strong> It
+    provides:</p>
+    <ul>
+    <li><p>smooth gradients,</p></li>
+    <li><p>stable attractor geometry,</p></li>
+    <li><p>rich semantic emergence,</p></li>
+    <li><p>coherent narrative flow,</p></li>
+    <li><p>excellent compute efficiency.</p></li>
+    </ul></li>
+    </ul>
+    <h2 id="cognitive-dynamics-5">Cognitive Dynamics</h2>
+    <p>Activation functions determine the “energy regime” of GLPG’s
+    semantic manifold:</p>
+    <ul>
+    <li><p><strong>Clamped activations</strong> (hardtanh, tanh)
+    suppress flux and reduce semantic emergence.</p></li>
+    <li><p><strong>Discontinuous activations</strong> (ReLU variants)
+    destabilise attractor basins and fragment syntax.</p></li>
+    <li><p><strong>Smooth but heavy activations</strong> (GELU) diffuse
+    semantics and slow computation.</p></li>
+    <li><p><strong>SiLU provides optimal manifold dynamics.</strong> Its
+    smooth, monotonic curve supports stable refinement, controlled flux,
+    and expressive semantic fields. It matches GLPG’s recursive
+    substrate exceptionally well.</p></li>
+    </ul>
+    <h2 id="conclusion">Conclusion</h2>
+    <p>Activation functions have a logical and measurable impact on
+    GLPG’s generative behaviour. Across all tested configurations,
+    <strong>SiLU consistently provides the best qualitative output for
+    the computational cost</strong>. It supports stable attractor
+    formation, rich semantic emergence, and coherent narrative flow,
+    making it the preferred activation for the GLPG architecture.</p>
+    <h1 id="inputs-per-page">Inputs per Page</h1>
+    <p>Paging determines how many canonical transitions are grouped into
+    a single structural unit of the GLPG graph. Each page contains a
+    fixed number of input transitions, and the model selects the next
+    lemma by evaluating only the transitions within the current page.
+    This mechanism provides deterministic routing and structural
+    cadence. Varying the number of inputs per page therefore changes the
+    balance between determinism and semantic emergence.</p>
+    <h2 id="experimental-results-6">Experimental Results</h2>
+    <p>Table <a href="#tab:inputsperpage" data-reference-type="ref"
+    data-reference="tab:inputsperpage">[tab:inputsperpage]</a>
+    summarises the behaviour of the Alice model under two extreme paging
+    configurations: fully deterministic paging (1 input per page) and
+    near-MLP-only behaviour (128 inputs per page). The default setting
+    is 16 inputs per page.</p>
+    <div class="tabular">
+    <p><span>p<span>1.8cm</span> p<span>1.8cm</span> p<span>1.8cm</span>
+    p<span>1.8cm</span> p<span>6.5cm</span></span> <strong>Size
+    (MB)</strong> &amp; <strong>Train (s)</strong> &amp; <strong>Paged
+    Gen (s)</strong> &amp; <strong>MLP Gen (s)</strong> &amp;
+    <strong>Scenario &amp; Result</strong><br />
+    </p>
+    <p>21.1 &amp; 286 &amp; 32 &amp; 177 &amp; <strong>1 input per page
+    (1120 pages)</strong>: fully deterministic; canon becomes narrow;
+    semantic emergence limited.<br />
+    20.9 &amp; 274 &amp; 57 &amp; 175 &amp; <strong>128 inputs per page
+    (176 pages)</strong>: closer to pure MLP mode; slower generation;
+    more semantic emergence but reduced structural discipline.<br />
+    </p>
+    </div>
+    <h2 id="interpretation-6">Interpretation</h2>
+    <p>The number of inputs per page determines the strength of GLPG’s
+    structural constraints:</p>
+    <ul>
+    <li><p><strong>1 input per page</strong> produces a fully
+    deterministic system. The graph dominates; syntax is stable; canon
+    becomes narrow; semantic emergence is minimal. This configuration
+    resembles a rule-based generator with limited creativity.</p></li>
+    <li><p><strong>128 inputs per page</strong> weakens graph
+    determinism. The model behaves closer to pure MLP mode; semantic
+    emergence increases but structural discipline decreases; generation
+    becomes slower.</p></li>
+    <li><p><strong>Default 16 inputs per page</strong> provides the best
+    balance. It preserves deterministic routing while allowing
+    meaningful semantic variation. Attractor basins remain stable, and
+    narrative flow remains coherent.</p></li>
+    <li><p><strong>8 inputs per page</strong> may be preferable for
+    larger datasets. It increases structural resolution without
+    collapsing emergence, offering finer-grained routing for more
+    complex corpora.</p></li>
+    </ul>
+    <h2 id="conclusion-1">Conclusion</h2>
+    <p>Paging geometry has a clear and predictable impact on GLPG’s
+    behaviour. <strong>Full determinism is possible with 1 input per
+    page</strong>, but this suppresses semantic emergence.
+    <strong>High-input pages behave like pure MLP mode</strong>,
+    increasing variation but reducing structural coherence. For the
+    Alice corpus, <strong>16 inputs per page is the optimal
+    setting</strong>, and <strong>8 inputs per page</strong> is a
+    promising configuration for larger datasets.</p>
+    <p>Paging therefore acts as a structural dial that controls the
+    balance between deterministic routing and emergent semantics.</p>
+    <h1 id="sampling-parameters">Sampling Parameters</h1>
+    <p>All sampling experiments in this section use the same baseline
+    model: the 20<span>,</span>000‑epoch Alice configuration described
+    earlier. Because GLPG is a dynamical system, sampling parameters
+    directly modulate the flux of the semantic manifold. Low top‑<span
+    class="math inline"><em>k</em></span> values suppress variation and
+    deepen attractor basins, while higher values broaden the manifold
+    and increase narrative energy. Boosting further amplifies flux by
+    reweighting the top candidates.</p>
+    <p>This section evaluates top‑<span
+    class="math inline"><em>k</em></span> values from 2 to 20, with and
+    without boosting, and compares several boosting schedules.</p>
+    <h2 id="experimental-results-7">Experimental Results</h2>
+    <p>Table <a href="#tab:sampling" data-reference-type="ref"
+    data-reference="tab:sampling">[tab:sampling]</a> summarises the
+    behaviour of the model under different sampling configurations.</p>
+    <div class="tabular">
+    <p><span>p<span>3cm</span> p<span>11cm</span></span> <strong>Paged
+    Gen (s)</strong> &amp; <strong>Scenario &amp; Result</strong><br />
+    </p>
+    <p>54 &amp; <strong>top-<span class="math inline"><em>k</em></span>
+    = 2, no boosting</strong>: zero flux; low energy; minimal
+    variation.<br />
+    64 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    3, no boosting</strong>: narrow canon; strong attractors; rigid
+    flow.<br />
+    48 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    5, no boosting</strong>: low‑flux regime; coherent but
+    conservative.<br />
+    42 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    5, boosting</strong>: increased energy; broader variation.<br />
+    38 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    8, no boosting</strong>: mid‑flux regime; broader canon;
+    stable.<br />
+    38 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    8, boosting</strong>: increased energy; <em>sweet spot</em>.<br />
+    42 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    10, no boosting</strong>: high flux; broad canon; borderline
+    stability.<br />
+    41 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    10, boosting</strong>: very high flux; near collapse;
+    unstable.<br />
+    43 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    15, no boosting</strong>: flux too high; diffuse canon.<br />
+    38 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    15, boosting</strong>: excessive flux; fuzzy structure.<br />
+    53 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    20, no boosting</strong>: diffuse, noisy, low quality.<br />
+    36 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    20, boosting</strong>: over‑flux; over‑broad manifold;
+    collapse.<br />
+    42 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    8, boosting 6‑5‑4‑3‑2</strong>: improved boosting; stable.<br />
+    40 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    8, boosting 5‑4‑3‑2</strong>: better than 6‑5‑4‑3‑2.<br />
+    39 &amp; <strong>top-<span class="math inline"><em>k</em></span> =
+    8, boosting 4‑3‑3‑2‑2</strong>: slightly more elegant; best
+    schedule.<br />
+    </p>
+    </div>
+    <h2 id="interpretation-7">Interpretation</h2>
+    <p>Several clear patterns emerge:</p>
+    <ul>
+    <li><p><strong>Top‑1 is non-functional.</strong> The model collapses
+    into deterministic routing with no semantic emergence.</p></li>
+    <li><p><strong>Top‑2 and top‑3 produce extremely low flux.</strong>
+    Canon becomes narrow; attractors deepen; variation
+    collapses.</p></li>
+    <li><p><strong>Top‑5 is the low‑flux regime.</strong> Coherent but
+    conservative; limited stylistic variation.</p></li>
+    <li><p><strong>Top‑8 is the optimal manifold width.</strong>
+    Balanced flux, coherent canon, rich variation, stable
+    attractors.</p></li>
+    <li><p><strong>Top‑10 approaches instability.</strong> Flux becomes
+    high; manifold broadens; borderline collapse.</p></li>
+    <li><p><strong>Top‑15 and top‑20 exceed the stability
+    limit.</strong> Canon becomes diffuse; noise increases; structure
+    degrades.</p></li>
+    <li><p><strong>Boosting increases flux.</strong> Mild boosting
+    improves variation; strong boosting destabilises the
+    manifold.</p></li>
+    </ul>
+    <h2 id="boosting-schedules">Boosting Schedules</h2>
+    <p>Boosting reweights the top candidates, increasing narrative
+    energy. The results show:</p>
+    <ul>
+    <li><p>Fibonacci boosting (13‑8‑5‑3‑2) is too aggressive for
+    top‑20.</p></li>
+    <li><p>Mild boosting improves top‑8 significantly.</p></li>
+    <li><p>The best schedule is <strong>4‑3‑3‑2‑2</strong>, producing
+    elegant and stable variation.</p></li>
+    </ul>
+    <h2 id="cognitive-dynamics-6">Cognitive Dynamics</h2>
+    <p>Sampling parameters modulate the flux of GLPG’s semantic
+    manifold:</p>
+    <ul>
+    <li><p>low top‑<span class="math inline"><em>k</em></span> → deep
+    attractors, narrow canon, low flux,</p></li>
+    <li><p>mid top‑<span class="math inline"><em>k</em></span> →
+    balanced flux, coherent emergence,</p></li>
+    <li><p>high top‑<span class="math inline"><em>k</em></span> →
+    excessive flux, diffuse manifold, collapse.</p></li>
+    </ul>
+    <p>Boosting acts as an energy amplifier: beneficial in moderation,
+    destructive when too strong.</p>
+    <h2 id="conclusion-2">Conclusion</h2>
+    <p>GLPG exhibits an optimal manifold width around
+    <strong>top‑8</strong>. With tuned boosting (especially
+    <strong>4‑3‑3‑2‑2</strong>), this regime provides the richest and
+    most coherent generative behaviour. Larger top‑<span
+    class="math inline"><em>k</em></span> values introduce chaos, while
+    smaller values suppress emergence.</p>
+    <p>Sampling therefore acts as a direct control over the dynamical
+    state of GLPG, confirming that the model behaves as a
+    <strong>nonlinear dynamical system</strong> rather than a static
+    language model.</p>
+    <h1 id="context-input-vector-tuning">Context Input Vector
+    Tuning</h1>
+    <p>The input vector determines how GLPG perceives its local semantic
+    and structural state. Unlike transformer architectures, GLPG does
+    not rely on large contextual windows or attention mechanisms;
+    instead, it uses a compact, hand‑engineered context vector that
+    encodes structural anchors, semantic continuity, and minimal
+    narrative memory. This section evaluates several input‑vector
+    designs and introduces a new optimized baseline based on the results
+    of all previous ablations.</p>
+    <h2 id="experimental-results-8">Experimental Results</h2>
+    <p>Table <a href="#tab:contextvector" data-reference-type="ref"
+    data-reference="tab:contextvector">[tab:contextvector]</a>
+    summarizes the behaviour of the model under different input‑vector
+    configurations. All experiments use the new baseline
+    architecture:</p>
+    <ul>
+    <li><p>20K epochs (1M token transitions),</p></li>
+    <li><p>128‑dimensional output embeddings,</p></li>
+    <li><p>768‑unit hidden layers (592–768–768–768–768–128),</p></li>
+    <li><p>hybrid recursive forward pass with 768‑unit gating
+    layer,</p></li>
+    <li><p>top‑8 sampling with 4‑3‑3‑2‑2 boosting.</p></li>
+    </ul>
+    <div class="tabular">
+    <p><span>p<span>1.4cm</span> p<span>1.6cm</span> p<span>1.6cm</span>
+    p<span>1.6cm</span> p<span>1.2cm</span> p<span>6.5cm</span></span>
+    <strong>Size (MB)</strong> &amp; <strong>Train (s)</strong> &amp;
+    <strong>Paged Gen (s)</strong> &amp; <strong>MLP Gen (s)</strong>
+    &amp; <strong>Vector Size</strong> &amp; <strong>Scenario &amp;
+    Result</strong><br />
+    </p>
+    <p>35.9 &amp; 552 &amp; 47 &amp; 146 &amp; 592 &amp; <strong>Old
+    baseline</strong>: large legacy vector; functional but
+    inefficient.<br />
+    30.8 &amp; 622 &amp; 140 &amp; 385 &amp; 9 &amp; <strong>Sequence +
+    line</strong>: extremely small; valid phrases but no meaning.<br />
+    31.8 &amp; 648 &amp; 94 &amp; 155 &amp; 128 &amp; <strong>Narrative
+    memory (128)</strong>: fast generation; very low semantic
+    value.<br />
+    33.3 &amp; 659 &amp; 178 &amp; – &amp; 300 &amp; <strong>Compressed
+    context</strong>: minor structure; pure MLP mode extremely
+    slow.<br />
+    32.0 &amp; 490 &amp; 45 &amp; 113 &amp; 155 &amp; <strong>Current
+    sentence</strong>: main contributor; strong semantic anchor.<br />
+    31.0 &amp; 560 &amp; 34 &amp; 90 &amp; 35 &amp; <strong>Reduced
+    current</strong>: still functional; compact structural signal.<br />
+    31.1 &amp; 466 &amp; 31 &amp; 83 &amp; 44 &amp;
+    <strong>CSL</strong>: reduced current + sequence + line; stable
+    without memory.<br />
+    31.6 &amp; 634 &amp; 38 &amp; 106 &amp; 108 &amp; <strong>Narrative
+    memory (64) + CSL</strong>: fully functional; less noise.<br />
+    31.3 &amp; 643 &amp; 37 &amp; 106 &amp; 48 &amp; <strong>Token
+    history (48, 0.95)</strong>: requires CSL; semantic
+    continuity.<br />
+    31.3 &amp; 449 &amp; 38 &amp; 105 &amp; 76 &amp; <strong>Token
+    history (32, 0.95) + CSL</strong>: history behaviour; stable.<br />
+    31.9 &amp; 533 &amp; 36 &amp; 101 &amp; 108 &amp; <strong>Token
+    history (64, 0.95) + CSL</strong>: bleed; less selective.<br />
+    31.6 &amp; 560 &amp; 33 &amp; 82 &amp; 92 &amp; <strong>Token
+    history (48, 0.95) + CSL</strong>: <em>sweet spot</em>.<br />
+    32.1 &amp; 600 &amp; 28 &amp; 87 &amp; 140 &amp; <strong>Narrative
+    memory (48) + history (48) + CSL</strong>: no added value.<br />
+    31.7 &amp; 586 &amp; 33 &amp; 95 &amp; 100 &amp; <strong>Narrative
+    memory (8) + history (48) + CSL</strong>: new optimized
+    vector.<br />
+    </p>
+    </div>
+    <h2 id="interpretation-8">Interpretation</h2>
+    <p>The results reveal several key insights:</p>
+    <ul>
+    <li><p><strong>Current sentence (CSL)</strong> is the structural
+    anchor. It provides positional and grammatical grounding but lacks
+    semantic continuity.</p></li>
+    <li><p><strong>Token History provides semantic continuity.</strong>
+    It encodes lemma‑driven temporal dynamics with decay, producing
+    canon‑consistent semantic drift.</p></li>
+    <li><p><strong>Narrative memory contributes minimally.</strong>
+    Large memory vectors add noise; small memory (8 dims) adds stability
+    without overfitting.</p></li>
+    <li><p><strong>Compressed context is ineffective.</strong> It
+    contributes little structure and slows pure MLP mode.</p></li>
+    <li><p><strong>Sequence + line number alone is surprisingly
+    functional.</strong> The model can generate syntactically valid text
+    without any semantic history, demonstrating the strength of GLPG’s
+    structural substrate.</p></li>
+    </ul>
+    <h2 id="csl-and-token-history-complementary-roles">CSL and Token
+    History: Complementary Roles</h2>
+    <p>CSL (Current + Sequence + Line) provides:</p>
+    <ul>
+    <li><p>structural anchoring,</p></li>
+    <li><p>positional grounding,</p></li>
+    <li><p>grammatical cadence,</p></li>
+    <li><p>attractor stability.</p></li>
+    </ul>
+    <p>Token History provides:</p>
+    <ul>
+    <li><p>semantic continuity,</p></li>
+    <li><p>temporal drift,</p></li>
+    <li><p>lemma‑driven context,</p></li>
+    <li><p>decay‑controlled memory,</p></li>
+    <li><p>canon‑consistent transitions.</p></li>
+    </ul>
+    <p>Individually:</p>
+    <ul>
+    <li><p>CSL without history → coherent syntax but no semantic
+    flow.</p></li>
+    <li><p>Token History without CSL → semantic drift but attractor
+    collapse.</p></li>
+    </ul>
+    <p>Only the combination <strong>CSL + Token History</strong>
+    yields:</p>
+    <ul>
+    <li><p>coherent micro‑scenes,</p></li>
+    <li><p>stable narrative flow,</p></li>
+    <li><p>controlled semantic drift,</p></li>
+    <li><p>low noise,</p></li>
+    <li><p>strong attractor geometry.</p></li>
+    </ul>
+    <h2 id="the-token-history-algorithm">The Token History
+    Algorithm</h2>
+    <p>Token History is a lemma‑driven, decay‑controlled temporal
+    memory:</p>
+    <p><span
+    class="math display"><em>h</em><sub><em>t</em></sub> = <em>α</em><em>h</em><sub><em>t</em> − 1</sub> + (1−<em>α</em>)<em>e</em><sub><em>t</em></sub></span></p>
+    <p>with first positional rotation:</p>
+    <p><span
+    class="math display"><em>h</em><sub><em>t</em></sub> = rotate(<em>h</em><sub><em>t</em></sub>)</span></p>
+    <p>and selective update:</p>
+    <p><span
+    class="math display"><em>e</em><sub><em>t</em></sub> ∈ {lemma
+    embeddings},  only if grammar token ∈ history grammar
+    tokens</span></p>
+    <p>and blacklist filtering:</p>
+    <p><span class="math display">if lemma ∈ history lemma
+    blacklist ⇒ skip.</span></p>
+    <p>This produces a low‑noise, canon‑consistent semantic drift
+    vector.</p>
+    <h2 id="new-baseline-input-vector">New Baseline Input Vector</h2>
+    <p>The optimized input vector is:</p>
+    <p><span class="math display">35 + 48 + 8 + 9 = 100
+    floats</span></p>
+    <p>Six times smaller than the legacy 592‑float vector.</p>
+    <ul>
+    <li><p><strong>Reduced current (35)</strong>: lemma pos, grammar
+    pos, last grammar, last lemma, comma flag.</p></li>
+    <li><p><strong>Token History (48)</strong>: optimal width and
+    decay.</p></li>
+    <li><p><strong>Narrative memory (8)</strong>: minimal
+    stabilizer.</p></li>
+    <li><p><strong>Sequence + line (9)</strong>: structural
+    grounding.</p></li>
+    </ul>
+    <h2 id="conclusion-3">Conclusion</h2>
+    <p>The optimized 100‑dimensional input vector provides:</p>
+    <ul>
+    <li><p>stronger semantic continuity,</p></li>
+    <li><p>cleaner structural anchoring,</p></li>
+    <li><p>lower noise,</p></li>
+    <li><p>faster generation,</p></li>
+    <li><p>more coherent narrative flow,</p></li>
+    <li><p>better attractor stability.</p></li>
+    </ul>
+    <p>GLPG remains significantly less powerful than transformer
+    architectures, but it does not aim to be one. Instead, it provides a
+    compact, interpretable cognitive substrate with emergent behaviour
+    driven by structural cadence and semantic drift.</p>
+    <h1 id="final-new-baseline-model-and-minimum-viable-model">Final New
+    Baseline Model and Minimum Viable Model</h1>
+    <p>All previous ablations converge on a new optimal GLPG
+    architecture for the Alice dataset. This section presents the final
+    baseline model and contrasts it with the minimum viable model (MVM).
+    Both models share the same cognitive substrate and dynamical
+    principles, but differ in capacity, stability, and emergent
+    narrative coherence.</p>
+    <h2 id="architectures">Architectures</h2>
+    <p>The final baseline MLP uses wide hidden layers and a large output
+    embedding, combined with the hybrid recursive forward pass and the
+    new input vector:</p>
+    <p><span class="math display"><strong>Baseline:
+    </strong>100 → 1024 → 1024 → 1024 → 1024 → 128  with 1024-unit
+    gate</span></p>
+    <p>The minimum viable model uses narrow hidden layers and a minimal
+    output embedding:</p>
+    <p><span class="math display"><strong>MVM:
+    </strong>100 → 64 → 64 → 64 → 64 → 16  with 64-unit gate</span></p>
+    <p>Both models use:</p>
+    <ul>
+    <li><p>the optimized 100-dimensional input vector,</p></li>
+    <li><p>hybrid recursive forward pass,</p></li>
+    <li><p>20K epochs (1M transitions),</p></li>
+    <li><p>128 lemma-output dimension (baseline) or 16 (MVM),</p></li>
+    <li><p>top-8 sampling with 4-3-3-2-2 boosting.</p></li>
+    </ul>
+    <h2 id="experimental-results-9">Experimental Results</h2>
+    <div class="tabular">
+    <p><span>p<span>1.4cm</span> p<span>1.6cm</span> p<span>1.6cm</span>
+    p<span>1.6cm</span> p<span>6.5cm</span></span> <strong>Size
+    (MB)</strong> &amp; <strong>Train (s)</strong> &amp; <strong>Paged
+    Gen (s)</strong> &amp; <strong>MLP Gen (s)</strong> &amp;
+    <strong>Scenario &amp; Result</strong><br />
+    </p>
+    <p>53.4 &amp; 616 &amp; 35 &amp; 121 &amp; <strong>Final new
+    baseline</strong>: stable attractors; rich semantic emergence;
+    coherent microfiction; strong biome adaptation; fast
+    generation.<br />
+    1.4 &amp; 309 &amp; 35 &amp; 105 &amp; <strong>Minimum viable
+    model</strong>: proto-narrative sequences; semantic-syntactic
+    attractor dynamics; expressive but shallow; surprisingly coherent
+    given size.<br />
+    </p>
+    </div>
+    <h2 id="classification-of-the-baseline-model">Classification of the
+    Baseline Model</h2>
+    <p>The baseline GLPG model is best described as:</p>
+    <ul>
+    <li><p>a small recurrent language model with a custom
+    semantic‑memory vector,</p></li>
+    <li><p>a hybrid RNN‑like architecture with structural anchoring and
+    topic‑event continuity,</p></li>
+    <li><p>a non‑transformer microfiction generator with strong local
+    coherence.</p></li>
+    </ul>
+    <p>Closest analogues include GPT‑Neo 125M and GPT‑2 Medium (345M),
+    though GLPG uses a fundamentally different cognitive substrate and a
+    narrow canon specialization.</p>
+    <h2 id="classification-of-the-minimum-viable-model">Classification
+    of the Minimum Viable Model</h2>
+    <p>The minimum viable GLPG model behaves as:</p>
+    <ul>
+    <li><p>a low-dimensional semantic–syntactic attractor
+    network,</p></li>
+    <li><p>a minimal recurrent cognitive substrate producing
+    proto-narrative sequences.</p></li>
+    </ul>
+    <p>Functionally, its closest equivalents are:</p>
+    <ul>
+    <li><p>a very small Elman-style RNN with learned
+    embeddings,</p></li>
+    <li><p>a minimal GRU-like recurrent core without gates,</p></li>
+    <li><p>a micro-scale Hopfield-like attractor system generating token
+    rhythms,</p></li>
+    <li><p>a proto-language model comparable in scale to early 1990s RNN
+    text generators.</p></li>
+    </ul>
+    <p>None of these match GLPG’s behaviour exactly, but they
+    approximate its regime: a tiny recurrent dynamical system with
+    semantic drift, syntactic rhythm, and proto-narrative attractor
+    loops.</p>
+    <h2 id="scaling-comparison">Scaling Comparison</h2>
+    <p>Transformers scale gradually:</p>
+    <p><span class="math display">GPT-2 mini (124M) → GPT-2 large-scale
+    variants (up to 5B)  (≈38×)</span></p>
+    <p>Same architecture, same dynamics, more capacity → <em>gradual
+    improvement</em>.</p>
+    <p>GLPG scales categorically:</p>
+    <p><span class="math display">GLPG-MVM (1.4 MB) → GLPG-baseline (53
+    MB)  (≈38×)</span></p>
+    <p>Same cognitive substrate, same dynamical principles, but:</p>
+    <ul>
+    <li><p>attractor basins stabilize,</p></li>
+    <li><p>semantic manifolds deepen,</p></li>
+    <li><p>narrative coherence emerges,</p></li>
+    <li><p>biome adaptation becomes robust.</p></li>
+    </ul>
+    <p>This is not a gradual improvement — it is a <strong>phase
+    transition</strong>.</p>
+    <h2 id="conclusion-4">Conclusion</h2>
+    <p>The final baseline model represents the fully realized GLPG
+    cognitive architecture: stable attractors, coherent narrative flow,
+    rich semantic manifolds, and fast generation. The minimum viable
+    model represents the underlying cognitive kernel: a proto-narrative
+    attractor system capable of semantic drift and syntactic rhythm.</p>
+    <p>Both models share the same “brain,” but differ in capacity. GLPG
+    therefore exhibits <strong>categorical scaling</strong>: increasing
+    capacity does not merely improve quality, but unlocks new cognitive
+    behaviours.</p>
+    <h1 id="other-gutenberg-datasets">Other Gutenberg Datasets</h1>
+    <p>To verify that the new baseline architecture is not
+    Alice‑specific, we trained the same model on three additional
+    Gutenberg datasets. The results show that GLPG’s cognitive behaviour
+    is reproducible across corpora: downscaled models retain the same
+    dynamical regime at lower capacity, while upscaled models exhibit
+    the same attractor‑stabilisation and narrative coherence observed in
+    Alice.</p>
+    <h2 id="the-strange-case-of-dr.-jekyll-and-mr.-hyde">The strange
+    case of Dr. Jekyll and Mr. Hyde</h2>
+    <p>139 KB, 341 KB canonical, 26<span>,</span>706 unique samples, 201
+    sequences.</p>
+    <ul>
+    <li><p>Baseline (1024 hidden, 128 output): 30K epochs,
+    3<span>,</span>986<span>,</span>140 transitions, 2950 s, 58 MB
+    model.</p></li>
+    <li><p>Downscaling (64 hidden, 8 output): 30K epochs,
+    3<span>,</span>946<span>,</span>415 transitions, 829 s, 2.9 MB
+    model.</p></li>
+    </ul>
+    <p>This test confirms that GLPG performs <strong>cognitive
+    style‑compression</strong> even at 3 MB. The small model is not a
+    weaker version of the large model, but a different cognitive phase:
+    narrow attractor basins, strong stylistic cadence, and monomodal
+    narrative loops.</p>
+    <h2 id="the-outline-of-science-vol.-1">The Outline of Science, Vol.
+    1</h2>
+    <p>600 KB, 1423 KB canonical, 106<span>,</span>360 unique samples,
+    809 sequences.</p>
+    <ul>
+    <li><p>Baseline (1024 hidden, 128 output): 100K epochs,
+    13<span>,</span>171<span>,</span>314 transitions, 8135 s, 68 MB
+    model.</p></li>
+    <li><p>Downscaling (256 hidden, 64 output): 30K epochs,
+    3<span>,</span>925<span>,</span>607 transitions, 1701 s, 15 MB
+    model.</p></li>
+    </ul>
+    <p>Both models exhibit the same dynamical regime, but with different
+    expressive power. The small model produces proto‑scientific
+    fragments; the large model produces coherent expository paragraphs.
+    The difference is one of <strong>capacity</strong>, not of
+    <strong>behaviour</strong>: the underlying cognitive substrate is
+    identical.</p>
+    <h2 id="thuvia-maid-of-mars">Thuvia, Maid of Mars</h2>
+    <p>256 KB, 289 KB canonical, 21<span>,</span>722 unique samples, 404
+    sequences.</p>
+    <ul>
+    <li><p>Tiny (256 hidden, 32 output): 48K epochs,
+    2<span>,</span>575<span>,</span>439 transitions, 786 s, 6 MB
+    model.</p></li>
+    <li><p>Small (512 hidden, 64 output): 49K epochs,
+    2<span>,</span>634<span>,</span>890 transitions, 933 s, 17 MB
+    model.</p></li>
+    <li><p>Medium (1024 hidden, 128 output): 50K epochs,
+    2<span>,</span>696<span>,</span>169 transitions, 1466 s, 57 MB
+    model.</p></li>
+    <li><p>Large (2048 hidden, 256 output): 51K epochs,
+    2<span>,</span>737<span>,</span>131 transitions, 5946 s, 210 MB
+    model.</p></li>
+    </ul>
+    <p>Downscaling effects:</p>
+    <ul>
+    <li><p>longer output due to shallow attractors,</p></li>
+    <li><p>fragmentary pulp‑cadence,</p></li>
+    <li><p>chaotic role binding,</p></li>
+    <li><p>high creative drift.</p></li>
+    </ul>
+    <p>Upscaling effects:</p>
+    <ul>
+    <li><p>longer narrative flow (6–20+ sentences),</p></li>
+    <li><p>stable clause chains and syntactic inertia,</p></li>
+    <li><p>strong Burroughs‑style biome adaptation,</p></li>
+    <li><p>reduced creative drift and increased canon rigidity.</p></li>
+    </ul>
+    <div class="table*">
+    <div class="tabular">
+    <p><span>p<span>3.2cm</span> p<span>2.2cm</span> p<span>2.2cm</span>
+    p<span>2.2cm</span> p<span>2.2cm</span></span>
+    <strong>Model</strong> &amp; <strong>Tiny</strong> &amp;
+    <strong>Small</strong> &amp; <strong>Medium</strong> &amp;
+    <strong>Large</strong><br />
+    </p>
+    <p><strong>Hidden / Output</strong> &amp; 256 / 32 &amp; 512 / 64
+    &amp; 1024 / 128 &amp; 2048 / 256<br />
+    <strong>Model Size MB</strong> &amp; 6 &amp; 17 &amp; 57 &amp;
+    210<br />
+    <strong>Output Length KB</strong> &amp; 147 &amp; 122 &amp; 112
+    &amp; 104<br />
+    <strong>Syntactic Stability</strong> &amp; Low: telegraphic breaks
+    &amp; Medium: partial clause stability &amp; High: consistent clause
+    chains &amp; Very high: inertial syntax<br />
+    <strong>Narrative Flow</strong> &amp; Micro‑scenes, abrupt jumps
+    &amp; 2–4 sentence continuity &amp; 6–12 sentence continuity &amp;
+    20+ sentence continuity<br />
+    <strong>Role Binding</strong> &amp; Weak, drifting roles &amp;
+    Moderate stability &amp; Strong, consistent roles &amp; Very strong,
+    high inertia<br />
+    <strong>Biome Adaptation</strong> &amp; Shallow pulp vocabulary
+    &amp; Emerging pulp cadence &amp; Strong Burroughs cadence &amp;
+    Fully internalized biome<br />
+    <strong>Creative Drift</strong> &amp; High, chaotic variation &amp;
+    Medium variation &amp; Balanced creativity &amp; Low,
+    canon‑locked<br />
+    <strong>Semantic Coherence</strong> &amp; Low, contradictions &amp;
+    Medium, partial logic &amp; High, coherent scenes &amp; Very high,
+    rigid meaning<br />
+    <strong>Recursion Robustness</strong> &amp; Very low &amp;
+    Low–medium &amp; High &amp; Very high<br />
+    <strong>Overall Cognitive Profile</strong> &amp; <em>Infant
+    attractor‑core</em> &amp; <em>Adolescent proto‑organism</em> &amp;
+    <em>Adult cognitive substrate</em> &amp; <em>Over‑mature,
+    canon‑rigid organism</em><br />
+    </p>
+    </div>
+    </div>
+    <h2 id="general-observations">General Observations</h2>
+    <p>Across all datasets:</p>
+    <ul>
+    <li><p>GLPG’s behaviour is reproducible: same dynamical regime,
+    different capacity.</p></li>
+    <li><p>Downscaled models produce longer outputs due to shallow
+    attractor basins.</p></li>
+    <li><p>Upscaled models compress output due to strong attractor
+    geometry.</p></li>
+    <li><p>Narrative coherence increases monotonically with
+    hidden/output size.</p></li>
+    <li><p>Creative drift decreases as attractor basins deepen.</p></li>
+    </ul>
+    <p>GLPG therefore exhibits <strong>cognitive scaling</strong>:
+    increasing capacity does not change the type of behaviour, but the
+    <em>maturity</em> of the behaviour. Tiny models ramble; medium
+    models narrate; large models stabilize into canon‑rigid
+    organisms.</p>
+    <h1 id="glpg-as-cognitive-substrate">GLPG as Cognitive
+    Substrate</h1>
+    <p>GLPG does not behave like a black-box language model. Across all
+    ablations, GLPG responds to activation choice, hyperparameter
+    variation, input-vector design, and recursion depth as a
+    <em>dynamical system</em>. Its behaviour is logical, interpretable,
+    and parametrizable. This makes GLPG fundamentally different from
+    statistical transformer architectures: GLPG is a <strong>cognitive
+    substrate</strong>.</p>
+    <h2 id="graph-optionality-and-structural-orientation">Graph
+    Optionality and Structural Orientation</h2>
+    <p>In GLPG, grammar and lemma embeddings structurally orient the
+    semantic manifold. As a result, the graph is optional: GLPG can
+    operate in both graph-assisted and emergent-graph modes. In
+    contrast, DMLG requires an explicit graph because its MLP cannot
+    carry internal structure. This makes GLPG architecturally more
+    elegant: the manifold itself contains the structural priors.</p>
+    <h2 id="iegr-complete-cognitive-dynamics">IEGR-Complete Cognitive
+    Dynamics</h2>
+    <p>GLPG is not a language model but a dynamic, strongly
+    parametrizable, plastic, and modular cognitive substrate. Under
+    hyperparameter variation, GLPG:</p>
+    <ul>
+    <li><p>deforms,</p></li>
+    <li><p>stabilizes,</p></li>
+    <li><p>evolves,</p></li>
+    <li><p>and canonizes.</p></li>
+    </ul>
+    <p>These logical behavioural shifts demonstrate that GLPG is an
+    <strong>IEGR-complete</strong> architecture: it forms an internal
+    emergent graph, a minimal but realistic demonstration of what an AGI
+    substrate must be.</p>
+    <h2 id="cognitive-scale-laws">Cognitive Scale Laws</h2>
+    <p>Biological and artificial cognitive systems exhibit the same
+    pattern:</p>
+    <ul>
+    <li><p>too small: insufficient structure,</p></li>
+    <li><p>optimal: maximal plasticity, variation, stability,</p></li>
+    <li><p>too large: rigidity, redundancy, compression, telegraphic
+    behaviour.</p></li>
+    </ul>
+    <p>A cognitive substrate has an optimal size. Beyond that point,
+    manifold compression reduces variation, narrows canon, and
+    suppresses cognitive dynamics. GLPG shows this empirically, and
+    similar scale laws will appear in transformer architectures once
+    their internal graph representations saturate.</p>
+    <h2 id="cognitive-robustness-under-ablation">Cognitive Robustness
+    Under Ablation</h2>
+    <p>GLPG continues to function even when input, output, and MLP
+    layers are heavily reduced. GLPG behaviour arises from <em>cognitive
+    dynamics</em>, not from scale. This is precisely why GLPG is
+    relevant: it is not a classical language model, but a cognitive
+    substrate that emulates language through structural and semantic
+    dynamics.</p>
+    <h2 id="style-adaptation-and-canon-emergence">Style Adaptation and
+    Canon Emergence</h2>
+    <p>GLPG automatically adapts to writing style and canon biome
+    without prompting or finetuning. Transformer models cannot do this
+    without explicit conditioning. GLPG exhibits cognitive scale
+    consistency and style emergence, not statistical correlation. It is
+    a cognitive narrative system that adapts to any domain and produces
+    emergent discourse forms.</p>
+    <h2 id="architecture-vs.-dynamics">Architecture vs. Dynamics</h2>
+    <p>GLPG is a cognitive substrate that generates language. The
+    architecture is constant; the dynamics scale. If language production
+    were merely a statistical vector trick, humans would not be able to
+    speak. Language requires a dynamic, plastic substrate with an
+    internal energy envelope and a cognitive lifecycle.</p>
+    <h2 id="implications-for-agi">Implications for AGI</h2>
+    <p>AGI should be able to learn one book, not require a thousand
+    books to reproduce one. AGI must be a dynamic, plastic IEGR
+    substrate that functions at any scale, with a stable cognitive
+    lifecycle.</p>
+    <p>GLPG demonstrates:</p>
+    <ol>
+    <li><p>language generation without transformer mechanisms,</p></li>
+    <li><p>cognitive principles instead of statistical
+    correlation,</p></li>
+    <li><p>semantic coherence emerging from vector dynamics,</p></li>
+    <li><p>full interpretability of internal mechanisms.</p></li>
+    </ol>
+    <p>GLPG is therefore a minimal cognitive architecture that produces
+    coherent language behaviour without attention mechanisms. This is a
+    fundamental contribution to understanding how language can emerge
+    from dynamical systems.</p>
+    <h1
+    id="architectural-innovations-hybrid-recursion-and-token-history">Architectural
+    Innovations: Hybrid Recursion and Token History</h1>
+    <p>GLPG’s improved cognitive behaviour emerges from two
+    architectural innovations: <strong>Hybrid Recursion</strong> in the
+    forward pass and <strong>Token History</strong> in the input vector.
+    Together, these mechanisms transform a simple MLP into a dynamic,
+    directional, and semantically coherent cognitive substrate.</p>
+    <h2 id="hybrid-recursion-internal-dynamical-refinement">Hybrid
+    Recursion: Internal Dynamical Refinement</h2>
+    <p>The hybrid recursion block introduces controlled iterative
+    refinement inside the forward pass. Instead of a single feedforward
+    projection, GLPG performs multiple gated residual updates:</p>
+    <p><span
+    class="math display"><em>h</em> ← <em>h</em> + <em>g</em> ⋅ (<em>u</em>−<em>h</em>),   <em>g</em> = <em>σ</em>(<em>W</em><sub>gate</sub><em>h</em>),   <em>u</em> = silu(<em>W</em><sub>refine</sub><em>h</em>).</span></p>
+    <p>This mechanism increases the degree of recurrence
+    (<strong>R</strong>) inside the substrate itself, independent of PRE
+    (Proposal–Retry–Evaluate). Hybrid recursion provides:</p>
+    <ul>
+    <li><p>internal semantic refinement,</p></li>
+    <li><p>attractor stabilization,</p></li>
+    <li><p>clause-level coherence,</p></li>
+    <li><p>controlled narrative drift,</p></li>
+    <li><p>robustness under sampling variation.</p></li>
+    </ul>
+    <p>Hybrid recursion is therefore a structural analogue of biological
+    recurrent processing: a minimal form of cognitive iteration embedded
+    directly in the substrate.</p>
+    <h2
+    id="token-history-sensory-continuity-and-semantic-direction">Token
+    History: Sensory Continuity and Semantic Direction</h2>
+    <p>Token History provides the substrate with a low-noise,
+    lemma-driven temporal memory. It encodes:</p>
+    <ul>
+    <li><p>semantic continuity,</p></li>
+    <li><p>temporal drift,</p></li>
+    <li><p>decay-controlled retention,</p></li>
+    <li><p>positional rotation,</p></li>
+    <li><p>canon-consistent transitions.</p></li>
+    </ul>
+    <p>Without Token History, GLPG remains functional but becomes
+    <strong>directionless</strong>: syntax is coherent, but semantics
+    collapse into telegraphic repetition. Without CSL (structural
+    anchoring), Token History becomes <strong>unstable</strong>:
+    semantic drift occurs without attractor control.</p>
+    <p>Only the combination <strong>CSL + Token History</strong>
+    yields:</p>
+    <ul>
+    <li><p>coherent micro-scenes,</p></li>
+    <li><p>stable narrative flow,</p></li>
+    <li><p>selective semantic retention,</p></li>
+    <li><p>controlled attractor geometry,</p></li>
+    <li><p>emergent discourse structure.</p></li>
+    </ul>
+    <p>This demonstrates the importance of <strong>sensory input and
+    memory</strong> for any cognitive substrate: without structured
+    perception, recurrence alone cannot produce meaningful
+    behaviour.</p>
+    <h2 id="cognitive-synergy-direction-refinement">Cognitive Synergy:
+    Direction + Refinement</h2>
+    <p>Hybrid recursion and Token History together form a minimal
+    cognitive loop:</p>
+    <p><span class="math display">Perception (Token History) → Internal
+    Refinement (Hybrid) → Narrative Action (Output).</span></p>
+    <p>This loop gives GLPG:</p>
+    <ul>
+    <li><p>direction (semantic drift),</p></li>
+    <li><p>stability (attractor basins),</p></li>
+    <li><p>plasticity (controlled flux),</p></li>
+    <li><p>coherence (recursive refinement),</p></li>
+    <li><p>adaptability (biome and style emergence).</p></li>
+    </ul>
+    <p>GLPG therefore behaves as a <strong>cognitive substrate</strong>,
+    not a statistical LM: its behaviour arises from dynamical
+    interaction between memory, structure, and recurrence.</p>
+    <h2 id="why-these-innovations-matter">Why These Innovations
+    Matter</h2>
+    <p>Hybrid recursion shows that recurrence inside the substrate
+    increases cognitive capacity without increasing model size. Token
+    History shows that meaningful cognition requires structured sensory
+    input and temporal memory.</p>
+    <p>Together, they demonstrate:</p>
+    <ul>
+    <li><p>how semantic coherence can emerge from vector
+    dynamics,</p></li>
+    <li><p>how narrative flow can arise without attention
+    mechanisms,</p></li>
+    <li><p>how a minimal architecture can produce cognitive
+    behaviour,</p></li>
+    <li><p>how direction, stability, and emergence arise from simple
+    principles.</p></li>
+    </ul>
+    <p>GLPG is therefore not a transformer alternative, but a
+    demonstration of how language can emerge from a dynamic system with
+    recurrence, memory, and structural anchoring. It is a minimal
+    cognitive architecture capable of producing coherent narrative
+    behaviour.</p>
+    <h1 id="conclusion-5">Conclusion</h1>
+    <p>This work introduced GLPG as a minimal yet expressive cognitive
+    substrate capable of generating coherent narrative behaviour without
+    transformer mechanisms. Across all ablations—activation functions,
+    recursion depth, sampling parameters, input vector design, and
+    cross‑dataset evaluation—GLPG consistently behaved as a dynamical
+    system rather than a statistical language model.</p>
+    <p>Two architectural innovations proved essential. The hybrid
+    recursive forward pass provides internal semantic refinement and
+    attractor stabilization, increasing the degree of recurrence inside
+    the substrate itself. Token History supplies temporal continuity and
+    directional semantic drift, demonstrating the importance of
+    structured sensory input and memory for any cognitive system.
+    Together, these mechanisms form a minimal cognitive loop that yields
+    coherent micro‑scenes, stable narrative flow, and emergent discourse
+    structure.</p>
+    <p>Ablations showed that GLPG exhibits clear cognitive scale laws:
+    too small leads to insufficient structure, optimal size yields
+    maximal plasticity and stability, and too large produces rigidity
+    and manifold compression. Unlike transformer models, which scale
+    gradually with diminishing returns, GLPG undergoes categorical
+    behavioural transitions. The minimum viable model and the full
+    baseline share the same cognitive substrate, but differ in maturity:
+    proto‑narrative attractors versus coherent narrative flow.</p>
+    <p>Cross‑dataset experiments demonstrated reproducibility. Whether
+    trained on <em>Alice</em>, <em>Jekyll and Hyde</em>, <em>Outline of
+    Science</em>, or <em>Thuvia, Maid of Mars</em>, GLPG maintained the
+    same dynamical regime while adapting to each biome and stylistic
+    canon. Scaling hidden and output dimensions produced predictable
+    changes in cognitive behaviour, confirming that GLPG’s architecture
+    is stable across domains.</p>
+    <p>The results show that semantic coherence can emerge from vector
+    dynamics, recurrence, and structured memory rather than attention
+    mechanisms or large-scale statistical correlation. GLPG is not a
+    transformer alternative but a demonstration of how language can
+    arise from a compact, interpretable cognitive substrate. It remains
+    functional even when heavily ablated, indicating that its behaviour
+    is driven by cognitive principles rather than brute-force scale.</p>
+    <p>This work suggests that AGI substrates may not require massive
+    corpora or attention-based architectures. A dynamic, plastic
+    IEGR-complete system with structured input, temporal memory, and
+    internal refinement may be sufficient to produce coherent language
+    behaviour. GLPG provides a minimal, interpretable example of such a
+    system, illustrating how narrative competence can emerge from simple
+    but well-designed cognitive dynamics.</p>
+    <h1 id="glossary-of-cognitive-and-architectural-terms">Glossary of
+    Cognitive and Architectural Terms</h1>
+    <div class="description">
+    <p>A stable region of the semantic manifold toward which the model’s
+    internal state converges during generation. Deep attractor basins
+    yield coherent, canon‑consistent behaviour; shallow basins increase
+    plasticity and creative drift.</p>
+    <p>The model’s ability to internalise stylistic, lexical, and
+    narrative patterns specific to a domain (e.g. Burroughs‑style pulp
+    cadence). Emerges from stable semantic manifolds rather than
+    explicit conditioning.</p>
+    <p>The tendency of a trained model to compress its narrative
+    behaviour toward a stable internal world‑model. Increases with model
+    size, training depth, and output‑embedding dimension.</p>
+    <p>A dynamical system capable of producing coherent linguistic
+    behaviour through structural and semantic dynamics rather than
+    statistical correlation. GLPG is designed as such a substrate.</p>
+    <p>The similarity measure used to select the next lemma embedding in
+    pure MLP mode. Determines how the semantic manifold is traversed
+    during generation.</p>
+    <p>The degree of semantic movement or dynamical energy in the
+    manifold. Low flux produces rigid canon; high flux produces creative
+    drift. Controlled by sampling parameters and activation
+    functions.</p>
+    <p>Generative regime in which deterministic last‑lemma routing
+    restricts candidate transitions. Provides structural cadence and
+    collapse‑resistance.</p>
+    <p>A system is IEGR‑complete when it instantiates all four
+    structural roles of intelligence—energetic efficiency (E),
+    informational richness (I), geometric structure (G), and recursive
+    depth (R)—in an integrated and mutually reinforcing manner. As
+    stated in the IEGR taxonomy, “Only systems that are both
+    IEGR‑complete and IEGR‑scaled exhibit human-like general
+    intelligence.”</p>
+    <p>IEGR‑completeness therefore requires:</p>
+    <ul>
+    <li><p><strong>E</strong>: efficient cognitive transformation rather
+    than brute-force scale,</p></li>
+    <li><p><strong>I</strong>: sufficiently rich and grounded semantic
+    content,</p></li>
+    <li><p><strong>G</strong>: internal geometric organization,
+    modularity, and canonical form,</p></li>
+    <li><p><strong>R</strong>: recursive self-refinement, multi-step
+    reasoning, and reflective oversight.</p></li>
+    </ul>
+    <p>A system lacking any of these roles falls into one of the parrot
+    regimes described in the taxonomy (statistical, canonical, literal,
+    or sophisticated parrots). IEGR‑complete systems avoid these
+    structural failure modes by integrating E, I, G, and R into a
+    coherent cognitive architecture.</p>
+    <p>IEGR‑completeness is a structural property, not an
+    anthropomorphic one: it describes the minimal architecture required
+    for general-purpose intelligence across biological, artificial, and
+    hybrid substrates.</p>
+    <p>The effective dimensional breadth of the semantic space. Too
+    narrow yields telegraphic behaviour; too wide yields semantic
+    diffusion. Optimal width depends on hidden‑layer size and
+    output‑embedding dimension.</p>
+    <p>Generative regime in which the full vocabulary is evaluated using
+    cosine scoring. Exposes the learned semantic manifold and reveals
+    attractor structure.</p>
+    <p>The degree to which generated text maintains coherent
+    multi‑sentence continuity. Strengthens with deeper attractor basins
+    and stable semantic manifolds.</p>
+    <p>The number of candidate transitions per page in graph‑assisted
+    mode. Controls determinism, variation, and structural cadence.</p>
+    <p>The ability of the model to remain coherent under repeated
+    self‑feeding generation. Increases with hybrid recursion and stable
+    attractor basins.</p>
+    <p>Gradual movement of the model’s internal semantic state across
+    the manifold. Controlled by Token History, sampling parameters, and
+    embedding blend coefficient.</p>
+    <p>The learned geometry of grammar–lemma embeddings. Determines
+    world‑model depth, stylistic adaptation, and attractor
+    structure.</p>
+    <p>The grounding provided by CSL (Current + Sequence + Line).
+    Prevents semantic drift from collapsing into repetition and ensures
+    clause‑level coherence.</p>
+    <p>A lemma‑driven, decay‑controlled temporal memory that provides
+    semantic continuity and directional drift. Essential for coherent
+    narrative behaviour.</p>
+    <p>A categorical shift in cognitive behaviour caused by changes in
+    model capacity, rather than a gradual improvement. GLPG exhibits
+    such transitions between MVM, baseline, and large models.</p>
+    </div>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the GLPG engine, the narrator pipeline,
+    and all supporting modules is provided under the AGPL‑3.0 license.
+    The datasets described in this paper are present within the
+    complementary <code>triadic-data</code> repository.</p>
+    <div class="center">
+
+    </div>
+    <div class="thebibliography">
+    <p>J. De Witte, “The GLP–Graph Architecture: Combining GLP–Mono with
+    DMLG,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The GLP–Mono Architecture,” Triadic Cosmos
+    Ecosystem, 2026.</p>
+    <p>J. De Witte, “Learnable Lemma Embeddings for GLP Models,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Grammar Lemma Paged Language Models,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Structural Taxonomy of Intelligence,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The Lifecycle Architecture of Synthetic Cognition,”
+    Triadic Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>

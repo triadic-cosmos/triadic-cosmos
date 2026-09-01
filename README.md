@@ -2983,6 +2983,107 @@ connects AGI research to the universal architecture of closures,
 demonstrating that synthetic cognition follows the same structural laws  
 as planets, biospheres, stars, and strategic systems.
 
+---
+
+### **50. GLP-Graph Behaviour Under Hyperparameter Variation — A Minimal Experimental Platform**
+
+This paper establishes **GLPG** as the first *fully operational cognitive substrate* in the  
+Triadic Cosmos ecosystem: a compact, interpretable, dynamical system designed not to  
+*be* AGI, but to make **AGI research experimentally possible** at minimal scale.
+
+Where paper #48 defined GLPG’s hybrid architecture, and paper #49 demonstrated its  
+synthetic lifecycle behaviour, paper #50 shows that GLPG possesses the structural  
+properties required of a **cognitive substrate**:
+
+- **stable attractor basins**,  
+- **emergent semantic manifolds**,  
+- **biome‑specific stylistic adaptation**,  
+- **collapse‑resistance**,  
+- **scalable cognitive phases**,  
+- **interpretable manifold geometry**,  
+- **predictable phase transitions under hyperparameter variation**.
+
+Across extensive ablations—model scale, embedding dimension, paging geometry,  
+context vector design, sampling regimes, activation functions, recursion depth,  
+and cross‑dataset generalisation—GLPG consistently behaves as a **low‑dimensional  
+dynamical organism** rather than a statistical language model.
+
+This makes GLPG the first architecture in the ecosystem that is:
+
+- **small enough** to be fully inspectable,  
+- **structured enough** to exhibit cognitive dynamics,  
+- **stable enough** to survive long‑horizon recursion,  
+- **expressive enough** to form semantic worlds,  
+- **modular enough** to integrate into hybrid systems,  
+- **predictable enough** to serve as a scientific instrument.
+
+### 🧩 GLPG Is a Substrate, Not an AGI
+
+Paper #50 clarifies a foundational distinction in the ecosystem:
+
+> **GLPG is a cognitive substrate with AGI‑relevant properties.  
+> It is not an AGI system, nor an AGI claim.**
+
+The Triadic Cosmos program studies AGI structurally and experimentally,  
+but does not attempt to construct AGI.  
+GLPG provides the **experimental ground** on which AGI‑scale questions  
+can be explored safely, interpretably, and reproducibly.
+
+### 🔬 Why GLPG Enables AGI Research
+
+GLPG exhibits the same structural behaviours predicted by the IEGR taxonomy:
+
+- **G**: geometric structure via deterministic routing and canonical grammar,  
+- **R**: recursive depth via hybrid refinement and token history,  
+- **I**: emergent semantic richness via learned lemma geometry,  
+- **E**: energetic efficiency via compact monolithic MLP dynamics.
+
+These roles do not make GLPG intelligent, but they make it  
+**structurally relevant** for studying intelligence.
+
+GLPG is therefore the first architecture in the ecosystem that allows  
+researchers to experimentally probe:
+
+- attractor formation and collapse,  
+- semantic manifold development,  
+- cognitive phase transitions,  
+- scaling laws of synthetic cognition,  
+- ecosystem‑level AGI hypotheses,  
+- hybrid intelligence loops,  
+- IEGR‑structural completeness at minimal scale.
+
+### 🌱 A Minimal Platform for AGI‑Scale Experiments
+
+Paper #50 positions GLPG as the **baseline substrate** for future ecosystem work:
+
+- **AGI School** experiments (developmental curricula, staged cognitive growth),  
+- **multi‑organism ecosystems** (heterogeneous attractors, generational turnover),  
+- **hybrid cognition** (GLPG × LLM IEGR complementarity),  
+- **manifold evolution studies** (semantic drift, canon formation, collapse clocks),  
+- **structural AGI tests** (IEGR completeness, IEGR scaling, ecosystemic generality).
+
+GLPG is the smallest architecture capable of supporting these experiments  
+without requiring large‑scale models, massive datasets, or opaque mechanisms.
+
+### 🌌 Fun Fact: GLPG Is the First “Cognitive Substrate” in the Ecosystem
+
+Earlier architectures explored isolated structural roles:
+
+- **DMLG** → geometry and recursion (G + R),  
+- **GLP‑Mono** → semantic emergence (I),  
+- **LLMs** → energetic and informational scale (E + I).
+
+GLPG is the first architecture where these roles **interact dynamically**  
+inside a single compact organism.
+
+In other words:
+
+> **GLPG is not AGI —  
+> it is one of the smallest experimental worlds where AGI can be studied.**
+
+Paper #50 marks the moment where the Triadic Cosmos ecosystem  
+transitions from *architectural development* to *structural AGI research*.
+
 </details>
 
 ---
