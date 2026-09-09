@@ -1,0 +1,2272 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>GLP–Graph Scaling Behaviour<br />
+Cognitive Manifold Stability Across Generations</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#significance-statement"
+    id="toc-significance-statement">Significance Statement</a></li>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#effects-of-grammar-fixing"
+    id="toc-effects-of-grammar-fixing">Effects of Grammar
+    Fixing</a></li>
+    <li><a href="#output-scoring-and-evaluation"
+    id="toc-output-scoring-and-evaluation">Output Scoring and
+    Evaluation</a></li>
+    <li><a href="#what-is-scaling" id="toc-what-is-scaling">What is
+    Scaling</a></li>
+    <li><a href="#what-is-staged-training"
+    id="toc-what-is-staged-training">What is Staged Training</a></li>
+    <li><a href="#experimental-setup"
+    id="toc-experimental-setup">Experimental Setup</a></li>
+    <li><a href="#scaling-examples" id="toc-scaling-examples">Scaling
+    Examples</a></li>
+    <li><a href="#staged-learning-examples"
+    id="toc-staged-learning-examples">Staged Learning Examples</a></li>
+    <li><a href="#transfer-learning-examples"
+    id="toc-transfer-learning-examples">Transfer Learning
+    Examples</a></li>
+    <li><a href="#trained-models-quality-evaluation"
+    id="toc-trained-models-quality-evaluation">Trained Models Quality
+    Evaluation</a></li>
+    <li><a href="#textbook-scaling-behaviour"
+    id="toc-textbook-scaling-behaviour">Textbook Scaling
+    Behaviour</a></li>
+    <li><a href="#relevance-for-agi"
+    id="toc-relevance-for-agi">Relevance for AGI</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#validation-of-the-numerical-evaluation-method"
+    id="toc-validation-of-the-numerical-evaluation-method">Validation of
+    the Numerical Evaluation Method</a></li>
+    <li><a href="#graph-based-qkv-selection-in-glpg"
+    id="toc-graph-based-qkv-selection-in-glpg">Graph-Based QKV Selection
+    in GLPG</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 class="unnumbered" id="significance-statement">Significance
+    Statement</h1>
+    <p>The GLP–Graph (GLPG) architecture was originally introduced as a
+    minimal and interpretable cognitive substrate capable of combining
+    deterministic graph routing with emergent semantic manifolds. The
+    present paper extends this foundation by demonstrating that GLPG is
+    not merely a static architecture, but a scalable and
+    evolution-capable cognitive system whose attractor geometry remains
+    stable across architectural transformations, dataset transfers, and
+    staged generational growth.</p>
+    <p>This work introduces the first numerical evaluation pipeline for
+    GLPG: all generated stories across all scaling experiments are
+    assessed by an external LLM using a calibrated scoring regime. This
+    provides an objective and reproducible metric for comparing
+    cognitive behaviour across model sizes, generative modes, training
+    depths, staged lineages, and transfer-learning directions. The
+    resulting measurements reveal that GLPG supports function-preserving
+    scaling: the learned lemma embeddings and paging geometry act as
+    cognitive DNA that survives both upscaling and downscaling, enabling
+    models to grow or shrink without cognitive reset.</p>
+    <p>The experiments show that GLPG exhibits unusually strong
+    structural and semantic stability. Upscaling inflates the semantic
+    manifold while preserving canonical structure; downscaling
+    compresses the manifold without erasing core attractors; staged
+    training produces hereditary semantic clusters that propagate across
+    generations; and transfer learning reorganises the manifold in a
+    deterministic, canon-dominant manner. Large models trained from
+    scratch perform significantly worse than lineage-grown models,
+    demonstrating that capacity alone is insufficient without prior
+    consolidation at smaller scales.</p>
+    <p>These findings position GLPG as a minimal yet robust cognitive
+    substrate. Its bidirectional scalability, hereditary attractor
+    dynamics, stability under variation, and staged growth behaviour
+    provide a concrete computational analogue for cognitive development,
+    inheritance, and world-formation within the Triadic Cosmos
+    ecosystem. GLPG therefore serves not only as a language generator,
+    but as a structurally grounded model of scalable artificial
+    cognition.</p>
+    <h1 id="introduction">Introduction</h1>
+    <p>The GLP–Graph (GLPG) architecture was introduced as a hybrid
+    generative substrate that unifies deterministic graph routing with
+    emergent semantic behaviour inside a single monolithic MLP. Whereas
+    conventional language models rely on large-scale attention
+    mechanisms and implicit statistical correlations, GLPG provides an
+    explicit and inspectable governance layer: grammar tokens, lemma
+    transitions, paging geometry, and structural cadence are defined by
+    a canonical graph, while semantic content is injected through
+    learned lemma embeddings and a compact feedforward network. This
+    combination yields a system that is both structurally deterministic
+    and semantically expressive, forming a minimal cognitive substrate
+    within the Triadic Cosmos ecosystem.</p>
+    <p>Previous work established two foundational properties of GLPG.
+    The architecture paper demonstrated that GLPG supports dual
+    generative modes—paged graph traversal and pure MLP
+    sampling—revealing that the monolithic network internalises manifold
+    structure that mirrors the deterministic graph. The hyperparameter
+    study showed that GLPG exhibits structured cognitive dynamics across
+    scale: proto-semantic attractors in underscaled models, emergent
+    semantic manifolds in mid-scale configurations, and canon
+    compression in larger models. These behaviours suggest that GLPG
+    operates not merely as a language generator, but as a
+    low-dimensional dynamical system whose attractor geometry evolves
+    predictably with capacity.</p>
+    <p>The present paper extends this line of inquiry by investigating
+    GLPG under architectural scaling, staged generational growth, and
+    cross-dataset transfer. We examine how the attractor manifold
+    behaves when the hidden-layer capacity of the monolithic MLP is
+    increased, decreased, or grown through lineage. Crucially, we
+    introduce the first numerical evaluation pipeline for GLPG: all
+    generated stories across all scaling experiments are assessed by an
+    external LLM using a calibrated scoring regime. This provides an
+    objective and reproducible metric for comparing cognitive behaviour
+    across model sizes, generative modes, training depths, staged
+    lineages, and transfer- learning directions.</p>
+    <p>Using this metric, we show that GLPG supports function-preserving
+    scaling. The learned lemma embeddings and paging geometry act as
+    cognitive DNA that remains stable across architectural
+    transformations. Upscaling expands the semantic manifold without
+    erasing existing attractors; downscaling compresses the manifold
+    while preserving canonical structure; staged training produces
+    hereditary attractor clusters that propagate across generations; and
+    transfer learning reorganises the manifold in a deterministic,
+    canon-dominant manner. Large models trained from scratch perform
+    significantly worse than lineage-grown models, demonstrating that
+    capacity alone is insufficient without prior consolidation.</p>
+    <p>Across all experiments, GLPG exhibits unusually strong structural
+    and semantic stability. Its manifold deforms smoothly under
+    hyperparameter variation, scaling, compression, and dataset
+    transfer, behaving not as a statistical correlation space but as a
+    structured cognitive dynamical system. This stability enables
+    predictable cognitive development across architectural stages and
+    provides a foundation for lineage-based world formation.</p>
+    <p>Overall, this paper positions GLPG as a scalable and
+    evolution-capable cognitive substrate. Its bidirectional stability,
+    hereditary attractor dynamics, transfer-learning behaviour, and
+    staged growth properties provide a computational analogue for the
+    AGI lifecycle concept: cognitive systems that develop, compress,
+    inherit, and expand their internal world models across
+    generations.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Research on scaling behaviour in neural architectures has largely
+    focused on transformers and their predecessors—MLPs, RNNs, LSTMs,
+    GRUs, and convolutional sequence models. Although these systems have
+    achieved impressive empirical performance, none exhibit the
+    combination of function-preserving scaling, attractor stability,
+    staged consolidation, and lineage formation demonstrated by
+    GLPG.</p>
+    <h2 id="scaling-in-conventional-neural-architectures">Scaling in
+    Conventional Neural Architectures</h2>
+    <p>Early neural language models (MLPs, RNNs, LSTMs) do not support
+    architectural scaling without full retraining. Increasing
+    hidden-layer capacity changes the model’s inductive biases, alters
+    its internal attractor landscape, and typically requires training
+    from scratch. Downscaling is even more destructive: reducing
+    capacity collapses attractors, erases learned structure, and
+    produces models that bear little resemblance to their larger
+    predecessors. No lineage or inheritance is possible.</p>
+    <p>Transformers introduced more predictable scaling laws, but only
+    in the statistical sense. Kaplan et al. (2020) and subsequent work
+    showed that transformer performance follows power-law relationships
+    with respect to dataset size, model size, and compute. However,
+    these laws do not imply function-preserving scaling. A larger
+    transformer is not a continuation of a smaller one: it must be
+    trained from scratch, and its internal representations differ
+    substantially. Attempts at function-preserving scaling—such as
+    Net2Net transformations, layer expansion, or width doubling—have
+    limited applicability and do not preserve semantic manifolds in
+    generative models.</p>
+    <p>Moreover, transformers exhibit several instability modes under
+    scaling: attention collapse, gradient interference, catastrophic
+    forgetting, embedding drift, and sensitivity to initialization and
+    optimizer dynamics. Small changes in hyperparameters or dataset
+    composition can produce large, unpredictable shifts in output
+    quality. These behaviours contrast sharply with GLPG’s smooth
+    manifold deformation under upscaling, downscaling, and staged
+    growth.</p>
+    <h2 id="distillation-compression-and-model-surgery">Distillation,
+    Compression, and Model Surgery</h2>
+    <p>Knowledge distillation (Hinton et al., 2015) compresses large
+    models into smaller ones, but the resulting student model is not a
+    structural continuation of the teacher. Distillation is lossy,
+    requires a separate training process, and does not preserve the
+    teacher’s attractor geometry. Similarly, pruning, quantization, and
+    low-rank factorization reduce model size but degrade semantic
+    structure and do not support reversible scaling.</p>
+    <p>Net2Net transformations (Chen et al., 2016) introduced
+    function-preserving network expansion and contraction for
+    feedforward models, but these techniques do not apply to generative
+    architectures with recurrent or attention-based dynamics. Even when
+    applicable, Net2Net transformations preserve only local function
+    approximations, not global attractor manifolds or semantic world
+    models.</p>
+    <p>GLPG differs fundamentally: downscaling acts as
+    self-distillation, compressing the manifold without erasing
+    canonical attractors, while upscaling expands capacity without
+    cognitive reset. This bidirectional, reversible scaling has no
+    analogue in existing language model architectures.</p>
+    <h2 id="staged-growth-and-lineage-formation">Staged Growth and
+    Lineage Formation</h2>
+    <p>Staged or curriculum-based training has been explored in various
+    contexts, including progressive nets, growing neural gas, and
+    curriculum learning. However, these methods do not produce
+    hereditary attractor basins or multi-generational cognitive
+    lineages. Transformers trained with curricula do not inherit
+    structured attractors from smaller ancestors; they simply converge
+    more quickly or more stably.</p>
+    <p>The closest analogue is the Toy Academy work, which demonstrated
+    staged growth for function learning. GLPG extends this idea from
+    functions to worlds: staged training produces semantic clusters that
+    propagate across generations, enabling genuine lineage formation. No
+    existing language model architecture exhibits this behaviour.</p>
+    <h2 id="transfer-learning-and-canon-dynamics">Transfer Learning and
+    Canon Dynamics</h2>
+    <p>Transfer learning in transformers typically results in
+    catastrophic forgetting or unstable interference between domains.
+    Multi-domain training requires careful balancing, adapter layers, or
+    mixture-of-experts routing to avoid collapse. Even then, semantic
+    interference remains a major challenge.</p>
+    <p>GLPG’s transfer learning behaviour is qualitatively different.
+    The attractor manifold reorganises in a deterministic,
+    canon-dominant manner: vocabulary persists, but semantic activation
+    follows the dataset with the strongest attractor structure. This is
+    not catastrophic forgetting but a stable, predictable cognitive
+    overwrite analogous to biological learning dynamics.</p>
+    <h2 id="summary">Summary</h2>
+    <p>Across all prior architectures, scaling is either destructive
+    (downscaling), non-preserving (upscaling), or requires full
+    retraining (transformers). No existing system supports reversible,
+    function-preserving scaling; no system maintains stable attractor
+    geometry across architectural transformations; no system exhibits
+    hereditary semantic clusters; and no system demonstrates
+    canon-dominant transfer learning.</p>
+    <p>GLPG therefore occupies a unique position in the landscape of
+    neural architectures: a minimal, interpretable, evolution-capable
+    cognitive substrate whose scaling behaviour has no precedent in
+    conventional language models.</p>
+    <h1 id="effects-of-grammar-fixing">Effects of Grammar Fixing</h1>
+    <p>The original GLPG engine included an optional grammar–fixing
+    layer designed to correct surface-level linguistic mistakes after
+    generation. Although well-intentioned, this mechanism introduced a
+    critical flaw: it operated outside the canonical grammar–lemma graph
+    and was therefore capable of producing tokens that did not exist in
+    the canonical domain. As a result, grammar fixing could break canon,
+    distort lemma embeddings, and introduce semantic drift that did not
+    originate from the GLPG model itself.</p>
+    <h2 class="unnumbered" id="observed-grammar-fix-behaviour">Observed
+    Grammar Fix Behaviour</h2>
+    <p>During early experiments, the grammar fixer produced several
+    classes of corrections:</p>
+    <ol>
+    <li><p><strong>Verb normalization:</strong> <em>woulds → would</em>,
+    <em>coulds → could</em>, <em>musts → must</em>, <em>oughts →
+    ought</em>.</p></li>
+    <li><p><strong>Canon-breaking substitutions:</strong> These were the
+    most problematic, replacing canonical tokens with unrelated words:
+    <em>Zaidie → aide</em>, <em>murgatroyd → purgatory</em>,
+    <em>dejeuner → Lejeune</em>, <em>Weena → Deena</em>, <em>morlocks →
+    warlocks</em>, <em>saltpetre → saltwater</em>, <em>astronef →
+    estrone</em>. Such substitutions violate the canon-closed nature of
+    GLPG and corrupt the learned lemma geometry.</p></li>
+    <li><p><strong>Contraction repair:</strong> <em>did n’t →
+    didn’t</em>, <em>husband ’s → husband’s</em>, and similar apostrophe
+    handling.</p></li>
+    <li><p><strong>Capitalization changes:</strong> <em>martian →
+    Martian</em>, <em>mars → Mars</em>, <em>jupiter → Jupiter</em>,
+    <em>andrew → Andrew</em>, <em>mrs. sends → Mrs. Sends</em>.</p></li>
+    <li><p><strong>Singular/plural and conjugation
+    adjustments.</strong></p></li>
+    <li><p><strong>Minor lexical corrections:</strong> <em>too →
+    to</em>, <em>a → an</em>, <em>an → a</em>, <em>its →
+    it’s</em>.</p></li>
+    <li><p><strong>Punctuation changes:</strong> Adding commas or
+    replacing periods with question marks.</p></li>
+    <li><p><strong>English variant normalization:</strong> <em>grey →
+    gray</em>, <em>centre → center</em>, <em>marvellous →
+    marvelous</em>, <em>colour → color</em>, <em>recognise →
+    recognize</em>.</p></li>
+    <li><p><strong>Hyphenation and word-joining:</strong> <em>south
+    eastern → south-eastern</em>, <em>any more → anymore</em>.</p></li>
+    <li><p><strong>Insertion of missing verbs or pronouns:</strong>
+    e.g. adding <em>is</em> or <em>I</em>.</p></li>
+    <li><p><strong>Word removal:</strong> e.g. <em>these their →
+    these</em>.</p></li>
+    </ol>
+    <p>Although many of these corrections were linguistically
+    reasonable, they were structurally unsafe: the grammar fixer could
+    introduce tokens not present in the canonical dataset, thereby
+    breaking GLPG’s core guarantee of canon-closed generation.</p>
+    <h2 class="unnumbered" id="deterministic-fixing-rules">Deterministic
+    Fixing Rules</h2>
+    <p>To eliminate canon-breaking behaviour, the grammar fixer has been
+    replaced by a small set of deterministic, safe post-processing
+    rules. These rules correct only trivial surface-level issues and
+    never introduce new tokens. The current fixing layer applies:</p>
+    <ul>
+    <li><p>contraction normalization: <code>" n’t" → " not"</code>,
+    <code>" ’" → "’"</code>,</p></li>
+    <li><p>simple lexical repairs: <code>" woulds" → " would"</code>,
+    <code>" a a" → " an a"</code>,</p></li>
+    <li><p>specific phrase corrections:
+    <code>"I going" → "I’m going"</code>,</p></li>
+    <li><p>capitalization of property names
+    (e.g. <code>" america" → " America"</code>).</p></li>
+    </ul>
+    <p>These rules are intentionally minimal and deterministic. They
+    preserve the canonical token inventory, avoid semantic drift, and
+    ensure that the model output is evaluated exactly as generated,
+    without an additional stochastic or corpus-driven correction
+    layer.</p>
+    <h2 class="unnumbered"
+    id="removal-of-grammar-based-postprocessing">Removal of
+    Grammar-Based Postprocessing</h2>
+    <p>The optional grammar checker remains available for diagnostic
+    purposes, but it is no longer used during generation or evaluation.
+    Any discrepancy between the deterministic fixes and the grammar
+    checker output is logged for inspection. This logging mechanism
+    allows detection of potential structural issues without modifying
+    the model output.</p>
+    <h2 class="unnumbered" id="summary-1">Summary</h2>
+    <p>The removal of the original grammar fixer restores GLPG’s core
+    architectural principle: <strong>all generated text must remain
+    canon-closed</strong>. The new deterministic fixing layer ensures
+    surface-level consistency while preserving the integrity of the
+    learned lemma geometry, the paging structure, and the attractor
+    manifold.</p>
+    <h1 id="output-scoring-and-evaluation">Output Scoring and
+    Evaluation</h1>
+    <p>To compare cognitive behaviour across scaling experiments, every
+    model generates a fixed set of outputs: twenty independent stories
+    of twenty lines each, produced in both generative modes supported by
+    GLPG (paged graph traversal and pure MLP mode). These stories are
+    evaluated by an external LLM, providing an objective and
+    reproducible numerical metric for model quality.</p>
+    <h2 id="external-llm-evaluator">External LLM Evaluator</h2>
+    <p>All evaluations are performed using the Mistral 7B v0.3 instruct
+    model, operating as a blind, architecture-agnostic assessor. The
+    evaluator receives only the generated story text and applies a
+    calibrated scoring regime from 1 to 100. The prompt is:</p>
+    <blockquote>
+    <p>“Give a score between 1 and 100 for the following short story.
+    The story is written on a moderate level. A score below 50 is
+    perfectly acceptable. Assume the average moderate story scores
+    around 50. Only exceptional stories should score above 80. Evaluate
+    using the following criteria: content, coherence, readability,
+    originality, creativity, style, structure. Do not explain the
+    score.”</p>
+    </blockquote>
+    <p>This calibrated regime ensures that mid-quality stories cluster
+    around 50, weak stories fall below 40, and only highly coherent or
+    stylistically rich stories exceed 80. The evaluator is invoked twice
+    per story to reduce stochastic variance.</p>
+    <h2 id="evaluation-pipeline">Evaluation Pipeline</h2>
+    <p>The evaluation process follows three steps:</p>
+    <ol>
+    <li><p><strong>Story extraction.</strong> Each output file is
+    segmented into stories of at least twenty lines. Shorter fragments
+    are discarded. A maximum of one thousand stories may be processed,
+    though all experiments in this paper use exactly twenty.</p></li>
+    <li><p><strong>Dual scoring.</strong> For each story, the evaluator
+    produces two independent scores:</p>
+    <p><span
+    class="math display"><em>s</em><sub>1</sub>, <em>s</em><sub>2</sub> ∈ [1,100].</span></p>
+    <p>If either score falls outside the valid range (due to malformed
+    output), the evaluator retries until a valid score is
+    obtained.</p></li>
+    <li><p><strong>Score consolidation.</strong> From the two scores,
+    three per-story values are computed:</p>
+    <p><span class="math display">$$s_{\min} = \min(s_1, s_2), \qquad
+            s_{\max} = \max(s_1, s_2), \qquad
+            s_{\mathrm{avg}} = \left\lfloor \frac{s_1 + s_2 + 1}{2}
+    \right\rfloor.$$</span></p>
+    <p>These values capture evaluator variance and provide a
+    representative score for the story.</p></li>
+    </ol>
+    <h2 id="score-aggregation">Score Aggregation</h2>
+    <p>To obtain a compact and comparable metric across all scaling
+    experiments, the twenty stories generated by each model are
+    aggregated into six values:</p>
+    <ul>
+    <li><p><strong>Total Min:</strong> <span
+    class="math inline">∑<em>s</em><sub>min</sub></span> — global
+    lower-bound quality.</p></li>
+    <li><p><strong>Total Max:</strong> <span
+    class="math inline">∑<em>s</em><sub>max</sub></span> — global
+    upper-bound quality.</p></li>
+    <li><p><strong>Total Avg:</strong> <span
+    class="math inline">∑<em>s</em><sub>avg</sub></span> —
+    representative global quality.</p></li>
+    <li><p><strong>Min:</strong> <span
+    class="math inline">min <em>s</em><sub>avg</sub></span> — weakest
+    attractor basin.</p></li>
+    <li><p><strong>Max:</strong> <span
+    class="math inline">max <em>s</em><sub>avg</sub></span> — strongest
+    attractor basin.</p></li>
+    <li><p><strong>Median:</strong> median of all <span
+    class="math inline"><em>s</em><sub>avg</sub></span> — typical
+    attractor strength.</p></li>
+    </ul>
+    <p>These six values form a stable cognitive fingerprint of each
+    model. The total scores measure global attractor strength and
+    semantic coherence; the per-story min, max, and median measure
+    manifold spread, attractor depth, and narrative stability. Together,
+    they allow direct comparison between models of different sizes,
+    training depths, and generational lineages.</p>
+    <h2 id="rationale">Rationale</h2>
+    <p>GLPG is a deterministic-structural yet semantically emergent
+    architecture. Its behaviour is best captured not by classical
+    statistical metrics, but by measures that reflect attractor
+    geometry, semantic basin depth, and manifold spread. The six
+    aggregated values introduced here provide a compact and
+    interpretable representation of these cognitive properties, enabling
+    quantitative analysis of scaling behaviour across all experiments in
+    this paper.</p>
+    <h2
+    id="comparison-with-conventional-language-model-evaluation">Comparison
+    with Conventional Language Model Evaluation</h2>
+    <p>Conventional language models are typically evaluated using
+    statistical benchmarks such as perplexity, next-token prediction
+    accuracy, masked-token recovery, or large-scale QA and reasoning
+    datasets. These metrics assume a probabilistic generative mechanism
+    in which the model attempts to approximate the statistical
+    distribution of a corpus. Such evaluations are appropriate for
+    transformer-based architectures, where semantic behaviour emerges
+    from high-dimensional attention patterns and large-scale
+    correlation.</p>
+    <p>GLPG does not operate in this regime. Its generative behaviour is
+    governed by a deterministic grammar–lemma graph, explicit paging
+    geometry, and a compact monolithic MLP that injects semantic content
+    into a canon-closed structural substrate. As a result, GLPG is not a
+    statistical language model: it does not attempt to predict
+    corpus-level token frequencies, nor does it optimize likelihood over
+    a distribution. Instead, GLPG produces structured prose constrained
+    by a fixed canonical domain. The quality of its output can therefore
+    never exceed the quality of the canonical dataset itself; the
+    dataset defines an upper bound on semantic richness, stylistic
+    variation, and narrative complexity.</p>
+    <p>Because GLPG is canon-driven rather than distribution-driven,
+    conventional LM benchmarks provide little insight into its cognitive
+    behaviour. Perplexity cannot be meaningfully computed on a model
+    whose transitions are filtered by deterministic grammar rules and
+    paging constraints. Masked-token recovery is incompatible with
+    GLPG’s explicit routing and lemma geometry. Reasoning and QA
+    benchmarks assume open-domain semantic generalization, whereas GLPG
+    operates within a closed canonical world.</p>
+    <p>For these reasons, the present paper adopts an external LLM-based
+    evaluation method rather than statistical LM metrics. The numerical
+    scoring regime introduced here captures the aspects of GLPG that
+    matter: attractor stability, manifold coherence, narrative flow, and
+    stylistic consistency. These properties reflect GLPG’s architectural
+    identity as a deterministic cognitive substrate rather than a
+    probabilistic language model. The evaluation method therefore aligns
+    with GLPG’s design principles and provides a meaningful basis for
+    comparing scaling behaviour across models and generations.</p>
+    <h2 id="comparison-with-human-evaluation">Comparison with Human
+    Evaluation</h2>
+    <p>Human linguistic ability is traditionally assessed not through
+    statistical benchmarks, but through qualitative scoring of written
+    output. In educational and linguistic settings, a short essay or
+    composition is evaluated by another human using criteria such as
+    content, coherence, readability, creativity, style, and structural
+    clarity. These criteria closely mirror the dimensions used in the
+    LLM-based evaluator adopted in this paper. Human language competence
+    is therefore measured through holistic judgement rather than through
+    token-level prediction accuracy or probabilistic metrics.</p>
+    <p>Conventional language-model benchmarks do not align with this
+    human-centric evaluation framework. Perplexity assumes that a model
+    should approximate corpus-level token frequencies; QA benchmarks
+    assume broad factual knowledge and open-domain reasoning;
+    masked-token recovery assumes statistical reconstruction of missing
+    information. None of these assumptions apply to human language
+    production, where quality is judged by narrative flow, stylistic
+    consistency, and conceptual coherence rather than by statistical
+    likelihood.</p>
+    <p>GLPG operates in a similar regime. As a canon-driven
+    architecture, GLPG generates text within a closed structural and
+    semantic domain defined by its canonical dataset. The quality of its
+    output can therefore never exceed the quality of the canon itself;
+    the dataset imposes an upper bound on semantic richness and
+    stylistic variation. This mirrors human writing: a person cannot
+    produce knowledge or stylistic nuance beyond what they have been
+    exposed to. GLPG’s generative behaviour is thus constrained by its
+    learned world model rather than by open-domain statistical
+    generalization.</p>
+    <p>For these reasons, human-style evaluation is more appropriate for
+    GLPG than conventional LM benchmarks. The external LLM assessor used
+    in this paper functions analogously to a human grader: it reads the
+    generated story, applies qualitative criteria, and assigns a
+    holistic score. This approach captures the aspects of GLPG that
+    matter—attractor stability, narrative coherence, semantic
+    consistency, and stylistic fidelity—while avoiding metrics that
+    presuppose statistical language modelling.</p>
+    <p>In the broader context of AGI research, such human-aligned
+    evaluation may become increasingly important. As cognitive
+    substrates evolve beyond probabilistic token predictors,
+    naturalistic assessment of narrative quality, conceptual structure,
+    and stylistic competence provides a more meaningful measure of
+    emergent intelligence. GLPG’s evaluation method therefore represents
+    a step toward future AGI benchmarks that reflect human linguistic
+    judgement rather than purely statistical performance.</p>
+    <h1 id="what-is-scaling">What is Scaling</h1>
+    <p>GLPG supports architectural scaling: the hidden-layer capacity of
+    the monolithic MLP can be increased or decreased while preserving
+    the learned cognitive manifold. This behaviour is unusual among
+    language models. Conventional architectures require full retraining
+    when capacity changes, because their internal representations are
+    statistically entangled. GLPG, however, separates structure (the
+    deterministic grammar–lemma graph and paging geometry) from
+    semantics (the learned lemma embeddings and MLP projection). As a
+    result, the canonical world model can be preserved across
+    architectural transformations.</p>
+    <p>Scaling therefore refers to the process of transforming a trained
+    GLPG model into a larger or smaller version while retaining its
+    attractor basins, canonical structure, and semantic geometry.</p>
+    <h2 id="conceptual-overview">Conceptual Overview</h2>
+    <p>GLPG scaling is governed by two principles:</p>
+    <ol>
+    <li><p><strong>Structural invariance.</strong> The grammar–lemma
+    graph, paging geometry, and learned lemma embeddings remain
+    unchanged during scaling. These components form the cognitive DNA of
+    the model.</p></li>
+    <li><p><strong>Semantic projection.</strong> The monolithic MLP is
+    replaced by a larger or smaller network whose weights are derived
+    from the original model through conservative embedding (upscaling)
+    or projection (downscaling). This preserves the semantic manifold
+    while adjusting its expressive capacity.</p></li>
+    </ol>
+    <p>Because the canonical world model is preserved, scaling does not
+    reset the model. Instead, the model continues training from a
+    transformed but structurally identical cognitive substrate.</p>
+    <h2 id="upscaling">Upscaling</h2>
+    <p>Upscaling increases the hidden-layer size of the monolithic MLP.
+    The goal is to expand the semantic manifold without erasing existing
+    attractors. GLPG accomplishes this by embedding the old weight
+    matrices into the top-left corner of larger matrices and
+    initializing all new parameters with extremely small values. This
+    ensures that the expanded model behaves like the original model at
+    the start of training, while providing additional capacity for
+    semantic growth.</p>
+    <p>Formally, given an old hidden size <span
+    class="math inline"><em>H</em></span> and a new size <span
+    class="math inline"><em>H</em>′ &gt; <em>H</em></span>, each linear
+    layer is widened:</p>
+    <p><span class="math display">$$W' =
+        \begin{pmatrix}
+            W &amp; \varepsilon \\
+            \varepsilon &amp; \varepsilon
+        \end{pmatrix},
+        \qquad
+        b' = (b, \varepsilon),$$</span></p>
+    <p>where <span class="math inline"><em>ε</em></span> is tiny noise
+    (e.g. <span class="math inline">10<sup>−5</sup></span>). The old
+    cognitive manifold is preserved in the upper-left block, while the
+    new dimensions begin as neutral extensions of the existing
+    space.</p>
+    <p>This mechanism allows a small, heavily trained model to seed a
+    larger model that requires only light additional training to achieve
+    high performance. Upscaling therefore acts as capacity-expansion
+    without cognitive reset.</p>
+    <h2 id="downscaling">Downscaling</h2>
+    <p>Downscaling reduces the hidden-layer size. The goal is to
+    compress the semantic manifold into a smaller core while preserving
+    its canonical structure. GLPG accomplishes this by projecting each
+    large weight matrix onto its top-left block:</p>
+    <p><span
+    class="math display"><em>W</em>′ = <em>W</em>[:<em>H</em>′,:<em>H</em>′],   <em>b</em>′ = <em>b</em>[:<em>H</em>′].</span></p>
+    <p>This operation extracts the most stable portion of the attractor
+    manifold. Because GLPG’s semantic geometry is strongly shaped by
+    paging and deterministic routing, the first <span
+    class="math inline"><em>H</em>′</span> dimensions typically contain
+    the core attractor basins. Downscaling therefore acts as cognitive
+    compression.</p>
+    <p>Downscaled models often exhibit higher local coherence and
+    stronger canonical pressure, even though their expressive capacity
+    is reduced. This behaviour mirrors biological systems: smaller
+    brains can retain stable behavioural patterns while losing
+    higher-level variation.</p>
+    <h2 id="algorithmic-description">Algorithmic Description</h2>
+    <p>The upscaling and downscaling procedures are implemented directly
+    in the GLPG reference engine. The following excerpt illustrates the
+    core mechanism:</p>
+    <blockquote>
+    <p><strong>Upscaling:</strong> embed old weights into larger
+    matrices; initialize new parameters with tiny noise.<br />
+    <strong>Downscaling:</strong> project large matrices onto smaller
+    blocks; retain the first <span
+    class="math inline"><em>H</em>′</span> dimensions.</p>
+    </blockquote>
+    <p>These operations preserve the functional behaviour of the model
+    while adjusting its capacity. Training can continue immediately
+    after scaling, allowing the model to refine its expanded or
+    compressed manifold without losing previously learned structure.</p>
+    <h2 id="implications">Implications</h2>
+    <p>Scaling reveals that GLPG behaves as a cognitive substrate rather
+    than a statistical model. Its semantic manifold is stable,
+    hereditary, and structurally grounded. Upscaling inflates the
+    manifold; downscaling compresses it; staged training produces
+    generational inheritance. The baseline model therefore serves not
+    only as a reference point, but as the progenitor of an entire
+    lineage of scaled models explored in the following sections.</p>
+    <h1 id="what-is-staged-training">What is Staged Training</h1>
+    <p>Staged training is a multi-generational growth procedure in which
+    a GLPG model is trained across several architectural capacities in
+    sequence. Instead of training a single large model from scratch, the
+    model is grown through a lineage of progressively larger
+    hidden-layer sizes. Each stage inherits the canonical world model,
+    lemma embeddings, and paging geometry from the previous stage,
+    ensuring continuity of the attractor manifold.</p>
+    <p>This approach mirrors biological and cognitive development: a
+    small system first consolidates its core attractors, after which
+    larger systems expand and refine the inherited semantic manifold.
+    Staged training therefore provides a controlled mechanism for
+    cognitive growth.</p>
+    <h2 id="conceptual-overview-1">Conceptual Overview</h2>
+    <p>The example staged training pipeline consists of four phases:</p>
+    <ol>
+    <li><p><strong>Stage 1: Smaller model (384 units).</strong> The
+    model begins with low capacity, forcing strong attractor
+    consolidation. This stage forms the “genetic core” of the
+    lineage.</p></li>
+    <li><p><strong>Stage 2: Baseline-scale model (768 units).</strong>
+    The model expands its semantic manifold while retaining the Stage 1
+    attractors. New attractor pockets emerge.</p></li>
+    <li><p><strong>Stage 3: Larger model (1152 units).</strong> The
+    manifold becomes richer and more expressive. This stage often
+    produces the most balanced cognitive behaviour.</p></li>
+    <li><p><strong>Stage 4: Largest model (1536 units).</strong> The
+    model reaches full capacity. If trained sufficiently, this stage
+    yields a mature attractor manifold.</p></li>
+    </ol>
+    <p>Each stage begins from the scaled version of the previous stage
+    rather than from random initialization. This ensures hereditary
+    transfer of attractors and prevents cognitive reset.</p>
+    <h2 id="epoch-allocation">Epoch Allocation</h2>
+    <p>Total training epochs are distributed across stages using fixed
+    multipliers:</p>
+    <p><span class="math display">Multipliers = [4, 3, 2, 1].</span></p>
+    <p>Given a total epoch budget <span
+    class="math inline"><em>E</em></span>, each stage receives:</p>
+    <p><span class="math display">$$E_i = \left\lfloor \frac{E}{4 + 3 +
+    2 + 1} \right\rfloor \times \text{Multiplier}_i.$$</span></p>
+    <p>For example, with <span
+    class="math inline"><em>E</em> = 200, 000</span> epochs as
+    budget:</p>
+    <p><span class="math display">$$\begin{aligned}
+            E_1 &amp;= 80{,}000,\\
+            E_2 &amp;= 60{,}000,\\
+            E_3 &amp;= 40{,}000,\\
+            E_4 &amp;= 20{,}000,
+        \end{aligned}$$</span></p>
+    <p>yielding a total of 200,000 epochs.</p>
+    <p>This allocation reflects the cognitive principle that smaller
+    models require more training to stabilize their attractor basins,
+    while larger models require fewer epochs to refine inherited
+    structure.</p>
+    <h2 id="algorithmic-description-1">Algorithmic Description</h2>
+    <p>Staged training is implemented in the GLPG engine through two
+    operations:</p>
+    <ol>
+    <li><p><strong>Scaling.</strong> The model is upscaled or downscaled
+    to the next hidden size using the function-preserving
+    transformations described in Section 5. The canonical world model
+    remains unchanged.</p></li>
+    <li><p><strong>Training.</strong> The scaled model is trained for
+    <span class="math inline"><em>E</em><sub><em>i</em></sub></span>
+    randomized epochs using the same curriculum as the baseline model.
+    This refines the inherited attractor manifold at the new
+    capacity.</p></li>
+    </ol>
+    <p>The following pseudocode summarizes the procedure:</p>
+    <blockquote>
+    <p><strong>for each stage <span
+    class="math inline"><em>i</em></span>:</strong> scale model to
+    hidden size <span
+    class="math inline"><em>H</em><sub><em>i</em></sub></span> train
+    model for <span
+    class="math inline"><em>E</em><sub><em>i</em></sub></span> epochs
+    save model as next-stage ancestor</p>
+    </blockquote>
+    <p>This process yields a lineage of models, each inheriting and
+    expanding the attractor geometry of its predecessor.</p>
+    <h2 id="rationale-1">Rationale</h2>
+    <p>Staged training exploits a key property of GLPG: its attractor
+    manifold is stable under architectural scaling. A small model can be
+    trained until its attractors are deeply consolidated. Upscaling then
+    embeds this manifold into a larger semantic space, allowing new
+    attractors to form without erasing the old ones. The result is a
+    cognitively richer model that requires far fewer epochs than a large
+    model trained from scratch.</p>
+    <p>This behaviour is analogous to biological development: early
+    consolidation, followed by capacity expansion, followed by
+    refinement. Staged training therefore provides a computational
+    analogue of cognitive growth and inheritance within the GLPG
+    architecture.</p>
+    <h1 id="experimental-setup">Experimental Setup</h1>
+    <p>This section defines the canonical datasets, hyperparameters, and
+    baseline model configuration used throughout all scaling
+    experiments. The baseline model serves as the reference point
+    against which upscaling, downscaling, staged training, and
+    cross-dataset inheritance are evaluated.</p>
+    <h2 id="datasets">Datasets</h2>
+    <p>All experiments use canonical grammar–lemma corpora derived from
+    two complete Gutenberg novels. These datasets provide compact yet
+    structurally rich narrative biomes suitable for observing GLPG’s
+    attractor dynamics. Both datasets exhibit regular syntactic cadence
+    and constrained vocabulary, making them ideal substrates for
+    studying GLPG’s semantic manifold formation and scaling
+    behaviour.</p>
+    <h3 id="a-honeymoon-in-space">A Honeymoon in Space</h3>
+    <ul>
+    <li><p>357 KB raw text</p></li>
+    <li><p>709 KB canonical grammar–lemma tokens</p></li>
+    <li><p>54,039 unique token-transition samples</p></li>
+    <li><p>685 sequences</p></li>
+    </ul>
+    <h3 id="the-time-machine">The Time Machine</h3>
+    <ul>
+    <li><p>180 KB raw text</p></li>
+    <li><p>458 KB canonical grammar–lemma tokens</p></li>
+    <li><p>35,642 unique token-transition samples</p></li>
+    <li><p>238 sequences</p></li>
+    </ul>
+    <h2 id="hyperparameters">Hyperparameters</h2>
+    <p>All models share the same structural hyperparameters unless
+    otherwise specified:</p>
+    <ul>
+    <li><p><strong>Input vector (124 dimensions):</strong> 44 CSL
+    features (current token, sequence index, line index), 48
+    token-history features, 32 recurrent narrative-memory
+    features</p></li>
+    <li><p><strong>Output embedding:</strong> 128-dimensional learned
+    lemma embedding</p></li>
+    <li><p><strong>Baseline model hidden size:</strong> 768
+    units</p></li>
+    <li><p><strong>Paging geometry:</strong> 1024 pages with a maximum
+    of 8 lemma inputs per page (restricting the candidate token space
+    and improving routing determinism)</p></li>
+    </ul>
+    <p>These hyperparameters define the canonical GLPG manifold width
+    used throughout the scaling experiments.</p>
+    <h2 id="baseline-models">Baseline Models</h2>
+    <h3 id="a-honeymoon-in-space-1">A Honeymoon in Space</h3>
+    <ul>
+    <li><p>Model size: 39 MB</p></li>
+    <li><p>Training epochs: 100,000</p></li>
+    <li><p>Learned transitions: 7,881,963</p></li>
+    </ul>
+    <h3 id="the-time-machine-1">The Time Machine</h3>
+    <ul>
+    <li><p>Model size: 38 MB</p></li>
+    <li><p>Training epochs: 50,000</p></li>
+    <li><p>Learned transitions: 7,539,465</p></li>
+    </ul>
+    <h3 id="role-of-the-baseline-models">Role of the Baseline
+    Models</h3>
+    <p>The baseline model defines the canonical attractor manifold for
+    the domain. Scaling experiments—upscaling, downscaling,
+    cross-dataset inheritance, and staged training— are evaluated
+    relative to this baseline. Its attractor geometry, semantic
+    richness, and narrative stability serve as the cognitive reference
+    against which lineage growth and capacity-driven deformation are
+    measured.</p>
+    <h1 id="scaling-examples">Scaling Examples</h1>
+    <p>This section illustrates the behaviour of GLPG under direct
+    architectural scaling. All experiments begin from a fully trained
+    baseline model and apply either upscaling or downscaling
+    transformations as defined in Section 5. The goal of this section is
+    purely descriptive: to document the scaling procedures, training
+    budgets, and resulting model geometries. Quality evaluation of these
+    scaled models is presented separately in Section 11.</p>
+    <h2 id="upscaling-a-honeymoon-in-space">Upscaling: <em>A Honeymoon
+    in Space</em></h2>
+    <p>Upscaling expands the hidden-layer capacity of the monolithic MLP
+    while preserving the canonical grammar–lemma graph, paging geometry,
+    and learned lemma embeddings. Three upscaling scenarios were tested
+    on the <em>Honeymoon in Space</em> corpus.</p>
+    <h4 id="baseline-768-large-3072">(1) Baseline (768) → Large
+    (3072)</h4>
+    <p>A fourfold expansion of hidden-layer width.</p>
+    <ul>
+    <li><p>Additional training: 50<span>,</span>000 epochs</p></li>
+    <li><p>Learned transitions:
+    11<span>,</span>838<span>,</span>669</p></li>
+    <li><p>Training time: 20<span>,</span>988 s</p></li>
+    <li><p>Model size: 450 MB</p></li>
+    </ul>
+    <h4 id="stage-4-1536-large-3072">(2) Stage 4 (1536) → Large
+    (3072)</h4>
+    <p>A twofold expansion starting from the Stage 4 model of the staged
+    lineage.</p>
+    <ul>
+    <li><p>Additional training: 10<span>,</span>000 epochs</p></li>
+    <li><p>Learned transitions:
+    16<span>,</span>548<span>,</span>259</p></li>
+    <li><p>Training time: 4<span>,</span>593 s</p></li>
+    <li><p>Model size: 450 MB</p></li>
+    </ul>
+    <h4 id="large-3072-from-scratch">(3) Large (3072) from scratch</h4>
+    <p>A reference model trained directly at full capacity.</p>
+    <ul>
+    <li><p>Training: 10<span>,</span>000 epochs</p></li>
+    <li><p>Learned transitions: 790<span>,</span>135</p></li>
+    <li><p>Training time: 5<span>,</span>115 s</p></li>
+    <li><p>Model size: 450 MB</p></li>
+    </ul>
+    <p>These three configurations provide a controlled comparison
+    between capacity expansion from consolidated models and direct
+    training at full scale.</p>
+    <h2 id="downscaling-a-honeymoon-in-space">Downscaling: <em>A
+    Honeymoon in Space</em></h2>
+    <p>Downscaling compresses the semantic manifold into a smaller
+    hidden-layer width while preserving canonical structure. All
+    downscaling experiments use 5<span>,</span>000 epochs of additional
+    training.</p>
+    <h4 id="baseline-768-small-384">(1) Baseline (768) → Small
+    (384)</h4>
+    <p>A halving of hidden-layer width.</p>
+    <ul>
+    <li><p>Additional training: 5<span>,</span>000 epochs</p></li>
+    <li><p>Learned transitions:
+    8<span>,</span>282<span>,</span>931</p></li>
+    <li><p>Training time: 198 s</p></li>
+    <li><p>Model size: 17 MB</p></li>
+    </ul>
+    <h4 id="stage-4-1536-small-384">(2) Stage 4 (1536) → Small
+    (384)</h4>
+    <p>A fourfold compression starting from the Stage 4 model.</p>
+    <ul>
+    <li><p>Additional training: 5<span>,</span>000 epochs</p></li>
+    <li><p>Learned transitions:
+    16<span>,</span>153<span>,</span>354</p></li>
+    <li><p>Training time: 165 s</p></li>
+    <li><p>Model size: 17 MB</p></li>
+    </ul>
+    <h4 id="small-384-from-scratch">(3) Small (384) from scratch</h4>
+    <p>Reference model trained directly at small capacity.</p>
+    <ul>
+    <li><p>Training: 5<span>,</span>000 epochs</p></li>
+    <li><p>Learned transitions: 393<span>,</span>775</p></li>
+    <li><p>Training time: 170 s</p></li>
+    <li><p>Model size: 17 MB</p></li>
+    </ul>
+    <p>These configurations allow comparison between compressed
+    manifolds and models trained natively at reduced capacity with a low
+    amount of epochs.</p>
+    <h2 id="downscaling-the-time-machine">Downscaling: <em>The Time
+    Machine</em></h2>
+    <p>A second dataset was used to verify that downscaling behaviour
+    generalizes across domains. All experiments use 3<span>,</span>000
+    epochs of additional training.</p>
+    <h4 id="baseline-768-small-384-1">(1) Baseline (768) → Small
+    (384)</h4>
+    <ul>
+    <li><p>Additional training: 3<span>,</span>000 epochs</p></li>
+    <li><p>Learned transitions:
+    7<span>,</span>994<span>,</span>909</p></li>
+    <li><p>Training time: 169 s</p></li>
+    <li><p>Model size: 16 MB</p></li>
+    </ul>
+    <h4 id="stage-4-1536-small-384-1">(2) Stage 4 (1536) → Small
+    (384)</h4>
+    <ul>
+    <li><p>Additional training: 3<span>,</span>000 epochs</p></li>
+    <li><p>Learned transitions:
+    15<span>,</span>418<span>,</span>648</p></li>
+    <li><p>Training time: 166 s</p></li>
+    <li><p>Model size: 16 MB</p></li>
+    </ul>
+    <h4 id="small-384-from-scratch-1">(3) Small (384) from scratch</h4>
+    <ul>
+    <li><p>Training: 3<span>,</span>000 epochs</p></li>
+    <li><p>Learned transitions: 451<span>,</span>269</p></li>
+    <li><p>Training time: 181 s</p></li>
+    <li><p>Model size: 16 MB</p></li>
+    </ul>
+    <h2 class="unnumbered" id="summary-2">Summary</h2>
+    <p>The scaling experiments documented in this section establish the
+    structural behaviour of GLPG under both expansion and compression of
+    hidden-layer capacity. Upscaling preserves the inherited semantic
+    manifold while enabling further refinement; downscaling compresses
+    the manifold while retaining core attractors. The quality
+    implications of these transformations are analysed in
+    Section 11.</p>
+    <h1 id="staged-learning-examples">Staged Learning Examples</h1>
+    <p>Staged learning is a multi-generational training procedure in
+    which a GLPG model is grown through a sequence of progressively
+    larger hidden-layer capacities. Each stage inherits the canonical
+    grammar–lemma graph, paging geometry, and learned lemma embeddings
+    from the previous stage, ensuring continuity of the attractor
+    manifold. This section documents the staged training runs performed
+    on two canonical datasets. Quality evaluation of these staged models
+    is presented separately in Section 11.</p>
+    <h2 id="a-honeymoon-in-space-2">A Honeymoon in Space</h2>
+    <p>The staged lineage for <em>A Honeymoon in Space</em> uses a total
+    budget of 200<span>,</span>000 epochs. Training proceeds through
+    four stages: 384 → 768 → 1152 → 1536 hidden units. The total
+    training time is 8<span>,</span>445 s.</p>
+    <p>For comparison, training a single 1536-unit model for the full
+    200<span>,</span>000 epochs would require:</p>
+    <p><span
+    class="math display">200 × 1726 s/20 = 17, 260 s,</span></p>
+    <p>which is more than twice as slow as the staged procedure. Staged
+    learning therefore provides a substantial computational advantage
+    while preserving and expanding the inherited attractor manifold.</p>
+    <table>
+    <caption>Staged learning lineage for <em>A Honeymoon in
+    Space</em>.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Hidden Size</strong></th>
+    <th style="text-align: right;"><strong>Epochs</strong></th>
+    <th style="text-align: right;"><strong>Transitions</strong></th>
+    <th style="text-align: right;"><strong>Time (s)</strong></th>
+    <th style="text-align: right;"><strong>Model Size (MB)</strong></th>
+    <th style="text-align: right;"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">384</td>
+    <td style="text-align: right;">80<span>,</span>000</td>
+    <td
+    style="text-align: right;">6<span>,</span>296<span>,</span>181</td>
+    <td style="text-align: right;">2<span>,</span>245</td>
+    <td style="text-align: right;">17</td>
+    <td style="text-align: right;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">768</td>
+    <td style="text-align: right;">60<span>,</span>000</td>
+    <td
+    style="text-align: right;">11<span>,</span>031<span>,</span>624</td>
+    <td style="text-align: right;">2<span>,</span>324</td>
+    <td style="text-align: right;">39</td>
+    <td style="text-align: right;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">1152</td>
+    <td style="text-align: right;">40<span>,</span>000</td>
+    <td
+    style="text-align: right;">14<span>,</span>176<span>,</span>395</td>
+    <td style="text-align: right;">2<span>,</span>149</td>
+    <td style="text-align: right;">73</td>
+    <td style="text-align: right;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">1536</td>
+    <td style="text-align: right;">20<span>,</span>000</td>
+    <td
+    style="text-align: right;">15<span>,</span>756<span>,</span>454</td>
+    <td style="text-align: right;">1<span>,</span>726</td>
+    <td style="text-align: right;">121</td>
+    <td style="text-align: right;"></td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 id="the-time-machine-2">The Time Machine</h2>
+    <p>The staged lineage for <em>The Time Machine</em> uses a total
+    budget of 100<span>,</span>000 epochs. Training proceeds through the
+    same four capacities: 384 → 768 → 1152 → 1536 hidden units. The
+    total training time is 8<span>,</span>139 s.</p>
+    <p>Training a single 1536-unit model for the full
+    100<span>,</span>000 epochs would require:</p>
+    <p><span
+    class="math display">100 × 1637 s/10 = 16, 370 s,</span></p>
+    <p>again more than twice the staged training time. This confirms
+    that staged learning provides consistent computational benefits
+    across datasets.</p>
+    <table>
+    <caption>Staged learning lineage for <em>The Time
+    Machine</em>.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Hidden Size</strong></th>
+    <th style="text-align: right;"><strong>Epochs</strong></th>
+    <th style="text-align: right;"><strong>Transitions</strong></th>
+    <th style="text-align: right;"><strong>Time (s)</strong></th>
+    <th style="text-align: right;"><strong>Model Size (MB)</strong></th>
+    <th style="text-align: right;"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">384</td>
+    <td style="text-align: right;">40<span>,</span>000</td>
+    <td
+    style="text-align: right;">5<span>,</span>967<span>,</span>629</td>
+    <td style="text-align: right;">2<span>,</span>321</td>
+    <td style="text-align: right;">16</td>
+    <td style="text-align: right;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">768</td>
+    <td style="text-align: right;">30<span>,</span>000</td>
+    <td
+    style="text-align: right;">10<span>,</span>464<span>,</span>670</td>
+    <td style="text-align: right;">2<span>,</span>142</td>
+    <td style="text-align: right;">38</td>
+    <td style="text-align: right;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">1152</td>
+    <td style="text-align: right;">20<span>,</span>000</td>
+    <td
+    style="text-align: right;">13<span>,</span>456<span>,</span>118</td>
+    <td style="text-align: right;">2<span>,</span>040</td>
+    <td style="text-align: right;">73</td>
+    <td style="text-align: right;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">1536</td>
+    <td style="text-align: right;">10<span>,</span>000</td>
+    <td
+    style="text-align: right;">14<span>,</span>974<span>,</span>968</td>
+    <td style="text-align: right;">1<span>,</span>637</td>
+    <td style="text-align: right;">121</td>
+    <td style="text-align: right;"></td>
+    </tr>
+    </tbody>
+    </table>
+    <h2 class="unnumbered" id="summary-3">Summary</h2>
+    <p>Across both datasets, staged learning provides:</p>
+    <ul>
+    <li><p>significant reductions in total training time,</p></li>
+    <li><p>stable inheritance of the attractor manifold across
+    stages,</p></li>
+    <li><p>progressive expansion of semantic capacity,</p></li>
+    <li><p>and consistent structural behaviour across narrative
+    biomes.</p></li>
+    </ul>
+    <p>The quality implications of these staged lineages are analysed in
+    Section 11.</p>
+    <h1 id="transfer-learning-examples">Transfer Learning Examples</h1>
+    <p>Transfer learning in GLPG provides a direct window into the
+    behaviour of its attractor manifold. Because GLPG is a canon‑closed
+    architecture whose semantic geometry is shaped by deterministic
+    paging and learned lemma embeddings, mixing datasets does not simply
+    combine stylistic features. Instead, transfer learning reveals how
+    strongly each dataset imprints its attractor basins onto the
+    manifold, and how these basins reorganise when a second dataset is
+    introduced.</p>
+    <p>A hybrid model always retains the combined vocabulary of both
+    datasets, but the active canon—the semantic and structural behaviour
+    expressed during generation—depends entirely on the relative
+    strength of the attractor basins formed during training.</p>
+    <h2 id="honeymoon-to-time-machine">Honeymoon to Time Machine</h2>
+    <p>The first transfer experiment begins from a fully trained
+    <em>Honeymoon in Space</em> baseline model (768 hidden units,
+    100<span>,</span>000 epochs). The model is then trained for an
+    additional 30<span>,</span>000 epochs on <em>The Time Machine</em>,
+    combined with an upscaling step to 1536 hidden units.</p>
+    <ul>
+    <li><p>Baseline: 768 hidden units, 100<span>,</span>000
+    epochs</p></li>
+    <li><p>Additional training: 30<span>,</span>000 Time Machine
+    epochs</p></li>
+    <li><p>Upscale: 1536 hidden units</p></li>
+    <li><p>Learned transitions:
+    12<span>,</span>388<span>,</span>365</p></li>
+    <li><p>Training time: 5<span>,</span>910 s</p></li>
+    <li><p>Model size: 126 MB</p></li>
+    </ul>
+    <p>Despite the mixed vocabulary, the resulting hybrid model
+    expresses almost entirely <em>Time Machine</em> canon. Only isolated
+    lemma tokens from <em>Honeymoon in Space</em> remain, without any of
+    their original semantic or structural context. The attractor
+    manifold has been fully reshaped toward the second dataset.</p>
+    <h2 id="time-machine-to-honeymoon">Time Machine to Honeymoon</h2>
+    <p>The second transfer experiment begins from a fully trained
+    <em>Time Machine</em> baseline model (768 hidden units,
+    50<span>,</span>000 epochs). The model is then trained for an
+    additional 60<span>,</span>000 epochs on <em>A Honeymoon in
+    Space</em>, combined with an upscaling step to 1536 hidden
+    units.</p>
+    <ul>
+    <li><p>Baseline: 768 hidden units, 50<span>,</span>000
+    epochs</p></li>
+    <li><p>Additional training: 60<span>,</span>000 Honeymoon
+    epochs</p></li>
+    <li><p>Upscale: 1536 hidden units</p></li>
+    <li><p>Learned transitions:
+    12<span>,</span>265<span>,</span>834</p></li>
+    <li><p>Training time: 5<span>,</span>708 s</p></li>
+    <li><p>Model size: 126 MB</p></li>
+    </ul>
+    <p>In this direction, the hybrid model expresses almost entirely
+    <em>Honeymoon in Space</em> canon. Only a few lemma tokens from
+    <em>The Time Machine</em> remain, again without semantic activation.
+    The attractor manifold is reshaped toward the second dataset just as
+    strongly as in the previous experiment.</p>
+    <h2 id="transfer-learning-canon-dynamics">Transfer Learning Canon
+    Dynamics</h2>
+    <p>These experiments reveal a fundamental cognitive property of
+    GLPG: <strong>transfer learning is canon‑dominant</strong>. The
+    dataset with the strongest attractor structure determines the active
+    canon of the hybrid model, regardless of the combined
+    vocabulary.</p>
+    <p>Several dynamics emerge:</p>
+    <ul>
+    <li><p><strong>Asymmetric inheritance.</strong> The semantic
+    manifold reorganises toward the second dataset. Training exclusively
+    on domain B after domain A causes A to be largely overwritten by
+    B.</p></li>
+    <li><p><strong>Attractor dominance.</strong> The dataset with
+    stronger syntactic cadence, more stable lemma clusters, and higher
+    canon pressure dominates the manifold. In practice, <em>A Honeymoon
+    in Space</em> exhibits stronger attractors than <em>The Time
+    Machine</em>, but in both directions the second dataset fully
+    determines the resulting canon.</p></li>
+    <li><p><strong>Lemma persistence without semantics.</strong>
+    Vocabulary from the first dataset remains present in embedding
+    space, but without semantic activation. These tokens appear only as
+    isolated artefacts, not as coherent narrative structures.</p></li>
+    <li><p><strong>Cognitive overwriting.</strong> This behaviour
+    mirrors biological cognitive systems: training a human or animal
+    exclusively in domain B causes domain A to fade. Previously
+    consolidated attractors weaken when new attractors are repeatedly
+    reinforced.</p></li>
+    <li><p><strong>Consolidation requires repetition.</strong> To
+    maintain competence in both domains A and B, both must be trained
+    repeatedly. Without continued exposure, one domain will dominate and
+    overwrite the other.</p></li>
+    </ul>
+    <h2 id="comparison-with-conventional-language-models">Comparison
+    with Conventional Language Models</h2>
+    <p>Transformers exhibit a superficially similar phenomenon known as
+    <em>catastrophic forgetting</em>, driven by:</p>
+    <ul>
+    <li><p>gradient overwriting,</p></li>
+    <li><p>loss‑driven collapse,</p></li>
+    <li><p>embedding drift,</p></li>
+    <li><p>attention‑pattern overwriting.</p></li>
+    </ul>
+    <p>However, the mechanism in GLPG is fundamentally different.
+    Transformers forget because new gradients overwrite statistical
+    correlations. GLPG forgets because new attractor basins reorganise
+    the semantic manifold in a deterministic, interpretable way.</p>
+    <p>Where transformers lose information unpredictably, GLPG
+    exhibits:</p>
+    <ul>
+    <li><p>predictable attractor dominance,</p></li>
+    <li><p>traceable manifold reshaping,</p></li>
+    <li><p>canon‑closed overwriting,</p></li>
+    <li><p>cognitively interpretable inheritance dynamics.</p></li>
+    </ul>
+    <p>This makes GLPG’s transfer‑learning behaviour not a failure mode,
+    but a hallmark of its identity as a minimal cognitive substrate.</p>
+    <h2 class="unnumbered" id="summary-4">Summary</h2>
+    <p>Transfer learning in GLPG does not blend canons. It reveals how
+    semantic attractors compete, reorganise, and dominate within a
+    unified manifold. The second dataset consistently overwrites the
+    first, unless both are trained repeatedly. This behaviour aligns
+    with biological cognition and distinguishes GLPG from conventional
+    language models, reinforcing its role as a structurally grounded and
+    cognitively interpretable substrate.</p>
+    <h1 id="trained-models-quality-evaluation">Trained Models Quality
+    Evaluation</h1>
+    <h2 id="a-honeymoon-in-space-3">A Honeymoon in Space</h2>
+    <p>The <em>Honeymoon in Space</em> evaluation comprises fourteen
+    trained models, each assessed in both generative modes supported by
+    GLPG: paged graph traversal (P) and pure MLP mode (M). This yields
+    twenty‑eight independent outputs, each scored by the external LLM
+    evaluator using the calibrated regime described in Section 4. The
+    resulting metrics provide a detailed view of how scaling, staged
+    learning, and transfer learning affect the stability and
+    expressiveness of the Honeymoon attractor manifold. The output size
+    provides an indication of the average sentence length.</p>
+    <table>
+    <caption>Quality evaluation of all Honeymoon models across paged (P)
+    and pure MLP (M) modes.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Model</strong></th>
+    <th style="text-align: center;"><strong>Mode</strong></th>
+    <th style="text-align: right;"><strong>KB</strong></th>
+    <th style="text-align: right;"><strong>Total Min</strong></th>
+    <th style="text-align: right;"><strong>Total Max</strong></th>
+    <th style="text-align: right;"><strong>Total Avg</strong></th>
+    <th style="text-align: right;"><strong>Min</strong></th>
+    <th style="text-align: right;"><strong>Max</strong></th>
+    <th style="text-align: right;"><strong>Median</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;">694</td>
+    <td style="text-align: right;">878</td>
+    <td style="text-align: right;">793</td>
+    <td style="text-align: right;">21</td>
+    <td style="text-align: right;">51</td>
+    <td style="text-align: right;">40</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">xl new</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">20</td>
+    <td style="text-align: right;">609</td>
+    <td style="text-align: right;">727</td>
+    <td style="text-align: right;">672</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">42</td>
+    <td style="text-align: right;">33</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">xl base</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">24</td>
+    <td style="text-align: right;">686</td>
+    <td style="text-align: right;">876</td>
+    <td style="text-align: right;">785</td>
+    <td style="text-align: right;">31</td>
+    <td style="text-align: right;">52</td>
+    <td style="text-align: right;">39</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">xl stage4</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;"><strong>26</strong></td>
+    <td style="text-align: right;">754</td>
+    <td style="text-align: right;">918</td>
+    <td style="text-align: right;">839</td>
+    <td style="text-align: right;">29</td>
+    <td style="text-align: right;">53</td>
+    <td style="text-align: right;">41</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">small new</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">18</td>
+    <td style="text-align: right;">650</td>
+    <td style="text-align: right;">831</td>
+    <td style="text-align: right;">746</td>
+    <td style="text-align: right;">28</td>
+    <td style="text-align: right;">48</td>
+    <td style="text-align: right;">36</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">small base</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">24</td>
+    <td style="text-align: right;"><strong>796</strong></td>
+    <td style="text-align: right;"><strong>957</strong></td>
+    <td style="text-align: right;"><strong>882</strong></td>
+    <td style="text-align: right;"><strong>32</strong></td>
+    <td style="text-align: right;">58</td>
+    <td style="text-align: right;"><strong>45</strong></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">small stage4</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">21</td>
+    <td style="text-align: right;">733</td>
+    <td style="text-align: right;">944</td>
+    <td style="text-align: right;">844</td>
+    <td style="text-align: right;">30</td>
+    <td style="text-align: right;">60</td>
+    <td style="text-align: right;">43</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">stage1</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;">708</td>
+    <td style="text-align: right;">869</td>
+    <td style="text-align: right;">792</td>
+    <td style="text-align: right;">26</td>
+    <td style="text-align: right;">55</td>
+    <td style="text-align: right;">39</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">stage2</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">22</td>
+    <td style="text-align: right;">697</td>
+    <td style="text-align: right;">909</td>
+    <td style="text-align: right;">806</td>
+    <td style="text-align: right;">28</td>
+    <td style="text-align: right;">48</td>
+    <td style="text-align: right;">42</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">stage3</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">24</td>
+    <td style="text-align: right;">699</td>
+    <td style="text-align: right;">928</td>
+    <td style="text-align: right;">820</td>
+    <td style="text-align: right;">29</td>
+    <td style="text-align: right;"><strong>63</strong></td>
+    <td style="text-align: right;">40</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">stage4</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">664</td>
+    <td style="text-align: right;">884</td>
+    <td style="text-align: right;">778</td>
+    <td style="text-align: right;">31</td>
+    <td style="text-align: right;">48</td>
+    <td style="text-align: right;">40</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">hybrid</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">22</td>
+    <td style="text-align: right;">681</td>
+    <td style="text-align: right;">839</td>
+    <td style="text-align: right;">767</td>
+    <td style="text-align: right;">30</td>
+    <td style="text-align: right;">51</td>
+    <td style="text-align: right;">38</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;"><strong>717</strong></td>
+    <td style="text-align: right;">907</td>
+    <td style="text-align: right;"><strong>817</strong></td>
+    <td style="text-align: right;"><strong>30</strong></td>
+    <td style="text-align: right;">54</td>
+    <td style="text-align: right;">39</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">xl new</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">18</td>
+    <td style="text-align: right;">572</td>
+    <td style="text-align: right;">790</td>
+    <td style="text-align: right;">684</td>
+    <td style="text-align: right;">27</td>
+    <td style="text-align: right;">46</td>
+    <td style="text-align: right;">33</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">xl base</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">658</td>
+    <td style="text-align: right;">805</td>
+    <td style="text-align: right;">738</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;">57</td>
+    <td style="text-align: right;">37</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">xl stage4</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;"><strong>28</strong></td>
+    <td style="text-align: right;">685</td>
+    <td style="text-align: right;">923</td>
+    <td style="text-align: right;">810</td>
+    <td style="text-align: right;">27</td>
+    <td style="text-align: right;">57</td>
+    <td style="text-align: right;">39</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">small new</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">16</td>
+    <td style="text-align: right;">611</td>
+    <td style="text-align: right;">727</td>
+    <td style="text-align: right;">672</td>
+    <td style="text-align: right;">20</td>
+    <td style="text-align: right;">45</td>
+    <td style="text-align: right;">35</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">small base</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">694</td>
+    <td style="text-align: right;"><strong>927</strong></td>
+    <td style="text-align: right;">815</td>
+    <td style="text-align: right;">22</td>
+    <td style="text-align: right;"><strong>58</strong></td>
+    <td style="text-align: right;"><strong>41</strong></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">small stage4</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">21</td>
+    <td style="text-align: right;">669</td>
+    <td style="text-align: right;">846</td>
+    <td style="text-align: right;">763</td>
+    <td style="text-align: right;">28</td>
+    <td style="text-align: right;">52</td>
+    <td style="text-align: right;">38</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">stage1</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;">627</td>
+    <td style="text-align: right;">744</td>
+    <td style="text-align: right;">689</td>
+    <td style="text-align: right;">20</td>
+    <td style="text-align: right;">43</td>
+    <td style="text-align: right;">35</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">stage2</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">22</td>
+    <td style="text-align: right;">693</td>
+    <td style="text-align: right;">835</td>
+    <td style="text-align: right;">770</td>
+    <td style="text-align: right;">26</td>
+    <td style="text-align: right;">49</td>
+    <td style="text-align: right;">39</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">stage3</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">26</td>
+    <td style="text-align: right;">651</td>
+    <td style="text-align: right;">870</td>
+    <td style="text-align: right;">766</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">49</td>
+    <td style="text-align: right;">38</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">stage4</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">680</td>
+    <td style="text-align: right;">846</td>
+    <td style="text-align: right;">768</td>
+    <td style="text-align: right;">26</td>
+    <td style="text-align: right;">57</td>
+    <td style="text-align: right;">38</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">hybrid</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">22</td>
+    <td style="text-align: right;">700</td>
+    <td style="text-align: right;">858</td>
+    <td style="text-align: right;">785</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">52</td>
+    <td style="text-align: right;"><strong>41</strong></td>
+    </tr>
+    </tbody>
+    </table>
+    <h4 id="ranking-and-interpretation">Ranking and Interpretation</h4>
+    <p>To obtain a single comparative score per model, the paged and MLP
+    totals are summed. The resulting ranking reveals several notable
+    cognitive and architectural patterns:</p>
+    <ol>
+    <li><p><strong>small base: 1697</strong> — The strongest model
+    overall. A downscaled version of the baseline exhibits exceptionally
+    stable attractors and highly coherent prose. Compression strengthens
+    the manifold.</p></li>
+    <li><p><strong>xl stage4: 1649</strong> — Large model grown through
+    staged lineage. Capacity expansion preserves and amplifies inherited
+    attractors.</p></li>
+    <li><p><strong>base: 1610</strong> — The baseline model remains
+    robust and balanced.</p></li>
+    <li><p><strong>small stage4: 1607</strong> — Downscaled Stage 4
+    retains strong attractor geometry.</p></li>
+    <li><p><strong>stage3: 1586</strong> — Mid‑stage models (Stage 2/3)
+    consistently outperform Stage 4.</p></li>
+    <li><p><strong>stage2: 1576</strong> — Stage 2 and Stage 3 form the
+    optimal cognitive regime.</p></li>
+    <li><p><strong>hybrid: 1552</strong> — Mixed‑canon models exhibit
+    more diffuse attractors.</p></li>
+    <li><p><strong>stage4: 1546</strong> — Stage 4 requires deeper
+    training to fully stabilise.</p></li>
+    <li><p><strong>xl base: 1523</strong> — Large model trained directly
+    at full capacity underperforms lineage‑grown variants.</p></li>
+    <li><p><strong>stage1: 1481</strong> — Early‑stage models show
+    limited semantic development.</p></li>
+    <li><p><strong>small new: 1418</strong> — Small model trained from
+    scratch is under‑consolidated.</p></li>
+    <li><p><strong>xl new: 1356</strong> — Large model trained from
+    scratch performs worst; capacity alone does not induce strong
+    attractors.</p></li>
+    </ol>
+    <h4 id="discussion">Discussion</h4>
+    <p>Several cognitive dynamics emerge clearly from these results:</p>
+    <ul>
+    <li><p><strong>Compression strengthens attractors.</strong>
+    Downscaled models (e.g., <em>small base</em>) often outperform
+    larger models, indicating that GLPG’s semantic manifold becomes more
+    coherent when projected into a smaller space.</p></li>
+    <li><p><strong>Staged growth outperforms direct training.</strong>
+    Large models trained from scratch (<em>xl new</em>) perform
+    significantly worse than large models grown through lineage (<em>xl
+    stage4</em>). This confirms that cognitive consolidation at smaller
+    capacities is a prerequisite for successful expansion.</p></li>
+    <li><p><strong>Mid‑stage models are optimal.</strong> Stage 2 and
+    Stage 3 consistently produce the strongest balance between semantic
+    richness and structural stability.</p></li>
+    <li><p><strong>Hybrid models diffuse the manifold.</strong>
+    Mixed‑canon training weakens attractor depth, reducing overall
+    coherence.</p></li>
+    <li><p><strong>Paged and MLP modes remain close.</strong>
+    Differences between P and M modes are small, confirming that the
+    monolithic MLP internalises the graph structure.</p></li>
+    </ul>
+    <p>Overall, the Honeymoon evaluation demonstrates that GLPG’s
+    cognitive behaviour depends strongly on architectural scale,
+    training depth, and lineage. Compression, staged growth, and
+    mid‑capacity refinement consistently yield the most stable and
+    expressive attractor manifolds.</p>
+    <h2 id="the-time-machine-3">The Time Machine</h2>
+    <p>The <em>Time Machine</em> evaluation comprises nine trained
+    models, each assessed in both generative modes supported by GLPG:
+    paged graph traversal (P) and pure MLP mode (M). This yields
+    eighteen independent outputs. As in the previous subsection, all
+    stories are scored by the external LLM evaluator, producing a
+    detailed fingerprint of attractor stability and semantic coherence
+    across architectural scales and training regimes.</p>
+    <table>
+    <caption>Quality evaluation of all Time Machine models across paged
+    (P) and pure MLP (M) modes.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Model</strong></th>
+    <th style="text-align: center;"><strong>Mode</strong></th>
+    <th style="text-align: right;"><strong>KB</strong></th>
+    <th style="text-align: right;"><strong>Total Min</strong></th>
+    <th style="text-align: right;"><strong>Total Max</strong></th>
+    <th style="text-align: right;"><strong>Total Avg</strong></th>
+    <th style="text-align: right;"><strong>Min</strong></th>
+    <th style="text-align: right;"><strong>Max</strong></th>
+    <th style="text-align: right;"><strong>Median</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">24</td>
+    <td style="text-align: right;">768</td>
+    <td style="text-align: right;">1006</td>
+    <td style="text-align: right;">888</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;">59</td>
+    <td style="text-align: right;"><strong>47</strong></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">small new</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">18</td>
+    <td style="text-align: right;"><strong>788</strong></td>
+    <td style="text-align: right;">998</td>
+    <td style="text-align: right;">896</td>
+    <td style="text-align: right;">28</td>
+    <td style="text-align: right;">64</td>
+    <td style="text-align: right;">45</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">small base</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;">720</td>
+    <td style="text-align: right;">885</td>
+    <td style="text-align: right;">806</td>
+    <td style="text-align: right;">29</td>
+    <td style="text-align: right;">54</td>
+    <td style="text-align: right;">39</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">small stage4</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;">787</td>
+    <td style="text-align: right;">1000</td>
+    <td style="text-align: right;"><strong>900</strong></td>
+    <td style="text-align: right;"><strong>33</strong></td>
+    <td style="text-align: right;">63</td>
+    <td style="text-align: right;">44</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">stage1</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;">755</td>
+    <td style="text-align: right;">970</td>
+    <td style="text-align: right;">866</td>
+    <td style="text-align: right;">28</td>
+    <td style="text-align: right;">55</td>
+    <td style="text-align: right;">44</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">stage2</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;"><strong>25</strong></td>
+    <td style="text-align: right;">717</td>
+    <td style="text-align: right;">923</td>
+    <td style="text-align: right;">825</td>
+    <td style="text-align: right;">29</td>
+    <td style="text-align: right;">57</td>
+    <td style="text-align: right;">41</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">stage3</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;"><strong>25</strong></td>
+    <td style="text-align: right;">763</td>
+    <td style="text-align: right;">965</td>
+    <td style="text-align: right;">869</td>
+    <td style="text-align: right;">29</td>
+    <td style="text-align: right;"><strong>71</strong></td>
+    <td style="text-align: right;">43</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">stage4</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;"><strong>25</strong></td>
+    <td style="text-align: right;">770</td>
+    <td style="text-align: right;">927</td>
+    <td style="text-align: right;">853</td>
+    <td style="text-align: right;">31</td>
+    <td style="text-align: right;">49</td>
+    <td style="text-align: right;">44</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">hybrid</td>
+    <td style="text-align: center;">P</td>
+    <td style="text-align: right;"><strong>25</strong></td>
+    <td style="text-align: right;">766</td>
+    <td style="text-align: right;"><strong>1013</strong></td>
+    <td style="text-align: right;">895</td>
+    <td style="text-align: right;"><strong>33</strong></td>
+    <td style="text-align: right;">54</td>
+    <td style="text-align: right;">44</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">24</td>
+    <td style="text-align: right;">706</td>
+    <td style="text-align: right;">919</td>
+    <td style="text-align: right;">818</td>
+    <td style="text-align: right;">29</td>
+    <td style="text-align: right;">56</td>
+    <td style="text-align: right;">40</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">small new</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">17</td>
+    <td style="text-align: right;">689</td>
+    <td style="text-align: right;">940</td>
+    <td style="text-align: right;">820</td>
+    <td style="text-align: right;">29</td>
+    <td style="text-align: right;">52</td>
+    <td style="text-align: right;">40</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">small base</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;">681</td>
+    <td style="text-align: right;">886</td>
+    <td style="text-align: right;">788</td>
+    <td style="text-align: right;">24</td>
+    <td style="text-align: right;">58</td>
+    <td style="text-align: right;">36</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">small stage4</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">23</td>
+    <td style="text-align: right;">791</td>
+    <td style="text-align: right;">1017</td>
+    <td style="text-align: right;">911</td>
+    <td style="text-align: right;"><strong>35</strong></td>
+    <td style="text-align: right;"><strong>70</strong></td>
+    <td style="text-align: right;">44</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">stage1</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">21</td>
+    <td style="text-align: right;">717</td>
+    <td style="text-align: right;">1010</td>
+    <td style="text-align: right;">870</td>
+    <td style="text-align: right;">29</td>
+    <td style="text-align: right;">58</td>
+    <td style="text-align: right;">42</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">stage2</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">24</td>
+    <td style="text-align: right;"><strong>795</strong></td>
+    <td style="text-align: right;"><strong>1032</strong></td>
+    <td style="text-align: right;"><strong>918</strong></td>
+    <td style="text-align: right;">31</td>
+    <td style="text-align: right;">59</td>
+    <td style="text-align: right;"><strong>47</strong></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">stage3</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">668</td>
+    <td style="text-align: right;">860</td>
+    <td style="text-align: right;">767</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">52</td>
+    <td style="text-align: right;">39</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">stage4</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;"><strong>26</strong></td>
+    <td style="text-align: right;">768</td>
+    <td style="text-align: right;">987</td>
+    <td style="text-align: right;">882</td>
+    <td style="text-align: right;">28</td>
+    <td style="text-align: right;">65</td>
+    <td style="text-align: right;">45</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">hybrid</td>
+    <td style="text-align: center;">M</td>
+    <td style="text-align: right;">25</td>
+    <td style="text-align: right;">730</td>
+    <td style="text-align: right;">923</td>
+    <td style="text-align: right;">832</td>
+    <td style="text-align: right;">27</td>
+    <td style="text-align: right;">52</td>
+    <td style="text-align: right;">44</td>
+    </tr>
+    </tbody>
+    </table>
+    <h4 id="ranking-and-interpretation-1">Ranking and
+    Interpretation</h4>
+    <p>To compare overall performance, the paged and MLP totals are
+    summed for each model. The resulting ranking reveals several
+    distinctive cognitive patterns:</p>
+    <ol>
+    <li><p><strong>small stage4: 1811</strong> — The strongest model
+    overall. A downscaled Stage 4 model exhibits exceptionally deep
+    attractor basins and highly coherent prose in both modes.</p></li>
+    <li><p><strong>stage2: 1743</strong> — Stage 2 shows very strong
+    MLP‑mode behaviour, confirming that mid‑stage models often form the
+    richest semantic manifolds.</p></li>
+    <li><p><strong>stage1: 1736</strong> — Surprisingly strong
+    early‑stage performance; attractors form quickly on this
+    dataset.</p></li>
+    <li><p><strong>stage4: 1735</strong> — Full‑capacity Stage 4
+    performs well but requires more epochs to fully stabilise.</p></li>
+    <li><p><strong>hybrid: 1727</strong> — Mixed‑canon training diffuses
+    attractor depth but remains competitive.</p></li>
+    <li><p><strong>small new: 1716</strong> — Under‑trained but still
+    relatively strong due to the dataset’s stable cadence.</p></li>
+    <li><p><strong>base: 1706</strong> — The baseline model performs
+    adequately but is not the strongest in this dataset.</p></li>
+    <li><p><strong>stage3: 1636</strong> — Lower MLP‑mode performance
+    reduces the combined score.</p></li>
+    <li><p><strong>small base: 1594</strong> — Downscaled baseline
+    performs weakest; attractor formation is incomplete.</p></li>
+    </ol>
+    <h4 id="discussion-1">Discussion</h4>
+    <p>The Time Machine results reveal several cognitive dynamics
+    distinct from the Honeymoon evaluation:</p>
+    <ul>
+    <li><p><strong>Mid‑stage models dominate.</strong> Stage 2 and
+    Stage 1 outperform the baseline and even Stage 4, indicating that
+    the Time Machine manifold stabilises early and benefits from
+    moderate capacity.</p></li>
+    <li><p><strong>Downscaled Stage 4 is optimal.</strong> Compression
+    again strengthens attractor coherence, producing the strongest model
+    in both modes.</p></li>
+    <li><p><strong>MLP mode is highly expressive.</strong> Several
+    models (Stage 2, Stage 1, small stage4) show exceptionally high
+    MLP‑mode scores, confirming that the monolithic MLP internalises the
+    dataset’s semantic structure effectively.</p></li>
+    <li><p><strong>Hybrid models remain competitive.</strong> Although
+    mixed‑canon training diffuses attractor depth, hybrid models still
+    perform near the top of the ranking.</p></li>
+    </ul>
+    <p>Overall, the Time Machine evaluation demonstrates that GLPG’s
+    cognitive behaviour depends strongly on training depth and lineage,
+    with mid‑stage and compressed models consistently yielding the most
+    stable and expressive attractor manifolds for this dataset.</p>
+    <h2 id="summary-5">Summary</h2>
+    <p>Across both canonical datasets, the evaluation results reveal a
+    coherent and interpretable picture of GLPG’s cognitive behaviour
+    under scaling, staged learning, and transfer learning. Despite
+    substantial variation in model size, training depth, and
+    architectural lineage, the overall quality of generated stories
+    remains remarkably stable. Most models achieve median scores around
+    40 or higher, with occasional outputs reaching moderate quality
+    (scores near 50) and rare outliers approaching 70. Scores above
+    80—corresponding to exceptional narrative quality—are not observed,
+    consistent with the structural limits imposed by the canonical
+    datasets themselves.</p>
+    <p>Several global trends emerge:</p>
+    <ul>
+    <li><p><strong>Paged mode is consistently faster and more
+    stable.</strong> Paged graph traversal is more than four times
+    faster than pure MLP mode and exhibits tighter structural cadence.
+    MLP mode remains expressive but computationally expensive.</p></li>
+    <li><p><strong>Sentence length correlates with capacity and training
+    depth.</strong> Larger models and models trained for more epochs
+    tend to produce longer sentences, reflecting broader semantic
+    manifolds and deeper attractor basins.</p></li>
+    <li><p><strong>Compression strengthens attractors.</strong>
+    Downscaled models often outperform their larger counterparts.
+    Projecting the manifold into a smaller hidden space increases
+    structural coherence and reduces semantic drift.</p></li>
+    <li><p><strong>Staged growth outperforms direct training.</strong>
+    Large models trained from scratch perform significantly worse than
+    large models grown through staged lineage. Cognitive consolidation
+    at smaller capacities is a prerequisite for successful
+    expansion.</p></li>
+    <li><p><strong>Mid‑stage models form the optimal cognitive
+    regime.</strong> Stage 2 and Stage 3 consistently yield the
+    strongest balance between semantic richness and structural stability
+    across both datasets.</p></li>
+    <li><p><strong>Hybrid models diffuse attractor depth.</strong>
+    Mixed‑canon training produces competitive but slightly weaker
+    results, reflecting a more diffuse semantic manifold.</p></li>
+    <li><p><strong>Dataset complexity influences manifold
+    behaviour.</strong> <em>The Time Machine</em> models generate faster
+    and often exhibit stronger early‑stage attractors, while <em>A
+    Honeymoon in Space</em> models show more pronounced benefits from
+    staged growth and compression.</p></li>
+    <li><p><strong>Shorter outputs can score higher.</strong> Models
+    producing shorter, structurally simpler sentences often achieve
+    better scores due to reduced narrative complexity and fewer
+    opportunities for semantic drift.</p></li>
+    </ul>
+    <p>Overall, the evaluation demonstrates that GLPG maintains stable
+    generative quality across a wide range of capacities, training
+    regimes, and datasets. The architecture’s cognitive
+    properties—compression‑driven coherence, staged consolidation,
+    attractor‑based semantics, and dual‑mode generation—produce a robust
+    and interpretable manifold whose behaviour remains consistent even
+    under substantial architectural variation.</p>
+    <h1 id="textbook-scaling-behaviour">Textbook Scaling Behaviour</h1>
+    <p>Across all scaling experiments, GLPG exhibits a remarkably
+    consistent and textbook-like developmental pattern. Upscaling
+    monotonically improves semantic richness and attractor depth;
+    downscaling compresses the manifold while preserving canonical
+    structure; tiny models reach a clear capacity limit; lineage-based
+    XL models outperform all baselines; and XL models trained from
+    scratch collapse due to insufficient consolidation. These behaviours
+    occur uniformly across all model sizes, generational paths, and
+    datasets.</p>
+    <p>Beyond these monotonic scaling laws, GLPG displays an additional
+    and highly unusual property: <strong>structural and semantic
+    stability under variation</strong>. Across hyperparameter sweeps,
+    scaling directions, staged learning regimes, transfer learning
+    experiments, and dual-mode generation, the model’s attractor
+    manifold remains coherent and predictable. Changes in learning rate,
+    batch size, initialization, training depth, or model capacity do not
+    produce chaotic jumps, collapses, or irregularities. Instead, GLPG
+    consistently deforms its manifold in smooth, interpretable ways.</p>
+    <p>This stability is not typical for language models.
+    Transformer-based architectures often show non-monotonic scaling
+    behaviour, irregular performance jumps, catastrophic forgetting,
+    embedding drift, and sensitivity to initialization and optimizer
+    dynamics. Small changes in hyperparameters or dataset composition
+    can produce large, unpredictable shifts in output quality. GLPG, by
+    contrast, behaves as a low-dimensional cognitive dynamical system:
+    consolidation at smaller capacities stabilizes the attractor
+    manifold, which can then be expanded through upscaling without
+    resetting the learned world model. Downscaling compresses the
+    manifold without destroying canonical structure, and transfer
+    learning reorganizes attractors in a deterministic, canon-dominant
+    manner.</p>
+    <p>The textbook nature of GLPG’s scaling behaviour arises from its
+    architectural separation between structure and semantics. The
+    deterministic grammar–lemma graph and paging geometry provide a
+    stable backbone, while the monolithic MLP acts as a semantic
+    projector whose capacity can be increased or decreased without
+    entangling the underlying canonical world. Function-preserving
+    scaling therefore yields predictable cognitive deformation:
+    compression, stabilization, expansion, and refinement.</p>
+    <p>This combination of monotonic scaling laws and cross-regime
+    stability makes GLPG uniquely suitable for staged growth,
+    lineage-based training, and controlled cognitive evolution. The
+    scaling results in this paper demonstrate that GLPG’s manifold
+    behaves not as a statistical correlation space, but as a structured
+    cognitive substrate whose development follows clear, reproducible,
+    and biologically-plausible patterns.</p>
+    <h1 id="relevance-for-agi">Relevance for AGI</h1>
+    <p>GLPG exhibits a constellation of properties that are rare or
+    entirely absent in conventional language model architectures. Most
+    neural language models—MLPs, RNNs, LSTMs, and transformers—do not
+    support function-preserving scaling, do not preserve their attractor
+    manifold under architectural change, and do not maintain stable
+    behaviour under hyperparameter variation, dataset mixing, or staged
+    training. Increasing or decreasing model capacity in such systems
+    typically requires full retraining, and the resulting model is not a
+    continuation of the smaller model but a new statistical system with
+    different inductive biases, different attractors, and different
+    failure modes.</p>
+    <p>GLPG behaves differently. Its monolithic MLP supports
+    function-preserving hidden-layer doubling: upscaling expands
+    capacity while preserving the attractor manifold; downscaling
+    compresses the manifold without destroying its structure. As a
+    result, GLPG models can grow and shrink without cognitive reset.
+    This behaviour is reinforced by a second, equally unusual property:
+    <strong>structural and semantic stability</strong>. Across
+    hyperparameter sweeps, scaling experiments, staged learning,
+    transfer learning, and dual-mode generation, GLPG’s manifold deforms
+    smoothly and predictably. No chaotic jumps, collapses, or
+    irregularities appear. This stability is not typical for statistical
+    language models and reflects GLPG’s identity as a low-dimensional
+    cognitive dynamical system.</p>
+    <h2 id="cognitive-manifold-preservation">Cognitive Manifold
+    Preservation</h2>
+    <p>The experiments in this paper demonstrate that GLPG maintains a
+    stable cognitive manifold under both upscaling and downscaling. A
+    larger model is not a new model; it is a more mature version of the
+    smaller model. The canonical attractors—characters, motifs,
+    stylistic rhythms, and world-objects—remain intact across
+    generations. Even after extreme transformations, the canonical
+    elements persist across all stages.</p>
+    <p>This stability is the foundation for GLPG’s lineage behaviour:
+    models inherit structure, style, and attractors from their
+    ancestors, forming a coherent genealogical line.</p>
+    <h2 id="self-distillation-through-downscaling">Self-Distillation
+    Through Downscaling</h2>
+    <p>Downscaling acts as a form of self-distillation. Instead of
+    training a new student model on a new dataset, GLPG compresses its
+    own manifold into a smaller semantic core. This core retains the
+    essential attractors of the parent model. Subsequent upscaling
+    expands this core into a larger semantic space, producing a model
+    that is structurally similar to the parent but often more stable and
+    more coherent.</p>
+    <p><span class="math display">upscaling = capacity
+    expansion,   downscaling = self-distillation.</span></p>
+    <h2 id="lineage-and-generational-growth">Lineage and Generational
+    Growth</h2>
+    <p>The scaling experiments show that GLPG supports genuine lineage
+    formation. Models can be trained across multiple generations, each
+    inheriting the attractor manifold of the previous generation. This
+    produces predictable cognitive phases:</p>
+    <ul>
+    <li><p><strong>Undertraining</strong> leads to drift but not
+    collapse.</p></li>
+    <li><p><strong>Overtraining</strong> produces hypercoherent
+    baselines.</p></li>
+    <li><p><strong>Downscaling</strong> compresses the
+    manifold.</p></li>
+    <li><p><strong>Upscaling</strong> inflates the manifold.</p></li>
+    <li><p><strong>Generations</strong> can be evaluated and
+    compared.</p></li>
+    <li><p><strong>Evolution</strong> becomes visible in the
+    output.</p></li>
+    </ul>
+    <p>This constitutes an artificial evolutionary line: a computational
+    analogue of developmental growth.</p>
+    <h2 id="transfer-learning-and-canon-dominance">Transfer Learning and
+    Canon Dominance</h2>
+    <p>Transfer learning reveals another AGI-relevant property:
+    <strong>canon dominance</strong>. When a model trained on dataset A
+    is subsequently trained on dataset B, the attractor manifold
+    reorganises deterministically toward B. Vocabulary from A persists,
+    but its semantic activation disappears. This behaviour mirrors
+    biological cognition: new attractors overwrite old ones unless both
+    domains are repeatedly reinforced.</p>
+    <p>This is not catastrophic forgetting in the transformer sense.
+    GLPG does not lose information through gradient interference;
+    instead, its attractor basins reorganise in a stable, predictable,
+    canon-closed manner. The dataset with the strongest attractor
+    structure dominates the hybrid manifold. This is a cognitive
+    phenomenon, not a statistical failure mode.</p>
+    <h2 id="the-xl-scratch-ablation">The XL Scratch Ablation</h2>
+    <p>The XL-from-scratch experiment provides a critical ablation:</p>
+    <ol>
+    <li><p>A 3072-unit model trained from scratch for 10K epochs
+    performs significantly worse than the genealogical XL
+    model.</p></li>
+    <li><p>Its attractors differ: fewer canonical motifs, weaker
+    structure, more repetition, and less coherent rhythm.</p></li>
+    </ol>
+    <p>This demonstrates that lineage is not merely a convenience but a
+    cognitive factor. Capacity alone is insufficient; staged
+    consolidation is required.</p>
+    <h2 id="the-glpg-cognitive-consolidation-principle">The GLPG
+    Cognitive Consolidation Principle</h2>
+    <p>The experiments support a general principle:</p>
+    <blockquote>
+    <p><strong>A model’s attractor manifold must be stabilized at lower
+    capacities before architectural upscaling. Upscaling without
+    sufficient consolidation leads to monotonic attractor collapse, even
+    when total parameter count increases. Upscaling with consolidation
+    leads to cognitive growth.</strong></p>
+    </blockquote>
+    <p>Toy Academy demonstrated that staged growth works for functions.
+    GLPG demonstrates that staged growth works for worlds.</p>
+    <h2 id="towards-an-agi-ecology">Towards an AGI Ecology</h2>
+    <p>The behaviour observed in GLPG resembles properties of biological
+    and cultural systems:</p>
+    <ul>
+    <li><p>diversity of attractors,</p></li>
+    <li><p>niche formation,</p></li>
+    <li><p>cultural evolution,</p></li>
+    <li><p>redundancy,</p></li>
+    <li><p>emergent behaviour between agents.</p></li>
+    </ul>
+    <p>AGI is unlikely to be an individual system. AGI is a collective
+    phenomenon.</p>
+    <p>You do not build an AGI model. You build an AGI ecology.</p>
+    <p>GLPG’s scaling, stability, lineage, and self-distillation
+    properties provide a concrete computational mechanism for such an
+    ecology: multiple agents, each with inherited attractors, evolving
+    through staged growth, dataset transfer, compression, expansion, and
+    cross-generational consolidation. GLPG does not behave like a
+    statistical language model; it behaves like a structured cognitive
+    substrate whose development follows clear, reproducible, and
+    biologically plausible patterns.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>The experiments in this paper demonstrate that GLPG is not merely
+    another language model architecture, but a structurally grounded
+    cognitive substrate whose behaviour is stable, interpretable, and
+    reproducible across a wide range of capacities, datasets, and
+    training regimes. Unlike statistical language models, whose scaling
+    behaviour is often irregular, sensitive, and prone to collapse, GLPG
+    exhibits textbook developmental dynamics: compression strengthens
+    attractors, staged consolidation stabilizes the manifold, upscaling
+    expands semantic capacity without cognitive reset, and transfer
+    learning reorganizes attractors in a deterministic, canon‑dominant
+    manner.</p>
+    <p>Across all evaluations, GLPG maintains a coherent attractor
+    manifold. Small models form stable semantic cores; downscaled models
+    retain essential structure; mid‑stage models achieve optimal balance
+    between richness and stability; and lineage‑grown XL models
+    outperform scratch‑trained variants by a wide margin. Even under
+    extreme architectural transformations, canonical elements persist,
+    stylistic rhythms remain intact, and the manifold deforms smoothly
+    rather than chaotically. This robustness is unusual for neural
+    language models and reflects the architectural separation between
+    structure and semantics: the grammar–lemma graph provides a stable
+    backbone, while the monolithic MLP acts as a semantic projector
+    whose capacity can be increased or decreased without entangling the
+    underlying world model.</p>
+    <p>The cognitive implications are significant. GLPG supports
+    function‑preserving scaling, self‑distillation through downscaling,
+    generational lineage formation, and predictable cognitive growth.
+    Transfer learning reveals canon dominance rather than catastrophic
+    forgetting, and staged training demonstrates that consolidation at
+    lower capacities is a prerequisite for successful expansion. These
+    behaviours mirror properties of biological and cultural systems:
+    inheritance, niche formation, attractor competition, and
+    evolutionary development.</p>
+    <p>Taken together, the results suggest that GLPG provides a concrete
+    computational mechanism for building not a single AGI model, but an
+    AGI ecology: multiple agents, each with inherited attractors,
+    evolving through staged growth, dataset transfer, compression,
+    expansion, and cross‑generational consolidation. GLPG does not
+    behave like a statistical correlation engine. It behaves like a
+    structured cognitive dynamical system whose development follows
+    clear, reproducible, and biologically plausible patterns.</p>
+    <p>In this sense, GLPG offers a path toward scalable artificial
+    cognition: an architecture capable of growing worlds, preserving
+    minds, and supporting the emergence of complex, multi‑agent
+    intelligence.</p>
+    <h1 id="validation-of-the-numerical-evaluation-method">Validation of
+    the Numerical Evaluation Method</h1>
+    <p>To verify that the numerical evaluation pipeline produces
+    meaningful and credible results, we performed a cross-check using
+    the best-performing models from both canonical datasets: <em>A
+    Honeymoon in Space</em> (small base, paged mode) and <em>The Time
+    Machine</em> (small stage 4, paged and MLP modes). For each model,
+    twenty independent stories were generated and scored by an external
+    LLM using the calibrated evaluation prompt described in Section 3.
+    The scoring regime defines moderate-level quality around a median
+    of 50, with scores above 80 reserved for exceptional human-level
+    coherence.</p>
+    <h2 id="honeymoon-cross-check">Honeymoon Cross-Check</h2>
+    <p>The best Honeymoon model (small base, paged mode) produced scores
+    ranging from 32 to 58, with a median of 45 and a total average
+    of 882. The distribution is tightly clustered around the
+    moderate-quality band, with no outliers above 60 and no collapses
+    below 20. This matches the expected behaviour of GLPG’s paged
+    generation: structurally stable, stylistically consistent, but
+    semantically diffuse. The score distribution is monotonic, smooth,
+    and free of anomalies, confirming that the evaluator responds
+    predictably to GLPG’s output characteristics.</p>
+    <h2 id="time-machine-cross-check">Time Machine Cross-Check</h2>
+    <p>The best Time Machine model (small stage 4) was evaluated in both
+    paged and MLP modes. Paged mode produced scores between 33 and 63
+    (median 44, total 900), while MLP mode produced scores between 35
+    and 70 (median 44, total 911). The similarity of the medians
+    demonstrates that the monolithic MLP internalises the graph
+    structure, while the slightly higher maximum scores in MLP mode
+    reflect its tendency to generate longer and locally more coherent
+    sentences. Crucially, both modes remain within the moderate-quality
+    band, with no exceptional scores above 80 and no pathological
+    failures below 20.</p>
+    <h2 id="consistency-and-realism">Consistency and Realism</h2>
+    <p>Across both datasets and both generative modes, the evaluation
+    pipeline yields:</p>
+    <ul>
+    <li><p><strong>Realistic score ranges</strong> (30–60), consistent
+    with moderate-level narrative quality.</p></li>
+    <li><p><strong>Stable medians</strong> (44–45), reflecting GLPG’s
+    attractor-driven coherence.</p></li>
+    <li><p><strong>Plausible maxima</strong> (58–70), indicating
+    occasional strong passages without exceeding the exceptional
+    threshold.</p></li>
+    <li><p><strong>Absence of collapses</strong> (no scores below 20),
+    demonstrating GLPG’s structural stability.</p></li>
+    <li><p><strong>Dataset-sensitive variation</strong>, with Time
+    Machine producing slightly higher maxima due to its stronger lemma
+    clusters.</p></li>
+    <li><p><strong>Mode-sensitive variation</strong>, with MLP mode
+    occasionally producing higher peaks while preserving the same median
+    as paged mode.</p></li>
+    </ul>
+    <p>These properties confirm that the evaluation method is both
+    <em>credible</em> and <em>diagnostic</em>. The scoring pipeline does
+    not inflate results, does not compress distributions, and does not
+    produce artefactual extremes. Instead, it yields smooth,
+    interpretable score profiles that align with the known cognitive
+    behaviour of GLPG.</p>
+    <h2 id="conclusion-1">Conclusion</h2>
+    <p>The cross-check demonstrates that the numerical evaluation
+    pipeline provides a reliable and realistic measure of GLPG’s
+    performance. The scores are consistent with the expected
+    moderate-level quality of GLPG outputs, sensitive to architectural
+    differences, and stable across datasets and generative modes. This
+    validates the use of the external LLM evaluator as an objective
+    metric for assessing cognitive behaviour in GLPG.</p>
+    <h1 id="graph-based-qkv-selection-in-glpg">Graph-Based QKV Selection
+    in GLPG</h1>
+    <p>GLPG does not use attention, nor does it rely on the
+    query–key–value mechanism found in transformers. However, the
+    structure of the GLPG language graph naturally induces an analogous
+    triplet. This analogy is not architectural but conceptual: it
+    clarifies which parts of the GLPG pipeline are already
+    deterministic, and which part remains an open challenge for further
+    quality improvements.</p>
+    <h2 id="deterministic-k-and-v-in-the-language-graph">Deterministic K
+    and V in the Language Graph</h2>
+    <p>In GLPG, every lemma is a node in the canonical language graph.
+    Each node has a set of outgoing transitions representing all
+    semantically valid continuations. This yields two deterministic
+    components:</p>
+    <ul>
+    <li><p><strong>K (Key):</strong> the lemma itself, representing
+    <em>where</em> we are in the canonical world. The key is not a
+    learned vector but a structural position in the graph.</p></li>
+    <li><p><strong>V (Value):</strong> the set of all outgoing
+    transitions from that lemma, representing <em>what</em> can happen
+    next. The value is not a dense projection but a deterministic
+    transition set.</p></li>
+    </ul>
+    <p>Thus, GLPG already provides the “K” and “V” components through
+    its world model. They are not learned; they are part of the
+    canonical structure.</p>
+    <h2 id="q-as-context-derived-motivation">Q as Context-Derived
+    Motivation</h2>
+    <p>The missing component is the <strong>Q (Query)</strong>, which
+    must determine <em>why</em> a particular transition from <span
+    class="math inline"><em>V</em>(<em>K</em>)</span> should be
+    selected. Unlike transformers, where Q is a learned linear
+    projection of the token embedding, GLPG must derive Q from the input
+    vector and the paging context.</p>
+    <p>Q must encode:</p>
+    <ul>
+    <li><p>attractor pressure,</p></li>
+    <li><p>narrative intent,</p></li>
+    <li><p>world-state consistency,</p></li>
+    <li><p>lemma-embedding similarity,</p></li>
+    <li><p>and the cognitive phase of the model.</p></li>
+    </ul>
+    <p>At present, GLPG uses simple context encoders to approximate Q.
+    These encoders work, but they are not yet expressive enough to fully
+    exploit the structure of the graph. Improving Q is therefore one of
+    the main challenges for future GLPG development.</p>
+    <h2 id="why-this-analogy-matters">Why This Analogy Matters</h2>
+    <p>This QKV interpretation is not a transformer claim. It is a
+    structural analogy that highlights the division of labour inside
+    GLPG:</p>
+    <p><span
+    class="math display"><em>K</em> = where,   <em>Q</em> = why,   <em>V</em> = what.</span></p>
+    <p>Transformers must learn all three components from scratch. GLPG
+    already has K and V embedded in the canonical graph. Only Q must be
+    inferred from context.</p>
+    <p>This means that GLPG is inherently closer to a <em>semantic
+    router</em> than to an attention mechanism. The model does not
+    search over all tokens; it selects among the transitions that the
+    world model allows. Improving Q will therefore directly improve
+    semantic precision, coherence, and narrative stability.</p>
+    <h2 id="open-challenge">Open Challenge</h2>
+    <p>The next major step for GLPG is to strengthen the context encoder
+    so that Q becomes a reliable, high-resolution motivation signal.
+    When Q is sufficiently expressive, GLPG will effectively implement a
+    graph-based QKV selection mechanism:</p>
+    <p><span
+    class="math display"><em>V</em><sup>*</sup> = argmax<sub><em>v</em> ∈ <em>V</em>(<em>K</em>)</sub>compatibility(<em>Q</em>,<em>v</em>),</span></p>
+    <p>where compatibility is determined by attractor matching,
+    canonical consistency, and paging context.</p>
+    <p>This is not attention. It is a deterministic world model guided
+    by a learned motivational vector. But the structural analogy
+    clarifies what is already solved (K and V) and what remains to be
+    improved (Q).</p>
+    <p>Improving Q is therefore one of the key challenges for increasing
+    GLPG output quality and for enabling more complex multi-agent and
+    multi-world experiments such as the AGI School.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the GLPG engine, the narrator pipeline,
+    and all supporting modules is provided under the AGPL‑3.0 license.
+    The datasets described in this paper are present within the
+    complementary <code>triadic-data</code> repository.</p>
+    <div class="thebibliography">
+    <p>J. De Witte, “GLP–Graph Behaviour Under Hyperparameter
+    Variation,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The GLP–Graph Architecture: Combining GLP–Mono with
+    DMLG,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The GLP–Mono Architecture,” Triadic Cosmos
+    Ecosystem, 2026.</p>
+    <p>J. De Witte, “Learnable Lemma Embeddings for GLP Models,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Grammar Lemma Paged Language Models,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>

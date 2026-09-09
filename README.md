@@ -3084,6 +3084,53 @@ In other words:
 Paper #50 marks the moment where the Triadic Cosmos ecosystem  
 transitions from *architectural development* to *structural AGI research*.
 
+---
+
+### **51. GLP‑Graph Scaling Behaviour — Cognitive Manifold Stability Across Generations**
+
+This paper is the first fully empirical GLPG study:  
+a large‑scale, dataset‑driven evaluation of cognitive manifold stability under  
+**upscaling, downscaling, staged lineage growth, and cross‑dataset transfer**.
+
+Where earlier GLPG papers established architecture (#48), lifecycle behaviour (#49),  
+and hyperparameter robustness (#50), paper #51 introduces the **first numerical  
+benchmarking pipeline** for GLPG. Every model is evaluated through:
+
+- **20×20 story generation**,  
+- **dual‑mode output (Paged + MLP)**,  
+- **dual scoring per story**,  
+- **six aggregated cognitive metrics** (Total Min/Max/Avg, Min/Max/Median),  
+- **external LLM evaluation** using a calibrated scoring regime.
+
+This marks the first time that **real benchmark results**—produced by a large‑scale  
+LLM evaluator—are integrated into a GLPG paper, making it the most empirically  
+grounded study in the ecosystem to date.
+
+The results show that GLPG supports **function‑preserving scaling**:
+
+- upscaling expands the semantic manifold without cognitive reset,  
+- downscaling compresses the manifold while preserving canonical structure,  
+- staged lineage produces hereditary attractor clusters,  
+- transfer learning reorganises the manifold in a deterministic, canon‑dominant way.
+
+GLPG exhibits **unusual structural and semantic stability**:  
+its manifold deforms smoothly under hyperparameter variation, scaling, compression,  
+and dataset transfer. This stability confirms GLPG’s identity as a  
+**low‑dimensional cognitive dynamical system**, not a statistical LM.
+
+#### **Evaluation Notes**
+- One external LLM evaluator (Mistral 7B v0.3) was used.  
+- Quality is canon‑bounded: GLPG cannot exceed the semantic richness of its dataset.  
+- No human annotators were used in this round.  
+- A secondary cross‑check was performed with a different LLM, confirming score realism.
+
+### 🌟 **Fun Fact**
+This is the **first GLPG paper with true benchmark‑level evaluation**:  
+a full, reproducible scoring pipeline with hundreds of LLM‑generated scores.  
+It transforms GLPG research from qualitative demonstration into  
+**quantitative cognitive science**, making paper #51 an empirical anchor  
+of the Triadic Cosmos ecosystem.
+
 </details>
 
 ---
