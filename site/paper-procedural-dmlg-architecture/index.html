@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The Procedural DMLG Architecture<br />
+A Large Mind Creating Many Smaller Minds</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#architecture"
+    id="toc-architecture">Architecture</a></li>
+    <li><a href="#training" id="toc-training">Training</a></li>
+    <li><a href="#inference" id="toc-inference">Inference</a></li>
+    <li><a href="#solving-several-dmlg-weaknesses"
+    id="toc-solving-several-dmlg-weaknesses">Solving Several DMLG
+    Weaknesses</a></li>
+    <li><a href="#comparison-to-hyper-networks"
+    id="toc-comparison-to-hyper-networks">Comparison to
+    Hyper-networks</a></li>
+    <li><a
+    href="#eliminating-paging-dynamic-modularization-via-procedural-micro-mlps"
+    id="toc-eliminating-paging-dynamic-modularization-via-procedural-micro-mlps">Eliminating
+    Paging: Dynamic Modularization via Procedural Micro-MLPs</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#dmlgv3-page-geometry-as-a-simpler-alternative"
+    id="toc-dmlgv3-page-geometry-as-a-simpler-alternative">DMLG‑v3 Page
+    Geometry as a Simpler Alternative</a></li>
+    <li><a href="#micromlp-parameter-budgets"
+    id="toc-micromlp-parameter-budgets">Micro‑MLP Parameter
+    Budgets</a></li>
+    <li><a href="#relation-to-biological-cognition"
+    id="toc-relation-to-biological-cognition">Relation to Biological
+    Cognition</a></li>
+    <li><a href="#relation-to-existing-machine-learning-architectures"
+    id="toc-relation-to-existing-machine-learning-architectures">Relation
+    to Existing Machine Learning Architectures</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Contemporary language models rely on large-scale statistical
+    learning, high-dimensional embeddings, and transformer-based
+    attention mechanisms. Although these systems exhibit remarkable
+    generative capabilities, they lack explicit structure, deterministic
+    control, and transparent internal representations. As a result, they
+    remain difficult to govern, hard to interpret, and fundamentally
+    limited in their ability to provide guarantees about domain
+    fidelity, safety, or stylistic consistency. Parameter scaling has
+    improved performance but has not resolved these structural
+    limitations.</p>
+    <p>The Dynamic Modular Language Graph (DMLG) addresses these issues
+    by modelling language as traversal through a deterministic canonical
+    graph rather than as next-token prediction over a probability
+    distribution. Tokens and their admissible transitions form an
+    explicit structural substrate, and generation is expressed as
+    navigation through this graph rather than sampling from a
+    statistical model. This shift enables transparency, modularity, and
+    fine-grained control that are difficult to obtain from purely neural
+    approaches. In the original formulation, local micro-models score
+    transitions, grammar provides deterministic context compression, and
+    paging organizes the graph into modular biomes. These components
+    yield a lightweight, interpretable, and domain-faithful governance
+    architecture.</p>
+    <p>However, classical DMLG inherits two structural weaknesses.
+    First, each lemma requires its own micro-model, leading to a rapid
+    explosion in parameters as the graph grows. Second, transition
+    selection relies on alternating grammar and lemma tokens, scored by
+    lemma-local one-hot classifiers whose dimensionality varies across
+    nodes. This makes the architecture fragile, difficult to train, and
+    challenging to scale.</p>
+    <p>This paper introduces <em>Procedural DMLG</em>, a geometry-fixed,
+    hypernetwork-style extension that resolves both limitations. Instead
+    of maintaining thousands of independent micro-models, a single
+    monolithic MLP procedurally generates the hidden-layer parameters of
+    compact lemma-specific micro-MLPs. All micro-models share the same
+    input projection, output projection, and trainable target embedding
+    matrix, while only their internal hidden layer is generated
+    dynamically. This eliminates parameter explosion and enables
+    continuous lifecycle learning: micro-models evolve through training,
+    and the monolithic network periodically learns to reconstruct their
+    current parameters.</p>
+    <p>In addition, Procedural DMLG replaces alternating grammar and
+    lemma transitions with single-step (grammar, lemma) pairs, following
+    the successful design of GLP-Mono. This unifies structural and
+    semantic decisions, simplifies traversal, and allows transitions to
+    be selected via cosine similarity in a shared embedding space rather
+    than via lemma-local one-hot classifiers. The result is a stable,
+    scalable, and semantically coherent output space that preserves
+    determinism while enabling emergent behaviour within fixed canonical
+    constraints.</p>
+    <p>Procedural DMLG therefore represents a hybrid between DMLG and
+    GLP-Mono: a deterministic graph architecture equipped with a
+    monolithic procedural generator that constructs many small
+    lemma-specific minds. The remainder of this paper formalizes the
+    architecture, describes its training and inference procedures, and
+    explains why empirical results from GLPG indicate that this approach
+    is structurally viable even without initial experimental
+    validation.</p>
+    <h1 id="architecture">Architecture</h1>
+    <p>The Procedural DMLG architecture extends the original Dynamic
+    Modular Language Graph by replacing large per‑lemma micro‑models and
+    alternating grammar/lemma transitions with a compact,
+    geometry‑fixed, procedurally generated micro‑model design. This
+    section describes the structural components of the architecture, the
+    flow of information through the system, and the role of the
+    monolithic procedural generator.</p>
+    <h2 id="context-encoding">Context Encoding</h2>
+    <p>Procedural DMLG employs a modernized context encoder that
+    replaces the grammar-based compression mechanism of classical DMLG
+    <span class="citation" data-cites="DeWitte2026DMLG"></span>.
+    Extensive hyperparameter studies in GLP-Graph <span class="citation"
+    data-cites="DeWitte2026Parameter"></span> demonstrate that
+    grammar-driven context compression is brittle, overly discrete, and
+    insufficiently expressive for stable semantic modulation. In
+    contrast, GLPG’s evolved context encoder—based on fixed-width
+    learned projections—provides significantly more robust behaviour
+    across scales, datasets, and paging geometries.</p>
+    <p>Procedural DMLG inherits this improved design. The context
+    encoder is fully customizable, but must satisfy two constraints:</p>
+    <ol>
+    <li><p>It produces a fixed-width vector independent of sequence
+    length.</p></li>
+    <li><p>It includes the last lemma token in some form, ensuring that
+    the procedural generator can condition its output on the current
+    semantic position in the graph.</p></li>
+    </ol>
+    <p>This design allows DMLG and GLPG to share the same context
+    encoder without modification. Because both architectures operate
+    over canonical grammar–lemma pairs and rely on cosine distance in a
+    shared embedding space, their context requirements are structurally
+    aligned. Sharing the encoder across architectures provides a major
+    practical advantage: improvements in GLPG’s context dynamics
+    immediately transfer to Procedural DMLG without architectural
+    changes.</p>
+    <p>The encoded context serves as the sole input to the monolithic
+    procedural generator. By decoupling context encoding from grammar
+    structure, Procedural DMLG gains the stability, expressiveness, and
+    manifold coherence observed in GLPG, while preserving the
+    deterministic graph traversal semantics of the original DMLG
+    architecture.</p>
+    <h2 id="deterministic-input-embeddings">Deterministic Input
+    Embeddings</h2>
+    <p>Each lemma is associated with a deterministic input embedding.
+    These embeddings are not learned; they are fixed, stable, and
+    derived from canonical lemma identity. Deterministic embeddings
+    ensure that the meaning of a lemma is grounded in the graph
+    structure rather than in a statistical distribution, consistent with
+    the original DMLG ontology <span class="citation"
+    data-cites="DeWitte2026DMLG"></span>. During inference, the input
+    embedding of the last lemma token is concatenated with the encoded
+    context and fed into the procedural generator.</p>
+    <h2 id="shared-target-embedding-space">Shared Target Embedding
+    Space</h2>
+    <p>Procedural DMLG replaces lemma‑local one‑hot classifiers with a
+    unified trainable target embedding matrix. Each admissible (grammar,
+    lemma) pair is assigned a learnable vector in a fixed‑width space
+    (typically 128 dimensions or smaller). All micro‑models project into
+    this shared space, and transitions are selected via cosine
+    similarity rather than softmax classification. This design follows
+    the successful approach of GLP‑Mono and GLPG, where cosine‑distance
+    transitions remain generative even under imperfect function
+    approximation.</p>
+    <p>The shared target embedding matrix provides a stable semantic
+    space, eliminates variable output dimensionality, and ensures that
+    all transitions are canon‑compatible by construction.</p>
+    <h2 id="monolithic-procedural-generator">Monolithic Procedural
+    Generator</h2>
+    <p>At the core of the architecture is a single monolithic MLP that
+    procedurally generates the hidden‑layer parameters of lemma‑specific
+    micro‑models. The generator receives the encoded context (including
+    the last lemma embedding) and outputs a fixed‑size vector
+    representing the weights of a single hidden layer. For the initial
+    implementation, a single hidden layer (e.g., 64 parameters) is used;
+    deeper micro‑models are possible but increase the output
+    dimensionality of the generator.</p>
+    <p>The procedural generator replaces thousands of independent
+    micro‑models from classical DMLG. Instead of storing per‑lemma
+    networks, the system stores only the generator and a side file
+    containing the current hidden‑layer parameters for each lemma, used
+    exclusively during training. Inference requires only the
+    generator.</p>
+    <h2 id="lemma-micromodels">Lemma Micro‑Models</h2>
+    <p>Each lemma is associated with a compact micro‑MLP consisting
+    of:</p>
+    <ul>
+    <li><p>a shared input projection,</p></li>
+    <li><p>a single procedural hidden layer with SiLU
+    activation,</p></li>
+    <li><p>a shared output projection into the target embedding
+    space.</p></li>
+    </ul>
+    <p>Only the hidden layer is lemma‑specific; all other parameters are
+    shared globally. This geometry‑fixed design ensures that the
+    procedural generator can reliably produce valid micro‑model
+    parameters for any lemma.</p>
+    <p>During inference, the hidden layer is generated on demand by the
+    monolithic MLP. The micro‑model then maps the encoded context to a
+    target embedding representing the next (grammar, lemma) pair.</p>
+    <h2 id="unified-transition-mechanism">Unified Transition
+    Mechanism</h2>
+    <p>Procedural DMLG replaces alternating grammar and lemma
+    transitions with single‑step (grammar, lemma) pairs. This design
+    simplifies traversal, reduces evaluator complexity, and aligns DMLG
+    with the GLP‑Mono transition mechanism. Because each pair is
+    represented as a single target embedding, the micro‑model produces
+    one vector per step, and cosine similarity selects the next
+    transition.</p>
+    <p>This mechanism eliminates the fragility of alternating
+    transitions and ensures that all generated transitions remain
+    canon‑compatible.</p>
+    <h2 id="information-flow">Information Flow</h2>
+    <p>The full architectural flow is:</p>
+    <ol>
+    <li><p>Encode context into a fixed‑width vector.</p></li>
+    <li><p>Concatenate deterministic lemma embedding.</p></li>
+    <li><p>Feed into monolithic procedural generator.</p></li>
+    <li><p>Generate hidden‑layer parameters for the lemma
+    micro‑model.</p></li>
+    <li><p>Apply shared input projection.</p></li>
+    <li><p>Apply procedural hidden layer with SiLU activation.</p></li>
+    <li><p>Apply shared output projection into target embedding
+    space.</p></li>
+    <li><p>Compute cosine similarity with all admissible (grammar,
+    lemma) embeddings.</p></li>
+    <li><p>Select top‑K transitions and apply boosting.</p></li>
+    </ol>
+    <p>This flow preserves the deterministic graph structure of DMLG
+    while enabling emergent behaviour within fixed canonical
+    constraints.</p>
+    <h2 id="architecture-diagram">Architecture Diagram</h2>
+    <p>A schematic overview of the architecture is shown in Figure <a
+    href="#fig:procedural-dmlg" data-reference-type="ref"
+    data-reference="fig:procedural-dmlg">1</a>.</p>
+    <figure id="fig:procedural-dmlg">
+
+    <figcaption>High-level architecture of Procedural DMLG.</figcaption>
+    </figure>
+    <h1 id="training">Training</h1>
+    <p>Training in Procedural DMLG follows a two-stage, lemma-local
+    lifecycle. Each lemma has its own micro-model that evolves through
+    direct training on canonical transitions, and the monolithic
+    procedural generator periodically learns to reproduce the current
+    parameters of that specific micro-model. This ensures that inference
+    remains compact and deterministic, while training allows rich
+    lemma-specific dynamics to emerge.</p>
+    <h2 id="micro-model-training">Micro-Model Training</h2>
+    <p>For each canonical transition</p>
+    <p><span
+    class="math display">(ℓ<sub>current</sub>,<em>g</em><sub>next</sub>,ℓ<sub>next</sub>),</span></p>
+    <p>the system encodes the active traversal context into a
+    fixed-width vector. This encoded context, together with the
+    deterministic embedding of the current lemma, is fed into the
+    lemma-specific micro-MLP. The micro-model produces a target
+    embedding intended to match the learned embedding associated with
+    the next admissible (grammar, lemma) pair.</p>
+    <p>A standard forward–backward pass updates:</p>
+    <ul>
+    <li><p>the lemma-specific hidden layer (stored only during
+    training),</p></li>
+    <li><p>the shared input projection,</p></li>
+    <li><p>the shared output projection.</p></li>
+    </ul>
+    <p>Only the hidden layer is lemma-specific; all other parameters are
+    shared globally. This geometry-fixed design ensures that
+    micro-models remain compact and structurally aligned across the
+    entire graph.</p>
+    <h2 id="target-embedding-updates">Target Embedding Updates</h2>
+    <p>Procedural DMLG employs a unified trainable target embedding
+    matrix for all admissible (grammar, lemma) pairs. During training,
+    each target embedding is updated using a small blend coefficient
+    <span class="math inline"><em>α</em></span> (typically <span
+    class="math inline">0.001</span>), following the semantic adaptation
+    rule introduced in GLPG <span class="citation"
+    data-cites="DeWitte2026Parameter"></span>:</p>
+    <p><span
+    class="math display"><em>E</em><sub>target</sub> ← (1−<em>α</em>)<em>E</em><sub>target</sub> + <em>α</em><em>E</em><sub>predicted</sub>.</span></p>
+    <p>Small <span class="math inline"><em>α</em></span> values preserve
+    long-term stability and allow semantic structure to accumulate
+    gradually, while larger values increase plasticity at the cost of
+    coherence. As in GLPG, the range <span
+    class="math inline"><em>α</em> ∈ [0.001,0.002]</span> consistently
+    yields the strongest cognitive behaviour.</p>
+    <h2 id="lemma-local-procedural-generator-training">Lemma-Local
+    Procedural Generator Training</h2>
+    <p>The monolithic procedural generator is trained <em>per
+    lemma</em>, not globally. Each lemma maintains its own update
+    counter. After a configurable <span
+    class="math inline"><em>N</em></span> successful training updates of
+    a particular micro-model, the generator is trained to reproduce the
+    current hidden-layer parameters of that lemma.</p>
+    <p>For lemma <span class="math inline">ℓ</span>, the generator
+    receives as input either:</p>
+    <ul>
+    <li><p>the most recent encoded context used during micro-model
+    training, or</p></li>
+    <li><p>the full set of the last <span
+    class="math inline"><em>N</em></span> encoded contexts (stored
+    temporarily),</p></li>
+    </ul>
+    <p>and is trained to output the hidden-layer weight vector currently
+    stored for that lemma.</p>
+    <p>The reconstruction loss is:</p>
+    <p><span
+    class="math display">ℒ<sub>reconstruct</sub> = ∥<em>W</em><sub>ℓ</sub><sup>generated</sup> − <em>W</em><sub>ℓ</sub><sup>stored</sup>∥<sup>2</sup>.</span></p>
+    <p>Because each lemma maintains its own update counter, the
+    procedural generator learns a distributed representation of the
+    graph: consolidation occurs independently for each node, allowing
+    the generator to internalize the evolving micro-model parameters
+    without ever storing thousands of networks.</p>
+    <h2 id="lifecycle-learning">Lifecycle Learning</h2>
+    <p>The training process forms a lemma-specific lifecycle:</p>
+    <ol>
+    <li><p><strong>Micro-model evolution:</strong> Each lemma
+    micro-model is trained directly on canonical transitions, refining
+    its hidden layer and contributing to the semantic structure of the
+    target embedding space.</p></li>
+    <li><p><strong>Procedural consolidation:</strong> After <span
+    class="math inline"><em>N</em></span> updates, the monolithic
+    generator learns to reconstruct the current hidden-layer parameters
+    of that lemma, using the most recent context encodings as
+    conditioning signals.</p></li>
+    </ol>
+    <p>This lifecycle mirrors the semantic manifold consolidation
+    observed in GLPG: micro-models provide high-frequency plasticity,
+    while the generator provides low-frequency structural stability.
+    Because consolidation is lemma-local, the generator learns a
+    distributed procedural representation of the entire graph without
+    ever storing thousands of independent networks.</p>
+    <h2
+    id="context-conditioned-procedural-generation">Context-Conditioned
+    Procedural Generation</h2>
+    <p>A key advantage of Procedural DMLG over classical DMLG and GLPG
+    is that the monolithic procedural generator receives not only the
+    deterministic lemma embedding, but also the encoded context as
+    input. As a result, the generator does not merely learn to reproduce
+    a single hidden-layer configuration per lemma; it can learn to
+    produce <em>context-conditioned</em> variants of that
+    configuration.</p>
+    <p>Instead of a static mapping</p>
+    <p><span class="math display">ℓ ↦ <em>W</em><sub>ℓ</sub>,</span></p>
+    <p>the generator can learn a richer conditional mapping</p>
+    <p><span
+    class="math display">(ℓ,<em>C</em>) ↦ <em>W</em><sub>ℓ, <em>C</em></sub>,</span></p>
+    <p>where <span class="math inline"><em>C</em></span> denotes the
+    encoded context. In practice, this means that the generator can
+    produce slightly different hidden-layer parameters for the same
+    lemma depending on the semantic, structural, or narrative conditions
+    present during training.</p>
+    <p>Two conditioning strategies are supported:</p>
+    <ol>
+    <li><p><strong>Last-context conditioning.</strong> After <span
+    class="math inline"><em>N</em></span> micro-model updates for lemma
+    <span class="math inline">ℓ</span>, the generator is trained using
+    the most recent context encoding <span
+    class="math inline"><em>C</em><sub>last</sub></span> encountered
+    during micro-model training.</p></li>
+    <li><p><strong>Multi-context conditioning.</strong> Alternatively,
+    the system may store the last <span
+    class="math inline"><em>N</em></span> context encodings <span
+    class="math inline">{<em>C</em><sub>1</sub>, <em>C</em><sub>2</sub>, …, <em>C</em><sub><em>N</em></sub>}</span>
+    used during micro-model training, allowing the generator to learn a
+    small context-conditioned manifold of micro-model variants.</p></li>
+    </ol>
+    <p>The small size of the hidden layer and the periodic nature of
+    consolidation ensure that context-conditioned variation remains
+    bounded, preventing drift or instability. Unlike classical
+    hypernetworks, which often produce unstable or high-variance
+    parameterizations, Procedural DMLG’s geometry-fixed micro-models
+    guarantee that all generated parameters remain structurally
+    valid.</p>
+    <p>This design preserves determinism while enabling richer
+    lemma-specific dynamics, and it provides a principled path toward
+    more expressive procedural micro-models without increasing parameter
+    count or architectural complexity.</p>
+    <h2 id="training-summary">Training Summary</h2>
+    <p>Training Procedural DMLG consists of:</p>
+    <ul>
+    <li><p>direct micro-model training via cosine-distance
+    alignment,</p></li>
+    <li><p>gradual semantic adaptation of target embeddings via small
+    <span class="math inline"><em>α</em></span>,</p></li>
+    <li><p>lemma-local reconstruction training of the monolithic
+    generator,</p></li>
+    <li><p>consolidation of lemma-specific dynamics into a single
+    procedural substrate.</p></li>
+    </ul>
+    <p>This design eliminates parameter explosion, stabilizes the output
+    space, and enables continuous lifecycle learning while preserving
+    the deterministic graph traversal semantics of DMLG.</p>
+    <figure>
+
+    <figcaption>Lemma-local lifecycle training in Procedural
+    DMLG.</figcaption>
+    </figure>
+    <h1 id="inference">Inference</h1>
+    <p>Inference in Procedural DMLG is fully deterministic and requires
+    only the monolithic procedural generator. No lemma-specific
+    micro-models are stored: their hidden layers are generated on demand
+    from the encoded context and the deterministic lemma embedding. This
+    makes inference compact, efficient, and structurally aligned with
+    the canonical graph.</p>
+    <h2 id="context-encoding-1">Context Encoding</h2>
+    <p>At each inference step, the system encodes the active traversal
+    state into a fixed-width context vector. This encoding includes the
+    last lemma token and any additional structural signals required by
+    the context encoder. Because the encoder is shared with GLPG,
+    inference benefits from the same stability and manifold coherence
+    observed in GLPG’s generative regime.</p>
+    <h2 id="procedural-hidden-layer-generation">Procedural Hidden-Layer
+    Generation</h2>
+    <p>The encoded context and deterministic lemma embedding are
+    concatenated and fed into the monolithic procedural generator. The
+    generator produces the hidden-layer parameters for the
+    lemma-specific micro-model:</p>
+    <p><span
+    class="math display"><em>W</em><sub>ℓ, <em>C</em></sub> = Generator(ℓ,<em>C</em>).</span></p>
+    <p>These parameters define the procedural hidden layer for the
+    current step. Because the generator was trained lemma-locally, the
+    produced hidden layer is guaranteed to be structurally valid and
+    compatible with the shared input and output projections.</p>
+    <h2 id="micro-model-forward-pass">Micro-Model Forward Pass</h2>
+    <p>The micro-model consists of:</p>
+    <ul>
+    <li><p>a shared input projection,</p></li>
+    <li><p>the generated hidden layer with SiLU activation,</p></li>
+    <li><p>a shared output projection into the target embedding
+    space.</p></li>
+    </ul>
+    <p>Applying these components yields a predicted target
+    embedding:</p>
+    <p><span
+    class="math display"><em>E</em><sub>predicted</sub> = <em>f</em><sub>ℓ</sub>(<em>C</em>),</span></p>
+    <p>where <span class="math inline"><em>f</em><sub>ℓ</sub></span>
+    denotes the lemma-specific micro-model instantiated procedurally for
+    the current step.</p>
+    <h2 id="cosine-distance-transition-selection">Cosine-Distance
+    Transition Selection</h2>
+    <p>Procedural DMLG replaces alternating grammar and lemma
+    transitions with single-step (grammar, lemma) pairs. Each admissible
+    pair has a learned target embedding <span
+    class="math inline"><em>E</em><sub>target</sub>(<em>g</em>,ℓ′)</span>.</p>
+    <p>Inference computes cosine similarity between the predicted
+    embedding and all admissible transitions from the current lemma:</p>
+    <p><span
+    class="math display">cos (<em>E</em><sub>predicted</sub>,<em>E</em><sub>target</sub>(<em>g</em>,ℓ′)).</span></p>
+    <p>The system selects the next transition using:</p>
+    <ul>
+    <li><p>top-<span class="math inline"><em>K</em></span> cosine
+    candidates,</p></li>
+    <li><p>optional boosting heuristics,</p></li>
+    <li><p>deterministic tie-breaking.</p></li>
+    </ul>
+    <p>Because all transitions are canon-compatible by construction, no
+    rule-based filtering is required. This eliminates the fragile
+    grammar/lemma alternation logic of classical DMLG.</p>
+    <h2 id="deterministic-graph-traversal">Deterministic Graph
+    Traversal</h2>
+    <p>Once the next (grammar, lemma) pair is selected, the system:</p>
+    <ol>
+    <li><p>updates the canonical graph state,</p></li>
+    <li><p>updates the context encoder,</p></li>
+    <li><p>proceeds to the next inference step.</p></li>
+    </ol>
+    <p>Inference therefore consists of deterministic traversal through
+    the canonical graph, guided by cosine-distance alignment in a stable
+    embedding space.</p>
+    <h2 id="inference-summary">Inference Summary</h2>
+    <p>Inference in Procedural DMLG consists of:</p>
+    <ul>
+    <li><p>encoding context into a fixed-width vector,</p></li>
+    <li><p>generating lemma- and context-conditioned hidden-layer
+    parameters,</p></li>
+    <li><p>applying the procedural micro-model to obtain a target
+    embedding,</p></li>
+    <li><p>selecting the next (grammar, lemma) pair via cosine
+    similarity,</p></li>
+    <li><p>performing deterministic canonical graph traversal.</p></li>
+    </ul>
+    <p>Inference requires only the monolithic procedural generator;
+    micro-model weights are generated procedurally and do not need to be
+    stored.</p>
+    <figure>
+
+    <figcaption>Inference flow in Procedural DMLG.</figcaption>
+    </figure>
+    <h1 id="solving-several-dmlg-weaknesses">Solving Several DMLG
+    Weaknesses</h1>
+    <p>Procedural DMLG resolves several structural limitations of the
+    original DMLG architecture. These improvements address parameter
+    explosion, fragile transition mechanisms, and limited semantic
+    expressiveness, while preserving the deterministic graph traversal
+    that defines DMLG.</p>
+    <h2 id="unified-grammar-lemma-transitions">Unified (Grammar, Lemma)
+    Transitions</h2>
+    <p>Classical DMLG generates grammar and lemma tokens in alternating
+    steps, requiring lemma-local one-hot classifiers whose
+    dimensionality varies across nodes. This mechanism is fragile,
+    difficult to scale, and structurally misaligned with the canonical
+    graph.</p>
+    <p>Procedural DMLG replaces alternating transitions with single-step
+    (grammar, lemma) pairs, following the successful design of GLP-Mono.
+    Each pair is represented by a learned target embedding in a
+    fixed-width semantic space. This unification:</p>
+    <ul>
+    <li><p>eliminates variable output dimensionality,</p></li>
+    <li><p>simplifies traversal into a single semantic decision per
+    step,</p></li>
+    <li><p>aligns DMLG with GLPG’s cosine-distance transition
+    mechanism,</p></li>
+    <li><p>and provides a stable substrate for emergent
+    behaviour.</p></li>
+    </ul>
+    <h2 id="terminal-tokens-as-lemma-tokens">Terminal Tokens as Lemma
+    Tokens</h2>
+    <p>A further refinement arises from treating terminal tokens—such as
+    punctuation marks—as lemma tokens rather than as a separate
+    grammatical category. In classical DMLG, terminal tokens occupy a
+    special role in the grammar–lemma alternation mechanism, requiring
+    dedicated rule-based logic to ensure correct placement. GLPG, by
+    contrast, treats punctuation as ordinary grammar–lemma pairs,
+    allowing terminals to participate naturally in the learned semantic
+    manifold.</p>
+    <p>Procedural DMLG adopts the GLPG approach. Terminal tokens such as
+    period, comma, question mark, and exclamation mark are represented
+    as standard (grammar, lemma) pairs with learned target embeddings.
+    This yields several advantages:</p>
+    <ul>
+    <li><p><strong>Unified transition mechanism.</strong> Terminals no
+    longer require special-case alternation logic; they are selected via
+    the same cosine-distance mechanism as all other
+    transitions.</p></li>
+    <li><p><strong>Stable embedding geometry.</strong> Because terminals
+    occupy the same embedding space as ordinary lemma tokens, their
+    semantic and stylistic behaviour becomes consistent across contexts,
+    mirroring GLPG’s punctuation dynamics.</p></li>
+    <li><p><strong>Elimination of rule-based punctuation
+    handling.</strong> Classical DMLG required explicit structural rules
+    for punctuation placement. Procedural DMLG removes this dependency
+    entirely: terminals are canon-compatible transitions governed by the
+    learned embedding space.</p></li>
+    <li><p><strong>Improved stylistic fidelity.</strong> Terminals
+    contribute to the learned manifold, allowing the model to capture
+    stylistic cadence, sentence rhythm, and domain-specific punctuation
+    patterns.</p></li>
+    </ul>
+    <p>By treating terminal tokens as lemma tokens, Procedural DMLG
+    aligns fully with GLPG’s transition semantics and removes one of the
+    last remaining sources of rule-based fragility in the original DMLG
+    architecture. This unification further strengthens determinism while
+    allowing punctuation to participate in emergent stylistic behaviour
+    within the canonical graph.</p>
+    <h2 id="eliminating-parameter-explosion">Eliminating Parameter
+    Explosion</h2>
+    <p>In classical DMLG, each lemma page requires its own micro-model,
+    leading to rapid parameter growth as the canonical graph expands.
+    Procedural DMLG eliminates this explosion by introducing a single
+    monolithic procedural generator that produces lemma-specific hidden
+    layers on demand.</p>
+    <p>Because all micro-models share the same input projection, output
+    projection, and target embedding space, the total parameter count
+    becomes deterministic and independent of the number of lemmas. Only
+    the hidden layer is lemma-specific, and it is generated procedurally
+    rather than stored.</p>
+    <h2 id="replacing-one-hot-fragility">Replacing One-Hot
+    Fragility</h2>
+    <p>Lemma-local one-hot classifiers in classical DMLG are
+    structurally brittle: their dimensionality varies per lemma page,
+    they cannot be shared across the graph, and they provide no semantic
+    continuity. Procedural DMLG replaces these classifiers with a
+    unified learned target embedding matrix, as in GLPG.</p>
+    <p>This embedding space:</p>
+    <ul>
+    <li><p>provides stable semantic geometry,</p></li>
+    <li><p>supports cosine-distance scoring,</p></li>
+    <li><p>enables emergent semantic clustering,</p></li>
+    <li><p>and eliminates the need for lemma-local softmax layers
+    entirely.</p></li>
+    </ul>
+    <h2 id="hybridization-with-glp-mono-and-glpg">Hybridization with
+    GLP-Mono and GLPG</h2>
+    <p>Just as GLP-Mono combined monolithic semantic projection with
+    deterministic graph routing to form GLP-Graph, Procedural DMLG forms
+    a hybrid architecture: a deterministic canonical graph equipped with
+    a GLP-Mono–style procedural generator.</p>
+    <p>The big monolithic network does not generate target embeddings
+    (as in GLPG); instead, it generates the hidden-layer parameters of
+    lemma-specific micro-models. This preserves the explicit structural
+    semantics of DMLG while inheriting the stability and expressiveness
+    of GLPG’s embedding-based transition mechanism.</p>
+    <h2 id="increased-determinism-and-canon-fidelity">Increased
+    Determinism and Canon Fidelity</h2>
+    <p>Procedural DMLG increases determinism in two ways:</p>
+    <ul>
+    <li><p>Each lemma receives its own procedural micro-model, ensuring
+    lemma-specific structural behaviour.</p></li>
+    <li><p>All transitions remain canon-compatible by construction,
+    eliminating the need for rule-based filtering or grammar alternation
+    logic.</p></li>
+    </ul>
+    <p>Because the generator is trained lemma-locally, each lemma’s
+    procedural micro-model remains aligned with its canonical transition
+    set, ensuring strict domain fidelity.</p>
+    <h2 id="maximizing-determinism-and-emergence">Maximizing Determinism
+    and Emergence</h2>
+    <p>Procedural DMLG maximizes both structural determinism and
+    emergent behaviour:</p>
+    <ul>
+    <li><p>Determinism arises from the canonical graph, fixed geometry,
+    and shared projections.</p></li>
+    <li><p>Emergence arises from the learned target embeddings and
+    context-conditioned procedural hidden layers.</p></li>
+    </ul>
+    <p>This combination yields a system that is structurally safe,
+    domain-faithful, and capable of rich semantic variation within
+    strict canonical constraints.</p>
+    <h2 id="summary">Summary</h2>
+    <p>Procedural DMLG resolves the core weaknesses of classical DMLG
+    by:</p>
+    <ul>
+    <li><p>unifying grammar and lemma transitions,</p></li>
+    <li><p>eliminating parameter explosion,</p></li>
+    <li><p>replacing one-hot fragility with stable learned
+    embeddings,</p></li>
+    <li><p>hybridizing DMLG with GLP-Mono’s procedural
+    generator,</p></li>
+    <li><p>increasing determinism and canon fidelity,</p></li>
+    <li><p>and enabling controlled emergent behaviour.</p></li>
+    </ul>
+    <p>These improvements transform DMLG into a scalable, stable, and
+    semantically expressive governance architecture suitable for hybrid
+    intelligent systems.</p>
+    <h1 id="comparison-to-hyper-networks">Comparison to
+    Hyper-networks</h1>
+    <p>Procedural DMLG occupies a conceptual space adjacent to
+    hyper-networks, but differs from classical designs in several
+    fundamental ways. Classical hyper-networks generate the parameters
+    of other networks, typically in a high-dimensional, probabilistic,
+    and architecture-flexible manner. While powerful, these systems
+    often suffer from instability, drift, and uncontrolled parameter
+    variance, especially when the generated networks vary in size or
+    topology.</p>
+    <p>Procedural DMLG adopts the core idea of a hyper-network—a large
+    model generating the parameters of smaller models—but constrains it
+    through deterministic geometry, canonical structure, and
+    lemma-modular decomposition. The result is a <em>deterministic,
+    geometry-fixed, lemma-modular hyper-network</em> that avoids the
+    instability typical of classical designs.</p>
+    <p>Several distinctions are central:</p>
+    <h2 id="fixed-geometry-and-deterministic-structure">Fixed Geometry
+    and Deterministic Structure</h2>
+    <p>Classical hyper-networks generate parameters for networks whose
+    geometry may vary across tasks or samples. Procedural DMLG fixes the
+    geometry of all micro-models: each lemma receives a micro-MLP with
+    identical structure, identical shared projections, and a single
+    procedural hidden layer. This fixed geometry ensures:</p>
+    <ul>
+    <li><p>structural stability across all generated
+    micro-models,</p></li>
+    <li><p>predictable parameterization,</p></li>
+    <li><p>and guaranteed compatibility with the canonical
+    graph.</p></li>
+    </ul>
+    <p>This eliminates the drift and collapse modes observed in
+    unconstrained hyper-network architectures.</p>
+    <h2 id="lemma-modular-parameter-generation">Lemma-Modular Parameter
+    Generation</h2>
+    <p>Hyper-networks typically generate parameters for entire tasks or
+    layers. Procedural DMLG generates parameters <em>per lemma</em>,
+    forming a distributed procedural substrate aligned with the
+    canonical graph. Each lemma maintains its own micro-model lifecycle,
+    and the procedural generator learns to reconstruct these
+    lemma-specific hidden layers independently.</p>
+    <p>This modularity yields:</p>
+    <ul>
+    <li><p>fine-grained structural control,</p></li>
+    <li><p>deterministic alignment with canonical transitions,</p></li>
+    <li><p>and distributed stability across the graph.</p></li>
+    </ul>
+    <h2 id="context-conditioned-generation">Context-Conditioned
+    Generation</h2>
+    <p>Classical hyper-networks condition parameter generation on task
+    embeddings or latent representations. Procedural DMLG conditions
+    generation on both lemma identity and encoded context, enabling
+    subtle context-conditioned variation while preserving deterministic
+    structure. The mapping</p>
+    <p><span
+    class="math display">(ℓ,<em>C</em>) ↦ <em>W</em><sub>ℓ, <em>C</em></sub></span></p>
+    <p>provides expressive flexibility without sacrificing stability,
+    because the hidden layer is small, geometry-fixed, and trained
+    lemma-locally.</p>
+    <h2 id="stable-embedding-based-output-space">Stable Embedding-Based
+    Output Space</h2>
+    <p>Hyper-networks often generate parameters for networks that output
+    logits or high-dimensional vectors with variable semantics.
+    Procedural DMLG projects all micro-model outputs into a shared
+    learned target embedding space, following GLPG. Cosine-distance
+    scoring ensures:</p>
+    <ul>
+    <li><p>stable semantic geometry,</p></li>
+    <li><p>smooth transition dynamics,</p></li>
+    <li><p>and robust emergent behaviour.</p></li>
+    </ul>
+    <p>This embedding space replaces the fragile one-hot classifiers of
+    classical DMLG and avoids the uncontrolled output variance typical
+    of hyper-network-generated classifiers.</p>
+    <h2 id="deterministic-canon-traversal">Deterministic Canon
+    Traversal</h2>
+    <p>Hyper-networks typically operate in free-form generative
+    settings. Procedural DMLG operates within a deterministic canonical
+    graph: all transitions are canon-compatible by construction, and the
+    procedural generator cannot produce invalid transitions. This
+    provides structural guarantees that classical hyper-networks cannot
+    offer.</p>
+    <h2 id="summary-1">Summary</h2>
+    <p>Procedural DMLG can be viewed as a disciplined, deterministic
+    hyper-network:</p>
+    <ul>
+    <li><p>geometry-fixed micro-models,</p></li>
+    <li><p>lemma-modular parameter generation,</p></li>
+    <li><p>context-conditioned hidden layers,</p></li>
+    <li><p>stable embedding-based output space,</p></li>
+    <li><p>and deterministic canonical traversal.</p></li>
+    </ul>
+    <p>These constraints transform the hyper-network concept into a
+    stable, interpretable, and domain-faithful procedural substrate,
+    avoiding the instability, drift, and parameter variance typical of
+    classical hyper-network designs.</p>
+    <h1
+    id="eliminating-paging-dynamic-modularization-via-procedural-micro-mlps">Eliminating
+    Paging: Dynamic Modularization via Procedural Micro-MLPs</h1>
+    <p>Classical DMLG organizes the canonical graph into pages:
+    structural biomes that group lemma tokens and provide modularity,
+    locality, and activation boundaries. Paging emerged as a practical
+    necessity to contain the parameter explosion caused by per-lemma
+    micro-models and to stabilize grammar–lemma alternation. Although
+    effective, paging imposed a rigid, manually engineered modular
+    structure that did not evolve naturally with the semantic manifold
+    or with the growth of the graph.</p>
+    <p>Procedural DMLG removes the need for paging entirely.
+    Modularization is no longer achieved through static page boundaries,
+    but through dynamic, lemma-local procedural micro-MLPs whose
+    parameters evolve over time and are periodically consolidated by the
+    monolithic generator. This shift replaces structural modularity with
+    procedural modularity, yielding a more flexible, cognitively
+    coherent, and scalable architecture.</p>
+    <p>Three structural changes make paging obsolete:</p>
+    <ol>
+    <li><p><strong>Unified (grammar, lemma) transitions.</strong>
+    Alternating grammar/lemma steps previously required page-local
+    classifiers whose dimensionality varied across pages. Procedural
+    DMLG replaces this mechanism with single-step (grammar, lemma) pairs
+    represented in a shared target embedding space. Because all
+    transitions share the same output geometry, page-local
+    classifiers—and thus pages themselves—are no longer needed.</p></li>
+    <li><p><strong>Shared projections and fixed geometry.</strong> All
+    lemma micro-models share the same input projection, output
+    projection, and target embedding matrix. Only the hidden layer is
+    lemma-specific, and it is generated procedurally. This fixed
+    geometry eliminates the structural heterogeneity that paging was
+    designed to manage.</p></li>
+    <li><p><strong>Lemma-local lifecycle learning.</strong> Each lemma
+    maintains its own evolving hidden layer, updated through direct
+    micro-model training and periodically consolidated by the monolithic
+    generator. This creates a form of controlled, lemma-specific
+    plasticity: micro-models adapt to their local semantic roles, while
+    the generator learns to reproduce their current parameters.
+    Modularization emerges naturally from the distributed evolution of
+    thousands of small lemma minds rather than from static page
+    boundaries.</p></li>
+    </ol>
+    <p>The result is a form of dynamic modularization: each lemma
+    becomes a self-contained procedural module whose behaviour is shaped
+    by its local training history, its context manifold, and its
+    consolidation dynamics. Unlike paging, which partitions the graph
+    into fixed structural regions, procedural modularization allows the
+    architecture to grow organically as the semantic manifold expands.
+    Lemma micro-models can specialize, diverge, or stabilize depending
+    on their role in the canonical graph, while remaining fully
+    compatible with the shared projections and embedding space.</p>
+    <p>This transformation aligns DMLG with modern procedural
+    architectures such as GLP-Mono and GLPG, while preserving the
+    deterministic traversal semantics that define the DMLG family.
+    Paging—once a core structural component—becomes unnecessary,
+    replaced by a more expressive, flexible, and cognitively meaningful
+    modular substrate. Procedural DMLG therefore represents not merely
+    an optimization of classical DMLG, but a conceptual evolution: a
+    deterministic graph architecture in which modularity arises from
+    dynamic, lemma-local procedural micro-models rather than from static
+    structural partitions.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>Procedural DMLG extends the original Dynamic Modular Language
+    Graph architecture with a deterministic, geometry‑fixed,
+    lemma‑modular procedural substrate. By replacing alternating grammar
+    and lemma transitions with unified (grammar, lemma) pairs,
+    eliminating lemma‑local one‑hot classifiers, and introducing a
+    monolithic generator that procedurally constructs lemma‑specific
+    micro‑models, the architecture resolves several structural
+    weaknesses of classical DMLG while preserving its canonical
+    determinism.</p>
+    <p>The removal of paging represents a conceptual turning point.
+    Classical DMLG relied on page‑structured modularization to contain
+    parameter growth and stabilize grammar–lemma alternation. Procedural
+    DMLG replaces this static structure with dynamic modularization:
+    each lemma becomes a self‑contained procedural micro‑MLP whose
+    hidden layer evolves through direct training and is periodically
+    consolidated by the monolithic generator. This form of controlled,
+    lemma‑local plasticity provides a more flexible and cognitively
+    coherent modular substrate than paging, allowing the architecture to
+    grow organically as the semantic manifold expands.</p>
+    <p>GLPG demonstrates that cosine‑distance transitions and shared
+    output embeddings are sufficient for generative behavior even when
+    the underlying function approximator is imperfect. Procedural DMLG
+    inherits this insight: transitions are selected in a stable learned
+    embedding space, enabling emergent semantic behavior within strict
+    canonical constraints. The result is a system that combines
+    deterministic graph traversal with expressive semantic manifolds,
+    without relying on large‑scale attention mechanisms or
+    high‑dimensional probabilistic classifiers.</p>
+    <p>The training lifecycle—micro‑model evolution followed by
+    lemma‑local procedural consolidation—ensures that inference remains
+    compact and deterministic. Micro‑models provide high‑frequency
+    plasticity, while the monolithic generator provides low‑frequency
+    structural stability. Because hidden layers are generated on demand,
+    inference requires only the generator and the shared projections,
+    eliminating parameter explosion and enabling scalable deployment
+    across large canonical graphs.</p>
+    <p>Procedural DMLG therefore represents a hybrid architecture:
+    structurally grounded like DMLG, semantically expressive like GLPG,
+    and procedurally modular like GLP‑Mono. By replacing paging with
+    dynamic lemma‑local procedural modularization, the architecture
+    achieves a synthesis of determinism, emergence, and scalability.
+    Within the broader Triadic Cosmos ecosystem, Procedural DMLG offers
+    a principled path toward modular, inspectable, and cognitively
+    meaningful intelligent systems that unify explicit structure with
+    learned semantic dynamics.</p>
+    <h1 id="dmlgv3-page-geometry-as-a-simpler-alternative">DMLG‑v3 Page
+    Geometry as a Simpler Alternative</h1>
+    <p>Before the development of Procedural DMLG, the DMLG‑v3
+    architecture introduced a simpler and structurally elegant solution
+    to the micro-model explosion problem. Instead of generating
+    lemma-specific micro-models procedurally, DMLG‑v3 fixed the number
+    of lemma pages (typically 256) and assigned one micro-model per
+    page. All lemma tokens belonging to the same page were evaluated by
+    the same micro-model, eliminating the need for thousands of
+    independent evaluators. This page-based consolidation was first
+    formalized in the DMLG narrator pipeline <span class="citation"
+    data-cites="DeWitte2026Narrator"></span>, where page geometry
+    provided a stable structural backbone for long-form generation.</p>
+    <h2 id="fixed-page-geometry">Fixed Page Geometry</h2>
+    <p>In DMLG‑v3, the canonical graph is partitioned into a fixed
+    number of lemma pages. Each page contains a bounded set of lemma
+    tokens, and each page is associated with a single micro-MLP. This
+    design provides a deterministic upper bound on the number of
+    micro-models:</p>
+    <p><span class="math display">Number of micro-models = Number of
+    pages.</span></p>
+    <p>Two variants were explored:</p>
+    <ul>
+    <li><p><strong>Identical page models:</strong> All page micro-models
+    share the same geometry, simplifying implementation and ensuring
+    structural uniformity across the graph.</p></li>
+    <li><p><strong>Variable page models:</strong> Page micro-models may
+    vary in size depending on the number of lemma tokens assigned to the
+    page, providing flexibility while maintaining bounded
+    complexity.</p></li>
+    </ul>
+    <p>This page-based approach eliminates the micro-model explosion
+    inherent in classical DMLG without requiring procedural
+    generation.</p>
+    <h2 id="remaining-limitations-of-dmlgv3">Remaining Limitations of
+    DMLG‑v3</h2>
+    <p>Although DMLG‑v3 solved the parameter explosion problem, two
+    structural weaknesses remained:</p>
+    <h4 id="deterministic-triple-hot-encodings.">Deterministic
+    triple-hot encodings.</h4>
+    <p>DMLG‑v3 continued to rely on deterministic grammar-hot,
+    lemma-hot, and page-hot encodings for transition scoring. These
+    encodings were structurally simple but semantically brittle: they
+    provided no learned geometry, no manifold continuity, and no
+    semantic clustering. As a result, transition scoring remained
+    discrete and fragile compared to the learned target embeddings
+    introduced later in GLPG and Procedural DMLG.</p>
+    <h4 id="grammarlemma-alternation.">Grammar–lemma alternation.</h4>
+    <p>DMLG‑v3 preserved the original grammar–lemma alternation
+    mechanism. Grammar tokens compressed context, lemma tokens expressed
+    content, and transitions alternated between the two. Although
+    functional, this mechanism required rule-based logic and imposed
+    structural constraints that limited emergent behaviour. Procedural
+    DMLG replaces this alternation with single-step (grammar, lemma)
+    pairs, following GLP‑Mono, yielding a simpler and more stable
+    transition mechanism.</p>
+    <p>These limitations mean that several innovations introduced in
+    this paper—shared learned target embeddings, cosine-distance
+    transitions, and unified (grammar, lemma) pairs—remain relevant even
+    when using the simpler DMLG‑v3 page geometry.</p>
+    <h2 id="shared-projections-and-embedding-space">Shared Projections
+    and Embedding Space</h2>
+    <p>DMLG‑v3 introduced two innovations that remain fully compatible
+    with Procedural DMLG:</p>
+    <ul>
+    <li><p>a shared input projection for all page micro-models,</p></li>
+    <li><p>a shared output projection into a unified target embedding
+    space.</p></li>
+    </ul>
+    <p>These components ensure that all page micro-models operate within
+    the same semantic geometry. Procedural DMLG inherits and extends
+    this design by replacing triple-hot encodings with learned target
+    embeddings and cosine-distance scoring.</p>
+    <h2 id="comparison-with-procedural-dmlg">Comparison with Procedural
+    DMLG</h2>
+    <p>The DMLG‑v3 page-based solution and the Procedural DMLG
+    hypernetwork solution represent two complementary approaches to the
+    same structural challenge:</p>
+    <ul>
+    <li><p><strong>DMLG‑v3:</strong> Fix the number of lemma pages and
+    assign one micro-model per page. Simple, deterministic, and easy to
+    implement. Eliminates micro-model explosion through structural
+    partitioning. Still uses triple-hot encodings and grammar–lemma
+    alternation.</p></li>
+    <li><p><strong>Procedural DMLG:</strong> Generate lemma-specific
+    hidden layers procedurally using a monolithic generator. More
+    expressive and context-conditioned. Eliminates micro-model explosion
+    through dynamic parameter generation. Replaces triple-hot encodings
+    with learned target embeddings. Replaces grammar–lemma alternation
+    with unified (grammar, lemma) pairs.</p></li>
+    </ul>
+    <p>Both approaches retain the core DMLG and GLPG innovations:</p>
+    <ul>
+    <li><p>deterministic canonical graph traversal,</p></li>
+    <li><p>shared input and output projections,</p></li>
+    <li><p>cosine-distance transition scoring,</p></li>
+    <li><p>fixed geometry for micro-models.</p></li>
+    </ul>
+    <p>The difference lies in how specialization and semantic continuity
+    are achieved.</p>
+    <h2 id="improvements-applicable-to-dmlgv3">Improvements Applicable
+    to DMLG‑v3</h2>
+    <p>Although DMLG‑v3 successfully eliminated the micro-model
+    explosion through fixed page geometry, several structural
+    limitations remained that are directly addressed by the innovations
+    introduced in Procedural DMLG. These improvements apply equally well
+    to a page-based DMLG‑v3 system, even without adopting the procedural
+    generator.</p>
+    <h4
+    id="replacing-triple-hot-encodings-with-learned-target-embeddings.">Replacing
+    triple-hot encodings with learned target embeddings.</h4>
+    <p>DMLG‑v3 relied on deterministic grammar-hot, lemma-hot, and
+    page-hot encodings for transition scoring. While simple, these
+    encodings provided no semantic continuity and no manifold structure.
+    Procedural DMLG replaces these discrete encodings with a unified
+    learned target embedding space, enabling cosine-distance transitions
+    and stable semantic clustering. This improvement is fully compatible
+    with DMLG‑v3 and can be adopted without modifying its page-based
+    micro-model structure.</p>
+    <h4 id="eliminating-grammarlemma-alternation.">Eliminating
+    grammar–lemma alternation.</h4>
+    <p>DMLG‑v3 preserved the alternating grammar/lemma transition
+    mechanism, which required rule-based logic and imposed structural
+    constraints on generation. Procedural DMLG replaces this alternation
+    with single-step (grammar, lemma) pairs, following GLP‑Mono. This
+    unified transition mechanism simplifies traversal, removes
+    alternation fragility, and yields a more stable and semantically
+    coherent output space. DMLG‑v3 can adopt this improvement directly,
+    independent of procedural generation.</p>
+    <h4 id="shared-projections-and-cosine-distance-scoring.">Shared
+    projections and cosine-distance scoring.</h4>
+    <p>The shared input and output projections introduced in DMLG‑v3
+    remain fully compatible with the learned target embedding space used
+    in Procedural DMLG. Transition scoring via cosine similarity
+    provides smoother dynamics and improved stylistic fidelity compared
+    to triple-hot classification. This enhancement integrates seamlessly
+    with the page-based architecture.</p>
+    <h4 id="compatibility-with-page-based-micro-models.">Compatibility
+    with page-based micro-models.</h4>
+    <p>All improvements introduced in this paper—learned embeddings,
+    cosine-distance transitions, and unified (grammar, lemma) pairs—can
+    be applied to DMLG‑v3 without altering its fixed page geometry. The
+    page-based micro-model structure remains intact; only the transition
+    representation and scoring mechanism are upgraded.</p>
+    <h4 id="ecosystem-perspective.">Ecosystem perspective.</h4>
+    <p>DMLG‑v3 and Procedural DMLG therefore occupy adjacent positions
+    in the design space. DMLG‑v3 provides a simpler structural backbone,
+    while Procedural DMLG adds procedural generation and
+    context-conditioned specialization. The semantic and structural
+    improvements introduced here benefit both architectures, reinforcing
+    the broader Triadic Cosmos ecosystem.</p>
+    <h1 id="micromlp-parameter-budgets">Micro‑MLP Parameter Budgets</h1>
+    <p>To make the procedural design concrete, we consider a
+    standardized micro‑MLP geometry and a fixed monolithic
+    generator:</p>
+    <ul>
+    <li><p>Context input vector: 512 floats (including lemma
+    embedding).</p></li>
+    <li><p>Target embedding output: 128 floats.</p></li>
+    <li><p>Micro‑MLP: one hidden layer of size <span
+    class="math inline"><em>H</em></span>.</p></li>
+    <li><p>Monolithic generator: 3 hidden layers of 1024 units, input
+    size 512, output size <span
+    class="math inline"><em>H</em><sup>2</sup></span>.</p></li>
+    </ul>
+    <h2 id="micromlp-parameters">Micro‑MLP Parameters</h2>
+    <p>Each micro‑MLP consists of:</p>
+    <ul>
+    <li><p>Shared input projection: <span
+    class="math inline">512 × <em>H</em></span> parameters.</p></li>
+    <li><p>Procedural hidden layer: <span
+    class="math inline"><em>H</em> × <em>H</em></span>
+    parameters.</p></li>
+    <li><p>Shared output projection: <span
+    class="math inline"><em>H</em> × 128</span> parameters.</p></li>
+    </ul>
+    <p>Total parameters per micro‑MLP:</p>
+    <p><span
+    class="math display"><em>P</em><sub>micro</sub>(<em>H</em>) = 512<em>H</em> + <em>H</em><sup>2</sup> + 128<em>H</em>.</span></p>
+    <p>Procedural parameters per lemma:</p>
+    <p><span
+    class="math display"><em>P</em><sub>proc</sub>(<em>H</em>) = <em>H</em><sup>2</sup>.</span></p>
+    <h2 id="monolithic-generator-parameters">Monolithic Generator
+    Parameters</h2>
+    <p>The monolithic generator has:</p>
+    <p><span
+    class="math display">512 → 1024 → 1024 → 1024 → <em>H</em><sup>2</sup></span></p>
+    <p>with total parameters:</p>
+    <p><span
+    class="math display"><em>P</em><sub>mono</sub>(<em>H</em>) = 512 ⋅ 1024 + 1024 ⋅ 1024 + 1024 ⋅ 1024 + 1024 ⋅ <em>H</em><sup>2</sup>.</span></p>
+    <p>The first three layers contribute a fixed:</p>
+    <p><span
+    class="math display"><em>P</em><sub>base</sub> = 2, 621, 440</span></p>
+    <p>parameters, independent of <span
+    class="math inline"><em>H</em></span>.</p>
+    <h2 id="parameter-budget-table">Parameter Budget Table</h2>
+    <p>Table <a href="#tab:micro-budgets" data-reference-type="ref"
+    data-reference="tab:micro-budgets">1</a> summarizes the parameter
+    budgets for several hidden sizes.</p>
+    <div id="tab:micro-budgets">
+    <table>
+    <caption>Procedural hidden-layer size per lemma and corresponding
+    parameter budgets.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;">Hidden size <span
+    class="math inline"><em>H</em></span></th>
+    <th style="text-align: right;">Hidden params <span
+    class="math inline"><em>H</em><sup>2</sup></span></th>
+    <th style="text-align: right;">Mono params <span
+    class="math inline"><em>P</em><sub>mono</sub></span></th>
+    <th style="text-align: right;">Micro params <span
+    class="math inline"><em>P</em><sub>micro</sub></span></th>
+    <th style="text-align: right;">Procedural fraction</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">32</td>
+    <td style="text-align: right;">1<span>,</span>024</td>
+    <td
+    style="text-align: right;">3<span>,</span>670<span>,</span>016</td>
+    <td style="text-align: right;">21<span>,</span>504</td>
+    <td style="text-align: right;">4.8%</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">64</td>
+    <td style="text-align: right;">4<span>,</span>096</td>
+    <td
+    style="text-align: right;">6<span>,</span>815<span>,</span>744</td>
+    <td style="text-align: right;">45<span>,</span>056</td>
+    <td style="text-align: right;">9.1%</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">96</td>
+    <td style="text-align: right;">9<span>,</span>216</td>
+    <td
+    style="text-align: right;">12<span>,</span>058<span>,</span>624</td>
+    <td style="text-align: right;">70<span>,</span>656</td>
+    <td style="text-align: right;">13.1%</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">128</td>
+    <td style="text-align: right;">16<span>,</span>384</td>
+    <td
+    style="text-align: right;">19<span>,</span>398<span>,</span>656</td>
+    <td style="text-align: right;">98<span>,</span>304</td>
+    <td style="text-align: right;">16.7%</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">256</td>
+    <td style="text-align: right;">65<span>,</span>536</td>
+    <td
+    style="text-align: right;">71<span>,</span>171<span>,</span>456</td>
+    <td style="text-align: right;">196<span>,</span>608</td>
+    <td style="text-align: right;">33.3%</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="interpretation">Interpretation</h2>
+    <p>This budget shows that even for modest hidden sizes (e.g., <span
+    class="math inline"><em>H</em> = 64</span>), each lemma receives a
+    specialized micro‑MLP with only <span
+    class="math inline"> ∼ 4</span>K procedural parameters, while the
+    shared projections dominate the total micro‑model size. The
+    monolithic generator remains compact (on the order of a few million
+    parameters), and the per‑lemma specialization is small but
+    structurally precise, making it feasible to support large numbers of
+    lemmas without excessive parameter growth.</p>
+    <h2 id="comparison-with-dmlgv3-page-models">Comparison with DMLG‑v3
+    Page Models</h2>
+    <p>To compare Procedural DMLG with the page-based DMLG‑v3 design, we
+    consider a DMLG‑v3 configuration with:</p>
+    <ul>
+    <li><p>256 lemma pages,</p></li>
+    <li><p>one micro‑model per page,</p></li>
+    <li><p>identical geometry for all page models.</p></li>
+    </ul>
+    <p>Each DMLG‑v3 page model receives the same 512‑dimensional context
+    input and produces a 128‑dimensional target embedding, with two
+    hidden layers of size <span
+    class="math inline"><em>H</em></span>:</p>
+    <p><span
+    class="math display">512 → <em>H</em> → <em>H</em> → 128.</span></p>
+    <p>For a given hidden size <span
+    class="math inline"><em>H</em></span>, the parameters per page model
+    are:</p>
+    <p><span
+    class="math display"><em>P</em><sub>page</sub>(<em>H</em>) = 512<em>H</em> + <em>H</em><sup>2</sup> + <em>H</em><sup>2</sup> + 128<em>H</em> = 640<em>H</em> + 2<em>H</em><sup>2</sup>.</span></p>
+    <p>With 256 pages, the total parameter count for all DMLG‑v3 page
+    models is:</p>
+    <p><span
+    class="math display"><em>P</em><sub>DMLG‑v3</sub>(<em>H</em>) = 256 ⋅ (640<em>H</em>+2<em>H</em><sup>2</sup>).</span></p>
+    <h4 id="example-h-96.">Example: <span
+    class="math inline"><em>H</em> = 96</span>.</h4>
+    <p>For <span class="math inline"><em>H</em> = 96</span>:</p>
+    <p><span
+    class="math display">640<em>H</em> = 640 ⋅ 96 = 61, 440,</span></p>
+    <p><span
+    class="math display">2<em>H</em><sup>2</sup> = 2 ⋅ 96<sup>2</sup> = 2 ⋅ 9, 216 = 18, 432,</span></p>
+    <p><span
+    class="math display"><em>P</em><sub>page</sub>(96) = 61, 440 + 18, 432 = 79, 872.</span></p>
+    <p>Total across 256 pages:</p>
+    <p><span
+    class="math display"><em>P</em><sub>DMLG‑v3</sub>(96) = 256 ⋅ 79, 872 = 20, 447, 232.</span></p>
+    <p>So a DMLG‑v3 system with 256 identical page models of geometry
+    <span class="math inline">512 → 96 → 96 → 128</span> requires
+    approximately:</p>
+    <p><span class="math display">$$\boxed{20.4 \text{ million
+    parameters}}$$</span></p>
+    <p>for the page models alone.</p>
+    <h4 id="comparison.">Comparison.</h4>
+    <p>By contrast, Procedural DMLG with hidden size <span
+    class="math inline"><em>H</em> = 96</span> uses:</p>
+    <ul>
+    <li><p>a single monolithic generator with</p>
+    <p><span class="math display"><em>P</em><sub>mono</sub>(96) ≈ 12.06
+    million parameters,</span></p></li>
+    <li><p>per‑lemma micro‑MLPs with</p>
+    <p><span
+    class="math display"><em>P</em><sub>micro</sub>(96) = 70, 656
+    parameters,</span></p>
+    <p>of which</p>
+    <p><span
+    class="math display"><em>H</em><sup>2</sup> = 9, 216</span></p>
+    <p>are procedural.</p></li>
+    </ul>
+    <p>DMLG‑v3 concentrates capacity in 256 fixed page models, while
+    Procedural DMLG concentrates capacity in a single generator and
+    distributes a small, specialized hidden layer per lemma. This
+    illustrates that both designs operate in a similar total parameter
+    regime, but with very different allocation: page‑local
+    specialization in DMLG‑v3 versus lemma‑local procedural
+    specialization in Procedural DMLG.</p>
+    <h1 id="relation-to-biological-cognition">Relation to Biological
+    Cognition</h1>
+    <p>Procedural DMLG exhibits several structural and dynamical
+    properties that align more closely with biological neural systems
+    than with classical machine learning architectures. Although the
+    architecture remains fully deterministic and geometry-fixed, its
+    procedural modulation mechanisms introduce a form of controlled
+    analog variation reminiscent of synaptic dynamics in biological
+    brains.</p>
+    <h2
+    id="deterministic-structure-with-analog-modulation">Deterministic
+    Structure with Analog Modulation</h2>
+    <p>Biological neural circuits are anatomically stable: neurons
+    maintain fixed connectivity patterns over long timescales. However,
+    the <em>effective</em> strength of these connections varies
+    continuously due to chemical, electrical, and metabolic processes.
+    Synaptic transmission is modulated by neurotransmitter
+    concentrations, receptor activation, ion-channel dynamics, and
+    neuromodulatory signals, producing behaviour that is largely
+    deterministic at the macro level but exhibits small analog
+    variations at the micro level.</p>
+    <p>Procedural DMLG mirrors this pattern. Each lemma micro-model has
+    a fixed geometry and shared projections, analogous to stable
+    anatomical connectivity. Yet the hidden layer of each micro-model is
+    generated procedurally from the encoded context and lemma identity,
+    allowing its effective behaviour to vary slightly across contexts.
+    This produces deterministic traversal with bounded analog variation,
+    closely resembling biological response patterns in which repeated
+    stimuli yield consistent outputs with small context-dependent
+    deviations.</p>
+    <h2
+    id="context-conditioned-parameter-generation">Context-Conditioned
+    Parameter Generation</h2>
+    <p>In biological systems, neuromodulators such as dopamine,
+    serotonin, and acetylcholine influence synaptic efficacy based on
+    global or local context. These modulatory signals do not alter the
+    structural connectivity of the brain but adjust the functional
+    behaviour of existing circuits.</p>
+    <p>Procedural DMLG implements an analogous mechanism. The monolithic
+    procedural generator acts as a global modulatory substrate: it
+    receives the encoded context and produces context-conditioned
+    hidden-layer parameters for each lemma micro-model. This allows the
+    same lemma to exhibit slightly different functional behaviour
+    depending on semantic, structural, or narrative conditions, without
+    altering the underlying canonical graph or shared projections.</p>
+    <h2 id="local-plasticity-and-global-consolidation">Local Plasticity
+    and Global Consolidation</h2>
+    <p>Biological learning involves both rapid synaptic plasticity
+    (e.g., long-term potentiation and depression) and slower
+    consolidation processes that stabilize memory traces. Procedural
+    DMLG implements a similar dual-timescale learning dynamic.
+    Micro-models undergo rapid lemma-local updates during training,
+    while the monolithic generator periodically consolidates their
+    current hidden-layer parameters. This ensures stability during
+    inference while allowing rich lemma-specific dynamics to emerge
+    during training.</p>
+    <h2 id="dynamic-modularization">Dynamic Modularization</h2>
+    <p>Unlike classical DMLG, which relied on static paging to impose
+    modular structure, Procedural DMLG achieves modularization through
+    dynamic lemma-local procedural micro-models. This mirrors biological
+    functional modularity, where regions of the brain exhibit
+    specialized behaviour not because of rigid structural partitions but
+    because of evolving patterns of activation, plasticity, and
+    neuromodulation.</p>
+    <h2 id="summary-2">Summary</h2>
+    <p>Although Procedural DMLG is not a biological model, its
+    combination of fixed geometry, deterministic traversal,
+    context-conditioned parameter modulation, lemma-local plasticity,
+    and periodic consolidation yields a computational substrate that is
+    conceptually closer to biological cognition than classical
+    statistical language models or hypernetwork architectures. This
+    alignment suggests that Procedural DMLG may provide a promising
+    foundation for future research into deterministic, modular, and
+    cognitively interpretable artificial systems.</p>
+    <h1
+    id="relation-to-existing-machine-learning-architectures">Relation to
+    Existing Machine Learning Architectures</h1>
+    <p>Procedural DMLG occupies a conceptual space that is distinct from
+    classical machine learning architectures. Although it employs neural
+    components, its deterministic traversal, fixed geometry, lemma-local
+    procedural modulation, and canonical graph structure place it
+    outside the design families of statistical language models,
+    hypernetworks, mixture-of-experts systems, and recurrent
+    architectures. This appendix clarifies these distinctions and
+    highlights the unique cognitive properties of Procedural DMLG.</p>
+    <h2 id="not-a-statistical-language-model">Not a Statistical Language
+    Model</h2>
+    <p>Modern language models—including transformers, RNNs, and
+    encoder–decoder architectures— operate through probabilistic
+    next-token prediction. Their behaviour is governed by large softmax
+    layers, high-dimensional embeddings, and stochastic sampling
+    procedures. Repeated inputs typically yield different outputs due to
+    probabilistic decoding, dropout, and temperature modulation.</p>
+    <p>Procedural DMLG differs fundamentally. It performs deterministic
+    traversal through a canonical graph, selecting transitions via
+    cosine-distance alignment in a fixed semantic space. No
+    probabilistic sampling is involved, and repeated inputs yield more
+    consistent outputs with only bounded context-conditioned variation.
+    This behaviour is closer to biological cognition, where responses
+    are stable at the macro level but exhibit small analog deviations
+    due to local modulatory processes.</p>
+    <h2 id="not-a-classical-hypernetwork">Not a Classical
+    Hypernetwork</h2>
+    <p>Hypernetworks generate parameters for other networks, often with
+    flexible geometry and probabilistic modulation. They typically
+    suffer from instability, drift, and uncontrolled parameter variance,
+    especially when generating large or heterogeneous architectures.</p>
+    <p>Procedural DMLG is not a hypernetwork in this sense. All lemma
+    micro-models share a fixed geometry, and only a single hidden layer
+    is generated procedurally. The generator operates within strict
+    structural constraints, producing bounded context-conditioned
+    variation rather than arbitrary parameterizations. Lemma-local
+    consolidation ensures stability over time, preventing drift and
+    maintaining compatibility with the canonical graph. This yields a
+    deterministic, geometry-fixed procedural substrate unlike classical
+    hypernetwork designs.</p>
+    <h2 id="not-a-mixture-of-experts-system">Not a Mixture-of-Experts
+    System</h2>
+    <p>Mixture-of-experts (MoE) architectures route inputs to different
+    expert networks based on learned gating functions. These systems
+    rely on probabilistic routing, large expert pools, and dynamic
+    activation patterns.</p>
+    <p>Procedural DMLG does not route inputs to experts. Instead, each
+    lemma <em>is</em> its own procedural module: a compact micro-MLP
+    whose hidden layer is generated on demand. There is no gating, no
+    probabilistic selection, and no expert pool. Modularization arises
+    from lemma-local procedural variation rather than from dynamic
+    routing, making Procedural DMLG structurally simpler and cognitively
+    more interpretable than MoE systems.</p>
+    <h2 id="not-a-recurrent-or-state-based-neural-architecture">Not a
+    Recurrent or State-Based Neural Architecture</h2>
+    <p>Recurrent neural networks maintain hidden states that evolve over
+    time, producing temporal dynamics through learned recurrence.
+    Procedural DMLG does not maintain hidden states. Instead, it relies
+    on explicit canonical graph traversal and context encoding. The
+    procedural generator produces micro-model parameters based solely on
+    the current lemma and encoded context, without storing internal
+    temporal states. This yields deterministic behaviour aligned with
+    explicit structural semantics rather than implicit recurrent
+    dynamics.</p>
+    <h2 id="a-new-cognitive-architecture-class">A New Cognitive
+    Architecture Class</h2>
+    <p>Procedural DMLG combines several properties rarely found together
+    in machine learning:</p>
+    <ul>
+    <li><p>deterministic canonical graph traversal,</p></li>
+    <li><p>geometry-fixed micro-models,</p></li>
+    <li><p>lemma-local procedural modulation,</p></li>
+    <li><p>context-conditioned parameter generation,</p></li>
+    <li><p>shared projections and embedding space,</p></li>
+    <li><p>dual-timescale learning via evolution and
+    consolidation,</p></li>
+    <li><p>dynamic modularization without routing or paging.</p></li>
+    </ul>
+    <p>This synthesis produces a computational substrate that is neither
+    a statistical language model, nor a hypernetwork, nor a
+    mixture-of-experts system, nor a recurrent architecture. Instead, it
+    constitutes a distinct class of deterministic procedural cognitive
+    architectures, characterized by stable structure, bounded analog
+    variation, and interpretable modular dynamics.</p>
+    <h2 id="summary-3">Summary</h2>
+    <p>Procedural DMLG represents a conceptual departure from existing
+    machine learning paradigms. Its combination of deterministic
+    traversal, procedural micro-model generation, fixed geometry, and
+    canonical graph semantics yields a unique architecture that aligns
+    more closely with biological cognition than with classical neural
+    models. This distinction underscores its value as a foundation for
+    future research into modular, interpretable, and cognitively
+    meaningful artificial systems.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the DMLG and GLP engines, the narrator
+    pipeline, and all supporting modules is provided under the AGPL‑3.0
+    license.</p>
+    <div class="thebibliography">
+    <p>J. De Witte, “GLP–Graph Behaviour Under Hyperparameter
+    Variation,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The GLP–Graph Architecture: Combining GLP–Mono with
+    DMLG,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The GLP–Mono Architecture,” Triadic Cosmos
+    Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Narrator Pipeline driven by DMLG: Structural
+    Hybrid Intelligence,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Language as Graph Traversal: The DMLG
+    Architecture,” Triadic Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>
