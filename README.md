@@ -10,6 +10,26 @@ Licensed under CC BY‑NC‑ND 4.0
 
 ---
 
+## 🌌 A Unified Architectural Research Ecosystem
+
+The Triadic Cosmos is not a collection of projects, nor a hobby‑sized
+portfolio. It is a full architectural research ecosystem spanning three
+domains — intelligence, narration, and physics — built over dozens of
+formal publications and multiple software architectures.
+
+The ecosystem currently consists of several papers, books, Java
+toy‑universes, and complete Python implementations of the DMLG, GLP, and
+hybrid narrator pipelines. Together, these components form a coherent
+triadic discipline: a unified framework for building systems, stories,
+and universes using one shared architectural grammar.
+
+Although developed by a single researcher, the scope and internal
+structure of the Triadic Cosmos are comparable to the research output of
+a small institute. Its identity is defined by architectural coherence,
+not by scale of personnel — and its scale is substantial.
+
+---
+
 ## 🪐 A Micro‑Cosmos Within Its Own Closure
 
 The Triadic Cosmos is built as a self‑contained micro‑cosmos:  
