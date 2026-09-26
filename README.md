@@ -803,6 +803,23 @@ different ontologies — all within a single architectural run.
 **A multi‑world demonstration of closure‑driven fiction.**  
 **A foundational pillar of the Monolithic Parrot project.**
 
+### **17. The Autonomous Parrot: Martian Pulp Fiction Omnibus** 🦜⌨️
+
+A full demonstration of the **next‑generation Triadic Cosmos Narrator Pipeline**,  
+showing how a single **GLP–Graph world‑closure lineage** can autonomously generate  
+a complete **seven‑book Martian pulp‑fiction omnibus** within one stable canon.
+
+All seven books are produced **without prompting, steering, filtering, or selection**.  
+Every chapter is included exactly as generated — no cherry‑picking, no pre‑filtering,  
+no curation. This volume therefore represents **typical, unoptimized pipeline output**,  
+revealing the raw structural behavior of GLP–Graph under blended‑world closure.
+
+Built on four Gutenberg substrates — *Thuvia, Maid of Mars*, *A Honeymoon in Space*,  
+*The Time Machine*, and *Jekyll & Hyde* — the omnibus demonstrates how  
+**graph‑driven world closure**, **PRE stabilization**, and **autonomous recursion**  
+can sustain long‑form pulp‑fiction across multiple books with consistent mythology  
+and emergent narrative coherence.
+
 </details>
 
 <details>
