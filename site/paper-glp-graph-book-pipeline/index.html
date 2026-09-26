@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The GLP–Graph Book Authoring Pipeline<br />
+Hybrid Intelligence Evolving Beyond the Monkeys with Typewriters</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#from-paging-to-transition-map"
+    id="toc-from-paging-to-transition-map">From Paging to Transition
+    Map</a></li>
+    <li><a href="#improving-the-input-vector"
+    id="toc-improving-the-input-vector">Improving the Input
+    Vector</a></li>
+    <li><a href="#adding-structural-tokens"
+    id="toc-adding-structural-tokens">Adding Structural Tokens</a></li>
+    <li><a href="#improving-the-training-regime"
+    id="toc-improving-the-training-regime">Improving the Training
+    Regime</a></li>
+    <li><a href="#fully-parametrizable-generation"
+    id="toc-fully-parametrizable-generation">Fully Parametrizable
+    Generation</a></li>
+    <li><a href="#bringing-back-learned-activation-functions"
+    id="toc-bringing-back-learned-activation-functions">Bringing Back
+    Learned Activation Functions</a></li>
+    <li><a href="#introducing-an-optional-learned-bias-function"
+    id="toc-introducing-an-optional-learned-bias-function">Introducing
+    an Optional Learned Bias Function</a></li>
+    <li><a href="#testing-the-effect-of-the-bias-function"
+    id="toc-testing-the-effect-of-the-bias-function">Testing the Effect
+    of the Bias Function</a></li>
+    <li><a href="#evolving-to-fully-procedural-glpg"
+    id="toc-evolving-to-fully-procedural-glpg">Evolving to Fully
+    Procedural GLPG</a></li>
+    <li><a href="#the-four-gutenberg-books"
+    id="toc-the-four-gutenberg-books">The Four Gutenberg Books</a></li>
+    <li><a href="#behavior-of-glpg-at-different-lineage-scales"
+    id="toc-behavior-of-glpg-at-different-lineage-scales">Behavior of
+    GLPG at Different Lineage Scales</a></li>
+    <li><a href="#the-new-narrator-pipeline"
+    id="toc-the-new-narrator-pipeline">The New Narrator
+    Pipeline</a></li>
+    <li><a href="#example-generated-books"
+    id="toc-example-generated-books">Example Generated Books</a></li>
+    <li><a href="#analogy-to-the-monkeys-with-typewriters"
+    id="toc-analogy-to-the-monkeys-with-typewriters">Analogy to the
+    Monkeys with Typewriters</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Hybrid intelligence systems challenge the assumption that
+    long-form narrative generation requires large-scale probabilistic
+    models. The GLP–Graph Book Authoring Pipeline (GLPG) demonstrates
+    that coherent books, complete with chapters, paragraphs, pacing, and
+    canon, can emerge from a compact deterministic architecture built
+    around attractor dynamics rather than transformer-style sequence
+    modeling. In GLPG, every lemma corresponds to a stable attractor
+    state, and generation unfolds as a trajectory through a learned
+    transition map. This perspective reframes narrative generation as
+    the evolution of a dynamical system rather than the sampling of a
+    token distribution.</p>
+    <p>The original GLPG architecture relied on paging to cluster lemmas
+    into shared attractor regions. In this work, we adopt a simplified
+    configuration in which each lemma occupies its own page, collapsing
+    the paging mechanism into a pure transition map. This single-lemma
+    regime enforces strict canon compliance: transitions between
+    attractor states follow the learned structure of the world model,
+    eliminating drift and preserving narrative identity across long
+    trajectories.</p>
+    <p>A central theme of this paper is the role of the input vector in
+    shaping the attractor flow. Unlike conventional language models,
+    GLPG places no architectural constraints on the composition of its
+    input encoding. The recursive core remains unchanged regardless of
+    how the input vector is constructed, allowing new contextual signals
+    to be added without modifying the underlying architecture. We
+    exploit this flexibility to introduce several enhancements: a
+    normalized line fraction, a high-resolution current sentence
+    representation, multi-scale token histories, and a lightweight
+    narrative memory. These components enrich the temporal and
+    structural information available to the attractor system, improving
+    pacing, segmentation, and stylistic stability.</p>
+    <p>Beyond input encoding, we refine the training regime through
+    sentence-level sampling, multi-book curricula, structural token
+    annotation, and balanced epoch selection. We further extend the
+    generative engine with a fully parametrizable
+    <code>WriterParams</code> layer, enabling explicit control over
+    chapter structure, temporal steering, attractor routing, beam
+    dynamics, and token-level modulation. Optional learned activation
+    and bias functions are explored as modular extensions to the
+    recursive core.</p>
+    <p>Together, these contributions show that long-form narrative
+    generation does not require large models or probabilistic decoding.
+    A compact attractor system, equipped with structured contextual
+    signals and a parametrizable generation layer, can produce coherent
+    books under strict structural constraints. GLPG illustrates a path
+    toward hybrid intelligence: small deterministic architectures
+    augmented by modular steering layers, capable of evolving beyond the
+    classical “monkeys with typewriters” paradigm.</p>
+    <h1 id="from-paging-to-transition-map">From Paging to Transition
+    Map</h1>
+    <p>In the original GLPG architecture, paging provides a mechanism
+    for grouping multiple input lemmas into shared attractor regions.
+    Each page contains a small set of lemmas, and the recursive dynamics
+    operate within the attractor associated with that page. This allows
+    GLPG to maintain structural coherence while supporting controlled
+    variation inside each page.</p>
+    <p>For the experiments in this paper, we adopt a simplified variant
+    of GLPG in which each page contains exactly one lemma. In this
+    configuration, the number of pages equals the number of lemmas, and
+    the paging mechanism collapses into a deterministic transition map.
+    Each lemma directly selects its own attractor state, and the model
+    transitions deterministically between these states according to the
+    learned transition structure.</p>
+    <p>This single‑lemma paging regime is no longer a paging system in
+    the traditional sense. Instead, it behaves as a pure transition map:
+    every lemma corresponds to a unique attractor, and the model
+    generates only transitions that are canon‑compliant with respect to
+    the underlying world model. This ensures maximal structural
+    stability and eliminates drift between unrelated attractor
+    regions.</p>
+    <p>The same principle appears in the design of procedural DMLG,
+    where each lemma is associated with its own dynamically generated
+    module. In both cases, the architecture enforces strict
+    lemma‑specific transitions, guaranteeing that the generative process
+    remains aligned with the canonical structure of the training
+    corpus.</p>
+    <h1 id="improving-the-input-vector">Improving the Input Vector</h1>
+    <p>Although the input vector of a GLPG model is fixed at training
+    time, its internal composition is highly flexible. GLPG places no
+    architectural constraints on how the input vector is constructed,
+    and the recursive core of the model operates identically regardless
+    of the chosen encoding scheme. As a result, different input
+    encoders—potentially combining multiple sources of information—can
+    be designed without requiring any modification to the rest of the
+    architecture.</p>
+    <p>This flexibility is unusual among language model architectures,
+    where the input representation is typically tightly coupled to the
+    internal layers and difficult to alter without retraining the entire
+    system. In GLPG, the attractor dynamics are robust enough to
+    accommodate a wide range of input encodings, provided that the model
+    is trained with the desired input vector structure from the
+    outset.</p>
+    <p>Consequently, improvements to the input vector can have a
+    substantial impact on model quality. Richer or more structured input
+    encoders allow GLPG to incorporate additional contextual signals
+    while preserving its compact architecture and deterministic
+    attractor behavior. The following subsections explore several ways
+    in which the input vector can be enhanced to strengthen the
+    expressive capacity of GLPG.</p>
+    <h2 id="book-line-number-fraction">Book Line Number Fraction</h2>
+    <p>A simple yet highly effective enhancement to the input vector is
+    the inclusion of a <em>book line number fraction</em>. During
+    training, every sentence in each source book is assigned a
+    normalized position value in the interval <span
+    class="math inline">[0,1]</span>, reflecting its sequential location
+    within the book. A sentence at the beginning receives a value near
+    <span class="math inline">0</span>, one at the end receives a value
+    near <span class="math inline">1</span>, and all intermediate
+    sentences are mapped linearly between these extremes.</p>
+    <p>During generation, the input vector is augmented with a single
+    float representing the current position in the generated sequence,
+    likewise normalized to <span class="math inline">[0,1]</span>. The
+    number of generated lines does not need to match the number of lines
+    in any training book; the model simply interprets the fraction as a
+    positional cue within an abstract narrative flow.</p>
+    <p>This positional signal allows GLPG to infer where a generated
+    line is situated relative to the global structure learned from the
+    training corpus. Even though it consists of only one scalar value,
+    the line fraction provides a clear and continuous encoding of
+    narrative progression, enabling the model to align its output with
+    the structural patterns present in the original books.</p>
+    <h2 id="improving-current-sentence-representation">Improving Current
+    Sentence Representation</h2>
+    <p>The current sentence representation provides one of the strongest
+    and most immediately useful signals in the input vector. Unlike the
+    multi-sentence mechanisms (narrative memory, token history), this
+    component focuses exclusively on the structure of the
+    <em>ongoing</em> sentence. It captures the most recent grammar and
+    lemma activity, the local punctuation state, and a normalized
+    positional index.</p>
+    <p>The representation maintains two fixed-length queues: one for
+    grammar tokens and one for lemma tokens. Each queue stores the last
+    <span class="math inline"><em>N</em></span> embeddings, where <span
+    class="math inline"><em>N</em></span> is a configurable window size
+    (set to <span class="math inline">10</span> in this paper). When a
+    new token arrives, its embedding is inserted at the front of the
+    corresponding queue, and older entries are shifted to the right.
+    This produces a compact, temporally ordered view of the most recent
+    syntactic activity.</p>
+    <p>Lemma tokens increase the sentence position counter, which is
+    normalized by a divider constant to produce a stable positional
+    feature:</p>
+    <p><span class="math display">$$\text{pos}_{\text{norm}} =
+    \frac{\text{position}}{\text{divider}}.$$</span></p>
+    <p>Terminal tokens (e.g. punctuation) also advance the position
+    counter and set a punctuation flag. Non-terminal grammar tokens
+    update the grammar queue without affecting the position.</p>
+    <p>The final current-sentence vector is constructed as</p>
+    <p><span
+    class="math display">CurrentSentence = GrammarQueue ‖ LemmaQueue ‖ [punctuation] ‖ [pos<sub>norm</sub>],</span></p>
+    <p>where <span class="math inline">‖</span> denotes concatenation.
+    This structure provides the model with a high-resolution snapshot of
+    the ongoing sentence: recent grammar patterns, recent lexical
+    choices, punctuation state, and local progress within the
+    sentence.</p>
+    <p>Because the representation is updated token-by-token and reflects
+    the immediate syntactic context, it offers a strong stabilizing
+    influence on generation. It helps the model maintain coherent
+    sentence structure, predict appropriate follow-up tokens, and avoid
+    syntactic drift. While the configuration used here (window size
+    <span class="math inline"><em>N</em> = 10</span> and a single
+    punctuation flag) is effective, it is not necessarily optimal;
+    richer punctuation signals or alternative window sizes may further
+    improve performance.</p>
+    <h2 id="multiplying-token-history">Multiplying Token History</h2>
+    <p>The token history mechanism provides a lightweight recurrent
+    trace of recent lemma embeddings. In the baseline configuration, a
+    single history vector of fixed width and decay parameter was used
+    (typically width 48 with decay 0.95). While effective as a
+    stabilizing signal, a single temporal profile limits the model to
+    one characteristic memory scale.</p>
+    <p>To improve temporal resolution, the system now employs
+    <em>multiple</em> parallel token histories. Each history instance
+    maintains its own embedding width and decay coefficient, producing a
+    set of recurrent vectors that capture different temporal dynamics of
+    the recent token stream. The configuration used in this work
+    consists of seven histories:</p>
+    <p><span class="math display">history
+    size = 8, 16, 32, 48, 64, 80, 96,</span></p>
+    <p><span class="math display">history
+    alpha = 0.80, 0.85, 0.90, 0.95, 0.97, 0.98, 0.99.</span></p>
+    <p>Each history vector evolves according to its own decay parameter
+    <span class="math inline"><em>α</em></span>, blending new lemma
+    embeddings with its internal state:</p>
+    <p><span
+    class="math display"><em>h</em> ← <em>α</em><em>h</em> + (1−<em>α</em>)<em>e</em>,</span></p>
+    <p>where <span class="math inline"><em>e</em></span> is the current
+    lemma embedding. Smaller widths emphasize short-term fluctuations,
+    while larger widths accumulate broader contextual trends. Lower
+    decay values respond quickly to new tokens, whereas higher decay
+    values retain long-range structure.</p>
+    <p>The combined history signal is additive rather than substitutive:
+    all history vectors are concatenated into the input vector,
+    providing the model with a multi-scale temporal representation of
+    recent activity. This multi-resolution design allows the generator
+    to exploit both fine-grained and coarse-grained temporal patterns
+    without requiring complex recurrent architectures.</p>
+    <p>The specific configuration above is chosen for demonstration
+    purposes and is not necessarily optimal. The ideal combination of
+    widths and decay parameters remains an open question and may depend
+    on the curriculum, the narrative domain, or the desired stylistic
+    stability. Nevertheless, multiplying token history significantly
+    enriches the temporal structure of the input vector and improves the
+    expressive capacity of the generator.</p>
+    <h2 id="improving-narrative-memory">Improving Narrative Memory</h2>
+    <p>The narrative memory mechanism provides a deterministic and
+    lightweight history signal derived from the syntactic-semantic
+    backbone of recent sentences. Because all generated sentences follow
+    a strict <code>&lt;G&gt; &lt;L&gt;</code> structure—where each
+    grammar token <span
+    class="math inline"><em>G</em><sub><em>i</em></sub></span> is
+    immediately followed by its corresponding lemma token <span
+    class="math inline"><em>L</em><sub><em>i</em></sub></span>—the
+    extraction procedure retains all semantically relevant lemma
+    embeddings in their original order.</p>
+    <p>A fixed set of history tokens marks which grammar categories
+    contribute to the memory:</p>
+    <pre><code>        &lt;VERB-PRESENT&gt;, &lt;VERB-PRESENT-3S&gt;, &lt;VERB-PRESENT-1S&gt;,
+        &lt;VERB-PAST&gt;, &lt;VERB-ING&gt;, &lt;VERB-INGV&gt;, &lt;VERB-PERFECT&gt;,
+        &lt;NOUN&gt;, &lt;NOUN-PLURAL&gt;, &lt;PROPN&gt;, &lt;ADJ&gt;, &lt;ADV&gt; </code></pre>
+    <p>Whenever such a token is encountered, the next lemma token is
+    guaranteed to be its semantic counterpart. The memory module
+    therefore collects the embeddings of all relevant lemma tokens in
+    the sentence, producing a variable-length sequence that captures the
+    sentence’s syntactic core.</p>
+    <p>This sequence is processed by a deterministic recurrent
+    projector,</p>
+    <p><span
+    class="math display"><em>h</em> ← tanh (<em>W</em><sub><em>h</em></sub><em>h</em>+<em>W</em><sub><em>e</em></sub><em>e</em>+<em>b</em>),</span></p>
+    <p>followed by a linear projection,</p>
+    <p><span
+    class="math display"><em>P</em> = <em>V</em><em>h</em> + <em>c</em>,</span></p>
+    <p>yielding a compact sentence-level vector. The memory stores the
+    most recent <span class="math inline"><em>M</em></span> projections
+    in a temporally ordered structure of size <span
+    class="math inline"><em>L</em> × <em>M</em></span>, shifting older
+    entries to the right and inserting the newest projection at
+    position 0.</p>
+    <p>Although intentionally low-bandwidth, this mechanism provides a
+    stable and reproducible temporal signal. It preserves the sequence
+    of recent actions, entities, and modifiers without attempting deep
+    semantic encoding. Within the broader input vector, narrative memory
+    contributes lightweight contextual coherence, syntactic rhythm, and
+    structural stability across multi-sentence generation.</p>
+    <h2 id="the-combined-input-vector">The Combined Input Vector</h2>
+    <p>The GLPG input vector consists of 1307 floats. Each component
+    contributes distinct structural, temporal, or variational signals to
+    the attractor dynamics. The vector is composed of four major
+    subsystems: line number, current sentence encoding, multiple token
+    histories, and narrative memory.</p>
+    <h4 id="overview">Overview</h4>
+    <p><span class="math display">1 + 322 + 344 + 640 = 1307
+    floats</span></p>
+    <h4 id="line-number-1-float">1. Line Number (1 float)</h4>
+    <p>A single normalized scalar indicating the global position of the
+    current sentence within the generated document. This value provides
+    temporal anchoring and supports global pacing, arc progression, and
+    chapter‑level flow.</p>
+    <h4 id="current-sentence-encoding-322-floats">2. Current Sentence
+    Encoding (322 floats)</h4>
+    <p>The current sentence is encoded through a combination of grammar
+    embeddings, lemma embeddings, positional information, and
+    punctuation state.</p>
+    <ul>
+    <li><p>last 10 grammar embeddings <span class="math inline">×</span>
+    16 floats = 160</p></li>
+    <li><p>last 10 lemma embeddings <span class="math inline">×</span>
+    16 floats = 160</p></li>
+    <li><p>positional scalar (normalized) = 1</p></li>
+    <li><p>comma / punctuation flag (0 or 1) = 1</p></li>
+    </ul>
+    <p>Total: 322 floats.</p>
+    <p>This subsystem provides micro‑structure: paragraph formation,
+    chapter boundaries, scene breaks, and local pacing.</p>
+    <h4 id="multiple-token-histories-344-floats">3. Multiple Token
+    Histories (344 floats)</h4>
+    <p>Seven history windows encode lemma‑driven temporal continuity
+    with varying widths and decay factors. Each history window maintains
+    a recurrent trace of previous lemma embeddings.</p>
+    <ul>
+    <li><p>history sizes: 8, 16, 32, 48, 64, 80, 96</p></li>
+    <li><p>history alphas: 0.8, 0.85, 0.9, 0.95, 0.97, 0.98,
+    0.99</p></li>
+    </ul>
+    <p>Total: 344 floats.</p>
+    <p>Token history provides variational modulation: lemma‑route
+    diversity, syntactic nuance, micro‑pacing variation, and emergent
+    mini‑plots.</p>
+    <h4 id="narrative-memory-640-floats">4. Narrative Memory (640
+    floats)</h4>
+    <p>A recurrent projection of the previous 20 sentences, each
+    represented by a 32‑float embedding derived from the main lemma
+    tokens of the sentence.</p>
+    <p><span class="math display">20 × 32 = 640 floats</span></p>
+    <p>Narrative memory contributes micro‑modulation: subtle rhythmic
+    coloration, light smoothing, and small callbacks. It does not carry
+    structure, pacing, canon, or lemma‑routes.</p>
+    <h4 id="summary">Summary</h4>
+    <p>The combined input vector integrates structural drivers (line
+    number, current sentence), variational modulators (token histories),
+    and micro‑modulation (narrative memory). The attractor core remains
+    responsible for canon, syntax, lemma‑routes, scene‑flow, and the
+    autonomous narrative motor.</p>
+    <h2 id="ablation-tests">Ablation Tests</h2>
+    <p>Using the base model, we ablate specific components of the input
+    vector by setting subsets of the 1307 floats to zero. No new models
+    are trained; the only difference between conditions is the removal
+    of encoded information in the input vector. This reveals which
+    components contribute to structure, pacing, variation, and global
+    narrative flow.</p>
+    <h4 id="quantitative-overview">Quantitative Overview</h4>
+    <ul>
+    <li><p>baseline full vector : 1225 s, 258 KB, 128 chapters</p></li>
+    <li><p>no line number : 1285 s, 260 KB, 127 chapters</p></li>
+    <li><p>no current sentence : 1217 s, 253 KB, 1 big chapter, no
+    paragraphs</p></li>
+    <li><p>no token histories : 927 s, 255 KB, 125 chapters</p></li>
+    <li><p>no narrative memory : 890 s, 255 KB, 126 chapters</p></li>
+    <li><p>all missing : 844 s, 247 KB, 1 big chapter, no
+    paragraphs</p></li>
+    <li><p>only current sentence : 986 s, 256 KB, 124 chapters</p></li>
+    <li><p>only line number + current sentence : 890 s, 256 KB, 128
+    chapters</p></li>
+    </ul>
+    <p>Dropping token history or narrative memory significantly
+    increases generation speed. The current sentence encoding is crucial
+    for paragraph and chapter structure. Best speed and stability occur
+    when line number + current sentence are present and narrative memory
+    is absent.</p>
+    <h4 id="global-findings">Global Findings</h4>
+    <p>The model has an internal narrative motor that continues to
+    operate even when nearly all input information is removed. GLPG
+    continues to generate coherent text under ablations that would break
+    any transformer-based language model, because it is an autonomous
+    attractor system whose narrative dynamics are internally
+    carried.</p>
+    <p>The transition map and the encoding in the target embeddings form
+    a strong internal steering layer. The context MLP is not a primary
+    motor, but a fine-tuning layer on top of an autonomous
+    attractor.</p>
+    <h4 id="role-of-line-number">Role of Line Number</h4>
+    <p>Without line number, GLPG loses global flow and remains stuck in
+    a “beginning-of-book” attractor mode. Current sentence provides
+    micro-structure, but line number is essential for arc progression,
+    chapter flow, and temporal anchoring.</p>
+    <h4 id="role-of-current-sentence">Role of Current Sentence</h4>
+    <p>Without current sentence, all chapter and paragraph structure
+    disappears. The rest of the narrative remains surprisingly intact,
+    because canon, syntax, lemma-routes, and scene-flow are
+    attractor-internal. Current sentence is the primary structural
+    driver.</p>
+    <h4 id="role-of-token-history">Role of Token History</h4>
+    <p>Without token history, the narrative remains fully intact, but
+    the flow becomes smoother, less layered, and less variable. Token
+    history is a variation injector, not a structural component. It
+    modulates lemma-route diversity, micro-pacing, and emergent
+    mini-plots.</p>
+    <h4 id="role-of-narrative-memory">Role of Narrative Memory</h4>
+    <p>Narrative memory remains the least important component. It
+    contributes only micro-modulation: subtle rhythmic coloration, small
+    callbacks, and light smoothing. Canon, syntax, pacing, structure,
+    and lemma-routes are fully attractor-internal.</p>
+    <h4 id="minimal-steering-vector">Minimal Steering Vector</h4>
+    <p>The combination “line number + current sentence” is qualitatively
+    almost as strong as baseline. It is far stronger than the extreme
+    ablation and preserves nearly all narrative properties of the
+    baseline model. What is missing: global arc structure, additional
+    lemma variation, and extra pacing nuance. The core—canon, syntax,
+    scene-flow, lemma-routes—remains fully intact.</p>
+    <h1 id="adding-structural-tokens">Adding Structural Tokens</h1>
+    <p>To obtain full long-form book structure directly from GLPG
+    generation, two structural terminal grammar tokens are introduced
+    into the decoding process:</p>
+    <ul>
+    <li><p><code>&lt;SOC&gt;</code> – Start of Chapter</p></li>
+    <li><p><code>&lt;SOP&gt;</code> – Start of Paragraph</p></li>
+    </ul>
+    <p>These tokens act as explicit structural delimiters within the
+    grammar. Both <code>&lt;SOC&gt;</code> and <code>&lt;SOP&gt;</code>
+    may only appear at the beginning of a sentence, immediately
+    following the <code>&lt;EOL&gt;</code> token of the previous line. A
+    paragraph start cannot coincide with a chapter start; therefore,
+    <code>&lt;SOP&gt;</code> and <code>&lt;SOC&gt;</code> are mutually
+    exclusive on the same line.</p>
+    <p>Minimum line thresholds enforce structural cadence. A
+    configurable lower bound (e.g. three lines per paragraph and twenty
+    lines per chapter) ensures that structural tokens cannot be emitted
+    prematurely. Rule-based transition constraints prevent the selection
+    of <code>&lt;SOC&gt;</code> or <code>&lt;SOP&gt;</code> until the
+    required number of lines has elapsed since the previous structural
+    boundary.</p>
+    <p>With only these two additions, GLPG is able to produce complete
+    book-like documents during autonomous generation. Chapters emerge
+    naturally as long-range units, while paragraphs provide mid-scale
+    segmentation. The narrator pipeline subsequently generates chapter
+    titles and performs structural refinement, but the underlying
+    chapter and paragraph boundaries originate from the grammar-level
+    structural tokens.</p>
+    <h1 id="improving-the-training-regime">Improving the Training
+    Regime</h1>
+    <p>Two major refinements were introduced into the GLPG training
+    regime, each aimed at increasing structural stability, narrative
+    coherence, and curriculum diversity across long-form generation.</p>
+    <h2 id="sentence-level-training">Sentence-Level Training</h2>
+    <p>The first improvement replaces sequence-level training with
+    sentence-level training. Each individual line of the book becomes an
+    independent trainable unit, while its contextual embedding is
+    derived from all preceding lines. This approach removes the
+    imbalance between long and short sequences and ensures that every
+    line contributes equally to the learning dynamics.</p>
+    <p>A continuous <em>line fraction</em> is assigned to each sentence,
+    ranging from 0 at the beginning of the book to 1 at the end. This
+    scalar provides the model with a positional signal that captures
+    narrative progression without requiring explicit sequence indices.
+    The model thus learns how early-book and late-book sentences differ
+    in tone, pacing, and structural behavior.</p>
+    <h2 id="training-across-multiple-books">Training Across Multiple
+    Books</h2>
+    <p>The second improvement expands the curriculum from a single book
+    to multiple books. All books are decomposed into sentences, each
+    annotated with its own line fraction based on its position within
+    its respective volume. This exposes the model to multiple examples
+    of narrative flow from start to finish, greatly increasing the
+    diversity of structural patterns it encounters.</p>
+    <p>By observing several independent trajectories from line
+    fraction 0 to line fraction 1, the model learns generalized
+    long-range behavior rather than overfitting to the structure of a
+    single text. This multi-book curriculum also improves robustness
+    when generating autonomous drafts, as the model internalizes a
+    broader distribution of narrative arcs.</p>
+    <h2 id="structural-token-annotation">Structural Token
+    Annotation</h2>
+    <p>All curriculum sentences are annotated with the structural
+    grammar tokens <code>&lt;SOC&gt;</code> and
+    <code>&lt;SOP&gt;</code>. These annotations inform the model of
+    valid chapter and paragraph boundaries, enabling it to learn the
+    conditions under which structural tokens appear. During generation,
+    the rule-based transition system enforces minimum line thresholds,
+    while the learned structural patterns guide the placement of chapter
+    and paragraph starts.</p>
+    <h2 id="balanced-epoch-sampling">Balanced Epoch Sampling</h2>
+    <p>Each training epoch selects a single random sentence from the
+    curriculum. This uniform sampling strategy ensures that epochs are
+    balanced across the entire dataset, avoiding the uneven weighting
+    that arises when training on long sequences. The model receives a
+    steady stream of diverse structural contexts, improving stability
+    and reducing bias toward any particular region of the training
+    corpus.</p>
+    <p>Together, these improvements yield a training regime that is more
+    stable, more structurally aware, and better suited for autonomous
+    long-form generation. The resulting models exhibit stronger
+    narrative flow, more consistent structural segmentation, and greater
+    resilience across lineage scales.</p>
+    <h1 id="fully-parametrizable-generation">Fully Parametrizable
+    Generation</h1>
+    <p>A defining characteristic of the GLPG generative engine is its
+    ability to operate under a fully parametrizable configuration layer.
+    Unlike traditional language models, which expose only stochastic
+    sampling controls such as temperature or top-<span
+    class="math inline"><em>k</em></span> sampling, GLPG accepts a
+    structured <code>WriterParams</code> object that governs narrative
+    structure, temporal progression, attractor routing, and token-level
+    dynamics. This transforms generation from a probabilistic decoding
+    process into a configurable dynamical system.</p>
+    <h2 id="structural-constraints-as-first-class-parameters">Structural
+    Constraints as First-Class Parameters</h2>
+    <p>The parameter class includes explicit structural constraints such
+    as minimum chapter length, minimum paragraph length, sentence word
+    bounds, and maximum chapter counts. These constraints are enforced
+    by the generative engine itself. GLPG’s narrator pipeline integrates
+    these constraints directly into the transition map and lemma
+    routing, ensuring that every generated book respects the requested
+    macro-structure. This stands in contrast to transformer-based
+    models, which cannot guarantee structural compliance and typically
+    rely on prompt heuristics.</p>
+    <h2 id="temporal-and-canonical-steering">Temporal and Canonical
+    Steering</h2>
+    <p>The parameters <code>from_line_fraction</code> and
+    <code>to_line_fraction</code> introduce a temporal steering
+    mechanism that selects a specific region of the canon manifold. This
+    allows the generator to operate within a controlled slice of the
+    narrative attractor space. Keywords and prompt lines further act as
+    attractor selectors, influencing lemma clusters and world-model
+    routing rather than merely biasing token probabilities.</p>
+    <h2 id="beam-dynamics-and-multi-route-exploration">Beam Dynamics and
+    Multi-Route Exploration</h2>
+    <p>Beam-search parameters (<code>nr_of_beams</code>,
+    <code>beam_alpha</code>, <code>beam_jitter</code>,
+    <code>beam_temperature</code>) control a multi-route exploration
+    mechanism embedded within the generative engine. In GLPG, beams
+    represent parallel dynamical trajectories through the attractor
+    landscape rather than classical decoding paths. Score damping and
+    jitter introduce controlled stochasticity, enabling exploration
+    without destabilizing the underlying narrative physics. This design
+    allows GLPG to maintain coherence even under extreme parameter
+    settings.</p>
+    <h2 id="token-level-steering-and-vocabulary-modulation">Token-Level
+    Steering and Vocabulary Modulation</h2>
+    <p>Parameters such as <code>top_k</code>, <code>temperature</code>,
+    <code>top_boost</code>, and <code>max_tokens</code> provide
+    fine-grained control over token selection. Unlike classical
+    sampling, these parameters modulate the internal scoring of grammar
+    and lemma tokens produced by the transition map. The generator
+    adjusts the dynamical scoring of candidate transitions rather than
+    sampling from a static distribution. The
+    <code>max_pageless_vocab</code> parameter enables a hybrid mode in
+    which the MLP-only generator operates on a random subset of the
+    vocabulary, demonstrating that GLPG can function even when
+    graph-based routing is partially disabled.</p>
+    <h2 id="graph-vs.-pageless-generation-modes">Graph vs. Pageless
+    Generation Modes</h2>
+    <p>The flag <code>enable_paging</code> toggles between two
+    fundamentally different generation modes. In graph mode, GLPG uses
+    its full lemma-transition graph, attractor clusters, and world-model
+    routing. In pageless mode, the generator relies solely on the MLP
+    transition map and target embedding encoding. Both modes remain
+    fully functional, and pageless generation continues to produce
+    coherent narrative output. This indicates that the internal
+    attractor dynamics are strong enough to sustain generation even when
+    structural routing is removed.</p>
+    <h2 id="a-configurable-dynamical-system">A Configurable Dynamical
+    System</h2>
+    <p>Taken together, the <code>WriterParams</code> class defines a
+    generative engine that is not merely tunable but architecturally
+    configurable. Each parameter influences a distinct layer of the
+    system: structural constraints, temporal steering, attractor
+    routing, beam dynamics, token scoring, and vocabulary modulation.
+    This level of configurability is unprecedented in traditional
+    language models, where sampling parameters operate only at the
+    surface level. GLPG’s design exposes the internal mechanics of
+    generation, allowing researchers to shape the behavior of the
+    dynamical system itself.</p>
+    <h1 id="bringing-back-learned-activation-functions">Bringing Back
+    Learned Activation Functions</h1>
+    <p>A baseline GLPG model is first trained using the fixed SiLU
+    activation function. This establishes a stable attractor flow and
+    provides a deterministic reference architecture against which
+    subsequent modulation strategies can be evaluated. The fixed
+    activation ensures that the recursive dynamics converge reliably,
+    forming a well-defined attractor landscape that serves as the
+    cognitive core of the model.</p>
+    <p>To explore whether GLPG can benefit from a learned nonlinearity,
+    a small activation MLP is trained to approximate the SiLU function.
+    This auxiliary network consists of a single input, a single output,
+    and one hidden layer, with SiLU as its internal nonlinearity. Its
+    purpose is not to introduce a new activation regime, but to
+    reproduce the baseline SiLU curve with high fidelity. By doing so,
+    the transition from a fixed activation to a learned activation
+    becomes smooth and controlled, ensuring that the attractor dynamics
+    are not disrupted abruptly.</p>
+    <p>After this pretraining phase, the activation MLP is inserted into
+    the GLPG architecture as a drop-in replacement for the fixed SiLU
+    function. The model is then trained for additional epochs under this
+    hybrid activation scheme. This yields a GLPG variant with a learned
+    activation function embedded in its recursive core, analogous to the
+    activation mechanism used in DMLG architectures, but implemented
+    here as a modular plugin rather than a global default.</p>
+    <p>Experiments were conducted using the learned activation function
+    in different subsets of the hidden layers, as well as across all
+    layers. Interestingly, the learned activation MLP remained almost
+    identical to the pretrained SiLU curve, even after extended
+    training. This suggests that SiLU is already well aligned with the
+    attractor dynamics of GLPG, and that the additional computational
+    cost of a learned global activation function does not provide
+    tangible benefits. The attractor appears to prefer the original SiLU
+    shape, indicating that GLPG’s recursive structure is inherently
+    compatible with this fixed nonlinearity.</p>
+    <h1 id="introducing-an-optional-learned-bias-function">Introducing
+    an Optional Learned Bias Function</h1>
+    <p>Instead of augmenting the recursive layer with an additional
+    activation MLP, we introduce a lightweight <em>bias MLP</em> that
+    learns to inject a context-dependent bias directly into the
+    recursive update. This bias term can be trained as a <em>global</em>
+    modulation function, shared across all lemmas, or as a
+    <em>lemma-specific</em> function that adapts the recursive dynamics
+    based on the semantic identity of the current token.</p>
+    <p>The motivation for this design is rooted in the structural
+    properties of GLPG. As a recursive architecture, GLPG exhibits a
+    highly malleable cognitive substrate: its attractor dynamics are
+    stable enough to preserve global structure, yet flexible enough to
+    accept fine-grained modulation without destabilizing the overall
+    flow. A learned bias function exploits this plasticity by altering
+    the local curvature of the vector field that governs the recursive
+    update. Rather than replacing the underlying dynamics, the bias MLP
+    subtly reshapes them, allowing the model to express richer
+    contextual variation while maintaining canonical consistency.</p>
+    <p>Bias MLPs are computationally efficient, stable under training,
+    and provide qualitatively meaningful modulation. They operate as a
+    lightweight hypernetwork: instead of generating weights, they
+    generate a bias vector that shifts the recursive update in a
+    context-sensitive direction. This enables GLPG to adapt its internal
+    state transitions without increasing model size or compromising the
+    stability of the attractor.</p>
+    <h2
+    id="bias-conditioned-dynamics-in-the-full-forward-pass">Bias-Conditioned
+    Dynamics in the Full Forward Pass</h2>
+    <p>The forward computation of GLPG consists of an initial
+    projection, followed by a sequence of recursive gated updates and a
+    final refinement stage. The learned bias function integrates
+    specifically into the recursive block, where it modulates the
+    attractor dynamics.</p>
+    <p>Let the input be denoted by <span
+    class="math inline"><em>x</em></span>. The model first computes an
+    internal state</p>
+    <p><span
+    class="math display"><em>h</em><sub>0</sub> = silu(<em>W</em><sub>1</sub><em>x</em>),   <em>h</em><sub>1</sub> = silu(<em>W</em><sub>2</sub><em>h</em><sub>0</sub>),</span></p>
+    <p>which serves as the initial condition for the recursive
+    process.</p>
+    <h4 id="recursive-gated-update.">Recursive gated update.</h4>
+    <p>Each recursive step applies a gated residual transformation. For
+    iteration <span class="math inline"><em>t</em></span>, the gate
+    value is computed as</p>
+    <p><span
+    class="math display"><em>g</em><sub><em>t</em></sub> = <em>σ</em>(<em>G</em><em>h</em><sub><em>t</em></sub>),</span></p>
+    <p>with <span
+    class="math inline"><em>g</em><sub><em>t</em></sub> ∈ (0,1)</span>
+    controlling the effective depth of the recurrence.</p>
+    <p>The default attractor update is given by</p>
+    <p><span
+    class="math display"><em>u</em><sub><em>t</em></sub><sup>(0)</sup> = silu(<em>A</em><em>h</em><sub><em>t</em></sub>),</span></p>
+    <p>where <span class="math inline"><em>A</em></span> defines the
+    baseline vector field of the recursive dynamics.</p>
+    <p>When the bias function is enabled, a context-dependent modulation
+    term</p>
+    <p><span
+    class="math display"><em>b</em><sub><em>t</em></sub> = <em>B</em>(<em>h</em><sub><em>t</em></sub>)</span></p>
+    <p>is added to the attractor update, yielding</p>
+    <p><span
+    class="math display"><em>u</em><sub><em>t</em></sub> = silu(<em>A</em><em>h</em><sub><em>t</em></sub>+<em>b</em><sub><em>t</em></sub>).</span></p>
+    <p>The recursive state transition then becomes</p>
+    <p><span
+    class="math display"><em>h</em><sub><em>t</em> + 1</sub> = <em>h</em><sub><em>t</em></sub> + <em>g</em><sub><em>t</em></sub>(<em>u</em><sub><em>t</em></sub> − <em>h</em><sub><em>t</em></sub>),</span></p>
+    <p>which shows that the bias term directly influences the direction
+    and magnitude of the recursive update. Because this modulation
+    occurs inside the recurrence, it affects multiple successive
+    transitions, allowing the attractor trajectory to adapt dynamically
+    to the context encoded in <span
+    class="math inline"><em>h</em><sub><em>t</em></sub></span>.</p>
+    <h4 id="refinement-stage.">Refinement stage.</h4>
+    <p>After the recursive block, the model applies a final refinement
+    transformation</p>
+    <p><span
+    class="math display"><em>r</em> = silu(<em>R</em><em>h</em><sub><em>T</em></sub>),   <em>h</em><sub>final</sub> = <em>h</em><sub><em>T</em></sub> + <em>r</em>,</span></p>
+    <p>which stabilizes the attractor and ensures that the modulation
+    introduced by the bias does not destabilize the global structure of
+    the state space.</p>
+    <h4 id="output.">Output.</h4>
+    <p>The final output is produced by a linear projection</p>
+    <p><span
+    class="math display"><em>y</em> = <em>O</em><em>h</em><sub>final</sub>.</span></p>
+    <h4 id="interpretation.">Interpretation.</h4>
+    <p>This formulation reveals that the bias function acts as a
+    lightweight hypernetwork: it does not generate weights, but instead
+    produces a context-sensitive perturbation of the vector field
+    governing the recursive update. The attractor defined by <span
+    class="math inline"><em>A</em></span> remains intact, while the bias
+    term <span
+    class="math inline"><em>b</em><sub><em>t</em></sub></span> reshapes
+    its local curvature. This enables GLPG to express richer contextual
+    variation without increasing model size or compromising
+    stability.</p>
+    <h1 id="testing-the-effect-of-the-bias-function">Testing the Effect
+    of the Bias Function</h1>
+    <p>This section evaluates how a learnable bias function influences a
+    GLPG model trained entirely from scratch. The experiment examines
+    the formation of a bias–conditioned manifold, the internalization of
+    the bias field, and the effect of scaling the bias during inference
+    through an adjustable guidance coefficient <span
+    class="math inline"><em>α</em></span>.</p>
+    <h2 id="training-sequence">Training Sequence</h2>
+    <p>The model was trained in sequential phases:</p>
+    <ul>
+    <li><p>Hidden size: 768.</p></li>
+    <li><p>Warmup without bias (1K epochs): 118 s, 17 884 transitions,
+    model size 54.9 MB.</p></li>
+    <li><p>Generation test (300 sentences): 155 s, one long
+    chapter.</p></li>
+    <li><p>Addition of bias–MLP with hidden size: 256.</p></li>
+    <li><p>2K bias–MLP initialization epochs (zero–bias): model size
+    56.4 MB.</p></li>
+    <li><p>Additional 1K epochs: 140 s, 36 363 transitions, model size
+    58.5 MB.</p></li>
+    <li><p>Generation test (300 sentences): 146 s, one long
+    chapter.</p></li>
+    <li><p>Additional 100K epochs: 2 461 s, 1 883 847 transitions, model
+    size 68.3 MB.</p></li>
+    <li><p>Generation test (3 000 sentences): 983 s, 245 KB, 127
+    chapters.</p></li>
+    <li><p>Additional 200K epochs: 7 904 s, 5 562 998 transitions, model
+    size 68.3 MB.</p></li>
+    <li><p>Generation test (3 000 sentences): 1 192 s, 258 KB, 122
+    chapters.</p></li>
+    </ul>
+    <p>After 100K epochs the model remains partially procedural and
+    fragmentary. After 300K epochs the model exhibits a fully developed
+    bias–canon: a coherent attractor family shaped by the bias–MLP.</p>
+    <h2 id="bias-ablation">Bias Ablation</h2>
+    <p>To measure how much of the bias field is internalized, generation
+    was performed with the bias disabled:</p>
+    <ul>
+    <li><p>Generation with bias disabled (<span
+    class="math inline"><em>α</em> = 0</span>): 1 256 s, 260 KB, 123
+    chapters.</p></li>
+    </ul>
+    <p>The output remains canon–consistent but becomes looser, noisier,
+    and less structurally stable. This confirms that the bias–MLP acts
+    as a training–time regularizer: it shapes the manifold and
+    stabilizes attractor dynamics, and part of this structure persists
+    even when the bias is removed.</p>
+    <h2 id="bias-scaling">Bias Scaling</h2>
+    <p>During inference the bias vector was scaled:</p>
+    <p><span
+    class="math display"><em>b</em> = <em>α</em> ⋅ bias(<em>h</em>),   <em>u</em> = silu(<em>W</em><em>h</em>+<em>b</em>).</span></p>
+    <p>Generation results:</p>
+    <ul>
+    <li><p>Bias scaled by <span
+    class="math inline"><em>α</em> = 3</span>: 1 016 s, 258 KB, 123
+    chapters.</p></li>
+    <li><p>Bias scaled by <span
+    class="math inline"><em>α</em> = 5</span>: 1 116 s, 264 KB, 125
+    chapters.</p></li>
+    <li><p>Bias scaled by <span
+    class="math inline"><em>α</em> = 1000</span>: 1 097 s, 260 KB, 124
+    chapters.</p></li>
+    </ul>
+    <p>These ablations demonstrate that the bias–MLP is a learnable
+    modulation field with an adjustable guidance coefficient <span
+    class="math inline"><em>α</em></span>, shaping the latent manifold
+    and controlling attractor stability.</p>
+    <h2 id="effect-of-the-guidance-coefficient">Effect of the Guidance
+    Coefficient</h2>
+    <p>The following regimes were observed:</p>
+    <ul>
+    <li><p><span class="math inline"><em>α</em> = 0</span>: free, noisy,
+    reduced canon stability.</p></li>
+    <li><p><span class="math inline"><em>α</em> = 1</span>: organic,
+    emergent, high variation.</p></li>
+    <li><p><span class="math inline"><em>α</em> = 3</span>: sweet spot;
+    canon–stable, smooth pacing, coherent scene flow.</p></li>
+    <li><p><span class="math inline"><em>α</em> = 5</span>: strongly
+    guided; rigid, hyper–canon, reduced variation.</p></li>
+    <li><p><span class="math inline"><em>α</em> = 1000</span>: extreme
+    guidance; the bias field fully dominates the recurrent update,
+    producing a single, monolithic attractor with highly stable but
+    minimally varied output.</p></li>
+    </ul>
+    <p>At <span class="math inline"><em>α</em> = 1000</span> the
+    recurrent update becomes numerically dominated by the scaled bias
+    term:</p>
+    <p><span
+    class="math display"><em>u</em> ≈ silu(1000⋅bias(<em>h</em>)),</span></p>
+    <p>rendering the contribution of <span
+    class="math inline"><em>W</em><em>h</em></span> negligible. As a
+    result, the bias–MLP becomes effectively self–recursive: its output
+    reenters the bias network at each timestep, forming a closed
+    procedural loop. This produces a deterministic bias–attractor
+    characterized by:</p>
+    <ul>
+    <li><p>highly stable syntactic rhythm,</p></li>
+    <li><p>fixed lemma–routing patterns,</p></li>
+    <li><p>repeated canon clusters,</p></li>
+    <li><p>uniform pacing across chapters,</p></li>
+    <li><p>minimal emergent variation.</p></li>
+    </ul>
+    <p>Despite the extreme scaling, the model remains fully functional
+    and continues to generate coherent text. This robustness indicates
+    that the GLPG substrate tolerates large perturbations in its
+    modulation field without collapsing, behaving as a dynamical system
+    whose attractor geometry can be overwritten by sufficiently strong
+    guidance.</p>
+    <p>The <span class="math inline"><em>α</em> = 1000</span> regime
+    therefore reveals the limiting behaviour of the bias–MLP: a pure
+    procedural attractor driven entirely by the modulation field,
+    demonstrating that the bias function can assume complete control
+    over the recurrent dynamics when scaled beyond the influence of the
+    main update term.</p>
+    <h2 id="relation-to-known-techniques">Relation to Known
+    Techniques</h2>
+    <p>The mechanism resembles several known forms of guided
+    training:</p>
+    <h4 id="auxiliary-networks.">Auxiliary Networks.</h4>
+    <p>A small network shapes the manifold, reduces noise, stabilizes
+    gradients, and prevents attractor chaos. During inference the
+    auxiliary network may be disabled while its structural imprint
+    remains.</p>
+    <h4 id="teacher-forcing-and-scheduled-sampling.">Teacher Forcing and
+    Scheduled Sampling.</h4>
+    <p>The model learns under structured guidance but generates without
+    it. The learned manifold remains smoother and more coherent than
+    models trained without guidance.</p>
+    <p>Unlike Transformers, GLPG possesses a recurrent attractor state
+    and lemma–conditioned manifold, making <span
+    class="math inline"><em>α</em></span>–scaled modulation dynamically
+    stable and architecturally feasible. The bias–MLP therefore
+    functions as a genuine learnable guidance engine within the GLPG
+    substrate.</p>
+    <h1 id="evolving-to-fully-procedural-glpg">Evolving to Fully
+    Procedural GLPG</h1>
+    <p>Procedural GLPG refers to architectures in which parts of the
+    network are generated <em>on demand</em> rather than stored as fixed
+    parameters. The recursive structure of GLPG naturally supports such
+    procedurality: its attractor dynamics are stable enough to tolerate
+    modulation, yet flexible enough to benefit from context-dependent
+    variation. In the previous section, we introduced a lightweight form
+    of procedural modulation through a learned bias function applied
+    inside the recursive update. This constitutes the simplest
+    procedural extension of GLPG. We now outline how this idea can be
+    expanded into a fully procedural architecture in which entire hidden
+    layers are generated dynamically.</p>
+    <h2 id="lightweight-procedural-glpg">Lightweight Procedural
+    GLPG</h2>
+    <p>The bias-conditioned recurrence described earlier already
+    provides a minimal form of procedurality. The modulation term is
+    computed at runtime from the current hidden state, allowing the
+    recursive flow to adapt dynamically without altering the stored
+    parameters of the network. This approach preserves the compactness
+    of GLPG while introducing a controlled degree of procedural
+    behavior. It serves as a practical first step toward more advanced
+    forms of procedural GLPG.</p>
+    <h2 id="full-procedural-glpg-dynamic-low-rank-layer-generation">Full
+    Procedural GLPG: Dynamic Low-Rank Layer Generation</h2>
+    <p>A fully procedural GLPG replaces its internal hidden layers with
+    dynamically generated parameters. Rather than storing dense weight
+    matrices, the model uses lemma-conditioned hypernetworks to produce
+    low-rank factorizations of these matrices at runtime. This approach
+    preserves the expressive power of GLPG while avoiding the
+    prohibitive cost of generating full parameter sets for large hidden
+    sizes.</p>
+    <p>To make the discussion concrete, consider a GLPG model with
+    hidden size <span class="math inline">256</span>. A dense layer of
+    this size contains</p>
+    <p><span class="math display">256 × 256 + 256 = 65, 792</span></p>
+    <p>parameters. Generating such a matrix procedurally for every lemma
+    would be computationally infeasible. Instead, each hidden layer is
+    represented through a rank-<span class="math inline">16</span>
+    factorization:</p>
+    <p><span
+    class="math display"><em>W</em> = <em>A</em><em>B</em>,</span></p>
+    <p>where <span
+    class="math inline"><em>A</em> ∈ ℝ<sup>256 × 16</sup></span> and
+    <span class="math inline"><em>B</em> ∈ ℝ<sup>16 × 256</sup></span>.
+    The total number of parameters per layer becomes</p>
+    <p><span
+    class="math display">256 ⋅ 16 + 16 ⋅ 256 = 8, 192,</span></p>
+    <p>a reduction by nearly an order of magnitude. This low-rank
+    representation is sufficient to modulate the attractor dynamics
+    while keeping the procedural generators compact and trainable.</p>
+    <p>GLPG contains three internal hidden layers and one gate layer. In
+    the fully procedural variant, each of these four layers is replaced
+    by a dedicated lemma-conditioned generator MLP that outputs the
+    corresponding low-rank factors <span
+    class="math inline">(<em>A</em>,<em>B</em>)</span>. A fifth
+    generator produces the bias vector used inside the recursive update.
+    Together, these five procedural modules define the lemma-specific
+    dynamics of the network.</p>
+    <h4 id="training.">Training.</h4>
+    <p>During training, the procedural generators are updated through
+    backpropagation exactly like ordinary network components. The
+    generated parameters are transient: they exist only during the
+    forward pass. Gradients flow through the generated low-rank factors
+    into the generator MLPs, allowing them to learn how to produce
+    effective layer parameters without ever storing the full matrices.
+    This approach scales well even for large lemma vocabularies, since
+    the procedural generators remain small and shared across all
+    lemmas.</p>
+    <h4 id="inference.">Inference.</h4>
+    <p>At inference time, the procedural generators compute the low-rank
+    factors <span class="math inline">(<em>A</em>,<em>B</em>)</span> for
+    each layer based on the current lemma embedding and hidden state.
+    The resulting matrices are constructed on the fly and used to
+    evaluate the GLPG recurrence. Caching is optional but not required.
+    The model behaves identically to a standard GLPG except that its
+    internal dynamics are now lemma-conditioned and
+    context-sensitive.</p>
+    <h4 id="memory-footprint.">Memory footprint.</h4>
+    <p>The total footprint of fully procedural GLPG consists of:</p>
+    <ul>
+    <li><p>all learned target embeddings (128-dimensional),</p></li>
+    <li><p>the shared input and output projection layers,</p></li>
+    <li><p>four low-rank procedural generators (for three hidden layers
+    and one gate layer),</p></li>
+    <li><p>one bias generator for lightweight modulation.</p></li>
+    </ul>
+    <p>For a lemma space of size <span
+    class="math inline">100, 000</span>, storing dense parameters for
+    four layers would require</p>
+    <p><span class="math display">100, 000 × 65, 792 = 6.5G
+    parameters,</span></p>
+    <p>which is impractical. The procedural low-rank approach represents
+    all of these parameters implicitly through compact generator
+    networks, trading memory for compute. Since inference bottlenecks
+    are typically dominated by memory bandwidth rather than arithmetic
+    throughput, this trade-off is advantageous.</p>
+    <h4 id="summary.">Summary.</h4>
+    <p>Lightweight procedural GLPG introduces dynamic modulation through
+    a learned bias function, while fully procedural GLPG extends this
+    idea by generating entire hidden layers through lemma-conditioned
+    low-rank hypernetworks. This architecture enables fine-grained
+    control over attractor dynamics, supports lineage and modularity,
+    and preserves the compactness of GLPG. The low-rank formulation
+    makes full procedurality feasible even for moderately sized hidden
+    layers, providing a practical path toward highly expressive and
+    context-adaptive GLPG models.</p>
+    <h1 id="the-four-gutenberg-books">The Four Gutenberg Books</h1>
+    <p>These four public‑domain novels form the superposed canon used to
+    construct the GLPG world model. Together they provide a diverse
+    mixture of science fiction, planetary romance, Victorian horror, and
+    early speculative literature. Their combined narrative space defines
+    the semantic substrate from which GLPG learns its attractor
+    dynamics.</p>
+    <table>
+    <caption>Overview of the four Gutenberg books forming the GLPG
+    superposed canon.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Book</strong></th>
+    <th style="text-align: right;"><strong>Sentences</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><em>A Honeymoon in Space</em></td>
+    <td style="text-align: right;">3797</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><em>Thuvia, Maid of Mars</em></td>
+    <td style="text-align: right;">2841</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><em>The Time Machine</em></td>
+    <td style="text-align: right;">2094</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><em>Dr. Jekyll and Mr. Hyde</em></td>
+    <td style="text-align: right;">1809</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>Across these four works, the combined corpus contains a total
+    of</p>
+    <p><span class="math display">10541 sentences</span></p>
+    <p>from which</p>
+    <p><span class="math display">194085 unique training
+    samples</span></p>
+    <p>were extracted. The resulting vocabulary comprises</p>
+    <p><span class="math display">8562 distinct lemmas,</span></p>
+    <p>forming the lexical and conceptual foundation of the GLPG world
+    model.</p>
+    <h1 id="behavior-of-glpg-at-different-lineage-scales">Behavior of
+    GLPG at Different Lineage Scales</h1>
+    <p>The GLPG architecture exhibits distinct behavioral regimes
+    depending on lineage depth, hidden‑state scale, and accumulated
+    training epochs. Each lineage variant is trained as an independent
+    cognitive substrate, inheriting only the compressed transition
+    statistics of its parent when applicable. The table below summarizes
+    the principal configurations and their empirical characteristics
+    during training and autonomous draft‑book generation.</p>
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Class</strong></th>
+    <th style="text-align: right;"><strong>Model Size</strong></th>
+    <th style="text-align: right;"><strong>Hidden</strong></th>
+    <th style="text-align: right;"><strong>Parent</strong></th>
+    <th style="text-align: right;"><strong>Add. Epochs</strong></th>
+    <th style="text-align: right;"><strong>Transitions</strong></th>
+    <th style="text-align: right;"><strong>Train (s)</strong></th>
+    <th style="text-align: right;"><strong>Gen (s)</strong></th>
+    <th style="text-align: right;"><strong>KB</strong></th>
+    <th style="text-align: right;"><strong>Ch.</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: right;">92 MB</td>
+    <td style="text-align: right;">1024</td>
+    <td style="text-align: right;">none</td>
+    <td style="text-align: right;">300000</td>
+    <td style="text-align: right;">5505880</td>
+    <td style="text-align: right;">12344</td>
+    <td style="text-align: right;">1087</td>
+    <td style="text-align: right;">257</td>
+    <td style="text-align: right;">124</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">base+bias</td>
+    <td style="text-align: right;">92 MB</td>
+    <td style="text-align: right;">1024+8</td>
+    <td style="text-align: right;">base</td>
+    <td style="text-align: right;">100000</td>
+    <td style="text-align: right;">7346679</td>
+    <td style="text-align: right;">5629</td>
+    <td style="text-align: right;">1127</td>
+    <td style="text-align: right;">266</td>
+    <td style="text-align: right;">127</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;">68 MB</td>
+    <td style="text-align: right;">768+256</td>
+    <td style="text-align: right;">none</td>
+    <td style="text-align: right;">302000</td>
+    <td style="text-align: right;">5562998</td>
+    <td style="text-align: right;">10365</td>
+    <td style="text-align: right;">1192</td>
+    <td style="text-align: right;">258</td>
+    <td style="text-align: right;">123</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">large</td>
+    <td style="text-align: right;">252 MB</td>
+    <td style="text-align: right;">2048</td>
+    <td style="text-align: right;">base</td>
+    <td style="text-align: right;">200000</td>
+    <td style="text-align: right;">9199949</td>
+    <td style="text-align: right;">33724</td>
+    <td style="text-align: right;">1195</td>
+    <td style="text-align: right;">263</td>
+    <td style="text-align: right;">127</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">xl</td>
+    <td style="text-align: right;">862 MB</td>
+    <td style="text-align: right;">4096</td>
+    <td style="text-align: right;">large</td>
+    <td style="text-align: right;">40000</td>
+    <td style="text-align: right;">9938266</td>
+    <td style="text-align: right;">23244</td>
+    <td style="text-align: right;">1629</td>
+    <td style="text-align: right;">267</td>
+    <td style="text-align: right;">126</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">xxl</td>
+    <td style="text-align: right;">3.15 GB</td>
+    <td style="text-align: right;">8192</td>
+    <td style="text-align: right;">xl</td>
+    <td style="text-align: right;">2000</td>
+    <td style="text-align: right;">9975674</td>
+    <td style="text-align: right;">4537</td>
+    <td style="text-align: right;">4206</td>
+    <td style="text-align: right;">261</td>
+    <td style="text-align: right;">125</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">small</td>
+    <td style="text-align: right;">48 MB</td>
+    <td style="text-align: right;">512</td>
+    <td style="text-align: right;">large</td>
+    <td style="text-align: right;">200000</td>
+    <td style="text-align: right;">12886275</td>
+    <td style="text-align: right;">3204</td>
+    <td style="text-align: right;">1053</td>
+    <td style="text-align: right;">265</td>
+    <td style="text-align: right;">127</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">tiny</td>
+    <td style="text-align: right;">34 MB</td>
+    <td style="text-align: right;">256</td>
+    <td style="text-align: right;">small</td>
+    <td style="text-align: right;">200000</td>
+    <td style="text-align: right;">16565029</td>
+    <td style="text-align: right;">1985</td>
+    <td style="text-align: right;">1063</td>
+    <td style="text-align: right;">268</td>
+    <td style="text-align: right;">132</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">micro</td>
+    <td style="text-align: right;">28 MB</td>
+    <td style="text-align: right;">64</td>
+    <td style="text-align: right;">tiny</td>
+    <td style="text-align: right;">200000</td>
+    <td style="text-align: right;">20243999</td>
+    <td style="text-align: right;">2108</td>
+    <td style="text-align: right;">875</td>
+    <td style="text-align: right;">265</td>
+    <td style="text-align: right;">136</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">xxl micro</td>
+    <td style="text-align: right;">3.15 GB</td>
+    <td style="text-align: right;">8192</td>
+    <td style="text-align: right;">micro</td>
+    <td style="text-align: right;">2000</td>
+    <td style="text-align: right;">20280933</td>
+    <td style="text-align: right;">1746</td>
+    <td style="text-align: right;">3808</td>
+    <td style="text-align: right;">270</td>
+    <td style="text-align: right;">137</td>
+    </tr>
+    </tbody>
+    </table>
+    <p>For very small models, the embedding matrices dominate the
+    serialized footprint; their size remains constant across all
+    variants. Despite GLPG’s non‑transformer architecture, the lineage
+    exhibits a clear cognitive scaling curve analogous to LLM scaling
+    laws. This behavior provides predictive evidence for the cognitive
+    potential of procedural GLPG systems: larger hidden states and
+    deeper lineage produce disproportionately richer generative
+    dynamics, even with minimal additional epochs.</p>
+    <p>Lineage inheritance plays a decisive role. The XXL model, when
+    trained on top of XL parent, converges rapidly and exhibits stable
+    long‑range behavior after only a few thousand additional epochs.
+    Conversely, the micro‑based XXL lineage benefits from its vastly
+    larger accumulated transition count, producing more structurally
+    diverse outputs despite identical hidden‑state scale.</p>
+    <p>All lineage variants are capable of generating fully autonomous
+    draft books. Each book is distinct yet consistently situated within
+    the superposed canon world derived from the four original training
+    novels. Draft generation typically spans 3000 lines, with a
+    configurable line‑fraction from 0 (start) to 1 (end). A minimum of
+    20 lines per chapter yields a theoretical maximum of 150 chapters.
+    Generation time and output size vary per run, as the models produce
+    highly divergent narratives from scratch, guided only by the initial
+    random seed.</p>
+    <h1 id="the-new-narrator-pipeline">The New Narrator Pipeline</h1>
+    <p>The narrator pipeline introduces a second generative stage that
+    operates on top of the raw GLPG output. Instead of producing a
+    finished book directly, GLPG now generates a draft file containing
+    unmoderated chapters, each composed of structurally valid but
+    semantically rough sentences. This draft serves as the substrate for
+    a fully agentic, LLM-driven narrator that transforms the raw
+    material into a coherent, publishable LaTeX book.</p>
+    <h2 id="from-glpg-draft-to-narrator-input">From GLPG Draft to
+    Narrator Input</h2>
+    <p>The first stage consists of pure GLPG sampling. The generator
+    produces a sequence of chapters, each marked by structural
+    boundaries and containing the canonical lemma clusters
+    characteristic of GLPG’s attractor dynamics. These chapters are
+    written to disk as a plain text file. No moderation, scoring, or
+    narrative shaping occurs at this stage; the output is intentionally
+    raw, preserving the full dynamical behavior of the generative
+    engine.</p>
+    <p>The narrator pipeline reads this file line by line,
+    reconstructing chapter boundaries and extracting the original
+    sentences. Each chapter becomes a
+    <code>TriadicNarratorChapter</code> object, containing the
+    unprocessed GLPG output that will be refined in subsequent
+    steps.</p>
+    <h2 id="agentic-moderation-and-literary-refinement">Agentic
+    Moderation and Literary Refinement</h2>
+    <p>The second stage is a purely LLM-driven transformation. Using a
+    dedicated moderation prompt, the narrator applies grammatical
+    correction, semantic repair, narrative arc construction, and
+    descriptive enhancement. The moderation process is iterative: the
+    narrator attempts multiple refinements until the chapter meets
+    minimum structural and semantic criteria. Broken sentences are
+    repaired, gaps are filled, and the chapter is reshaped into a
+    coherent literary unit while remaining faithful to the original GLPG
+    content.</p>
+    <p>This moderation step is not a simple rewrite. It is an agentic
+    process in which the LLM evaluates its own output, retries failed
+    attempts, and ensures that the final chapter satisfies constraints
+    such as minimum length, narrative coherence, and stylistic
+    consistency. The result is a polished chapter that retains GLPG’s
+    canonical world-model while achieving the readability of a
+    professionally edited text.</p>
+    <h2 id="title-generation-and-chapter-scoring">Title Generation and
+    Chapter Scoring</h2>
+    <p>Once a chapter is moderated, the narrator invokes a
+    title-generation prompt to produce a suitable chapter title. The LLM
+    evaluates the chapter’s thematic content and proposes a concise,
+    stylistically appropriate title. If the title is unsatisfactory, the
+    narrator retries until a non-empty, meaningful title is
+    obtained.</p>
+    <p>The narrator then assigns a numerical score to the chapter using
+    a dedicated scoring prompt. The score reflects coherence,
+    readability, originality, creativity, narrative progression, and
+    suitability as a chapter in a real book. Chapters that fail to meet
+    the minimum score threshold are retried, ensuring that only
+    high-quality moderated chapters appear in the final output.</p>
+    <h2 id="inter-chapter-transitions">Inter-Chapter Transitions</h2>
+    <p>Between consecutive chapters, the narrator tries to generate a
+    short optional transition using a specialized bridging prompt. These
+    transitions do not summarize the chapters; instead, they provide
+    subtle, mood-based connective tissue that enhances the flow of the
+    book. The narrator ensures that transitions introduce no new
+    characters, objects, or events, and that they avoid repetition or
+    collapse. A dedicated repetition detector verifies that the
+    transition is structurally clean before it is accepted.</p>
+    <p>The result is a seamless narrative progression across chapters,
+    transforming GLPG’s independent outputs into a unified literary
+    work.</p>
+    <h2 id="latex-assembly-and-final-book-construction">LaTeX Assembly
+    and Final Book Construction</h2>
+    <p>After moderation, titling, scoring, and transition generation,
+    the narrator writes the final book to a LaTeX file. Each chapter is
+    emitted with a proper <code>\chapter{}</code> command, followed by
+    the moderated sentences. Transitions are inserted as comment-marked
+    sections, preserving structure while maintaining readability.</p>
+    <p>The output file is immediately usable as a complete book
+    manuscript. It contains:</p>
+    <ul>
+    <li><p>polished chapters with coherent narrative arcs,</p></li>
+    <li><p>automatically generated titles,</p></li>
+    <li><p>validated transitions,</p></li>
+    <li><p>structural metadata such as chapter scores,</p></li>
+    <li><p>and a fully assembled LaTeX layout.</p></li>
+    </ul>
+    <h2 id="hybrid-glpg-times-llm-architecture">Hybrid GLPG <span
+    class="math inline">×</span> LLM Architecture</h2>
+    <p>This two-stage architecture demonstrates that a compact model
+    such as Mistral-7B can achieve output quality normally associated
+    with much larger LLMs. GLPG provides structural stability, canonical
+    consistency, and attractor-driven world modeling, while the narrator
+    LLM provides semantic refinement, literary shaping, and agentic
+    decision-making.</p>
+    <p>The result is a hybrid system in which architectural design
+    compensates for model scale. The narrator pipeline elevates raw GLPG
+    output into a fully publishable book, illustrating that generative
+    quality can emerge from the interaction between a deterministic
+    grammar engine and an agentic refinement layer rather than from
+    sheer parameter count alone.</p>
+    <h1 id="example-generated-books">Example Generated Books</h1>
+    <p>The narrator pipeline produces complete long-form books through
+    autonomous draft generation, remastering, and final LaTeX rendering.
+    Below is an overview of several example outputs created with
+    different model lineages, draft sizes, and narrator configurations.
+    Each entry represents a fully generated book produced end-to-end by
+    the pipeline.</p>
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Model</strong></th>
+    <th style="text-align: right;"><strong>Draft (KB)</strong></th>
+    <th style="text-align: right;"><strong>Narrator (KB)</strong></th>
+    <th style="text-align: right;"><strong>Seconds</strong></th>
+    <th style="text-align: right;"><strong>Title</strong></th>
+    <th style="text-align: left;"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: right;">258</td>
+    <td style="text-align: right;">574</td>
+    <td style="text-align: right;">23130</td>
+    <td style="text-align: right;">Veils of the Red Twilight</td>
+    <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">base+bias</td>
+    <td style="text-align: right;">267</td>
+    <td style="text-align: right;">573</td>
+    <td style="text-align: right;">21650</td>
+    <td style="text-align: right;">Astral Tides of the Hidden Suns</td>
+    <td style="text-align: left;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;">257</td>
+    <td style="text-align: right;">542</td>
+    <td style="text-align: right;">16352</td>
+    <td style="text-align: right;">Astral Gate: Chronicles of the
+    Crimson Arrival</td>
+    <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">large</td>
+    <td style="text-align: right;">261</td>
+    <td style="text-align: right;">568</td>
+    <td style="text-align: right;">15887</td>
+    <td style="text-align: right;">Echoes Across the Crimson Gate</td>
+    <td style="text-align: left;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">large</td>
+    <td style="text-align: right;">263</td>
+    <td style="text-align: right;">571</td>
+    <td style="text-align: right;">17761</td>
+    <td style="text-align: right;">The Ocean Between Suns</td>
+    <td style="text-align: left;"></td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">xl</td>
+    <td style="text-align: right;">267</td>
+    <td style="text-align: right;">555</td>
+    <td style="text-align: right;">17587</td>
+    <td style="text-align: right;">The Martian Twilight</td>
+    <td style="text-align: left;"></td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">xxl micro</td>
+    <td style="text-align: right;">270</td>
+    <td style="text-align: right;">578</td>
+    <td style="text-align: right;">16239</td>
+    <td style="text-align: right;">The Temple of the Mountain Gods</td>
+    <td style="text-align: left;"></td>
+    </tr>
+    </tbody>
+    </table>
+    <p>A fully autonomously created omnibus, <em>The Autonomous Parrot:
+    Martian Pulp Fiction Omnibus</em>, is available within the ecosystem
+    and contains all seven generated books. This combined work exceeds
+    1900 pages and demonstrates the pipeline’s ability to produce
+    large-scale, multi-world narrative artifacts.</p>
+    <p><strong>Important note.</strong> These books serve primarily as
+    demonstrations of the current capabilities of the narrator pipeline.
+    The draft-generation stage does not yet enforce long-range coherence
+    across an entire book, and therefore these works should be regarded
+    as technical end-to-end AI artifacts rather than publishable novels.
+    They illustrate the architecture’s autonomy, lineage variation, and
+    world-blending behavior within the ecosystem.</p>
+    <h1 id="analogy-to-the-monkeys-with-typewriters">Analogy to the
+    Monkeys with Typewriters</h1>
+    <p>The classical “monkeys with typewriters” parable imagines an
+    infinite ensemble of random actors who, given unbounded time,
+    eventually reproduce the works of Shakespeare. Its yield is
+    conceptually nonzero, yet practically negligible: coherence is
+    accidental, structure is absent, and semantic consistency is never
+    guaranteed.</p>
+    <p>This system, by contrast, operates in a fundamentally different
+    regime. From a single canon source (GLPG) and a single
+    reconstruction engine (LLM), the pipeline produces a quasi-infinite
+    family of canon-consistent pulp books. Variation is not random but
+    procedurally modulated; structure is not emergent by chance but
+    enforced by attractor dynamics; coherence is not a statistical
+    accident but a consequence of hybrid intelligence.</p>
+    <p>Where monkeys with typewriters require infinite time to stumble
+    upon a single coherent work, the GLP–Graph Book Authoring Pipeline
+    generates a new unique book on every run. The yield is not
+    astronomically small, but astronomically large: a controlled
+    explosion of structured narrative diversity.</p>
+    <p>In this sense, the pipeline evolves <em>beyond</em> the classical
+    analogy. It replaces randomness with guided variation, replaces
+    noise with canon, and replaces chance with architectural intent.
+    This transformation—from stochastic typing to hybrid, procedural
+    authorship—captures the spirit of this paper:</p>
+    <p><em>Hybrid Intelligence Evolving Beyond the Monkeys with
+    Typewriters</em>.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This work demonstrates that long-form narrative generation does
+    not require large-scale probabilistic models or transformer-based
+    sequence architectures. The GLP–Graph Book Authoring Pipeline shows
+    that coherent books, complete with chapters, paragraphs, pacing, and
+    canon, can emerge from a compact deterministic attractor system when
+    equipped with structured contextual signals and a robust transition
+    map.</p>
+    <p>By collapsing paging into a single-lemma transition regime, GLPG
+    achieves strict canon compliance and stable attractor routing. The
+    improvements introduced in this paper—richer input encodings,
+    multi-scale temporal histories, a high-resolution current sentence
+    representation, lightweight narrative memory, and normalized line
+    fraction—demonstrate that the expressive capacity of the attractor
+    can be significantly enhanced without increasing architectural
+    complexity. These signals strengthen pacing, segmentation, and
+    stylistic stability while preserving the deterministic nature of the
+    recursive core.</p>
+    <p>The refined training regime further contributes to structural
+    coherence. Sentence-level sampling, multi-book curricula, structural
+    token annotation, and balanced epoch selection collectively produce
+    a model that generalizes across narrative arcs and maintains
+    stability over long trajectories. The introduction of a fully
+    parametrizable <code>WriterParams</code> layer transforms GLPG into
+    a configurable dynamical system, enabling explicit control over
+    macro-structure, temporal steering, attractor routing, beam
+    dynamics, and token-level modulation. Optional learned activation
+    and bias functions illustrate how modular extensions can be
+    integrated without disrupting the underlying attractor physics.</p>
+    <p>Taken together, these contributions reveal a broader insight:
+    hybrid intelligence can emerge from small deterministic systems when
+    their internal dynamics are enriched with structured contextual
+    signals and exposed steering layers. GLPG provides a concrete
+    demonstration of this principle, offering a compact, interpretable,
+    and parametrizable alternative to conventional language models. Its
+    attractor-based architecture suggests new directions for narrative
+    generation research, where dynamical systems, modular encodings, and
+    explicit structural constraints work together to produce coherent,
+    long-form text far beyond the classical “monkeys with typewriters”
+    paradigm.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the DMLG and GLPG engines, the narrator
+    pipeline, and all supporting modules is provided under the AGPL‑3.0
+    license.</p>
+    <div class="thebibliography">
+    <p>J. De Witte, “The GLP–Graph Architecture: Combining GLP–Mono with
+    DMLG,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The GLP–Mono Architecture,” Triadic Cosmos
+    Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Narrator Pipeline driven by DMLG: Structural
+    Hybrid Intelligence,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Language as Graph Traversal: The DMLG
+    Architecture,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “ The Procedural DMLG Architecture: A Large Mind
+    Creating Many Smaller Minds,” Triadic Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>

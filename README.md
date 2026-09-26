@@ -3279,6 +3279,33 @@ This bidirectional evolution yields **two structurally unique hybrids**:
 Both are deterministic, both are hybrid, but their **cognitive behaviour, emergent geometry,  
 and long‑horizon potential** differ radically — a rare evolutionary mirror inside Triadic Cosmos.
 
+---
+
+### **54. The GLP–Graph Book Authoring Pipeline — A Deterministic Narrative Engine**
+
+GLP–Graph reframes long‑form narrative generation as the evolution of a  
+**deterministic attractor system** rather than a probabilistic decoder.  
+Every lemma corresponds to its own attractor state, and generation unfolds as  
+a **canon‑compliant trajectory** through a learned transition map.  
+This eliminates stochastic drift and allows the model to produce coherent  
+books—chapters, paragraphs, pacing, and scene‑flow—using a compact recursive core.
+
+The architecture is strengthened by a richly structured input vector:
+
+- **line fraction** → global arc progression  
+- **current sentence encoder** → micro‑structure, paragraph and chapter formation  
+- **multi‑scale token histories** → temporal variation and lemma‑route diversity  
+- **narrative memory** → lightweight rhythmic coloration  
+
+Together, these signals modulate the attractor without replacing it.  
+GLPG behaves as a **small deterministic cognitive engine** whose internal narrative motor  
+remains active even under extreme ablations.
+
+A fully parametrizable writer parameter layer exposes structural constraints,  
+temporal steering, attractor routing, beam dynamics, and token‑level modulation.  
+This transforms generation from sampling into a **configurable dynamical system**  
+capable of producing long‑form books under strict structural rules.
+
 </details>
 
 ---
