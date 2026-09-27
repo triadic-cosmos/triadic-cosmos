@@ -30,6 +30,38 @@ not by scale of personnel — and its scale is substantial.
 
 ---
 
+## 🔒 Safe, Traceable, and Non‑Black‑Box AI
+
+The Triadic Cosmos is committed to developing **safe, modular, and fully
+traceable AI architectures**. All systems in the ecosystem are built from
+explicit evaluators, paged reasoning loops, micro‑models, and deterministic
+generation. Every cognitive step is inspectable, reproducible, and governed
+by transparent structural rules.
+
+The ecosystem does **not** pursue monolithic black‑box models or speculative
+“superintelligence” (SI). It uses a precise and architectural definition of
+**Artificial General Intelligence (AGI)** that aligns with its mission:
+
+> **AGI is a domain‑bounded, evaluator‑governed architecture capable of
+> structured reasoning, planning, and world‑modeling within a clearly
+> defined scope — without emergent intent, uncontrolled autonomy, or
+> spontaneous agency.**
+
+Under this definition, mainstream AI systems do **not** qualify as AGI, and
+the architectures in this ecosystem are intentionally designed to avoid the
+failure modes associated with frontier‑scale black‑box models.
+
+Domain‑bounded AGI is already observable inside the Triadic Cosmos.  
+For example, the **Narration pipeline** integrates multi‑agent reasoning,
+structural evaluators, and recursive world‑models to produce coherent
+stories while remaining fully sandboxed, interpretable, and safe by design.
+
+This ecosystem demonstrates that AI can be **architecturally safe**:
+modular, transparent, limited in scope, and incapable of the runaway
+behaviors often associated with speculative extinction scenarios.
+
+---
+
 ## 🪐 A Micro‑Cosmos Within Its Own Closure
 
 The Triadic Cosmos is built as a self‑contained micro‑cosmos:  
