@@ -3445,6 +3445,41 @@ the same principles that make biological intelligence stable.
 
 ---
 
+## ⚠️ Key Takeaway: Statistical AI Cannot Be Fully Safe by Architecture
+
+Modern AI systems are statistical engines:  
+they generate outputs by sampling from probability distributions  
+learned over vast, heterogeneous datasets.  
+This probabilistic nature makes safety fundamentally non‑deterministic.
+
+Even with perfect curation,  
+statistical recombination of safe patterns can yield unsafe behavior.  
+Transformer representations are opaque,  
+high‑dimensional, and non‑verifiable;  
+alignment methods such as RLHF and guardrails  
+can reduce unsafe outputs but cannot eliminate outliers.
+
+A statistical model cannot guarantee safety  
+because its core mechanism — probabilistic sampling —  
+allows rare, undesirable outputs by design.  
+Solving this problem requires replacing the statistical engine itself,  
+not scaling it or filtering it.
+
+This is why ecosystem‑AGI follows a different path:  
+modular, evaluator‑governed, deterministic,  
+and architecturally traceable —  
+a cognitive regime where safety is structural,  
+not statistical.
+
+Recent research confirms these architectural limits,
+and the renewed calls to pause or freeze frontier models
+stem directly from the fact that statistical AI safety
+cannot be solved easily with incremental alignment techniques —
+even though future moderation architectures might reduce risk,
+the core probabilistic engine remains a structural constraint.
+
+---
+
 ## 🔍 Purpose of This Repository
 
 This repository serves as the **authoritative source** for:
