@@ -3404,7 +3404,7 @@ must remain within the limits of its own closure.
 
 ---
 
-## 🔷 Ecosystem Insight: A Formal Counterexample for Contemporary AI Claims
+## 🔷 Ecosystem Insight: A Counterexample for Contemporary AI Claims
 
 Across the ecosystem, intelligence is treated as an architectural property,  
 not a marketing term.  
