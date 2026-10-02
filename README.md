@@ -3404,6 +3404,54 @@ must remain within the limits of its own closure.
 
 ---
 
+## 🔷 Ecosystem Insight: A Formal Counterexample for Contemporary AI Claims
+
+Across the ecosystem, intelligence is treated as an architectural property,  
+not a marketing term.  
+This leads to a simple but powerful insight:
+
+> **No contemporary AI system — statistical, deterministic, hybrid, or agentic —  
+> satisfies the architectural criteria for AGI, SI, or ASI.**
+
+Modern AI systems fall into three broad classes:
+
+- **statistical engines** (transformer LLMs, diffusion models),  
+- **deterministic engines** (GLPG grammar–lemma generators),  
+- **hybrid agentic pipelines** (tool‑using systems, narration engines, orchestrators).
+
+All three are highly capable, but none possess the structural features required for  
+general or super intelligence:  
+autonomous goal formation, cross‑domain reasoning, IEGR completeness,  
+energy‑efficient cognition, or stable world‑model integration.
+
+A concrete counterexample comes from the ecosystem’s own architectures:
+
+- **GLPG** can generate canon‑consistent books without prompting,  
+  but lacks broad semantic capability.  
+- **LLMs** have vast semantic capability,  
+  but cannot maintain canon or long‑horizon coherence without external control.  
+- **Hybrid pipelines** (GLPG × LLM) exceed both systems individually,  
+  yet remain software agents — not cognitive organisms.  
+- **Humans** exceed all three through general reasoning,  
+  autonomous cognition, and energy‑efficient IEGR integration.
+
+This yields a strict capacity hierarchy:
+
+> **GLPG ≪ LLM < hybrid agentic AI ≪ human general intelligence < super intelligence**
+
+The hierarchy shows that contemporary AI systems are powerful,  
+but not general, not super, and not architecturally capable of AGI or SI.  
+Their strengths — super‑scale pattern matching, super‑scale knowledge retrieval —  
+are narrow capabilities, not indicators of general intelligence.
+
+This insight corrects the misuse of terms like AGI, SI, and ASI in mainstream discourse:  
+current AI systems are extraordinary tools,  
+but they do not meet the structural requirements of general or super intelligence.  
+In the ecosystem, intelligence is defined by architecture —  
+and architecture is the boundary that contemporary AI has not yet crossed.
+
+---
+
 ## 🌍 Key Takeaway: Expansionism Shortens the Lifespan of a Closed World
 
 In a local closure, all resources and materials are finite.  
