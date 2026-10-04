@@ -3389,6 +3389,51 @@ temporal steering, attractor routing, beam dynamics, and token‑level modulatio
 This transforms generation from sampling into a **configurable dynamical system**  
 capable of producing long‑form books under strict structural rules.
 
+---
+
+### **55. AI Overshoot: A Concrete Example of the Closure Overshoot Law**
+
+The global AI industry is frequently misclassified as an “AI bubble”. This is a
+category error. The bubble framework focuses on **mispricing**, while the
+instability observed in AI arises from **ecosystem overshoot**: the simultaneous
+exceeding of resource, energetic, entropic, geometric, and temporal limits
+within a closed world.
+
+This paper presents the first concrete, real‑world example of the Closure
+Overshoot Law applied to a modern technological‑economic system. It shows how
+AI expansionism — frontier scaling, hardware scaling, datacenter growth,
+electrification, automation, governance lag, advertising fragmentation,
+automotive stress, social dependence, and institutional inertia — forms a
+**multi‑closure overshoot** that shortens the lifespan of the ecosystem. The
+resulting collapse vector is not financial but **systemic**, destabilizing
+economic, infrastructural, cognitive, industrial, and social closures.
+
+### Why this paper matters
+- It is the **first contemporary demonstration** of the Closure Overshoot Law
+  in action within a real technological ecosystem.
+- It reframes AI instability not as a bubble but as a **structural overshoot
+  phenomenon**, comparable to ecological, energetic, and industrial overshoot.
+- It shows that a **freeze** is not an ideological or speculative proposal but
+  an **architectural intervention** that reduces entropy, stabilizes temporal
+  pressure, and restores corrective capacity.
+- It highlights that there is **no external driver** requiring accelerated AI
+  growth. All pressures are internal — and therefore manageable.
+
+### Ecosystem relevance
+This paper serves as a **reference case** within the Triadic Cosmos ecosystem:
+a modern, empirically grounded illustration of how closed‑world expansionism
+leads to instability when local limits are exceeded. It connects disparate
+phenomena from current events — compute scarcity, chip shortages, EV market
+stress, advertising fragmentation, governance delays, energy inflation, and
+social dependence — into one coherent overshoot model.
+
+### Canon status
+This document stands as a **central ecosystem case**: a contemporary,
+high‑resolution example of the Closure Overshoot Law applied to a complex
+technological system. It is essential reading for anyone seeking to understand
+overshoot dynamics in a modern context and the structural nature of AI
+instability.
+
 </details>
 
 ---
