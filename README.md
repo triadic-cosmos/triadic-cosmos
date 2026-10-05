@@ -3434,6 +3434,38 @@ technological system. It is essential reading for anyone seeking to understand
 overshoot dynamics in a modern context and the structural nature of AI
 instability.
 
+### 🪙 Fun Fact: Crypto Was an Overshoot, Not a Bubble
+
+A surprising but instructive parallel: the crypto boom was **not** a classical
+bubble either. Although often framed as a speculative mania, its collapse
+followed the same structural patterns described by the **Closure Overshoot
+Law** — just on a much smaller scale than AI.
+
+Crypto exhibited multiple overshoot vectors:
+
+- ⚡ **Energetic overshoot:** extreme electricity consumption for mining.
+- 🧱 **Hardware overshoot:** GPU scarcity, ASIC churn, and supply chain stress.
+- 🏭 **Warehouse overshoot:** mining farms pushing physical and thermal limits.
+- 📉 **Regulatory overshoot:** governments unable to respond quickly enough.
+- 🧩 **Entropic overshoot:** fragmented ecosystems, unstable protocols,
+  inconsistent governance.
+
+The key difference:  
+crypto’s overshoot was **self‑contained**, **financially bounded**, and
+**low‑impact** compared to AI. Its collapse did not destabilize economic,
+industrial, cognitive, or infrastructural closures. Crucially, the ecosystem
+underwent **timely self‑regulation** (market contraction, mining bans,
+institutional exit), preventing systemic collapse.
+
+This makes crypto a **perfect precursor case** for understanding AI overshoot:
+similar failure modes, but orders of magnitude smaller — and without the
+multi‑closure destabilization that makes AI overshoot structurally dangerous.
+
+In short:
+
+> Crypto was an overshoot that corrected itself.  
+> AI is an overshoot that cannot self‑correct without deliberate intervention.
+
 </details>
 
 ---
