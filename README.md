@@ -903,6 +903,55 @@ Built on four Gutenberg substrates — *Thuvia, Maid of Mars*, *A Honeymoon in S
 can sustain long‑form pulp‑fiction across multiple books with consistent mythology  
 and emergent narrative coherence.
 
+### **18. The Moody Parrot: Revisiting the Wonderland Omnibus**  
+
+**The Moody Parrot Omnibus** is the second full volume grown entirely through a  
+**GLP–Graph world‑closure** operating inside the autonomous narrator pipeline.  
+All twelve books in this collection are generated end‑to‑end by the system,  
+with only minimal human editing.
+
+What distinguishes this omnibus is the introduction of a new cognitive mechanism  
+inside the GLPG architecture:
+
+#### 🌗 Mood Bias Modulation  
+In GLPG, bias is not a probability tweak — it is a **synthetic emotional state**.  
+The bias‑MLP modulates the narrator’s internal cognitive dynamics:
+
+- **Alpha‑scaling becomes the intensity of the mood**  
+- **Memory remains identical**, but its *expression* changes  
+- **Modulation is cognitive**, not statistical  
+- **Attractor‑based stability** prevents collapse under extreme mood swings  
+- **The moderator stabilizes worlds**, but does not create style  
+- **All variability originates from the GLPG latent manifold**
+
+This architecture allows the narrator to move fluidly across emotional spectra —  
+pastoral wonder, melancholic quest, cosmic symbolism, luminous moral clarity,  
+hyper‑moral epic intensity — without losing structural coherence.
+
+#### The Five Gutenberg Books Forming the Closure
+
+- *Aesop’s Fables* — Aesop  
+- *Alice’s Adventures in Wonderland* — Lewis Carroll  
+- *Alice’s Adventures Under Ground* — Lewis Carroll  
+- *Alice in Wonderland (One‑Syllable)* — Mrs. J. C. Gorham  
+- *The Adventures of Reddy Fox* — Thornton W. Burgess  
+
+Together they form a **Wonderland super‑closure**, where mood states act as  
+internal cognitive dynamics that reshape entire worlds.
+
+#### 🌀 Why This Book Matters  
+**The Moody Parrot Omnibus** is the first volume to show how:
+
+- **Synthetic emotions** can be architecturally modulated  
+- **Micro‑models** remain stable under extreme cognitive variation  
+- **Narrative worlds** emerge from attractor geometry  
+- **Mood states** produce coherent, canon‑anchored books  
+- **Structure > scale** even across twelve radically different variants
+
+It is an **ecosystem artefact**:  
+a demonstration that *emotional geometry* is a new generative dimension  
+within the Triadic Cosmos.
+
 </details>
 
 <details>
