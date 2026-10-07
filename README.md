@@ -3515,6 +3515,51 @@ In short:
 > Crypto was an overshoot that corrected itself.  
 > AI is an overshoot that cannot self‑correct without deliberate intervention.
 
+---
+
+### **56. The Triadic Stellar Cycle: A Closure‑Bounded TRG Oscillator**
+
+Stars provide the second major physical instantiation of triadic recursion within the Triadic Cosmos
+ecosystem. Where black holes realize **horizon‑bounded closures** governed by mass‑damped material
+time, stars realize **thermo‑bounded closures** governed by fusion‑damped recursion. Both systems
+follow the canonical triadic cycle **I → E → G → I**, as formalized in the Triadic Renormalization
+Group (TRG).
+
+Hydrostatic equilibrium emerges as a **triadic oscillator**: informational state (pressure, temperature,
+entropy, fuel composition) drives energetic response (fusion and gravity), which reorganizes geometry
+(expansion and contraction), producing a new informational state. Stellar pulsation, overshoot correction,
+and eventual collapse are direct manifestations of TRG dynamics and provide one of the clearest
+cosmic demonstrations of the **Closure Overshoot Law**.
+
+### Why this paper matters
+- It reveals that stars are **natural triadic closures**, not metaphors: their internal physics *is* the
+  triadic cycle.
+- It shows that hydrostatic equilibrium is a **recursive feedback loop**, not a static balance.
+- It demonstrates that stellar collapse is a **closure‑overshoot event**, structurally identical to
+  overshoot in ecological, industrial, and intelligence closures.
+- It establishes a **closure‑cascade**:  
+  **stellar closure → supernova closure → black‑hole closure**,  
+  forming a complete TRG evolution chain.
+
+### Ecosystem relevance
+This paper forms the **cosmic counterpart** to Paper #55 (AI Overshoot).  
+Where #55 analyzes overshoot in a modern intelligence‑closure, Paper #56 shows how the same
+architectural law governs stellar evolution. Together, they demonstrate that the Closure Overshoot Law
+is **universal across physical, biological, industrial, and cognitive closures**.
+
+The stellar cycle also links directly to the black‑hole formalism: massive stars collapse into
+horizon‑bounded closures, meaning black holes are not independent objects but the **successor state**
+of a failed stellar triadic cycle. This creates a unified cosmological architecture in which TRG dynamics
+govern both oscillatory (stellar) and fixed‑point (black‑hole) closures.
+
+### Canon status
+This document is a **foundational cosmic case** within the Triadic Cosmos ecosystem.  
+It provides the most elegant physical demonstration of the Closure Overshoot Law to date and
+establishes stars as a central triadic closure type alongside black holes and intelligence closures.
+
+It is essential reading for anyone studying triadic recursion, closure evolution, overshoot dynamics,
+and the structural unity of physical and cognitive systems.
+
 </details>
 
 ---
