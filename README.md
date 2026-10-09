@@ -952,6 +952,58 @@ It is an **ecosystem artefact**:
 a demonstration that *emotional geometry* is a new generative dimension  
 within the Triadic Cosmos.
 
+### **19. The Hybrid Parrot: Autonomous World Hybridization** 🦜🌀
+
+**The Hybrid Parrot** is the nineteenth volume in the Triadic Cosmos Library and the  
+first to demonstrate **pure hybrid world‑generation** driven entirely by a  
+**GLP–Graph world‑closure** blending three distinct Gutenberg substrates:
+
+- *Alice’s Adventures in Wonderland* — Lewis Carroll  
+- *Metamorphosis* — Franz Kafka  
+- *The Strange Case of Dr. Jekyll and Mr. Hyde* — R. L. Stevenson  
+
+Together they form a **triadic hybrid attractor**:  
+surreal spatial logic (Carroll), metamorphic psychological distortion (Kafka),  
+and dualistic moral tension (Stevenson).  
+The GLPG closure fuses these into a single deterministic world‑model that  
+expresses itself differently depending on the narrator pipeline variant.
+
+This volume contains **six autonomous books**, all generated end‑to‑end without  
+prompting, steering, filtering, or human curation.  
+Every chapter is presented exactly as produced by the pipeline.
+
+#### 🌀 Two Narrator Pipelines, One Hybrid World
+
+**Iterative Narrator Pipeline (Books 1–3)**  
+Chapters are grown through repeated cooperation between the GLPG model and the  
+moderation layer.  
+This produces **natural transitions**, stronger thematic continuity, and  
+a smoother expression of the hybrid world.  
+Alice becomes a stable attractor, and hybrid motifs emerge gradually across chapters.
+
+**Draft Narrator Pipeline (Books 4–6)**  
+The GLPG model generates a full draft book in one shot.  
+The moderation layer remasters it, but does not enforce transitions.  
+This yields **looser chapter coupling**, sharper world‑collisions, and more chaotic  
+interactions between Wonderland surrealism, Kafkaesque metamorphosis, and Hyde‑like  
+moral duality.
+
+#### 🧩 Why This Volume Matters
+
+**The Hybrid Parrot** is the first artefact to show how:
+
+- a **single lightweight world‑closure** can sustain hybrid literature  
+- **multi‑world attractors** emerge without prompting  
+- **Alice‑centric lemma blacklisting** can focus a hybrid world without steering  
+- **two narrator pipelines** produce distinct literary geometries from the same closure  
+- **lightweight autonomous generation** can produce six full books in a single day  
+  on commodity laptop hardware
+
+This volume is a structural milestone:  
+a demonstration that **hybrid world‑closure** is a viable generative paradigm,  
+capable of producing coherent long‑form literature with emergent variation  
+and stable canon — all without human intervention.
+
 </details>
 
 <details>
