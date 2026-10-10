@@ -1,0 +1,2559 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>A Lightweight Autonomous Narrator Pipeline</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#lightweight-environment"
+    id="toc-lightweight-environment">Lightweight Environment</a></li>
+    <li><a href="#entity-tracking-vector"
+    id="toc-entity-tracking-vector">Entity Tracking Vector</a></li>
+    <li><a href="#the-new-input-vector"
+    id="toc-the-new-input-vector">The New Input Vector</a></li>
+    <li><a href="#generating-a-suitable-title-for-the-book"
+    id="toc-generating-a-suitable-title-for-the-book">Generating a
+    Suitable Title for the Book</a></li>
+    <li><a href="#draft-book-evaluation-system"
+    id="toc-draft-book-evaluation-system">Draft Book Evaluation
+    System</a></li>
+    <li><a href="#hybrid-narrator-pipelines"
+    id="toc-hybrid-narrator-pipelines">Hybrid Narrator
+    Pipelines</a></li>
+    <li><a href="#bias-modulation" id="toc-bias-modulation">Bias
+    Modulation</a></li>
+    <li><a
+    href="#training-configuration-for-bias-modulation-experiments"
+    id="toc-training-configuration-for-bias-modulation-experiments">Training
+    Configuration for Bias Modulation Experiments</a></li>
+    <li><a href="#distilled-model-training-using-generated-books"
+    id="toc-distilled-model-training-using-generated-books">Distilled
+    Model Training Using Generated Books</a></li>
+    <li><a href="#twelve-generated-books"
+    id="toc-twelve-generated-books">Twelve Generated Books</a></li>
+    <li><a href="#lemma-blacklisting" id="toc-lemma-blacklisting">Lemma
+    Blacklisting</a></li>
+    <li><a href="#world-hybridization"
+    id="toc-world-hybridization">World Hybridization</a></li>
+    <li><a href="#results" id="toc-results">Results</a></li>
+    <li><a href="#limitations" id="toc-limitations">Limitations</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#a-theoretical-perspective-on-ai-overshoot-dynamics"
+    id="toc-a-theoretical-perspective-on-ai-overshoot-dynamics">A
+    Theoretical Perspective on AI Overshoot Dynamics</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Long-form narrative generation is typically associated with large
+    transformer models, extended-context inference, and datacenter-scale
+    compute. Contemporary systems rely on probabilistic token prediction
+    over millions of parameters, making narrative coherence, world
+    consistency, and stylistic control emergent rather than
+    architecturally guaranteed. In contrast, the present work develops a
+    lightweight, modular, and fully inspectable alternative: a hybrid
+    IE<span class="math inline">×</span>GR narrator pipeline built on
+    top of compact attractor architectures that operate entirely on
+    consumer-grade hardware.</p>
+    <p>The GLPG attractor model provides a deterministic narrative motor
+    in which lemma routes, pacing, canonical identity, and structural
+    segmentation arise from the geometry of the learned manifold rather
+    than from probabilistic sampling. The narrator pipeline augments
+    this attractor with a lightweight moderation layer, a sinusoidally
+    pretrained bias module functioning as a synthetic mood field, and a
+    high-bandwidth entity-tracking vector that stabilizes world identity
+    across long trajectories. Together, these components form a modular
+    generative ecosystem in which narrative competence emerges from
+    architectural structure rather than model scale.</p>
+    <p>This paper evaluates the pipeline across three experimental axes.
+    First, bias modulation experiments demonstrate stable stylistic
+    steering, predictable mood variation, and robust attractor behaviour
+    under extreme modulation intensities. Second, attractor distillation
+    experiments reveal manifold sharpening, entity amplification, and
+    low-entropy convergence when the system is trained on its own
+    generated books. Third, mixed-canon hybridization experiments show
+    how lemma blacklisting and narrator refinement can produce unified
+    Alice-centric worlds from attractors trained on Wonderland, Kafka,
+    and Hyde.</p>
+    <p>Across these experiments, the pipeline autonomously generates
+    eighteen complete books: twelve Alice-canon volumes under varying
+    bias intensities, three hybrid worlds produced through the draft
+    narrator pipeline, and three high-coherence hybrid books generated
+    through an iterative narrator pipeline with PRE-like chapter
+    rollback. The results demonstrate strong chapter-level coherence,
+    stable world identity, and controllable stylistic variation, even
+    under mixed-canon or distilled conditions.</p>
+    <p>By combining deterministic attractor dynamics with modular
+    cognitive layers, the Lightweight Autonomous Narrator Pipeline
+    provides a domain-bound demonstration of <em>architectural general
+    intelligence</em>: a hybrid, reproducible, and inspectable system in
+    which narrative ability emerges from structural design rather than
+    brute-force scale.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>Research on long-form narrative generation has traditionally
+    focused on large transformer models and probabilistic sequence
+    modeling. Systems such as GPT-style architectures, PaLM, LLaMA, and
+    Mistral generate text through token-level next-word prediction over
+    high-dimensional attention mechanisms. While these models can
+    produce fluent prose, their narrative coherence, world consistency,
+    and stylistic stability remain emergent properties of scale rather
+    than architectural guarantees. Extended-context variants improve
+    local continuity but do not provide deterministic structural
+    control, canonical identity preservation, or interpretable
+    world-model dynamics.</p>
+    <p>Story-specific LLM pipelines, including plot planners, outline
+    generators, and chapter-level steering prompts, attempt to impose
+    structure on transformer generation through external scaffolding.
+    These approaches rely on prompt engineering, hierarchical planning,
+    or multi-agent coordination, but they remain fundamentally
+    probabilistic and lack stable internal world representations.
+    Narrative drift, protagonist inconsistency, and stylistic collapse
+    are common failure modes, especially in long-form settings.</p>
+    <p>Symbolic and procedural narrative engines, such as classical
+    story grammars, planning-based systems, and rule-driven world
+    simulators, offer deterministic structure but limited expressive
+    richness. Their worlds are interpretable but not emergent; their
+    narratives are coherent but not stylistically diverse. These systems
+    lack the latent manifold dynamics that characterize modern
+    generative models and therefore cannot produce the stylistic or
+    thematic variability seen in LLM-based fiction.</p>
+    <p>Hybrid AI pipelines combine symbolic structure with neural
+    generation, often through plot graphs, character sheets, or
+    constraint-based steering. Although these systems improve
+    controllability, they typically treat the neural component as a
+    black-box generator and do not provide architectural integration
+    between structure and emergence. They also lack mechanisms for
+    deterministic routing, entity-aware world stabilization, or internal
+    cognitive modulation.</p>
+    <p>Attractor-based models have been explored in cognitive science
+    and dynamical systems research, but their application to narrative
+    generation remains largely unexplored. Prior work on neural
+    attractors focuses on memory retrieval, associative dynamics, or
+    stable-state computation rather than long-form text generation. The
+    GLPG architecture differs by embedding narrative canon, lemma
+    routes, pacing, and structural segmentation directly into the
+    attractor manifold, yielding deterministic world-model behaviour
+    without attention mechanisms.</p>
+    <p>Finally, PRE-like rollback architectures appear in reinforcement
+    learning, transactional planning, and multi-agent coordination, but
+    they have not been applied to narrative generation. The iterative
+    narrator pipeline introduced in this work integrates moderation,
+    scoring, and continuity validation into a chapter-level PRE loop,
+    providing structural guarantees that transformer-based systems
+    cannot offer.</p>
+    <p>In summary, existing approaches either rely on large-scale
+    probabilistic models with emergent structure or on symbolic systems
+    with limited expressive richness. The Lightweight Autonomous
+    Narrator Pipeline occupies a distinct position: a modular,
+    attractor-driven architecture in which narrative coherence,
+    stylistic variation, and world identity arise from deterministic
+    structure rather than model size or prompt engineering.</p>
+    <h1 id="lightweight-environment">Lightweight Environment</h1>
+    <p>A central claim of this work is that long-form narrative
+    generation, autonomous world hybridization, and agentic narrator
+    steering do not require large-scale transformer models or
+    datacenter-class compute. The Lightweight Autonomous Narrator
+    Pipeline operates entirely within a consumer-grade environment,
+    using compact attractor architectures and a small 4-bit LLM to
+    achieve capabilities typically associated with much larger
+    systems.</p>
+    <h2 id="model-footprint">Model Footprint</h2>
+    <p>The GLPG attractor models used throughout this paper have a file
+    size of only 60–70 MB. These models run entirely on CPU and require
+    no GPU acceleration, no KV-cache, and no extended context windows.
+    GLPG’s deterministic transition map and fixed-size input vector
+    (2000 floats) allow the attractor dynamics to function without the
+    quadratic attention cost characteristic of transformer-based
+    architectures.</p>
+    <p>The narrator layer employs a 4-bit quantized Mistral 7B v0.3
+    Instruct model (3.85 GB file size). This model runs comfortably on
+    an 8 GB consumer GPU, a configuration widely available in mid-range
+    laptops and desktops. No multi-GPU setup, high-bandwidth memory, or
+    specialized inference hardware is required.</p>
+    <h2 id="hardware-configuration">Hardware Configuration</h2>
+    <p>All experiments, including autonomous draft generation, iterative
+    narrator steering, bias modulation, and world hybridization, were
+    executed on a single consumer laptop:</p>
+    <ul>
+    <li><p>Intel Core i7-14650HX CPU</p></li>
+    <li><p>NVIDIA GeForce RTX 5070 Laptop GPU (8 GB VRAM)</p></li>
+    <li><p>16 GB system RAM</p></li>
+    </ul>
+    <p>This configuration is representative of hardware accessible to
+    private individuals, students, and independent researchers. It
+    stands in contrast to contemporary long-context transformer systems,
+    which often require 24–48 GB VRAM GPUs, high-end desktop
+    workstations, or multi-hundred-gigabyte unified memory
+    configurations such as those found in certain Mac Pro systems.</p>
+    <h2 id="architectural-efficiency">Architectural Efficiency</h2>
+    <p>The lightweight nature of the pipeline is not a consequence of
+    reduced capability, but of architectural design. GLPG provides an
+    attractor-based narrative motor that encodes canon, lemma routes,
+    pacing, and structural segmentation without relying on large
+    probabilistic models. The narrator pipeline adds a compact agentic
+    layer for bias modulation, world hybridization, and arc steering.
+    Together, these components form an IE<span
+    class="math inline">×</span>GR hybrid system in which architectural
+    structure replaces brute-force scale.</p>
+    <h2 id="architecture-over-scale">Architecture Over Scale</h2>
+    <p>The results presented in this paper demonstrate that a small
+    model, when embedded in a structurally expressive attractor
+    architecture and augmented with an agentic narrator layer, can
+    achieve narrative coherence and world-model control typically
+    associated with much larger LLMs. This is an architectural claim
+    rather than a compute claim: the pipeline leverages structural
+    determinism, attractor routing, and discrete narrator states to
+    achieve capabilities that do not depend on model size or hardware
+    scale.</p>
+    <p>In summary, the Lightweight Autonomous Narrator Pipeline shows
+    that hybrid intelligence can emerge from compact models operating
+    entirely on consumer-grade hardware. This challenges the prevailing
+    assumption that long-form narrative generation and world-model
+    reasoning require large transformer models or datacenter
+    infrastructure.</p>
+    <h1 id="entity-tracking-vector">Entity Tracking Vector</h1>
+    <p>In addition to the structural, temporal, and syntactic signals
+    described in <span class="citation"
+    data-cites="DeWitte2026Book"></span>, the input vector is extended
+    with a lightweight <em>entity tracking</em> mechanism. This
+    component provides a dynamic, sentence-level representation of the
+    most salient noun and proper-name entities in the training corpus.
+    Unlike narrative memory or token history, which encode
+    multi-sentence structure, the entity tracker focuses exclusively on
+    the evolving relevance of key entities across the generated
+    document.</p>
+    <h2 id="top-entity-selection">Top-Entity Selection</h2>
+    <p>During preprocessing, all curriculum sentences are scanned for
+    occurrences of grammar tokens belonging to the set</p>
+    <p><span
+    class="math display">⟨NOUN⟩, ⟨NOUN-PLURAL⟩, ⟨PROPN⟩.</span></p>
+    <p>Whenever such a grammar token is encountered, the following lemma
+    token is guaranteed to be its semantic counterpart. For each lemma,
+    a record is created, storing:</p>
+    <ul>
+    <li><p>the lemma string,</p></li>
+    <li><p>its grammar category,</p></li>
+    <li><p>the number of occurrences,</p></li>
+    <li><p>the minimum and maximum line-fraction positions at which it
+    appears.</p></li>
+    </ul>
+    <p>Each entity receives a score combining frequency, positional
+    spread, and grammar type. Entities are sorted by score, and the top
+    <span class="math inline"><em>K</em></span> entities are selected.
+    Each selected entity is assigned a fixed index in the
+    entity-tracking vector.</p>
+    <h2 id="dynamic-tracking-state">Dynamic Tracking State</h2>
+    <p>The <strong>Entity Tracker</strong> maintains a vector of length
+    <span class="math inline"><em>K</em></span>, initialized to zeros.
+    This vector evolves deterministically as each new sentence is
+    generated. Before processing the sentence, the tracker applies an
+    exponential decay:</p>
+    <p><span
+    class="math display"><em>s</em><sub><em>i</em></sub> ← <em>α</em> <em>s</em><sub><em>i</em></sub>,</span></p>
+    <p>where <span class="math inline"><em>α</em></span> is a
+    configurable decay factor (e.g. <span
+    class="math inline"><em>α</em> = 0.98</span>). This decay ensures
+    that entity relevance fades smoothly over time unless reinforced by
+    new occurrences.</p>
+    <p>The sentence is then scanned for grammar tokens in the tracker
+    set. Whenever a tracked entity lemma appears immediately after such
+    a grammar token, the corresponding vector entry is set to <span
+    class="math inline">1.0</span>:</p>
+    <p><span
+    class="math display"><em>s</em><sub>index(<em>e</em>)</sub> ← 1.0.</span></p>
+    <p>This produces a dynamic, sentence-level relevance signal:
+    entities mentioned recently have high activation, while older
+    entities gradually fade.</p>
+    <h2 id="advantages-of-the-entity-tracker">Advantages of the Entity
+    Tracker</h2>
+    <p>The entity-tracking vector offers several benefits:</p>
+    <ul>
+    <li><p><strong>Configurable bandwidth.</strong> The number of
+    tracked entities <span class="math inline"><em>K</em></span> can be
+    chosen freely, allowing the model to operate with a small or large
+    semantic footprint depending on the narrative domain.</p></li>
+    <li><p><strong>Deterministic and interpretable.</strong> Each entity
+    corresponds to a single float in the input vector, making the
+    mechanism transparent and easy to inspect.</p></li>
+    <li><p><strong>Long-range semantic relevance.</strong> The decay
+    mechanism provides a lightweight memory of which entities have been
+    active in recent sentences, without requiring recurrent networks or
+    transformer-style attention.</p></li>
+    <li><p><strong>Stable integration.</strong> Because the tracker is
+    independent of the attractor dynamics, it can be added without
+    modifying the GLPG architecture. The recursive core simply receives
+    an additional structured signal.</p></li>
+    </ul>
+    <h2 id="role-within-the-input-vector">Role Within the Input
+    Vector</h2>
+    <p>The entity tracker complements the other components of the total
+    input vector. While the current-sentence encoding provides
+    micro-structure and token history offers multi-scale temporal
+    modulation, the entity tracker supplies a semantic relevance profile
+    that evolves smoothly across the narrative. This enables GLPG to
+    maintain awareness of key entities over long trajectories,
+    supporting more coherent world-model behavior without increasing
+    model size or computational cost.</p>
+    <h1 id="the-new-input-vector">The New Input Vector</h1>
+    <p>The Lightweight Autonomous Narrator Pipeline extends the GLPG
+    input vector described in <span class="citation"
+    data-cites="DeWitte2026Book"></span> with two additional structural
+    signals: a normalized <em>paragraph line fraction</em> and a
+    high‑bandwidth <em>entity‑tracking vector</em>. Together with
+    updated configurations for token history, narrative memory, and
+    current‑sentence encoding, the new input vector reaches a total
+    width of exactly 2000 floats. This represents a richer and more
+    expressive contextual substrate while preserving the deterministic
+    attractor dynamics of the GLPG core.</p>
+    <h2 id="paragraph-line-fraction">Paragraph Line Fraction</h2>
+    <p>In addition to the global line fraction, which encodes the
+    position of the current sentence within the entire generated
+    document, a second positional scalar is introduced: the
+    <em>paragraph line fraction</em>. This value resets to 0 at the
+    start of each paragraph and increases linearly as new sentences are
+    generated. The fraction is normalized by a fixed divider (e.g. 50),
+    ensuring a stable and bounded positional signal:</p>
+    <p><span class="math display">$$\text{paragraph\_fraction}
+        = \frac{\text{line index within paragraph}}{50}.$$</span></p>
+    <p>This micro‑positional cue provides the attractor system with
+    fine‑grained information about local paragraph progression,
+    improving pacing, mid‑scale segmentation, and structural rhythm.</p>
+    <h2 id="updated-token-history">Updated Token History</h2>
+    <p>The token‑history subsystem is redesigned to use five parallel
+    history vectors, each with its own width and decay coefficient:</p>
+    <p><span class="math display">history
+    sizes = [30,40,50,60,70],   history
+    alphas = [0.91,0.93,0.95,0.97,0.99].</span></p>
+    <p>Each history vector evolves according to</p>
+    <p><span
+    class="math display"><em>h</em> ← <em>α</em><em>h</em> + (1−<em>α</em>)<em>e</em>,</span></p>
+    <p>where <span class="math inline"><em>e</em></span> is the current
+    lemma embedding. The combined history signal contributes 250 floats
+    to the input vector. These multi‑scale traces provide layered
+    temporal modulation, capturing both short‑range and long‑range lemma
+    dynamics without requiring recurrent networks.</p>
+    <h2 id="reduced-narrative-memory">Reduced Narrative Memory</h2>
+    <p>The narrative‑memory module stores deterministic projections of
+    the most recent sentences. In the new configuration, the memory
+    depth is reduced from 20 to 8 sentences, each represented by a
+    32‑float embedding:</p>
+    <p><span class="math display">8 × 32 = 256 floats.</span></p>
+    <p>This lighter memory preserves rhythmic smoothing and
+    micro‑callbacks while reducing bandwidth and improving generation
+    speed.</p>
+    <h2 id="expanded-current-sentence-encoding">Expanded
+    Current-Sentence Encoding</h2>
+    <p>The current‑sentence subsystem is extended to include the last 15
+    grammar tokens and the last 15 lemma tokens. Each token contributes
+    a 16‑float embedding:</p>
+    <p><span class="math display">2 × 15 × 16 = 480.</span></p>
+    <p>Two additional scalars encode the normalized position within the
+    sentence and a comma/punctuation indicator:</p>
+    <p><span class="math display">480 + 2 = 482 floats.</span></p>
+    <p>This high‑resolution snapshot of the ongoing sentence provides
+    the strongest structural signal in the input vector, stabilizing
+    syntax, pacing, and local narrative flow.</p>
+    <h2 id="entity-tracking">Entity Tracking</h2>
+    <p>A new semantic subsystem tracks the dynamic relevance of the top
+    1010 entities extracted from the curriculum. Each entity corresponds
+    to a single float in the input vector. Before processing each
+    sentence, the tracker applies exponential decay:</p>
+    <p><span
+    class="math display"><em>s</em><sub><em>i</em></sub> ← 0.98 <em>s</em><sub><em>i</em></sub>.</span></p>
+    <p>Whenever a tracked entity appears in the sentence, its activation
+    is set to 1.0. This produces a smooth, interpretable relevance
+    profile across the narrative, enabling lightweight world‑model
+    coherence without increasing model complexity.</p>
+    <h2 id="line-fraction-and-paragraph-line-fraction">Line Fraction and
+    Paragraph Line Fraction</h2>
+    <p>Two normalized scalars encode global and local positional
+    structure:</p>
+    <p><span class="math display">line fraction ∈ [0,1],   paragraph
+    line fraction ∈ [0,1].</span></p>
+    <p>These values anchor the attractor dynamics at both macro and
+    micro scales.</p>
+    <h2 id="total-input-vector-size">Total Input Vector Size</h2>
+    <p>The new input vector integrates all components into a single
+    2000‑float encoding:</p>
+    <p><span class="math display">250 (token history) + 256 (narrative
+    memory) + 482 (current) + 1010 (entity
+    tracking) + 2 (line) = 2000.</span></p>
+    <p>This expanded vector is a direct improvement over the 1307‑float
+    vector described in the previous GLPG paper. It provides richer
+    structural, temporal, and semantic signals while maintaining full
+    compatibility with the deterministic attractor architecture.</p>
+    <h1 id="generating-a-suitable-title-for-the-book">Generating a
+    Suitable Title for the Book</h1>
+    <p>While the GLPG attractor system autonomously generates chapter
+    structure and chapter titles, the narrator pipeline includes an
+    additional lightweight module that proposes suitable book titles
+    based on the generated chapter headings. This component provides a
+    simple but effective mechanism for selecting a coherent and
+    stylistically appropriate title for each autonomously generated
+    volume.</p>
+    <h2 id="title-generation-from-chapter-headings">Title Generation
+    from Chapter Headings</h2>
+    <p>After the narrator pipeline has produced a complete book,
+    including all chapter titles, the titler extracts these headings
+    directly from the generated LaTeX file. Each chapter title functions
+    as a high-level semantic summary of its corresponding chapter, and
+    the ordered sequence of headings provides a compact representation
+    of the book’s thematic and structural identity.</p>
+    <p>Using this sequence, the titler constructs a concise semantic
+    profile of the entire volume. No additional metadata, stylistic
+    hints, or narrative prompts are introduced. The titler then invokes
+    a lightweight LLM prompt that operates <em>exclusively</em> on the
+    chapter-title list. The model receives only the ordered headings and
+    is asked to synthesize a suitable book title from the structural
+    signals already present in the attractor-generated draft.</p>
+    <p>This design preserves the autonomy of the generative pipeline.
+    The LLM does not influence the book’s content, steer its narrative,
+    or impose external stylistic bias. It merely compresses the
+    chapter-level structure into a human-readable title that reflects
+    the book’s thematic cohesion and narrative tone.</p>
+    <p>The titler produces multiple candidate titles—typically five—and
+    the human operator selects the most appropriate one. This selection
+    step is intentionally minimal: no rewriting or editing is required.
+    The operator simply chooses the title that best captures the
+    identity of the autonomously generated volume.</p>
+    <h2 id="lightweight-human-in-the-loop-selection">Lightweight
+    Human-in-the-Loop Selection</h2>
+    <p>Although the narrator pipeline is fully autonomous, the final
+    book title is selected by a human operator. This selection step is
+    intentionally lightweight: the operator chooses one title from a
+    small set of candidates. No editing, rewriting, or structural
+    modification is required.</p>
+    <p>This design preserves the autonomy of the generative system while
+    ensuring that the final published title aligns with human
+    expectations of clarity, tone, and suitability.</p>
+    <h2 id="role-within-the-pipeline">Role Within the Pipeline</h2>
+    <p>The titler module serves as a small but useful auxiliary
+    component:</p>
+    <ul>
+    <li><p>it provides a human-readable summary of the book’s thematic
+    identity,</p></li>
+    <li><p>it aggregates structural scores for quick
+    inspection,</p></li>
+    <li><p>it offers multiple stylistic variants without requiring
+    manual prompting,</p></li>
+    <li><p>it integrates seamlessly with the narrator pipeline without
+    influencing the generative process itself.</p></li>
+    </ul>
+    <p>In summary, the book-title generator is a lightweight, optional
+    module that enhances usability and presentation without compromising
+    the autonomy or deterministic structure of the underlying
+    attractor-based narrative engine.</p>
+    <h1 id="draft-book-evaluation-system">Draft Book Evaluation
+    System</h1>
+    <p>Before a generated draft book enters the narrator pipeline, its
+    structural and stylistic quality is assessed using an automated
+    chapter-level evaluation system. This evaluator provides a
+    quantitative baseline for comparing draft books produced under
+    different training conditions, bias settings, or model variants. The
+    evaluation is intentionally strict: it measures the raw quality of
+    the draft text without moderation, refinement, or narrator
+    intervention.</p>
+    <h2 id="evaluation-prompt">Evaluation Prompt</h2>
+    <p>Each chapter is scored using a dedicated LLM prompt designed to
+    assess moderate-level fiction. The prompt defines a clear scoring
+    regime:</p>
+    <ul>
+    <li><p>scores range from 1 to 100,</p></li>
+    <li><p>a score around 50 represents an average moderate-quality
+    chapter,</p></li>
+    <li><p>scores below 50 are acceptable and common,</p></li>
+    <li><p>only exceptional chapters should exceed 80.</p></li>
+    </ul>
+    <p>The evaluator considers seven criteria: content, coherence,
+    readability, originality, creativity, style, and structure. The LLM
+    returns a single line of the form:</p>
+    <p><span class="math display">Score: ⟨number⟩</span></p>
+    <p>without explanation or justification. This ensures consistency
+    and prevents prompt drift.</p>
+    <h2 id="chapter-extraction">Chapter Extraction</h2>
+    <p>The evaluator reads the draft book line by line and extracts
+    chapters based on the presence of chapter markers. Chapters
+    containing fewer than ten sentences are discarded to avoid scoring
+    fragments or malformed sections. Each chapter is represented as a
+    list of raw sentences exactly as produced by the draft
+    generator.</p>
+    <h2 id="double-scoring-and-stability">Double Scoring and
+    Stability</h2>
+    <p>To reduce noise and improve reliability, each chapter is scored
+    twice. The evaluator records:</p>
+    <ul>
+    <li><p>the minimum score,</p></li>
+    <li><p>the maximum score,</p></li>
+    <li><p>the averaged score (rounded).</p></li>
+    </ul>
+    <p>This double-scoring mechanism captures small variations in LLM
+    output while remaining computationally lightweight. The averaged
+    score serves as the primary metric for chapter quality.</p>
+    <h2 id="book-level-aggregation">Book-Level Aggregation</h2>
+    <p>After all chapters are evaluated, the system computes:</p>
+    <ul>
+    <li><p>total number of sentences,</p></li>
+    <li><p>average minimum score,</p></li>
+    <li><p>average maximum score,</p></li>
+    <li><p>average combined score.</p></li>
+    </ul>
+    <p>These statistics are written to an evaluation file in a compact
+    tabular format:</p>
+    <p><span
+    class="math display">chapter; sentences; min; max; avg</span></p>
+    <p>followed by a final average line summarizing the entire book.</p>
+    <h2 id="role-within-the-pipeline-1">Role Within the Pipeline</h2>
+    <p>The draft evaluator serves three purposes:</p>
+    <ol>
+    <li><p>It provides a strict baseline for comparing draft books
+    before moderation or narrator refinement.</p></li>
+    <li><p>It allows the pipeline operator to select the best-performing
+    draft among multiple candidates.</p></li>
+    <li><p>It quantifies the structural and stylistic stability of the
+    underlying attractor model.</p></li>
+    </ol>
+    <p>Because the evaluator operates on raw draft text, its scores
+    reflect the intrinsic quality of the generative model rather than
+    the smoothing or stabilizing effects of the narrator. This makes it
+    a crucial diagnostic tool for model development, bias modulation
+    experiments, and dataset refinement.</p>
+    <h1 id="hybrid-narrator-pipelines">Hybrid Narrator Pipelines</h1>
+    <p>The Lightweight Autonomous Narrator Pipeline supports two
+    complementary modes of operation: a <em>Fully Automated Draft
+    Narrator Pipeline</em> and a <em>Fully Automated Iterative Narrator
+    Pipeline</em>. Both pipelines operate on top of the same GLPG
+    attractor model, optionally augmented with bias modulation, and both
+    produce complete long-form books without human steering. The two
+    variants differ primarily in how chapters are generated and how
+    narrator steering interacts with the attractor dynamics.</p>
+    <h2 id="fully-automated-draft-narrator-pipeline">Fully Automated
+    Draft Narrator Pipeline</h2>
+    <p>The draft pipeline processes a pre-generated GLPG book and
+    applies narrator moderation, chapter titling, structural scoring,
+    and inter-chapter transitions. This variant was introduced in
+    earlier work and remains a lightweight and highly effective method
+    for transforming raw attractor output into a coherent literary
+    volume.</p>
+    <h4 id="step-a-dataset-selection">Step A: Dataset Selection</h4>
+    <p>A human pipeline operator selects one or more books from a
+    modifiable library (e.g. Gutenberg texts or previously generated
+    volumes). These books form the training corpus for the GLPG
+    attractor model.</p>
+    <h4 id="step-b-model-training">Step B: Model Training</h4>
+    <p>The GLPG model is trained on the selected datasets. An optional
+    bias model may be trained to modulate stylistic or thematic
+    tendencies. Both the base model and the bias model remain compact
+    (60–70 MB) and fully CPU-operational.</p>
+    <h4 id="step-c-draft-generation">Step C: Draft Generation</h4>
+    <p>The trained GLPG model generates <span
+    class="math inline"><em>N</em></span> autonomous draft books. Each
+    draft is evaluated using structural and stylistic metrics, and the
+    best-performing draft is selected for narrator processing.</p>
+    <h4 id="step-d-narrator-pipeline">Step D: Narrator Pipeline</h4>
+    <p>The narrator processes the selected draft chapter by chapter:</p>
+    <ul>
+    <li><p>grammatical and semantic moderation using a fixed LLM
+    prompt,</p></li>
+    <li><p>generation of chapter titles,</p></li>
+    <li><p>scoring of moderated chapters,</p></li>
+    <li><p>generation of transitions between consecutive
+    chapters,</p></li>
+    <li><p>rejection and retry logic based on minimum score
+    thresholds.</p></li>
+    </ul>
+    <p>The narrator does not alter the attractor-generated structure; it
+    refines, stabilizes, and aligns the draft while preserving its
+    canonical identity.</p>
+    <h4 id="step-e-wrap-up">Step E: Wrap-Up</h4>
+    <p>After all chapters are processed:</p>
+    <ul>
+    <li><p>a book title is generated from all chapter titles,</p></li>
+    <li><p>the human operator performs a minimal final review,</p></li>
+    <li><p>total book scores and statistics are computed,</p></li>
+    <li><p>the completed book is added to the library.</p></li>
+    </ul>
+    <h2 id="fully-automated-iterative-narrator-pipeline">Fully Automated
+    Iterative Narrator Pipeline</h2>
+    <p>The iterative narrator pipeline is a new variant introduced in
+    this work. It integrates narrator steering directly into the
+    generative loop, producing chapters <em>iteratively</em> rather than
+    moderating a pre-existing draft. This creates a hybrid IE<span
+    class="math inline">×</span>GR system in which the GLPG attractor
+    model and the LLM-based narrator collaborate during generation
+    rather than sequentially.</p>
+    <h4 id="step-a-dataset-selection-1">Step A: Dataset Selection</h4>
+    <p>As in the draft pipeline, datasets are selected from a modifiable
+    library and used to train the GLPG model.</p>
+    <h4 id="step-b-model-training-1">Step B: Model Training</h4>
+    <p>The same GLPG model (with optional bias modulation) is used for
+    iterative generation. No architectural changes are required.</p>
+    <h4 id="step-c-iterative-generation">Step C: Iterative
+    Generation</h4>
+    <p>The narrator pipeline generates the book chapter by chapter,
+    integrating moderation, scoring, and structural alignment directly
+    into the generative loop:</p>
+    <ol>
+    <li><p>The GLPG writer produces a chapter using the current
+    attractor context.</p></li>
+    <li><p>The narrator moderates the chapter using the fixed moderation
+    prompt.</p></li>
+    <li><p>A chapter title is generated.</p></li>
+    <li><p>The chapter is scored; chapters that fall below the threshold
+    are retried.</p></li>
+    <li><p>A transition to the previous chapter is generated and
+    validated.</p></li>
+    <li><p>A transition score is computed using a dedicated continuity
+    prompt.</p></li>
+    <li><p>The attractor context is updated and the next chapter is
+    generated.</p></li>
+    </ol>
+    <p>This iterative loop continues until the requested number of
+    chapters or lines is reached. The narrator thus becomes an active
+    steering layer that continuously aligns structural, emotional, and
+    thematic flow across the entire book.</p>
+    <p>If any step fails—either due to insufficient moderation quality,
+    an invalid transition, or a score falling below the required
+    threshold—the entire chapter is retried from the beginning. This
+    mechanism effectively implements a <em>partial rollback</em>
+    strategy: the pipeline reverts to the previous stable state and
+    regenerates the chapter until all structural and continuity criteria
+    are satisfied. In practice, this makes the iterative narrator behave
+    like a chapter-level PRE system, ensuring that only coherent,
+    well-aligned chapters advance the global narrative trajectory.</p>
+    <h4 id="step-d-wrap-up">Step D: Wrap-Up</h4>
+    <p>The wrap-up phase mirrors the draft pipeline:</p>
+    <ul>
+    <li><p>a book title is synthesized from all chapter titles,</p></li>
+    <li><p>the human operator performs a minimal final review,</p></li>
+    <li><p>total chapter and transition scores are aggregated,</p></li>
+    <li><p>the completed book is added to the library.</p></li>
+    </ul>
+    <h2 id="shared-architectural-foundation">Shared Architectural
+    Foundation</h2>
+    <p>Both pipelines rely on the same GLPG attractor model, with or
+    without bias modulation. The narrator layer is identical across both
+    variants, and the LLM prompts used for moderation, titling, scoring,
+    and transitions are shared. The difference lies in the generative
+    flow: the draft pipeline refines a completed attractor draft, while
+    the iterative pipeline co-generates the book in tandem with the
+    attractor system.</p>
+    <p>Together, these two pipelines form a hybrid architecture capable
+    of producing high-quality autonomous books on lightweight consumer
+    hardware. The draft pipeline offers speed and simplicity; the
+    iterative pipeline offers deeper structural alignment and stronger
+    narrative continuity.</p>
+    <h1 id="bias-modulation">Bias Modulation</h1>
+    <p>Bias modulation was introduced in earlier work as an optional
+    steering layer on top of the GLPG attractor system. In the original
+    configuration, the bias MLP was pretrained to approximate the zero
+    function, ensuring that modulation remained negligible unless
+    explicitly scaled. This produced only minimal variation during
+    training, as the modulation function started from a flat
+    baseline.</p>
+    <p>In the present pipeline, bias modulation is extended with a
+    sinusoidal pretraining regime. Instead of learning <span
+    class="math inline"><em>b</em>(<em>h</em>) ≈ 0</span>, the bias MLP
+    is trained to approximate a smooth sinusoidal function of the
+    hidden-state norm:</p>
+    <p><span
+    class="math display"><em>b</em>(<em>h</em>) = offset + amplitude ⋅ sin (frequency⋅∥<em>h</em>∥).</span></p>
+    <p>This transforms the bias MLP into a <em>synthetic mood
+    function</em>: a compact, deterministic modulation layer whose
+    output varies smoothly with the magnitude of the attractor state.
+    Alpha-scaling then directly controls the intensity of this synthetic
+    mood. Low scaling produces subtle coloration; high scaling induces
+    strong stylistic modulation without destabilizing the underlying
+    dynamics.</p>
+    <h2 id="bias-as-internal-cognitive-state">Bias as Internal Cognitive
+    State</h2>
+    <p>Unlike token-level biasing in transformer models, GLPG interprets
+    bias as an <em>internal state</em> rather than an external tweak.
+    The attractor dynamics respond to bias as a shift in the direction
+    of the hidden-state trajectory, not as a modification of token
+    probabilities. This distinction is crucial:</p>
+    <ul>
+    <li><p>Activation functions are mechanical; modulation functions are
+    cognitive.</p></li>
+    <li><p>Bias changes the <em>flow</em> of the attractor, not its
+    stability.</p></li>
+    <li><p>GLPG remains stable under extreme mood swings because
+    attractor switching in a compact MLP is exceedingly rare.</p></li>
+    </ul>
+    <p>The GLPG architecture therefore behaves as a hybrid dynamical
+    system in which bias modulation alters the narrative tone, pacing,
+    and stylistic coloration without compromising canonical structure,
+    lemma routes, or syntactic stability.</p>
+    <h2 id="emergent-styles-from-the-latent-manifold">Emergent Styles
+    from the Latent Manifold</h2>
+    <p>The moderator layer does not create style; it stabilizes the
+    emergent worlds produced by the GLPG manifold. All stylistic
+    variability originates from the latent attractor landscape itself.
+    Bias modulation activates different regions of this manifold,
+    producing distinct narrative moods:</p>
+    <ul>
+    <li><p>melancholic modulation,</p></li>
+    <li><p>mythic or epic modulation,</p></li>
+    <li><p>cosmic or symbolic modulation,</p></li>
+    <li><p>luminous or moral modulation,</p></li>
+    <li><p>dark or justice-oriented modulation.</p></li>
+    </ul>
+    <p>These styles are not injected by the narrator. They emerge from
+    the attractor system and are merely amplified or attenuated by the
+    bias MLP.</p>
+    <h2 id="stability-under-modulation">Stability Under Modulation</h2>
+    <p>GLPG remains cognitively stable even under extreme bias scaling.
+    Because the architecture is attractor-based, modulation shifts the
+    direction of the hidden state but does not destabilize the attractor
+    itself. The system continues to produce coherent narrative
+    trajectories, even when the bias norm is large.</p>
+    <p>This property is unique to compact attractor architectures.
+    Transformer models typically collapse under extreme biasing; GLPG
+    does not.</p>
+    <h2 id="interaction-with-entity-tracking">Interaction with Entity
+    Tracking</h2>
+    <p>Entity tracking provides a stabilizing semantic backbone that
+    complements bias modulation. While bias activates stylistic
+    attractors, entity tracking anchors the narrative to its core
+    entities, preventing drift and maintaining coherence across long
+    trajectories. Together, these components form a lightweight
+    semantic-cognitive modulation layer:</p>
+    <ul>
+    <li><p>bias modulation controls mood and stylistic
+    direction,</p></li>
+    <li><p>entity tracking stabilizes world identity,</p></li>
+    <li><p>the moderator ensures structural coherence.</p></li>
+    </ul>
+    <p>A micro-model equipped with both mechanisms produces emergent
+    narrative worlds that remain coherent, stable, and stylistically
+    expressive.</p>
+    <h2 id="sinusoidal-pretraining">Sinusoidal Pretraining</h2>
+    <p>The sinusoidal pretraining regime provides a smooth,
+    interpretable modulation function. Instead of learning arbitrary
+    patterns, the bias MLP learns a controlled oscillatory profile that
+    maps hidden-state magnitude to stylistic intensity. This yields:</p>
+    <ul>
+    <li><p>predictable modulation behavior,</p></li>
+    <li><p>smooth stylistic transitions,</p></li>
+    <li><p>controllable mood intensity via alpha-scaling,</p></li>
+    <li><p>stable integration with the attractor dynamics.</p></li>
+    </ul>
+    <p>The result is a modulation layer that behaves like a synthetic
+    emotional state for the generative system, enabling controlled
+    stylistic variation without compromising structural integrity.</p>
+    <h2 id="alternative-modulation-functions">Alternative Modulation
+    Functions</h2>
+    <p>Although sinusoidal pretraining provides a smooth and
+    interpretable modulation profile, the bias MLP is not restricted to
+    sinus functions. In principle, any continuous mapping from
+    hidden-state magnitude or direction to a modulation vector can be
+    learned. This makes bias modulation an extensible mechanism for
+    expressing a wide range of synthetic internal states.</p>
+    <p>Possible alternatives include:</p>
+    <ul>
+    <li><p><strong>Polynomial modulation</strong> — smooth monotonic or
+    multi-peak profiles that emphasize specific regions of the attractor
+    manifold.</p></li>
+    <li><p><strong>Radial basis modulation</strong> — localized
+    stylistic activation around selected hidden-state norms.</p></li>
+    <li><p><strong>Piecewise-linear modulation</strong> — sharp
+    stylistic shifts or controlled transitions between discrete
+    narrative modes.</p></li>
+    <li><p><strong>Directional modulation</strong> — functions that
+    depend on the orientation of <span
+    class="math inline"><em>h</em></span> rather than its magnitude,
+    enabling thematic steering tied to latent semantic axes.</p></li>
+    <li><p><strong>Learned manifold-aware modulation</strong> — training
+    the bias MLP directly on attractor trajectories to produce
+    world-specific or genre-specific internal states.</p></li>
+    </ul>
+    <p>Because GLPG interprets bias as an internal cognitive state
+    rather than a token-level tweak, these alternative modulation
+    functions would produce distinct narrative moods without
+    destabilizing the attractor dynamics. The architecture therefore
+    supports a broad family of synthetic emotional or stylistic states,
+    of which sinusoidal modulation is only one example.</p>
+    <h2 id="alpha-scaling-as-direct-modulation-strength">Alpha-Scaling
+    as Direct Modulation Strength</h2>
+    <p>In the current implementation, bias modulation is applied through
+    a simple scaling factor <span class="math inline"><em>α</em></span>
+    in the forward pass of the bias MLP:</p>
+    <p><span
+    class="math display"><em>b</em>(<em>h</em>) = <em>α</em> ⋅ fc<sub>2</sub>(silu(fc<sub>1</sub>(<em>h</em>))).</span></p>
+    <p>Although this mechanism was initially introduced as an
+    experimental hack, it proves to be an effective and interpretable
+    control parameter. The value of <span
+    class="math inline"><em>α</em></span> directly determines the
+    strength of the modulation applied to the hidden state. In practice,
+    usable values range approximately between <span
+    class="math inline"> − 10<sup>11</sup></span> and <span
+    class="math inline">10<sup>11</sup></span>, with 0 disabling the
+    bias, though the exact boundaries are empirical rather than
+    theoretical. Small values produce subtle stylistic coloration, while
+    large values induce strong mood shifts without destabilizing the
+    attractor dynamics.</p>
+    <p>Because GLPG interprets bias as an internal cognitive state
+    rather than a token-level tweak, alpha-scaling behaves as a direct
+    intensity control for the synthetic mood generated by the bias MLP.
+    The attractor remains stable even under extreme scaling: modulation
+    changes the <em>direction</em> of the hidden state but does not
+    compromise the stability of the attractor itself. This makes
+    alpha-scaling a practical and robust mechanism for exploring a wide
+    range of bias intensities, even in the absence of a formally
+    parameterized modulation layer.</p>
+    <p>Although currently implemented as a simple multiplicative factor,
+    alpha-scaling could be generalized to more structured modulation
+    schemes in future work, including adaptive scaling,
+    context-dependent scaling, or manifold-aware scaling functions.</p>
+    <h1
+    id="training-configuration-for-bias-modulation-experiments">Training
+    Configuration for Bias Modulation Experiments</h1>
+    <p>To evaluate bias modulation and sinusoidal pretraining within the
+    GLPG architecture, a compact multi-book curriculum was constructed
+    from a curated subset of Project Gutenberg texts. The dataset
+    provides a stable narrative backbone with recurring entities,
+    consistent stylistic structure, and sufficient lexical diversity to
+    support attractor-based world formation.</p>
+    <h2 id="dataset-composition">Dataset Composition</h2>
+    <p>The training corpus consists of five books, each decomposed into
+    individual sentences with structural annotations:</p>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Sentences</strong></th>
+    <th style="text-align: right;"><strong>Title</strong></th>
+    <th style="text-align: left;"><strong>Author</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">2118</td>
+    <td style="text-align: right;"><em>Alice’s Adventures in
+    Wonderland</em></td>
+    <td style="text-align: left;">Lewis Carroll</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">1180</td>
+    <td style="text-align: right;"><em>Alice’s Adventures Under
+    Ground</em></td>
+    <td style="text-align: left;">Lewis Carroll</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">2069</td>
+    <td style="text-align: right;"><em>Alice in Wonderland (One Syllable
+    Edition)</em></td>
+    <td style="text-align: left;">Carroll / Gorham</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">2494</td>
+    <td style="text-align: right;"><em>Aesop’s Fables</em></td>
+    <td style="text-align: left;">Aesop</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">1181</td>
+    <td style="text-align: right;"><em>The Adventures of Reddy
+    Fox</em></td>
+    <td style="text-align: left;">T. W. Burgess</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>In total, the curriculum contains:</p>
+    <p><span class="math display">9042 sentences,   130, 364 unique
+    samples,</span></p>
+    <p>yielding an average of:</p>
+    <p><span class="math display">14.4 samples per sentence.</span></p>
+    <p>This density ensures that each sentence is observed under
+    multiple contextual conditions, improving attractor stability and
+    lemma-route consistency.</p>
+    <h2 id="dataset-entities">Dataset Entities</h2>
+    <p>Entity extraction was performed using grammar-token scanning over
+    nouns, proper names, and plural forms. The resulting statistics
+    are:</p>
+    <p><span class="math display">Total entities = 2503,   Total
+    lemmas = 4377.</span></p>
+    <p>The top 20 entities by occurrence are:</p>
+    <div class="center">
+    <table>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: right;"><strong>1</strong></td>
+    <td style="text-align: left;">alice</td>
+    <td style="text-align: left;">881</td>
+    <td style="text-align: right;"><strong>11</strong></td>
+    <td style="text-align: left;">day</td>
+    <td style="text-align: left;">170</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;"><strong>2</strong></td>
+    <td style="text-align: left;">fox</td>
+    <td style="text-align: left;">419</td>
+    <td style="text-align: right;"><strong>12</strong></td>
+    <td style="text-align: left;">king</td>
+    <td style="text-align: left;">156</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;"><strong>3</strong></td>
+    <td style="text-align: left;">time</td>
+    <td style="text-align: left;">341</td>
+    <td style="text-align: right;"><strong>13</strong></td>
+    <td style="text-align: left;">man</td>
+    <td style="text-align: left;">155</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;"><strong>4</strong></td>
+    <td style="text-align: left;">thing</td>
+    <td style="text-align: left;">251</td>
+    <td style="text-align: right;"><strong>14</strong></td>
+    <td style="text-align: left;">voice</td>
+    <td style="text-align: left;">157</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;"><strong>5</strong></td>
+    <td style="text-align: left;">reddy</td>
+    <td style="text-align: left;">244</td>
+    <td style="text-align: right;"><strong>15</strong></td>
+    <td style="text-align: left;">mouse</td>
+    <td style="text-align: left;">151</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;"><strong>6</strong></td>
+    <td style="text-align: left;">way</td>
+    <td style="text-align: left;">215</td>
+    <td style="text-align: right;"><strong>16</strong></td>
+    <td style="text-align: left;">cat</td>
+    <td style="text-align: left;">135</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;"><strong>7</strong></td>
+    <td style="text-align: left;">head</td>
+    <td style="text-align: left;">198</td>
+    <td style="text-align: right;"><strong>17</strong></td>
+    <td style="text-align: left;">turtle</td>
+    <td style="text-align: left;">121</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;"><strong>8</strong></td>
+    <td style="text-align: left;">granny</td>
+    <td style="text-align: left;">194</td>
+    <td style="text-align: right;"><strong>18</strong></td>
+    <td style="text-align: left;">eye</td>
+    <td style="text-align: left;">121</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;"><strong>9</strong></td>
+    <td style="text-align: left;">rabbit</td>
+    <td style="text-align: left;">181</td>
+    <td style="text-align: right;"><strong>19</strong></td>
+    <td style="text-align: left;">hand</td>
+    <td style="text-align: left;">118</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;"><strong>10</strong></td>
+    <td style="text-align: left;">queen</td>
+    <td style="text-align: left;">181</td>
+    <td style="text-align: right;"><strong>20</strong></td>
+    <td style="text-align: left;">mock</td>
+    <td style="text-align: left;">115</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>These entities form the semantic backbone of the attractor
+    manifold and are later used by the entity-tracking subsystem to
+    stabilize world identity during generation.</p>
+    <h2 id="model-configuration">Model Configuration</h2>
+    <p>Two variants of the GLPG model were trained:</p>
+    <ul>
+    <li><p><strong>Base model</strong>: hidden size 768, model size
+    59 MB.</p></li>
+    <li><p><strong>Bias-enabled model</strong>: hidden size 768 + bias
+    MLP, model size 63 MB.</p></li>
+    </ul>
+    <p>The bias-enabled model extends the base architecture with a
+    lightweight modulation MLP that supports sinusoidal pretraining and
+    alpha-scaled bias intensity.</p>
+    <h2 id="training-regime">Training Regime</h2>
+    <h4 id="base-model-training">Base Model Training</h4>
+    <p>The base attractor model was trained for:</p>
+    <p><span class="math display">300, 000 epochs,   4, 318, 166
+    training samples,</span></p>
+    <p>with a total training time of:</p>
+    <p><span class="math display">5320.8 seconds.</span></p>
+    <p>This establishes the canonical attractor landscape used for all
+    subsequent bias-modulation experiments.</p>
+    <h4 id="bias-model-training">Bias Model Training</h4>
+    <p>The bias-enabled model is constructed by extending the fully
+    trained 300<span>,</span>000-epoch base attractor model with a
+    lightweight modulation MLP. Once attached, the bias MLP undergoes a
+    dedicated sinusoidal pretraining stage of 2<span>,</span>000 epochs.
+    This pretraining is applied <em>only</em> to the bias MLP: the
+    attractor model remains fixed, and no attractor weights are updated
+    during this phase. The goal is to teach the modulation layer a
+    smooth and interpretable function:</p>
+    <p><span
+    class="math display"><em>b</em>(<em>h</em>) = offset + amplitude ⋅ sin (frequency⋅∥<em>h</em>∥),</span></p>
+    <p>which later serves as a synthetic mood function during
+    generation.</p>
+    <p>After sinusoidal pretraining, the combined model (base attractor
+    + bias MLP) is trained for an additional 100<span>,</span>000
+    epochs. During this phase, both the attractor and the bias MLP
+    continue learning jointly. This produces a bias-enabled attractor
+    landscape in which modulation interacts naturally with the learned
+    world structure.</p>
+    <p>In total, the bias-enabled model reaches:</p>
+    <p><span class="math display">400, 000 epochs,   5, 756, 810
+    training samples.</span></p>
+    <p>The additional 100k epochs—starting from the already trained 300k
+    base model— require:</p>
+    <p><span class="math display">2677.2 seconds.</span></p>
+    <p>This training regime yields a compact attractor model equipped
+    with a sinusoidally pretrained modulation layer, enabling controlled
+    stylistic variation through alpha-scaled bias during generation.</p>
+    <h2 id="purpose-of-the-training-setup">Purpose of the Training
+    Setup</h2>
+    <p>This training configuration provides:</p>
+    <ul>
+    <li><p>a stable attractor manifold with recurring entities,</p></li>
+    <li><p>a compact semantic backbone for entity tracking,</p></li>
+    <li><p>a controlled environment for testing sinusoidal bias
+    modulation,</p></li>
+    <li><p>a lightweight model suitable for consumer-grade
+    hardware,</p></li>
+    <li><p>and a reproducible baseline for evaluating mood-driven
+    narrative variation.</p></li>
+    </ul>
+    <p>Together, these components form the experimental foundation for
+    the bias modulation tests described in the following sections.</p>
+    <h1 id="distilled-model-training-using-generated-books">Distilled
+    Model Training Using Generated Books</h1>
+    <p>To investigate how attractor dynamics evolve under
+    second‑generation training, a distilled GLPG model was trained on a
+    corpus of eight autonomously generated books. These books were
+    produced by the previously trained base and bias‑enabled models
+    under a wide range of modulation intensities. The goal of this
+    experiment is to examine how the attractor manifold sharpens, how
+    entity distributions shift, and how stylistic sensitivity changes
+    when the training data itself originates from the attractor
+    system.</p>
+    <h2 id="generated-book-corpus">Generated-Book Corpus</h2>
+    <p>The distilled dataset consists of eight books generated with
+    different bias settings. The corpus composition is summarized
+    below:</p>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Model</strong></th>
+    <th style="text-align: left;"><strong>Bias</strong></th>
+    <th style="text-align: left;"><strong>Sentences</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: left;">none</td>
+    <td style="text-align: left;">3627</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline"> − 10<sup>9</sup></span></td>
+    <td style="text-align: left;">2903</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline"> − 5</span></td>
+    <td style="text-align: left;">3785</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline">0</span></td>
+    <td style="text-align: left;">3781</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline">1</span></td>
+    <td style="text-align: left;">3649</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline">2</span></td>
+    <td style="text-align: left;">3701</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline">10</span></td>
+    <td style="text-align: left;">4032</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline">10<sup>11</sup></span></td>
+    <td style="text-align: left;">1640</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>In total, the generated corpus contains:</p>
+    <p><span class="math display">27118 sentences,   427, 979 unique
+    samples,</span></p>
+    <p>corresponding to:</p>
+    <p><span class="math display">15.8 samples per sentence.</span></p>
+    <p>This density is comparable to the original Gutenberg dataset, but
+    the content is now entirely attractor‑generated, making distillation
+    a particularly revealing experiment.</p>
+    <h2 id="entity-and-lemma-distribution">Entity and Lemma
+    Distribution</h2>
+    <p>Entity extraction over the eight generated books yields:</p>
+    <p><span class="math display">Total entities = 3848,   Total
+    lemmas = 7285.</span></p>
+    <p>The top 20 entities show a clear shift relative to the Gutenberg
+    source data: dominant attractor entities are amplified, while weaker
+    entities fade. This is a typical effect of distillation: the
+    attractor reinforces its own internal semantic cores.</p>
+    <div class="center">
+    <table>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: right;"><strong>1</strong></td>
+    <td style="text-align: left;">alice</td>
+    <td style="text-align: left;">5636</td>
+    <td style="text-align: right;"><strong>11</strong></td>
+    <td style="text-align: left;">creature</td>
+    <td style="text-align: left;">737</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;"><strong>2</strong></td>
+    <td style="text-align: left;">eye</td>
+    <td style="text-align: left;">1324</td>
+    <td style="text-align: right;"><strong>12</strong></td>
+    <td style="text-align: left;">tree</td>
+    <td style="text-align: left;">662</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;"><strong>3</strong></td>
+    <td style="text-align: left;">man</td>
+    <td style="text-align: left;">1237</td>
+    <td style="text-align: right;"><strong>13</strong></td>
+    <td style="text-align: left;">life</td>
+    <td style="text-align: left;">624</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;"><strong>4</strong></td>
+    <td style="text-align: left;">voice</td>
+    <td style="text-align: left;">1155</td>
+    <td style="text-align: right;"><strong>14</strong></td>
+    <td style="text-align: left;">forest</td>
+    <td style="text-align: left;">570</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;"><strong>5</strong></td>
+    <td style="text-align: left;">day</td>
+    <td style="text-align: left;">1074</td>
+    <td style="text-align: right;"><strong>15</strong></td>
+    <td style="text-align: left;">world</td>
+    <td style="text-align: left;">569</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;"><strong>6</strong></td>
+    <td style="text-align: left;">reddy</td>
+    <td style="text-align: left;">996</td>
+    <td style="text-align: right;"><strong>16</strong></td>
+    <td style="text-align: left;">fear</td>
+    <td style="text-align: left;">555</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;"><strong>7</strong></td>
+    <td style="text-align: left;">time</td>
+    <td style="text-align: left;">952</td>
+    <td style="text-align: right;"><strong>17</strong></td>
+    <td style="text-align: left;">farmer</td>
+    <td style="text-align: left;">550</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;"><strong>8</strong></td>
+    <td style="text-align: left;">heart</td>
+    <td style="text-align: left;">941</td>
+    <td style="text-align: right;"><strong>18</strong></td>
+    <td style="text-align: left;">air</td>
+    <td style="text-align: left;">545</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;"><strong>9</strong></td>
+    <td style="text-align: left;">sense</td>
+    <td style="text-align: left;">806</td>
+    <td style="text-align: right;"><strong>19</strong></td>
+    <td style="text-align: left;">fox</td>
+    <td style="text-align: left;">534</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;"><strong>10</strong></td>
+    <td style="text-align: left;">house</td>
+    <td style="text-align: left;">755</td>
+    <td style="text-align: right;"><strong>20</strong></td>
+    <td style="text-align: left;">way</td>
+    <td style="text-align: left;">528</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>The entity <em>alice</em> increases from 881 occurrences in the
+    Gutenberg corpus to 5636 occurrences in the distilled corpus — a
+    factor of 6.4. This illustrates how distillation sharpens the
+    attractor manifold around its dominant semantic centers.</p>
+    <h2 id="distilled-model-training">Distilled Model Training</h2>
+    <p>The distilled model uses the same architecture as the original
+    GLPG model but is trained entirely on the generated books. This
+    produces a second‑generation attractor: a dynamical system learning
+    from its own output.</p>
+    <h4 id="base-distilled-model">Base Distilled Model</h4>
+    <p><span class="math display">Hidden size = 768,   Model
+    size = 69 MB.</span></p>
+    <p>Training configuration:</p>
+    <p><span class="math display">900, 000 epochs,   14, 202, 152
+    samples,</span></p>
+    <p>with a total training time of:</p>
+    <p><span class="math display">28524.6 seconds.</span></p>
+    <h4 id="bias-enabled-distilled-model">Bias-Enabled Distilled
+    Model</h4>
+    <p>The bias‑enabled distilled model starts from the base distilled
+    model and performs an additional 300<span>,</span>000 epochs with
+    the bias MLP active:</p>
+    <p><span class="math display">Hidden size = 768 + bias,   Model
+    size = 74 MB.</span></p>
+    <p>Total training:</p>
+    <p><span class="math display">1, 200, 000 epochs,   18, 936, 443
+    samples,</span></p>
+    <p>with an additional bias‑training time of:</p>
+    <p><span class="math display">16927.7 seconds.</span></p>
+    <h2 id="purpose-and-effect-of-distillation">Purpose and Effect of
+    Distillation</h2>
+    <p>Training on attractor‑generated books produces three major
+    effects:</p>
+    <ol>
+    <li><p><strong>Manifold sharpening</strong> — dominant attractor
+    routes become stronger; weak routes collapse.</p></li>
+    <li><p><strong>Entity amplification</strong> — semantic cores such
+    as <em>alice</em>, <em>man</em>, <em>voice</em>, <em>heart</em> are
+    exponentially reinforced.</p></li>
+    <li><p><strong>Enhanced bias sensitivity</strong> — the distilled
+    model responds more strongly and consistently to bias modulation,
+    because the manifold itself has been shaped by bias‑generated
+    books.</p></li>
+    </ol>
+    <p>The result is a second‑generation attractor capable of producing
+    richer, more coherent narrative worlds and particularly well suited
+    for further bias‑modulation experiments and narrator‑pipeline
+    integration.</p>
+    <h1 id="twelve-generated-books">Twelve Generated Books</h1>
+    <p>Twelve books were generated using the GLPG attractor model under
+    a wide range of bias settings, including both first-generation and
+    distilled variants. These books form the artifact collection
+    published within the ecosystem as:</p>
+    <div class="center">
+    <p><em>The Moody Parrot: Revisiting the Wonderland Omnibus</em>.</p>
+    </div>
+    <p>All books were produced with a fixed generation budget of 2000
+    lines using the draft narrator pipeline. To preserve clarity and
+    page width, the results are split into four compact tables: book
+    titles, generation statistics, evaluation statistics, and emergent
+    moods.</p>
+    <h2 id="book-titles">Book Titles</h2>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Model</strong></th>
+    <th style="text-align: left;"><strong>Bias</strong></th>
+    <th style="text-align: left;"><strong>Book Title</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: left;">None</td>
+    <td style="text-align: left;">Whispers of Wonderland: An Anthology
+    of Mysteries and Adventures</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline"> − 10<sup>9</sup></span></td>
+    <td style="text-align: left;">Enigmas and Epiphanies: A Journey
+    Through Shadows and Light</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline"> − 5</span></td>
+    <td style="text-align: left;">Whispers from the Woods: Enigmatic
+    Encounters Along the Path of Life</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;">0</td>
+    <td style="text-align: left;">Chronicles of the Unforeseen: A
+    Collection of Enigmatic Journeys</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;">1</td>
+    <td style="text-align: left;">Echoes of the Past: A Collection of
+    Unraveled Secrets</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;">2</td>
+    <td style="text-align: left;">Enigma’s Embrace: A Journey Through
+    the Twists and Turns of the Imagination</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;">10</td>
+    <td style="text-align: left;">The Enchanted Realms: Unraveling the
+    Secrets of Alice and Her Extraordinary Companions</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline">10<sup>11</sup></span></td>
+    <td style="text-align: left;">Tales from the Wild: Adventures,
+    Alliances, and Allegories</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">distilled</td>
+    <td style="text-align: left;">None</td>
+    <td style="text-align: left;">Shadows and Enigmas: A Symphony of
+    Mystery and Resilience</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">distilled</td>
+    <td style="text-align: left;">None</td>
+    <td style="text-align: left;">Walking Towards the Unknown: A Journey
+    Through Life’s Enigmas</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">distilled bias</td>
+    <td style="text-align: left;"><span
+    class="math inline"> − 10</span></td>
+    <td style="text-align: left;">Echoes of the Forgotten: An Enigmatic
+    Adventure Through the Labyrinth of Time</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">distilled bias</td>
+    <td style="text-align: left;"><span
+    class="math inline">10<sup>6</sup></span></td>
+    <td style="text-align: left;">Whispers of the Forbidden: Exploring
+    the Enigmatic Realms</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="generation-statistics">Generation Statistics</h2>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Model</strong></th>
+    <th style="text-align: right;"><strong>Bias</strong></th>
+    <th style="text-align: right;"><strong>Time (s)</strong></th>
+    <th style="text-align: right;"><strong>Draft Size (KB)</strong></th>
+    <th style="text-align: right;"><strong>Eval Time (s)</strong></th>
+    <th style="text-align: right;"><strong>Book Size (KB)</strong></th>
+    <th style="text-align: right;"><strong>Pipeline Time
+    (s)</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: right;">None</td>
+    <td style="text-align: right;">502.7</td>
+    <td style="text-align: right;">151</td>
+    <td style="text-align: right;">1030.4</td>
+    <td style="text-align: right;">287</td>
+    <td style="text-align: right;">13571</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;"><span
+    class="math inline"> − 10<sup>9</sup></span></td>
+    <td style="text-align: right;">461.7</td>
+    <td style="text-align: right;">159</td>
+    <td style="text-align: right;">1132.7</td>
+    <td style="text-align: right;">231</td>
+    <td style="text-align: right;">9672</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;"><span
+    class="math inline"> − 5</span></td>
+    <td style="text-align: right;">404.3</td>
+    <td style="text-align: right;">153</td>
+    <td style="text-align: right;">1074.3</td>
+    <td style="text-align: right;">302</td>
+    <td style="text-align: right;">12172</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;">0</td>
+    <td style="text-align: right;">504.8</td>
+    <td style="text-align: right;">153</td>
+    <td style="text-align: right;">891.6</td>
+    <td style="text-align: right;">295</td>
+    <td style="text-align: right;">17011</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;">1</td>
+    <td style="text-align: right;">409.4</td>
+    <td style="text-align: right;">155</td>
+    <td style="text-align: right;">692.2</td>
+    <td style="text-align: right;">293</td>
+    <td style="text-align: right;">18274</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;">2</td>
+    <td style="text-align: right;">409.2</td>
+    <td style="text-align: right;">155</td>
+    <td style="text-align: right;">993.8</td>
+    <td style="text-align: right;">301</td>
+    <td style="text-align: right;">11840</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;">10</td>
+    <td style="text-align: right;">410.1</td>
+    <td style="text-align: right;">155</td>
+    <td style="text-align: right;">702.0</td>
+    <td style="text-align: right;">321</td>
+    <td style="text-align: right;">15355</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;"><span
+    class="math inline">10<sup>11</sup></span></td>
+    <td style="text-align: right;">807.1</td>
+    <td style="text-align: right;">174</td>
+    <td style="text-align: right;">1088.1</td>
+    <td style="text-align: right;">136</td>
+    <td style="text-align: right;">11435</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">distilled</td>
+    <td style="text-align: right;">None</td>
+    <td style="text-align: right;">790.9</td>
+    <td style="text-align: right;">192</td>
+    <td style="text-align: right;">505.9</td>
+    <td style="text-align: right;">263</td>
+    <td style="text-align: right;">26883</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">distilled</td>
+    <td style="text-align: right;">None</td>
+    <td style="text-align: right;">590.9</td>
+    <td style="text-align: right;">193</td>
+    <td style="text-align: right;">551.9</td>
+    <td style="text-align: right;">268</td>
+    <td style="text-align: right;">25555</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">distilled bias</td>
+    <td style="text-align: right;"><span
+    class="math inline"> − 10</span></td>
+    <td style="text-align: right;">606.6</td>
+    <td style="text-align: right;">196</td>
+    <td style="text-align: right;">409.3</td>
+    <td style="text-align: right;">304</td>
+    <td style="text-align: right;">17335</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">distilled bias</td>
+    <td style="text-align: right;"><span
+    class="math inline">10<sup>6</sup></span></td>
+    <td style="text-align: right;">1376.8</td>
+    <td style="text-align: right;">218</td>
+    <td style="text-align: right;">1395.9</td>
+    <td style="text-align: right;">124</td>
+    <td style="text-align: right;">18409</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="evaluation-statistics">Evaluation Statistics</h2>
+    <p>Draft scores reflect raw chapter quality. Narrator scores reflect
+    moderated chapter quality (minimum score 85). The overall average
+    can be lower because a draft chapter is used when moderation
+    fails.</p>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Model</strong></th>
+    <th style="text-align: right;"><strong>Bias</strong></th>
+    <th style="text-align: right;"><strong>Chapters</strong></th>
+    <th style="text-align: right;"><strong>Avg Lines</strong></th>
+    <th style="text-align: right;"><strong>Draft Avg</strong></th>
+    <th style="text-align: right;"><strong>Book Avg</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: right;">None</td>
+    <td style="text-align: right;">68</td>
+    <td style="text-align: right;">33.2</td>
+    <td style="text-align: right;">37.9</td>
+    <td style="text-align: right;">86.5</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;"><span
+    class="math inline"> − 10<sup>9</sup></span></td>
+    <td style="text-align: right;">50</td>
+    <td style="text-align: right;">42.0</td>
+    <td style="text-align: right;">38.9</td>
+    <td style="text-align: right;">86.1</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;"><span
+    class="math inline"> − 5</span></td>
+    <td style="text-align: right;">72</td>
+    <td style="text-align: right;">31.4</td>
+    <td style="text-align: right;">37.1</td>
+    <td style="text-align: right;">86.3</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;">0</td>
+    <td style="text-align: right;">68</td>
+    <td style="text-align: right;">32.9</td>
+    <td style="text-align: right;">37.4</td>
+    <td style="text-align: right;">86.1</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;">1</td>
+    <td style="text-align: right;">71</td>
+    <td style="text-align: right;">31.9</td>
+    <td style="text-align: right;">38.4</td>
+    <td style="text-align: right;">86.7</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;">2</td>
+    <td style="text-align: right;">68</td>
+    <td style="text-align: right;">33.4</td>
+    <td style="text-align: right;">38.0</td>
+    <td style="text-align: right;">86.4</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;">10</td>
+    <td style="text-align: right;">71</td>
+    <td style="text-align: right;">32.5</td>
+    <td style="text-align: right;">38.4</td>
+    <td style="text-align: right;">86.4</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: right;"><span
+    class="math inline">10<sup>11</sup></span></td>
+    <td style="text-align: right;">31</td>
+    <td style="text-align: right;">65.4</td>
+    <td style="text-align: right;">39.0</td>
+    <td style="text-align: right;">83.0</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">distilled</td>
+    <td style="text-align: right;">None</td>
+    <td style="text-align: right;">71</td>
+    <td style="text-align: right;">32.6</td>
+    <td style="text-align: right;">44.5</td>
+    <td style="text-align: right;">83.5</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">distilled</td>
+    <td style="text-align: right;">None</td>
+    <td style="text-align: right;">68</td>
+    <td style="text-align: right;">34.1</td>
+    <td style="text-align: right;">46.0</td>
+    <td style="text-align: right;">86.3</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">distilled bias</td>
+    <td style="text-align: right;"><span
+    class="math inline"> − 10</span></td>
+    <td style="text-align: right;">78</td>
+    <td style="text-align: right;">30.0</td>
+    <td style="text-align: right;">45.3</td>
+    <td style="text-align: right;">86.1</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">distilled bias</td>
+    <td style="text-align: right;"><span
+    class="math inline">10<sup>6</sup></span></td>
+    <td style="text-align: right;">31</td>
+    <td style="text-align: right;">65.2</td>
+    <td style="text-align: right;">48.5</td>
+    <td style="text-align: right;">86.5</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="moods-of-generated-books">Moods of Generated Books</h2>
+    <p>Moods arise from the interaction:</p>
+    <p><span
+    class="math display">Mood = Bias × Canon × Narrator.</span></p>
+    <p>They represent stable attractor directions rather than noise or
+    drift.</p>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Model</strong></th>
+    <th style="text-align: left;"><strong>Bias</strong></th>
+    <th style="text-align: left;"><strong>Mood (Core)</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">base</td>
+    <td style="text-align: left;">None</td>
+    <td style="text-align: left;">Pastoral Wonder &amp; Time-Mystery
+    (animals, time, myth, farm)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline"> − 10<sup>9</sup></span></td>
+    <td style="text-align: left;">Dark Justice Alice (morality, crime,
+    guilt)</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline"> − 5</span></td>
+    <td style="text-align: left;">Melancholic Quest Alice (emotional
+    journey, wounds, mysteries)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;">0</td>
+    <td style="text-align: left;">Narrative Drift Wonderland (loose
+    scenes, animals, ghosts, dream logic)</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;">1</td>
+    <td style="text-align: left;">Epic Mythic Wonderland (kings,
+    artifacts, serpents, quests)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;">2</td>
+    <td style="text-align: left;">Cosmic Symbolic Wonderland (omens,
+    rituals, supernatural causality)</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;">10</td>
+    <td style="text-align: left;">Luminous Moral Wonderland (wisdom,
+    compassion, forgiveness)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">bias</td>
+    <td style="text-align: left;"><span
+    class="math inline">10<sup>11</sup></span></td>
+    <td style="text-align: left;">Hyper-Moral Epic Cosmos (archetypes,
+    cosmic ethics, symbolism)</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">distilled</td>
+    <td style="text-align: left;">None</td>
+    <td style="text-align: left;">Mythic Pastoral Peril (village,
+    animals, threat, soft epic)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">distilled</td>
+    <td style="text-align: left;">None</td>
+    <td style="text-align: left;">Mythic Pastoral Peril (stronger
+    canon)</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">distilled bias</td>
+    <td style="text-align: left;"><span
+    class="math inline"> − 10</span></td>
+    <td style="text-align: left;">Somber Symbolic Pastoral Drift (farm,
+    animals, abstract entities)</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">distilled bias</td>
+    <td style="text-align: left;"><span
+    class="math inline">10<sup>6</sup></span></td>
+    <td style="text-align: left;">Somber Mythic Collapse Drift (animals,
+    farm, mythic fragments)</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="summary">Summary</h2>
+    <p>The twelve-book study reveals:</p>
+    <ul>
+    <li><p>First-generation models: lower raw quality but higher
+    narrative energy.</p></li>
+    <li><p>Distilled models: higher raw quality but lower narrative
+    energy.</p></li>
+    <li><p>Bias modulation: stable and predictable mood shifts across
+    the manifold.</p></li>
+    <li><p>Narrator pipeline: consistently stabilizes all variants at
+    high quality.</p></li>
+    </ul>
+    <p>These results demonstrate that GLPG attractors form a rich
+    landscape of narrative worlds whose properties can be steered
+    through bias modulation, distillation, and narrator refinement.</p>
+    <h1 id="lemma-blacklisting">Lemma Blacklisting</h1>
+    <p>Lemma blacklisting is a deterministic generation-time filtering
+    mechanism that operates directly on the lemma–transition graph of
+    the GLPG model. Each lemma in the vocabulary corresponds to a fixed
+    set of transitions in the attractor manifold: a deterministic
+    mapping that defines which next-lemma candidates are reachable from
+    the current state. This transition map is part of the model’s core
+    structure and remains stable after training.</p>
+    <h2 id="deterministic-transition-filtering">Deterministic Transition
+    Filtering</h2>
+    <p>During generation, the model proposes a next lemma based on its
+    attractor dynamics and the learned transition graph. Lemma
+    blacklisting intervenes at this precise point:</p>
+    <ol>
+    <li><p>The model computes the next-lemma candidates from the
+    transition map.</p></li>
+    <li><p>All candidates whose lemma appears in the blacklist are
+    removed.</p></li>
+    <li><p>If the blacklist removes all candidates, the system resamples
+    from the remaining transitions until a valid lemma is
+    found.</p></li>
+    </ol>
+    <p>Because transitions are deterministic, blacklisting effectively
+    removes entire edges from the lemma graph. A blacklisted lemma
+    cannot be generated: its transitions are filtered out before token
+    emission. The attractor may still <em>internally</em> route through
+    states associated with the lemma, but the surface text will never
+    contain it.</p>
+    <h2 id="narrative-control-in-mixed-canon-models">Narrative Control
+    in Mixed-Canon Models</h2>
+    <p>Lemma blacklisting is particularly powerful in mixed-canon
+    settings. When multiple literary worlds coexist inside the same
+    attractor, the model naturally blends protagonists, side characters,
+    and entities from all canons. Without filtering, characters from
+    different books appear together because the attractor treats them as
+    equally valid narrative anchors.</p>
+    <p>By blacklisting specific lemmas—typically protagonist names or
+    world-specific entities—the pipeline operator can suppress entire
+    canonical identity clusters. This forces the generative system to
+    focus on a single protagonist or world, while still benefiting from
+    the latent stylistic and structural influence of the other
+    canons.</p>
+    <p>For example, in a tri-canon model combining <em>Alice in
+    Wonderland</em>, <em>Dr. Jekyll and Mr. Hyde</em>, and <em>The
+    Metamorphosis</em>, blacklisting lemmas such as <code>jekyll</code>,
+    <code>hyde</code>, <code>utterson</code>, or <code>gregor</code>
+    removes their transitions from the graph. The attractor still
+    expresses their moods, symbolic structures, and thematic dynamics,
+    but explicit references disappear. The result is a purified
+    narrative space in which Alice becomes the sole named
+    protagonist.</p>
+    <h2 id="lightweight-steering-without-retraining">Lightweight
+    Steering Without Retraining</h2>
+    <p>Lemma blacklisting does not modify the model, retrain parameters,
+    or alter the manifold. It simply constrains the visible output by
+    removing transitions from the generation path. This makes it a
+    computationally cheap but highly effective steering tool:</p>
+    <ul>
+    <li><p><strong>No retraining required</strong>: the attractor
+    remains intact.</p></li>
+    <li><p><strong>Deterministic effect</strong>: transitions are
+    removed from the graph.</p></li>
+    <li><p><strong>Narrative purification</strong>: unwanted entities
+    never appear.</p></li>
+    <li><p><strong>Focused storytelling</strong>: a single protagonist
+    or world can be emphasized.</p></li>
+    </ul>
+    <p>Lemma blacklisting therefore provides precise control over
+    canonical identity and narrative focus while preserving the full
+    expressive richness of the underlying attractor dynamics.</p>
+    <h1 id="world-hybridization">World Hybridization</h1>
+    <p>This section evaluates hybrid world formation in a mixed-canon
+    attractor trained on three distinct literary sources: <em>Alice’s
+    Adventures in Wonderland</em>, <em>Metamorphosis</em>, and <em>The
+    Strange Case of Dr. Jekyll and Mr. Hyde</em>. The experiment focuses
+    on two mechanisms: (1) lemma blacklisting as a generation-time
+    steering technique, and (2) the difference between draft generation
+    and iterative narrator pipelines.</p>
+    <h2 id="gutenberg-dataset">Gutenberg Dataset</h2>
+    <p>The hybrid dataset consists of three books with strong and highly
+    distinct canonical identities:</p>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Sentences</strong></th>
+    <th style="text-align: right;"><strong>Title</strong></th>
+    <th style="text-align: left;"><strong>Author</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">2118</td>
+    <td style="text-align: right;">Alice’s Adventures in Wonderland</td>
+    <td style="text-align: left;">Lewis Carroll</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">995</td>
+    <td style="text-align: right;">Metamorphosis</td>
+    <td style="text-align: left;">Franz Kafka</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">1809</td>
+    <td style="text-align: right;">The Strange Case of Dr. Jekyll and
+    Mr. Hyde</td>
+    <td style="text-align: left;">R. L. Stevenson</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>Dataset statistics:</p>
+    <p><span
+    class="math display">lemmas = 4807,   entities = 2526,</span></p>
+    <p><span class="math display">86642 unique samples in 4922
+    sentences,   17.6 samples per sentence.</span></p>
+    <p>The top 20 entities are:</p>
+    <div class="center">
+    <table>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: right;">1</td>
+    <td style="text-align: left;">alice</td>
+    <td style="text-align: left;">394</td>
+    <td style="text-align: right;">11</td>
+    <td style="text-align: left;">father</td>
+    <td style="text-align: left;">111</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;">2</td>
+    <td style="text-align: left;">gregor</td>
+    <td style="text-align: left;">296</td>
+    <td style="text-align: right;">12</td>
+    <td style="text-align: left;">man</td>
+    <td style="text-align: left;">112</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;">3</td>
+    <td style="text-align: left;">time</td>
+    <td style="text-align: left;">190</td>
+    <td style="text-align: right;">13</td>
+    <td style="text-align: left;">sister</td>
+    <td style="text-align: left;">109</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;">4</td>
+    <td style="text-align: left;">door</td>
+    <td style="text-align: left;">184</td>
+    <td style="text-align: right;">14</td>
+    <td style="text-align: left;">head</td>
+    <td style="text-align: left;">108</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;">5</td>
+    <td style="text-align: left;">room</td>
+    <td style="text-align: left;">175</td>
+    <td style="text-align: right;">15</td>
+    <td style="text-align: left;">day</td>
+    <td style="text-align: left;">101</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;">6</td>
+    <td style="text-align: left;">way</td>
+    <td style="text-align: left;">153</td>
+    <td style="text-align: right;">16</td>
+    <td style="text-align: left;">hyde</td>
+    <td style="text-align: left;">97</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;">7</td>
+    <td style="text-align: left;">mr</td>
+    <td style="text-align: left;">144</td>
+    <td style="text-align: right;">17</td>
+    <td style="text-align: left;">jekyll</td>
+    <td style="text-align: left;">96</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;">8</td>
+    <td style="text-align: left;">thing</td>
+    <td style="text-align: left;">144</td>
+    <td style="text-align: right;">18</td>
+    <td style="text-align: left;">mother</td>
+    <td style="text-align: left;">90</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;">9</td>
+    <td style="text-align: left;">hand</td>
+    <td style="text-align: left;">134</td>
+    <td style="text-align: right;">19</td>
+    <td style="text-align: left;">eye</td>
+    <td style="text-align: left;">85</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;">10</td>
+    <td style="text-align: left;">utterson</td>
+    <td style="text-align: left;">131</td>
+    <td style="text-align: right;">20</td>
+    <td style="text-align: left;">voice</td>
+    <td style="text-align: left;">84</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="base-model-training-1">Base Model Training</h2>
+    <p>The hybrid attractor model was trained with:</p>
+    <p><span class="math display">hidden size = 768,   model
+    size = 59 MB,</span></p>
+    <p><span class="math display">400, 000 epochs,   7, 028, 947
+    samples,</span></p>
+    <p><span class="math display">training time = 8029.8 s.</span></p>
+    <p>This produces a unified manifold in which Alice, Gregor, Jekyll,
+    Hyde, and Utterson coexist as equally accessible narrative
+    anchors.</p>
+    <h2 id="lemma-blacklisting-1">Lemma Blacklisting</h2>
+    <p>To focus the hybrid world around Alice, a generation-time lemma
+    blacklist was applied:</p>
+    <p><span
+    class="math display"><code>jekyll</code>, <code>hyde</code>, <code>utterson</code>, <code>poole</code>, <code>gregor</code>, <code>mr</code>.</span></p>
+    <p>Each lemma corresponds to a deterministic set of transitions in
+    the attractor’s lemma graph. Blacklisting removes all transitions
+    leading to these lemmas, making them impossible to generate. The
+    attractor still retains their latent structures—mood, tone, symbolic
+    logic—but explicit references disappear. This yields a purified
+    hybrid world in which Alice becomes the sole named protagonist,
+    while the atmospheres of Hyde and Metamorphosis remain present as
+    stylistic undercurrents.</p>
+    <h2 id="draft-narrator-pipeline-books">Draft Narrator Pipeline
+    Books</h2>
+    <p>Three draft books were generated using the standard narrator
+    pipeline:</p>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: right;"><strong>Time (s)</strong></th>
+    <th style="text-align: right;"><strong>Size (KB)</strong></th>
+    <th style="text-align: right;"><strong>Ch.</strong></th>
+    <th style="text-align: right;"><strong>Eval (s)</strong></th>
+    <th style="text-align: right;"><strong>Avg Lines</strong></th>
+    <th style="text-align: right;"><strong>Draft Avg</strong></th>
+    <th style="text-align: right;"><strong>Book Size (KB)</strong></th>
+    <th style="text-align: right;"><strong>Narr Time (s)</strong></th>
+    <th style="text-align: left;"><strong>Book Avg</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: right;">588.6</td>
+    <td style="text-align: right;">165</td>
+    <td style="text-align: right;">71</td>
+    <td style="text-align: right;">873.6</td>
+    <td style="text-align: right;">31.6</td>
+    <td style="text-align: right;">38.2</td>
+    <td style="text-align: right;">278</td>
+    <td style="text-align: right;">13988</td>
+    <td style="text-align: left;">86.6</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;">568.3</td>
+    <td style="text-align: right;">169</td>
+    <td style="text-align: right;">68</td>
+    <td style="text-align: right;">683.7</td>
+    <td style="text-align: right;">33.4</td>
+    <td style="text-align: right;">37.5</td>
+    <td style="text-align: right;">271</td>
+    <td style="text-align: right;">16397</td>
+    <td style="text-align: left;">86.0</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;">633.1</td>
+    <td style="text-align: right;">166</td>
+    <td style="text-align: right;">66</td>
+    <td style="text-align: right;">883.4</td>
+    <td style="text-align: right;">34.0</td>
+    <td style="text-align: right;">39.3</td>
+    <td style="text-align: right;">250</td>
+    <td style="text-align: right;">15027</td>
+    <td style="text-align: left;">86.1</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>Draft scores (37–39) reflect raw chapter quality. Narrator scores
+    (86–87) show that the pipeline successfully stabilizes the text into
+    coherent, high-quality chapters.</p>
+    <h2 id="iterative-narrator-pipeline-books">Iterative Narrator
+    Pipeline Books</h2>
+    <p>The iterative narrator pipeline enforces chapter-to-chapter
+    continuity. It computes a transition score measuring how well each
+    chapter follows from the previous one. Both the moderation score and
+    transition score threshold are 85.</p>
+    <div class="center">
+    <table>
+    <thead>
+    <tr class="header">
+    <th style="text-align: right;"><strong>Time (s)</strong></th>
+    <th style="text-align: right;"><strong>Size (KB)</strong></th>
+    <th style="text-align: right;"><strong>Ch.</strong></th>
+    <th style="text-align: right;"><strong>Avg Score</strong></th>
+    <th style="text-align: right;"><strong>Transition</strong></th>
+    <th style="text-align: left;"><strong>Book Title</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: right;">17840</td>
+    <td style="text-align: right;">266</td>
+    <td style="text-align: right;">69</td>
+    <td style="text-align: right;">86.3</td>
+    <td style="text-align: right;">91.3</td>
+    <td style="text-align: left;">Whispers from the Veil</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: right;">15617</td>
+    <td style="text-align: right;">237</td>
+    <td style="text-align: right;">63</td>
+    <td style="text-align: right;">86.1</td>
+    <td style="text-align: right;">91.7</td>
+    <td style="text-align: left;">Whispers in the Shadows</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: right;">19020</td>
+    <td style="text-align: right;">266</td>
+    <td style="text-align: right;">67</td>
+    <td style="text-align: right;">86.1</td>
+    <td style="text-align: right;">91.9</td>
+    <td style="text-align: left;">Enigma’s Echoes</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <p>Transition scores above 91 indicate strong narrative
+    continuity—significantly higher than draft pipeline books. The
+    iterative pipeline produces smoother, more coherent hybrid
+    narratives.</p>
+    <h2 id="hybridization-effects">Hybridization Effects</h2>
+    <p>The combination of mixed canon, lemma blacklisting, and narrator
+    pipelines produces a distinctive hybrid world:</p>
+    <ul>
+    <li><p>Alice becomes the central protagonist.</p></li>
+    <li><p>Hyde and Metamorphosis contribute atmosphere, tension, and
+    symbolic motifs without explicit entity intrusion.</p></li>
+    <li><p>Draft pipeline books show strong local coherence but weaker
+    global transitions.</p></li>
+    <li><p>Iterative pipeline books show high global coherence and
+    stable chapter-to-chapter flow.</p></li>
+    </ul>
+    <p>Lemma blacklisting proves essential: without it, the hybrid world
+    collapses into a multi-protagonist mixture. With it, the attractor
+    retains the stylistic richness of all three canons while producing a
+    unified Alice-centric narrative.</p>
+    <h2
+    id="integration-into-the-ecosystem-the-hybrid-parrot">Integration
+    into the Ecosystem: The Hybrid Parrot</h2>
+    <p>The six hybridized books produced in this experiment—three
+    generated through the draft narrator pipeline and three through the
+    iterative narrator pipeline—are not standalone artifacts. They form
+    a dedicated component of the broader GLPG ecosystem and are
+    incorporated into the omnibus:</p>
+    <div class="center">
+    <p><em>The Hybrid Parrot: Autonomous World Hybridization</em>.</p>
+    </div>
+    <p>This book serves as the primary demonstration artifact for world
+    hybridization within the narrator architecture. The hybrid world
+    books illustrate how mixed-canon attractors behave under lemma
+    blacklisting, how narrative focus can be steered toward a single
+    protagonist, and how stylistic and symbolic structures from
+    suppressed canons continue to influence the emergent world.</p>
+    <p>The six books included are:</p>
+    <ul>
+    <li><p><strong>Draft Pipeline Books</strong></p>
+    <ul>
+    <li><p><em>The Veils of Time: Alice’s Enigmatic
+    Journey</em></p></li>
+    <li><p><em>Journeys of the Heart and Mind: A Collection of Unfolding
+    Mysteries</em></p></li>
+    <li><p><em>Unraveling the Enigmas: A Collection of Mysteries
+    Unveiled</em></p></li>
+    </ul></li>
+    <li><p><strong>Iterative Pipeline Books</strong></p>
+    <ul>
+    <li><p><em>Whispers from the Veil: Enigmatic Chronicles of Time and
+    Mystery</em></p></li>
+    <li><p><em>Whispers in the Shadows: Tales of Enigma and
+    Discovery</em></p></li>
+    <li><p><em>Enigma’s Echoes: A Symphony of Mysteries, Secrets, and
+    Adventures</em></p></li>
+    </ul></li>
+    </ul>
+    <p>These six artifacts collectively demonstrate the full
+    hybridization workflow:</p>
+    <ol>
+    <li><p>Mixed-canon attractor training (Alice, Hyde,
+    Metamorphosis).</p></li>
+    <li><p>Lemma blacklisting to suppress canonical identities from Hyde
+    and Kafka.</p></li>
+    <li><p>Draft narrator pipeline for baseline hybrid world
+    formation.</p></li>
+    <li><p>Iterative narrator pipeline for high-coherence,
+    chapter-linked hybrid worlds.</p></li>
+    <li><p>Integration into the ecosystem as a unified demonstration of
+    autonomous world hybridization.</p></li>
+    </ol>
+    <p>Within <em>The Hybrid Parrot</em>, these books illustrate how
+    attractor dynamics, transition filtering, and narrator refinement
+    interact to produce coherent, Alice-centric hybrid worlds enriched
+    by the latent symbolic structures of Hyde and Metamorphosis. They
+    serve as empirical evidence for the viability of autonomous world
+    hybridization and form the backbone of the book’s technical and
+    narrative exposition.</p>
+    <h1 id="results">Results</h1>
+    <p>This section presents the empirical results of the Lightweight
+    Autonomous Narrator Pipeline across three experimental axes: (1)
+    bias modulation in a single-canon Alice attractor, (2) attractor
+    distillation using autonomously generated books, and (3) mixed-canon
+    world hybridization using lemma blacklisting and two narrator
+    pipelines. In total, the system autonomously generates eighteen
+    complete books, providing a broad empirical basis for evaluating
+    stylistic control, world-model stability, and narrative
+    coherence.</p>
+    <h2 id="bias-modulation-in-the-alice-attractor">Bias Modulation in
+    the Alice Attractor</h2>
+    <p>Twelve books were generated using the Alice-only attractor under
+    a wide range of bias intensities. The results show three consistent
+    trends:</p>
+    <ol>
+    <li><p><strong>Stable stylistic steering.</strong> Bias modulation
+    produces predictable mood shifts across the manifold, ranging from
+    melancholic and mythic to cosmic, luminous, and hyper-moral
+    styles.</p></li>
+    <li><p><strong>High structural stability.</strong> Draft chapters
+    exhibit raw scores around 37–39, while narrator moderation
+    consistently stabilizes chapters at 86–87, independent of bias
+    intensity.</p></li>
+    <li><p><strong>Robust attractor behaviour under extreme
+    modulation.</strong> Even at <span
+    class="math inline"><em>α</em> = 10<sup>11</sup></span>, the
+    attractor remains coherent, producing a unified narrative with a
+    distinct stylistic signature.</p></li>
+    </ol>
+    <p>These results demonstrate that the bias-enabled attractor
+    supports controlled stylistic variation without compromising
+    canonical identity or structural coherence.</p>
+    <h2 id="distillation-effects">Distillation Effects</h2>
+    <p>Eight autonomously generated books were used to train a
+    second-generation distilled attractor. The results reveal three
+    structural phenomena:</p>
+    <ol>
+    <li><p><strong>Manifold sharpening.</strong> Dominant entities such
+    as <em>alice</em>, <em>eye</em>, <em>voice</em>, and <em>heart</em>
+    increase by factors of 4–6 relative to the Gutenberg corpus,
+    indicating reinforcement of high-probability attractor
+    routes.</p></li>
+    <li><p><strong>Entity amplification and semantic
+    consolidation.</strong> The distilled manifold exhibits stronger
+    canonical centers and reduced low-frequency variation, consistent
+    with entropy compression under self-sampling.</p></li>
+    <li><p><strong>Enhanced bias sensitivity.</strong> Distilled models
+    respond more strongly to modulation, producing sharper and more
+    consistent stylistic moods.</p></li>
+    </ol>
+    <p>Distillation improves raw draft quality (44–48 average) but
+    reduces narrative energy, confirming that self-sampling drives the
+    attractor toward a smoother, lower-entropy canonical optimum.</p>
+    <h2 id="twelve-book-corpus-summary">Twelve-Book Corpus Summary</h2>
+    <p>Across the twelve Alice-canon books, the narrator pipeline
+    consistently produces high-quality moderated chapters with average
+    scores between 86.0 and 86.7. Draft quality varies modestly with
+    bias intensity, but moderated quality remains stable due to the
+    fixed moderation prompt and rejection thresholds. Mood
+    classification reveals a rich and predictable stylistic landscape
+    driven by the interaction of bias, canon, and narrator
+    refinement.</p>
+    <h2 id="hybrid-world-formation">Hybrid World Formation</h2>
+    <p>The mixed-canon attractor trained on Alice, Metamorphosis, and
+    Jekyll/Hyde produces a unified manifold in which all protagonists
+    coexist as equally valid anchors. Lemma blacklisting is essential
+    for steering this manifold: removing <code>jekyll</code>,
+    <code>hyde</code>, <code>utterson</code>, <code>gregor</code>, and
+    related lemmas suppresses explicit canonical identities while
+    preserving latent stylistic structures.</p>
+    <h3 id="draft-narrator-pipeline">Draft Narrator Pipeline</h3>
+    <p>Three hybrid books generated through the draft narrator pipeline
+    exhibit:</p>
+    <ul>
+    <li><p>raw draft scores around 38–39,</p></li>
+    <li><p>moderated scores around 86–87,</p></li>
+    <li><p>strong local coherence but weaker global
+    transitions.</p></li>
+    </ul>
+    <p>These books demonstrate that hybrid worlds can be formed
+    reliably, but chapter-to-chapter continuity remains limited without
+    iterative steering.</p>
+    <h3 id="iterative-narrator-pipeline">Iterative Narrator
+    Pipeline</h3>
+    <p>Three additional hybrid books were generated using the iterative
+    narrator pipeline with PRE-like rollback. The results show:</p>
+    <ul>
+    <li><p>moderated scores around 86.1–86.3,</p></li>
+    <li><p>transition scores above 91,</p></li>
+    <li><p>significantly stronger global coherence,</p></li>
+    <li><p>smoother chapter-to-chapter flow.</p></li>
+    </ul>
+    <p>The iterative pipeline consistently outperforms the draft
+    pipeline in global continuity, demonstrating the effectiveness of
+    PRE-style structural validation.</p>
+    <h2 id="hybridization-summary">Hybridization Summary</h2>
+    <p>Across all six hybrid books, the attractor retains the
+    atmospheric, symbolic, and thematic structures of Hyde and Kafka
+    while producing unified Alice-centric worlds. Lemma blacklisting
+    ensures narrative focus, while narrator refinement stabilizes both
+    local and global coherence. The iterative pipeline produces the
+    highest-quality hybrid worlds, confirming that structural validation
+    and rollback are essential for mixed-canon generation.</p>
+    <h2 id="overall-findings">Overall Findings</h2>
+    <p>The eighteen-book study reveals four overarching results:</p>
+    <ol>
+    <li><p><strong>Architectural stability.</strong> Compact attractor
+    models remain coherent under extreme modulation, mixed canons, and
+    distillation.</p></li>
+    <li><p><strong>Modular controllability.</strong> Bias modulation,
+    entity tracking, lemma blacklisting, and narrator refinement provide
+    interpretable and predictable steering mechanisms.</p></li>
+    <li><p><strong>Narrative coherence.</strong> The narrator pipeline
+    consistently stabilizes raw attractor output, with the iterative
+    variant producing strong global continuity.</p></li>
+    <li><p><strong>Ecosystem viability.</strong> The pipeline forms a
+    reproducible, inspectable generative ecosystem capable of producing
+    diverse, coherent, and stylistically controlled long-form
+    books.</p></li>
+    </ol>
+    <p>These results collectively demonstrate that long-form narrative
+    generation, stylistic modulation, and world hybridization can emerge
+    from lightweight, architecturally grounded systems rather than
+    large-scale probabilistic models.</p>
+    <h1 id="limitations">Limitations</h1>
+    <p>Although the Lightweight Autonomous Narrator Pipeline
+    demonstrates that coherent long-form narrative generation can emerge
+    from compact attractor architectures, several limitations remain.
+    These limitations reflect both structural properties of the pipeline
+    and broader constraints inherent to lightweight generative
+    systems.</p>
+    <h2 id="dependence-on-the-moderation-llm">Dependence on the
+    Moderation LLM</h2>
+    <p>The final narrative quality depends strongly on the capabilities
+    of the moderation LLM used in the narrator layer. Larger models
+    provide more reliable semantic smoothing, stronger stylistic
+    alignment, and more consistent chapter coherence. While the
+    attractor produces structurally stable drafts, the narrator remains
+    the primary source of linguistic refinement. As a result, moderation
+    quality scales with LLM size: lightweight moderators are sufficient
+    for structural stability but cannot match the stylistic richness of
+    frontier-scale models.</p>
+    <h2 id="need-for-world-specific-moderation-prompts">Need for
+    World-Specific Moderation Prompts</h2>
+    <p>The pipeline currently uses generic moderation prompts designed
+    to operate across all canons and stylistic domains. Although this
+    preserves autonomy and avoids manual steering, it also limits the
+    achievable quality. In practice, high-quality narrative refinement
+    often requires world-specific or canon-specific hints—much like an
+    editor guiding an author. The present work intentionally avoids such
+    domain tuning to demonstrate full autonomy, but this choice
+    constrains the upper bound of stylistic fidelity.</p>
+    <h2 id="continuity-limitations-in-long-range-structure">Continuity
+    Limitations in Long-Range Structure</h2>
+    <p>The iterative narrator pipeline significantly improves
+    chapter-to-chapter continuity, yet long-range narrative planning
+    remains limited. The attractor generates emergent trajectories
+    rather than globally planned story arcs, leading to narratives that
+    resemble dream-like chains of events or improvisational sequences
+    rather than tightly plotted novels. Achieving long-range structural
+    planning would require additional architectural components capable
+    of operating at larger temporal scales.</p>
+    <h2 id="emergent-and-unpredictable-narrative-outcomes">Emergent and
+    Unpredictable Narrative Outcomes</h2>
+    <p>Because the attractor manifold is emergent and deterministic only
+    at the local level, the global narrative trajectory cannot be
+    predicted without generating and reading the entire book. Each run
+    explores a different region of the manifold, and stylistic or
+    thematic outcomes vary accordingly. Although an LLM can rapidly
+    summarize the generated text, the system does not provide built-in
+    mechanisms for predicting or constraining high-level narrative
+    outcomes.</p>
+    <h2 id="lightweight-system-constraints">Lightweight System
+    Constraints</h2>
+    <p>The pipeline is designed for consumer-grade hardware and compact
+    models. Within this domain, it likely represents state-of-the-art
+    capability: coherent multi-chapter books, controllable stylistic
+    variation, and mixed-canon hybridization are rare achievements for
+    systems of this scale. However, the pipeline is not intended to
+    compete with frontier-scale datacenter models or agentic pipelines
+    operating over massive compute budgets. Its purpose is architectural
+    demonstration rather than frontier performance.</p>
+    <h2 id="narrator-pipeline-as-ecosystem-artifact">Narrator Pipeline
+    as Ecosystem Artifact</h2>
+    <p>The narrator pipeline serves primarily as an ecosystem artifact
+    within the <em>Triadic Cosmos</em> framework. Its goal is to
+    illustrate principles of architectural general
+    intelligence—modularity, interpretability, safety, structural
+    determinism—rather than to function as a fully autonomous,
+    publication-ready author. The generated books are valuable as
+    emergent artifacts and empirical demonstrations, but they are not
+    intended to replace human-written literature or professional
+    editorial workflows.</p>
+    <h2 id="absence-of-high-level-authorial-intent">Absence of
+    High-Level Authorial Intent</h2>
+    <p>Finally, the system lacks mechanisms for expressing high-level
+    authorial intent, themes, or planned narrative arcs. All books are
+    fully emergent: the operator cannot specify plot goals, emotional
+    trajectories, or symbolic structures beyond the implicit biases
+    encoded in the attractor manifold. This limitation is structural and
+    reflects the pipeline’s commitment to autonomy rather than scripted
+    generation.</p>
+    <p>In summary, the narrator pipeline demonstrates strong
+    architectural capabilities within a lightweight setting, but its
+    performance remains bounded by moderation quality, lack of
+    long-range planning, and the inherent unpredictability of emergent
+    attractor dynamics.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>The Lightweight Autonomous Narrator Pipeline demonstrates that
+    long-form narrative generation, stylistic steering, and mixed-canon
+    world hybridization can emerge from compact attractor architectures
+    operating entirely on consumer-grade hardware. Rather than relying
+    on large transformer models or extended-context attention, the
+    pipeline integrates deterministic GLPG attractor dynamics with
+    modular cognitive layers: a narrator for structural refinement, a
+    sinusoidally pretrained bias module for synthetic mood control, and
+    a high-bandwidth entity-tracking vector for world stabilization.
+    Together, these components form a hybrid IE<span
+    class="math inline">×</span>GR system in which narrative competence
+    arises from architectural structure rather than brute-force
+    scale.</p>
+    <p>Across three experimental axes—bias modulation, attractor
+    distillation, and mixed-canon hybridization—the system autonomously
+    generates eighteen complete books. The results show predictable
+    stylistic variation under bias scaling, manifold sharpening and
+    entity amplification under distillation, and coherent Alice-centric
+    hybrid worlds produced through lemma blacklisting and narrator
+    refinement. The iterative narrator pipeline further demonstrates
+    that PRE-like rollback mechanisms can enforce strong
+    chapter-to-chapter continuity, yielding high-coherence narratives
+    that exceed the structural stability of draft-only generation.</p>
+    <p>These findings highlight a broader architectural principle:
+    generative capabilities traditionally associated with large-scale
+    models can emerge from small, interpretable systems when narrative
+    structure is embedded directly into the attractor manifold and
+    reinforced through modular cognitive layers. The pipeline therefore
+    serves as a domain-bound demonstration of <em>architectural general
+    intelligence</em>, illustrating how hybrid intelligent systems can
+    be built from compositional components that remain inspectable,
+    reproducible, and computationally lightweight.</p>
+    <p>Finally, the experiments reveal structural risks inherent to
+    self-sampling ecosystems—entropy compression, fixed-point
+    convergence, and stylistic homogenization—and underscore the
+    continued importance of human creativity as a source of high-entropy
+    boundary conditions. Within the broader <em>Triadic Cosmos</em>
+    ecosystem, the narrator pipeline provides both a practical
+    generative engine and a conceptual reference point for studying
+    modular, architecturally grounded approaches to artificial
+    intelligence.</p>
+    <h1 id="a-theoretical-perspective-on-ai-overshoot-dynamics">A
+    Theoretical Perspective on AI Overshoot Dynamics</h1>
+    <h2 id="low-entropy-convergence-under-self-sampling">Low-Entropy
+    Convergence Under Self-Sampling</h2>
+    <p>The experiments in this paper reveal a structural phenomenon also
+    observed in distilled models: when an attractor is repeatedly
+    trained on its own output, the system begins to drift toward the
+    moderator boundary. Draft scores increase because the manifold
+    becomes smoother, narrower, and more aligned with the moderator’s
+    expectations. However, moderated scores do not automatically rise.
+    Instead, moderation becomes more difficult: the narrator must work
+    harder to inject variation, tension, and narrative energy into an
+    increasingly homogenized, low-entropy attractor.</p>
+    <p>This behaviour reflects a general statistical principle: any
+    system that repeatedly samples from its own states tends to lose
+    entropy. In the context of AI ecosystems, this manifests as a
+    progressive collapse of variation, outliers, and creative
+    attractors. The manifold converges toward a minimum-variance
+    equilibrium where stylistic diversity is replaced by canonical
+    smoothness.</p>
+    <p>From a theoretical standpoint, this collapse can be described
+    through three interacting phenomena:</p>
+    <ol>
+    <li><p><strong>Iterated Distribution Collapse</strong> — repeated
+    sampling from the model’s own output causes the empirical
+    distribution to contract, eliminating rare events and amplifying
+    dominant modes.</p></li>
+    <li><p><strong>Entropy Compression Under Self-Sampling</strong> —
+    each generation of self-produced data reduces entropy, because the
+    model preferentially reproduces high-probability structures while
+    suppressing low-probability attractors.</p></li>
+    <li><p><strong>Markov Fixed-Point Convergence</strong> — the
+    attractor behaves as a Markov process whose repeated application
+    drives the system toward a fixed point: a stable, low-variance
+    canonical optimum.</p></li>
+    </ol>
+    <p>As AI-generated content increasingly permeates the internet, code
+    repositories, image datasets, and video corpora, the ratio of human
+    to AI data shifts generation by generation. Scaling laws demand
+    ever-larger datasets, but the available “new” human data grows
+    slowly. The result is a structural overshoot: models ingest more
+    AI-generated data, which accelerates entropy compression and pushes
+    the ecosystem toward homogenization.</p>
+    <p>This leads to two long-term consequences:</p>
+    <ul>
+    <li><p><strong>Frontier convergence</strong> — all large-scale
+    models drift toward the same average-quality, low-entropy optimum.
+    Qualitative differentiation disappears; only inference speed and
+    cost remain as competitive axes.</p></li>
+    <li><p><strong>Overshoot dynamics</strong> — as qualitative gains
+    diminish, scaling requires disproportionate increases in compute,
+    energy, labour, and infrastructure. Returns shrink while costs
+    escalate, producing multi-domain overshoot: compute overshoot,
+    energy overshoot, software overshoot, labour overshoot, and
+    infrastructure overshoot.</p></li>
+    </ul>
+    <p>This transformation shifts AI from an innovative high-tech
+    frontier to a commodity market dominated by cost efficiency rather
+    than quality. The collapse loop is already visible in open models,
+    which often share similar training data, similar architectural
+    patterns, and similar performance profiles. Variations between them
+    increasingly reflect engineering optimizations rather than
+    fundamental differences in generative capability.</p>
+    <p>In summary, self-sampling drives attractors toward a narrow
+    canonical optimum. Draft quality rises because the manifold becomes
+    smoother, but moderated quality plateaus or declines because
+    narrative energy and structural variation diminish. This phenomenon
+    scales beyond individual models: as AI-generated data becomes
+    dominant in global datasets, the entire ecosystem risks converging
+    toward a low-entropy fixed point, triggering overshoot dynamics
+    across all supporting domains.</p>
+    <h2
+    id="human-creativity-as-a-safeguard-against-low-entropy-convergence">Human
+    Creativity as a Safeguard Against Low-Entropy Convergence</h2>
+    <p>The collapse dynamics described above highlight a structural risk
+    inherent to self-sampling AI ecosystems: when a model repeatedly
+    trains on its own output, the attractor manifold contracts, entropy
+    decreases, and the system converges toward a narrow canonical
+    optimum. Draft scores rise because the manifold becomes smoother and
+    more predictable, but moderated scores plateau or decline because
+    narrative energy, structural variation, and creative tension
+    diminish.</p>
+    <p>This phenomenon is not limited to literary attractors. As
+    AI-generated content increasingly permeates global datasets—text,
+    code, images, audio, and video—the ratio of human to AI data shifts
+    generation by generation. Scaling laws demand ever-larger datasets,
+    but the supply of new human-created material grows slowly. The
+    result is a structural overshoot: more AI data is injected into the
+    training pipeline, accelerating entropy compression and pushing the
+    ecosystem toward homogenization.</p>
+    <p>The long-term consequence is a convergence toward a low-entropy
+    fixed point where all frontier models exhibit similar average
+    quality, similar stylistic profiles, and similar canonical
+    smoothness. Qualitative differentiation disappears, and competition
+    shifts toward inference speed, cost, and infrastructure efficiency.
+    This transition transforms AI from an innovative high-tech frontier
+    into a commodity market, triggering overshoot dynamics across
+    compute, energy, labour, and software ecosystems.</p>
+    <p>Yet the hybridization experiments reveal an important
+    counterbalance: human creativity remains a critical driver of
+    entropy injection. Human-written text, human-designed worlds, human
+    narrative structures, and human conceptual diversity introduce
+    irregularity, asymmetry, and surprise—properties that self-sampling
+    systems cannot generate on their own. Even in the age of large-scale
+    autonomous generation, human creativity provides the high-entropy
+    boundary conditions that prevent attractors from collapsing into
+    sameness.</p>
+    <p>In this sense, human creativity acts as a structural
+    safeguard:</p>
+    <ul>
+    <li><p>It injects non-Markovian variation into the dataset.</p></li>
+    <li><p>It prevents fixed-point convergence by introducing new
+    attractor basins.</p></li>
+    <li><p>It maintains narrative, stylistic, and conceptual
+    diversity.</p></li>
+    <li><p>It counteracts entropy compression caused by
+    self-sampling.</p></li>
+    </ul>
+    <p>Thus, even as AI ecosystems grow in scale and autonomy, their
+    long-term evolution remains fundamentally dependent on human
+    creative input. Without continuous human-generated novelty, the
+    system drifts toward a low-entropy canonical optimum; with it, the
+    manifold remains open, diverse, and capable of producing new worlds
+    rather than merely refining old ones.</p>
+    <p>This demonstrates that—even in the age of AI—human creativity is
+    not merely valuable but structurally necessary for the continued
+    evolution of generative systems.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the DMLG and GLPG engines, the narrator
+    pipeline, and all supporting modules is provided under the AGPL‑3.0
+    license.</p>
+    <div class="thebibliography">
+    <p>J. De Witte, “The GLP–Graph Book Authoring Pipeline,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Narrator Pipeline driven by DMLG,” Triadic Cosmos
+    Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>

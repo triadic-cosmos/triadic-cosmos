@@ -1,0 +1,182 @@
+/* ---------------------------------------------------------
+   TRIADIC COSMOS — COSMOLOGICAL THEME
+   A dark, cosmic, geometric aesthetic for HTML books
+   --------------------------------------------------------- */
+
+/* ---------- COLOR PALETTE ----------
+   Cosmic Black:      #0b0e12
+   Deep Space Blue:   #111827
+   Nebula Violet:     #6d28d9
+   Ionized Teal:      #14b8a6
+   Star Glow:         #fef3c7
+   Soft White:        #e5e7eb
+-------------------------------------- */
+
+body {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  background: radial-gradient(circle at 20% 20%, #111827, #0b0e12 70%);
+  color: #e5e7eb;
+  margin: 0;
+  padding: 0;
+  line-height: 1.7;
+}
+
+/* ---------- LAYOUT CONTAINER ---------- */
+
+#container {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 2rem;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* ---------- SIDEBAR / TOC ---------- */
+
+#toc {
+  width: 200px;
+  background: rgba(17, 24, 39, 0.7);
+  backdrop-filter: blur(6px);
+  padding: 1.2rem 1.4rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+  box-shadow: 0 0 20px rgba(109, 40, 217, 0.15);
+}
+
+#toc h2 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  letter-spacing: 0.05em;
+  color: #fef3c7;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+#toc ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+#toc li {
+  margin: 0.4rem 0;
+}
+
+#toc a {
+  color: #14b8a6;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+#toc a:hover {
+  color: #6d28d9;
+}
+
+/* ---------- MAIN CONTENT ---------- */
+
+#content {
+  flex: 1;
+  background: rgba(11, 14, 18, 0.6);
+  padding: 3rem 3rem;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow: 0 0 25px rgba(20, 184, 166, 0.12);
+
+  max-width: 720px;      
+  margin: auto;          
+  line-height: 1.75;     
+}
+
+/* ---------- HEADINGS ---------- */
+
+h1, h2, h3 {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+  font-weight: 600;
+  margin-top: 2.2rem;
+  margin-bottom: 1rem;
+  color: #fef3c7;
+}
+
+h1 {
+  font-size: 2.2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.6rem;
+  color: #14b8a6;
+}
+
+h3 {
+  font-size: 1.3rem;
+  color: #6d28d9;
+}
+
+/* ---------- LINKS ---------- */
+
+a {
+  color: #14b8a6;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #6d28d9;
+}
+
+/* ---------- CODE BLOCKS ---------- */
+
+pre, code {
+  background: #111827;
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  font-family: "JetBrains Mono", monospace;
+  color: #fef3c7;
+}
+
+/* ---------- BLOCKQUOTES ---------- */
+
+blockquote {
+  border-left: 4px solid #6d28d9;
+  padding-left: 1rem;
+  margin-left: 0;
+  color: #c4b5fd;
+  font-style: italic;
+}
+
+/* ---------- TABLES ---------- */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  padding: 0.75rem;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+th {
+  background: rgba(109, 40, 217, 0.2);
+  color: #fef3c7;
+}
+
+td {
+  background: rgba(255,255,255,0.03);
+}
+
+/* ---------- SMALL COSMIC ANIMATION ---------- */
+
+@keyframes starPulse {
+  0% { text-shadow: 0 0 4px rgba(254,243,199,0.4); }
+  50% { text-shadow: 0 0 12px rgba(254,243,199,0.8); }
+  100% { text-shadow: 0 0 4px rgba(254,243,199,0.4); }
+}
+
+h1 {
+  animation: starPulse 6s ease-in-out infinite;
+}
