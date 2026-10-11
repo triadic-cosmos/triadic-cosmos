@@ -189,6 +189,47 @@ and structural recursion into one coherent framework.
 
 ---
 
+## 🔺 Fun Fact: From Joachim of Fiore to the Triadic Cosmos
+
+Triadic architectural thinking has a surprisingly long lineage.  
+One of the earliest triadic system designers was **Joachim of Fiore** (1132–1202),  
+a medieval thinker who divided human history into three transformative ages:
+
+1. **Age of the Father** — order  
+2. **Age of the Son** — transformation  
+3. **Age of the Spirit** — emergence
+
+Eight centuries later, the **Triadic Cosmos** introduces a modern, scientific  
+triad built around the **triadic roles**:
+
+- **Information** — distinctions, state, identity  
+- **Energy** — transformation, activation, dynamics  
+- **Geometry** — structure, constraints, relational form
+
+A curious resonance appears across the centuries:  
+Fiore’s three ages map surprisingly well onto the triadic roles —  
+**order ↔ information**, **transformation ↔ energy**, **emergence ↔ geometry**.  
+Even in the Triadic Cosmos ecosystem, the geometry of the cosmos is literally  
+an emergent role produced by recursive interaction.
+
+This makes Fiore’s model a striking example of something central to the  
+Triadic Cosmos:  
+**triadic structures behave like a recursive fractal that reappears across  
+domains — from cosmology and computation to medieval historiography.**
+
+These roles form the basis of the ecosystem’s generative architecture.  
+Through **recursion**, they produce the triadic cycle that drives attractors,  
+world models, and the narrator pipeline:  
+Information activates Energy, Energy shapes Geometry, Geometry yields new Information.
+
+The coincidence is delightful:  
+the earliest triadic architect was named **Joachim**,  
+and the latest triadic architect… is also **Joachim**.
+
+A small historical loop inside a much larger triadic universe.
+
+---
+
 ## 🧠 Fun Fact: The Rarity of Architectural Ecosystems
 
 Architectural ecosystems like the **Triadic Cosmos** are exceptionally rare.  
