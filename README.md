@@ -3701,6 +3701,80 @@ human cognition — yet here it emerges from a small attractor engine with a few
 modular cognitive layers. Not AGI in the frontier sense, but a striking example
 of **architectural general intelligence** in action.
 
+---
+
+### **58. The Structural Force Constraint on Terrestrial Fusion**
+
+Terrestrial fusion is widely imagined as the ultimate energetic breakthrough — a technology that
+could stabilize global demand, unlock sustainable AI scaling, and even power interstellar vessels.
+This paper demonstrates that such expectations are **structurally impossible**. All terrestrial
+fusion architectures rely exclusively on **electromagnetic confinement** to produce **electromagnetic
+output**. Without a **free structural force**, no fusion system can form a closed energetic cycle.
+By conservation of energy, terrestrial fusion is **intrinsically net‑negative**.
+
+The paper introduces three architectural principles that together form a complete no‑go theorem
+for fusion on Earth:
+
+#### **1. The Structural Force Constraint**
+A nuclear energy system is net‑positive *only* when the force maintaining reaction conditions is
+**free**.
+
+- **Fission:** strong + weak forces → free chain reactivity  
+- **Stellar fusion:** gravity → free confinement and compression  
+- **Terrestrial fusion:** electromagnetism → *not free*, therefore net‑negative  
+
+This constraint is universal and independent of engineering refinement.
+
+#### **2. The Triadic Cycle Simulation Law**
+Stellar fusion succeeds because it implements a **single unified triadic cycle**:
+
+**I → E → G → I**
+
+Terrestrial fusion attempts to imitate this natural closure using **multiple artificial cycles**:
+magnetic confinement, plasma heating, cryogenics, diagnostics, and mechanical stabilization.
+These cycles do **not** recurse into a unified triadic flow. Fragmentation forces the system to
+spend increasing external energy coordinating its own subsystems, producing **energetic overshoot**
+rather than net‑positive output.
+
+#### **3. Upper Bounds on Triadic Closures**
+Even perfect triadic systems have intrinsic limits. Stellar fusion becomes endothermic at iron,
+causing collapse despite gravity being free. Terrestrial fusion reaches its upper bound far earlier:
+at the point where electromagnetic confinement requires more energy than fusion can deliver.
+The triadic cycle cannot close.
+
+### **Why this paper matters**
+- It reframes fusion not as an engineering challenge but as an **architectural impossibility**.  
+- It shows that fusion cannot stabilize AI energy demand and instead becomes a **capital and
+  energetic sink**.  
+- It connects fusion directly to the **Closure Overshoot Law**, revealing that fusion scaling is
+  itself an overshoot phenomenon.  
+- It provides the structural bridge between Paper #55 (AI Overshoot) and Paper #56 (Triadic
+  Stellar Cycle), completing the ecosystem’s energetic architecture.
+
+### **Ecosystem relevance**
+Paper #58 is the **energetic counterpart** to the ecosystem’s closure analyses:
+
+- Paper #55 shows overshoot in a modern intelligence‑closure.  
+- Paper #56 shows triadic recursion and overshoot in stellar closures.  
+- Paper #58 shows why terrestrial fusion cannot become a triadic closure and therefore cannot
+  serve as an escape mechanism for any closed world.
+
+Together, these papers demonstrate that **no closed system can escape its limits through energetic
+expansion**. Only architectural correction can restore stability.
+
+### **Canon status**
+This document is a **foundational energetic no‑go theorem** within the Triadic Cosmos ecosystem.
+It dismantles one of the most persistent futurist assumptions: that fusion is a closure‑breaking
+technology. Instead, fusion is revealed to be a **closure‑confinement mechanism** — a structural
+trap that amplifies entropy, recirculation, and instability.
+
+### **🚀 Fun Fact: Fusion Is Not a Starship Escape — It Is a Starship Trap 🛸**
+Across science and science fiction, fusion is portrayed as the miracle engine that lets a starship
+break free from its closure. This paper shows the opposite: fusion is **architecturally impossible**
+inside a closed vessel and makes a starship **even more unstable** than fission. The “miracle
+reactor” becomes an **entropy oven**, turning the starship into the most extreme form of closure
+confinement.
+
 </details>
 
 ---
