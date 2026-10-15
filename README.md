@@ -3950,6 +3950,50 @@ must remain within the limits of its own closure.
 
 ---
 
+## 🔷 Ecosystem Insight: AI Means *Architectural* Intelligence — Not Artificial Intelligence
+
+Across the Triadic Cosmos ecosystem, “AI” is not interpreted as *artificial intelligence*.  
+Artificial intelligence implies imitation: a statistical engine that approximates human cognition  
+through correlation, interpolation, or large‑scale pattern matching.
+
+The ecosystem adopts a different position:
+
+> **AI is Architectural Intelligence — a cognitive system whose capacity is defined entirely  
+> by its architecture and the closure in which it operates.**
+
+Under this definition, every modern AI system is an *architectural intelligence*:
+
+- **LLMs** are architectural intelligences with a *statistical closure*:  
+  vast semantic bandwidth, but monolithic manifolds and corpus‑bounded reasoning.
+
+- **GLPG** is an architectural intelligence with a *deterministic–emergent closure*:  
+  stable attractor geometry, canonical routing, and compact semantic emergence.
+
+- **Hybrid pipelines** (GLPG × LLM × evaluators × CAS) are architectural intelligences  
+  with *compositional closure*: multi‑module reasoning, moderation loops, and  
+  world‑model blending.
+
+Each system is intelligent only to the extent that its architecture allows.  
+Its closure defines what it can know, what it can infer, and what cognitive operations it can execute.
+
+This reframing resolves multiple contradictions in contemporary AI discourse:
+
+- LLMs appear “smart” but fail at long‑horizon reasoning → **statistical closure**.  
+- Micro‑LMs show structured cognition → **architectural closure**.  
+- Hybrid systems outperform monoliths → **compositional closure**.  
+- Scaling fails to produce AGI → **closure cannot be broken by scale**.  
+- Agents collapse under recursion → **monolithic closure cannot sustain world‑models**.
+
+Architectural Intelligence Theory therefore replaces the artificial paradigm with a structural one:
+
+> **Intelligence is not a property of a model.  
+> Intelligence is a property of an architecture.**
+
+This insight forms the conceptual foundation for the ecosystem’s definition of AGI,  
+the structural limits of statistical systems, and the architectural pathway toward ASI.
+
+---
+
 ## 🔷 Ecosystem Insight: A Counterexample for Contemporary AI Claims
 
 Across the ecosystem, intelligence is treated as an architectural property,  
