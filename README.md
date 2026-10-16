@@ -1045,6 +1045,65 @@ a demonstration that **hybrid world‑closure** is a viable generative paradigm,
 capable of producing coherent long‑form literature with emergent variation  
 and stable canon — all without human intervention.
 
+### **20. The Parrot Family: CAS‑Driven Cognitive Worlds** 🦜🧭
+
+**The Parrot Family** is the twentieth volume in the Triadic Cosmos Library and the  
+first to demonstrate **CAS‑modulated world‑generation** inside a full **GLPG narrator pipeline**.  
+Where earlier Parrot volumes explored monolithic worlds, autonomous recursion, mood‑bias  
+geometry, or hybrid attractors, this book introduces a new cognitive dimension:  
+**vectorial personality modulation**.
+
+#### 🧭 CAS Modulation  
+Within the ecosystem, **CAS** (Content–Accuracy–Safety) is extended into a  
+**vectorial personality field**: a compact bias‑space that shapes how the GLPG  
+world‑closure expresses itself.  
+Rather than steering style directly, CAS modulates the **latent attractor geometry**  
+of the narrator:
+
+- shifting which worlds dominate,  
+- suppressing or amplifying stylistic manifolds,  
+- altering emotional physics,  
+- and rebalancing the internal cadence of the GLPG model.
+
+CAS modulation does not create new styles; it reshapes the **cognitive attractor**  
+that already exists inside the world‑closure.  
+The result is a set of emergent authors — synthetic voices that do not exist in the  
+dataset, each formed by a different CAS personality manifold.
+
+#### 🌗 From Moody Parrot to Parrot Family
+Where **The Moody Parrot** demonstrated emotional bias as a cognitive mechanism,  
+**The Parrot Family** extends this idea into a full personality geometry.  
+Each book in this volume is grown under a distinct CAS modulation, producing  
+ten autonomous worlds with:
+
+- surreal cosmic logic,  
+- decadent gothic introspection,  
+- melancholic relational physics,  
+- void‑core minimalism,  
+- hyper‑aberrant dream‑geometry,  
+- and multi‑world drift states.
+
+All books are generated end‑to‑end without prompting, steering, filtering, or curation.  
+Every chapter is presented exactly as produced by the pipeline:  
+the raw interaction between **GLPG world‑closure**, **CAS modulation**, and  
+**autonomous narrator recursion**.
+
+#### 🌀 Why This Book Matters  
+**The Parrot Family** is the first ecosystem artefact to show how:
+
+- **vectorial personality fields** can reshape world‑closure attractors,  
+- **synthetic authors** emerge from architectural bias rather than statistical imitation,  
+- **multi‑style manifolds** can be combined, inverted, or suppressed deterministically,  
+- and how **GLPG** can maintain structural coherence even under extreme modulation.
+
+It is a demonstration that *personality geometry* is a new generative dimension  
+within the Triadic Cosmos — a cognitive mechanism that allows small models to  
+produce literature outside the traditional human manifold.
+
+**A showcase of vectorial authorship.**  
+**A new pillar of the Parrot Family.**  
+**A milestone in CAS‑driven generative cognition.**
+
 </details>
 
 <details>
