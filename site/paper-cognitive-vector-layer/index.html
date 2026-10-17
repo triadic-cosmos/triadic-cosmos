@@ -1,0 +1,1781 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Extending GLP–Graph with CAS<br />
+Architectural Personality Modulation and Closure-Breaking
+Generation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a
+    href="#cas-cognitive-vectors-for-content-and-personality-modulation"
+    id="toc-cas-cognitive-vectors-for-content-and-personality-modulation">CAS:
+    Cognitive Vectors for Content and Personality Modulation</a></li>
+    <li><a
+    href="#cas-vectors-as-personality-modulators-in-glpg-training"
+    id="toc-cas-vectors-as-personality-modulators-in-glpg-training">CAS
+    Vectors as Personality Modulators in GLPG Training</a></li>
+    <li><a
+    href="#cas-glpg-as-a-vector-driven-promptless-search-mechanism"
+    id="toc-cas-glpg-as-a-vector-driven-promptless-search-mechanism">CAS
+    × GLPG as a Vector-Driven Promptless Search Mechanism</a></li>
+    <li><a
+    href="#cas-glpg-as-an-empirical-instance-of-architectural-intelligence"
+    id="toc-cas-glpg-as-an-empirical-instance-of-architectural-intelligence">CAS
+    × GLPG as an Empirical Instance of Architectural
+    Intelligence</a></li>
+    <li><a href="#dataset-and-canon-profiles"
+    id="toc-dataset-and-canon-profiles">Dataset and Canon
+    Profiles</a></li>
+    <li><a href="#the-parrot-family-a-cas-personality-atlas"
+    id="toc-the-parrot-family-a-cas-personality-atlas">The Parrot
+    Family: A CAS Personality Atlas</a></li>
+    <li><a href="#emergent-author-profiles-induced-by-cas-vectors"
+    id="toc-emergent-author-profiles-induced-by-cas-vectors">Emergent
+    Author Profiles Induced by CAS Vectors</a></li>
+    <li><a
+    href="#ablation-study-additional-cas-vectors-and-manifold-exploration"
+    id="toc-ablation-study-additional-cas-vectors-and-manifold-exploration">Ablation
+    Study: Additional CAS Vectors and Manifold Exploration</a></li>
+    <li><a
+    href="#reconstruction-of-the-ecosystem-agi-architecture-at-small-scale"
+    id="toc-reconstruction-of-the-ecosystem-agi-architecture-at-small-scale">Reconstruction
+    of the Ecosystem AGI Architecture at Small Scale</a></li>
+    <li><a
+    href="#agi-criteria-cas-glpg-as-a-domain-bound-architectural-intelligence"
+    id="toc-agi-criteria-cas-glpg-as-a-domain-bound-architectural-intelligence">AGI
+    Criteria: CAS × GLPG as a Domain-Bound Architectural
+    Intelligence</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Generative language systems are traditionally driven by
+    large-scale statistical models whose behavior is shaped by textual
+    prompting, sampling noise, and implicit correlations learned from
+    vast datasets. While these systems can produce fluent prose, their
+    internal dynamics remain opaque, their stylistic control coarse, and
+    their generative behavior constrained by the statistical closure of
+    their training data. Architectural Intelligence Theory proposes an
+    alternative paradigm: cognitive behavior can emerge not from scale
+    or prompting, but from the interaction of modular components whose
+    internal structure defines new representational manifolds. In this
+    view, intelligence is an architectural property rather than a
+    statistical artifact.</p>
+    <p>This paper presents a compact, operational instance of such an
+    architecture by extending the GLP–Graph (GLPG) narrator engine with
+    the Cognitive Vector Layer (CAS). GLPG is a deterministic,
+    graph-based narrator model that generates machine-native lemma
+    sequences, pacing arcs, and canonical cadences learned from a small
+    dataset of four stylistically distinct worlds. CAS provides a
+    lightweight modulation signal—four scalar values concatenated to the
+    GLPG context vector—that acts as a geometric operator over the GLPG
+    manifold. Despite its minimal informational density, CAS induces
+    strong stylistic curvature, activates manifold regions, blends
+    attractors, and produces emergent narrative behaviors far beyond the
+    closure of the training corpus.</p>
+    <p>The resulting CAS <span class="math inline">×</span> GLPG system
+    forms a promptless, vector-driven generative architecture. GLPG
+    supplies deterministic canonical structure; CAS supplies geometric
+    modulation; the narrator pipeline provides multi-level PRE
+    (propose–retry) recursion; and a lightweight moderator LLM
+    translates GLPG’s internal narrator language into coherent chapters
+    using short, stable prompts. This separation of roles yields a
+    modular, inspectable, and energetically efficient system whose
+    behavior is governed by architectural composition rather than
+    stochastic prompting.</p>
+    <p>Empirically, the system exhibits closure-breaking generation:
+    CAS-driven manifold warping produces stylistic attractors, hybrid
+    worlds, and emergent authors not present in the dataset but
+    structurally consistent with GLPG’s canonical geometry. Extreme CAS
+    vectors, including <span
+    class="math inline">[10<sup>6</sup>,10<sup>6</sup>,10<sup>6</sup>,10<sup>6</sup>]</span>
+    and <span
+    class="math inline">[−10<sup>6</sup>,−10<sup>6</sup>,−10<sup>6</sup>,−10<sup>6</sup>]</span>,
+    reveal saturation and inversion regimes in which CAS dominates the
+    generative physics of the system. These behaviors demonstrate that
+    architectural modulation can unlock new representational manifolds
+    without increasing model scale or relying on complex prompts.</p>
+    <p>The remainder of this paper develops the architectural,
+    empirical, and theoretical foundations of CAS <span
+    class="math inline">×</span> GLPG. We introduce CAS as a personality
+    and content modulation layer; describe its integration with GLPG;
+    analyze its behavior through ablation studies; map the resulting
+    stylistic manifold in <em>The Parrot Family: A CAS Personality
+    Atlas</em>; and evaluate the system against the ten criteria of
+    Architectural Intelligence Theory. Together, these results show that
+    extending GLPG with CAS yields a domain-bound <em>Architectural
+    General Intelligence</em>: a compact generative system capable of
+    controlled personality modulation, emergent stylistic variation, and
+    closure-breaking narrative generation.</p>
+    <h1
+    id="cas-cognitive-vectors-for-content-and-personality-modulation">CAS:
+    Cognitive Vectors for Content and Personality Modulation</h1>
+    <p>The Cognitive Vector Layer (CAS) was originally introduced in the
+    AGI architecture <span class="citation"
+    data-cites="DeWitte2026AGI"></span> as a general epistemic control
+    mechanism for multi-dimensional evaluation. In its full formulation,
+    CAS attaches a structured vector to every intermediate and final
+    candidate, encoding orthogonal cognitive dimensions such as safety,
+    accuracy, relevance, style, and domain coherence. These vectors
+    guide the PRE refinement loop by providing explicit targets for
+    evaluators and refiners, transforming generation from an unguided
+    recursive process into a controlled cognitive trajectory.</p>
+    <p>In the present work, CAS is used in a more focused role:
+    modulating <em>content</em> and <em>personality</em>. Rather than
+    employing the full epistemic geometry, we restrict CAS to the
+    dimensions that directly influence narrative intent, stylistic
+    expression, and character-driven modulation. This specialization
+    allows CAS to act as a high-level personality controller layered on
+    top of GLPG and the narrator pipeline, enabling fine-grained
+    stylistic steering without altering the underlying structural or
+    semantic mechanisms.</p>
+    <h2 id="content-and-personality-vectors">Content and Personality
+    Vectors</h2>
+    <p>A CAS vector in this context encodes two primary dimensions:</p>
+    <ul>
+    <li><p><strong>content</strong>: thematic alignment, narrative
+    focus, and semantic intent,</p></li>
+    <li><p><strong>personality</strong>: tone, affect, cadence, and
+    stylistic coloration.</p></li>
+    </ul>
+    <p>These dimensions operate independently and can be combined to
+    produce complex modulation patterns. For example, a high-intensity
+    personality vector can enforce a distinctive narrative voice, while
+    a neutral content vector maintains canonical story structure.
+    Conversely, a strong content vector can enforce thematic constraints
+    while personality remains subtle or absent.</p>
+    <h2 id="orthogonality-and-controlled-modulation">Orthogonality and
+    Controlled Modulation</h2>
+    <p>CAS maintains strict orthogonality between content and
+    personality. This separation ensures that stylistic modulation does
+    not interfere with semantic coherence, and that thematic constraints
+    do not distort the intended narrative voice. Orthogonality
+    provides:</p>
+    <ul>
+    <li><p><strong>predictability</strong>: personality changes do not
+    alter plot structure,</p></li>
+    <li><p><strong>stability</strong>: content constraints do not
+    collapse stylistic variation,</p></li>
+    <li><p><strong>composability</strong>: vectors can be combined or
+    swapped without cross-dimensional interference.</p></li>
+    </ul>
+    <p>This design mirrors the original CAS principle that evaluation
+    dimensions should remain disentangled to preserve interpretability
+    and modularity.</p>
+    <h2 id="cas-guided-personality-shaping">CAS-Guided Personality
+    Shaping</h2>
+    <p>During generation, the proposer conditions candidates on a target
+    CAS vector, embedding content and personality goals directly into
+    the sampling process. The evaluators compute alignment scores for
+    both dimensions, and the refiner adjusts the candidate to better
+    match the intended cognitive profile. This creates a closed-loop
+    control system in which personality becomes a first-class modulation
+    signal rather than an emergent side effect of prompt
+    engineering.</p>
+    <h2 id="relation-to-the-original-cas-architecture">Relation to the
+    Original CAS Architecture</h2>
+    <p>While the original CAS formulation includes safety, accuracy,
+    relevance, and domain coherence, these dimensions are not central to
+    the present application. The narrative pipeline already enforces
+    structural correctness and canonical closure through GLPG, and
+    safety/accuracy evaluators are not required for stylistic
+    modulation. CAS therefore functions here as a <em>reduced</em>
+    cognitive layer, retaining its orthogonality and control properties
+    while specializing in content and personality shaping.</p>
+    <p>This specialization demonstrates that CAS is not limited to
+    epistemic evaluation but can serve as a general-purpose cognitive
+    modulation mechanism. In this paper, CAS provides the vector
+    geometry through which personality becomes a controllable,
+    continuous parameter rather than a discrete stylistic mode.</p>
+    <h1 id="cas-vectors-as-personality-modulators-in-glpg-training">CAS
+    Vectors as Personality Modulators in GLPG Training</h1>
+    <p>In this work, CAS is used in a concrete and operational form:
+    each book in the training corpus is assigned a dedicated scalar
+    dimension in a CAS vector. For a dataset of <span
+    class="math inline"><em>N</em></span> books, the CAS vector has
+    dimension <span class="math inline"><em>N</em></span>, and each book
+    corresponds to exactly one float within this vector. During
+    training, every sentence extracted from a given book is paired with
+    a one-hot CAS vector in which the dimension associated with that
+    book is set to <span class="math inline">1</span> and all others to
+    <span class="math inline">0</span>. This creates a consistent and
+    high-intensity modulation signal that the model can reliably learn
+    to associate with stylistic and narrative properties.</p>
+    <h2 id="concatenation-with-the-glpg-context-vector">Concatenation
+    with the GLPG Context Vector</h2>
+    <p>The GLPG model used in this paper employs a context input vector
+    of size <span class="math inline">2000</span>. The CAS vector is
+    concatenated directly to this context representation, producing a
+    combined input vector of size <span
+    class="math inline">2000 + <em>N</em></span>. For the present
+    dataset of four books, the resulting input dimensionality is <span
+    class="math inline">2004</span>. Although the CAS component is small
+    relative to the full input vector, its one-hot structure and perfect
+    consistency across all sentences of a given book make it an
+    extremely salient training signal. The model therefore learns to
+    treat CAS as a stable personality indicator layered on top of the
+    standard GLPG context features.</p>
+    <h2 id="learning-book-specific-personality-profiles">Learning
+    Book-Specific Personality Profiles</h2>
+    <p>Because every sentence of a book is paired with the same CAS
+    vector, the model implicitly learns a personality profile for each
+    book. These profiles emerge from the stylistic, structural, and
+    thematic regularities present in the book’s text. The CAS vector
+    acts as a selector that activates the corresponding personality
+    during generation. At inference time, supplying a CAS vector allows
+    the model to produce controlled stylistic variations while
+    maintaining the underlying GLPG structural coherence.</p>
+    <h2 id="extending-cas-beyond-one-hot-book-labels">Extending CAS
+    Beyond One-Hot Book Labels</h2>
+    <p>The one-hot formulation used here represents the simplest
+    instantiation of CAS. More expressive CAS vectors can be constructed
+    by assigning high-dimensional content and personality descriptors to
+    each book. These descriptors may encode attributes such as tone,
+    cadence, affect, narrative density, or thematic focus. Training with
+    such enriched CAS vectors would allow the model to learn a
+    high-dimensional personality manifold, enabling fine-grained
+    modulation during generation. Increasing the number of books further
+    expands the diversity of examples the model observes, strengthening
+    its ability to generalize personality control across the CAS
+    space.</p>
+    <h2 id="controlled-variation-within-a-single-glpg-model">Controlled
+    Variation Within a Single GLPG Model</h2>
+    <p>This approach demonstrates that CAS provides a lightweight yet
+    powerful mechanism for controlled variation within a single GLPG
+    model. By attaching a small, interpretable vector to the input, the
+    model can be trained to produce multiple distinct narrative styles
+    without requiring separate models or complex prompt engineering. CAS
+    therefore functions as a modular personality interface, enabling
+    continuous and composable stylistic control during generation.</p>
+    <h1 id="cas-glpg-as-a-vector-driven-promptless-search-mechanism">CAS
+    × GLPG as a Vector-Driven Promptless Search Mechanism</h1>
+    <p>The Cognitive Vector Layer (CAS) can be interpreted as a
+    lightweight vector database that interfaces directly with the GLPG
+    generative model. In this view, CAS provides a continuous, queryable
+    representation of stylistic and cognitive intent, while GLPG acts as
+    the decoder that transforms these vectors into coherent narrative
+    output. This establishes a promptless search-and-generation
+    mechanism in which vector composition replaces textual prompting as
+    the primary control signal.</p>
+    <h2 id="cas-as-a-vector-database">CAS as a Vector Database</h2>
+    <p>A CAS vector represents a point in a high-dimensional cognitive
+    space. Each dimension corresponds to a learned stylistic or
+    personality factor, and the vector as a whole functions as a query
+    into the model’s internal manifold of narrative behaviors. Unlike
+    traditional vector databases that retrieve stored embeddings, CAS
+    operates as a <em>generative</em> vector database: the query does
+    not retrieve an existing item but instead produces a new output
+    whose properties match the target vector.</p>
+    <p>This mechanism allows CAS to serve as an internal prompt
+    generator. Rather than constructing a textual prompt that describes
+    the desired style or personality, the user supplies a CAS vector,
+    and the system interprets this vector as a precise, machine-native
+    description of the intended cognitive state.</p>
+    <h2 id="promptless-cognitive-search">Promptless Cognitive
+    Search</h2>
+    <p>CAS × GLPG therefore implements a form of promptless cognitive
+    search. The CAS vector acts as a search key that selects a region of
+    the model’s latent narrative manifold. GLPG then decodes this region
+    into text, producing output that reflects the stylistic, affective,
+    and structural properties encoded in the vector. This process
+    bypasses the need for explicit textual prompting and eliminates the
+    ambiguity inherent in natural-language instructions.</p>
+    <p>Formally, generation becomes:</p>
+    <p><span
+    class="math display">output = GLPG(context ‖ CAS),</span></p>
+    <p>where the CAS vector determines the cognitive modulation applied
+    during decoding. The model effectively performs a vector-driven
+    search over its internal stylistic space, guided by the CAS
+    signal.</p>
+    <h2 id="capabilities-beyond-conventional-llm-prompting">Capabilities
+    Beyond Conventional LLM Prompting</h2>
+    <p>This architecture enables capabilities that are difficult or
+    impossible for conventional LLMs:</p>
+    <ul>
+    <li><p><strong>precise modulation</strong>: CAS provides a
+    deterministic and interpretable control signal, unlike textual
+    prompts which are ambiguous and context-dependent,</p></li>
+    <li><p><strong>continuous variation</strong>: personality and style
+    can be interpolated or blended by manipulating CAS vectors,</p></li>
+    <li><p><strong>compositional control</strong>: multiple stylistic
+    factors can be combined linearly, enabling emergent hybrid
+    styles,</p></li>
+    <li><p><strong>internal prompting</strong>: the model receives a
+    machine-native prompt that requires no linguistic
+    interpretation.</p></li>
+    </ul>
+    <p>This leads to the central observation of this paper:</p>
+    <blockquote>
+    <p>CAS × GLPG is a vector-database that automatically generates an
+    internal, machine-native prompt for a text generator—achieving a
+    form of controlled generation that no current LLM system can
+    simulate, and which would require extensive cognitive effort for a
+    human to construct manually.</p>
+    </blockquote>
+    <h2
+    id="emergent-personality-control-through-vector-composition">Emergent
+    Personality Control Through Vector Composition</h2>
+    <p>Because CAS vectors can be composed, interpolated, or scaled, the
+    system supports emergent personality control. By adjusting the CAS
+    vector, the user can steer the model toward different stylistic
+    attractors without modifying the underlying GLPG architecture or
+    relying on prompt engineering. This makes CAS × GLPG a modular and
+    extensible mechanism for controlled narrative variation within a
+    single generative model.</p>
+    <p>In summary, CAS provides the vector geometry, GLPG provides the
+    decoder, and their combination yields a promptless, vector-driven
+    generative interface that functions as a cognitive search mechanism
+    over the model’s internal stylistic manifold.</p>
+    <h1
+    id="cas-glpg-as-an-empirical-instance-of-architectural-intelligence">CAS
+    × GLPG as an Empirical Instance of Architectural Intelligence</h1>
+    <p>The Architectural Intelligence Theory <span class="citation"
+    data-cites="DeWitte2026Theory"></span> proposes that cognitive
+    systems can break the closure of their training data through
+    architectural composition rather than scale, prompting, or
+    statistical generalization. A system achieves closure breaking when
+    its internal components interact to produce new representational
+    manifolds that do not exist in the dataset but remain structurally
+    coherent within the system’s own constraints. The CAS × GLPG
+    architecture presented in this paper constitutes a concrete,
+    lightweight empirical example of such closure-breaking behavior
+    within a domain-bound generative intelligence: fictional
+    narration.</p>
+    <h2 id="architectural-composition-of-cas-and-glpg">Architectural
+    Composition of CAS and GLPG</h2>
+    <p>CAS × GLPG combines two architecturally distinct modules:</p>
+    <ul>
+    <li><p><strong>CAS</strong>: a vectorial personality and style space
+    functioning as a semantic vector-database of narrative attractors,
+    syntactic fields, stylistic manifolds, and domain cues,</p></li>
+    <li><p><strong>GLPG</strong>: a deterministic generative engine that
+    decodes these vectors into coherent prose using lemma clusters,
+    pacing chains, cadential profiles, and canon structures learned
+    during training.</p></li>
+    </ul>
+    <p>During training, each world (book) forms its own manifold region
+    inside GLPG: clusters of lemmas, stable cadences, tone fields, and
+    structural canon patterns. CAS provides a numerical vector that
+    activates these regions in different weights, allowing GLPG to form
+    blended latent states that do not necessarily correspond to any
+    single style present in the dataset. The resulting narrative output
+    emerges from linear algebra over multiple world vectors, including
+    derivative worlds such as <em>The Hybrid Parrot</em>, which arise
+    emergently yet function as basis vectors for further
+    composition.</p>
+    <h2 id="vectorial-canon-composition">Vectorial Canon
+    Composition</h2>
+    <p>This architecture enables a form of vectorial canon composition:
+    new narrative forms are generated by combining manifold regions
+    through CAS vectors rather than through textual prompting. The
+    system therefore acts as a modular, extensible style engine capable
+    of producing novel, canon-consistent narrative behaviors. CAS × GLPG
+    operates as a vector-driven promptless search mechanism in which CAS
+    serves as an internal query into the stylistic manifold, and GLPG
+    provides the deterministic decoding.</p>
+    <p>This mechanism is architecturally unique. It is not
+    transformer-like, not token-predictive, not RLHF-guided, and not
+    dependent on large-scale datasets for stylistic variation. Yet it
+    maintains canon consistency, stylistic stability, world coherence,
+    and emergent variation across attractors. The variability does not
+    arise from sampling noise but from architectural interaction between
+    CAS and GLPG.</p>
+    <h2 id="closure-breaking-through-architectural-interaction">Closure
+    Breaking Through Architectural Interaction</h2>
+    <p>According to Architectural Intelligence Theory, closure breaking
+    occurs when a system generates new manifolds outside the statistical
+    closure of its dataset while remaining structurally constrained by
+    its architecture. CAS × GLPG exhibits this property:</p>
+    <ul>
+    <li><p>GLPG provides a fixed representational closure: a
+    deterministic narrator pipeline, fixed prompts, no meta-reasoning,
+    and no external knowledge.</p></li>
+    <li><p>CAS acts as an architectural intervention that warps and
+    selects manifold regions, enabling new attractors and emergent
+    narrative dynamics.</p></li>
+    <li><p>The interaction between CAS and GLPG produces authors,
+    styles, and narrative worlds not present in the dataset but
+    consistent within the system’s structural canon.</p></li>
+    </ul>
+    <p>The LLM used in the narrator pipeline does not generate the
+    manifold; it merely expresses the GLPG states linguistically. It
+    cannot predict or correct the structural output of GLPG, and
+    therefore the emergent behavior originates entirely from the
+    architectural composition. This aligns precisely with the
+    theoretical claim that architecture—not scale—can open new
+    representational manifolds.</p>
+    <h2
+    id="architectural-general-intelligence-in-a-domain-bound-setting">Architectural
+    General Intelligence in a Domain-Bound Setting</h2>
+    <p>Architectural General Intelligence (AGI) is defined in the theory
+    as a software stack whose internal components collectively produce
+    cognitive behavior that is challenging for general intelligence and
+    unattainable for hyperscaled frontier models. CAS × GLPG
+    demonstrates this in a domain-bound setting: vectorial style
+    composition, emergent agency, canon-consistent narration, and
+    architectural cognition.</p>
+    <p>These capabilities exceed what current LLMs can simulate. Human
+    authors can master fragments of this skill—Joyce for cadence, Borges
+    for conceptual manifolds, Calvino for multi-style composition—but no
+    human can maintain four distinct styles, lemma fields, cadential
+    profiles, and canon structures in modular, vectorial, and consistent
+    combination. CAS × GLPG therefore extends the human narrative
+    manifold through architectural means.</p>
+    <h2 id="empirical-confirmation-of-the-theory">Empirical Confirmation
+    of the Theory</h2>
+    <p>The system presented here provides an empirical demonstration of
+    the core principle of Architectural Intelligence Theory:</p>
+    <blockquote>
+    <p>Architecture can break closure by generating new representational
+    manifolds that are not derived from the dataset but are constrained
+    by the system’s internal structure.</p>
+    </blockquote>
+    <p>CAS × GLPG is thus not merely a stylistic engine but a compact,
+    architecturally-driven cognitive system whose outputs constitute
+    manifold traces of a closure-breaking generative intelligence.</p>
+    <h1 id="dataset-and-canon-profiles">Dataset and Canon Profiles</h1>
+    <p>The experiments in this paper use a compact but stylistically
+    diverse dataset consisting of four narrative worlds. Each world
+    corresponds to one dimension in the CAS vector, and every sentence
+    extracted from a given world is paired with a one-hot CAS vector.
+    This allows the model to learn distinct manifold regions for each
+    world and to modulate them through CAS-driven vector
+    composition.</p>
+    <h2 id="source-worlds">Source Worlds</h2>
+    <p>The dataset contains four books representing four stylistic and
+    canonical domains:</p>
+    <ul>
+    <li><p><strong>The Hybrid Parrot</strong> (Iterative Narrator
+    Pipeline) — a synthetic hybrid world composed of <em>Alice in
+    Wonderland</em>, <em>The Strange Case of Dr. Jekyll and
+    Mr. Hyde</em>, and <em>Metamorphosis</em>. This world is an existing
+    ecosystem artifact rather than a purely human-designed
+    domain.</p></li>
+    <li><p><strong>Astronomy for Amateurs</strong> (Camille Flammarion)
+    — a descriptive, observational, cosmically oriented non-fiction
+    domain.</p></li>
+    <li><p><strong>The Picture of Dorian Gray</strong> (Oscar Wilde) — a
+    decadent, introspective, emotionally charged fictional
+    domain.</p></li>
+    <li><p><strong>A Honeymoon in Space</strong> (George Chetwynd
+    Griffith) — a pulp science-fiction domain with poetic cadence and
+    relational dynamics.</p></li>
+    </ul>
+    <h2 id="canonical-style-profiles">Canonical Style Profiles</h2>
+    <p>Each world exhibits a distinct canonical style, summarized as
+    follows:</p>
+    <ul>
+    <li><p><strong>Alice</strong>: surrealistic, dream-logic, syntactic
+    elasticity, short sentences, abrupt transitions, sensory
+    spikes.</p></li>
+    <li><p><strong>Astronomy</strong>: long descriptive sentences,
+    cosmological metaphors, observational tone, spatial orientation,
+    physical causality.</p></li>
+    <li><p><strong>Dorian</strong>: emotional ornamentation, decadence,
+    introspection, inner conflict, dark atmosphere.</p></li>
+    <li><p><strong>Honeymoon</strong>: melancholic tone, poetic cadence,
+    relational dynamics, soft science fiction, exotic worlds.</p></li>
+    </ul>
+    <p>Table <a href="#tab:canon_alignment" data-reference-type="ref"
+    data-reference="tab:canon_alignment">1</a> summarizes expected
+    stylistic alignment indicators.</p>
+    <div id="tab:canon_alignment">
+    <table>
+    <caption>Canonical style alignment indicators for each
+    world.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>World</strong></th>
+    <th style="text-align: left;"><strong>Expected Style</strong></th>
+    <th style="text-align: left;"><strong>Alignment
+    Indicators</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">Alice</td>
+    <td style="text-align: left;">pulp-narrative, surreal</td>
+    <td style="text-align: left;">tempo, abruptness, sensory spikes</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Astronomy</td>
+    <td style="text-align: left;">cosmic, descriptive</td>
+    <td style="text-align: left;">long sentences, cosmic metaphors</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">Dorian Gray</td>
+    <td style="text-align: left;">decadent, introspective</td>
+    <td style="text-align: left;">ornamentation, inner conflict</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">Honeymoon</td>
+    <td style="text-align: left;">pulp sci-fi, poetic</td>
+    <td style="text-align: left;">exotic worlds, relational cadence</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="cas-vectors-and-sentence-counts">CAS Vectors and Sentence
+    Counts</h2>
+    <p>Each world corresponds to one dimension in the CAS vector. During
+    training, the CAS vector is concatenated to the GLPG context vector,
+    producing an input vector of size <span
+    class="math inline">2000 + 4 = 2004</span>.</p>
+    <div id="tab:cas_sentences">
+    <table>
+    <caption>CAS vectors and sentence counts for each world.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>CAS Vector</strong></th>
+    <th style="text-align: right;"><strong>Sentences</strong></th>
+    <th style="text-align: left;"><strong>Title</strong></th>
+    <th style="text-align: left;"><strong>Author</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><span
+    class="math inline">[1,0,0,0]</span></td>
+    <td style="text-align: right;">5872</td>
+    <td style="text-align: left;">The Hybrid Parrot</td>
+    <td style="text-align: left;">Iterative Narrator Pipeline</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><span
+    class="math inline">[0,1,0,0]</span></td>
+    <td style="text-align: right;">3720</td>
+    <td style="text-align: left;">Astronomy for Amateurs</td>
+    <td style="text-align: left;">Camille Flammarion</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><span
+    class="math inline">[0,0,1,0]</span></td>
+    <td style="text-align: right;">6676</td>
+    <td style="text-align: left;">The Picture of Dorian Gray</td>
+    <td style="text-align: left;">Oscar Wilde</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><span
+    class="math inline">[0,0,0,1]</span></td>
+    <td style="text-align: right;">3797</td>
+    <td style="text-align: left;">A Honeymoon in Space</td>
+    <td style="text-align: left;">G. C. Griffith</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="lemma-and-entity-statistics">Lemma and Entity
+    Statistics</h2>
+    <p>The combined dataset contains:</p>
+    <ul>
+    <li><p><strong>20 065 sentences</strong>,</p></li>
+    <li><p><strong>338 382 unique samples</strong>,</p></li>
+    <li><p><strong>16.9 samples per sentence</strong>,</p></li>
+    <li><p><strong>11 390 lemmas</strong>,</p></li>
+    <li><p><strong>6676 entities</strong>.</p></li>
+    </ul>
+    <p>Table <a href="#tab:top_entities" data-reference-type="ref"
+    data-reference="tab:top_entities">3</a> shows the top 20
+    entities.</p>
+    <div id="tab:top_entities">
+    <table>
+    <caption>Top 20 entities across all worlds.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>Entity</strong></th>
+    <th style="text-align: right;"><strong>Count</strong></th>
+    <th style="text-align: left;"><strong>Entity</strong></th>
+    <th style="text-align: right;"><strong>Count</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;">alice</td>
+    <td style="text-align: right;">1109</td>
+    <td style="text-align: left;">night</td>
+    <td style="text-align: right;">372</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">man</td>
+    <td style="text-align: right;">907</td>
+    <td style="text-align: left;">thing</td>
+    <td style="text-align: right;">360</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">time</td>
+    <td style="text-align: right;">705</td>
+    <td style="text-align: left;">lord</td>
+    <td style="text-align: right;">332</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">eye</td>
+    <td style="text-align: right;">641</td>
+    <td style="text-align: left;">moment</td>
+    <td style="text-align: right;">332</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">sun</td>
+    <td style="text-align: right;">598</td>
+    <td style="text-align: left;">door</td>
+    <td style="text-align: right;">307</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">day</td>
+    <td style="text-align: right;">590</td>
+    <td style="text-align: left;">sense</td>
+    <td style="text-align: right;">307</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">life</td>
+    <td style="text-align: right;">583</td>
+    <td style="text-align: left;">house</td>
+    <td style="text-align: right;">294</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">room</td>
+    <td style="text-align: right;">557</td>
+    <td style="text-align: left;">world</td>
+    <td style="text-align: right;">524</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;">earth</td>
+    <td style="text-align: right;">503</td>
+    <td style="text-align: left;">star</td>
+    <td style="text-align: right;">416</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;">dorian</td>
+    <td style="text-align: right;">392</td>
+    <td style="text-align: left;">hand</td>
+    <td style="text-align: right;">382</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="model-architecture-and-training">Model Architecture and
+    Training</h2>
+    <p>All generations in this paper use the same GLPG model:</p>
+    <ul>
+    <li><p><strong>hidden size</strong>: 896,</p></li>
+    <li><p><strong>input vector size</strong>: 2004 (context +
+    CAS),</p></li>
+    <li><p><strong>model size</strong>: 93 MB.</p></li>
+    </ul>
+    <p>Training statistics:</p>
+    <ul>
+    <li><p><strong>training epochs (sentences)</strong>:
+    500 000,</p></li>
+    <li><p><strong>unique samples processed</strong>:
+    8 433 247,</p></li>
+    <li><p><strong>training time</strong>: 18 335 s.</p></li>
+    </ul>
+    <p>This compact dataset and lightweight model architecture
+    demonstrate that CAS × GLPG can produce rich stylistic manifolds and
+    controlled personality modulation without requiring large-scale data
+    or frontier-model capacity.</p>
+    <h1 id="the-parrot-family-a-cas-personality-atlas">The Parrot
+    Family: A CAS Personality Atlas</h1>
+    <p>To illustrate the expressive power of CAS-driven personality
+    modulation, we constructed a new ecosystem artifact titled <em>The
+    Parrot Family: A CAS Personality Atlas</em>. This omnibus contains
+    ten books generated by the iterative narrator pipeline using the
+    trained GLPG model. Each book is produced by sampling approximately
+    2000 GLPG draft sentences per chapter and refining them through the
+    narrator pipeline. The ten books correspond to ten distinct CAS
+    vectors, including pure attractors, mixed attractors, neutral
+    vectors, unified vectors, and extrapolated vectors outside the
+    training manifold.</p>
+    <h2 id="purpose-of-the-atlas">Purpose of the Atlas</h2>
+    <p>The atlas serves as an empirical demonstration of CAS × GLPG as a
+    modular, vector-driven personality engine. Each book represents a
+    stable stylistic attractor induced by its CAS vector. Together, the
+    ten books form a map of the personality manifold learned by the
+    model, showing how linear combinations, superpositions, and
+    extrapolations of world vectors produce coherent but novel narrative
+    styles.</p>
+    <h2 id="generated-books">Generated Books</h2>
+    <p>Table <a href="#tab:parrot_family_books"
+    data-reference-type="ref"
+    data-reference="tab:parrot_family_books">4</a> summarizes the ten
+    generated books, including their CAS vectors, number of chapters,
+    size, generation time, average evaluator scores, and titles.</p>
+    <div id="tab:parrot_family_books">
+    <table>
+    <caption>Generated books in <em>The Parrot Family: A CAS Personality
+    Atlas</em>.</caption>
+    <thead>
+    <tr class="header">
+    <th style="text-align: left;"><strong>CAS Vector</strong></th>
+    <th style="text-align: right;"><strong>Ch.</strong></th>
+    <th style="text-align: right;"><strong>KB</strong></th>
+    <th style="text-align: right;"><strong>Time (s)</strong></th>
+    <th style="text-align: right;"><strong>Score</strong></th>
+    <th style="text-align: right;"><strong>Trans Score</strong></th>
+    <th style="text-align: left;"><strong>Title</strong></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr class="odd">
+    <td style="text-align: left;"><span
+    class="math inline">[1,0,0,0]</span></td>
+    <td style="text-align: right;">71</td>
+    <td style="text-align: right;">277</td>
+    <td style="text-align: right;">26442</td>
+    <td style="text-align: right;">87.1</td>
+    <td style="text-align: right;">94.7</td>
+    <td style="text-align: left;">Stellar Echoes</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><span
+    class="math inline">[0,1,0,0]</span></td>
+    <td style="text-align: right;">72</td>
+    <td style="text-align: right;">275</td>
+    <td style="text-align: right;">28194</td>
+    <td style="text-align: right;">86.5</td>
+    <td style="text-align: right;">95.1</td>
+    <td style="text-align: left;">The Enigma of Existence</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><span
+    class="math inline">[0,0,1,0]</span></td>
+    <td style="text-align: right;">75</td>
+    <td style="text-align: right;">300</td>
+    <td style="text-align: right;">25093</td>
+    <td style="text-align: right;">86.8</td>
+    <td style="text-align: right;">94.9</td>
+    <td style="text-align: left;">The Celestial Sojourn</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><span
+    class="math inline">[0,0,0,1]</span></td>
+    <td style="text-align: right;">72</td>
+    <td style="text-align: right;">316</td>
+    <td style="text-align: right;">39131</td>
+    <td style="text-align: right;">87.1</td>
+    <td style="text-align: right;">94.8</td>
+    <td style="text-align: left;">Beyond the Veil</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><span
+    class="math inline">[1,0,1,0]</span></td>
+    <td style="text-align: right;">70</td>
+    <td style="text-align: right;">321</td>
+    <td style="text-align: right;">24201</td>
+    <td style="text-align: right;">86.8</td>
+    <td style="text-align: right;">94.7</td>
+    <td style="text-align: left;">Unraveling the Enigma</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><span
+    class="math inline">[0,1,0,1]</span></td>
+    <td style="text-align: right;">77</td>
+    <td style="text-align: right;">289</td>
+    <td style="text-align: right;">35667</td>
+    <td style="text-align: right;">86.8</td>
+    <td style="text-align: right;">95.1</td>
+    <td style="text-align: left;">Chronicles of the Cosmos</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><span
+    class="math inline">[0,0,0,0]</span></td>
+    <td style="text-align: right;">73</td>
+    <td style="text-align: right;">291</td>
+    <td style="text-align: right;">42100</td>
+    <td style="text-align: right;">87.7</td>
+    <td style="text-align: right;">94.9</td>
+    <td style="text-align: left;">Galactic Melodies</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><span
+    class="math inline">[1,1,1,1]</span></td>
+    <td style="text-align: right;">72</td>
+    <td style="text-align: right;">279</td>
+    <td style="text-align: right;">42983</td>
+    <td style="text-align: right;">86.8</td>
+    <td style="text-align: right;">94.7</td>
+    <td style="text-align: left;">Time’s Cosmic Dance</td>
+    </tr>
+    <tr class="odd">
+    <td style="text-align: left;"><span
+    class="math inline">[2,−1,−1,−1]</span></td>
+    <td style="text-align: right;">75</td>
+    <td style="text-align: right;">340</td>
+    <td style="text-align: right;">26710</td>
+    <td style="text-align: right;">87.1</td>
+    <td style="text-align: right;">94.6</td>
+    <td style="text-align: left;">A Celestial Sojourn</td>
+    </tr>
+    <tr class="even">
+    <td style="text-align: left;"><span
+    class="math inline">[−1,−1,−1,−1]</span></td>
+    <td style="text-align: right;">73</td>
+    <td style="text-align: right;">306</td>
+    <td style="text-align: right;">22474</td>
+    <td style="text-align: right;">87.0</td>
+    <td style="text-align: right;">94.8</td>
+    <td style="text-align: left;">The Stellar Symphony</td>
+    </tr>
+    </tbody>
+    </table>
+    </div>
+    <h2 id="manifold-coverage">Manifold Coverage</h2>
+    <p>The ten CAS vectors span a diverse region of the learned
+    personality manifold:</p>
+    <ul>
+    <li><p><strong>Pure attractors</strong>: <span
+    class="math inline">[1,0,0,0]</span>, <span
+    class="math inline">[0,1,0,0]</span>, <span
+    class="math inline">[0,0,1,0]</span>, <span
+    class="math inline">[0,0,0,1]</span>.</p></li>
+    <li><p><strong>Mixed attractors</strong>: <span
+    class="math inline">[1,0,1,0]</span>, <span
+    class="math inline">[0,1,0,1]</span>.</p></li>
+    <li><p><strong>Neutral attractor</strong>: <span
+    class="math inline">[0,0,0,0]</span>.</p></li>
+    <li><p><strong>Unified attractor</strong>: <span
+    class="math inline">[1,1,1,1]</span>.</p></li>
+    <li><p><strong>Extrapolated attractors</strong>: <span
+    class="math inline">[2,−1,−1,−1]</span>, <span
+    class="math inline">[−1,−1,−1,−1]</span>.</p></li>
+    </ul>
+    <p>These vectors demonstrate that GLPG can decode both canonical and
+    extrapolated regions of the CAS space into coherent narrative
+    output. Mixed vectors produce hybrid styles combining multiple
+    canonical manifolds, while extrapolated vectors yield emergent
+    styles not present in the dataset but structurally consistent with
+    the learned canon.</p>
+    <h2 id="a-new-ecosystem-artifact">A New Ecosystem Artifact</h2>
+    <p><em>The Parrot Family: A CAS Personality Atlas</em> is therefore
+    a new artifact in the Triadic Cosmos ecosystem. It documents the
+    behavior of a closure-breaking, vector-driven generative
+    architecture and provides a concrete map of the stylistic manifold
+    induced by CAS × GLPG. Each book serves as an empirical trace of a
+    distinct attractor regime, and the atlas as a whole demonstrates how
+    architectural composition can generate new narrative forms beyond
+    the closure of the dataset.</p>
+    <h1 id="emergent-author-profiles-induced-by-cas-vectors">Emergent
+    Author Profiles Induced by CAS Vectors</h1>
+    <p>Each CAS vector induces a distinct stylistic attractor inside the
+    GLPG manifold. Because CAS acts as an architectural bias rather than
+    a cosmetic parameter, the resulting narrative styles are not derived
+    from the dataset but emerge from manifold warping within the GLPG
+    architecture. This section documents the ten emergent author
+    profiles generated in <em>The Parrot Family: A CAS Personality
+    Atlas</em>. Each profile represents a new, architecturally generated
+    author that does not exist in the training corpus, demonstrating
+    closure-breaking behavior.</p>
+    <h2 id="pure-attractors">Pure Attractors</h2>
+    <h4 id="cas-vector-1000">CAS Vector <span
+    class="math inline">[1,0,0,0]</span></h4>
+    <p>Atlas-name: <em>The Surreal Cosmic Oracle</em><br />
+    Closest match: Jeff VanderMeer + Samuel R. Delany, with
+    Miéville-surrealism and Wilde-ornamentation as interference<br />
+    Canon-mix: Alice + Astronomy + Dorian<br />
+    Style: surrealistic, cosmic, introspective<br />
+    Narrative attractor: tri-hybrid<br />
+    Unicity: new author not present in the dataset<br />
+    </p>
+    <h4 id="cas-vector-0100">CAS Vector <span
+    class="math inline">[0,1,0,0]</span></h4>
+    <p>Atlas-name: <em>The Celestial Oracle of Introspection</em><br />
+    Closest match: Flammarion + Stapledon, with Clarke’s cosmic wonder
+    and Wilde’s ornamentation as interference<br />
+    Canon-mix: Astronomy + Dorian + Alice<br />
+    Style: cosmic, introspective, mystical, surrealistic<br />
+    Narrative attractor: dual-core (Astronomy + Dorian) with Alice
+    interference<br />
+    Unicity: new author not present in the dataset<br />
+    </p>
+    <h4 id="cas-vector-0010">CAS Vector <span
+    class="math inline">[0,0,1,0]</span></h4>
+    <p>Atlas-name: <em>The Celestial Decadent of the Shrouded
+    Worlds</em><br />
+    Closest match: Oscar Wilde + H. P. Lovecraft, with
+    Bradbury-melancholy and Flammarion-scale as interference<br />
+    Canon-mix: Dorian + Astronomy + Alice<br />
+    Style: decadent, introspective, gothic, cosmic, symbolic<br />
+    Narrative attractor: dominant Dorian-core with Astronomy-cosmos and
+    Alice-surreality<br />
+    Unicity: new author not present in the dataset<br />
+    </p>
+    <h4 id="cas-vector-0001">CAS Vector <span
+    class="math inline">[0,0,0,1]</span></h4>
+    <p>Atlas-name: <em>The Luminous Voyager of the Red Sun</em><br />
+    Closest match: Ray Bradbury + Arthur C. Clarke, with Wilde-emotional
+    ornamentation and VanderMeer-surreality as interference<br />
+    Canon-mix: Honeymoon + Astronomy + Dorian + Alice<br />
+    Style: melancholic, cosmic, relational, introspective, lightly
+    surrealistic<br />
+    Narrative attractor: weak Honeymoon-core with strong Astronomy
+    dominance and Dorian/Alice interference<br />
+    Unicity: new author not present in the dataset<br />
+    </p>
+    <h2 id="mixed-attractors">Mixed Attractors</h2>
+    <h4 id="cas-vector-1010">CAS Vector <span
+    class="math inline">[1,0,1,0]</span></h4>
+    <p>Atlas-name: <em>The Zephyr Oracle of Decadent Worlds</em><br />
+    Closest match: China Miéville + Oscar Wilde, with
+    VanderMeer-weirdness and Flammarion-cosmos as interference<br />
+    Canon-mix: Alice + Dorian + Astronomy<br />
+    Style: decadent, surrealistic, cosmic, gothic, introspective<br />
+    Narrative attractor: dual-core (Alice + Dorian) with Astronomy
+    injection<br />
+    Unicity: new author not present in the dataset<br />
+    </p>
+    <h4 id="cas-vector-0101">CAS Vector <span
+    class="math inline">[0,1,0,1]</span></h4>
+    <p>Atlas-name: <em>The Martian Dreamweaver of the Living
+    Worlds</em><br />
+    Closest match: Ray Bradbury + Flammarion, with Griffith-melancholy
+    and Miéville-surreality as interference<br />
+    Canon-mix: Astronomy + Honeymoon + Alice + Dorian<br />
+    Style: cosmic, melancholic, introspective, surrealistic,
+    relational<br />
+    Narrative attractor: Astronomy-dominant with Honeymoon-cadence and
+    Alice/Dorian interference<br />
+    Unicity: new author not present in the dataset<br />
+    </p>
+    <h2 id="neutral-and-unified-attractors">Neutral and Unified
+    Attractors</h2>
+    <h4 id="cas-vector-0000">CAS Vector <span
+    class="math inline">[0,0,0,0]</span></h4>
+    <p>Atlas-name: <em>The Driftwalker of the Soul of the
+    Stars</em><br />
+    Closest match: Ray Bradbury + Jeff VanderMeer, with
+    Flammarion-cosmos and Wilde-ornamentation as interference<br />
+    Canon-mix: Alice + Astronomy + Dorian + Honeymoon (all weak,
+    blended)<br />
+    Style: surrealistic, cosmic, introspective, melancholic,
+    dream-logic<br />
+    Narrative attractor: multi-drift attractor (no dominant world; full
+    interference)<br />
+    Unicity: natural attractor of the model without CAS steering<br />
+    </p>
+    <h4 id="cas-vector-1111">CAS Vector <span
+    class="math inline">[1,1,1,1]</span></h4>
+    <p>Atlas-name: <em>The Polyphonic Oracle of Time and
+    Stars</em><br />
+    Closest match: Gene Wolfe + Ursula K. Le Guin, with
+    Miéville-surreality, Bradbury-melancholy, Wilde-ornamentation, and
+    Flammarion-cosmos as interference<br />
+    Canon-mix: Alice + Astronomy + Dorian + Honeymoon (all equally
+    strong)<br />
+    Style: cosmic, surrealistic, introspective, relational, ornamental,
+    mystical<br />
+    Narrative attractor: full superposition attractor<br />
+    Unicity: new author not present in the dataset<br />
+    </p>
+    <h2 id="extrapolated-attractors">Extrapolated Attractors</h2>
+    <h4 id="cas-vector-2-1-1-1">CAS Vector <span
+    class="math inline">[2,−1,−1,−1]</span></h4>
+    <p>Atlas-name: <em>The Aberrant Oracle of Shattered
+    Worlds</em><br />
+    Closest match: Mark Z. Danielewski + Anna Kavan + early
+    VanderMeer<br />
+    Canon-mix: Alice dominant with anti-Astronomy, anti-Dorian,
+    anti-Honeymoon fields<br />
+    Style: hyper-surrealistic, fragmented, dream-logical, atmospheric,
+    alienating<br />
+    Narrative attractor: monoculture attractor with negative
+    interference<br />
+    Unicity: fully new author; style not present in the dataset<br />
+    </p>
+    <h4 id="cas-vector--1-1-1-1">CAS Vector <span
+    class="math inline">[−1,−1,−1,−1]</span></h4>
+    <p>Atlas-name: <em>The Void Oracle of Unbeing</em><br />
+    Closest match: Beckett × Danielewski × Ballard<br />
+    Canon-mix: anti-Alice + anti-Astronomy + anti-Dorian +
+    anti-Honeymoon<br />
+    Style: clinical, inert, fragmentary, dehumanized<br />
+    Narrative attractor: void-core<br />
+    Unicity: pure architectural emergence<br />
+    </p>
+    <h2 id="architectural-interpretation">Architectural
+    Interpretation</h2>
+    <p>These emergent authors demonstrate that CAS is not a stylistic
+    parameter but an architectural bias that shifts the GLPG manifold.
+    The resulting styles are not derived from human literature but are
+    architecturally generated. The closure breaking observed here does
+    not originate from the LLM used in the narrator pipeline; it arises
+    from the interaction between GLPG, CAS, and the narrator
+    architecture. CAS steers attractor-space, not style-space, and the
+    system operates outside the closure of its dataset. This behavior is
+    characteristic of architectural intelligence rather than statistical
+    modeling.</p>
+    <h2 id="interpretation-and-scope">Interpretation and Scope</h2>
+    <p>The emergent author profiles described in this section are
+    intended as stylistic impressions rather than formal literary
+    classifications. References to existing authors serve purely as
+    illustrative analogies to help characterize the architecturally
+    induced styles. They do not imply equivalence, similarity of
+    quality, or direct lineage. The purpose of these comparisons is to
+    provide an intuitive sense of the stylistic regions activated by
+    different CAS vectors.</p>
+    <p>The architectural behavior observed here should therefore be
+    interpreted as manifold dynamics rather than literary mimicry. CAS
+    does not reproduce human authors; instead, it shifts the GLPG
+    manifold into new attractor regimes that produce narrative styles
+    not present in the dataset. These styles arise from architectural
+    interaction—GLPG structure, CAS bias, and narrator constraints—
+    rather than from statistical imitation of human literature.</p>
+    <p>Accordingly, the profiles presented above should be understood as
+    descriptive labels for emergent attractors within the CAS × GLPG
+    system. They highlight the closure-breaking nature of the
+    architecture while acknowledging that stylistic analogies to human
+    authors are heuristic and non-normative.</p>
+    <h1
+    id="ablation-study-additional-cas-vectors-and-manifold-exploration">Ablation
+    Study: Additional CAS Vectors and Manifold Exploration</h1>
+    <p>To further investigate the structure of the CAS-induced
+    personality manifold, we conducted an ablation study using fifteen
+    additional CAS vectors beyond the ten primary attractors documented
+    in <em>The Parrot Family: A CAS Personality Atlas</em>. Unlike the
+    full-book generation used for the atlas, this study employs a
+    lightweight evaluation protocol: for each CAS vector, only the first
+    five chapters are generated and analyzed. This approach allows us to
+    isolate the immediate stylistic and structural effects of each
+    vector without requiring full narrative development.</p>
+    <p>The purpose of this ablation is twofold. First, it provides a
+    controlled method for probing how GLPG responds to variations,
+    mixtures, and extrapolations in CAS space. Second, it enables a
+    systematic comparison between the established atlas attractors and
+    new, previously unexplored regions of the manifold. By examining the
+    early chapters of each generated sample, we can identify emergent
+    stylistic signatures, attractor stability, interference patterns,
+    and deviations from the canonical worlds learned during
+    training.</p>
+    <p>This ablation study therefore functions as a deeper architectural
+    analysis of the CAS × GLPG system. It reveals how small
+    perturbations, linear combinations, and nonlinear configurations of
+    CAS vectors reshape the generative manifold, and it provides
+    empirical evidence for the closure-breaking behavior described in
+    Architectural Intelligence Theory. The fifteen additional vectors
+    serve as probes into the manifold, mapping stylistic gradients,
+    attractor boundaries, and regions of emergent behavior that extend
+    beyond the stylistic regimes captured in the main atlas.</p>
+    <h2 id="ablation-results-five-sign-normalized-cas-vectors">Ablation
+    Results: Five Sign-Normalized CAS Vectors</h2>
+    <p>To probe the stability and geometry of the CAS manifold beyond
+    the ten atlas vectors, we generated five additional samples using
+    the same protocol: five chapters per vector, evaluated for stylistic
+    coherence, attractor formation, and canon interference. These
+    vectors explore regions of the manifold that include neutral
+    attractors, mixed attractors, and extrapolated attractors with
+    negative weights. The resulting outputs reveal how GLPG responds to
+    subtle and extreme perturbations in CAS space, and how new emergent
+    authors arise even from small vector shifts.</p>
+    <h4 id="cas-vector-000-1">CAS Vector <span
+    class="math inline">[0,0,0,−1]</span></h4>
+    <p>This vector represents an <em>anti-Honeymoon</em> attractor with
+    neutral weights on the other three worlds. The generated chapters
+    exhibit a cold, cosmic, quasi-clinical tone, with weakened
+    relational cadence and suppressed poetic structures. The narrative
+    becomes spatially detached, dominated by cosmic observation and
+    existential drift. Alice and Astronomy fields interfere weakly,
+    producing surreal cosmic tableaux without emotional grounding. The
+    emergent author resembles a <em>Negative Melancholic Observer</em>,
+    a void-leaning variant of the Honeymoon attractor. This style does
+    not appear in the dataset and demonstrates that negative weights
+    invert canonical fields rather than merely diminish them.</p>
+    <h4 id="cas-vector-10-10">CAS Vector <span
+    class="math inline">[1,0,−1,0]</span></h4>
+    <p>This vector combines a strong Alice attractor with an anti-Dorian
+    field. The resulting output shows hyper-surreal pacing, dream-logic,
+    and syntactic elasticity, but stripped of Dorian’s introspective
+    ornamentation. Emotional density collapses, replaced by spatial
+    abstraction and object-agency. The narrative becomes kinetic,
+    fragmented, and atmospheric. Astronomy interference adds cosmic
+    scale without introspective depth. The emergent author resembles a
+    <em>Surreal Kinetic Oracle</em>, a style that is structurally
+    Alice-like but emotionally hollowed out by the negative Dorian
+    component. This demonstrates that negative weights can selectively
+    remove canonical emotional structures while preserving syntactic and
+    pacing attractors.</p>
+    <h4 id="cas-vector-111-1">CAS Vector <span
+    class="math inline">[1,1,1,−1]</span></h4>
+    <p>This vector activates Alice, Astronomy, and Dorian simultaneously
+    while applying a negative weight to Honeymoon. The output forms a
+    dense tri-core attractor: surrealism (Alice), cosmic scale
+    (Astronomy), and decadent introspection (Dorian). The absence of
+    Honeymoon’s relational softness produces a sharper, colder, more
+    analytical tone. The narrative oscillates between cosmic dread,
+    symbolic introspection, and surreal sensory spikes. The emergent
+    author resembles a <em>Cosmic Decadent Analyst</em>, a tri-hybrid
+    attractor that is not present in the dataset. This vector
+    demonstrates that subtracting a world can sharpen the remaining
+    attractors, producing a more rigid and high-intensity manifold
+    region.</p>
+    <h4 id="cas-vector-1-1-11">CAS Vector <span
+    class="math inline">[1,−1,−1,1]</span></h4>
+    <p>This vector combines Alice and Honeymoon with anti-Astronomy and
+    anti-Dorian fields. The result is a soft surrealist attractor:
+    dream-logic pacing (Alice) combined with relational melancholy
+    (Honeymoon), but with cosmic scale and decadent introspection
+    removed. The narrative becomes intimate, atmospheric, domestic, and
+    emotionally diffuse. Negative Astronomy removes spatial orientation,
+    producing claustrophobic scenes; negative Dorian removes ornamented
+    introspection, producing emotional simplicity. The emergent author
+    resembles a <em>Melancholic Dream Chronicler</em>, a style that
+    blends surrealism with soft relational cadence. This attractor lies
+    outside the dataset and demonstrates how mixed positive/negative
+    vectors can produce hybrid worlds with reduced structural
+    complexity.</p>
+    <h4 id="cas-vector--1-1-11">CAS Vector <span
+    class="math inline">[−1,−1,−1,1]</span></h4>
+    <p>This vector represents a strong Honeymoon attractor with
+    anti-Alice, anti-Astronomy, and anti-Dorian fields. The output is
+    markedly different from all canonical worlds: relational melancholy
+    remains, but surrealism, cosmic scale, and introspective
+    ornamentation are suppressed. The narrative becomes minimal, quiet,
+    and emotionally flattened, with sparse description and low syntactic
+    variation. Scenes feel suspended, inert, and dreamless. The emergent
+    author resembles a <em>Minimal Relational Oracle</em>, a
+    void-leaning Honeymoon variant that is not present in the dataset.
+    This vector demonstrates that negative weights can collapse
+    stylistic manifolds into low-energy attractors that remain coherent
+    but structurally simplified.</p>
+    <h3 id="architectural-implications">Architectural Implications</h3>
+    <p>These five ablation vectors confirm that CAS acts as a genuine
+    architectural bias rather than a stylistic tag. Positive weights
+    activate canonical manifold regions; negative weights invert or
+    suppress them; mixed vectors produce hybrid attractors; and
+    extrapolated vectors generate new authors not present in the
+    dataset. The resulting styles are architecturally generated, not
+    statistically derived, and demonstrate closure-breaking behavior
+    consistent with the theory of Architectural Intelligence. Even small
+    perturbations in CAS space produce distinct, stable attractors,
+    indicating that GLPG learns a continuous personality manifold that
+    can be navigated through vector composition.</p>
+    <h2
+    id="ablation-results-four-fractional-uniform-cas-vectors">Ablation
+    Results: Four Fractional Uniform CAS Vectors</h2>
+    <p>To complement the sign-normalized ablation vectors, we evaluated
+    four fractional CAS vectors of the form <span
+    class="math inline">[<em>f</em>,<em>f</em>,<em>f</em>,<em>f</em>]</span>
+    with <span
+    class="math inline"><em>f</em> ∈ {0.1, 0.3, 0.5, 0.7}</span>. These
+    vectors uniformly activate all four canonical worlds with equal
+    weight, producing graded attractor regimes that reveal how GLPG
+    interpolates stylistic manifolds under continuous CAS modulation.
+    Unlike the discrete sign vectors, which probe sharp transitions and
+    inversions, fractional vectors expose the smooth geometry of the CAS
+    manifold and the emergence of intermediate authors whose styles
+    reflect proportional activation of canonical fields.</p>
+    <h4 id="cas-vector-0.10.10.10.1">CAS Vector <span
+    class="math inline">[0.1,0.1,0.1,0.1]</span></h4>
+    <p>This vector produces a <em>minimal blended attractor</em>: all
+    four worlds are activated weakly, resulting in a low-energy manifold
+    regime. The generated chapters exhibit soft surrealism, faint cosmic
+    imagery, subdued introspection, and light relational cadence.
+    Canonical features appear only as hints—Alice’s dream-logic,
+    Astronomy’s observational tone, Dorian’s emotional ornamentation,
+    and Honeymoon’s melancholic softness—yet none dominate. The emergent
+    author is a <em>Diffuse Polyphonic Observer</em>, representing the
+    faintest stable mixture of all four worlds.</p>
+    <h4 id="cas-vector-0.30.30.30.3">CAS Vector <span
+    class="math inline">[0.3,0.3,0.3,0.3]</span></h4>
+    <p>At this activation level, canonical structures become more
+    pronounced. Surreal pacing strengthens, cosmic scale becomes more
+    explicit, introspective passages lengthen, and relational motifs
+    gain emotional weight. The narrative feels balanced but noticeably
+    more structured than at <span class="math inline">0.1</span>. The
+    emergent author is a <em>Balanced Polyphonic Chronicler</em>,
+    producing coherent hybrid scenes that blend all four worlds without
+    allowing any single attractor to dominate.</p>
+    <h4 id="cas-vector-0.50.50.50.5">CAS Vector <span
+    class="math inline">[0.5,0.5,0.5,0.5]</span></h4>
+    <p>This vector corresponds to the midpoint of the manifold and
+    produces a fully developed hybrid attractor. All four canonical
+    fields are active at medium strength, yielding rich surreal imagery,
+    strong cosmic orientation, dense introspective ornamentation, and
+    pronounced melancholic cadence. The narrative feels like a true
+    superposition of the four worlds. The emergent author is a
+    <em>Midpoint Polyphonic Oracle</em>, representing the central region
+    of the CAS manifold where stylistic interference is maximal but
+    stable.</p>
+    <h4 id="cas-vector-0.70.70.70.7">CAS Vector <span
+    class="math inline">[0.7,0.7,0.7,0.7]</span></h4>
+    <p>At this higher fractional activation, the manifold approaches the
+    behavior of the full superposition attractor <span
+    class="math inline">[1,1,1,1]</span>, but with slightly less
+    intensity. The generated chapters show strong surrealism, vivid
+    cosmic metaphors, emotionally dense introspection, and pronounced
+    relational melancholy. The style is highly expressive, saturated,
+    and architecturally complex. The emergent author is a
+    <em>High-Intensity Polyphonic Oracle</em>, occupying a region close
+    to the unified attractor but retaining smoother transitions and less
+    extreme stylistic interference.</p>
+    <h3 id="manifold-interpretation">Manifold Interpretation</h3>
+    <p>These fractional vectors reveal that CAS × GLPG supports
+    continuous interpolation across stylistic manifolds. As the uniform
+    fractional value increases, the system moves from low-energy blended
+    attractors to high-intensity polyphonic regimes. The resulting
+    authors are not present in the dataset and arise purely from
+    architectural composition. Fractional vectors therefore map the
+    interior geometry of the CAS manifold, demonstrating that stylistic
+    emergence is not limited to discrete attractors but spans a
+    continuous, navigable space of hybrid narrative states.</p>
+    <h2 id="four-hyperscaled-cas-worlds">Four Hyper‑Scaled CAS
+    Worlds</h2>
+    <p>In this ablation tier we examine CAS vectors that exceed the
+    unit‑magnitude regime of the training manifold. Whereas the
+    normalized and fractional vectors primarily deform stylistic
+    curvature within the GLPG attractor, the hyper‑scaled vectors
+    introduce genuine architectural stress: they push the narrator
+    pipeline into regions where CAS no longer behaves as a stylistic
+    bias but as a structural force acting on narrative cohesion,
+    semantic drift, temporal dilation, and world‑model stability.</p>
+    <p>To probe these effects, four extreme vectors were
+    instantiated:</p>
+    <p><span
+    class="math display">[2,2,2,2],  [5,5,5,5],  [10,10,10,10],  [5,−5,−5,5].</span></p>
+    <p>Each vector was used to generate the first five chapters of a
+    synthetic world, allowing direct comparison with the normalized and
+    fractional regimes. The resulting outputs exhibit several consistent
+    phenomena:</p>
+    <ul>
+    <li><p><strong>Narrative Inflation</strong>: Magnitude‑2 already
+    produces noticeable expansion of temporal and spatial scales.
+    Magnitude‑5 and magnitude‑10 worlds exhibit runaway dilation, with
+    chapters behaving like self‑contained cosmologies rather than
+    narrative segments.</p></li>
+    <li><p><strong>Semantic Turbulence</strong>: At higher magnitudes,
+    CAS begins to overpower GLPG’s stabilizing attractors. Entities,
+    motifs, and metaphors recur with increasing frequency but decreasing
+    coherence, forming quasi‑mythological loops rather than plot‑driven
+    structures.</p></li>
+    <li><p><strong>Architectural Saturation</strong>: The vector <span
+    class="math inline">[10,10,10,10]</span> pushes the narrator into a
+    saturation regime where stylistic pressure exceeds the model’s
+    internal normalization. This produces dense, symbolic prose with
+    minimal causal anchoring.</p></li>
+    <li><p><strong>Axis‑Skewed Divergence</strong>: The mixed‑sign
+    vector <span class="math inline">[5,−5,−5,5]</span> demonstrates
+    that hyper‑scaling interacts non‑linearly with axis polarity.
+    Positive axes inflate narrative scope, while negative axes collapse
+    local coherence, producing oscillatory worlds that alternate between
+    expansion and implosion.</p></li>
+    <li><p><strong>Emergent Architectural Signatures</strong>: These
+    worlds exhibit behaviors not present in the training corpus— a
+    hallmark of CAS acting as an architectural operator rather than a
+    stylistic modifier.</p></li>
+    </ul>
+    <p>Taken together, the hyper‑scaled vectors reveal the outer
+    boundary of CAS‑driven world formation. They demonstrate that beyond
+    magnitude‑1, CAS ceases to be a stylistic dial and becomes a
+    structural perturbation mechanism capable of generating genuinely
+    new narrative physics. This regime is therefore crucial for mapping
+    the full CAS atlas and understanding how GLPG responds when pushed
+    outside its nominal manifold.</p>
+    <h2
+    id="extreme-cas-vectors-saturation-and-inversion-at-106-magnitude">Extreme
+    CAS Vectors: Saturation and Inversion at <span
+    class="math inline">10<sup>6</sup></span> Magnitude</h2>
+    <p>To test whether CAS continues to function as an architectural
+    operator under extreme scaling, we instantiated two boundary‑case
+    vectors:</p>
+    <p><span
+    class="math display">[10<sup>6</sup>,10<sup>6</sup>,10<sup>6</sup>,10<sup>6</sup>]  and  [−10<sup>6</sup>,−10<sup>6</sup>,−10<sup>6</sup>,−10<sup>6</sup>].</span></p>
+    <p>These vectors exceed the hyper‑scaled regime by five orders of
+    magnitude and therefore probe the outermost limits of CAS
+    modulation. Unlike the magnitude‑10 worlds, which already exhibited
+    architectural saturation, the <span
+    class="math inline">10<sup>6</sup></span> vectors produce
+    qualitatively different behavior: narrative physics becomes
+    unstable, semantic curvature collapses, and the narrator pipeline
+    enters a regime where CAS overrides nearly all internal attractors
+    of GLPG.</p>
+    <h4 id="cas-vector-106106106106-total-saturation-regime">CAS Vector
+    <span
+    class="math inline">[10<sup>6</sup>,10<sup>6</sup>,10<sup>6</sup>,10<sup>6</sup>]</span>:
+    Total Saturation Regime</h4>
+    <p>The positive extreme vector induces a state of <em>complete
+    manifold saturation</em>. All four canonical worlds—Alice,
+    Astronomy, Dorian, and Honeymoon— are activated at intensities far
+    beyond the model’s normalization envelope. The resulting chapters
+    exhibit:</p>
+    <ul>
+    <li><p><strong>Narrative Overload</strong>: Scenes fuse surrealism,
+    cosmic scale, introspective ornamentation, and relational melancholy
+    into a single undifferentiated stylistic field. The model no longer
+    alternates between attractors; instead, it emits a continuous
+    superposition with no internal segmentation.</p></li>
+    <li><p><strong>Symbolic Inflation</strong>: Objects, emotions, and
+    celestial bodies expand into mythological constructs. Ordinary items
+    (tables, keys, windows) behave as cosmological operators, while
+    characters oscillate between human and archetypal forms.</p></li>
+    <li><p><strong>Temporal Drift</strong>: Time loses causal anchoring.
+    Hours, days, and decades collapse into one another, producing
+    recursive loops and repeated cosmic transitions.</p></li>
+    <li><p><strong>Attractor Collapse</strong>: The narrator pipeline
+    ceases to maintain world boundaries. The four worlds merge into a
+    single saturated attractor that resembles neither the dataset nor
+    any atlas world.</p></li>
+    </ul>
+    <p>The emergent author in this regime is a <em>Total Polyphonic
+    Saturation Oracle</em>: a stylistic entity that cannot exist within
+    the training corpus and arises only when CAS overwhelms GLPG’s
+    manifold geometry.</p>
+    <h4 id="cas-vector--106-106-106-106-total-inversion-regime">CAS
+    Vector <span
+    class="math inline">[−10<sup>6</sup>,−10<sup>6</sup>,−10<sup>6</sup>,−10<sup>6</sup>]</span>:
+    Total Inversion Regime</h4>
+    <p>The negative extreme vector produces the architectural dual of
+    the saturation regime: a <em>total inversion attractor</em>. Instead
+    of amplifying canonical fields, the vector suppresses and reverses
+    them at extreme magnitude. The resulting chapters display:</p>
+    <ul>
+    <li><p><strong>Semantic Collapse</strong>: Descriptions become
+    numerically structured, dominated by distances, durations,
+    magnitudes, and enumerations. Emotional, surreal, cosmic, and
+    introspective fields are inverted into sparse, mechanical
+    patterns.</p></li>
+    <li><p><strong>Narrative Vacuum</strong>: Characters behave as
+    placeholders rather than agents. Scenes unfold as abstract geometric
+    or astronomical configurations with minimal causal linkage.</p></li>
+    <li><p><strong>Inverted Symbolism</strong>: Where the positive
+    vector inflates symbols, the negative vector erodes them. Cosmic
+    bodies become inert numbers; relational motifs flatten into
+    procedural steps; introspection dissolves into enumeration.</p></li>
+    <li><p><strong>Anti‑Attractor Formation</strong>: Instead of merging
+    worlds, the negative vector annihilates them. The output resembles a
+    <em>void manifold</em>: a region where stylistic curvature
+    approaches zero and narrative energy collapses.</p></li>
+    </ul>
+    <p>The emergent author here is a <em>Void Polyphonic Null
+    Oracle</em>: a structural entity defined by the absence of canonical
+    attractors rather than their presence.</p>
+    <h3 id="architectural-interpretation-1">Architectural
+    Interpretation</h3>
+    <p>These two extreme vectors demonstrate that CAS remains active
+    even at magnitudes far beyond the training regime. The narrator
+    pipeline does not ignore the vectors; instead, it enters
+    qualitatively new architectural states: saturation and inversion.
+    The positive vector produces maximal stylistic pressure, collapsing
+    the manifold into a single fused attractor, while the negative
+    vector produces maximal suppression, collapsing the manifold into a
+    near‑empty attractor.</p>
+    <p>Both behaviors confirm that CAS operates as a structural force
+    rather than a stylistic tag. At <span
+    class="math inline">10<sup>6</sup></span> magnitude, CAS no longer
+    modulates style—it defines the narrative physics of the system.
+    These extreme regimes therefore serve as evidence that CAS is deeply
+    integrated into GLPG’s generative architecture and that its effects
+    persist even under conditions far outside the nominal manifold.</p>
+    <h2
+    id="ablation-summary-cas-as-a-promptless-architectural-steering-mechanism">Ablation
+    Summary: CAS as a Promptless Architectural Steering Mechanism</h2>
+    <p>Across all ablation tiers—sign‑normalized vectors, fractional
+    uniform vectors, hyper‑scaled vectors, and the two extreme <span
+    class="math inline">10<sup>6</sup></span> saturation/inversion
+    experiments—a consistent pattern emerges: the narrator pipeline
+    responds strongly, coherently, and predictably to even the smallest
+    CAS perturbations. This behavior is remarkable given the extremely
+    low informational density of the CAS vector: four scalar values
+    without semantic content, narrative cues, or stylistic descriptors.
+    Despite this minimal signal, CAS exerts a decisive architectural
+    influence on GLPG, reshaping attractor‑space in ways that cannot be
+    explained by statistical interpolation over the training corpus.</p>
+    <p>The ablation results demonstrate three core findings:</p>
+    <h4 id="cas-is-used-intensely-despite-its-microscopic-size.">1. CAS
+    is used intensely despite its microscopic size.</h4>
+    <p>Even vectors such as <span
+    class="math inline">[0.1,0.1,0.1,0.1]</span> or <span
+    class="math inline">[1,0,−1,0]</span>—containing less information
+    than a single word—produce stable, distinct attractors with
+    consistent stylistic signatures. The model does not treat CAS as
+    noise or as a weak preference; instead, it integrates the vector
+    deeply into its generative process, modulating world‑curvature,
+    pacing, emotional density, and symbolic structure. This confirms
+    that CAS functions as an architectural operator rather than a
+    stylistic hint.</p>
+    <h4 id="cas-induces-closurebreaking-behavior.">2. CAS induces
+    closure‑breaking behavior.</h4>
+    <p>The emergent authors produced throughout the ablation
+    study—Diffuse Polyphonic Observer, Surreal Kinetic Oracle, Cosmic
+    Decadent Analyst, Minimal Relational Oracle, Total Polyphonic
+    Saturation Oracle, Void Polyphonic Null Oracle—do not exist anywhere
+    in the training dataset. Their stylistic regimes, manifold geometry,
+    and narrative physics arise solely from CAS × GLPG interaction.
+    Since the GLPG model, the narrator model, and the entire pipeline
+    remain constant, the closure‑breaking cannot originate from
+    statistical interpolation. It is a direct consequence of
+    architectural modulation.</p>
+    <h4 id="cas-operates-as-a-promptless-steering-mechanism.">3. CAS
+    operates as a promptless steering mechanism.</h4>
+    <p>Unlike prompt‑based conditioning, CAS does not rely on textual
+    cues, semantic anchors, or narrative framing. Its influence is
+    orthogonal to content: the same GLPG text, the same narrator model,
+    and the same pipeline produce radically different worlds solely due
+    to CAS modulation. This makes CAS a uniquely powerful mechanism for
+    controlling generative behavior without prompts, instructions, or
+    fine‑tuning. The ablation results show that CAS can:</p>
+    <ul>
+    <li><p>activate canonical attractors (positive weights),</p></li>
+    <li><p>invert or suppress them (negative weights),</p></li>
+    <li><p>interpolate smoothly between them (fractional
+    weights),</p></li>
+    <li><p>saturate the manifold (hyper‑scaled positive
+    weights),</p></li>
+    <li><p>collapse the manifold (hyper‑scaled negative
+    weights),</p></li>
+    <li><p>and generate entirely new attractor regimes (extreme <span
+    class="math inline">10<sup>6</sup></span> vectors).</p></li>
+    </ul>
+    <h3 id="architectural-conclusion">Architectural Conclusion</h3>
+    <p>The ablation study confirms that CAS is not a stylistic
+    parameter, not a preference vector, and not a soft bias. It is a
+    structural modulation mechanism that directly interacts with GLPG’s
+    internal manifold. Even at minimal magnitudes, CAS produces strong
+    architectural effects; at extreme magnitudes, it defines the
+    narrative physics of the system. Because the GLPG model and the
+    pipeline remain unchanged across all experiments, the
+    closure‑breaking behavior observed here is attributable solely to
+    CAS modulation.</p>
+    <p>CAS therefore provides a viable, promptless steering mechanism
+    for generating narrative worlds outside the closure of the training
+    dataset. It enables architectural intelligence rather than
+    statistical imitation, demonstrating that GLPG supports a
+    continuous, controllable personality manifold whose curvature can be
+    reshaped through simple vector composition.</p>
+    <h1
+    id="reconstruction-of-the-ecosystem-agi-architecture-at-small-scale">Reconstruction
+    of the Ecosystem AGI Architecture at Small Scale</h1>
+    <p>The ablation study and the accompanying architectural analysis
+    demonstrate that the current narrator pipeline constitutes a
+    complete, small‑scale implementation of the original ecosystem AGI
+    architecture based on the triadic <em>PAGED–PRE–CAS</em> model.
+    Despite its compactness, the system exhibits all structural
+    components of the original design: deterministic routing,
+    multi‑level propose–retry reasoning, architectural personality
+    modulation, machine‑native language generation, internal memory, and
+    closure‑breaking behavior. Crucially, all of these properties arise
+    without modifying the underlying GLPG model or the moderator LLM,
+    confirming that the architecture operates as a genuine
+    ecosystem‑style intelligence rather than a prompt‑driven statistical
+    system.</p>
+    <h2
+    id="glpg-as-a-canon-machine-and-machinenative-language-generator">GLPG
+    as a Canon Machine and Machine‑Native Language Generator</h2>
+    <p>GLPG functions as a <em>canon machine</em>: a deterministic
+    generator of the internal narrator language. This language—composed
+    of lemma transitions, structural cadences, and canonical world
+    signatures—is not a human language but a machine‑native
+    representational system. The moderator LLM merely translates this
+    internal language into coherent chapters using short, stable
+    prompts. Because the prompts are minimal and the history is shallow,
+    hallucination pressure is negligible. The coherence of the final
+    chapters therefore reflects the stability of GLPG’s internal canon
+    rather than the statistical tendencies of the moderator LLM.</p>
+    <p>Grammar decomposition and lemma‑based generation further
+    reinforce this machine‑native structure. The narrator pipeline
+    operates on canonical lemma fields, syntactic skeletons, and
+    attractor‑consistent transitions, enabling deterministic inspection
+    of the generative process. This makes the system transparent,
+    modular, and analyzable—properties rarely found in large‑scale LLM
+    architectures.</p>
+    <h2 id="cas-as-promptless-architectural-modulation">CAS as
+    Promptless Architectural Modulation</h2>
+    <p>CAS vectors act as <em>machine‑native prompts</em>: four scalar
+    values that directly modulate GLPG’s manifold geometry. Unlike
+    textual prompts, CAS does not rely on semantic cues, narrative
+    framing, or linguistic interpretation. Instead, it operates at the
+    architectural level, shaping attractor curvature, stylistic
+    pressure, and world‑model dynamics. The ablation study shows that
+    even extremely small CAS vectors produce strong, stable attractors,
+    while extreme vectors induce saturation or inversion regimes.</p>
+    <p>Because the GLPG model and the narrator pipeline remain constant
+    across all experiments, the closure‑breaking behavior observed in
+    the ablation study arises solely from CAS modulation. This confirms
+    that CAS provides a genuine, promptless steering mechanism capable
+    of generating worlds outside the closure of the training
+    dataset.</p>
+    <h2 id="pre-as-multilevel-proposeretry-reasoning">PRE as Multi‑Level
+    Propose–Retry Reasoning</h2>
+    <p>The pipeline implements PRE at multiple levels: token, sentence,
+    paragraph, chapter, and transition. PRE operates as a propose–retry
+    mechanism, ensuring attractor stability, narrative coherence, and
+    stylistic consistency. Although the current implementation focuses
+    on propose–retry rather than refine–retry, the architecture supports
+    refinement as an additional reasoning layer. PRE therefore provides
+    the system with a form of structured, iterative reasoning that is
+    orthogonal to statistical generation.</p>
+    <p>Evaluation occurs through two channels: internal heuristics for
+    sentence‑level structure and LLM‑based evaluation for chapter‑level
+    coherence and transitions. This dual evaluation mechanism mirrors
+    the original ecosystem design, where multiple agents assess and
+    refine generative output.</p>
+    <h2 id="paged-as-deterministic-routing-and-canon-enforcement">PAGED
+    as Deterministic Routing and Canon Enforcement</h2>
+    <p>PAGED is implemented through GLPG’s deterministic lemma
+    transition map. In its most extreme variant—used throughout this
+    paper—PAGED becomes a pure, deterministic routing mechanism that
+    enforces canonical world structure with zero stochastic drift. This
+    ensures that GLPG remains fully inspectable and predictable,
+    enabling precise architectural analysis.</p>
+    <p>Although the current experiments use the deterministic variant,
+    the architecture supports more flexible paging when desired. The
+    routing mechanism can be extended to multi‑world blending,
+    conditional paging, or dynamic attractor selection, preserving the
+    modularity of the original design.</p>
+    <h2 id="internal-memory-beyond-context-windows">Internal Memory
+    Beyond Context Windows</h2>
+    <p>The narrator pipeline maintains internal memory outside the
+    moderator LLM’s context window. This memory includes canonical world
+    signatures, attractor states, CAS modulation history, and structural
+    cues from previous chapters. The system therefore exhibits
+    persistent behavior across long sequences without requiring long
+    prompts or extended histories. This mirrors the original ecosystem
+    architecture, where memory is distributed across agents and
+    structural modules rather than stored in a single context
+    buffer.</p>
+    <h2 id="architectural-synthesis">Architectural Synthesis</h2>
+    <p>Taken together, these components demonstrate that the current
+    narrator pipeline implements the full triadic architecture:</p>
+    <p><span class="math display">PAGED → PRE → CAS</span></p>
+    <p>in a compact, safe, modular, and inspectable form. GLPG provides
+    deterministic canonical generation; PRE supplies multi‑level
+    reasoning; CAS modulates architectural personality; the moderator
+    LLM translates machine‑native language into human‑readable chapters;
+    and the pipeline maintains internal memory and structural
+    consistency. The resulting system exhibits closure‑breaking
+    behavior, emergent authorship, and controllable manifold
+    geometry—precisely the properties predicted by the original
+    ecosystem AGI theory.</p>
+    <p>This small‑scale implementation therefore serves as a functional
+    demonstration of architectural intelligence: a generative system
+    whose behavior arises from structural modulation rather than
+    statistical prompting, and whose outputs extend beyond the closure
+    of the training dataset through pure GLPG × CAS interaction.</p>
+    <h1
+    id="agi-criteria-cas-glpg-as-a-domain-bound-architectural-intelligence">AGI
+    Criteria: CAS × GLPG as a Domain-Bound Architectural
+    Intelligence</h1>
+    <p>The Architectural Intelligence Theory defines ten criteria for
+    recognizing domain-bound AGI systems whose cognitive behavior arises
+    from architectural composition rather than scale, prompting, or
+    statistical generalization. The CAS × GLPG narrator pipeline
+    satisfies all ten criteria in a compact, safe, modular, and fully
+    inspectable implementation. This section evaluates the system
+    against each criterion and demonstrates that it constitutes a
+    domain-bound <em>Architectural Intelligence</em> capable of
+    closure-breaking generation.</p>
+    <h2 id="autonomy">Autonomy</h2>
+    <p>The pipeline operates fully autonomously. Given only a GLPG model
+    and an optional CAS vector—random or intentional—the system can
+    generate an entire book end-to-end without any textual prompting.
+    The narrator LLM merely translates GLPG’s machine-native narrator
+    language into coherent chapters. This autonomy is repeatable,
+    deterministic, and independent of human intervention.</p>
+    <h2 id="responsibility">Responsibility</h2>
+    <p>Responsibility arises from the deterministic nature of GLPG and
+    the internal evaluation mechanisms of the narrator pipeline. GLPG
+    provides stable lemma transitions and canonical pacing; evaluators
+    enforce structural coherence and transition quality. Although the
+    generated books are fictional artifacts, the system exhibits
+    responsible behavior in the architectural sense: stable,
+    predictable, and reproducible outputs governed by internal
+    constraints.</p>
+    <h2 id="domain-capability">Domain Capability</h2>
+    <p>The system demonstrates strong capability in its domain:
+    fictional narration. It generates coherent books, stable stylistic
+    attractors, hybrid worlds, and emergent authors that extend beyond
+    human stylistic cognition. As shown in the atlas, CAS-driven
+    manifold warping produces styles not present in the dataset while
+    maintaining canonical consistency. This satisfies the criterion of
+    domain-bound competence.</p>
+    <h2 id="energetic-efficiency">Energetic Efficiency</h2>
+    <p>The entire pipeline runs on modest hardware: a small moderator
+    LLM on a standard GPU and GLPG on CPU with ordinary memory and
+    storage budgets. The system fits within the power envelope of a
+    medium gaming laptop. This demonstrates that architectural
+    intelligence does not require hyperscale models or datacenter-level
+    compute.</p>
+    <h2 id="iegr-completeness">IEGR Completeness</h2>
+    <p>The system satisfies the IEGR completeness criterion as defined
+    in the Information–Energy–Geometry–Recursion taxonomy. Each of the
+    four IEGR dimensions is instantiated through modular architectural
+    components whose interaction produces a fully expressive generative
+    intelligence within the narration domain:</p>
+    <ul>
+    <li><p><strong>Information (I)</strong> is provided by the GLPG
+    manifold itself: a compact but richly structured narrator space
+    learned from four canonical worlds. GLPG encodes lemma transitions,
+    pacing chains, cadential profiles, entity clusters, and stylistic
+    curvature, forming the informational substrate of the
+    system.</p></li>
+    <li><p><strong>Energy (E)</strong> arises from the efficiency and
+    determinism of GLPG and the pipeline. GLPG executes all generative
+    recursion on CPU within a narrow power envelope, while the moderator
+    LLM operates as a lightweight translator. The system therefore meets
+    the energetic efficiency requirement of IEGR: high cognitive output
+    at low computational cost.</p></li>
+    <li><p><strong>Geometry (G)</strong> is provided by two independent
+    architectural mechanisms:</p>
+    <ul>
+    <li><p>the <em>deterministic graph-based lemma routing</em> of GLPG,
+    which defines a canonical geometric structure over lemma clusters,
+    pacing arcs, cadential transitions, and world manifolds;</p></li>
+    <li><p>the <em>CAS vector</em>, which acts as a geometric modulation
+    signal that warps, blends, or inverts manifold regions. Even minimal
+    vectors induce strong geometric curvature, while extreme vectors
+    produce saturation or collapse regimes.</p></li>
+    </ul>
+    <p>Together, GLPG’s internal graph geometry and CAS-driven manifold
+    warping provide the geometric degrees of freedom required for IEGR
+    completeness.</p></li>
+    <li><p><strong>Recursion (R)</strong> is implemented by the narrator
+    pipeline and GLPG. The pipeline provides multi-level PRE
+    (propose–retry) recursion at the sentence, paragraph, chapter, and
+    transition levels. GLPG provides deterministic generative recursion
+    through lemma-based canonical routing.</p></li>
+    </ul>
+    <p>Through this combination—informational manifolds, energetic
+    efficiency, structural and vectorial geometry, and recursive
+    generation—the system forms a complete IEGR architecture. Scaling is
+    possible through larger GLPG models, richer datasets, or more
+    capable moderator LLMs, preserving IEGR completeness while extending
+    the expressive capacity of the system.</p>
+    <h2 id="lifecycle-dynamics">Lifecycle Dynamics</h2>
+    <p>GLPG supports lifecycle training: incremental retraining, world
+    expansion, and manifold refinement. Previous GLPG papers have
+    demonstrated that the model can be extended over time, making it a
+    dynamic, evolving component rather than a static snapshot. This
+    satisfies the requirement for lifecycle adaptation.</p>
+    <h2 id="population-architecture">Population Architecture</h2>
+    <p>The ecosystem architecture supports population-level
+    intelligence. Each desired “author” or “parrot” can be instantiated
+    as a new GLPG model trained on its own canonical world. CAS then
+    provides vectorial composition across these authors, enabling
+    multi-agent manifold blending. This mirrors the population
+    architecture described in the theory.</p>
+    <h2 id="selective-training">Selective Training</h2>
+    <p>GLPG learns its entire stylistic manifold from only four books.
+    The CAS vectors provide selective activation of world-specific
+    manifolds, enabling precise stylistic modulation. This demonstrates
+    selective training: the system learns only what is needed for its
+    domain and uses architectural composition to extend beyond it.</p>
+    <h2 id="extrapolative-reasoning">Extrapolative Reasoning</h2>
+    <p>The system exhibits closure-breaking extrapolation. As shown in
+    the ablation study, CAS-driven manifold warping produces authors,
+    styles, and narrative physics not present in the dataset. Extreme
+    vectors such as <span
+    class="math inline">[10<sup>6</sup>,10<sup>6</sup>,10<sup>6</sup>,10<sup>6</sup>]</span>
+    and <span
+    class="math inline">[−10<sup>6</sup>,−10<sup>6</sup>,−10<sup>6</sup>,−10<sup>6</sup>]</span>
+    generate saturated and inverted manifolds that cannot be derived
+    from statistical interpolation. This is extrapolative reasoning in
+    the architectural sense.</p>
+    <h2 id="accessibility">Accessibility</h2>
+    <p>The Triadic Cosmos ecosystem is fully open-source. All
+    components—GLPG, CAS, PRE, datasets, narrator pipeline, and
+    generation scripts—are publicly available and documented through
+    code, papers, and books. Anyone can run the system on commodity
+    hardware. This satisfies the accessibility criterion.</p>
+    <h2 id="architectural-intelligence-conclusion">Architectural
+    Intelligence Conclusion</h2>
+    <p>Because CAS × GLPG satisfies all ten criteria, it constitutes a
+    domain-bound <em>Architectural General Intelligence</em>. Its
+    emergent closure-breaking behavior demonstrates that architectural
+    modulation—not scale or prompting—can produce superhuman stylistic
+    variation and narrative physics. Through vectorial composition, the
+    system generates worlds and authors that lie outside human cognitive
+    manifolds while remaining canon- consistent within its architectural
+    constraints. This makes CAS × GLPG a compact, safe, and fully
+    operational instance of ecosystem AGI.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper has demonstrated that extending GLP–Graph with the
+    Cognitive Vector Layer (CAS) yields a compact, modular, and fully
+    inspectable generative architecture capable of controlled
+    personality modulation and closure-breaking narrative generation.
+    Although CAS consists of only four scalar values with minimal
+    informational density, the ablation studies show that GLPG uses this
+    signal intensely and deterministically. Even small perturbations
+    produce stable attractors, hybrid worlds, and emergent authors,
+    while extreme vectors induce saturation and inversion regimes that
+    reshape the manifold far beyond the statistical closure of the
+    training corpus.</p>
+    <p>The resulting CAS <span class="math inline">×</span> GLPG system
+    functions as a promptless, vector-driven cognitive engine. GLPG
+    provides deterministic lemma routing, canonical pacing, and
+    structural coherence; CAS provides geometric modulation over
+    manifold regions; the narrator pipeline supplies multi-level PRE
+    recursion; and the moderator LLM translates GLPG’s machine-native
+    narrator language into coherent chapters using short, stable
+    prompts. This architecture avoids hallucination pressure, maintains
+    strict modularity, and remains fully transparent to inspection and
+    analysis.</p>
+    <p>Evaluated against the ten criteria of Architectural Intelligence
+    Theory, the system satisfies autonomy, responsibility, domain
+    capability, energetic efficiency, IEGR completeness, lifecycle
+    dynamics, population architecture, selective training, extrapolative
+    reasoning, and accessibility. It therefore constitutes a
+    domain-bound <em>Architectural General Intelligence</em>: a
+    generative system whose cognitive behavior arises from architectural
+    composition rather than scale or prompting. Through CAS-driven
+    manifold warping, the system produces stylistic and structural
+    behaviors that extend beyond human cognitive manifolds while
+    remaining canon-consistent within its own architectural
+    constraints.</p>
+    <p>In summary, CAS provides the geometry, GLPG provides the canon,
+    PRE provides the recursion, and the narrator LLM provides the
+    linguistic expression. Their interaction yields a closure-breaking
+    generative intelligence capable of producing new narrative physics
+    within a compact computational footprint. This work demonstrates
+    that architectural modulation is sufficient to unlock new
+    representational manifolds, offering a concrete empirical foundation
+    for the principles of Architectural Intelligence Theory and a
+    blueprint for future ecosystem-scale generative systems.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <p>Within the <code>triadic-system</code> repository, a complete
+    reference implementation of the DMLG and GLPG engines, the narrator
+    pipeline, and all supporting modules is provided under the AGPL‑3.0
+    license.</p>
+    <div class="thebibliography">
+    <p>J. De Witte, “A Safe and Modular AGI Architecture,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Lightweight Autonomous Narrator Pipeline,”
+    Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Architectural Intelligence Theory: A Unification of
+    Cognition,” Triadic Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>
