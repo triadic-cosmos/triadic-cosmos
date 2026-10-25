@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The Vector–Graph–PRE–CAS Cognitive Architecture Family</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="container">
+
+  <aside id="toc">
+    <h2>Contents</h2>
+    <ul>
+    <li><a href="#introduction"
+    id="toc-introduction">Introduction</a></li>
+    <li><a href="#related-work" id="toc-related-work">Related
+    Work</a></li>
+    <li><a href="#design-objectives" id="toc-design-objectives">Design
+    Objectives</a></li>
+    <li><a href="#the-vectorgraphprecas-cognitive-architecture-family"
+    id="toc-the-vectorgraphprecas-cognitive-architecture-family">The
+    Vector–Graph–PRE–CAS Cognitive Architecture Family</a></li>
+    <li><a href="#state-representation"
+    id="toc-state-representation">State Representation</a></li>
+    <li><a href="#graph-based-state-spaces"
+    id="toc-graph-based-state-spaces">Graph-Based State Spaces</a></li>
+    <li><a href="#neural-state-vector-inference"
+    id="toc-neural-state-vector-inference">Neural State Vector
+    Inference</a></li>
+    <li><a href="#vector-modulation" id="toc-vector-modulation">Vector
+    Modulation</a></li>
+    <li><a href="#decoding-mechanisms"
+    id="toc-decoding-mechanisms">Decoding Mechanisms</a></li>
+    <li><a href="#the-cas-framework" id="toc-the-cas-framework">The CAS
+    Framework</a></li>
+    <li><a href="#rule-based-control"
+    id="toc-rule-based-control">Rule-Based Control</a></li>
+    <li><a href="#pre-reasoning-loops" id="toc-pre-reasoning-loops">PRE
+    Reasoning Loops</a></li>
+    <li><a href="#hybrid-intelligence-integration"
+    id="toc-hybrid-intelligence-integration">Hybrid Intelligence
+    Integration</a></li>
+    <li><a href="#advantages-and-limitations"
+    id="toc-advantages-and-limitations">Advantages and
+    Limitations</a></li>
+    <li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+    <li><a href="#triadic-cosmos-ecosystem-context"
+    id="toc-triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</a></li>
+    </ul>
+  </aside>
+
+  <main id="content">
+    <div class="center">
+    <p><span>©2026 Joachim De Witte. All rights reserved.<br />
+    Published under the Creative Commons BY–NC–ND 4.0
+    license.</span></p>
+    </div>
+    <h1 id="introduction">Introduction</h1>
+    <p>Artificial intelligence has experienced unprecedented progress
+    through the development of large-scale neural architectures,
+    particularly foundation models and large language models. These
+    systems demonstrate remarkable capabilities in language
+    understanding, reasoning, planning, and knowledge retrieval.
+    Nevertheless, their internal representations remain largely opaque,
+    while properties such as long-term state consistency, explicit
+    controllability, traceability, and structured behavioral steering
+    remain challenging.</p>
+    <p>Historically, artificial intelligence has oscillated between
+    neural and symbolic paradigms. Purely symbolic systems offer
+    transparency, deterministic reasoning, and explicit state
+    representations, but often struggle with adaptability and learning.
+    Purely neural systems excel at learning from data and producing
+    emergent behavior, but may sacrifice interpretability,
+    reproducibility, and explicit control. As intelligent systems become
+    increasingly autonomous and agentic, there is growing interest in
+    hybrid approaches that combine the strengths of both
+    perspectives.</p>
+    <p>Within the broader Hybrid Intelligence methodology developed in
+    the Triadic Cosmos ecosystem, intelligence is viewed not as the
+    consequence of a single algorithmic mechanism, but as the result of
+    interacting cognitive subsystems that may employ different
+    computational principles. In such a framework, neural, symbolic,
+    evaluative, and memory-oriented components can coexist and cooperate
+    as part of a larger intelligent architecture.</p>
+    <p>This paper introduces the <em>Vector–Graph–PRE–CAS (VGPC)
+    Cognitive Architecture Family</em>, a general architectural
+    framework designed around this hybrid philosophy. The framework
+    combines vector-based state representations, graph-constrained state
+    transitions, neural state-vector inference, recursive evaluation
+    loops, and learnable behavioral control mechanisms. The resulting
+    architecture aims to provide a balance between adaptability and
+    control, allowing systems to benefit from learned representations
+    while maintaining explicit and inspectable state spaces.</p>
+    <p>The VGPC architecture family did not emerge as a purely
+    theoretical proposal, but as the abstraction of principles that
+    became apparent during the development of concrete systems. In
+    particular, the previously introduced GLP–Graph architecture can be
+    viewed as a specific realization of the broader VGPC framework. The
+    present work generalizes these underlying concepts into a unified
+    architectural family capable of supporting a wider range of
+    cognitive systems, world engines, reasoning engines, memory systems,
+    and hybrid agentic architectures.</p>
+    <p>Importantly, VGPC is not proposed as a replacement for
+    contemporary foundation models. Rather, it is intended as a
+    complementary architectural component that can operate either as a
+    standalone cognitive system within bounded domains or as part of
+    larger hybrid intelligent systems. In such environments, VGPC-based
+    subsystems may provide structured world modeling, state management,
+    traceability, and behavioral control, while other components,
+    including large language models, contribute broad generalization
+    capabilities and natural language competence.</p>
+    <p>The remainder of this paper formalizes the VGPC architecture
+    family, discusses its relation to existing work in cognitive
+    architectures and neuro-symbolic AI, and outlines its role as a
+    potential building block for future modular and hybrid intelligent
+    systems.</p>
+    <h1 id="related-work">Related Work</h1>
+    <p>The Vector–Graph–PRE–CAS (VGPC) architecture family builds upon
+    ideas that have appeared across multiple traditions within
+    artificial intelligence, cognitive architectures, neural learning
+    systems, graph-based models, and hybrid symbolic reasoning. Rather
+    than belonging exclusively to any single tradition, VGPC combines
+    concepts from several research directions into a unified
+    architectural framework.</p>
+    <h2 id="cognitive-architectures">Cognitive Architectures</h2>
+    <p>Classical cognitive architectures such as SOAR and ACT–R were
+    designed to model cognitive processes through explicit state
+    representations, symbolic reasoning mechanisms, procedural
+    knowledge, and memory systems. These architectures emphasize
+    interpretability, modularity, and the decomposition of intelligence
+    into interacting subsystems.</p>
+    <p>VGPC shares the objective of constructing modular cognitive
+    systems rather than end-to-end predictive models. However, unlike
+    traditional symbolic cognitive architectures, VGPC employs
+    vector-based state representations and neural inference mechanisms
+    while retaining explicit state transitions and evaluation processes.
+    The architecture therefore occupies an intermediate position between
+    classical cognitive architectures and modern neural systems.</p>
+    <h2 id="large-language-models-and-transformer-architectures">Large
+    Language Models and Transformer Architectures</h2>
+    <p>Transformer-based architectures and large language models have
+    demonstrated remarkable capabilities through large-scale
+    self-supervised learning. Knowledge, reasoning patterns, and
+    behavioral tendencies are represented implicitly within distributed
+    parameter spaces, enabling highly flexible and general-purpose
+    behavior.</p>
+    <p>VGPC differs fundamentally from this paradigm. Instead of
+    directly predicting outputs from context, the architecture separates
+    state-space navigation from neural inference. Neural components
+    infer target directions within a vector space, while
+    graph-constrained decoding determines admissible state transitions.
+    The resulting design prioritizes explicit state representation,
+    traceability, controllability, and inspection over unrestricted
+    emergence.</p>
+    <p>Importantly, VGPC is not intended as a replacement for
+    transformer-based systems. Rather, both approaches are viewed as
+    complementary components within hybrid intelligent systems.</p>
+    <h2 id="neuro-symbolic-artificial-intelligence">Neuro-Symbolic
+    Artificial Intelligence</h2>
+    <p>A long-standing objective in artificial intelligence has been the
+    integration of neural learning and symbolic reasoning.
+    Neuro-symbolic systems attempt to combine the adaptability of neural
+    networks with the interpretability and structure of symbolic
+    representations.</p>
+    <p>The VGPC architecture can be viewed as a neuro-symbolic framework
+    in this broader sense. Neural inference is responsible for
+    estimating future state directions, while symbolic and deterministic
+    mechanisms such as graphs, transition rules, and evaluation
+    procedures constrain and guide system behavior. Unlike many
+    neuro-symbolic approaches that focus on logical reasoning, VGPC is
+    centered around structured state-space traversal and hierarchical
+    generation processes.</p>
+    <h2 id="graph-based-models">Graph-Based Models</h2>
+    <p>Graphs have been applied extensively throughout artificial
+    intelligence, including knowledge graphs, probabilistic graphical
+    models, planning systems, state-space search algorithms, and graph
+    neural networks.</p>
+    <p>The role of graphs in VGPC differs from these applications. The
+    graph does not primarily represent semantic knowledge or relational
+    facts. Instead, it encodes admissible transitions between system
+    states. In this sense, the graph functions as an explicit
+    representation of the state space that governs possible system
+    trajectories.</p>
+    <p>This design shares certain similarities with search-based
+    planning systems and state-transition models, while maintaining
+    compatibility with learned vector representations and neural
+    guidance mechanisms.</p>
+    <h2 id="reflection-and-iterative-improvement-mechanisms">Reflection
+    and Iterative Improvement Mechanisms</h2>
+    <p>Recent AI systems increasingly employ self-reflection,
+    verification, critique, and iterative refinement processes. Examples
+    include chain-of-thought verification, self-consistency methods,
+    planning agents, and various forms of generate-and-evaluate
+    workflows.</p>
+    <p>The PRE (Propose–Retry–Evaluate) mechanism used within VGPC
+    belongs to this general family of approaches. However, PRE is
+    incorporated as an architectural component rather than merely a
+    prompting strategy. It can operate at multiple levels of
+    abstraction, allowing recursive evaluation and improvement of state
+    sequences, plans, actions, or generated structures.</p>
+    <h2 id="positioning-of-vgpc">Positioning of VGPC</h2>
+    <p>The VGPC architecture family intersects multiple existing
+    directions but does not fully coincide with any of them. It
+    combines:</p>
+    <ul>
+    <li><p>vector-based representations inspired by modern neural
+    systems,</p></li>
+    <li><p>explicit state transitions inspired by planning and symbolic
+    AI,</p></li>
+    <li><p>graph-constrained state spaces,</p></li>
+    <li><p>recursive evaluation through PRE mechanisms,</p></li>
+    <li><p>behavioral steering through CAS vectors,</p></li>
+    <li><p>optional rule-based control and deterministic
+    reasoning.</p></li>
+    </ul>
+    <p>The resulting architecture is intended as a framework for
+    constructing inspectable, controllable, and modular intelligent
+    systems. Within the Triadic Cosmos ecosystem, the previously
+    introduced GLP–Graph architecture represents an early concrete
+    instance of this broader architectural family.</p>
+    <h1 id="design-objectives">Design Objectives</h1>
+    <p>The Vector–Graph–PRE–CAS (VGPC) Cognitive Architecture Family was
+    designed to address several objectives that emerge from the
+    development of hybrid intelligent systems. Rather than focusing
+    exclusively on a particular domain, such as language generation, the
+    architecture targets a broader class of problems that can be
+    represented as state spaces with explicit transitions between
+    states.</p>
+    <p>The central assumption of the framework is that many cognitive,
+    generative, and decision-making processes can be modeled as
+    navigation through a structured state space. A state may represent a
+    token, a sentence, a paragraph, an image component, an audio
+    fragment, a world configuration, a memory item, an action, or any
+    other domain-specific unit. Intelligent behavior then emerges from
+    the selection and evaluation of transitions between valid
+    states.</p>
+    <p>The design of the architecture is guided by five primary
+    objectives.</p>
+    <h2 id="modularity">Modularity</h2>
+    <p>The architecture is intended to be composed of independent but
+    cooperating subsystems. State representation, graph traversal,
+    neural inference, behavioral steering, evaluation, and rule-based
+    control are separated into distinct architectural components.</p>
+    <p>This modularity allows systems to be extended, modified, or
+    replaced without requiring the complete redesign of the overall
+    architecture. It also supports the construction of hybrid systems in
+    which different cognitive functions are implemented using different
+    computational mechanisms.</p>
+    <h2 id="traceability">Traceability</h2>
+    <p>Modern neural systems often achieve powerful results at the cost
+    of reduced interpretability. The VGPC architecture seeks to preserve
+    explicit knowledge about how decisions are made.</p>
+    <p>The use of graph-structured state spaces, deterministic
+    transitions, explicit decoding mechanisms, and optional rule-based
+    constraints makes it possible to inspect how a particular output or
+    decision was produced. The resulting systems therefore provide
+    significantly greater transparency than purely end-to-end neural
+    architectures.</p>
+    <h2 id="controllability">Controllability</h2>
+    <p>The architecture is designed to permit explicit control over
+    system behavior without requiring extensive prompt engineering or
+    retraining.</p>
+    <p>Behavior can be influenced through graph structure, rule systems,
+    modulation mechanisms, evaluation loops, and CAS vectors. Multiple
+    layers of control can therefore coexist within the same system,
+    allowing behavioral constraints to be applied at different stages of
+    the inference process.</p>
+    <p>This objective is particularly important for systems operating in
+    environments where consistency, safety, reliability, or policy
+    compliance must be maintained.</p>
+    <h2 id="hybrid-intelligence">Hybrid Intelligence</h2>
+    <p>The architecture follows a Hybrid Intelligence philosophy in
+    which intelligence is viewed as the interaction of multiple
+    complementary mechanisms rather than the product of a single
+    algorithmic principle.</p>
+    <p>Neural inference, symbolic constraints, deterministic graphs,
+    recursive evaluation mechanisms, and behavioral steering vectors are
+    all treated as legitimate cognitive components. The architecture is
+    therefore intended to serve both as a standalone framework and as a
+    building block within larger hybrid intelligent systems.</p>
+    <p>In particular, VGPC systems are designed to coexist naturally
+    with large language models, planning systems, memory systems, and
+    specialized reasoning engines.</p>
+    <h2 id="domain-independence">Domain Independence</h2>
+    <p>Although some concrete implementations of the architecture have
+    focused on text generation, the VGPC framework is not inherently
+    tied to language.</p>
+    <p>The architecture is intended for any domain that can be
+    represented as states and transitions between states. Examples
+    include text generation, image generation, audio generation,
+    simulation systems, planning systems, memory systems, game worlds,
+    autonomous agents, and other structured cognitive processes.</p>
+    <p>The architecture therefore defines a general computational
+    framework rather than a domain-specific generative model. Text
+    generation, including systems such as GLP–Graph, represents only one
+    possible application of the broader architectural family.</p>
+    <h2 id="structured-emergence">Structured Emergence</h2>
+    <p>The architecture seeks to combine the flexibility of learned
+    representations with the reliability of explicit structural
+    constraints.</p>
+    <p>Rather than maximizing unrestricted emergence, VGPC promotes
+    emergence within well-defined state spaces. Neural components may
+    discover useful transition patterns and representations, while
+    graphs, rules, and evaluation mechanisms ensure that generated
+    trajectories remain compatible with the constraints of the modeled
+    domain.</p>
+    <p>The objective is not to eliminate emergence, but to place it
+    within a traceable, inspectable, and controllable computational
+    framework.</p>
+    <h1 id="the-vectorgraphprecas-cognitive-architecture-family">The
+    Vector–Graph–PRE–CAS Cognitive Architecture Family</h1>
+    <p>The Vector–Graph–PRE–CAS (VGPC) Cognitive Architecture Family
+    provides a general framework for constructing intelligent systems
+    based on explicit state spaces, learned transition prediction,
+    behavioral control mechanisms, and recursive evaluation processes.
+    Rather than being tied to a particular domain or representation
+    format, the architecture is intended for any problem that can be
+    modeled as a collection of states and admissible transitions between
+    those states.</p>
+    <p>At its core, the architecture combines six complementary
+    concepts:</p>
+    <ol>
+    <li><p>Vector-based state representations.</p></li>
+    <li><p>Graph-defined transition spaces.</p></li>
+    <li><p>Neural state-vector inference.</p></li>
+    <li><p>Optional vector modulation mechanisms.</p></li>
+    <li><p>PRE-based recursive evaluation loops.</p></li>
+    <li><p>CAS-based behavioral steering.</p></li>
+    </ol>
+    <p>The interaction of these components enables the construction of
+    systems that are simultaneously trainable, controlled, traceable,
+    and modular. The resulting architecture occupies an intermediate
+    position between purely neural systems and purely symbolic systems
+    by combining learned representations with explicit state-space
+    structure.</p>
+    <p>Unlike architectures built around direct output prediction, VGPC
+    models cognition as structured navigation through a state space.
+    Neural components are responsible for estimating desirable future
+    regions of that state space, while graphs, rules, and evaluation
+    mechanisms constrain how movement through that space ultimately
+    occurs.</p>
+    <h2 id="architectural-overview">Architectural Overview</h2>
+    <p>The VGPC architecture assumes the existence of a state space
+    containing all possible states relevant to a given domain. Each
+    state is represented by an associated vector and may correspond to
+    any meaningful unit of representation.</p>
+    <p>Examples include:</p>
+    <ul>
+    <li><p>tokens, sentences, paragraphs, or chapters in text
+    generation,</p></li>
+    <li><p>image primitives, regions, objects, or latent image states in
+    visual systems,</p></li>
+    <li><p>audio fragments, phonetic units, or musical structures in
+    audio systems,</p></li>
+    <li><p>actions and world states in planning systems,</p></li>
+    <li><p>memory objects in memory architectures,</p></li>
+    <li><p>entities, concepts, or beliefs in reasoning systems.</p></li>
+    </ul>
+    <p>A graph defines which transitions between states are admissible.
+    This graph may be derived from training data, manually specified,
+    partially learned, or constructed through domain-specific
+    mechanisms.</p>
+    <p>The current context is encoded into a context representation that
+    captures the relevant system state. A neural inference mechanism
+    predicts a target state vector representing the desired direction of
+    the next transition. Optional modulation mechanisms may then
+    transform this vector before decoding occurs.</p>
+    <p>The graph is used to enumerate candidate states reachable from
+    the current state, after which decoding mechanisms determine which
+    candidate most closely matches the inferred target direction.
+    Additional rule systems may further filter or constrain candidate
+    transitions.</p>
+    <p>The resulting transition can subsequently be evaluated through
+    one or more PRE (Propose–Retry–Evaluate) loops. If accepted, the new
+    state becomes part of the active context. Otherwise, alternative
+    candidates may be explored.</p>
+    <p>Conceptually the architecture can be summarized as:</p>
+    <div class="center">
+    <p>Context <span class="math inline">→</span> Vector Inference <span
+    class="math inline">→</span> Vector Modulation <span
+    class="math inline">→</span> Graph-Constrained Decoding <span
+    class="math inline">→</span> PRE Evaluation <span
+    class="math inline">→</span> Context Update</p>
+    </div>
+    <h2 id="inference-pipeline">Inference Pipeline</h2>
+    <p>The VGPC inference process can be viewed as a sequence of
+    distinct cognitive operations.</p>
+    <p>First, the current context is encoded. The exact encoding
+    mechanism is domain-dependent and may incorporate recent states,
+    historical information, entity tracking, memory structures,
+    positional information, behavioral control vectors, or additional
+    contextual information.</p>
+    <p>Second, a neural inference mechanism predicts a target state
+    vector. This vector does not necessarily correspond to an actual
+    state. Instead, it represents a desired direction within the state
+    space toward which the system should move.</p>
+    <p>Third, optional modulation mechanisms may alter the inferred
+    vector. These modulations may depend on contextual variables,
+    positional information, CAS vectors, domain-specific constraints, or
+    learned control mechanisms.</p>
+    <p>Fourth, decoding is performed. The graph provides a set of
+    admissible transition candidates. Candidate state vectors are
+    compared with the inferred target vector using an appropriate
+    distance measure, such as cosine similarity or Euclidean distance.
+    The resulting scores are transformed into a probability distribution
+    or ranking from which candidate states can be selected.</p>
+    <p>Fifth, one or more PRE evaluation stages may assess the quality
+    of the generated transition or sequence. Evaluation can occur at
+    multiple levels of abstraction, including individual states, state
+    sequences, plans, documents, images, actions, or larger cognitive
+    structures.</p>
+    <p>Finally, the accepted state is incorporated into the active
+    context, and the process repeats.</p>
+    <p>The architecture therefore separates:</p>
+    <ul>
+    <li><p><strong>Inference</strong>: determining where to
+    move.</p></li>
+    <li><p><strong>Decoding</strong>: determining what is
+    possible.</p></li>
+    <li><p><strong>Evaluation</strong>: determining what is
+    acceptable.</p></li>
+    </ul>
+    <p>This separation allows different computational mechanisms to
+    specialize in different aspects of cognition.</p>
+    <h2 id="architectural-variants">Architectural Variants</h2>
+    <p>The VGPC framework describes a family of architectures rather
+    than a single fixed design. Different implementations may vary in
+    how states are defined, how context is represented, and how
+    inference, control, and evaluation are performed.</p>
+    <p>A first distinction concerns the granularity of states.
+    Fine-grained systems may operate on small units such as tokens,
+    actions, or image fragments, while coarser systems may operate on
+    sentences, plans, scenes, objects, or higher level abstractions.</p>
+    <p>A second distinction concerns hierarchy. Multiple VGPC instances
+    may cooperate across levels of abstraction. Higher-level systems can
+    infer transitions between abstract states while lower-level systems
+    realize these transitions through finer-grained state generation
+    processes.</p>
+    <p>A third distinction concerns the role of PRE evaluation. Some
+    implementations may perform evaluation only after complete sequences
+    have been generated, whereas others may perform recursive evaluation
+    at every stage of generation.</p>
+    <p>A fourth distinction concerns behavioral control. CAS vectors may
+    be absent, fixed, dynamically adjusted, or learned through
+    domain-specific training procedures. Rule systems may similarly
+    range from completely absent to highly restrictive deterministic
+    policies.</p>
+    <p>Finally, VGPC systems may operate either as standalone cognitive
+    systems or as components within larger hybrid architectures. In
+    hybrid environments, a VGPC instance may serve as a structured world
+    engine, planning subsystem, memory subsystem, reasoning component,
+    or behavioral controller while cooperating with other specialized
+    modules such as large language models, retrieval systems, external
+    memory stores, or agentic orchestration layers.</p>
+    <p>Consequently, the VGPC framework should not be viewed as a single
+    architecture but rather as a structured design space for
+    constructing modular and controllable intelligent systems across a
+    wide range of domains.</p>
+    <h1 id="state-representation">State Representation</h1>
+    <h2 id="states-as-vectors">States as Vectors</h2>
+    <p>The fundamental building block of the Vector–Graph–PRE–CAS (VGPC)
+    architecture is the notion of a <em>state</em>. All cognitive
+    processes described by the framework are modeled as transitions
+    between states within a state space.</p>
+    <p>A state represents a meaningful unit within a domain. The exact
+    interpretation of a state is domain-dependent and may range from
+    low-level elements to highly abstract constructs.</p>
+    <p>Examples include:</p>
+    <ul>
+    <li><p>tokens, words, sentences, paragraphs, or chapters in text
+    systems,</p></li>
+    <li><p>image primitives, objects, or regions in visual
+    systems,</p></li>
+    <li><p>audio fragments, phonemes, or musical structures in audio
+    systems,</p></li>
+    <li><p>actions or plans in autonomous agents,</p></li>
+    <li><p>memories, concepts, or beliefs in cognitive systems,</p></li>
+    <li><p>world configurations in simulation environments.</p></li>
+    </ul>
+    <p>Each state is associated with a vector representation.</p>
+    <p><span
+    class="math display"><em>s</em><sub><em>i</em></sub> → <strong>v</strong><sub><em>i</em></sub></span></p>
+    <p>where <span
+    class="math inline"><em>s</em><sub><em>i</em></sub></span> denotes a
+    state and <span
+    class="math inline"><strong>v</strong><sub><em>i</em></sub></span>
+    denotes the corresponding state vector.</p>
+    <p>The state vector serves as the primary representation used by
+    neural inference, distance calculations, steering mechanisms, and
+    candidate selection algorithms. The vector may be deterministic,
+    learned from data, procedurally generated, or produced through a
+    combination of these approaches.</p>
+    <p>The architecture does not prescribe a particular vector
+    construction method. Any representation capable of capturing useful
+    similarities and transitions between states is compatible with the
+    framework.</p>
+    <h2 id="finite-and-procedural-state-spaces">Finite and Procedural
+    State Spaces</h2>
+    <p>Many practical implementations employ a finite state space.</p>
+    <p>For example, in a text generation system a state may correspond
+    to a token from a finite vocabulary. In such systems every
+    admissible state is known in advance and can be explicitly
+    represented within the graph structure.</p>
+    <p>However, finite state spaces are not a requirement of the VGPC
+    architecture.</p>
+    <p>More generally, a state space may be partially procedural or
+    entirely procedural. In such systems states are generated
+    dynamically rather than being enumerated beforehand.</p>
+    <p>The architecture only requires that for a current state:</p>
+    <ol>
+    <li><p>a vector representation can be obtained,</p></li>
+    <li><p>admissible successor states can be determined,</p></li>
+    <li><p>successor states can also be represented as vectors.</p></li>
+    </ol>
+    <p>Consequently, the graph itself may be explicit, implicit, or
+    procedural.</p>
+    <p>An explicit graph stores transitions directly as nodes and
+    edges.</p>
+    <p>A procedural graph computes transitions through algorithms,
+    simulation rules, constraint systems, generators, or domain-specific
+    logic.</p>
+    <p>From the perspective of the architecture these approaches are
+    equivalent, provided that candidate transitions can be generated
+    when required.</p>
+    <h2 id="hierarchical-state-spaces">Hierarchical State Spaces</h2>
+    <p>States may exist at multiple levels of abstraction
+    simultaneously.</p>
+    <p>For example, a text generation system may represent:</p>
+    <p><span
+    class="math display">Book → Chapter → Paragraph → Sentence → Token</span></p>
+    <p>where each level consists of its own states, transitions, and
+    vector representations.</p>
+    <p>Similarly, a visual generation system may contain hierarchical
+    states ranging from complete scenes to objects, regions, shapes, and
+    image primitives.</p>
+    <p>The VGPC framework places no restrictions on the granularity of
+    states. Different implementations may operate at a single level of
+    abstraction or may combine multiple interconnected state spaces.</p>
+    <p>Hierarchical state spaces enable higher-level cognitive processes
+    to guide the behavior of lower-level generation processes while
+    preserving explicit state representations throughout the system.</p>
+    <h2 id="context-representation">Context Representation</h2>
+    <p>A single state rarely contains sufficient information to
+    determine future behavior. Consequently, VGPC systems generally
+    operate on a context consisting of multiple states.</p>
+    <p>The current context can be interpreted as the active cognitive
+    state of the system.</p>
+    <p><span
+    class="math display"><em>C</em> = {<em>s</em><sub>1</sub>, <em>s</em><sub>2</sub>, ..., <em>s</em><sub><em>n</em></sub>}</span></p>
+    <p>The method used to encode this context is
+    implementation-dependent and may include recent states, long-term
+    memories, entity tracking information, positional representations,
+    behavioral steering vectors, or other domain-specific features.</p>
+    <p>The resulting context representation forms the input to the
+    neural inference mechanisms described in subsequent sections.</p>
+    <p>In this sense, the context plays a role analogous to the query
+    representation used in modern neural architectures, while the state
+    space and associated transitions define the structured environment
+    within which inference occurs.</p>
+    <h1 id="graph-based-state-spaces">Graph-Based State Spaces</h1>
+    <p>A distinguishing characteristic of the Vector–Graph–PRE–CAS
+    (VGPC) architecture family is the explicit representation of
+    admissible transitions between states. While vector representations
+    capture similarity, direction, and learned relationships between
+    states, the graph structure defines the boundaries within which
+    state transitions may occur.</p>
+    <p>The graph therefore acts as a structured state space that
+    constrains possible system trajectories. Rather than allowing
+    arbitrary movement within a vector space, cognition is modeled as
+    navigation through a graph of admissible transitions guided by
+    learned vector inference mechanisms.</p>
+    <p>This separation between vector prediction and graph traversal
+    forms one of the central design principles of the architecture.</p>
+    <h2 id="transition-graphs">Transition Graphs</h2>
+    <p>Let</p>
+    <p><span
+    class="math display"><em>G</em> = (<em>S</em>,<em>E</em>)</span></p>
+    <p>denote a directed graph where <span
+    class="math inline"><em>S</em></span> represents the set of states
+    and <span class="math inline"><em>E</em></span> represents the set
+    of admissible transitions between states.</p>
+    <p>An edge</p>
+    <p><span
+    class="math display">(<em>s</em><sub><em>i</em></sub>,<em>s</em><sub><em>j</em></sub>) ∈ <em>E</em></span></p>
+    <p>indicates that a transition from state <span
+    class="math inline"><em>s</em><sub><em>i</em></sub></span> to state
+    <span class="math inline"><em>s</em><sub><em>j</em></sub></span> is
+    permitted by the system.</p>
+    <p>Unlike many graph-based AI systems, the graph in VGPC is not
+    primarily intended to represent semantic knowledge, logical facts,
+    or entity relationships. Instead, the graph defines the possible
+    evolution of system states.</p>
+    <p>The graph can be constructed through multiple mechanisms:</p>
+    <ul>
+    <li><p>learned directly from training data,</p></li>
+    <li><p>manually engineered,</p></li>
+    <li><p>generated procedurally,</p></li>
+    <li><p>derived from simulations,</p></li>
+    <li><p>generated dynamically during execution,</p></li>
+    <li><p>constructed as a combination of these approaches.</p></li>
+    </ul>
+    <p>For example, in a language generation system, transitions may
+    represent observed continuations between language units. In a
+    planning environment, transitions may correspond to valid actions
+    that transform one world state into another. In a visual system,
+    transitions may describe admissible modifications of a scene
+    representation.</p>
+    <p>The architecture deliberately avoids imposing restrictions on how
+    transitions are obtained. The only requirement is that a mechanism
+    exists for determining which successor states are reachable from a
+    given state.</p>
+    <p>Consequently, the graph may be:</p>
+    <ul>
+    <li><p>explicit and finite,</p></li>
+    <li><p>implicit and generated on demand,</p></li>
+    <li><p>partially procedural,</p></li>
+    <li><p>potentially unbounded.</p></li>
+    </ul>
+    <p>This distinction is important because the VGPC architecture does
+    not require a fixed vocabulary or a finite state space. Infinite or
+    dynamically generated state spaces are compatible with the framework
+    provided that admissible transitions can be generated when
+    required.</p>
+    <h2 id="candidate-state-generation">Candidate State Generation</h2>
+    <p>During inference the graph functions as a candidate
+    generator.</p>
+    <p>Given the current state <span
+    class="math inline"><em>s</em><sub><em>t</em></sub></span>, the
+    graph determines the set of admissible successor states:</p>
+    <p><span
+    class="math display"><em>N</em>(<em>s</em><sub><em>t</em></sub>) = {<em>s</em><sub><em>j</em></sub> ∣ (<em>s</em><sub><em>t</em></sub>,<em>s</em><sub><em>j</em></sub>) ∈ <em>E</em>}</span></p>
+    <p>where <span
+    class="math inline"><em>N</em>(<em>s</em><sub><em>t</em></sub>)</span>
+    denotes the neighborhood of the current state.</p>
+    <p>This neighborhood constitutes the candidate set from which future
+    states may be selected.</p>
+    <p>In explicit graphs, candidate generation consists simply of
+    enumerating the outgoing transitions of the current state.</p>
+    <p>In procedural graphs, candidate generation may require the
+    execution of algorithms, simulations, rule systems, constraint
+    solvers, environment models, or domain-specific generators.</p>
+    <p>The architecture intentionally separates candidate generation
+    from candidate selection.</p>
+    <p>Candidate generation answers the question:</p>
+    <div class="center">
+    <p><em>What transitions are possible?</em></p>
+    </div>
+    <p>Candidate selection answers the question:</p>
+    <div class="center">
+    <p><em>Which transition should be preferred?</em></p>
+    </div>
+    <p>The first question is answered by the graph.</p>
+    <p>The second question is answered by the vector inference and
+    decoding mechanisms described in subsequent sections.</p>
+    <p>This separation introduces a clear distinction between the
+    structure of the state space and the learned preferences of the
+    system.</p>
+    <h2 id="graph-traversal-as-inference">Graph Traversal as
+    Inference</h2>
+    <p>In many contemporary neural architectures, inference directly
+    predicts the next output from the current context.</p>
+    <p>The VGPC architecture adopts a different perspective.</p>
+    <p>Inference is not viewed as direct output prediction but rather as
+    guided navigation through a constrained state space.</p>
+    <p>Given a current context, the neural inference system predicts a
+    target vector representing a desirable future direction within the
+    state space. The graph then determines which states are actually
+    reachable.</p>
+    <p>The resulting inference process can therefore be conceptualized
+    as:</p>
+    <p><span class="math display">Context → Target Direction → Reachable
+    Candidates → Candidate Selection</span></p>
+    <p>rather than:</p>
+    <p><span class="math display">Context → Output</span></p>
+    <p>This distinction has important consequences.</p>
+    <p>First, all generated states remain compatible with the graph
+    structure and any additional constraints imposed by the system.</p>
+    <p>Second, reasoning becomes inherently traceable because every
+    generated result corresponds to an explicit sequence of graph
+    transitions.</p>
+    <p>Third, graph traversal naturally supports deterministic,
+    probabilistic, neural, or hybrid decision mechanisms without
+    requiring changes to the underlying state space representation.</p>
+    <p>The graph can therefore be interpreted as a structured
+    environment through which cognition occurs. Neural inference
+    mechanisms do not directly determine future states. Instead, they
+    guide traversal within the space of admissible possibilities
+    provided by the graph.</p>
+    <p>This design allows learned behavior and explicit structure to
+    coexist within the same cognitive framework, balancing adaptability
+    with interpretability and control.</p>
+    <h1 id="neural-state-vector-inference">Neural State Vector
+    Inference</h1>
+    <p>While the graph defines the admissible structure of the state
+    space, the role of neural inference is to determine which directions
+    within that state space are desirable given the current context.</p>
+    <p>The purpose of neural inference is therefore not to directly
+    select the next state, but to estimate a target state vector that
+    represents a suitable direction for future state transitions. The
+    graph, candidate generation mechanisms, and decoding procedures
+    subsequently determine which concrete state is chosen.</p>
+    <p>This separation between direction prediction and state selection
+    constitutes a central design principle of the VGPC architecture
+    family.</p>
+    <h2 id="context-encoding">Context Encoding</h2>
+    <p>The first stage of neural inference consists of constructing a
+    context representation from the current cognitive state of the
+    system.</p>
+    <p>Unlike architectures that prescribe a specific context encoding
+    mechanism, the VGPC framework deliberately remains agnostic
+    regarding how context is represented. Different domains,
+    applications, and cognitive functions may benefit from different
+    encoding strategies.</p>
+    <p>Consequently, multiple context encoders may coexist within the
+    same system, with each encoder capturing information at a different
+    resolution or serving a different purpose.</p>
+    <p>Possible context components include:</p>
+    <ul>
+    <li><p>recent state histories,</p></li>
+    <li><p>positional information,</p></li>
+    <li><p>long-term memory representations,</p></li>
+    <li><p>entity tracking information,</p></li>
+    <li><p>world-state representations,</p></li>
+    <li><p>planning information,</p></li>
+    <li><p>temporal information,</p></li>
+    <li><p>external sensor inputs,</p></li>
+    <li><p>CAS vectors,</p></li>
+    <li><p>domain-specific features.</p></li>
+    </ul>
+    <p>These components can be concatenated, combined through learned
+    projections, fused through attention mechanisms, or integrated using
+    any other suitable encoding approach.</p>
+    <p>Importantly, the architecture does not assume a single universal
+    encoding paradigm. Self-attention mechanisms may be used when
+    appropriate, but they represent only one possible solution among
+    many.</p>
+    <p>For example, some implementations may rely primarily on:</p>
+    <ul>
+    <li><p>attention-based context aggregation,</p></li>
+    <li><p>recurrent encoders,</p></li>
+    <li><p>memory retrieval systems,</p></li>
+    <li><p>statistical summaries,</p></li>
+    <li><p>explicit state tracking,</p></li>
+    <li><p>graph-derived features,</p></li>
+    <li><p>procedural feature generators.</p></li>
+    </ul>
+    <p>The result of this stage is an input vector</p>
+    <p><span class="math display"><strong>x</strong></span></p>
+    <p>that captures the information considered relevant for future
+    state prediction.</p>
+    <p>From the perspective of the architecture, the construction of
+    this context vector is a design choice rather than a fixed
+    requirement.</p>
+    <h2 id="target-state-vector-prediction">Target State Vector
+    Prediction</h2>
+    <p>The encoded context vector serves as input to a neural prediction
+    mechanism whose purpose is to infer a target state vector.</p>
+    <p><span class="math display">$$\mathbf{x}
+        \rightarrow
+        f_{\theta}
+        \rightarrow
+        \hat{\mathbf{v}}$$</span></p>
+    <p>where:</p>
+    <ul>
+    <li><p><span class="math inline"><strong>x</strong></span> is the
+    encoded context vector,</p></li>
+    <li><p><span
+    class="math inline"><em>f</em><sub><em>θ</em></sub></span> is the
+    inference model,</p></li>
+    <li><p><span class="math inline">$\hat{\mathbf{v}}$</span> is the
+    predicted target state vector.</p></li>
+    </ul>
+    <p>The target vector does not necessarily correspond to an existing
+    state.</p>
+    <p>Instead, it represents a desired direction within the state space
+    and acts as a guiding signal for subsequent decoding mechanisms.</p>
+    <p>The VGPC architecture deliberately imposes few restrictions on
+    the structure of the inference model.</p>
+    <p>Simple implementations may use shallow multilayer perceptrons,
+    while more advanced systems may employ:</p>
+    <ul>
+    <li><p>deep feed-forward networks,</p></li>
+    <li><p>recurrent architectures,</p></li>
+    <li><p>gated architectures,</p></li>
+    <li><p>recursive neural systems,</p></li>
+    <li><p>attention-based components,</p></li>
+    <li><p>mixture-of-experts systems,</p></li>
+    <li><p>dynamically generated subnetworks,</p></li>
+    <li><p>hypernetwork-generated parameters,</p></li>
+    <li><p>other differentiable inference mechanisms.</p></li>
+    </ul>
+    <p>The architecture only requires that a mapping exists between the
+    encoded context and a predicted target vector.</p>
+    <p>Consequently, VGPC defines the role of the inference mechanism
+    rather than a specific neural architecture.</p>
+    <p>This design allows future implementations to adopt new neural
+    techniques without altering the overall architecture.</p>
+    <h2 id="learning-transition-directions">Learning Transition
+    Directions</h2>
+    <p>Training the inference mechanism consists of learning a mapping
+    between observed contexts and desirable future state vectors.</p>
+    <p>Given a context representation</p>
+    <p><span class="math display"><strong>x</strong></span></p>
+    <p>and an observed successor state</p>
+    <p><span
+    class="math display"><em>s</em><sub><em>t</em> + 1</sub></span></p>
+    <p>with associated vector</p>
+    <p><span
+    class="math display"><strong>v</strong><sub><em>t</em> + 1</sub>,</span></p>
+    <p>the objective is to train the inference model such that</p>
+    <p><span
+    class="math display"><em>f</em><sub><em>θ</em></sub>(<strong>x</strong>) ≈ <strong>v</strong><sub><em>t</em> + 1</sub>.</span></p>
+    <p>The resulting loss function depends on the chosen vector
+    representation and application domain.</p>
+    <p>Common objectives may include:</p>
+    <ul>
+    <li><p>cosine similarity losses,</p></li>
+    <li><p>Euclidean distance losses,</p></li>
+    <li><p>contrastive objectives,</p></li>
+    <li><p>ranking losses,</p></li>
+    <li><p>learned metric-space objectives,</p></li>
+    <li><p>composite multi-objective losses.</p></li>
+    </ul>
+    <p>From a conceptual perspective, the training objective is
+    straightforward:</p>
+    <div class="center">
+    <p><em>Given the current context, learn the direction in state space
+    that leads toward appropriate future states.</em></p>
+    </div>
+    <p>This differs from direct next-state prediction because the neural
+    model is not required to identify the exact successor state.
+    Instead, it learns the underlying geometric structure of transitions
+    within the state space.</p>
+    <p>During inference, graph traversal and decoding mechanisms use
+    this predicted direction to select admissible successor states.</p>
+    <p>The resulting division of responsibilities can be summarized as
+    follows:</p>
+    <ul>
+    <li><p>Context encoding determines what information is
+    relevant.</p></li>
+    <li><p>Neural inference predicts where the system should
+    move.</p></li>
+    <li><p>Graph traversal determines what transitions are
+    possible.</p></li>
+    <li><p>Decoding determines which admissible transition best matches
+    the predicted direction.</p></li>
+    </ul>
+    <p>This separation allows neural learning, symbolic constraints,
+    procedural knowledge, and deterministic control mechanisms to
+    coexist within a unified cognitive architecture while preserving
+    traceability and modularity.</p>
+    <h1 id="vector-modulation">Vector Modulation</h1>
+    <p>The target state vector produced by the neural inference stage
+    represents an estimate of the direction that should be followed
+    within the state space. However, there is no requirement that this
+    vector must be used directly during decoding.</p>
+    <p>The VGPC architecture introduces an optional <em>vector
+    modulation</em> stage between neural inference and graph-based
+    decoding. The purpose of this stage is to transform, refine, or
+    adapt the predicted target vector before candidate selection
+    occurs.</p>
+    <p>Conceptually, vector modulation acts as an intermediate control
+    layer situated between learned prediction and state-space
+    traversal.</p>
+    <p><span class="math display">$$\mathbf{x}
+        \rightarrow
+        f_{\theta}
+        \rightarrow
+        \hat{\mathbf{v}}
+        \rightarrow
+        M
+        \rightarrow
+        \hat{\mathbf{v}}'$$</span></p>
+    <p>where:</p>
+    <ul>
+    <li><p><span class="math inline"><strong>x</strong></span> is the
+    encoded context,</p></li>
+    <li><p><span class="math inline">$\hat{\mathbf{v}}$</span> is the
+    inferred target vector,</p></li>
+    <li><p><span class="math inline"><em>M</em></span> is a modulation
+    function,</p></li>
+    <li><p><span class="math inline">$\hat{\mathbf{v}}'$</span> is the
+    modulated target vector.</p></li>
+    </ul>
+    <p>The modulated vector is subsequently used during candidate
+    evaluation and decoding.</p>
+    <p>This additional layer increases the flexibility of the
+    architecture by allowing systematic transformations to be learned
+    independently from the primary inference process.</p>
+    <h2 id="motivation">Motivation</h2>
+    <p>In many learning systems, a single neural inference mechanism is
+    expected to capture every aspect of future state prediction.</p>
+    <p>The VGPC architecture adopts a different perspective.</p>
+    <p>A predicted target vector may correctly identify a desired region
+    of the state space while still benefiting from additional
+    transformations that improve decoding performance, reinforce domain
+    structure, or inject behavioral control.</p>
+    <p>The motivation for vector modulation is therefore to introduce an
+    additional adaptive layer capable of modifying target directions
+    without requiring changes to the underlying inference model.</p>
+    <p>Several potential advantages arise from this separation:</p>
+    <ul>
+    <li><p>refinement of inferred target directions,</p></li>
+    <li><p>incorporation of domain-specific structure,</p></li>
+    <li><p>contextual adaptation of predictions,</p></li>
+    <li><p>behavioral steering,</p></li>
+    <li><p>improved decoding performance,</p></li>
+    <li><p>selective specialization of state transitions.</p></li>
+    </ul>
+    <p>Unlike large neural components that may require extensive
+    retraining, a modulation layer can often be learned independently
+    while leaving the underlying inference mechanism unchanged.</p>
+    <p>Within the GLP–Graph architecture, preliminary experiments have
+    demonstrated that learned vector modulation can have a measurable
+    influence on generation behavior despite its conceptual simplicity.
+    This suggests that target-vector transformation may represent a
+    useful source of additional expressiveness within the broader VGPC
+    design space.</p>
+    <h2 id="projection-functions">Projection Functions</h2>
+    <p>The VGPC framework does not prescribe a particular modulation
+    mechanism.</p>
+    <p>The simplest implementation consists of a projection matrix:</p>
+    <p><span class="math display">$$\hat{\mathbf{v}}'
+        =
+        W
+        \hat{\mathbf{v}}$$</span></p>
+    <p>where <span class="math inline"><em>W</em></span> is a learnable
+    square matrix with the same dimensionality as the state vectors.</p>
+    <p>Such a projection can be interpreted as a learned transformation
+    of the state space that alters how inferred directions are mapped
+    into candidate-selection space.</p>
+    <p>More generally, modulation functions may include:</p>
+    <ul>
+    <li><p>linear projections,</p></li>
+    <li><p>affine transformations,</p></li>
+    <li><p>multiple projection matrices,</p></li>
+    <li><p>learned neural transformations,</p></li>
+    <li><p>recursive modulation systems,</p></li>
+    <li><p>procedural transformations,</p></li>
+    <li><p>hybrid deterministic-neural mechanisms.</p></li>
+    </ul>
+    <p>The projection mechanism itself may be globally applied to all
+    states or may be specialized to particular contexts, state
+    categories, abstraction levels, or behavioral modes.</p>
+    <p>Importantly, useful modulation does not necessarily require
+    complex models.</p>
+    <p>Simple matrix-based projection layers may already provide
+    meaningful improvements while remaining fully interpretable and
+    computationally efficient.</p>
+    <p>Furthermore, the architecture permits modulation layers to be
+    trained independently from the primary inference network. They may
+    therefore function as lightweight adaptation mechanisms rather than
+    large-scale learned models.</p>
+    <h2 id="conditional-modulation">Conditional Modulation</h2>
+    <p>Modulation functions may also depend on contextual
+    information.</p>
+    <p>Rather than applying a single global transformation, different
+    modulation functions may be activated under different
+    conditions.</p>
+    <p>For example, modulation may depend on:</p>
+    <ul>
+    <li><p>state position,</p></li>
+    <li><p>generation stage,</p></li>
+    <li><p>hierarchy level,</p></li>
+    <li><p>domain context,</p></li>
+    <li><p>task identity,</p></li>
+    <li><p>system mode,</p></li>
+    <li><p>CAS vectors,</p></li>
+    <li><p>external control signals.</p></li>
+    </ul>
+    <p>In such systems the modulation process becomes:</p>
+    <p><span class="math display">$$\hat{\mathbf{v}}'
+        =
+        M(\hat{\mathbf{v}}, \mathbf{c})$$</span></p>
+    <p>where <span class="math inline"><strong>c</strong></span>
+    represents conditional control information.</p>
+    <p>A particularly important possibility is conditioning modulation
+    on CAS vectors. Different content, accuracy, safety, or personality
+    profiles may induce different transformations of the same inferred
+    direction. In this way, behavioral steering can occur not only at
+    the context level but also within the geometry of the state-space
+    traversal process itself.</p>
+    <p>The mechanism generating the modulation parameters may also
+    vary.</p>
+    <p>Projection matrices may be:</p>
+    <ul>
+    <li><p>fixed after training,</p></li>
+    <li><p>selected from a predefined set,</p></li>
+    <li><p>interpolated between multiple matrices,</p></li>
+    <li><p>generated by auxiliary neural systems,</p></li>
+    <li><p>procedurally constructed,</p></li>
+    <li><p>produced by hypernetworks.</p></li>
+    </ul>
+    <p>Likewise, the learning process itself is not restricted. Standard
+    gradient optimization may be used, but alternative approaches remain
+    equally compatible.</p>
+    <p>For example, matrix-based projection layers may be learned
+    incrementally through local update mechanisms inspired by Hebbian
+    learning, where individual matrix coefficients evolve according to
+    observed transition patterns. Consequently, modulation can function
+    both as a conventional trainable layer and as an independently
+    adaptable control mechanism.</p>
+    <p>The VGPC framework therefore treats vector modulation not as a
+    fixed algorithm but as a general architectural concept: an optional
+    transformation stage that reshapes predicted state-space directions
+    before graph traversal and decoding occur. This additional degree of
+    freedom enables learned adaptation and behavioral control while
+    preserving the modular design principles of the architecture.</p>
+    <h1 id="decoding-mechanisms">Decoding Mechanisms</h1>
+    <p>The purpose of decoding is to transform a predicted target vector
+    into a concrete state transition.</p>
+    <p>Within the VGPC architecture, decoding operates on the candidate
+    states provided by the graph and any additional filtering mechanisms
+    that may be present. Unlike direct prediction architectures,
+    decoding is not responsible for generating arbitrary outputs.
+    Instead, it selects among admissible alternatives that already exist
+    within the state space.</p>
+    <p>This separation between candidate generation and candidate
+    selection is one of the defining characteristics of the
+    architecture.</p>
+    <p><span class="math display">Context → Target Vector → Candidate
+    Generation → Decoding → Selected State</span></p>
+    <p>The framework intentionally imposes few restrictions on the
+    decoding mechanism. Any procedure that transforms a set of
+    admissible candidate states into a selected successor state is
+    compatible with the architecture.</p>
+    <h2 id="candidate-selection">Candidate Selection</h2>
+    <p>The first stage of decoding consists of obtaining a candidate
+    set.</p>
+    <p>Given a current state <span
+    class="math inline"><em>s</em><sub><em>t</em></sub></span>, the
+    graph produces a set of admissible successor states</p>
+    <p><span
+    class="math display"><em>N</em>(<em>s</em><sub><em>t</em></sub>) = {<em>s</em><sub>1</sub>, <em>s</em><sub>2</sub>, …, <em>s</em><sub><em>n</em></sub>}.</span></p>
+    <p>Additional mechanisms may further reduce this candidate set
+    before selection occurs.</p>
+    <p>Possible filtering mechanisms include:</p>
+    <ul>
+    <li><p>deterministic rules,</p></li>
+    <li><p>constraint systems,</p></li>
+    <li><p>safety policies,</p></li>
+    <li><p>CAS-dependent restrictions,</p></li>
+    <li><p>planning constraints,</p></li>
+    <li><p>procedural validators,</p></li>
+    <li><p>domain-specific logic.</p></li>
+    </ul>
+    <p>The resulting candidate set therefore represents the states that
+    are both reachable and currently acceptable.</p>
+    <p>This process answers the question:</p>
+    <div class="center">
+    <p><em>Which transitions are permitted?</em></p>
+    </div>
+    <p>Only after this stage does the architecture address the
+    question:</p>
+    <div class="center">
+    <p><em>Which permitted transition should be chosen?</em></p>
+    </div>
+    <h2 id="distance-metrics">Distance Metrics</h2>
+    <p>Once the candidate set has been established, each candidate state
+    vector is compared to the predicted target vector.</p>
+    <p>Let</p>
+    <p><span class="math display">$$\hat{\mathbf{v}}$$</span></p>
+    <p>denote the inferred or modulated target vector and</p>
+    <p><span
+    class="math display"><strong>v</strong><sub><em>i</em></sub></span></p>
+    <p>the vector associated with candidate state <span
+    class="math inline"><em>s</em><sub><em>i</em></sub></span>.</p>
+    <p>A scoring function</p>
+    <p><span class="math display">$$score(s_i)
+        =
+        D(\hat{\mathbf{v}},\mathbf{v}_i)$$</span></p>
+    <p>can then be applied to determine how well a candidate aligns with
+    the predicted direction.</p>
+    <p>The architecture does not require a specific distance metric.</p>
+    <p>Possible choices include:</p>
+    <ul>
+    <li><p>cosine similarity,</p></li>
+    <li><p>Euclidean distance,</p></li>
+    <li><p>Manhattan distance,</p></li>
+    <li><p>learned similarity metrics,</p></li>
+    <li><p>kernel-based similarity measures,</p></li>
+    <li><p>composite scoring functions.</p></li>
+    </ul>
+    <p>Vector representations make such comparisons straightforward
+    while remaining independent of the underlying domain.</p>
+    <p>In many practical implementations cosine similarity is
+    particularly attractive because it primarily evaluates directional
+    agreement rather than absolute magnitude.</p>
+    <p>However, the VGPC framework intentionally leaves metric selection
+    to the application.</p>
+    <h2 id="probability-assignment">Probability Assignment</h2>
+    <p>The candidate scores obtained during distance evaluation must
+    ultimately guide candidate selection.</p>
+    <p>Unlike large language models, the resulting probability values
+    should not necessarily be interpreted as statistical estimates of
+    token frequencies or next-state likelihoods. Instead, they serve as
+    a prioritization mechanism that expresses the relative desirability
+    of candidate transitions.</p>
+    <p>Consequently, the VGPC framework does not prescribe a particular
+    probability assignment procedure.</p>
+    <p>A variety of approaches are possible:</p>
+    <ul>
+    <li><p>direct score normalization,</p></li>
+    <li><p>softmax-based distributions,</p></li>
+    <li><p>rank-based probability assignment,</p></li>
+    <li><p>boosted ranking systems,</p></li>
+    <li><p>deterministic best-candidate selection,</p></li>
+    <li><p>uniform sampling among high-ranking candidates.</p></li>
+    </ul>
+    <p>In practice, softmax is not always ideal because small score
+    differences can sometimes produce excessively peaked
+    distributions.</p>
+    <p>Alternative normalization procedures may therefore be
+    preferable.</p>
+    <p>For example, a simple normalization scheme consists of:</p>
+    <p><span
+    class="math display"><em>s</em><em>c</em><em>o</em><em>r</em><em>e</em>′<sub><em>i</em></sub> = <em>s</em><em>c</em><em>o</em><em>r</em><em>e</em><sub><em>i</em></sub> − min (<em>s</em><em>c</em><em>o</em><em>r</em><em>e</em>) + <em>T</em></span></p>
+    <p>where <span class="math inline"><em>T</em></span> is a
+    temperature parameter ensuring positive values.</p>
+    <p>The resulting probabilities become:</p>
+    <p><span class="math display">$$P(s_i)
+        =
+        \frac{score'_i}
+        {\sum_j score'_j}.$$</span></p>
+    <p>This approach preserves relative ranking while allowing the
+    temperature parameter to control diversity.</p>
+    <p>Larger temperature values tend to distribute probability mass
+    more evenly, while smaller values increase preference for the
+    highest-scoring candidates.</p>
+    <p>Additional mechanisms may further modify candidate priorities
+    before normalization occurs.</p>
+    <p>For example, the highest-ranked candidates may receive an
+    explicit score boost prior to probability assignment, thereby
+    increasing their likelihood of selection without completely
+    eliminating lower-ranked alternatives.</p>
+    <p>The architecture remains agnostic regarding which prioritization
+    strategy is used.</p>
+    <h2 id="top-k-selection">Top-K Selection</h2>
+    <p>In many systems the full candidate set may be too large to
+    evaluate exhaustively during final selection.</p>
+    <p>A common strategy therefore consists of retaining only the
+    highest-scoring candidates:</p>
+    <p><span
+    class="math display"><em>K</em> = {<em>s</em><sub>1</sub>, <em>s</em><sub>2</sub>, …, <em>s</em><sub><em>k</em></sub>}.</span></p>
+    <p>The remaining candidates are discarded and subsequent probability
+    assignment or sampling procedures operate only on this reduced
+    set.</p>
+    <p>Top-K selection offers several advantages:</p>
+    <ul>
+    <li><p>reduced computational cost,</p></li>
+    <li><p>improved selection efficiency,</p></li>
+    <li><p>removal of low-quality candidates,</p></li>
+    <li><p>controllable diversity.</p></li>
+    </ul>
+    <p>The architecture does not mandate a particular strategy after the
+    Top-K set has been determined.</p>
+    <p>Possible approaches include:</p>
+    <ul>
+    <li><p>selecting the highest-ranked candidate,</p></li>
+    <li><p>probability-weighted sampling,</p></li>
+    <li><p>equal-probability sampling,</p></li>
+    <li><p>CAS-conditioned sampling,</p></li>
+    <li><p>rule-guided selection,</p></li>
+    <li><p>evaluator-guided selection.</p></li>
+    </ul>
+    <p>Consequently, Top-K should be viewed as a candidate reduction
+    mechanism rather than a complete decoding strategy.</p>
+    <p>Within the VGPC architecture, decoding is ultimately responsible
+    for transforming geometric preferences within vector space into
+    concrete state transitions. By separating graph traversal, candidate
+    generation, score evaluation, probability assignment, and final
+    selection, the framework allows deterministic, probabilistic,
+    neural, symbolic, and hybrid decision mechanisms to coexist within a
+    unified state-space representation.</p>
+    <h1 id="the-cas-framework">The CAS Framework</h1>
+    <p>The Content–Accuracy–Safety–Personality (CAS) framework provides
+    a general mechanism for behavioral steering within the VGPC
+    architecture family.</p>
+    <p>Unlike rule systems, which impose explicit constraints on
+    admissible behavior, CAS operates as a soft conditioning mechanism.
+    Its purpose is not to determine what the system must or must not do,
+    but rather to influence the probability that particular behaviors,
+    trajectories, styles, or decisions emerge during generation.</p>
+    <p>The central idea is that training data can be annotated with
+    behavioral metadata that captures desirable properties of states,
+    sequences, or complete artifacts. This metadata is represented as a
+    vector and incorporated into both training and inference.</p>
+    <p>More generally, the CAS framework can be interpreted as a
+    mechanism for encoding additional dimensions of behavior alongside
+    the primary domain representation.</p>
+    <p><span
+    class="math display"><em>C</em><em>A</em><em>S</em> = (<em>c</em><sub>1</sub>,<em>c</em><sub>2</sub>,…,<em>c</em><sub><em>n</em></sub>)</span></p>
+    <p>where each component represents a continuous behavioral
+    characteristic.</p>
+    <p>Although the original formulation consists of Content, Accuracy,
+    Safety, and Personality dimensions, the VGPC architecture imposes no
+    restrictions on the number or meaning of components.</p>
+    <p>CAS should therefore be viewed as a general behavioral vector
+    framework rather than a fixed four-dimensional representation.</p>
+    <h2 id="content">Content</h2>
+    <p>The Content dimension captures what type of information, themes,
+    concepts, or subject matter are associated with a particular state
+    or sequence.</p>
+    <p>Depending on the application domain, content-related dimensions
+    may encode:</p>
+    <ul>
+    <li><p>topics,</p></li>
+    <li><p>genres,</p></li>
+    <li><p>semantic categories,</p></li>
+    <li><p>conceptual domains,</p></li>
+    <li><p>world-specific attributes,</p></li>
+    <li><p>stylistic themes.</p></li>
+    </ul>
+    <p>In generative systems this allows behavioral steering toward
+    particular forms of content without explicitly prescribing
+    individual outcomes.</p>
+    <p>For example, two trajectories may remain structurally valid while
+    differing substantially in their thematic tendencies.</p>
+    <p>The Content dimensions provide a mechanism for expressing such
+    preferences within the architecture.</p>
+    <h2 id="accuracy">Accuracy</h2>
+    <p>The Accuracy dimension captures properties related to
+    correctness, reliability, consistency, or quality.</p>
+    <p>The precise interpretation depends on the domain.</p>
+    <p>Possible examples include:</p>
+    <ul>
+    <li><p>factual correctness,</p></li>
+    <li><p>simulation fidelity,</p></li>
+    <li><p>logical consistency,</p></li>
+    <li><p>structural coherence,</p></li>
+    <li><p>domain compliance,</p></li>
+    <li><p>adherence to reference data.</p></li>
+    </ul>
+    <p>Accuracy does not directly enforce correctness.</p>
+    <p>Instead, it biases generation toward states and transitions that
+    have been associated with higher levels of the desired property
+    during training.</p>
+    <p>Explicit guarantees remain the responsibility of graph
+    constraints, rule systems, validation components, or PRE evaluation
+    loops.</p>
+    <h2 id="safety">Safety</h2>
+    <p>The Safety dimension captures properties associated with
+    acceptable and responsible system behavior.</p>
+    <p>Examples may include:</p>
+    <ul>
+    <li><p>risk levels,</p></li>
+    <li><p>content sensitivities,</p></li>
+    <li><p>operational constraints,</p></li>
+    <li><p>policy preferences,</p></li>
+    <li><p>domain-specific safety criteria.</p></li>
+    </ul>
+    <p>The role of CAS safety differs fundamentally from deterministic
+    safety systems.</p>
+    <p>A high safety value encourages trajectories that resemble safe
+    examples present within the training data.</p>
+    <p>However, it does not prevent unsafe transitions from occurring if
+    they remain reachable and admissible.</p>
+    <p>Consequently, safety-critical guarantees should generally be
+    implemented through rule-based constraints or evaluation mechanisms
+    rather than CAS alone.</p>
+    <h2 id="personality">Personality</h2>
+    <p>The Personality dimension captures stable behavioral tendencies
+    that influence how the system behaves while preserving freedom
+    within the underlying state space.</p>
+    <p>Possible examples include:</p>
+    <ul>
+    <li><p>creativity,</p></li>
+    <li><p>formality,</p></li>
+    <li><p>exploration,</p></li>
+    <li><p>curiosity,</p></li>
+    <li><p>cautiousness,</p></li>
+    <li><p>narrative style,</p></li>
+    <li><p>agent identity.</p></li>
+    </ul>
+    <p>Personality dimensions are particularly useful because they allow
+    behavioral characteristics to be learned directly from examples
+    rather than manually encoded through rules.</p>
+    <p>Multiple personalities may coexist within the same dataset and
+    become available through continuous CAS interpolation.</p>
+    <p>As a result, personality becomes a steerable property of
+    generation rather than a fixed characteristic of the system.</p>
+    <h2 id="behavioral-steering-through-cas-vectors">Behavioral Steering
+    Through CAS Vectors</h2>
+    <p>The primary purpose of CAS is behavioral steering.</p>
+    <p>During training, examples are associated with one or more CAS
+    vectors. The neural inference mechanisms therefore learn not only
+    the relationship between context and future states, but also the
+    influence of behavioral attributes on those transitions.</p>
+    <p>During inference, a desired CAS vector can be incorporated into
+    the context representation:</p>
+    <p><span
+    class="math display"><strong>x</strong> = <em>C</em><em>o</em><em>n</em><em>t</em><em>e</em><em>x</em><em>t</em> ⊕ <em>C</em><em>A</em><em>S</em></span></p>
+    <p>where <span class="math inline">⊕</span> denotes some form of
+    feature combination.</p>
+    <p>The inference model then predicts transition directions that are
+    influenced by both the contextual state and the requested behavioral
+    profile.</p>
+    <p>Importantly, CAS should not be interpreted as a rule system.</p>
+    <p>A common misconception is to view CAS as a form of whitelisting
+    or blacklisting. Such mechanisms are outside its intended
+    purpose.</p>
+    <p>The objective of CAS is not:</p>
+    <ul>
+    <li><p>to forbid states,</p></li>
+    <li><p>to enforce deterministic policies,</p></li>
+    <li><p>to guarantee compliance,</p></li>
+    <li><p>to replace symbolic constraints.</p></li>
+    </ul>
+    <p>Instead, CAS acts as a soft biasing mechanism.</p>
+    <p>It influences preferences without eliminating alternatives.</p>
+    <p>For example, a high safety value may increase the probability of
+    selecting safer trajectories, but it does not automatically remove
+    all unsafe possibilities from the candidate set.</p>
+    <p>Similarly, a creativity-oriented personality vector may increase
+    the likelihood of unusual transitions without explicitly requiring
+    them.</p>
+    <p>The distinction between CAS and rule systems is therefore
+    fundamental:</p>
+    <ul>
+    <li><p>Rules determine what is permitted.</p></li>
+    <li><p>Graphs determine what is possible.</p></li>
+    <li><p>CAS influences what is preferred.</p></li>
+    </ul>
+    <p>Because CAS operates through continuous vector representations,
+    heterogeneous datasets can be annotated with rich behavioral
+    information that remains available during inference. The resulting
+    mechanism provides a flexible and domain-independent approach to
+    steering behavior while preserving the adaptability and diversity of
+    the underlying state-space traversal process.</p>
+    <p>Within the VGPC architecture family, CAS therefore serves as a
+    bridge between explicit control and learned behavior, enabling
+    systems to express preferences without sacrificing flexibility or
+    requiring hard-coded policies.</p>
+    <h1 id="rule-based-control">Rule-Based Control</h1>
+    <p>Although graph-constrained state spaces already provide a
+    significant degree of structural control, additional rule-based
+    mechanisms may further restrict or guide system behavior.</p>
+    <p>The VGPC architecture therefore includes optional rule-based
+    control systems that operate alongside neural inference and graph
+    traversal. These mechanisms allow deterministic knowledge, domain
+    constraints, policies, and symbolic reasoning procedures to directly
+    influence state transitions.</p>
+    <p>The architecture does not require rule systems, and many
+    applications may operate entirely through graph constraints and
+    vector-guided decoding. Nevertheless, rule-based control can provide
+    additional guarantees regarding consistency, safety, validity, and
+    domain-specific correctness.</p>
+    <p>Within the broader architecture, rules represent an additional
+    source of knowledge that complements both learned representations
+    and graph structure.</p>
+    <h2 id="transition-constraints">Transition Constraints</h2>
+    <p>The most direct application of rule-based control is the
+    restriction of candidate transitions.</p>
+    <p>Given a candidate set</p>
+    <p><span
+    class="math display"><em>N</em>(<em>s</em><sub><em>t</em></sub>) = {<em>s</em><sub>1</sub>, <em>s</em><sub>2</sub>, …, <em>s</em><sub><em>n</em></sub>},</span></p>
+    <p>a rule system may remove candidates that violate predefined
+    constraints.</p>
+    <p>Conceptually:</p>
+    <p><span
+    class="math display"><em>N</em>(<em>s</em><sub><em>t</em></sub>) → <em>R</em>(<em>N</em>(<em>s</em><sub><em>t</em></sub>)) → <em>N</em>′(<em>s</em><sub><em>t</em></sub>)</span></p>
+    <p>where <span class="math inline"><em>R</em></span> denotes the
+    rule system and <span
+    class="math inline"><em>N</em>′(<em>s</em><sub><em>t</em></sub>)</span>
+    the filtered candidate set.</p>
+    <p>Possible constraints include:</p>
+    <ul>
+    <li><p>syntactic validity,</p></li>
+    <li><p>structural consistency,</p></li>
+    <li><p>domain-specific policies,</p></li>
+    <li><p>safety requirements,</p></li>
+    <li><p>resource limitations,</p></li>
+    <li><p>planning constraints,</p></li>
+    <li><p>behavioral restrictions.</p></li>
+    </ul>
+    <p>Rules may operate on:</p>
+    <ul>
+    <li><p>the current state,</p></li>
+    <li><p>candidate states,</p></li>
+    <li><p>state histories,</p></li>
+    <li><p>contextual information,</p></li>
+    <li><p>CAS vectors,</p></li>
+    <li><p>external environment information.</p></li>
+    </ul>
+    <p>In practice, such constraints often eliminate undesirable
+    transitions before candidate selection occurs, reducing the burden
+    placed on neural inference and evaluation mechanisms.</p>
+    <p>Importantly, graph constraints and rule constraints serve
+    different purposes.</p>
+    <p>The graph defines transitions that are generally admissible
+    within the modeled domain.</p>
+    <p>Rules determine which of those transitions are currently
+    acceptable under the present context, objectives, or policies.</p>
+    <p>Consequently, a transition may exist within the graph while still
+    being temporarily disallowed by the active rule system.</p>
+    <h2 id="deterministic-reasoning">Deterministic Reasoning</h2>
+    <p>Beyond candidate filtering, rule systems may perform
+    deterministic reasoning directly.</p>
+    <p>In this setting, rules are not merely restrictions but active
+    decision-making mechanisms.</p>
+    <p>Examples include:</p>
+    <ul>
+    <li><p>enforcing domain invariants,</p></li>
+    <li><p>performing logical deductions,</p></li>
+    <li><p>managing state consistency,</p></li>
+    <li><p>applying planning heuristics,</p></li>
+    <li><p>maintaining structural constraints,</p></li>
+    <li><p>triggering mandatory transitions.</p></li>
+    </ul>
+    <p>In certain situations a rule may uniquely determine the next
+    state without requiring probabilistic candidate selection.</p>
+    <p>Conceptually:</p>
+    <p><span
+    class="math display"><em>R</em>(<em>C</em>) → <em>s</em><sub><em>t</em> + 1</sub></span></p>
+    <p>where the next state is produced directly from the rule system
+    given the current context <span
+    class="math inline"><em>C</em></span>.</p>
+    <p>This capability allows deterministic reasoning processes to
+    coexist naturally with neural inference mechanisms.</p>
+    <p>For some domains deterministic knowledge may represent the most
+    reliable source of control. Rather than forcing such knowledge to be
+    approximated through learning, the architecture permits it to remain
+    explicitly represented and directly executable.</p>
+    <h2 id="hybrid-neuro-symbolic-control">Hybrid Neuro-Symbolic
+    Control</h2>
+    <p>The most general configuration combines neural prediction, graph
+    traversal, and symbolic control.</p>
+    <p>In such systems:</p>
+    <ul>
+    <li><p>neural inference proposes desirable directions,</p></li>
+    <li><p>graph structures define admissible transitions,</p></li>
+    <li><p>rule systems impose symbolic constraints,</p></li>
+    <li><p>decoding mechanisms perform final candidate
+    selection.</p></li>
+    </ul>
+    <p>This creates a hybrid neuro-symbolic decision process in which
+    learned and deterministic mechanisms cooperate rather than
+    compete.</p>
+    <p>The interaction can be summarized as:</p>
+    <p><span class="math display">Context → Vector Inference → Graph
+    Candidates → Rule Filtering → Decoding → Selected State</span></p>
+    <p>or, in cases where deterministic knowledge is sufficiently
+    strong,</p>
+    <p><span class="math display">Context → Rule System → Selected
+    State.</span></p>
+    <p>A practical example can be found in language-oriented VGPC
+    systems such as GLP–Graph, where states may contain both lexical and
+    grammatical information. Rules can therefore operate on grammatical
+    categories, lexical categories, or combinations of both.</p>
+    <p>Such rules may enforce additional structural constraints beyond
+    those already present in the graph itself.</p>
+    <p>In many cases the graph alone may already provide substantial
+    protection against invalid transitions because it is derived from
+    observed training sequences. However, datasets may contain
+    exceptional cases, rare patterns, or undesirable transitions that
+    remain technically reachable. Rule systems provide an additional
+    layer of deterministic control that can prevent such transitions
+    from being selected.</p>
+    <p>More generally, rule-based control enables explicit human
+    knowledge, symbolic reasoning, and domain expertise to participate
+    directly in the cognitive process. The resulting architecture
+    therefore combines three complementary sources of guidance:</p>
+    <ul>
+    <li><p>learned knowledge through neural inference,</p></li>
+    <li><p>structural knowledge through graph topology,</p></li>
+    <li><p>explicit knowledge through symbolic rules.</p></li>
+    </ul>
+    <p>The VGPC framework treats these mechanisms as cooperative
+    components within a single cognitive architecture, allowing systems
+    to balance flexibility, traceability, and deterministic control
+    according to the requirements of the application domain.</p>
+    <h1 id="pre-reasoning-loops">PRE Reasoning Loops</h1>
+    <p>The Propose–Retry–Evaluate (PRE) framework provides the primary
+    mechanism for recursive evaluation, quality control, and
+    self-correction within the VGPC architecture family.</p>
+    <p>While vector inference, graph traversal, and decoding determine
+    what candidate states or sequences are generated, PRE determines
+    whether the generated result is sufficiently desirable to be
+    accepted.</p>
+    <p>The framework is intentionally general and can be applied to any
+    cognitive artifact produced by the system, including individual
+    states, state sequences, plans, documents, images, audio structures,
+    actions, memories, or higher-level cognitive constructs.</p>
+    <p>Unlike architectures that rely solely on prediction, PRE
+    introduces an additional evaluation stage that enables generation to
+    be guided by explicit quality criteria.</p>
+    <p><span class="math display">Generate → Evaluate → Accept or
+    Retry</span></p>
+    <p>This simple pattern can be applied recursively at multiple levels
+    of abstraction and with a wide variety of evaluation functions.</p>
+    <h2 id="proposeretryevaluate">Propose–Retry–Evaluate</h2>
+    <p>At its most basic level, PRE consists of three stages.</p>
+    <p>First, the system proposes a candidate output.</p>
+    <p>Second, the output is evaluated according to one or more quality
+    measures.</p>
+    <p>Third, the candidate is either accepted or rejected.</p>
+    <p>Conceptually:</p>
+    <p><span
+    class="math display"><em>C</em><em>a</em><em>n</em><em>d</em><em>i</em><em>d</em><em>a</em><em>t</em><em>e</em> → <em>E</em><em>v</em><em>a</em><em>l</em><em>u</em><em>a</em><em>t</em><em>o</em><em>r</em> → <em>D</em><em>e</em><em>c</em><em>i</em><em>s</em><em>i</em><em>o</em><em>n</em></span></p>
+    <p>If the candidate satisfies the required acceptance criteria,
+    generation continues.</p>
+    <p>Otherwise, a new candidate may be generated and evaluated
+    again.</p>
+    <p><span
+    class="math display"><em>C</em><em>a</em><em>n</em><em>d</em><em>i</em><em>d</em><em>a</em><em>t</em><em>e</em><sub>1</sub> → <em>R</em><em>e</em><em>j</em><em>e</em><em>c</em><em>t</em></span></p>
+    <p><span
+    class="math display"><em>C</em><em>a</em><em>n</em><em>d</em><em>i</em><em>d</em><em>a</em><em>t</em><em>e</em><sub>2</sub> → <em>R</em><em>e</em><em>j</em><em>e</em><em>c</em><em>t</em></span></p>
+    <p><span
+    class="math display"><em>C</em><em>a</em><em>n</em><em>d</em><em>i</em><em>d</em><em>a</em><em>t</em><em>e</em><sub>3</sub> → <em>A</em><em>c</em><em>c</em><em>e</em><em>p</em><em>t</em></span></p>
+    <p>The architecture places no restrictions on how new candidates are
+    obtained.</p>
+    <p>Alternative candidates may emerge through:</p>
+    <ul>
+    <li><p>probabilistic decoding,</p></li>
+    <li><p>Top-K sampling,</p></li>
+    <li><p>modified modulation vectors,</p></li>
+    <li><p>alternative graph traversals,</p></li>
+    <li><p>stochastic generation mechanisms,</p></li>
+    <li><p>other domain-specific processes.</p></li>
+    </ul>
+    <p>An important implication follows immediately.</p>
+    <p>PRE requires diversity within the generation process.</p>
+    <p>If inference is completely deterministic and always produces the
+    same output, retry loops cannot improve results because every retry
+    yields an identical candidate.</p>
+    <p>Consequently, PRE is most effective when multiple plausible
+    candidate trajectories are available.</p>
+    <h2 id="recursive-evaluation">Recursive Evaluation</h2>
+    <p>The evaluation stage is the central component of PRE.</p>
+    <p>The architecture intentionally avoids prescribing a particular
+    evaluation mechanism.</p>
+    <p>Evaluators may range from simple heuristics to highly
+    sophisticated learned systems.</p>
+    <p>Possible evaluation functions include:</p>
+    <ul>
+    <li><p>length constraints,</p></li>
+    <li><p>structural heuristics,</p></li>
+    <li><p>grammar validation,</p></li>
+    <li><p>consistency checks,</p></li>
+    <li><p>rule compliance,</p></li>
+    <li><p>classifier-based scoring,</p></li>
+    <li><p>retrieval-based verification,</p></li>
+    <li><p>simulation-based validation,</p></li>
+    <li><p>specialist neural evaluators,</p></li>
+    <li><p>large language model critics.</p></li>
+    </ul>
+    <p>The evaluator therefore becomes a highly flexible source of
+    feedback.</p>
+    <p>In many domains the evaluator may contain knowledge that is
+    difficult to encode directly within the generation process
+    itself.</p>
+    <p>For example, a grammatical evaluator may be significantly simpler
+    than forcing the generation mechanism to guarantee grammatical
+    correctness in every situation.</p>
+    <p>Similarly, an LLM-based critic may be capable of assessing
+    coherence, quality, style, or consistency using capabilities that
+    differ substantially from those of the generator.</p>
+    <p>The VGPC framework therefore treats evaluation as an independent
+    cognitive function rather than an intrinsic property of
+    generation.</p>
+    <h2 id="multi-level-reasoning">Multi-Level Reasoning</h2>
+    <p>One of the most powerful aspects of PRE is its ability to operate
+    across multiple levels of abstraction simultaneously.</p>
+    <p>Consider a hierarchical generation process:</p>
+    <p><span
+    class="math display"><em>T</em><em>o</em><em>k</em><em>e</em><em>n</em> → <em>S</em><em>e</em><em>n</em><em>t</em><em>e</em><em>n</em><em>c</em><em>e</em> → <em>P</em><em>a</em><em>r</em><em>a</em><em>g</em><em>r</em><em>a</em><em>p</em><em>h</em> → <em>C</em><em>h</em><em>a</em><em>p</em><em>t</em><em>e</em><em>r</em> → <em>D</em><em>o</em><em>c</em><em>u</em><em>m</em><em>e</em><em>n</em><em>t</em></span></p>
+    <p>A PRE loop may exist at every level.</p>
+    <p>For example:</p>
+    <ul>
+    <li><p>token-level validation,</p></li>
+    <li><p>sentence-level evaluation,</p></li>
+    <li><p>paragraph-level coherence checks,</p></li>
+    <li><p>chapter-level quality assessment,</p></li>
+    <li><p>document-level consistency evaluation.</p></li>
+    </ul>
+    <p>This creates a hierarchy of feedback mechanisms that monitor
+    different forms of quality.</p>
+    <p>Lower levels may focus on local correctness, while higher levels
+    evaluate global consistency and long-range structure.</p>
+    <p>More generally, PRE levels may evaluate different properties of
+    the same artifact.</p>
+    <p>For example:</p>
+    <ul>
+    <li><p>correctness,</p></li>
+    <li><p>coherence,</p></li>
+    <li><p>safety,</p></li>
+    <li><p>stylistic consistency,</p></li>
+    <li><p>task completion,</p></li>
+    <li><p>transition quality,</p></li>
+    <li><p>behavioral alignment.</p></li>
+    </ul>
+    <p>The resulting architecture supports a form of recursive reasoning
+    in which generated artifacts are repeatedly inspected and improved
+    before becoming part of the active context.</p>
+    <p>Although the current formulation emphasizes retry-based
+    correction, the framework also naturally supports refinement-based
+    approaches.</p>
+    <p>Instead of generating entirely new candidates, evaluator feedback
+    may be used to modify future generation behavior, influence
+    candidate scoring, or steer the system toward improved
+    trajectories.</p>
+    <p>Consequently, PRE encompasses both iterative retry and iterative
+    refinement strategies.</p>
+    <h2 id="quality-control-and-self-correction">Quality Control and
+    Self-Correction</h2>
+    <p>PRE transforms evaluation from a passive measurement process into
+    an active control mechanism.</p>
+    <p>Rather than merely reporting quality, evaluators directly
+    influence which artifacts become part of the evolving state
+    sequence.</p>
+    <p>Acceptance can be based on:</p>
+    <ul>
+    <li><p>fixed thresholds,</p></li>
+    <li><p>adaptive thresholds,</p></li>
+    <li><p>ranking criteria,</p></li>
+    <li><p>comparative evaluation,</p></li>
+    <li><p>multi-objective scoring functions.</p></li>
+    </ul>
+    <p>In practice, retry loops are typically bounded.</p>
+    <p>A system may therefore operate according to a maximum retry
+    budget:</p>
+    <p><span
+    class="math display"><em>R</em><sub><em>m</em><em>a</em><em>x</em></sub></span></p>
+    <p>that limits computational cost.</p>
+    <p>When all retries are exhausted, several fallback strategies
+    remain possible.</p>
+    <p>Examples include:</p>
+    <ul>
+    <li><p>accepting the highest-scoring candidate,</p></li>
+    <li><p>accepting the most recent candidate,</p></li>
+    <li><p>relaxing evaluation thresholds,</p></li>
+    <li><p>invoking alternative generation mechanisms,</p></li>
+    <li><p>escalating evaluation to a higher-level subsystem.</p></li>
+    </ul>
+    <p>These mechanisms ensure that generation remains practical even
+    when perfect solutions cannot be found.</p>
+    <p>From a cognitive perspective, PRE can be interpreted as a general
+    self-correction loop.</p>
+    <p>Generation produces hypotheses.</p>
+    <p>Evaluation assesses their quality.</p>
+    <p>Retry or refinement mechanisms revise unsuccessful
+    hypotheses.</p>
+    <p>The process continues until an acceptable result is obtained or
+    resource constraints are reached.</p>
+    <p>The PRE framework therefore separates generation from judgment in
+    much the same way that graph traversal separates possibility from
+    preference and CAS separates preference from constraint.</p>
+    <p>Within the VGPC architecture family, PRE serves as a
+    general-purpose reasoning, quality-control, and self-correction
+    mechanism capable of operating across multiple domains and levels of
+    abstraction. It provides an explicit framework for incorporating
+    reflective behavior into intelligent systems while remaining
+    compatible with deterministic, probabilistic, neural, symbolic, and
+    hybrid generation processes.</p>
+    <h1 id="hybrid-intelligence-integration">Hybrid Intelligence
+    Integration</h1>
+    <p>The Vector–Graph–PRE–CAS (VGPC) architecture family is
+    intentionally designed as a modular cognitive framework rather than
+    a monolithic intelligent system.</p>
+    <p>The architecture does not assume that a single computational
+    mechanism should be responsible for every aspect of cognition.
+    Instead, it follows a Hybrid Intelligence philosophy in which
+    specialized components cooperate to perform different cognitive
+    functions.</p>
+    <p>Within this perspective, VGPC systems are viewed as cognitive
+    building blocks that can operate independently or participate as
+    subsystems within larger intelligent ecosystems.</p>
+    <p>This design reflects a central assumption of the
+    architecture:</p>
+    <div class="center">
+    <p><em>Complex intelligence may emerge from the interaction of
+    complementary cognitive systems rather than from a single
+    homogeneous model.</em></p>
+    </div>
+    <p>The architecture therefore emphasizes modularity,
+    interoperability, inspectability, and compositionality.</p>
+    <h2 id="vgpc-as-a-cognitive-subsystem">VGPC as a Cognitive
+    Subsystem</h2>
+    <p>The VGPC framework is designed to function as a reusable
+    cognitive component.</p>
+    <p>Rather than defining a complete end-to-end intelligence system, a
+    VGPC instance may specialize in a particular cognitive role.</p>
+    <p>Possible examples include:</p>
+    <ul>
+    <li><p>world modeling,</p></li>
+    <li><p>memory management,</p></li>
+    <li><p>planning,</p></li>
+    <li><p>narrative generation,</p></li>
+    <li><p>simulation,</p></li>
+    <li><p>domain-specific reasoning,</p></li>
+    <li><p>behavior control.</p></li>
+    </ul>
+    <p>Multiple VGPC systems may coexist within the same architecture
+    and can operate at different abstraction levels.</p>
+    <p>For example, a high-level planning system may interact with one
+    or more specialized VGPC world models, each responsible for a
+    different domain.</p>
+    <p>This compositional approach allows complex intelligent behavior
+    to emerge from the interaction of smaller and more tractable
+    subsystems.</p>
+    <p>An important consequence is that VGPC systems can remain useful
+    even when trained on relatively small datasets and modest
+    computational resources.</p>
+    <p>Their value derives not solely from scale but also from the
+    explicit structure provided by state spaces, graphs, behavioral
+    control mechanisms, and evaluation loops.</p>
+    <h2 id="integration-with-large-language-models">Integration with
+    Large Language Models</h2>
+    <p>The VGPC architecture is not intended as a replacement for large
+    language models.</p>
+    <p>Instead, both approaches provide complementary capabilities.</p>
+    <p>Large language models excel at:</p>
+    <ul>
+    <li><p>broad generalization,</p></li>
+    <li><p>language understanding,</p></li>
+    <li><p>semantic knowledge,</p></li>
+    <li><p>flexible reasoning,</p></li>
+    <li><p>natural language generation.</p></li>
+    </ul>
+    <p>VGPC systems emphasize different properties:</p>
+    <ul>
+    <li><p>explicit state management,</p></li>
+    <li><p>structured world modeling,</p></li>
+    <li><p>traceability,</p></li>
+    <li><p>controllability,</p></li>
+    <li><p>behavioral steering,</p></li>
+    <li><p>persistent state evolution.</p></li>
+    </ul>
+    <p>These capabilities naturally complement one another.</p>
+    <p>A VGPC system may provide structured domain knowledge, world
+    dynamics, behavioral constraints, or memory representations, while a
+    large language model provides linguistic competence and broad
+    semantic reasoning.</p>
+    <p>Conceptually such a system may be represented as:</p>
+    <p><span
+    class="math display"><em>V</em><em>G</em><em>P</em><em>C</em> + <em>L</em><em>L</em><em>M</em> = <em>H</em><em>y</em><em>b</em><em>r</em><em>i</em><em>d</em><em>C</em><em>o</em><em>g</em><em>n</em><em>i</em><em>t</em><em>i</em><em>v</em><em>e</em><em>S</em><em>y</em><em>s</em><em>t</em><em>e</em><em>m</em></span></p>
+    <p>The resulting architecture combines explicit state-space
+    navigation with the generalization capabilities of modern neural
+    language models.</p>
+    <h2 id="agentic-architectures">Agentic Architectures</h2>
+    <p>Modern intelligent systems increasingly rely on agentic pipelines
+    composed of multiple interacting components.</p>
+    <p>The VGPC framework fits naturally within such architectures.</p>
+    <p>Because state spaces, graphs, CAS vectors, modulation mechanisms,
+    and PRE evaluators are independent components, they can be
+    configured dynamically at runtime according to the requirements of a
+    particular task.</p>
+    <p>Examples include:</p>
+    <ul>
+    <li><p>selecting different CAS profiles,</p></li>
+    <li><p>activating specialized evaluators,</p></li>
+    <li><p>switching modulation strategies,</p></li>
+    <li><p>changing graph traversal policies,</p></li>
+    <li><p>combining outputs from multiple VGPC systems.</p></li>
+    </ul>
+    <p>This flexibility allows agentic systems to adapt their behavior
+    without requiring retraining of the entire architecture.</p>
+    <p>Furthermore, because the neural inference mechanism is only one
+    component of the overall system, its complexity can be scaled
+    independently.</p>
+    <p>Implementations may employ compact neural models when
+    computational efficiency is important or larger models when
+    additional representational capacity is required.</p>
+    <p>This scalability enables VGPC systems to function across a wide
+    range of resource budgets while preserving their overall cognitive
+    structure.</p>
+    <h2 id="world-engines-and-memory-systems">World Engines and Memory
+    Systems</h2>
+    <p>One particularly important application of the architecture is the
+    construction of world engines and memory systems.</p>
+    <p>Because state transitions are represented explicitly, VGPC
+    systems naturally model evolving environments whose internal state
+    changes over time.</p>
+    <p>The architecture supports both static and dynamic state
+    spaces.</p>
+    <p>While some domains employ fixed collections of states, others may
+    introduce new states during operation.</p>
+    <p>For example, a vocabulary may grow over time, new entities may
+    appear within a world model, or memory systems may continuously
+    acquire new information.</p>
+    <p>This flexibility is possible because neural inference predicts
+    target vectors rather than identifiers tied to a fixed output
+    space.</p>
+    <p>As long as newly introduced states can be assigned valid vector
+    representations and integrated into the transition graph, they
+    immediately become available to the system.</p>
+    <p>Consequently, VGPC architectures are naturally compatible with
+    continuous learning scenarios in which knowledge evolves rather than
+    remaining frozen in a single training snapshot.</p>
+    <p>A domain-specific intelligent system may therefore consist of
+    multiple specialized VGPC instances, one or more large language
+    models, external vector databases, retrieval systems, and agentic
+    orchestration software.</p>
+    <p>In such environments VGPC components act as structured cognitive
+    modules that maintain explicit state evolution while cooperating
+    with external systems that provide complementary forms of
+    intelligence.</p>
+    <p>The architecture is therefore best understood not as an isolated
+    model but as a family of interoperable cognitive components designed
+    to participate in larger hybrid intelligent ecosystems.</p>
+    <h2
+    id="example-autonomous-narration-through-hybrid-world-modeling">Example:
+    Autonomous Narration Through Hybrid World Modeling</h2>
+    <p>A concrete example of the Hybrid Intelligence philosophy is
+    provided by the narrator pipeline developed within the Triadic
+    Cosmos ecosystem.</p>
+    <p>The narrator pipeline combines a VGPC-based world engine with a
+    large language model to produce long-form narrative content with
+    minimal creative input.</p>
+    <p>Within this architecture, a GLP–Graph system serves as the
+    primary world model. Rather than generating finished prose directly,
+    the world engine maintains an evolving narrative state and produces
+    structured representations of future story developments based on the
+    learned dynamics of its training corpus.</p>
+    <p>The generated state sequences capture narrative progression,
+    thematic development, character interactions, and world evolution.
+    These state transitions emerge from traversal of the
+    graph-constrained state space and are further influenced by vector
+    inference, CAS steering, and PRE evaluation mechanisms.</p>
+    <p>A large language model subsequently transforms these structured
+    world states into natural language narratives.</p>
+    <p>Conceptually the system can be represented as:</p>
+    <p><span
+    class="math display"><em>W</em><em>o</em><em>r</em><em>l</em><em>d</em> <em>E</em><em>n</em><em>g</em><em>i</em><em>n</em><em>e</em> → <em>S</em><em>t</em><em>o</em><em>r</em><em>y</em> <em>S</em><em>t</em><em>a</em><em>t</em><em>e</em> → <em>L</em><em>L</em><em>M</em> → <em>N</em><em>a</em><em>r</em><em>r</em><em>a</em><em>t</em><em>i</em><em>v</em><em>e</em> <em>T</em><em>e</em><em>x</em><em>t</em></span></p>
+    <p>or more explicitly:</p>
+    <p><span
+    class="math display"><em>G</em><em>L</em><em>P</em>–<em>G</em><em>r</em><em>a</em><em>p</em><em>h</em> → <em>C</em><em>h</em><em>a</em><em>p</em><em>t</em><em>e</em><em>r</em> <em>D</em><em>r</em><em>a</em><em>f</em><em>t</em> → <em>L</em><em>L</em><em>M</em> → <em>F</em><em>i</em><em>n</em><em>a</em><em>l</em> <em>C</em><em>h</em><em>a</em><em>p</em><em>t</em><em>e</em><em>r</em></span></p>
+    <p>The resulting architecture illustrates a clear separation of
+    responsibilities.</p>
+    <p>The VGPC subsystem is responsible for:</p>
+    <ul>
+    <li><p>world evolution,</p></li>
+    <li><p>narrative continuity,</p></li>
+    <li><p>character consistency,</p></li>
+    <li><p>long-term state management,</p></li>
+    <li><p>behavioral steering,</p></li>
+    <li><p>structural control.</p></li>
+    </ul>
+    <p>The large language model is responsible for:</p>
+    <ul>
+    <li><p>natural language realization,</p></li>
+    <li><p>semantic expansion,</p></li>
+    <li><p>stylistic variation,</p></li>
+    <li><p>linguistic fluency,</p></li>
+    <li><p>contextual extrapolation.</p></li>
+    </ul>
+    <p>This division allows each component to operate according to its
+    strengths.</p>
+    <p>The GLP–Graph system contributes explicit state tracking,
+    controllable narrative progression, and domain-specific structure,
+    while the large language model contributes broad language competence
+    and expressive flexibility.</p>
+    <p>An important consequence is that substantial narrative emergence
+    can arise from the interaction of both systems.</p>
+    <p>The world engine provides a constrained narrative trajectory
+    derived from its training corpus, while the large language model
+    extrapolates beyond the explicit training examples during language
+    realization. The resulting stories therefore exhibit characteristics
+    inherited from both the learned narrative canon and the broader
+    semantic knowledge encoded within the language model.</p>
+    <p>The narrator pipeline demonstrates how VGPC architectures can
+    function as specialized cognitive subsystems within larger hybrid
+    intelligent systems. Rather than replacing large language models,
+    the architecture enriches them with explicit world dynamics,
+    structured state evolution, and controllable generative
+    behavior.</p>
+    <p>More generally, the example illustrates the central thesis of
+    Hybrid Intelligence: complex behavior can emerge from the
+    cooperation of multiple specialized cognitive components, each
+    contributing capabilities that are not easily obtained from a single
+    monolithic model.</p>
+    <h1 id="advantages-and-limitations">Advantages and Limitations</h1>
+    <p>As a cognitive architecture, VGPC occupies a different position
+    within the design space of intelligent systems than contemporary
+    large-scale transformer architectures. The framework therefore
+    exhibits a distinct set of strengths, limitations, and
+    trade-offs.</p>
+    <p>Importantly, the architecture is not proposed as a universal
+    replacement for existing approaches. Rather, it represents an
+    alternative set of design priorities centered around structured
+    state spaces, explicit control mechanisms, modular composition, and
+    hybrid intelligent systems.</p>
+    <p>The value of the architecture should therefore be evaluated in
+    terms of the problems it attempts to solve rather than by direct
+    comparison with systems optimized for unrestricted large-scale
+    statistical learning.</p>
+    <h2 id="strengths">Strengths</h2>
+    <p>The VGPC architecture provides several advantages that arise from
+    its explicit state-space representation and modular design.</p>
+    <p>A first advantage is traceability.</p>
+    <p>Because generation occurs through explicit state transitions,
+    graph traversal, and observable decoding mechanisms, the reasoning
+    process remains largely inspectable. Generated outputs can often be
+    traced back to specific states, transitions, constraints, and
+    evaluative decisions.</p>
+    <p>A second advantage is controllability.</p>
+    <p>Behavior can be influenced through multiple independent
+    mechanisms including graph topology, rule systems, vector
+    modulation, CAS steering, and PRE evaluation loops. This layered
+    approach provides substantially more explicit control than
+    architectures that rely exclusively on learned parameter spaces.</p>
+    <p>A third advantage is modularity.</p>
+    <p>The architecture naturally decomposes into independent subsystems
+    that may be modified, replaced, or extended without requiring
+    fundamental redesign of the overall system. This property supports
+    experimentation and facilitates integration into larger hybrid
+    intelligent environments.</p>
+    <p>A fourth advantage is computational accessibility.</p>
+    <p>VGPC systems can be trained and deployed on comparatively small
+    datasets and modest computational resources. Since the architecture
+    incorporates explicit structure through graph representations and
+    deterministic components, useful behavior can emerge without
+    requiring extremely large parameter counts or massive training
+    corpora.</p>
+    <p>A fifth advantage is adaptability through continuous
+    evolution.</p>
+    <p>New states can be introduced without fundamentally changing the
+    output dimensionality of the neural inference mechanism. Because
+    inference predicts vectors rather than identifiers tied to a fixed
+    vocabulary, state spaces may grow over time as new concepts,
+    memories, entities, or knowledge are acquired.</p>
+    <p>This property makes the architecture naturally compatible with
+    continuous learning systems.</p>
+    <p>A sixth advantage is what may be described as <em>canon
+    compression</em>.</p>
+    <p>Rather than attempting to store broad statistical representations
+    of the entire training distribution, VGPC systems can capture
+    characteristic transition structures and attractor dynamics within a
+    comparatively compact state-space representation. This can be
+    particularly useful for domain-specific cognitive systems that must
+    preserve a consistent internal canon or behavioral identity.</p>
+    <p>Finally, the architecture supports horizontal scaling.</p>
+    <p>Instead of constructing ever larger monolithic models, complex
+    capabilities may emerge through the cooperation of multiple
+    specialized VGPC systems, each focused on a distinct domain or
+    cognitive function.</p>
+    <h2 id="limitations">Limitations</h2>
+    <p>Despite these strengths, the architecture also introduces several
+    limitations.</p>
+    <p>The most obvious limitation arises from its dependence on
+    structured state spaces.</p>
+    <p>Graphs, state representations, rule systems, and evaluation
+    mechanisms must either be constructed explicitly or learned
+    indirectly. For some domains this may require significant
+    engineering effort.</p>
+    <p>A second limitation concerns scalability.</p>
+    <p>Transformer architectures have demonstrated remarkable
+    performance when trained at extreme scales with vast quantities of
+    data and computation. At present, there is no evidence that VGPC
+    architectures exhibit scaling properties that allow them to compete
+    directly with frontier foundation models along the same
+    trajectory.</p>
+    <p>The architecture therefore should not be viewed as a drop-in
+    replacement for large-scale transformer systems.</p>
+    <p>A third limitation concerns state representation.</p>
+    <p>The usefulness of vector inference and graph traversal depends
+    heavily on the quality of the underlying state definitions. Poorly
+    chosen state spaces may restrict expressiveness or introduce
+    suboptimal transition structures.</p>
+    <p>A fourth limitation concerns graph construction and
+    maintenance.</p>
+    <p>As domains become larger and more complex, the structure of the
+    transition space may itself become increasingly difficult to
+    manage.</p>
+    <p>Although procedural and dynamically generated graphs mitigate
+    this issue, they do not eliminate it completely.</p>
+    <p>A fifth limitation arises from evaluation costs.</p>
+    <p>PRE loops can significantly improve quality but may increase
+    computational requirements, particularly when sophisticated
+    evaluators or multiple recursive levels are employed.</p>
+    <p>Finally, the architecture benefits most when meaningful state
+    transitions exist.</p>
+    <p>Domains that are naturally represented as state-space
+    trajectories align well with the framework, whereas domains lacking
+    useful state abstractions may prove less suitable.</p>
+    <h2 id="trade-offs">Trade-Offs</h2>
+    <p>The VGPC architecture intentionally makes trade-offs that differ
+    from those found in contemporary transformer systems.</p>
+    <p>The architecture generally favors:</p>
+    <ul>
+    <li><p>traceability over opacity,</p></li>
+    <li><p>explicit structure over implicit representation,</p></li>
+    <li><p>controllability over unrestricted emergence,</p></li>
+    <li><p>modularity over monolithic design,</p></li>
+    <li><p>continuous evolution over fixed training snapshots,</p></li>
+    <li><p>specialized subsystems over universal models.</p></li>
+    </ul>
+    <p>These trade-offs should not be interpreted as universally
+    superior choices.</p>
+    <p>Rather, they reflect different architectural priorities.</p>
+    <p>For example, modern large language models excel at large-scale
+    statistical generalization and broad knowledge acquisition. VGPC
+    systems instead emphasize structured cognitive processes, explicit
+    state management, and deterministic control mechanisms.</p>
+    <p>Similarly, many neural architectures rely on statistical
+    probability distributions over output spaces. VGPC systems can
+    instead be interpreted as operating through attractor dynamics
+    within graph-constrained state spaces, where candidate states
+    compete based on vector similarity, behavioral steering, and
+    evaluative feedback.</p>
+    <p>Neither paradigm is inherently superior.</p>
+    <p>They address different aspects of intelligent behavior and can
+    often be viewed as complementary rather than competing
+    approaches.</p>
+    <p>Indeed, one of the central hypotheses underlying the Hybrid
+    Intelligence methodology is that future intelligent systems may
+    benefit from combining both paradigms. Large-scale neural models can
+    provide broad generalization and semantic flexibility, while VGPC
+    systems contribute explicit structure, persistent state evolution,
+    traceability, and domain-specific control.</p>
+    <p>From this perspective, the most promising application of the
+    architecture may not be as an isolated intelligent system, but as a
+    specialized cognitive component within larger hybrid ecosystems
+    composed of complementary architectural paradigms.</p>
+    <h1 id="conclusion">Conclusion</h1>
+    <p>This paper introduced the <em>Vector–Graph–PRE–CAS (VGPC)
+    Cognitive Architecture Family</em>, a framework for constructing
+    modular cognitive systems that combine vector-based representations,
+    graph-constrained state spaces, neural inference, recursive
+    evaluation mechanisms, behavioral steering vectors, and optional
+    rule-based reasoning.</p>
+    <p>The central objective of the architecture is not to maximize
+    unrestricted emergence, but to balance adaptability with
+    controllability. By separating state representation, state-space
+    structure, inference, evaluation, and behavioral control into
+    distinct architectural components, VGPC enables the construction of
+    intelligent systems that remain inspectable, traceable, and modular
+    while retaining the benefits of learned representations.</p>
+    <p>The architecture occupies an intermediate position between
+    classical symbolic systems and modern neural approaches. It
+    incorporates neural learning where appropriate while preserving
+    explicit state spaces, deterministic transition mechanisms, and
+    evaluative control processes. As a result, the framework can be
+    viewed as a neuro-symbolic cognitive architecture designed around
+    controlled state-space navigation rather than unrestricted
+    predictive generation.</p>
+    <p>Rather than introducing an isolated computational model, the VGPC
+    framework generalizes principles that emerged during the development
+    of concrete systems such as GLP–Graph. The resulting architectural
+    family provides a common foundation upon which multiple
+    implementations, world engines, reasoning engines, memory systems,
+    and domain-specific cognitive subsystems can be built.</p>
+    <p>The framework is equally compatible with standalone applications
+    and hybrid intelligent systems. In particular, VGPC architectures
+    may serve as structured cognitive components within larger agentic
+    environments that incorporate large language models, external memory
+    systems, planning systems, and specialized reasoning modules. Such
+    integrations align with the broader Hybrid Intelligence methodology,
+    where intelligence emerges from the interaction of multiple
+    complementary subsystems rather than from a single homogeneous
+    mechanism.</p>
+    <p>Future work will explore specific instances of the architecture
+    family, including extensions of the GLP–Graph architecture,
+    multi-granularity state representation mechanisms, advanced
+    modulation techniques, recursive PRE-based reasoning systems, and
+    integrations with autonomous hybrid narrator and agent pipelines.
+    These implementations will provide concrete demonstrations of how
+    the general principles described in this paper can be applied within
+    practical cognitive systems.</p>
+    <p>The primary contribution of this work is therefore not a
+    particular model, algorithm, or application, but the formalization
+    of a broader architectural family that offers a structured design
+    space for future research into modular, inspectable, and hybrid
+    intelligent systems.</p>
+    <h1 id="triadic-cosmos-ecosystem-context">Triadic Cosmos Ecosystem
+    Context</h1>
+    <p>The present paper is part of the broader <em>Triadic Cosmos</em>
+    ecosystem: a unified research program that develops a compositional
+    ontology of intelligence together with modular, inspectable
+    computational architectures. The ecosystem spans conceptual theory,
+    executable reference implementations, and fully documented empirical
+    demonstrations, forming a coherent framework for studying hybrid
+    intelligent systems.</p>
+    <p>All materials, extended notes, and evolving documentation are
+    publicly available in the open GitHub project:</p>
+    <div class="center">
+    <p><code>https://github.com/triadic-cosmos</code></p>
+    </div>
+    <div class="thebibliography">
+    <p>J. De Witte, “A Safe and Modular AGI Architecture,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Architectural Intelligence Theory: A Unification of
+    Cognition,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Language as Graph Traversal: The DMLG
+    Architecture,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Learnable Lemma Embeddings for GLP Models,” Triadic
+    Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “The GLP–Graph Architecture: Combining GLP–Mono with
+    DMLG,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “Extending GLP–Graph with CAS: Architectural
+    Personality Modulation,” Triadic Cosmos Ecosystem, 2026.</p>
+    <p>J. De Witte, “A Lightweight Autonomous Narrator Pipeline,”
+    Triadic Cosmos Ecosystem, 2026.</p>
+    </div>
+  </main>
+
+</div>
+
+</body>
+</html>
