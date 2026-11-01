@@ -4448,7 +4448,8 @@ It gradually evolved into something much broader:
 a theory suggesting that the most important variable might not be intelligence, valuation, compute, or even capability itself, but synchronization.
 
 In that sense, the paper is less about AI than about a question that may have appeared repeatedly throughout history:
-What happens when one part of civilization evolves faster than the rest?
+
+> What happens when one part of civilization evolves faster than the rest?
 
 A central historical example is the printing press.
 The printing press dramatically accelerated information production and distribution while institutions, governance structures, and educational systems adapted much more slowly.
