@@ -4408,7 +4408,7 @@ Few architecture papers travel that path in reverse.
 
 ---
 
-### **61. Temporal Misalignment within Contemporary AI Ecosystems**
+### **62. Temporal Misalignment within Contemporary AI Ecosystems**
 
 Many current discussions surrounding AI focus on individual symptoms:
 
@@ -4449,7 +4449,7 @@ a theory suggesting that the most important variable might not be intelligence, 
 
 In that sense, the paper is less about AI than about a question that may have appeared repeatedly throughout history:
 
-> What happens when one part of civilization evolves faster than the rest?
+> "What happens when one part of civilization evolves faster than the rest?"
 
 A central historical example is the printing press.
 The printing press dramatically accelerated information production and distribution while institutions, governance structures, and educational systems adapted much more slowly.
