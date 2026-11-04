@@ -12,10 +12,10 @@ Licensed under CC BY‑NC‑ND 4.0
 
 ## 🏠 Ecosystem Navigation
 
-- [📚 Books](docs/books.md)
-- [📄 Papers](docs/papers.md)
-- [🌌 Dual Time](docs/dual-time.md)
-- [🤖 Architectural Intelligence Theory](docs/agi.md)
+- 📚 [Books](docs/books.md)
+- 📄 [Papers](docs/papers.md)
+- 🌌 [Dual Time](docs/dual-time.md)
+- 🤖 [Architectural Intelligence](docs/agi.md)
 
 ---
 
