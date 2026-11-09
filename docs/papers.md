@@ -1518,7 +1518,7 @@ Closure Capacity ↔ Structure (Geometry)
 
 Viewed from this perspective, cognition can be interpreted as a closure continuously transforming information through its structural organization. The three dimensions are therefore not merely a classification scheme, but can also be seen as a cognitive projection of the deeper Information–Energy–Geometry triad that appears throughout multiple ecosystem theories.
 
-Perhaps the most unusual aspect of the paper is that this connection is not required to understand or use the framework. The three-dimensional model stands on its own, yet still naturally aligns with several earlier ecosystem concepts, making it one of the most self-contained synthesis papers in the project.
+Perhaps the most unusual aspect of the paper is that this connection is not required to understand or use the framework. The three-dimensional model stands on its own, yet still naturally aligns with several earlier ecosystem concepts.
 
 ---
 
