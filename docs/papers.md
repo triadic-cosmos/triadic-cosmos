@@ -1662,6 +1662,128 @@ triadic interpretation can simultaneously explain phenomena in:
 The paper therefore serves both as an independent framework and as a
 demonstration of the explanatory power of triadic analysis itself.
 
+#### 🔺 Why Knowledge, Resources and Infrastructure?
+
+A natural question is why the framework focuses specifically on
+Knowledge, Resources and Infrastructure.
+
+Within the broader Triadic Cosmos ecosystem, these dimensions are not
+arbitrary categories.
+
+They correspond to three fundamentally different classes of entities
+that repeatedly appear across physical, cognitive, technological,
+economic, and societal systems.
+
+| Dimension | Core Property | Examples |
+|------------|------------|------------|
+| Knowledge | Informational | Scientific discoveries, software, mathematics, education, data |
+| Resources | Spendable | Money, energy, fuel, time, raw materials, compute-hours |
+| Infrastructure | Structural | Datacenters, institutions, factories, power grids, engineering teams |
+
+The distinction can be understood through a simple question:
+
+> Does using the entity consume it?
+
+Knowledge is generally **non-rival**.
+
+Using a mathematical theorem does not destroy the theorem.
+Multiple actors may simultaneously use the same software design,
+scientific insight, or mathematical proof.
+
+Resources are typically **spendable**.
+
+Fuel can be burned.
+
+Money can be allocated.
+
+Electricity can be consumed.
+
+Compute-hours can be exhausted.
+
+Infrastructure occupies a third category.
+
+Infrastructure is generally **not spent directly**.
+
+A factory is not consumed each time it produces a product.
+
+A datacenter is not spent when a model is trained.
+
+An engineering team is not allocated away like money or fuel.
+
+Instead, infrastructure creates and maintains capacity.
+
+Infrastructure may degrade, age, or require maintenance, but its role is
+structural rather than consumptive.
+
+This distinction explains why the three dimensions repeatedly emerge as
+separate components within recursive systems.
+
+```text
+Knowledge
+    ↓ creates
+
+Resources
+    ↓ build
+
+Infrastructure
+    ↓ enables
+
+Knowledge
+```
+
+The triad therefore captures three fundamentally different functions:
+
+```text
+Know
+Spend
+Structure
+```
+
+rather than three arbitrarily chosen economic categories.
+
+#### 🧩 A Link to the Information–Energy–Geometry Triad
+
+The separation becomes even clearer when compared to the deeper
+Information–Energy–Geometry framework used elsewhere in the ecosystem.
+
+```text
+Information     ↔ Knowledge
+Energy          ↔ Resources
+Geometry        ↔ Infrastructure
+```
+
+Knowledge corresponds to informational content.
+
+Resources correspond to spendable transformational capacity.
+
+Infrastructure corresponds to enduring structure.
+
+Interestingly, the same distinction also appears in physical systems.
+
+Information is not directly visible or consumed.
+
+Energy can be expended.
+
+Geometry provides the structural constraints within which energy flows.
+
+Similarly:
+
+- Knowledge can be shared without being spent.
+- Resources are allocated and consumed.
+- Infrastructure provides the structure that enables both.
+
+From this perspective, the Knowledge–Resource–Infrastructure cycle can be
+viewed as an economic and technological projection of the deeper
+Information–Energy–Geometry triad.
+
+This recurring correspondence is one of the reasons why triadic
+structures appear repeatedly throughout the wider Triadic Cosmos
+ecosystem.
+
+Rather than representing isolated theories, many ecosystem triads may be
+interpreted as domain-specific projections of the same underlying
+fractal structure.
+
 ### 📈 Fun Fact: Progress Does Not Eliminate Bottlenecks 🚧
 
 A common assumption is that enough progress eventually removes scarcity.
