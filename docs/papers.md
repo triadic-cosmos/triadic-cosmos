@@ -1522,6 +1522,182 @@ Perhaps the most unusual aspect of the paper is that this connection is not requ
 
 ---
 
+### **64. Triadic Inflation: Structural Imbalance in Knowledge, Resource and Infrastructure Cycles**
+
+Classical inflation is traditionally associated with money, while bubble
+theories focus on divergences between perceived and fundamental value.
+This paper proposes a broader interpretation:
+
+> Inflation is the observable reduction of scarcity when one dimension of a
+> recursive system expands faster than the other dimensions can absorb it.
+
+Within the Triadic Cosmos ecosystem, complex adaptive systems are modeled
+through recursive interactions between **Knowledge**, **Resources**, and
+**Infrastructure**.
+
+```text
+Knowledge
+    ↓
+Resources
+    ↓
+Infrastructure
+    ↓
+Knowledge
+```
+
+Under balanced conditions, these dimensions reinforce one another and
+increase the carrying capacity of the larger system.
+
+When one dimension accelerates significantly faster than the others,
+structural imbalance emerges.
+
+The paper introduces **Triadic Inflation** as the observable manifestation
+of this imbalance and proposes two related principles:
+
+- **Scarcity Conservation Principle**: progress rarely eliminates scarcity,
+  it relocates it.
+- **Bottleneck Migration Principle**: bottlenecks migrate toward the
+  slowest-adapting dimension of a recursive system.
+
+Viewed through this framework:
+
+- Knowledge Inflation occurs when knowledge production exceeds
+  interpretation and integration capacity.
+- Resource Inflation occurs when capital and economic expectations exceed
+  deployment capacity.
+- Infrastructure Inflation occurs when capacity expansion exceeds future
+  utilization.
+
+Unlike classical bubble theories, Triadic Inflation does **not** require
+fraud, irrationality, technological failure, or fundamental mispricing.
+
+The knowledge may be real.
+
+The technology may be real.
+
+The investment may be rational.
+
+The imbalance emerges because recursive growth outpaces adaptation.
+
+#### Why this paper matters
+
+- It generalizes inflation beyond money and valuation into a broader
+  theory of structural imbalance.
+- It introduces **scarcity migration** and **bottleneck migration** as
+  recurring dynamics within recursive systems.
+- It provides a common explanatory framework linking scientific research,
+  AI development, cybersecurity, valuation cycles, infrastructure
+  expansion, and technological disruption.
+- It argues that many perceived bubbles are better understood as
+  manifestations of deeper ecosystem imbalances.
+- It transforms inflation from a primarily economic concept into an
+  observable signal of recursive disequilibrium.
+
+#### Relationship to Earlier Ecosystem Papers
+
+This paper serves as the third component of a closely related trilogy:
+
+| Paper | Primary Focus |
+|---------|---------|
+| AI Overshoot | Why recursive systems exceed carrying capacity |
+| Temporal Misalignment | How recursive components evolve at incompatible rates |
+| **Triadic Inflation** | How those imbalances become observable |
+
+Together they form a progression:
+
+```text
+Closure
+    ↓
+Overshoot
+    ↓
+Temporal Misalignment
+    ↓
+Bottleneck Migration
+    ↓
+Triadic Inflation
+```
+
+The papers can therefore be viewed as describing different layers of the
+same phenomenon:
+
+- **Overshoot** explains why instability appears.
+- **Temporal Misalignment** explains how instability emerges.
+- **Triadic Inflation** explains how instability becomes visible.
+
+#### Ecosystem Relevance
+
+This paper is particularly important because it provides an
+**observational layer** for the Triadic Cosmos ecosystem.
+
+Many ecosystem theories describe causes and mechanisms.
+
+Triadic Inflation focuses on symptoms.
+
+It explains how structural imbalance becomes visible through changing
+scarcity patterns, shifting bottlenecks, attention concentration,
+valuation surges, infrastructure expansion, and knowledge overload.
+
+For this reason, the paper acts as a bridge between abstract recursive
+theory and concrete real-world phenomena.
+
+#### Canon Status
+
+This paper is considered a **core ecosystem synthesis paper**.
+
+Together with **AI Overshoot** and **Temporal Misalignment**, 
+it establishes one of the clearest applications of triadic reasoning 
+within the entire ecosystem.
+
+It is especially important because it demonstrates how a single
+triadic interpretation can simultaneously explain phenomena in:
+
+- artificial intelligence,
+- mathematics,
+- cybersecurity,
+- venture capital,
+- infrastructure investment,
+- scientific research,
+- technological ecosystems.
+
+The paper therefore serves both as an independent framework and as a
+demonstration of the explanatory power of triadic analysis itself.
+
+### 📈 Fun Fact: Progress Does Not Eliminate Bottlenecks 🚧
+
+A common assumption is that enough progress eventually removes scarcity.
+
+The framework proposed in this paper suggests something else:
+
+```text
+More knowledge
+    ↓
+Less scarcity of discovery
+    ↓
+More scarcity of interpretation
+
+More capital
+    ↓
+Less scarcity of funding
+    ↓
+More scarcity of deployment
+
+More infrastructure
+    ↓
+Less scarcity of capacity
+    ↓
+More scarcity of utilization
+```
+
+From this perspective, successful progress does not always eliminate bottlenecks.
+
+It moves them.
+
+The central claim of the paper can therefore be summarized in a single sentence:
+
+> Rapid progress transforms scarcity more often than it eliminates it.
+
+---
+
 ## **🌀📖 Narration Papers**
 
 ### **15. Diffusion‑Driven Narration — Tales of a Sophisticated Parrot**  
