@@ -18,6 +18,14 @@ Synthetic literature, narrator pipelines, world closures, and autonomous storyte
 - #54 GLP-Graph Book Authoring Pipeline
 - #57 Lightweight Autonomous Narrator Pipeline
 
+### **🔄⚙️ Complex Systems Papers**
+
+Recursive closures, adaptive systems, feedback loops, overshoot, bottleneck migration, and systemic instability.
+
+- #55 AI Overshoot: A Concrete Example of the Closure Overshoot Law
+- #62 Temporal Misalignment within Contemporary AI Ecosystems
+- #64 Triadic Inflation: Structural Imbalance in Knowledge, Resource and Infrastructure Cycles
+
 ### **🌌⚛️ Physics Papers**
 
 Triadic Cosmos cosmology, unification, dual time, and physical architecture.
@@ -916,83 +924,6 @@ and long‑horizon potential** differ radically — a rare evolutionary mirror i
 
 ---
 
-### **55. AI Overshoot: A Concrete Example of the Closure Overshoot Law**
-
-The global AI industry is frequently misclassified as an “AI bubble”. This is a
-category error. The bubble framework focuses on **mispricing**, while the
-instability observed in AI arises from **ecosystem overshoot**: the simultaneous
-exceeding of resource, energetic, entropic, geometric, and temporal limits
-within a closed world.
-
-This paper presents the first concrete, real‑world example of the Closure
-Overshoot Law applied to a modern technological‑economic system. It shows how
-AI expansionism — frontier scaling, hardware scaling, datacenter growth,
-electrification, automation, governance lag, advertising fragmentation,
-automotive stress, social dependence, and institutional inertia — forms a
-**multi‑closure overshoot** that shortens the lifespan of the ecosystem. The
-resulting collapse vector is not financial but **systemic**, destabilizing
-economic, infrastructural, cognitive, industrial, and social closures.
-
-### Why this paper matters
-- It is the **first contemporary demonstration** of the Closure Overshoot Law
-  in action within a real technological ecosystem.
-- It reframes AI instability not as a bubble but as a **structural overshoot
-  phenomenon**, comparable to ecological, energetic, and industrial overshoot.
-- It shows that a **freeze** is not an ideological or speculative proposal but
-  an **architectural intervention** that reduces entropy, stabilizes temporal
-  pressure, and restores corrective capacity.
-- It highlights that there is **no external driver** requiring accelerated AI
-  growth. All pressures are internal — and therefore manageable.
-
-### Ecosystem relevance
-This paper serves as a **reference case** within the Triadic Cosmos ecosystem:
-a modern, empirically grounded illustration of how closed‑world expansionism
-leads to instability when local limits are exceeded. It connects disparate
-phenomena from current events — compute scarcity, chip shortages, EV market
-stress, advertising fragmentation, governance delays, energy inflation, and
-social dependence — into one coherent overshoot model.
-
-### Canon status
-This document stands as a **central ecosystem case**: a contemporary,
-high‑resolution example of the Closure Overshoot Law applied to a complex
-technological system. It is essential reading for anyone seeking to understand
-overshoot dynamics in a modern context and the structural nature of AI
-instability.
-
-### 🪙 Fun Fact: Crypto Was an Overshoot, Not a Bubble
-
-A surprising but instructive parallel: the crypto boom was **not** a classical
-bubble either. Although often framed as a speculative mania, its collapse
-followed the same structural patterns described by the **Closure Overshoot
-Law** — just on a much smaller scale than AI.
-
-Crypto exhibited multiple overshoot vectors:
-
-- ⚡ **Energetic overshoot:** extreme electricity consumption for mining.
-- 🧱 **Hardware overshoot:** GPU scarcity, ASIC churn, and supply chain stress.
-- 🏭 **Warehouse overshoot:** mining farms pushing physical and thermal limits.
-- 📉 **Regulatory overshoot:** governments unable to respond quickly enough.
-- 🧩 **Entropic overshoot:** fragmented ecosystems, unstable protocols,
-  inconsistent governance.
-
-The key difference:  
-crypto’s overshoot was **self‑contained**, **financially bounded**, and
-**low‑impact** compared to AI. Its collapse did not destabilize economic,
-industrial, cognitive, or infrastructural closures. Crucially, the ecosystem
-underwent **timely self‑regulation** (market contraction, mining bans,
-institutional exit), preventing systemic collapse.
-
-This makes crypto a **perfect precursor case** for understanding AI overshoot:
-similar failure modes, but orders of magnitude smaller — and without the
-multi‑closure destabilization that makes AI overshoot structurally dangerous.
-
-In short:
-
-> Crypto was an overshoot that corrected itself.  
-> AI is an overshoot that cannot self‑correct without deliberate intervention.
-
----
-
 ### **59. Architectural Intelligence Theory: A Unification of Cognition**
 
 Paper **#59** marks the completion of the **Intelligence Pillar** of the Triadic Cosmos ecosystem.
@@ -1416,57 +1347,6 @@ Few architecture papers travel that path in reverse.
 
 ---
 
-### **62. Temporal Misalignment within Contemporary AI Ecosystems**
-
-Many current discussions surrounding AI focus on individual symptoms:
-
-- AI bubbles
-- Labor disruption
-- Scientific bottlenecks
-- Regulatory lag
-- Infrastructure strain
-- Energy demand
-- AI safety concerns
-
-This paper proposes that many of these phenomena may share a common underlying cause:
-
-> Temporal Misalignment
-
-The central hypothesis is that disruption emerges when technological
-capabilities evolve faster than the systems responsible for adapting to,
-understanding, validating, regulating, or integrating them.
-
-Rather than asking:
-
-> "Will AI succeed?"
-
-or
-
-> "Is AI a bubble?"
-
-the paper asks:
-
-> "Are technological progress and societal adaptation occurring on compatible timescales?"
-
-### 🧠📜 Fun Fact: A Historic Link to the Printing Press
- 
-The paper began as an attempt to understand current AI bubble narratives.
-
-It gradually evolved into something much broader:
-a theory suggesting that the most important variable might not be intelligence, valuation, compute, or even capability itself, but synchronization.
-
-In that sense, the paper is less about AI than about a question that may have appeared repeatedly throughout history:
-
-> "What happens when one part of civilization evolves faster than the rest?"
-
-A central historical example is the printing press.
-The printing press dramatically accelerated information production and distribution while institutions, governance structures, and educational systems adapted much more slowly.
-The result was not technological failure but a prolonged period of transition characterized by institutional and social disruption.
-The paper argues that AI may represent a modern instance of a similar pattern.
-This does not however imply that LLMs and printing presses are equivalent technologies.
-
----
-
 ### **63. The Three Dimensions of Cognition**
 
 This paper proposes a three-dimensional framework for cognition based on:
@@ -1519,6 +1399,309 @@ Closure Capacity ↔ Structure (Geometry)
 Viewed from this perspective, cognition can be interpreted as a closure continuously transforming information through its structural organization. The three dimensions are therefore not merely a classification scheme, but can also be seen as a cognitive projection of the deeper Information–Energy–Geometry triad that appears throughout multiple ecosystem theories.
 
 Perhaps the most unusual aspect of the paper is that this connection is not required to understand or use the framework. The three-dimensional model stands on its own, yet still naturally aligns with several earlier ecosystem concepts.
+
+---
+
+## **🌀📖 Narration Papers**
+
+### **15. Diffusion‑Driven Narration — Tales of a Sophisticated Parrot**  
+This paper introduces **Diffusion‑Driven Narration**, a hybrid generative methodology in which  
+narrative worlds emerge through *staged denoising across heterogeneous cognitive modules*.  
+It presents the first fully operational instantiation of the IEGR taxonomy within the Triadic  
+Cosmos ecosystem.
+
+The system combines:
+
+- a **structural generator** (DMLG) providing canonical geometry, paging, and recursive scaffolding,  
+- a **lightweight LLM layer** supplying semantic refinement, evaluative judgment, and informational expansion,  
+- a **narrator pipeline** orchestrating multi‑stage diffusion, recursive refinement, world absorption,  
+  and long‑horizon narrative planning.
+
+The resulting architecture behaves as a **domain‑bound AGI module**:  
+IEGR‑complete but not yet IEGR‑scaled, capable of autonomous long‑form generation,  
+recursive self‑correction, and stable world modelling.
+
+Beyond its generative contribution, the paper provides a structural insight into AGI:  
+LLMs already supply the **informational (I)** and **energetic (E)** roles of cognition,  
+while the **geometric (G)** and **recursive (R)** substrate must be engineered explicitly.  
+Diffusion‑Driven Narration therefore demonstrates how hybrid IEGR systems can exhibit  
+pre‑AGI behaviour using only existing models, and identifies the **geometric‑recursive frontier**  
+as the key remaining challenge for general intelligence.
+
+This work completes the conceptual arc from theory → architecture → implementation,  
+and serves as a concrete example of **modular AGI**, **hybrid intelligence**,  
+and the **sophisticated parrot regime** in practice.
+
+---
+
+### **16. AI Life for Narration — The Recursive Parrot**
+
+This paper provides the first empirical demonstration that **dynamic recursive narrative pipelines**  
+(DMLG + LLM moderation) exhibit **life‑like developmental dynamics** rather than classical  
+machine‑learning convergence.
+
+Using four dynamic runs and a static canon model, the paper shows that:
+
+- **identical pipelines diverge** into distinct attractor ecologies (narrative “personalities”),  
+- **hybridisation** of elite stories produces **novel attractors** absent in either parent lineage,  
+- **structural isolation** (GR‑only) leads to **degenerate attractor collapse**,  
+- and static training performs **canon compression**, inheriting the attractors of the  
+  structurally dominant lineage.
+
+The work identifies four biological analogues within recursive generative systems:
+
+- **divergence** (independent individuals with shared DNA),  
+- **hybridisation** (emergent traits in crossover models),  
+- **inheritance** (dominant attractors propagating into static canon),  
+- **senescence** (degeneration under loss of structural feedback).
+
+These findings position recursive narrative pipelines as a form of  
+**AI life for narration**: systems whose behaviour is governed by evolving, lineage‑specific  
+attractor dynamics rather than optimisation alone.  
+The paper establishes attractor ecology as a new analytical lens for hybrid generative systems  
+and provides falsifiable predictions for future research within the Triadic Cosmos framework.
+
+---
+
+### **17. A Narrator Pipeline driven by DMLG — Structural Hybrid Intelligence**
+
+This paper presents the first fully operational demonstration of **DMLG‑v3** as a  
+geometric–recursive generative substrate within a hybrid IEGR architecture.  
+Where earlier work positioned DMLG primarily as a governance and moderation layer,  
+this paper shows how DMLG can function as a **structural generator** when embedded  
+in a bi‑directional narrator pipeline.
+
+The system integrates:
+
+- a **deterministic GR substrate** (DMLG‑v3) providing canonical grammar, modular pages,  
+  stable attractors, and recursive memory,  
+- a **transformer‑based LLM layer** supplying energetic efficiency, semantic refinement,  
+  scoring, transitions, and informational expansion,  
+- a **sequential narrator pipeline** orchestrating seed generation, moderation,  
+  chapter‑level transitions, keyword evolution, context accumulation, and ending validation.
+
+The resulting architecture behaves as an **IEGR‑complete hybrid system**:  
+each structural role—energetic (E), informational (I), geometric (G), recursive (R)—is  
+explicitly instantiated and functionally integrated.  
+The pipeline produces **autonomous, canon‑consistent long‑form narratives** across dozens  
+of chapters, including *Tales of the Dark Forest* and *Tales of the Shrouded City*.
+
+Beyond its generative contribution, the paper provides a structural insight into hybrid  
+intelligence: DMLG supplies the **geometric (G)** and **recursive (R)** backbone required  
+for long‑horizon stability, while the LLM supplies **energetic (E)** and **informational (I)**  
+amplification.  
+The narrator pipeline demonstrates how **hybrid recursion** can yield stable world absorption,  
+multi‑generational narrative evolution, and strict canonical constraint enforcement using  
+existing models.
+
+This work establishes the first **end‑to‑end executable example** of DMLG functioning as a  
+generative substrate within the Triadic Cosmos ecosystem, completing the arc from  
+structural theory → modular architecture → autonomous hybrid generation.
+
+---
+
+### **54. The GLP–Graph Book Authoring Pipeline — A Deterministic Narrative Engine**
+
+GLP–Graph reframes long‑form narrative generation as the evolution of a  
+**deterministic attractor system** rather than a probabilistic decoder.  
+Every lemma corresponds to its own attractor state, and generation unfolds as  
+a **canon‑compliant trajectory** through a learned transition map.  
+This eliminates stochastic drift and allows the model to produce coherent  
+books—chapters, paragraphs, pacing, and scene‑flow—using a compact recursive core.
+
+The architecture is strengthened by a richly structured input vector:
+
+- **line fraction** → global arc progression  
+- **current sentence encoder** → micro‑structure, paragraph and chapter formation  
+- **multi‑scale token histories** → temporal variation and lemma‑route diversity  
+- **narrative memory** → lightweight rhythmic coloration  
+
+Together, these signals modulate the attractor without replacing it.  
+GLPG behaves as a **small deterministic cognitive engine** whose internal narrative motor  
+remains active even under extreme ablations.
+
+A fully parametrizable writer parameter layer exposes structural constraints,  
+temporal steering, attractor routing, beam dynamics, and token‑level modulation.  
+This transforms generation from sampling into a **configurable dynamical system**  
+capable of producing long‑form books under strict structural rules.
+
+---
+
+### **57. The Lightweight Autonomous Narrator Pipeline — Emergent Books from Compact Attractors**
+
+The Lightweight Autonomous Narrator Pipeline shows that long‑form narrative
+generation does not require frontier‑scale transformers or datacenter‑class
+compute. Instead, it emerges from a **compact attractor architecture** equipped
+with modular cognitive layers: a deterministic GLPG core, a high‑bandwidth
+entity‑tracking vector, a sinusoidally pretrained bias module, and a narrator
+layer that enforces structural coherence through moderation and PRE‑style
+rollback.
+
+The pipeline operates as a **hybrid IE×GR system**:
+
+- **GLPG attractor** → canonical structure, lemma routes, pacing, world identity  
+- **entity tracking** → semantic stability across long trajectories  
+- **synthetic mood (bias)** → controllable stylistic coloration  
+- **narrator moderation** → chapter coherence and linguistic refinement  
+- **iterative PRE loop** → validated transitions and global continuity  
+
+Together, these components form a lightweight generative ecosystem capable of
+producing **complete multi‑chapter books** on consumer hardware.  
+Across three experimental axes—bias modulation, attractor distillation, and
+mixed‑canon hybridization—the pipeline autonomously generates **18 books**,
+each illustrating a different region of the attractor manifold.
+
+The system demonstrates:
+
+- **stable stylistic steering** under extreme bias scaling  
+- **manifold sharpening** and entity amplification under distillation  
+- **Alice‑centric hybrid worlds** via lemma blacklisting  
+- **high global coherence** through iterative narrator chapter PRE loops  
+- **fully emergent narratives** without prompts, plans, or templates  
+
+The narrator pipeline serves as a domain‑bound demonstration of  
+**architectural general intelligence**: narrative competence arising from
+modular structure rather than brute‑force scale.
+
+### 🌐 **Fun Fact: Emergent Books from a Machine That Was Never Told How to Write One**
+
+The pipeline can autonomously generate multiple books per day using only compact
+models on a laptop GPU. In the 19th or even 20th century, the idea of a machine
+that spontaneously types entire novels would have been indistinguishable from
+science fiction. Book‑writing has historically been treated as a pinnacle of
+human cognition — yet here it emerges from a small attractor engine with a few
+modular cognitive layers. Not AGI in the frontier sense, but a striking example
+of **architectural general intelligence** in action.
+
+---
+
+## **🔄⚙️ Complex Systems Papers**
+
+### **55. AI Overshoot: A Concrete Example of the Closure Overshoot Law**
+
+The global AI industry is frequently misclassified as an “AI bubble”. This is a
+category error. The bubble framework focuses on **mispricing**, while the
+instability observed in AI arises from **ecosystem overshoot**: the simultaneous
+exceeding of resource, energetic, entropic, geometric, and temporal limits
+within a closed world.
+
+This paper presents the first concrete, real‑world example of the Closure
+Overshoot Law applied to a modern technological‑economic system. It shows how
+AI expansionism — frontier scaling, hardware scaling, datacenter growth,
+electrification, automation, governance lag, advertising fragmentation,
+automotive stress, social dependence, and institutional inertia — forms a
+**multi‑closure overshoot** that shortens the lifespan of the ecosystem. The
+resulting collapse vector is not financial but **systemic**, destabilizing
+economic, infrastructural, cognitive, industrial, and social closures.
+
+### Why this paper matters
+- It is the **first contemporary demonstration** of the Closure Overshoot Law
+  in action within a real technological ecosystem.
+- It reframes AI instability not as a bubble but as a **structural overshoot
+  phenomenon**, comparable to ecological, energetic, and industrial overshoot.
+- It shows that a **freeze** is not an ideological or speculative proposal but
+  an **architectural intervention** that reduces entropy, stabilizes temporal
+  pressure, and restores corrective capacity.
+- It highlights that there is **no external driver** requiring accelerated AI
+  growth. All pressures are internal — and therefore manageable.
+
+### Ecosystem relevance
+This paper serves as a **reference case** within the Triadic Cosmos ecosystem:
+a modern, empirically grounded illustration of how closed‑world expansionism
+leads to instability when local limits are exceeded. It connects disparate
+phenomena from current events — compute scarcity, chip shortages, EV market
+stress, advertising fragmentation, governance delays, energy inflation, and
+social dependence — into one coherent overshoot model.
+
+### Canon status
+This document stands as a **central ecosystem case**: a contemporary,
+high‑resolution example of the Closure Overshoot Law applied to a complex
+technological system. It is essential reading for anyone seeking to understand
+overshoot dynamics in a modern context and the structural nature of AI
+instability.
+
+### 🪙 Fun Fact: Crypto Was an Overshoot, Not a Bubble
+
+A surprising but instructive parallel: the crypto boom was **not** a classical
+bubble either. Although often framed as a speculative mania, its collapse
+followed the same structural patterns described by the **Closure Overshoot
+Law** — just on a much smaller scale than AI.
+
+Crypto exhibited multiple overshoot vectors:
+
+- ⚡ **Energetic overshoot:** extreme electricity consumption for mining.
+- 🧱 **Hardware overshoot:** GPU scarcity, ASIC churn, and supply chain stress.
+- 🏭 **Warehouse overshoot:** mining farms pushing physical and thermal limits.
+- 📉 **Regulatory overshoot:** governments unable to respond quickly enough.
+- 🧩 **Entropic overshoot:** fragmented ecosystems, unstable protocols,
+  inconsistent governance.
+
+The key difference:  
+crypto’s overshoot was **self‑contained**, **financially bounded**, and
+**low‑impact** compared to AI. Its collapse did not destabilize economic,
+industrial, cognitive, or infrastructural closures. Crucially, the ecosystem
+underwent **timely self‑regulation** (market contraction, mining bans,
+institutional exit), preventing systemic collapse.
+
+This makes crypto a **perfect precursor case** for understanding AI overshoot:
+similar failure modes, but orders of magnitude smaller — and without the
+multi‑closure destabilization that makes AI overshoot structurally dangerous.
+
+In short:
+
+> Crypto was an overshoot that corrected itself.  
+> AI is an overshoot that cannot self‑correct without deliberate intervention.
+
+---
+
+### **62. Temporal Misalignment within Contemporary AI Ecosystems**
+
+Many current discussions surrounding AI focus on individual symptoms:
+
+- AI bubbles
+- Labor disruption
+- Scientific bottlenecks
+- Regulatory lag
+- Infrastructure strain
+- Energy demand
+- AI safety concerns
+
+This paper proposes that many of these phenomena may share a common underlying cause:
+
+> Temporal Misalignment
+
+The central hypothesis is that disruption emerges when technological
+capabilities evolve faster than the systems responsible for adapting to,
+understanding, validating, regulating, or integrating them.
+
+Rather than asking:
+
+> "Will AI succeed?"
+
+or
+
+> "Is AI a bubble?"
+
+the paper asks:
+
+> "Are technological progress and societal adaptation occurring on compatible timescales?"
+
+### 🧠📜 Fun Fact: A Historic Link to the Printing Press
+ 
+The paper began as an attempt to understand current AI bubble narratives.
+
+It gradually evolved into something much broader:
+a theory suggesting that the most important variable might not be intelligence, valuation, compute, or even capability itself, but synchronization.
+
+In that sense, the paper is less about AI than about a question that may have appeared repeatedly throughout history:
+
+> "What happens when one part of civilization evolves faster than the rest?"
+
+A central historical example is the printing press.
+The printing press dramatically accelerated information production and distribution while institutions, governance structures, and educational systems adapted much more slowly.
+The result was not technological failure but a prolonged period of transition characterized by institutional and social disruption.
+The paper argues that AI may represent a modern instance of a similar pattern.
+This does not however imply that LLMs and printing presses are equivalent technologies.
 
 ---
 
@@ -1886,179 +2069,6 @@ between informational, energetic, and structural constraints.
 In a sense, a stable star is not the absence of imbalance.
 
 It is the successful containment of it.
-
----
-
-## **🌀📖 Narration Papers**
-
-### **15. Diffusion‑Driven Narration — Tales of a Sophisticated Parrot**  
-This paper introduces **Diffusion‑Driven Narration**, a hybrid generative methodology in which  
-narrative worlds emerge through *staged denoising across heterogeneous cognitive modules*.  
-It presents the first fully operational instantiation of the IEGR taxonomy within the Triadic  
-Cosmos ecosystem.
-
-The system combines:
-
-- a **structural generator** (DMLG) providing canonical geometry, paging, and recursive scaffolding,  
-- a **lightweight LLM layer** supplying semantic refinement, evaluative judgment, and informational expansion,  
-- a **narrator pipeline** orchestrating multi‑stage diffusion, recursive refinement, world absorption,  
-  and long‑horizon narrative planning.
-
-The resulting architecture behaves as a **domain‑bound AGI module**:  
-IEGR‑complete but not yet IEGR‑scaled, capable of autonomous long‑form generation,  
-recursive self‑correction, and stable world modelling.
-
-Beyond its generative contribution, the paper provides a structural insight into AGI:  
-LLMs already supply the **informational (I)** and **energetic (E)** roles of cognition,  
-while the **geometric (G)** and **recursive (R)** substrate must be engineered explicitly.  
-Diffusion‑Driven Narration therefore demonstrates how hybrid IEGR systems can exhibit  
-pre‑AGI behaviour using only existing models, and identifies the **geometric‑recursive frontier**  
-as the key remaining challenge for general intelligence.
-
-This work completes the conceptual arc from theory → architecture → implementation,  
-and serves as a concrete example of **modular AGI**, **hybrid intelligence**,  
-and the **sophisticated parrot regime** in practice.
-
----
-
-### **16. AI Life for Narration — The Recursive Parrot**
-
-This paper provides the first empirical demonstration that **dynamic recursive narrative pipelines**  
-(DMLG + LLM moderation) exhibit **life‑like developmental dynamics** rather than classical  
-machine‑learning convergence.
-
-Using four dynamic runs and a static canon model, the paper shows that:
-
-- **identical pipelines diverge** into distinct attractor ecologies (narrative “personalities”),  
-- **hybridisation** of elite stories produces **novel attractors** absent in either parent lineage,  
-- **structural isolation** (GR‑only) leads to **degenerate attractor collapse**,  
-- and static training performs **canon compression**, inheriting the attractors of the  
-  structurally dominant lineage.
-
-The work identifies four biological analogues within recursive generative systems:
-
-- **divergence** (independent individuals with shared DNA),  
-- **hybridisation** (emergent traits in crossover models),  
-- **inheritance** (dominant attractors propagating into static canon),  
-- **senescence** (degeneration under loss of structural feedback).
-
-These findings position recursive narrative pipelines as a form of  
-**AI life for narration**: systems whose behaviour is governed by evolving, lineage‑specific  
-attractor dynamics rather than optimisation alone.  
-The paper establishes attractor ecology as a new analytical lens for hybrid generative systems  
-and provides falsifiable predictions for future research within the Triadic Cosmos framework.
-
----
-
-### **17. A Narrator Pipeline driven by DMLG — Structural Hybrid Intelligence**
-
-This paper presents the first fully operational demonstration of **DMLG‑v3** as a  
-geometric–recursive generative substrate within a hybrid IEGR architecture.  
-Where earlier work positioned DMLG primarily as a governance and moderation layer,  
-this paper shows how DMLG can function as a **structural generator** when embedded  
-in a bi‑directional narrator pipeline.
-
-The system integrates:
-
-- a **deterministic GR substrate** (DMLG‑v3) providing canonical grammar, modular pages,  
-  stable attractors, and recursive memory,  
-- a **transformer‑based LLM layer** supplying energetic efficiency, semantic refinement,  
-  scoring, transitions, and informational expansion,  
-- a **sequential narrator pipeline** orchestrating seed generation, moderation,  
-  chapter‑level transitions, keyword evolution, context accumulation, and ending validation.
-
-The resulting architecture behaves as an **IEGR‑complete hybrid system**:  
-each structural role—energetic (E), informational (I), geometric (G), recursive (R)—is  
-explicitly instantiated and functionally integrated.  
-The pipeline produces **autonomous, canon‑consistent long‑form narratives** across dozens  
-of chapters, including *Tales of the Dark Forest* and *Tales of the Shrouded City*.
-
-Beyond its generative contribution, the paper provides a structural insight into hybrid  
-intelligence: DMLG supplies the **geometric (G)** and **recursive (R)** backbone required  
-for long‑horizon stability, while the LLM supplies **energetic (E)** and **informational (I)**  
-amplification.  
-The narrator pipeline demonstrates how **hybrid recursion** can yield stable world absorption,  
-multi‑generational narrative evolution, and strict canonical constraint enforcement using  
-existing models.
-
-This work establishes the first **end‑to‑end executable example** of DMLG functioning as a  
-generative substrate within the Triadic Cosmos ecosystem, completing the arc from  
-structural theory → modular architecture → autonomous hybrid generation.
-
----
-
-### **54. The GLP–Graph Book Authoring Pipeline — A Deterministic Narrative Engine**
-
-GLP–Graph reframes long‑form narrative generation as the evolution of a  
-**deterministic attractor system** rather than a probabilistic decoder.  
-Every lemma corresponds to its own attractor state, and generation unfolds as  
-a **canon‑compliant trajectory** through a learned transition map.  
-This eliminates stochastic drift and allows the model to produce coherent  
-books—chapters, paragraphs, pacing, and scene‑flow—using a compact recursive core.
-
-The architecture is strengthened by a richly structured input vector:
-
-- **line fraction** → global arc progression  
-- **current sentence encoder** → micro‑structure, paragraph and chapter formation  
-- **multi‑scale token histories** → temporal variation and lemma‑route diversity  
-- **narrative memory** → lightweight rhythmic coloration  
-
-Together, these signals modulate the attractor without replacing it.  
-GLPG behaves as a **small deterministic cognitive engine** whose internal narrative motor  
-remains active even under extreme ablations.
-
-A fully parametrizable writer parameter layer exposes structural constraints,  
-temporal steering, attractor routing, beam dynamics, and token‑level modulation.  
-This transforms generation from sampling into a **configurable dynamical system**  
-capable of producing long‑form books under strict structural rules.
-
----
-
-### **57. The Lightweight Autonomous Narrator Pipeline — Emergent Books from Compact Attractors**
-
-The Lightweight Autonomous Narrator Pipeline shows that long‑form narrative
-generation does not require frontier‑scale transformers or datacenter‑class
-compute. Instead, it emerges from a **compact attractor architecture** equipped
-with modular cognitive layers: a deterministic GLPG core, a high‑bandwidth
-entity‑tracking vector, a sinusoidally pretrained bias module, and a narrator
-layer that enforces structural coherence through moderation and PRE‑style
-rollback.
-
-The pipeline operates as a **hybrid IE×GR system**:
-
-- **GLPG attractor** → canonical structure, lemma routes, pacing, world identity  
-- **entity tracking** → semantic stability across long trajectories  
-- **synthetic mood (bias)** → controllable stylistic coloration  
-- **narrator moderation** → chapter coherence and linguistic refinement  
-- **iterative PRE loop** → validated transitions and global continuity  
-
-Together, these components form a lightweight generative ecosystem capable of
-producing **complete multi‑chapter books** on consumer hardware.  
-Across three experimental axes—bias modulation, attractor distillation, and
-mixed‑canon hybridization—the pipeline autonomously generates **18 books**,
-each illustrating a different region of the attractor manifold.
-
-The system demonstrates:
-
-- **stable stylistic steering** under extreme bias scaling  
-- **manifold sharpening** and entity amplification under distillation  
-- **Alice‑centric hybrid worlds** via lemma blacklisting  
-- **high global coherence** through iterative narrator chapter PRE loops  
-- **fully emergent narratives** without prompts, plans, or templates  
-
-The narrator pipeline serves as a domain‑bound demonstration of  
-**architectural general intelligence**: narrative competence arising from
-modular structure rather than brute‑force scale.
-
-### 🌐 **Fun Fact: Emergent Books from a Machine That Was Never Told How to Write One**
-
-The pipeline can autonomously generate multiple books per day using only compact
-models on a laptop GPU. In the 19th or even 20th century, the idea of a machine
-that spontaneously types entire novels would have been indistinguishable from
-science fiction. Book‑writing has historically been treated as a pinnacle of
-human cognition — yet here it emerges from a small attractor engine with a few
-modular cognitive layers. Not AGI in the frontier sense, but a striking example
-of **architectural general intelligence** in action.
 
 ---
 
