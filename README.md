@@ -33,6 +33,12 @@ Licensed under CC BY‑NC‑ND 4.0
 - Synthetic Narratology
 - Autonomous Literature
 
+### 🔄⚙️ Complex Systems
+
+- Closure Overshoot Law
+- Temporal Misalignment
+- Triadic Inflation
+
 ### 🌌⚛️ Physics
 
 - Dual Time
